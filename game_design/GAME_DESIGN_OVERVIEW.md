@@ -1,4 +1,4 @@
-# 博士模拟器：游戏设计总览 (GAME_DESIGN_OVERVIEW.md)
+# 绝不延毕：游戏设计总览 (GAME_DESIGN_OVERVIEW.md)
 
 ## 1. 游戏核心理念
 

@@ -1,9 +1,9 @@
-# 博士模拟器 游戏设计总览 (Game Design Document)
+# 绝不延毕 游戏设计总览 (Game Design Document)
 
 ## 1. 游戏名称 (Game Title)
 
-- **主标题**: **课题组会 (Research )**
-- **副标题**: **以手为证 (Proof by HanD)**
+- **主标题**: **组会 (Research Meeting)**
+- **副标题**: **以牌为证 (Proof by HanD)**
 
 *注：副标题的英文 `Proof by HanD` 中，'P', 'H', 'D' 三个字母的提炼，是游戏核心的彩蛋与宣言。*
 
