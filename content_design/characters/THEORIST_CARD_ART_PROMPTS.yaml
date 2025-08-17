@@ -1,0 +1,317 @@
+# 角色：理论派（The Theorist）卡牌插画主题关键词（AI生图提示）
+# 约定：每张卡牌提供 2-3 个联想词（中文），偏向主题/意象/材质，不锁具体画风，便于后续在提示词里组合风格。
+# 全局视觉基调（建议）：粉笔/黑板/论文/审稿、学术辩论、实验室冷暖对比光、幽默讽刺。
+
+theme_defaults:
+  palette: [深蓝, 粉笔白, 金色点缀, 酒红]
+  materials: [黑板, 粉笔, 书本, 论文, 报告]
+  motifs: [辩论讲台, 演讲手势, 数学符号, 函数曲线]
+
+cards:
+  # --- Power ---
+  - id: theorist_demon_form
+    zh_name: 第一性原理
+    type: Power
+    keywords: [符号洪流, 发光公式, 底层公理]
+  - id: theorist_metallicize
+    zh_name: 不动点原理
+    type: Power
+    keywords: [不动点环, 金属质感, 稳定护罩]
+  - id: theorist_feel_no_pain
+    zh_name: 幻想型人格
+    type: Power
+    keywords: [心理防线, 棉被护盾, 冷暖对比]
+  - id: theorist_dark_embrace
+    zh_name: 对偶理论
+    type: Power
+    keywords: [影子笔记, 反证法, 黑金边]
+  - id: theorist_barricade
+    zh_name: 充分条件
+    type: Power
+    keywords: [书墙堡垒, 叠瓦纸本, 固若金汤]
+  - id: theorist_combust
+    zh_name: 自引
+    type: Power
+    keywords: [纸张自燃, 红色批注, 灵感爆燃]
+  - id: theorist_evolve
+    zh_name: 辩证法
+    type: Power
+    keywords: [螺旋上升, 翻页进化, DNA双螺旋]
+  - id: theorist_inflame
+    zh_name: 正则化
+    type: Power
+    keywords: [权重收缩, 火焰羽笔, 稳健曲线]
+  - id: theorist_rupture
+    zh_name: 知耻
+    type: Power
+    keywords: [裂纹玻璃, 自我刺痛, 反弹成长]
+  - id: theorist_berserk
+    zh_name: 挂arxiv
+    type: Power
+    keywords: [论文投递, 火速上线, 热度飙升]
+  - id: theorist_brutality
+    zh_name: 上早八
+    type: Power
+    keywords: [黑眼圈, 清晨路灯, 咖啡杯]
+  - id: theorist_corruption
+    zh_name: 自我PUA
+    type: Power
+    keywords: [红章覆盖, 作业走捷径, 代价标记]
+  - id: theorist_rage
+    zh_name: 学者风采
+    type: Power
+    keywords: [逐帧连击, 鼓掌人群, 上升箭头]
+  - id: theorist_juggernaut
+    zh_name: 讨伐型人格
+    type: Power
+    keywords: [滚动书轮, 铠甲书脊, 破阵之势]
+
+  # --- Attack 深度核心 ---
+  - id: theorist_strike
+    zh_name: 基础理论
+    type: Attack
+    keywords: [粉笔直线, 基本定理, 简洁出击]
+  - id: theorist_bash
+    zh_name: 高阶微积分
+    type: Attack
+    keywords: [导数箭头, 破防裂纹, 积分符号]
+  - id: theorist_carnage
+    zh_name: 量子力学
+    type: Attack
+    keywords: [概率云, 干涉条纹, 裂变能量]
+
+  # --- Attack 其他 ---
+  - id: theorist_anger
+    zh_name: 那我问你
+    type: Attack
+    keywords: [指点质问, 连珠抛问, 复制回响]
+  - id: theorist_peaked_form
+    zh_name: 头顶尖尖
+    type: Attack
+    keywords: [尖帽剪影, 状态进化, 光锥]
+  - id: theorist_body_slam
+    zh_name: 论文发表
+    type: Attack
+    keywords: [厚重论文, 砸落冲击, 装订铁钉]
+  - id: theorist_clash
+    zh_name: 理论洁癖
+    type: Attack
+    keywords: [纯净构图, 白板清空, 刀锋分割]
+  - id: theorist_cleave
+    zh_name: 群论
+    type: Attack
+    keywords: [集合分割, 对称破缺, 圆环切面]
+  - id: theorist_clothesline
+    zh_name: 高度抽象
+    type: Attack
+    keywords: [抽象线条, 黑白几何, 悬挂衣绳]
+  - id: theorist_headbutt
+    zh_name: 易得
+    type: Attack
+    keywords: [顶击回收, 回旋书页, 记忆上顶]
+  - id: theorist_heavy_blade
+    zh_name: 高阶范数
+    type: Attack
+    keywords: [巨大刻刀, 向量范数, 叠乘刻痕]
+  - id: theorist_iron_wave
+    zh_name: 作用力和反作用力
+    type: Attack
+    keywords: [波纹钢流, 盾刃一体, 牛顿第三]
+  - id: theorist_pommel_strike
+    zh_name: 运筹学
+    type: Attack
+    keywords: [决策树, 扇形扭打, 数字抽取]
+  - id: theorist_sword_boomerang
+    zh_name: 随机过程
+    type: Attack
+    keywords: [回旋曲线, 随机漫步, 多段命中]
+  - id: theorist_thunderclap
+    zh_name: 你们不对！
+    type: Attack
+    keywords: [审稿雷霆, 驳斥手势, 破防裂闪]
+  - id: theorist_twin_strike
+    zh_name: 共轭
+    type: Attack
+    keywords: [双刃对偶, 镜像打击, 红蓝对称]
+  - id: theorist_carnage_alt
+    zh_name: 量子力学（异名占位）
+    type: Attack
+    keywords: [塌缩火花, 泡利禁则, 观测光]
+  - id: theorist_dropkick
+    zh_name: 微分流型
+    type: Attack
+    keywords: [踢击箭头, 黏滞曲面, 反证触发]
+  - id: theorist_hemokinesis
+    zh_name: 钻牛角尖
+    type: Attack
+    keywords: [墨迹划破, 血色批注, 代价输出]
+  - id: theorist_pummel
+    zh_name: 追问
+    type: Attack
+    keywords: [连环问号, 快速叠击, 小数点雨]
+  - id: theorist_rampage
+    zh_name: 贝塞尔曲线
+    type: Attack
+    keywords: [曲线增长, 递增刻度, 红线暴走]
+  - id: theorist_searing_blow
+    zh_name: 进化论
+    type: Attack
+    keywords: [火烙升级, 基因火纹, 强化印章]
+  - id: theorist_sever_soul
+    zh_name: 奥卡姆剃刀
+    type: Attack
+    keywords: [剃刀光刃, 简化切割, 非攻剔除]
+  - id: theorist_uppercut
+    zh_name: 显然
+    type: Attack
+    keywords: [上勾拳, 逻辑上扬, 破弱双标]
+  - id: theorist_whirlwind
+    zh_name: 深度穷举
+    type: Attack
+    keywords: [旋风算子, 扫场风暴, X次叠击]
+  - id: theorist_bludgeon
+    zh_name: 派对结束
+    type: Attack
+    keywords: [巨锤终局, 舞池熄灯, 一击定音]
+  - id: theorist_roche_limit
+    zh_name: 洛希极限
+    type: Attack
+    keywords: [潮汐撕裂, 行星环屑, 临界线]
+  - id: theorist_fiend_fire
+    zh_name: 代表作
+    type: Attack
+    keywords: [烧稿成炬, 字句火雨, 绝唱]
+  - id: theorist_reaper
+    zh_name: 吐槽
+    type: Attack
+    keywords: [镰刀吐槽, 观众笑声, 回血反讽]
+
+  # --- Skill 深度核心 ---
+  - id: theorist_defend
+    zh_name: 基本假设
+    type: Skill
+    keywords: [盾形括号, 证明起点, 朴素防御]
+  - id: theorist_armaments
+    zh_name: 深呼吸
+    type: Skill
+    keywords: [工具箱, 升级齿轮, 深吸白雾]
+
+  # --- Skill 其他 ---
+  - id: theorist_flex
+    zh_name: 紧急科研
+    type: Skill
+    keywords: [临时方案, 橡皮筋, 应急灯]
+  - id: theorist_havoc
+    zh_name: 随想
+    type: Skill
+    keywords: [盲盒上顶, 即兴演算, 运气骰]
+  - id: theorist_shrug_it_off
+    zh_name: “好的”
+    type: Skill
+    keywords: [无奈摊手, 蓝色护幕, 便签纸]
+  - id: theorist_true_grit
+    zh_name: 冷静思考
+    type: Skill
+    keywords: [滤出杂音, 选择性消耗, 粗糙纹理]
+  - id: theorist_warcry
+    zh_name: “收到”
+    type: Skill
+    keywords: [手势号令, 顶牌收纳, 红色标记]
+  - id: theorist_battle_trance
+    zh_name: 头脑风暴
+    type: Skill
+    keywords: [脑电激荡, 词云风暴, 抽牌禁令]
+  - id: theorist_bloodletting
+    zh_name: 拧大腿
+    type: Skill
+    keywords: [自我牺牲, 红色能量, 疼痛唤醒]
+  - id: theorist_burning_pact
+    zh_name: 推倒重来
+    type: Skill
+    keywords: [焚稿重写, 灰烬新章, 重构]
+  - id: theorist_dual_wield
+    zh_name: Ctrl C
+    type: Skill
+    keywords: [双持拷贝, 复制印章, 幻影分身]
+  - id: theorist_entrench
+    zh_name: 膨胀
+    type: Skill
+    keywords: [堡垒加倍, 壁垒层层, 蓝色堆叠]
+  - id: theorist_flame_barrier
+    zh_name: 厚脸皮
+    type: Skill
+    keywords: [火焰壁, 反伤火花, 护心镜]
+  - id: theorist_ghostly_armor
+    zh_name: 画饼充饥
+    type: Skill
+    keywords: [幽灵披风, 纸片护甲, 虚无褪色]
+  - id: theorist_infernal_blade
+    zh_name: 说点啥吧
+    type: Skill
+    keywords: [火焰短匕, 随机抽词, 0费标签]
+  - id: theorist_intimidate
+    zh_name: 拍马屁
+    type: Skill
+    keywords: [气场压制, 灰雾低语, 群体减益]
+  - id: theorist_second_wind
+    zh_name: 底线思维
+    type: Skill
+    keywords: [清空桌面, 核心守护, 风起重振]
+  - id: theorist_seeing_red
+    zh_name: 深度思考
+    type: Skill
+    keywords: [红色灵感, 额外能量, 额头亮光]
+  - id: theorist_shockwave
+    zh_name: 降维打击
+    type: Skill
+    keywords: [紫色冲击波, 维度褶皱, 群体破弱]
+  - id: theorist_spot_weakness
+    zh_name: 导师脸色
+    type: Skill
+    keywords: [盯视凝固, 攻击预判, 力量补正]
+  - id: theorist_disarm
+    zh_name: “您说的都对”
+    type: Skill
+    keywords: [卸力钳, 降功率, 掌心卸下]
+  - id: theorist_double_tap
+    zh_name: 双盲实验
+    type: Skill
+    keywords: [双测通道, 同步触发, 二次出手]
+  - id: theorist_exhume
+    zh_name: 考古式科研
+    type: Skill
+    keywords: [灰烬翻找, 档案夹, 旧卡归还]
+  - id: theorist_impervious
+    zh_name: 自我催眠
+    type: Skill
+    keywords: [绝对护罩, 厚重玻璃, 隔音室]
+  - id: theorist_limit_break
+    zh_name: 尤里卡！
+    type: Skill
+    keywords: [上限破壁, 灵光一现, 黄金裂缝]
+  - id: theorist_offering
+    zh_name: 赌上毕生所学
+    type: Skill
+    keywords: [血契签名, 烛火书案, 巨额回报]
+
+  # --- 特殊衍生 ---
+  - id: theorist_stc_toaster
+    zh_name: STC：烤面包机
+    type: Skill
+    keywords: [吐司机, 神圣面包, 温暖疗愈]
+
+  # --- 深度获取 ---
+  - id: theorist_deep_study
+    zh_name: 深入研究
+    type: Skill
+    keywords: [放大镜, 扉页批注, 深潜蓝]
+  - id: theorist_academic_focus
+    zh_name: 学术专精
+    type: Skill
+    keywords: [聚焦光斑, 学科图标, 选择开关]
+  - id: theorist_theoretical_breakthrough
+    zh_name: 理论突破
+    type: Skill
+    keywords: [灵感喷泉, 破圈箭头, 金色碎片]
+
+

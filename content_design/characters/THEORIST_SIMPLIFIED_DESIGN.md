@@ -28,14 +28,6 @@
 
 **注意：** 思想深度只影响攻击伤害和格挡值，不影响其他效果（如抽牌、状态施加、能量获得等）。
 
-### 消耗与偿还规则：
-
-1.  **使用即消耗：** 每当你打出一张**受“严谨”加成**的攻击牌或技能牌，你会消耗**1点**严谨。
-2.  **偿还学术债：** 当你处于“学术债”（负严谨）状态下，每打出一张受惩罚的牌，你的严谨会**恢复1点**（例如，从-4变为-3），代表你正在“偿还”你的逻辑漏洞。
-3.  **多段攻击：** `旋风斩`、`连续拳`等多段攻击牌，整张牌**只消耗1点**严谨。
-4.  **自动触发：** `自引`、`势不可挡`等由能力牌自动触发的伤害效果，每次触发时也**消耗1点**严谨。
-5.  **间接收益：** `格挡反击`这类基于其他数值造成伤害的卡牌，其最终伤害会**再次享受**严谨的加成（即 `伤害 = 格挡值 + 严谨`），并消耗1点严谨。
-
 ---
 
 ## 1. 公理 (Axiom) - 能力牌
@@ -262,4 +254,57 @@
 *   **核心机制**: **基因培养皿 (The Gene Petri Dish)**
 *   **玩法体验**: 玩法的核心不再是强化自身，而是通过“**创造**”、“**变异**”和“**指挥**”三类卡牌，在专属的“培养皿”槽位中召唤、养成并指挥能够自主战斗的生命体。玩家需要像《万智牌》的召唤师一样，管理场面、牺牲棋子、并保护自己培养出的核心生物，用“生物大军”淹没敌人。
 *   **一句话总结**: 我的造物将为你带来最终的解决方案，或者……一场灾难。
+
+
+---
+
+## 实现进度（Implementation Progress)
+
+- Attack
+  - 基础理论 (Strike): Implemented
+  - 高阶微积分 (Bash): Implemented
+  - 量子力学 (Carnage, Ethereal): Implemented
+  - 随机过程 (Sword Boomerang): Implemented
+  - 共轭 (Twin Strike): Implemented
+  - 群论 (Cleave): Implemented
+  - 你们不对！ (Thunderclap): Implemented
+  - 那我问你 (Anger) [+隐藏转化机制]: Implemented (copy). Secret transform: Not Implemented
+  - 论文发表 (Body Slam): Implemented
+  - 易得 (Headbutt): Implemented (damage). Topdeck effect: Not Implemented
+  - 高阶范数 (Heavy Blade 3x/5x): Implemented
+  - 贝塞尔曲线 (Rampage): Implemented
+  - 钻牛角尖 (Hemokinesis): Implemented
+  - 微分流型 (Dropkick): Implemented (+Vulnerable bonus: Implemented)
+  - 深度穷举 (Whirlwind, X): Implemented
+  - 派对结束 (Bludgeon): Implemented
+
+- Skill
+  - 基本假设 (Defend): Implemented
+  - 深呼吸 (Armaments): Implemented (block only)
+  - 作用力和反作用力 (Iron Wave): Implemented
+  - “好的” (Shrug It Off): Implemented
+  - 头脑风暴 (Battle Trance): Implemented (draw). No further draw lock: Not Implemented
+  - 深度思考 (Seeing Red): Implemented
+  - 拧大腿 (Bloodletting): Implemented
+  - 理论突破 (Theoretical Breakthrough): Implemented
+  - 考古式科研 (Exhume / +Toaster): Implemented
+
+- Power（持续效果）
+  - 正则化 (Inflame): Implemented (as one-shot rigor gain variant)
+  - 第一性原理 (Demon Form): Not Implemented
+  - 不动点原理 (Metallicize): Not Implemented
+  - 幻想型人格 (Feel No Pain): Not Implemented
+  - 对偶理论 (Dark Embrace): Not Implemented
+  - 充分条件 (Barricade): Not Implemented
+  - 自引 (Combust): Not Implemented
+  - 知耻 (Rupture): Not Implemented
+  - 挂arxiv (Berserk): Not Implemented
+  - 上早八 (Brutality): Partial (innate + simple effects). Full per-turn triggers: Not Implemented
+  - 学者风采 (Rage): Not Implemented
+  - 讨伐型人格 (Juggernaut): Not Implemented
+
+- 特殊牌
+  - STC：烤面包机 (Toaster): Implemented (Reduce stress placeholder)
+
+注：基于 `data/cards/theorist/*.json` 与当前效果系统；Power 类需后续引入回合/事件触发流水线。
 
