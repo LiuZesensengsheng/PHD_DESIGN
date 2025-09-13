@@ -1,4 +1,10 @@
 # 核心设计哲学 V4.0：博士生涯模拟器
+
+> 说明：本文件为“设计愿景与原则”的长期性文档，用于解释“为什么这样设计”。
+> 执行与实现口径以“权威三件套”为准：
+> - 概览：`docs/design/GAME_DESIGN_OVERVIEW.md`
+> - 战役（甘特）：`docs/design/GANTT_TRIS_MODEL_GDD.md`
+> - 战斗：`docs/design/COMBAT_SYSTEM_DOCUMENT.md`
 (Core Design Philosophy V4.0: The PhD Life Simulator)
 
 ---
