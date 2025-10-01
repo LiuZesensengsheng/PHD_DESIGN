@@ -308,3 +308,65 @@
 
 注：基于 `data/cards/theorist/*.json` 与当前效果系统；Power 类需后续引入回合/事件触发流水线。
 
+---
+
+## 颜色身份与归色表（V1）
+
+说明：本节为“理论派”现有卡池的五色归属建议，用于与理想系统对齐。归色以“主色（必要时标注副色）”表达；具体数值与稀有度不在本节确定。
+
+### 五色速写
+- 白（Order/秩序·防御·约束）：防御、弱化、秩序维持、以“自信”为核心的守势引擎
+- 蓝（Knowledge/知识·操控·抽滤）：抽牌、牌库与费用操控、信息优势
+- 黑（Ambition/野心·自耗·牺牲）：以生命/资源换即刻收益，牺牲与掠夺
+- 红（Impact/冲击·爆发·侵略）：直接伤害、易伤、能量/强度爆发
+- 绿（Growth/成长·累积·升级）：随时间/次数增益、升级、长期滚雪球
+
+### 白色（主：秩序/防御）
+- 能力：不动点原理（Metallicize）、充分条件（Barricade）、反驳型人格（反击与格挡联动，白/红）
+- 技能：基本假设（Defend）、“好的”（Shrug It Off，白/蓝）、厚脸皮（Flame Barrier，白/红）、幽灵护甲（Ghostly Armor）、强迫症（Impervious）、归档式稳固（Entrench，白/绿）、“您说的都对”（Disarm）、学者风采（Rage，白/红）
+- 攻击：论文发表（Body Slam，白/红）、作用力和反作用力（Iron Wave，白/红）
+
+### 蓝色（主：知识/操控）
+- 能力：对偶理论（Dark Embrace）、辩证法（Evolve）、自我PUA（Corruption，蓝/黑）
+- 技能：战吼（Warcry）、头脑风暴（Battle Trance）、焚稿誓言（Burning Pact，蓝/黑）、双盲实验（Double Tap? → 实为红色；见红）、Ctrl C（Dual Wield，蓝/绿）、随想（Havoc，蓝/黑）
+- 攻击：易得（Headbutt，蓝/红）
+
+### 黑色（主：野心/自耗）
+- 能力：挂arxiv（Berserk，黑/红）、上早八（Brutality，黑/蓝）、自引（Combust，黑/红）、知耻（Rupture，黑/绿）
+- 技能：拧大腿（Bloodletting）、赌上毕生所学（Offering）、二次风（Second Wind，黑/白）、考古式科研（Exhume，黑/蓝）
+- 攻击：钻牛角尖（Hemokinesis）、灵魂分割（Sever Soul，黑/蓝）
+
+### 红色（主：冲击/爆发）
+- 攻击：🧠基础理论（Strike）、🧠高阶微积分（Bash）、群论（Cleave）、量子力学（Carnage）、你们不对！（Thunderclap）、共轭（Twin Strike）、运筹学（Pommel Strike，红/蓝）、随机过程（Sword Boomerang）、高度抽象（Clothesline，红/白）、高阶范数（Heavy Blade）、深度穷举（Whirlwind）、派对结束（Bludgeon）、显然（Uppercut，红/白）、追问（Pummel）
+- 技能：深度思考（Seeing Red）、降维打击（Shockwave，红/白）、导师脸色（Spot Weakness）
+- 特殊：那我问你（So, Let Me Ask You，红/绿），头顶尖尖（Peaked Form，红）
+
+### 绿色（主：成长/累积）
+- 能力：第一性原理（Demon Form，绿/红）、正则化（Inflame，绿/红）
+- 技能：深呼吸（Armaments，绿/蓝）、尤里卡！（Limit Break，绿/红）
+- 攻击：贝塞尔曲线（Rampage，绿/红）、洛希极限（Roche Limit，绿/黑）
+- 深度机制：深入研究（Deep Study）、学术专精（Academic Focus）、理论突破（Theoretical Breakthrough）
+
+> 备注：带“/”为多色倾向；实现层面以“主色”判定同色-1，副色仅用于主题与事件权重。
+
+### 暂不归色/后续评估
+- 导师救我（Advisor, Save Me!）：功能复杂（费用关联、衍生牌池），建议根据衍生内容多色化（红/蓝/黑），基础牌先标注蓝。
+
+---
+
+## 无色（COLORLESS）过滤牌建议（控制规模：常见2-3张+非常见2-3张）
+设计目标：提供轻量“过牌/排废/轻调整”，不提供费用折扣、颜色掩码、或过度检索，避免绕开“理想冲突→心魔”的核心循环。
+
+- 筛查（Scry）［0-1费，常见，技能］：窥视牌库顶2，任意置底；抽1（可去掉抽1以弱化）。
+- 断舍离（Purge）［0-1费，常见，技能］：消耗1张状态/诅咒/手牌；若为状态/诅咒，获得少量自信（+4）。
+- 整理书桌（Tidy Desk）［0费，非常见，技能］：弃1，抽1；若弃的是状态/诅咒，再额外抽1。
+- 计划清单（Checklist）［0费，非常见，技能］：将手中1张牌置于抽牌堆顶；下回合抽牌+1。**虚无**。
+- 调整呼吸（Take a Breath）［1费，非常见，技能］：下回合能量+1。**消耗**。
+
+落地约束：
+- 不改变牌色、不产生“同色-1”折扣、不移除冲突导致的心魔产出。
+- 不提供强检索（不翻找弃牌/抽牌堆的任意牌）；不提供成本重定价。
+- 只做轻量循环与杂质清理，强化构筑可控性而非强度。
+
+> 会议决议后：在 `data/cards/colorless/*.json` 建立小池；敌对色“引诱/污染”不向无色池注入，以免稀释系统张力。
+
