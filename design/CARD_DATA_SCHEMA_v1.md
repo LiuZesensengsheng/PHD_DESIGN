@@ -87,13 +87,14 @@
 2.2 状态
 - 通用：`{ type:"status", status_type:"Vulnerable|Weak|Regulated|...", duration?:number, value?:number, target }`
 - 规整（推荐以“本回合+X”直赋）：`{ type:"status", status_type:"Regulated", value:number, target }`
+- 语义与结算顺序详见《[STATUS_EFFECTS_V1.md](./STATUS_EFFECTS_V1.md)》。
 
 2.3 严谨度
 - 永久/回合内：`{ type:"rigor"|"temporary_rigor", value:number, target:"player" }`
 
 2.4 位置与序列
-- 位置：`{ type:"reposition", op:"swap_with_right|move_to_leftmost|move_to_rightmost", target:"selected_enemy" }`
-- 序列伤害：`{ type:"sequence_damage", base:number, step:number, target:"left_to_right|right_to_left" }`
+- 位置：`{ type:"reposition", op:"swap_with_right|move_to_leftmost|move_to_rightmost|move_to_middle", target:"selected_enemy" }`
+- 序列伤害：`{ type:"sequence_damage", base:number, step:number, target:"left_to_right|right_to_left", view_only?:boolean }`
 
 2.5 范式（Paradigm）
 - 添加范式：
@@ -110,6 +111,20 @@
 ```
 
 2.6 坚定（Steadfast）
+2.7 指针（Pointer）
+- 关键词：`Pointer`（带此关键词的白色卡触发指针 Bootstrap）
+- 原语：
+  - `pointer_bootstrap`: `{ type:"pointer_bootstrap" }`（若无指针则建立：最左，PD=2，per_turn_limit=5，dir=right）
+  - `pointer_pd_add`: `{ type:"pointer_pd_add", value:number, duration?:"this_turn|permanent" }`
+  - `pointer_step`: `{ type:"pointer_step", value:1, dir?:"auto|left|right" }`
+  - `pointer_warp`: `{ type:"pointer_warp", to:"leftmost|rightmost|middle|lowest" }`
+  - `pointer_limit_add`: `{ type:"pointer_limit_add", value:number, duration?:"this_turn|permanent" }`
+  - `lock_queue`: `{ type:"lock_queue", duration:number }`
+
+示例（片段）：
+```
+pointer_bootstrap(); pointer_warp(to=middle); pointer_pd_add(value=1|duration=this_turn)
+```
 - 装填标记：
 ```json
 {
