@@ -198,3 +198,30 @@
   - 色彩遵守当前理想色主题，弱化全屏闪。
 
 注：UI层强调“看得懂即可”，避免过度文本化；图标与色光应成为新手识别主要渠道。
+
+
+### 5. 事件叠加图标（Event Overlay）UI 规范（MVP）
+
+目的：以最小改动为甘特块提供“事件图标”叠加层，用于呈现黑色幽默段子/微互动，不改变融合与进度。
+
+- 位置与层级
+  - 图标绘制在对应甘特块上方（顶部外侧 6–10px），随块一起滚动；Z 层级高于块、低于顶栏。
+  - 同一块最多显示 2 个事件图标；超出则折叠为“+N”。
+
+- 交互
+  - Hover：显示 `title` 提示；Click：弹出文本/二选一弹窗；Esc/点击空白关闭。
+  - 点击事件不消耗回合；弹窗内选项可授予轻量效果（如 `gain_confidence:3 / add_insight:1`）。
+
+- 生命周期（TTL）
+  - 事件默认存活 1–2 回合（`ttl_turns`）；过期后移入右侧“事件Feed”（滚动列表）。
+
+- 数据口径（与 Campaign 同步）
+  - 读取 `event` 结构：`{ id, theme, icon, title, body, choices[], ttl_turns }`。
+  - 不参与融合计算，不改变 `enemy_count/theme`。
+  - 来源与权重：ANY≈70%｜THEME≈20%｜LOCAL≈10%；同一事件5回合内不重复；Boss/关键战降权或静默。
+
+- 绘制与常量
+  - 图标与文本走 `constants/ui_constants.py`；严禁魔法值。
+  - 颜色与大小受当前 UI 主题皮肤控制；最小实现可用占位图标（envelope/bell/comment/code-branch）。
+
+参考：`docs/design/campaign/GANTT_TASKS_EVENTS.md`
