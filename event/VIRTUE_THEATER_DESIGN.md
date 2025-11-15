@@ -1,8 +1,9 @@
-## 美德（Judgment）演出与脚本设计（v1）
+## 美德（Judgment）演出与脚本设计（v1.3 - V7命名毕业版）
 
 ### 目标
-- 以低成本但高可读的方式，呈现“压力突破阈值→理想判定→结果（美德/裂痕/粉碎）”的剧情与反馈。
+- 以低成本但高可读的方式，呈现“压力突破阈值→理想判定→结果（美德/折磨）”的剧情与反馈。
 - 可数据驱动、可扩展（不同理想、不同难度、不同台词/特效），并与现有事件系统无缝对接。
+- **v1.3 更新**: 全面同步 `IDEALS_PARADOX_SYSTEM.md` v1.3 的术语，将“美德”与“折磨”的命名体系刷新为最终V7版，并移除“裂痕/粉碎”作为V1的检定结果。
 
 ### 触发与终止规则
 - 压力条总上限为200，但视觉条长度固定为100。
@@ -17,7 +18,7 @@
 3) Model 监听后调用 `JudgmentService`：
    - `compute_target_ideal(ideals)` 选取受检理想（按 lifetime/window 计数）
    - `compute_effective(...)` 计算有效权重
-   - `decide_verdict(effective, crack_stacks)` 判定结果（美德/裂痕/粉碎）
+   - `decide_verdict(effective, crack_stacks)` 判定结果（美德/折磨）
    - `apply_verdict(player, color, verdict)` 应用效果（见下）
 4) 发布 `JudgmentResolved(player_id, target_color, verdict)`，供 View 层演出。
 
@@ -25,12 +26,9 @@
 - 美德（virtue）：
   - 清空该色 window_count；
   - 减压：`JUDGMENT_RELIEF_VIRTUE`（例如 15–25，可调）。
-- 裂痕（crack）：
-  - 该色 crack_stacks +1；
-  - 清空该色 window_count。
-- 粉碎（shatter）：
-  - 从 active_colors 移除该理想色；
-  - 清空该色所有计数（window/lifetime/crack）。
+- 折磨（affliction）：
+  - **V1 版本**: 不直接应用负面效果，而是触发一个**选择事件**：玩家可以选择“放弃理想”来换取生存礼包，或者“坚持理想”并承受折磨状态。
+  - **V2 备选**: 可考虑引入 `crack_stacks` 机制，多次触发同色折磨会导致更严重的后果。
 
 ### 演出（View 层，建议总时长 ~3.0s，非阻塞或短暂停顿）
 阶段 A（~0.8s）
@@ -41,8 +39,7 @@
 - 中央小面板展示：理想图标 + 判定结果标签。
 - 结果特效建议：
   - 美德：金色光效（粒子/放射），舒缓钟声；压力条白闪后回落（与服务端减压同步）。
-  - 裂痕：紫色裂纹遮罩短闪，轻度震动/玻璃擦音；叠层 HUD 显示“裂痕+1”。
-  - 粉碎：图标破碎粒子飞散，彩色褪去，玻璃破碎音；提示“理想粉碎”。
+  - 折磨：紫色裂纹遮罩短闪，轻度震动/玻璃擦音；弹出抉择对话框。
 
 阶段 C（~0.5s）
 - 台词二段式显示（见台词规范）；面板淡出，恢复交互。
@@ -51,7 +48,7 @@
 - 结构：分为三个层级以便覆盖：
   1) 通用（default）
   2) 按理想色（white/blue/black/red/green）
-  3) 按结果（virtue/crack/shatter）
+  3) 按结果（virtue/affliction）
 - 每条支持多候选，运行时随机抽取。
 
 示例 JSON（建议文件：`docs/event/virtue_dialogue.json`）
@@ -60,14 +57,17 @@
   "default": {
     "prelude": ["你的理想正在经受考验……", "心之所向，正被拷问。"],
     "virtue": ["你坚守了初心。", "你没有背弃自己。"],
-    "crack": ["你的信念出现了裂痕。", "这一次，你犹豫了。"],
-    "shatter": ["你的某种理想粉碎了。", "你不再是刚才的你。"]
+    "affliction": ["你的信念动摇了。", "这一次，你犹豫了。"]
   },
   "white": {
     "prelude": ["秩序的信条，正在审视你。"],
-    "virtue": ["你维护了秩序。"],
-    "crack": ["秩序的边界开始松动。"],
-    "shatter": ["秩序不再是你的答案。"]
+    "virtue": ["规则，因我而存在。"],
+    "affliction": ["谁也别信，包括自己。"]
+  },
+  "red": {
+    "prelude": ["行动的冲动，正在审视你。"],
+    "virtue": ["我的信念，正在燃烧！"],
+    "affliction": ["想清楚再说吧……算了。"]
   }
 }
 ```
