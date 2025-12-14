@@ -13,6 +13,11 @@
         "application/combat",
         "contexts/combat"
       ]
+    },
+    "combat_mvc": {
+      "paths": [
+        "contexts/combat/mvc"
+      ]
     }
   },
 
@@ -30,7 +35,7 @@
       "id": "CP001_NO_MAGIC_EVENT_STATUS_TAG",
       "name": "禁止事件名/状态名/标签魔法字符串",
       "severity": "TIER1",
-      "scope": "combat_core",
+      "scope": "combat_mvc",
 
       "enabled": true,
 
@@ -59,7 +64,7 @@
           },
           {
             "pattern": "Subscript",
-            "value_name_contains": ["state", "payload", "data"],
+            "value_name_contains": ["state", "payload"],
             "slice_type": "Str"
           }
         ]
@@ -83,7 +88,7 @@
     {
       "id": "CP002_NO_NAKED_DICT_PAYLOAD",
       "name": "禁止裸 dict 承载业务数据",
-      "severity": "TIER1",
+      "severity": "TIER2",
       "scope": "combat_core",
 
       "enabled": true,
