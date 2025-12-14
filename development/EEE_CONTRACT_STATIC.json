@@ -1,0 +1,163 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "name": "EEE Contract Police - Static Rules",
+    "description": "静态契约检查规则（v1：魔法值 + 裸 dict）",
+    "status": "experimental"
+  },
+
+  "scopes": {
+    "combat_core": {
+      "paths": [
+        "domain/combat",
+        "application/combat",
+        "contexts/combat"
+      ]
+    }
+  },
+
+  "severity_levels": {
+    "TIER1": {
+      "description": "一旦违反必须挂掉 tests（硬红线）"
+    },
+    "TIER2": {
+      "description": "目前只报警，不阻断 tests（历史债 / 渐进改造）"
+    }
+  },
+
+  "rules": [
+    {
+      "id": "CP001_NO_MAGIC_EVENT_STATUS_TAG",
+      "name": "禁止事件名/状态名/标签魔法字符串",
+      "severity": "TIER1",
+      "scope": "combat_core",
+
+      "enabled": true,
+
+      "description": "所有跨模块使用的事件名、状态名、标签字符串，必须定义在集中常量模块中，通过导入使用，而不是直接写字面量。",
+
+      "constants_modules": [
+        "domain.combat.constants",
+        "contexts.combat.mvc.constants"
+      ],
+
+      "string_suspect_keywords": [
+        "event",
+        "status",
+        "tag",
+        "effect",
+        "state"
+      ],
+
+      "detection_strategy": {
+        "type": "ast_scan",
+        "targets": [
+          {
+            "pattern": "Call",
+            "func_name_contains": ["publish", "emit", "dispatch"],
+            "arg_types": ["Str"]
+          },
+          {
+            "pattern": "Subscript",
+            "value_name_contains": ["state", "payload", "data"],
+            "slice_type": "Str"
+          }
+        ]
+      },
+
+      "examples": {
+        "violation": [
+          "event_bus.publish(\"card_played\", payload)",
+          "state[\"stressed\"] = True",
+          "tags.append(\"ANGER\")"
+        ],
+        "preferred": [
+          "from domain.combat.constants import EVENT_CARD_PLAYED",
+          "event_bus.publish(EVENT_CARD_PLAYED, payload)",
+          "from domain.combat.constants import STATUS_STRESSED",
+          "state[STATUS_STRESSED] = True"
+        ]
+      }
+    },
+
+    {
+      "id": "CP002_NO_NAKED_DICT_PAYLOAD",
+      "name": "禁止裸 dict 承载业务数据",
+      "severity": "TIER1",
+      "scope": "combat_core",
+
+      "enabled": true,
+
+      "description": "跨层传递或跨模块复用的业务数据，不允许使用裸 dict/Dict[Any, Any]。必须使用 TypedDict / dataclass / Pydantic 模型，并在 protocols/dto 模块中集中定义。",
+
+      "dto_modules_hint": [
+        "domain.combat.protocols",
+        "application.combat.protocols",
+        "contexts.combat.mvc.protocols",
+        "domain.combat.dto",
+        "application.combat.dto"
+      ],
+
+      "suspicious_param_names": [
+        "payload",
+        "data",
+        "state",
+        "ctx",
+        "request"
+      ],
+
+      "detection_strategy": {
+        "type": "ast_scan",
+        "targets": [
+          {
+            "pattern": "FunctionDef",
+            "param_type_is": ["dict", "Dict", "Mapping"],
+            "param_name_in": "suspicious_param_names"
+          },
+          {
+            "pattern": "FunctionDef",
+            "return_type_is": ["dict", "Dict", "Mapping"]
+          }
+        ]
+      },
+
+      "examples": {
+        "violation": [
+          "def handle_card_play(payload: dict) -> dict:",
+          "def build_combat_state() -> Dict[str, Any]:"
+        ],
+        "preferred": [
+          "from application.combat.protocols import CardPlayPayload, CombatStateDTO",
+          "def handle_card_play(payload: CardPlayPayload) -> CombatStateDTO:"
+        ]
+      }
+    },
+
+    {
+      "id": "CP003_NO_ANY_IN_DOMAIN",
+      "name": "Domain 层禁止 Any（预留规则，暂时只报警）",
+      "severity": "TIER2",
+      "scope": "combat_core",
+
+      "enabled": false,
+
+      "description": "domain 层不允许使用 Any 作为类型标注，除非在白名单文件中（预留，等时机成熟再开启）。",
+
+      "whitelist_files": [
+        "domain/combat/experimental_*.py"
+      ],
+
+      "detection_strategy": {
+        "type": "ast_scan",
+        "targets": [
+          {
+            "pattern": "AnnAssign_or_Arg",
+            "annotation_is": "Any"
+          }
+        ]
+      }
+    }
+  ]
+}
+
+
