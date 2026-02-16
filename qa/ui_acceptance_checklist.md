@@ -3,7 +3,7 @@
 本清单用于人工验收与 CI 可视化检查的对照表。
 
 - 字体与中文显示
-  - 主题 `theme.json` 中 `label/button/window` 使用 `assets/fonts/NotoSansSC-Regular.otf`
+  - 主题 `theme.json` 中 `label/button/window` 使用 `assets/fonts/汇文明朝体.otf`
   - 所有中文文案无“口口”/乱码/空白
 
 - 设置窗口（Settings）
