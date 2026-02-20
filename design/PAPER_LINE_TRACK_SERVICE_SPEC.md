@@ -11,7 +11,7 @@
   - 蓝图→实例：立题后一次性 Commit 蓝图并激活；提前接收仅改变触发性（休眠），不改几何。
   - 不变量守护：Pinned 节点不可合并/删除；每行尾块为 DDL；融合只加强度与时长；工作量守恒。
   - 数据驱动：蓝图、层级梯子、判词脚本、台词/期刊/综述，均来自外部 JSON/CSV。
-  - 投稿梯子口径：首投层级可选但上限为 T0；每次 Reject 必降一档，直到 T4 按策略保底接收。
+  - 投稿梯子口径：首投层级可选但上限为 T0；每次 Reject 必降一档，降至 T4 后不再降档，T4 仍可能 Reject。
 
 ---
 
@@ -84,7 +84,7 @@ PublishingDone → Completed → Archived（可延迟）
   "default_start_tier": "T0",
   "demote_order": ["T0","T1","T2","T3","T4"],
   "reject_policy": "demote_one_tier_per_reject",
-  "t4_policy": {"battle": false, "auto_accept": true},
+  "t4_policy": {"battle_on_reject": false, "auto_accept": false, "reject_possible": true, "demote_on_reject": false},
   "verdict_rules": {
     "T0": {"minor_weight": 0.3, "major_weight": 0.5, "reject_weight": 0.2},
     "T3": {"minor_weight": 0.6, "major_weight": 0.2, "reject_weight": 0.2}
@@ -206,5 +206,4 @@ PublishingDone → Completed → Archived（可延迟）
 - 先将现有 `CampaignState` 写入路径切换到 TrackService；把 `blocks` 改为只读视图。
 - 复用现有 `_normalize_no_overlap/_resolve_fusion/_ensure_last_block_is_ddl_per_track` 作为服务内部校验/矫正步骤。
 - 不做“删除行导致 index 压缩”；保留逻辑 index，渲染层可紧凑显示，避免回放失真。
-
 
