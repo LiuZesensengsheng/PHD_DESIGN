@@ -89,3 +89,4 @@ git revert <commit_hash>
 | YYYY-MM-DD | DEL-001 | 例：`linshi/` 清理 | P2 | `pytest ...` | PASS | `<hash>` |
 | 2026-02-23 | DEL-20260223-01 | 删除 `examples/stack_logger_example.py`；删除 `robust_game_toolkit/rendering/**`；删除异常文件 `robust_game_toolkit/core/assets/fonts/SourceHanSans-Regular.otf` | P2 | `./.venv311/bin/python -m pytest -q` | PASS（仅既有 warning） | 待提交（提交后补 hash） |
 | 2026-02-23 | DEL-20260223-02 | 删除 `robust_game_toolkit/core/assets/fonts/NotoSerifCJKsc.otf`（53MB，无引用） | P2 | `./.venv311/bin/python -m pytest -q` | PASS（仅既有 warning） | 待提交（提交后补 hash） |
+| 2026-02-23 | DEL-20260223-03 | 删除 `robust_game_toolkit/setup.py`、`robust_game_toolkit/core/diagnostics.py`、`robust_game_toolkit/core/constants/diagnostics.py`、`robust_game_toolkit/core/assets/theme.json` | P2 | `./.venv311/bin/python -m pytest -q` | PASS（仅既有 warning） | 待提交（提交后补 hash） |

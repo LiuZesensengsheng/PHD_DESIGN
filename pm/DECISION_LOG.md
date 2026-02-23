@@ -182,3 +182,46 @@ AI 执行引用检查、删除和回归测试；人工只做删除边界确认�
 
 #### 后续动作
 继续按 `P2` 规则评估 `robust_game_toolkit/core` 内 0 引用模块，逐批处理。
+
+### [DL-20260223-04] 清理 robust 低引用诊断与打包遗留
+
+- 日期：2026-02-23
+- 负责人：Team
+- 状态：Accepted
+- 关联：`docs/pm/DELETE_POLICY.md`
+
+#### 背景
+在前两批清理后，`robust_game_toolkit` 仍存在一组低价值遗留文件：本地打包脚本、未接入的诊断模块、未引用主题文件。
+
+#### 决策
+删除以下 `P2` 文件：
+1. `robust_game_toolkit/setup.py`
+2. `robust_game_toolkit/core/diagnostics.py`
+3. `robust_game_toolkit/core/constants/diagnostics.py`
+4. `robust_game_toolkit/core/assets/theme.json`
+
+#### 人类工作量影响（核心）
+- 减少的人类工时：减少目录噪音和误判成本，降低后续维护负担。
+- 增加的人类工时：一次额外引用核查与回归测试。
+- 对关键路径的变化：不影响主流程开发与测试链路。
+
+#### AI 工作量假设
+AI 负责扫描引用、执行删除、回归测试；人工负责最终删除边界确认。
+
+#### 备选方案
+1. 暂缓删除，待版本冻结统一清理。
+2. 一次性清空 `robust_game_toolkit/core` 的所有低引用模块。
+
+#### 风险与触发信号
+- 风险：存在未覆盖到的隐式引用或手工脚本依赖。
+- 触发信号：运行期 ImportError 或资源加载失败。
+
+#### 验证计划
+- 成功指标：`./.venv311/bin/python -m pytest -q` 通过（允许既有 warning）。
+- 检查日期：2026-02-23（已通过）。
+
+#### 回滚方案
+提交后按批次 commit 进行 `git revert <commit_hash>`；未提交阶段可直接从索引恢复。
+
+#### 后续动作
+下一步仅评估 `robust_game_toolkit/core` 中“外部 0 引用且内部低依赖”的模块，不动主链路模块。
