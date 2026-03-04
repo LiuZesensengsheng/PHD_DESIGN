@@ -601,7 +601,7 @@
 
 #### 4.z.1 当前实现盘点（红色）
 
-- 已有核心牌（`data/cards/red/red_frontier_basic.json`）：
+- 已有核心牌（`data/cards/red/cards.csv` + `data/cards/red/effects.csv`）：
   - `red_latest_strike`（前沿伤害）
   - `red_frontier_guard`（前沿防御）
   - `red_defense_and_strike`（防御 + 前沿追伤）
@@ -701,4 +701,3 @@
     - 如果某个维度超标，就减少对应模式的牌张数；如果某个维度偏低，就补充相应模式。
 
 > 等你先给出“红色在这六个维度上的目标权重”（比如：输出 5、防御 1、资源 3…）之后，我们就可以一起给上面的 A/B/C/D/E 这些模式打等级，再根据预算决定：v1 具体需要哪些模式、每种做几张牌。
-
