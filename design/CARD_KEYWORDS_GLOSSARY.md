@@ -151,14 +151,14 @@
 
 ## G. 常用效果Key（语义与示例）
 - 伤害：
-  - 格式：`{ type: "damage", value, hit_count?, target }`
+  - 格式：`{ type: "damage", value, hit_count->, target }`
   - `target` 可为：`selected_enemy|all_enemies|random_enemy|leftmost_enemy|rightmost_enemy`。
   - 多段：`hit_count`>1 表示同一目标多段；序列多目标请使用 `sequence_damage`。
 - 自信（格挡）：
   - `confidence` 效果：`{ type: "confidence", value, target: "player|ally" }`。
   - 与“充分条件（自信不清空）”的交互通过范式处理。
 - 状态：
-  - `status`：`{ type: "status", status_type: "Vulnerable|Weak|Regulated|...", duration?, value?, target }`。
+  - `status`：`{ type: "status", status_type: "Vulnerable|Weak|Regulated|...", duration->, value->, target }`。
   - `Regulated` 多采用“本回合+X”的赋值，跨回合维持由范式脉冲负责。
 - 抽牌/能量：
   - 抽牌：`{ type: "draw", count, target: "player" }`。

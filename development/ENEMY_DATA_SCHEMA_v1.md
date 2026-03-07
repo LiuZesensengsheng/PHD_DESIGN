@@ -18,10 +18,10 @@
 - `intents: Intent[]` 意图池。
 
 推荐字段：
-- `role_tags?: string[]` 辅助标签（如 `{"priority_target"}`）。
-- `barks_zh?: string[]` 战斗台词（中文）。
-- `barks_en?: string[]` 战斗台词（英文）。
-- `notes?: string` 设计备注/护栏。
+- `role_tags->: string[]` 辅助标签（如 `{"priority_target"}`）。
+- `barks_zh->: string[]` 战斗台词（中文）。
+- `barks_en->: string[]` 战斗台词（英文）。
+- `notes->: string` 设计备注/护栏。
 
 ### 1.1 Passive
 ```json

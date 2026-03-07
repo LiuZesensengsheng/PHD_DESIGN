@@ -38,7 +38,7 @@
 - title: str（标题）
 - who: str（“导师”|“师兄”|“自语”）
 - category: str（"mentor"|"peer"|"flavor"|"system"）
-- trigger_window: { min_turn?: int, max_turn?: int }（可选触发窗口）
+- trigger_window: { min_turn->: int, max_turn->: int }（可选触发窗口）
 - requires_can_add_line: bool（是否仅在未达上限时允许出现）
 - conditions: 
   - all_of: [Condition]（全部满足）
@@ -60,7 +60,7 @@ Condition（MVP建议的原子条件）：
 Effect（MVP建议的原子效果）：
 - grant_inspiration: { amount: int }（正负皆可）
 - defer_add_task_line: {}（在返回战役后应用新任务线）
-- grant_trait: { id?: str|"random" }（若特质系统未完备，先用占位）
+- grant_trait: { id->: str|"random" }（若特质系统未完备，先用占位）
 - open_reward: { reward_id: str }（复用 RewardService）
 
 注：条件与效果仅声明，真实执行交由服务层完成（MeetingService/RewardService/TrackService 等）。  

@@ -328,7 +328,7 @@
 
 ### 蓝色（主：知识/操控）
 - 能力：对偶理论（Dark Embrace）、辩证法（Evolve）、自我PUA（Corruption，蓝/黑）
-- 技能：战吼（Warcry）、头脑风暴（Battle Trance）、焚稿誓言（Burning Pact，蓝/黑）、双盲实验（Double Tap? → 实为红色；见红）、Ctrl C（Dual Wield，蓝/绿）、随想（Havoc，蓝/黑）
+- 技能：战吼（Warcry）、头脑风暴（Battle Trance）、焚稿誓言（Burning Pact，蓝/黑）、双盲实验（Double Tap-> → 实为红色；见红）、Ctrl C（Dual Wield，蓝/绿）、随想（Havoc，蓝/黑）
 - 攻击：易得（Headbutt，蓝/红）
 
 ### 黑色（主：野心/自耗）
