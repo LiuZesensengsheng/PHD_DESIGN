@@ -1,20 +1,18 @@
 # Manage Toolkit Status
 
-`scripts/manage_toolkit/` is now treated as legacy tooling.
+`scripts/manage_toolkit/` has been removed.
 
 ## Current Rules
 
 - New runtime code must not import from `scripts/manage_toolkit/`
-- New tool features should not be added to this package
-- Shared runtime-safe constants now live in [constants/tooling.py](/D:/PHD_SIMULATER/constants/tooling.py)
-- The remaining package exists only to support any old script entrypoints that still rely on `constants.py`
+- Shared runtime-safe constants live in [constants/tooling.py](/D:/PHD_SIMULATER/constants/tooling.py)
+- Do not recreate `scripts/manage_toolkit/` as a project utility layer
 
-## Cleanup Direction
+## Outcome
 
-The former analyzer / checker / executor / manager stack is no longer part of the active architecture.
+The former analyzer / checker / executor / manager stack was fully retired.
 
-Default policy:
+Any future tooling should either:
 
-1. Keep only the smallest surface still needed by old scripts
-2. Delete unused legacy modules in batches
-3. Do not treat this package as a future platform layer
+1. live as a focused standalone script under `scripts/`, or
+2. move into a clearly scoped shared package only if it is genuinely reused.
