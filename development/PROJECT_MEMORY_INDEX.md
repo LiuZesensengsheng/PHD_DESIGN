@@ -18,6 +18,11 @@ Use this index to decide where to read and where to write project knowledge.
 - `docs/development/*.md`
 - Use for architecture boundaries, working rules, stable design constraints, and workflow agreements
 
+### Task Pool
+
+- `docs/development/CODEX_TASK_POOL.md`
+- Use for work suitable for long, independent Codex execution
+
 ### Decision Memory
 
 - `docs/pm/DECISION_LOG.md`
@@ -41,4 +46,5 @@ Use this index to decide where to read and where to write project knowledge.
 - Write daily progress into the dated daily log
 - Write stable conclusions into `docs/development/`
 - Write decision outcomes into `docs/pm/DECISION_LOG.md`
+- Write independent AI-executable work into `docs/development/CODEX_TASK_POOL.md`
 - Do not store current branch status or recent progress in skill bodies
