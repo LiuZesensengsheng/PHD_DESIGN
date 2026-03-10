@@ -1,12 +1,11 @@
 # Robust Game Toolkit Status
 
-`robust_game_toolkit` is now treated as a legacy support layer.
+`robust_game_toolkit` was a legacy support layer. The migration is complete and the root package has been removed.
 
 ## Current Rule
 
-- Do not add new functionality to `robust_game_toolkit/`
 - New code must import shared asset infrastructure from `contexts/shared/infrastructure/assets/`
-- The old package exists only as a temporary compatibility layer and should not receive new imports
+- Do not recreate `robust_game_toolkit/` as a root package
 
 ## Migration Scope
 
