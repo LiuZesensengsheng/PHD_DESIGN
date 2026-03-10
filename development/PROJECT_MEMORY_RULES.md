@@ -43,6 +43,14 @@ Promote a fact from daily logs into long-term memory only when it is:
 - Then read the most recent prior daily log with useful content
 - Do not load all history unless the task truly requires it
 
+### 6. Branch Naming Stays Predictable
+
+- Default Codex branch naming convention is `codex/MM-DD-topic`
+- Prefer short topic names that describe the work, for example:
+  - `codex/03-10-red-white-fix`
+  - `codex/03-10-enemy-balance-v1`
+- Use the date without the year unless there is a specific reason to disambiguate
+
 ## Default Workflow
 
 ### Night Planning

@@ -40,6 +40,27 @@ Avoid assigning Codex long unsupervised work on:
 
 ## Active Tasks
 
+### P1. Card Content Pipeline Hardening
+
+- Goal: make the card content pipeline reliable enough for continued large-scale content work
+- Inputs:
+  - current card CSV/JSON pipeline
+  - `scripts/cards_csv_to_json.py`
+  - red/white/theorist card data under `data/cards/`
+  - recent card text corruption findings from the daily log
+- Outputs:
+  - stronger validation for card text and core fields
+  - a documented source-of-truth rule for CSV vs generated JSON vs legacy bootstrap JSON
+  - a lightweight validation entry point or test coverage increase
+  - a workflow document for safe card-data editing
+- Boundaries:
+  - do not redesign the combat runtime repository
+  - do not rebalance all cards as part of this task
+  - do not delete old bootstrap JSON in the same pass unless they are fully proven unused
+- Done when:
+  - broken card text or malformed card data fails before runtime
+  - teammates can tell which files are editable source, runtime artifact, and legacy reference
+
 ### P1. Enemy Balance Baseline V1
 
 - Goal: define the first usable HP / damage / pressure curve for normal, elite, and boss enemies
