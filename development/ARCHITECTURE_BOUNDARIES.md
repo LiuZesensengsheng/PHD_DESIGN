@@ -5,7 +5,7 @@
 ### 核心规则（依赖只能向内）
 
 - **Domain（领域层）**：`contexts/*/domain/**`
-  - **允许依赖**：`shared_kernel`、`contexts/shared/domain`、Python 标准库（纯）
+  - **????**?`contexts/shared/domain`?`contexts/shared/infrastructure`?Python ??????
   - **禁止依赖**：`pygame/pygame_gui`、`contexts/*/ui`、`contexts/*/rendering`、`contexts/*/mvc`、`contexts/*/infrastructure`、文件/网络IO（除非通过注入的接口）
   - **职责**：规则、实体/值对象、领域事件、纯算法；尽量可单测、可 headless 运行
 
@@ -19,14 +19,14 @@
   - **禁止做**：写业务规则/结算；绕过 Services 直接修改 Domain 深层状态
   - **职责**：渲染、输入事件、把点击/按键翻译成“命令/选择”交给 Services
 
-- **Infrastructure（基础设施层）**：`contexts/*/infrastructure/**`、`infrastructure/**`
+- **Infrastructure???????**?`contexts/*/infrastructure/**`?`contexts/shared/infrastructure/**`
   - **允许依赖**：Domain（类型/接口）与标准库；第三方库（IO/资源）
   - **职责**：JSON/存档/资源加载/Repo 实现/适配器
 
 ### Cross-Context 规则（限界上下文）
 
 - **禁止**：`contexts.A` 直接 import `contexts.B` 的内部模块（除 `contexts.shared` 外）。
-- **允许**：通过 `shared_kernel` 或显式契约（DTO/Protocol/DomainEvent）沟通。
+- **??**??? `contexts/shared` ??????DTO/Protocol/DomainEvent????
 
 ### PR/提交前自检（5秒版）
 

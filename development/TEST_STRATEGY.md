@@ -41,7 +41,7 @@
   - `python -m pytest tests/campaign -q`
   - `python -m pytest tests/test_state_machine_minimal.py -q`
 
-### 改 Shared Kernel（例如 `shared_kernel/color.py` 这种“全局类型”）
+### ??????????? `contexts/shared/domain/color.py` ?????????
 - 必跑：
   - `python -m pytest -q`（全量）
 

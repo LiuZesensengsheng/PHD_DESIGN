@@ -91,7 +91,7 @@
 
 1. 鍦->README ->docs 涓啓娓呮滄寮忓叆鍙ｆ槸 `run_campaign.py`濓紝骞舵爣娉->`main.py` 涓->legacy->
 2. 缁->`scripts/validate_architecture.py` 澧炲姞瑙勫垯歝ombat/campaign 鐨->`domain/` 绂佹瀵煎叆 `pygame`乣pygame_gui`乣constants.*ui*`->
-3. 绾﹀畾璺->context 渚濊禆鍙兘閫氳繃 `contexts/shared` ->`shared_kernel` 鐨勭ǔ瀹氭帴鍙ｏ紙閬垮厤娣卞眰鏂囦欢浜掔浉 import夈€->
+3. 绾﹀畾璺->context 渚濊禆鍙兘閫氳繃 `contexts/shared` 鐨勭ǔ瀹氭帴鍙ｏ紙閬垮厤娣卞眰鏂囦欢浜掔浉 import夈€->
 
 
 

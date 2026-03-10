@@ -15,7 +15,7 @@
 
 纳入范围：
 
-- Python 源码（`contexts/`、`shared_kernel/`、`infrastructure/`、`scripts/`、`tools/`）
+- Python ???`contexts/`?`scripts/`?`tools/`?
 - 已无引用的资源或配置
 - 旧原型与临时文件
 
@@ -43,7 +43,7 @@
 执行引用检查：
 
 ```bash
-rg -n "<name_or_symbol>" contexts shared_kernel infrastructure scripts tools tests
+rg -n "<name_or_symbol>" contexts scripts tools tests
 rg --files | rg "<filename_or_folder>"
 ```
 
