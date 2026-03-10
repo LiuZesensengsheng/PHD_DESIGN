@@ -6,7 +6,7 @@
 
 - Do not add new functionality to `robust_game_toolkit/`
 - New code must import shared asset infrastructure from `contexts/shared/infrastructure/assets/`
-- The old package exists only as a compatibility layer during migration
+- The old package exists only as a temporary compatibility layer and should not receive new imports
 
 ## Migration Scope
 
