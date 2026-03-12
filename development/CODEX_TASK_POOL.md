@@ -83,6 +83,25 @@ These are the current default candidates for the next daytime execution block.
 - Done when:
   - common malformed content cases fail before runtime and produce actionable errors
 
+### P1. TA Minimal Task Host Implementation
+
+- Goal: implement the smallest combat-side task host needed to support `迟到学生 / 代到学生`
+- Inputs:
+  - `docs/design/enemydesigon/TA_IMPLEMENTABILITY_MAPPING_V1.md`
+  - `docs/design/enemydesigon/TA_TASK_HOST_MINIMUM_V1.md`
+  - current TA CSV/JSON pipeline and runtime enemy adapter
+- Outputs:
+  - a minimal combat task host runtime object
+  - countdown ticking and target-task completion support
+  - a minimal enemy transform path for `迟到学生 -> 代到学生`
+  - regression tests for the new host behavior
+- Boundaries:
+  - do not implement the full TA shared task system
+  - do not implement three-slot task UI or elite-only rules
+  - keep the first version limited to deadline target elimination tasks
+- Done when:
+  - a `迟到学生` encounter can publish a deadline task, tick countdown, and transform into `代到学生` on failure
+
 ## Pending Or Needs More Decisions
 
 ### P2. Enemy Balance Baseline V1
@@ -157,6 +176,7 @@ These are the current default candidates for the next daytime execution block.
 - `TA Enemy Implementability Mapping`
 - `TA First-Batch Skeleton Enemy Runtime Path`
 - `Repository Data Pipeline Guardrails`
+- `TA Batch-Three Minimum Task Host Evaluation`
 
 ## Exit Rules
 
