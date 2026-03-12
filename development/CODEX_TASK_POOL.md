@@ -44,45 +44,27 @@ These are the current default candidates for the next daytime execution block.
 
 ### Ready To Implement Tomorrow
 
-### P1. Thesis Runtime State Third Cut
+### P1. TA Batch Two Enemy Implementation
 
-- Goal: extract a thinner thesis runtime host so thesis state and publication/innovation persistence stop spreading across `CampaignState`, services, and session helpers
+- Goal: implement the second TA enemy batch on the main runtime path after the first-batch skeletons proved out
 - Inputs:
-  - current thesis/judgment outcome + flow split
-  - `contexts/campaign/state.py`
-  - thesis runtime fields and session persistence accessors
-  - publication / innovation persistence paths
-- Outputs:
-  - a thinner thesis runtime host or state object
-  - clearer ownership rules for runtime-only state vs persisted thesis data
-  - regression coverage for the extracted runtime host
-- Boundaries:
-  - do not redesign publication UX or thesis copy
-  - do not reopen the first/second cuts unless needed for compatibility
-  - keep runtime extraction incremental, not a full thesis subsystem rewrite
-- Done when:
-  - thesis runtime state has a clearer host than raw `CampaignState` fields
-  - publication/innovation persistence boundaries are enforced in code and tests
-
-### P1. TA Enemy Implementability Mapping
-
-- Goal: turn the TA enemy design package into an implementation-ready mapping against the current combat system
-- Inputs:
-  - `docs/design/enemydesigon/TA-2_extracted/`
-  - current enemy/card/task-related combat systems
-  - current enemy balance assumptions
-- Plan Document:
   - `docs/design/enemydesigon/TA_IMPLEMENTABILITY_MAPPING_V1.md`
+  - first-batch TA CSV/JSON pipeline under `data/combat/ta/`
+  - current enemy runtime intent adapter and encounter loader
+- Targets:
+  - ????
+  - ??
+  - ???
 - Outputs:
-  - a per-enemy mechanism mapping table
-  - a list of mechanics that already exist vs mechanics that still need engine support
-  - a recommended implementation order for the TA line
-  - a short research summary of which parts of the TA design can land immediately
+  - CSV source rows for the second-batch TA enemies
+  - regenerated runtime JSON content
+  - at least one new TA encounter exercising second-batch behavior
+  - regression coverage for the new enemy intents
 - Boundaries:
-  - do not implement full TA enemies in the same pass
-  - do not finalize balance numbers before enemy baseline work
+  - do not implement full task host or elite-only mechanics
+  - keep behaviors within the currently supported runtime effect subset, adding only minimal support if strictly necessary
 - Done when:
-  - we can say which TA enemies are directly implementable, which need support work, and which should wait
+  - all three second-batch enemies can enter combat from the main runtime path and pass smoke/runtime tests
 
 ### P1. Content Data Validation Expansion
 
@@ -171,6 +153,10 @@ These are the current default candidates for the next daytime execution block.
 - `Card Content Pipeline Hardening`
 - `Thesis And Judgment Complexity Review`
 - `Investigate Why Virtue/Torment Does Not Trigger At 100`
+- `Thesis Runtime State Third Cut`
+- `TA Enemy Implementability Mapping`
+- `TA First-Batch Skeleton Enemy Runtime Path`
+- `Repository Data Pipeline Guardrails`
 
 ## Exit Rules
 
