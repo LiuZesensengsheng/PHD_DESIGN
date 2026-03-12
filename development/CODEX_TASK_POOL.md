@@ -1,206 +1,178 @@
-# Codex Task Pool
+# Codex 任务池
 
-## Purpose
+## 用途
 
-This document tracks work that Codex can execute independently for several hours with limited supervision.
+这份文档只记录一类事情：
 
-Use it to choose daytime execution tasks after night planning is complete.
+- 哪些任务适合 Codex 独立连续执行几小时
+- 这些任务需要什么输入
+- 产出是什么
+- 哪些任务已经可以直接做，哪些还需要先继续定
 
-This file is not:
+这份文档不是：
 
-- a daily progress log
-- an architecture rulebook
-- a decision log
+- 日报
+- 架构原则文档
+- 决策日志
 
-## How To Use
+## 使用方式
 
-For each task:
+每次选择任务时，先确认 4 件事：
 
-1. Confirm the task still matches current priority
-2. Confirm required inputs exist
-3. Hand the task to Codex together with any needed plan or constraints
-4. Record execution results in the daily log
+1. 任务是否仍符合当前优先级
+2. 输入文档或数据是否已经存在
+3. 完成标准是否足够清楚
+4. 是否适合低监督连续执行
 
-## Task Selection Rules
+## 任务选择规则
 
-Choose tasks with these properties:
+优先交给 Codex 的任务：
 
-- clear input files or source documents
-- clear output files or acceptance criteria
-- low dependence on subjective visual judgment
-- low dependence on real-time human feedback
-- strong fit for test-first or document-first execution
+- 输入文件明确
+- 输出文件明确
+- 测试标准明确
+- 不依赖高频人工审美判断
+- 不依赖实时试玩手感
 
-Avoid assigning Codex long unsupervised work on:
+暂时不要交给 Codex 长时间独立推进的任务：
 
-- pure visual polish
-- final narrative tone decisions
-- high-subjectivity UX decisions
-- final hand-tuned balance passes that depend on feel
+- 纯视觉打磨
+- 最终剧情语气定稿
+- 高主观性的 UX 调整
+- 最后阶段的纯手感平衡
 
-## Active Tasks
+## 当前活跃任务
 
-These are the current default candidates for the next daytime execution block.
+### P1. TA 任务链式发布 v1
 
-### Ready To Implement Tomorrow
-
-### P1. TA ?????? v1
-
-- ??????????? deadline ????????????????
-- ???
+- 目标：
+  - 把点名主题从“单次 deadline”升级成“小型链式任务压力”
+- 主要输入：
   - `docs/design/enemydesigon/TA_TASK_CHAINING_V1.md`
   - `docs/design/enemydesigon/TA_TASK_HOST_MINIMUM_V1.md`
-  - ?? TA CSV/JSON ?????????? v1
-- ???
-  - ???????????????? encounter
-  - `publish_task` ?????????
-  - ??????????
-- ???
-  - ???? UI
-  - ?????????
-  - ??? DDL / ??
-- ?????
-  - ?????????????????????????????????
+  - 当前 TA CSV -> JSON 运行链
+- 预期输出：
+  - 至少 1 条真实可跑的链式任务遭遇
+  - `publish_task` 在运行时的稳定落地
+  - 对应回归测试
+- 边界：
+  - 不做任务 UI
+  - 不做完整任务 DSL
+  - 不直接做 DDL 或三端
+- 完成标准：
+  - 任务失败/完成都可以发布后续任务
+  - 点名主题 encounter 可以完整走完链式压力循环
 
-### P1. TA Batch Two Enemy Implementation
+### P1. TA DDL 精英前置机制评估
 
-- Goal: implement the second TA enemy batch on the main runtime path after the first-batch skeletons proved out
-- Inputs:
+- 目标：
+  - 盘清 DDL 种植园主要落地还缺哪些最小中层能力
+- 主要输入：
+  - `docs/design/enemydesigon/TA-2_extracted/TA/战斗/敌人设计/精英/DDL种植园主.md`
   - `docs/design/enemydesigon/TA_IMPLEMENTABILITY_MAPPING_V1.md`
-  - first-batch TA CSV/JSON pipeline under `data/combat/ta/`
-  - current enemy runtime intent adapter and encounter loader
-- Targets:
-  - ????
-  - ??
-  - ???
-- Outputs:
-  - CSV source rows for the second-batch TA enemies
-  - regenerated runtime JSON content
-  - at least one new TA encounter exercising second-batch behavior
-  - regression coverage for the new enemy intents
-- Boundaries:
-  - do not implement full task host or elite-only mechanics
-  - keep behaviors within the currently supported runtime effect subset, adding only minimal support if strictly necessary
-- Done when:
-  - all three second-batch enemies can enter combat from the main runtime path and pass smoke/runtime tests
+  - 当前 TA 任务宿主实现
+- 预期输出：
+  - 一份 DDL 精英前置机制评估文档
+  - 已支持 / 待补 / 不建议现在做 的清单
+  - 推荐实现顺序
+- 边界：
+  - 本轮只做评估，不直接实现精英
+  - 不顺手扩成完整 TA 全任务系统
+- 完成标准：
+  - 明确 DDL 精英是否只需要扩任务宿主，还是还需要额外中层能力
 
-### P1. Content Data Validation Expansion
+### P1. TA DDL 精英最小能力实现
 
-- Goal: extend validation beyond the current card text guardrails so content errors fail earlier and more clearly
-- Inputs:
-  - current CSV/JSON pipelines
-  - card/enemy/event-related data files under `data/`
-  - existing validation scripts and tests
-- Outputs:
-  - stronger validation rules or checks
-  - clearer failure categories for missing fields, invalid values, broken references, and suspicious text
-  - expanded test coverage for content validation
-- Boundaries:
-  - do not replace the whole content pipeline in one pass
-  - do not redesign runtime repositories as part of this task
-- Done when:
-  - common malformed content cases fail before runtime and produce actionable errors
+- 目标：
+  - 把 DDL 种植园主需要的 3 个最小中层能力补出来
+- 主要输入：
+  - `docs/design/enemydesigon/TA_DDL_PRECONDITIONS_V1.md`
+  - 当前 TA 任务宿主与链式任务实现
+- 预期输出：
+  - 任务数量查询接口
+  - 共享倒计时固定为 1 的 encounter 级配置
+  - 基于未完成任务数的分档 intent / 伤害表达
+- 边界：
+  - 本轮先补前置能力，不直接把 DDL 精英整套做完
+  - 不顺手做三端、不做完整任务 UI
+- 完成标准：
+  - DDL 精英已经具备第一版可实现的最小宿主能力
 
-### P1. TA Minimal Task Host Implementation
+### P1. 内容数据校验扩展
 
-- Goal: implement the smallest combat-side task host needed to support `迟到学生 / 代到学生`
-- Inputs:
-  - `docs/design/enemydesigon/TA_IMPLEMENTABILITY_MAPPING_V1.md`
-  - `docs/design/enemydesigon/TA_TASK_HOST_MINIMUM_V1.md`
-  - current TA CSV/JSON pipeline and runtime enemy adapter
-- Outputs:
-  - a minimal combat task host runtime object
-  - countdown ticking and target-task completion support
-  - a minimal enemy transform path for `迟到学生 -> 代到学生`
-  - regression tests for the new host behavior
-- Boundaries:
-  - do not implement the full TA shared task system
-  - do not implement three-slot task UI or elite-only rules
-  - keep the first version limited to deadline target elimination tasks
-- Done when:
-  - a `迟到学生` encounter can publish a deadline task, tick countdown, and transform into `代到学生` on failure
+- 目标：
+  - 继续扩内容数据校验，让坏数据更早失败
+- 主要输入：
+  - 当前 CSV/JSON 数据链
+  - `docs/development/DATA_PIPELINE_GUARDRAILS_V1.md`
+  - 现有校验脚本和测试
+- 预期输出：
+  - 更强的字段、引用、非法值校验
+  - 更清楚的失败提示
+  - 对应测试补强
+- 边界：
+  - 不重写整个内容系统
+  - 不顺手改 runtime repository
+- 完成标准：
+  - 常见坏内容能在 runtime 前失败，并给出明确错误
 
-## Pending Or Needs More Decisions
+## 待定 / 需要更多前置条件
 
-### P2. Enemy Balance Baseline V1
+### P2. 三端精英前置机制评估
 
-- Goal: define the first usable HP / damage / pressure curve for normal, elite, and boss enemies
-- Inputs:
-  - existing enemy design docs
-  - current red/white card baseline
-  - current combat tests and simulation scenarios
-- Outputs:
-  - baseline balance document
-  - initial numeric recommendations
-  - any required test or scenario updates
-- Boundaries:
-  - do not redesign enemy identities
-  - do not rebalance all colors at once
-- Done when:
-  - there is a documented enemy curve that can support ongoing encounter implementation
-- Why pending now:
-  - enemy design and mechanism mapping are not finished yet
-  - starting from numbers first would create fake precision without enough design grounding
+- 目标：
+  - 盘清“微信 / QQ / 邮箱”三端精英需要的最小宿主能力
+- 当前不优先的原因：
+  - 复杂度高于 DDL 精英
+  - 依赖更重的精英专属规则
 
-### P2. Red White Second-Pass Tuning
+### P2. 敌人数值基线 v1
 
-- Goal: adjust only the problem cards discovered after first-pass playtesting
-- Inputs:
-  - playtest notes
-  - `RED_WHITE_BALANCE_BASELINE_V1.md`
-- Outputs:
-  - small numeric delta set
-  - updated balance notes
-- Boundaries:
-  - do not run another full-pool rewrite
-  - do not change core card identities
-- Done when:
-  - only the identified outliers were changed and the new baseline remains test-clean
+- 目标：
+  - 给普通敌 / 精英 / boss 建第一版数值曲线
+- 当前不优先的原因：
+  - TA 主题机制还在继续落地
+  - 现在先做数值会产生假精确
 
-### P2. Headless Balance Checks
+### P2. 红白卡第二轮调数
 
-- Goal: create lightweight headless checks for obvious overpowered, underpowered, or malformed content
-- Inputs:
-  - existing simulation scenarios
-  - current combat tests
-- Outputs:
-  - repeatable headless checks
-  - simple report format for anomalies
-- Boundaries:
-  - do not build a complex search or optimizer system
-- Done when:
-  - a small fixed suite can catch obvious balance regressions
+- 目标：
+  - 只修首轮平衡后暴露的问题卡
+- 当前不优先的原因：
+  - 需要更多试玩反馈
 
-### P3. Content Integration Workflow
+### P2. Headless 平衡检查
 
-- Goal: document and tighten the workflow for adding new cards, enemies, and traits
-- Inputs:
-  - current card pipeline
-  - current enemy schema docs
-- Outputs:
-  - workflow doc
-  - minimum required tests/checks per content type
-- Boundaries:
-  - do not redesign content architecture
-- Done when:
-  - a teammate can add a new content item without guessing the process
+- 目标：
+  - 建立轻量的无 UI 平衡体检
+- 当前不优先的原因：
+  - 机制建设优先级更高
 
-## Recently Completed
+### P3. 内容接入工作流
+
+- 目标：
+  - 文档化新卡牌 / 新敌人 / 新特质接入流程
+- 当前不优先的原因：
+  - 当前更需要先把 TA 线和数据链继续做稳
+
+## 最近完成
 
 - `Card Content Pipeline Hardening`
 - `Thesis And Judgment Complexity Review`
 - `Investigate Why Virtue/Torment Does Not Trigger At 100`
 - `Thesis Runtime State Third Cut`
 - `TA Enemy Implementability Mapping`
-- `TA First-Batch Skeleton Enemy Runtime Path`
-- `Repository Data Pipeline Guardrails`
-- `TA Batch-Three Minimum Task Host Evaluation`
+- `TA 第一批骨架敌人主运行链接入`
+- `仓库级数据链护栏`
+- `TA 最小任务宿主`
+- `TA 任务宿主 v1`
+- `TA 任务链式发布 v1`
 
-## Exit Rules
+## 退出规则
 
-Remove or downgrade a task when:
+当出现以下任一情况时，任务应该从活跃区移走：
 
-- the task has been implemented
-- the task is blocked on design decisions
-- the task no longer fits the current production phase
-- the task turns out to require constant subjective feedback
+- 已经实现
+- 被新的设计决策阻塞
+- 不再适合当前生产阶段
+- 需要持续高频人工主观反馈
