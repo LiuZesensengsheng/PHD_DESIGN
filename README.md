@@ -1,88 +1,64 @@
-# 《绝不延毕》项目文档
+# 项目文档总览
 
-本项目采用EEE（Explanation-Embedded Engineering）方法论进行开发，文档按照清晰的四层架构组织：
+本目录存放项目设计、技术、协作与记忆文档。
 
-## 📁 文档结构（新）
+## 目录分层
 
-### 🎨 art/
-UI 与美术设计
-- `ART_STYLE_GUIDE.md` 美术风格指南
-- `CARD_ART_GUIDE.md` 卡牌美术指南
-- `MAIN_UI_STRUCTURE.md` UI 结构
-- `VISual_CONCEPT_FOR_UI.md` UI 概念稿
+### `development/`
 
-### 🧭 design/
-游戏策划总目录
+- 长期架构规则
+- AI 协作约定
+- 项目记忆入口
+- 默认工具入口
 
-- campaign/ 战役策划
-  - `events/` 战役事件文档
-  - `questline_tutorial/` 新手战役流程
-  - `ACADEMIC_PRESTIGE_SYSTEM.md` 学术声望系统
-  - `ACKNOWLEDGEMENTS_SYSTEM.md` 致谢系统
-  - `JOURNAL_SYSTEM_DESIGN.md` 日志系统
-  - `CAMPAIGN_SYSTEM_GANTT_CHART.md` 战役系统甘特
+### `design/`
 
-- combat/ 战斗策划与数值
-  - `CARD_SYSTEM.md` 卡牌系统总览
-  - `card_sets/` 卡组与卡池配置
-  - `BOSS_FIGHT.md`/`BOSS_FIGHT_V2.md` Boss 设计
-  - `ENEMY_DESIGN.md` 敌人设计
-  - `COMBAT_SYSTEM_*` 战斗系统文档（含平衡表）
-  - `DRAFT_ENEMIES_MEME.md` 敌人草案
+- 战役、战斗、角色与核心机制设计
 
-- core/ 核心机制与特性
-  - `CORE_MECHANICS.md` 核心循环与规则
-  - `TRAITS_MASTER_LIST.md` 特性总表
-  - `BASIC_TRAITS_DESIGN.md` 基础特性设计
-  - `DND_STYLE_TRAIT_SYSTEM.md` DnD 风格特性
-  - `TRAIT_SYSTEM_DESIGN.md` 特性系统设计
+### `tech/`
 
-- characters/ 角色设定
-  - 角色档案与卡面提示词等
+- 数据模型
+- 技术选型
+- 关键实现规划
 
-- 顶层设计文档（位于 design 根目录）
-  - `GAME_DESIGN_OVERVIEW.md` 游戏设计概览
-  - `CORE_DESIGN_PHILOSOPHY.md` 设计哲学
-  - `game_core_loop_and_innovation.md` 核心循环与创新
-  - `GANTT_TRIS_MODEL_GDD.md` 规划与进度模型
+### `art/`
 
-### 🏗️ tech/
-技术架构与实现规划
-- `DATA_MODEL.md` 数据模型
-- `TECHNICAL_CHOICE_RATIONALE.md` 技术选型理由
-- `SCENARIO_FLOWS.md` 场景与流程
-- `COMBAT_EVENTS_AND_SERVICES.md` 战斗事件与服务
-- `CARD_VFX_PLAN.md` 卡牌特效规划
+- UI 与美术相关说明
 
-### 🧪 development/
-开发方法论与协作规范
-- `AI_COLLABORATION_PRINCIPLES.md`
-- `AI_COLLABORATION_TOOLCHAIN.md`
-- 其他开发流程与规范文档
+### `marketing/`
 
-### 📣 marketing/
-宣传与对外材料
-- `promo_video_script.md`/`promo_video_script_part2.md` 宣传视频脚本
+- 对外展示与宣传材料
 
-### 🗄️ archive/
-历史废案与归档材料（保留溯源，不默认展示）
+### `archive/`
 
-## 🎯 阅读指南
+- 历史文档与归档材料
 
-### 新成员入门顺序
-1. 先读 `development/AI_COLLABORATION_TOOLCHAIN.md` 了解工具链
-2. 再读 `design/GAME_DESIGN_OVERVIEW.md` 与 `design/CORE_DESIGN_PHILOSOPHY.md`
-3. 阅读 `tech/DATA_MODEL.md` 与相关技术说明
-4. 根据分工进入 `design/campaign` 或 `design/combat`
+## 推荐阅读顺序
 
-### AI协作者快速上手
-直接运行项目根目录的 `python scripts/manage.py ai-guide` 命令，获得实时的项目状态和工具链指南。
+### 新成员
 
-## 🔧 EEE方法论核心
+1. 先读根目录 `AGENTS.md`
+2. 再读 `docs/development/CURRENT_DIRECTION.md`
+3. 如需执行工具或维护任务，读 `docs/development/DEFAULT_ENTRYPOINTS.md`
+4. 然后按任务进入相关 `design/`、`tech/`、`development/` 文档
 
-本项目严格遵循EEE的三大支柱：
-1. **Protocol-Driven**: 强制使用typing.Protocol定义接口
-2. **Plugin-based Toolchain**: 以manage.py为核心的自动化工具
-3. **Zero Magic Values**: 根除硬编码值，集中管理常量
+### AI 协作恢复
 
-目标是实现**调试周期计数(DCC) ≤ 10**，提高"首次提交正确率"。 
+请按以下入口恢复当前状态，不要依赖已移除的旧聚合脚本：
+
+1. `AGENTS.md`
+2. `docs/development/CURRENT_DIRECTION.md`
+3. `docs/development/DEFAULT_ENTRYPOINTS.md`
+4. 当天 daily log
+5. 最近一份有内容的 weekly summary
+
+## EEE 方法当前理解
+
+本项目曾使用 EEE（Explanation-Embedded Engineering）作为协作方法表达。
+当前仍保留的有效核心是：
+
+1. `Protocol-Driven`
+2. `Documented Toolchain`
+3. `Zero Magic Values`
+
+其中工具链部分已经从旧的聚合入口，收敛为“文档入口 + 直接脚本/pytest 命令”。

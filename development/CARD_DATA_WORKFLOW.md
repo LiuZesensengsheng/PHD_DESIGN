@@ -71,5 +71,5 @@ Do not treat legacy bootstrap JSON files as trusted recovery sources for text.
 
 ## Notes
 
-- `scripts/manage.py` still contains older card-management commands tied to the retired `cards_master.csv` workflow. Do not use that file as the source of truth for current card editing rules.
+- For recurring commands, prefer `docs/development/DEFAULT_ENTRYPOINTS.md` and the direct scripts documented there.
 - The current reliable pipeline is `CSV source -> generated JSON -> runtime`.

@@ -16,6 +16,20 @@ Keep project continuity in files with a simple four-layer model that works for p
 - Do not use for:
   - stable architecture rules
   - long-term project principles
+  - long weekly retrospectives
+
+## Layer 1.5 Weekly Summaries
+
+- Path: `docs/logs/weekly/`
+- Purpose: compressed bridge between short-term logs and long-term docs
+- Use for:
+  - weekly focus and progress
+  - weekly decisions worth remembering
+  - promotion suggestions
+  - next default direction
+- Do not use for:
+  - per-day execution detail
+  - stable architecture rules that should live in `docs/development/`
 
 ## Layer 2. Development Docs
 
@@ -25,6 +39,7 @@ Keep project continuity in files with a simple four-layer model that works for p
   - architecture boundaries
   - data workflows
   - UI rules
+  - default tool entrypoints
   - balance baselines
   - task pool
 - Do not use for:
@@ -57,15 +72,18 @@ Keep project continuity in files with a simple four-layer model that works for p
 For a non-trivial task, read in this order:
 
 1. `AGENTS.md`
-2. relevant docs in `docs/development/`
-3. `docs/pm/DECISION_LOG.md` if the task changes direction or architecture
-4. today's daily log
-5. the most recent useful prior daily log
-6. code
+2. `docs/development/CURRENT_DIRECTION.md`
+3. relevant docs in `docs/development/`
+4. `docs/pm/DECISION_LOG.md` if the task changes direction or architecture
+5. today's daily log
+6. the most recent useful prior daily log
+7. the most recent useful weekly summary
+8. code
 
 ## Write Rules
 
 - write current progress to the daily log
+- write weekly compression to `docs/logs/weekly/`
 - write stable rules to `docs/development/`
 - write major decisions to the decision log
 - write candidate independent work to the task pool
