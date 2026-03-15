@@ -61,46 +61,6 @@
 - 完成标准：
   - 常见坏内容能在 runtime 前失败，并给出明确错误
 
-### P1. Transition Contract Cleanup v1
-
-- 目标：
-  - 统一 campaign / combat / dialogue / event 之间的 request / result 传递模式，继续减少散装 payload 键名和隐式协议
-- 主要输入：
-  - `contexts/shared/domain/contracts.py`
-  - `contexts/shared/game_state_machine.py`
-  - 各 state 的 transition / persistent 读写路径
-- 预期输出：
-  - 更清晰的跨状态 contract 清单
-  - 新增或补齐的 helper / DTO / contract key
-  - 对应回归测试
-- 边界：
-  - 不一次性统一所有历史键名
-  - 不重写状态机
-  - 优先清理高频路径，不碰低价值历史路径
-- 完成标准：
-  - 至少 1 到 2 条高频状态切换链路完成显式 contract 收口
-  - 后续新增跨状态 payload 不再默认直接写裸字符串键
-
-### P1. Snapshot Diff Tool v1
-
-- 目标：
-  - 建一套轻量 snapshot diff / inspect 能力，帮助快速比较状态变化和定位回归
-- 主要输入：
-  - `contexts/shared/save/machine_snapshot_service.py`
-  - 当前 save/load 与 snapshot 结构
-  - 典型 campaign / thesis / combat snapshot 样本
-- 预期输出：
-  - 一个 focused script 或 helper
-  - 至少一组对应测试
-  - 一份简短使用说明
-- 边界：
-  - 不做复杂 GUI 工具
-  - 先支持 JSON 级 diff 与关键字段摘要
-  - 不顺手扩成完整调试平台
-- 完成标准：
-  - 能快速比较两份 machine snapshot 的关键差异
-  - 能帮助定位“状态为什么和预期不一样”
-
 ## 待定 / 需要更多前置条件
 
 ### P2. 三端精英前置机制评估
@@ -213,6 +173,8 @@
 
 ## 最近完成
 
+- `Snapshot Diff Tool v1`
+- `Transition Contract Cleanup v1`
 - `Headless Encounter Smoke v1`
 - `Thesis Runtime State Fourth Cut`
 - `依赖倒置与编排层收口 v1`

@@ -36,6 +36,13 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Run targeted pytest coverage:
   - `python -m pytest <path-or-test> -q`
 
+### Snapshot / Save Debugging
+
+- Compare two machine snapshots:
+  - `python scripts/diff_machine_snapshots.py <before.json> <after.json>`
+- Compare two machine snapshots with path-level details:
+  - `python scripts/diff_machine_snapshots.py <before.json> <after.json> --details`
+
 ## Project Recovery
 
 When you need to resume project context before running commands, read:
