@@ -224,14 +224,6 @@
   - 当前先把活跃 TA 主线做稳
   - 需要在现有运行链上确定最常见的坏数据形态
 
-### P2. Seed Replay / Repro Tool
-
-- 目标：
-  - 给关键 battle / campaign 流程提供更稳定的 seed 复现或最小 replay 能力
-- 当前不优先的原因：
-  - 先有 headless smoke 再做 replay 更划算
-  - 需要先确定哪些随机入口最值得固定
-
 ### P2. Balance Report Script V1
 
 - 目标：
@@ -249,6 +241,7 @@
 
 ## 最近完成
 
+- `Seed Replay / Repro Tool v1`
 - `内容数据校验扩展`
 - `Snapshot Diff Tool v1`
 - `Transition Contract Cleanup v1`

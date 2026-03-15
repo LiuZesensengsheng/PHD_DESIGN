@@ -42,6 +42,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/diff_machine_snapshots.py <before.json> <after.json>`
 - Compare two machine snapshots with path-level details:
   - `python scripts/diff_machine_snapshots.py <before.json> <after.json> --details`
+- Reproduce a seeded headless main path and write snapshots:
+  - `python scripts/repro_headless_flow.py <case> --seed <seed>`
+- Reproduce a seeded headless main path to a custom output directory:
+  - `python scripts/repro_headless_flow.py <case> --seed <seed> --output-dir <dir>`
 
 ## Project Recovery
 
