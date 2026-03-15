@@ -36,6 +36,7 @@ Required guardrails:
 - source CSV files must exist
 - generated runtime JSON must exist
 - CSV -> JSON regeneration must match committed runtime output
+- effect-side card references such as `card_id_to_create` must resolve to known card IDs before runtime
 
 #### TA Enemy Pipeline
 
@@ -53,6 +54,8 @@ Required guardrails:
 - TA CSV source files must exist
 - TA runtime entries must all be traceable to CSV source rows
 - regenerating TA payloads from CSV must match committed runtime JSON subsets
+- species rows must reference valid skill IDs through `skills_json`, `opener`, and `weights_json`
+- encounter rows must reference valid species IDs through `enemies_json` and task-host task/action payloads
 
 ### Level B: Editor / Import Pipelines
 

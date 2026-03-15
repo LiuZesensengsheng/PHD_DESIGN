@@ -43,24 +43,6 @@
 
 ## 当前活跃任务
 
-### P1. 内容数据校验扩展
-
-- 目标：
-  - 继续扩内容数据校验，让坏数据更早失败
-- 主要输入：
-  - 当前 CSV/JSON 数据链
-  - `docs/development/DATA_PIPELINE_GUARDRAILS_V1.md`
-  - 现有校验脚本和测试
-- 预期输出：
-  - 更强的字段、引用、非法值校验
-  - 更清楚的失败提示
-  - 对应测试补强
-- 边界：
-  - 不重写整个内容系统
-  - 不顺手改 runtime repository
-- 完成标准：
-  - 常见坏内容能在 runtime 前失败，并给出明确错误
-
 ## 待定 / 需要更多前置条件
 
 ### P2. 三端精英前置机制评估
@@ -132,6 +114,100 @@
   - 先要把当前 TA / DDL 主线和编排层收口工作做稳
   - 需要避免在机制仍快速变化时过早把整套战斗逻辑框架化
 
+### P2. Thesis Aggregate Boundary Review
+
+- 目标：
+  - 明确 thesis 线当前谁是事实聚合根、哪些状态修改必须走统一入口，而不是继续散落在 `CampaignState`、service 和临时字典之间
+- 主要输入：
+  - `contexts/campaign/domain/thesis_runtime_state.py`
+  - `contexts/campaign/services/thesis_*.py`
+  - `contexts/campaign/state.py`
+  - `docs/design/PAPER_LINE_TRACK_SERVICE_SPEC.md`
+- 预期输出：
+  - 一份 thesis 聚合边界判断
+  - 至少 1 个真实写路径收口切口
+  - 对应不变量或 seam 回归测试
+- 边界：
+  - 不重写 thesis 全链路
+  - 不顺手做 board/UI 重构
+  - 允许保留过渡 DTO 和 runtime seam
+- 完成标准：
+  - 明确 thesis 相关“哪些改动必须通过统一入口发生”
+  - 至少减少 1 处 thesis 散装状态写入
+- 当前不优先的原因：
+  - 先让当前 runtime seam 和编排层收口稳定一段时间
+  - 需要避免在 thesis 线仍有活跃需求时过早冻结整体建模
+
+### P2. Campaign Aggregate Candidate Review
+
+- 目标：
+  - 判断 campaign block / track / route 相关对象里，哪些值得继续保持 DTO + service，哪些已经到了应该收成聚合根的阶段
+- 主要输入：
+  - `contexts/campaign/domain/block_dto.py`
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/`
+  - `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+- 预期输出：
+  - 一份候选聚合图
+  - 明确“不建议现在聚合化”的部分
+  - 至少 1 条高频修改路径的收口建议
+- 边界：
+  - 不为了 DDD 名词强行引入聚合
+  - 不重写整个 campaign runtime
+  - 允许结论是“继续保持 DTO + 编排层更合适”
+- 完成标准：
+  - 能解释清楚 campaign 当前最值得聚合化的对象边界
+  - 能解释清楚哪些部分暂时不聚合反而更稳
+- 当前不优先的原因：
+  - 当前 campaign 仍处于 mixed-mode UI 过渡期
+  - 需要先继续观察 block / route / reward 高频改动路径
+
+### P2. Repository Boundary Cleanup V1
+
+- 目标：
+  - 盘清哪些地方值得正式 repository 化，哪些继续保持 session / persistent / helper 即可，避免 repository 模式被过早泛化
+- 主要输入：
+  - `contexts/shared/save/save_repository.py`
+  - `contexts/shared/save/file_save_repository.py`
+  - 当前 campaign / combat / content 读写路径
+  - `docs/development/ARCHITECTURE_BOUNDARIES.md`
+- 预期输出：
+  - repository 候选清单
+  - 不建议 repository 化的边界清单
+  - 至少 1 个高价值边界的抽象建议或切口
+- 边界：
+  - 不搞全仓库 repository 化运动
+  - 不为了模式统一重写稳定路径
+  - 允许结论是“某些边界继续保持 helper/store 更合适”
+- 完成标准：
+  - 明确哪些 repository 是真正高价值的
+  - 至少减少 1 处“service 直接碰具体数据实现”的风险点
+- 当前不优先的原因：
+  - 当前最成熟的 repository 样板主要集中在 save/load
+  - 需要先把更高优先级的编排层和 runtime seams 做稳
+
+### P2. Aggregate Invariant Tests V1
+
+- 目标：
+  - 把关键聚合或候选聚合的不变量写成可回归测试，而不是只停留在口头判断和聊天上下文
+- 主要输入：
+  - thesis / combat / campaign 的高价值聚合候选
+  - 现有 domain / service regression tests
+  - 当前 runtime seam 和 contract helper
+- 预期输出：
+  - 一组围绕不变量的 focused tests
+  - 一份简短说明，记录当前测试在保护哪些边界
+- 边界：
+  - 不要求先把所有聚合形式化完成
+  - 先保护最贵的非法状态和越界写入
+  - 不把测试写成 UI-heavy 集成大杂烩
+- 完成标准：
+  - 至少 2 到 3 组高价值不变量被测试兜住
+  - 后续相关重构不再完全依赖口头记忆
+- 当前不优先的原因：
+  - 需要先完成部分聚合边界判断，否则测试目标容易飘
+  - 当前更优先的是继续把运行时 seam 和 contract 收清
+
 ### P2. State Host Facade V1
 
 - 目标：
@@ -173,6 +249,7 @@
 
 ## 最近完成
 
+- `内容数据校验扩展`
 - `Snapshot Diff Tool v1`
 - `Transition Contract Cleanup v1`
 - `Headless Encounter Smoke v1`
