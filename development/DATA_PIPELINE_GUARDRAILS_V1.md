@@ -56,6 +56,27 @@ Required guardrails:
 - regenerating TA payloads from CSV must match committed runtime JSON subsets
 - species rows must reference valid skill IDs through `skills_json`, `opener`, and `weights_json`
 - encounter rows must reference valid species IDs through `enemies_json` and task-host task/action payloads
+- generated `encounters_ta.json` must also satisfy the runtime encounter contract against active combat bundles
+
+#### Questline / Encounter Runtime Contract
+
+- Runtime source:
+  - `data/questlines/encounters_*.json`
+  - `data/questlines/questline_*.json`
+- Runtime dependency bundles:
+  - `data/combat/species.json`
+  - `data/combat/traits.json`
+  - `data/combat/skills.json`
+  - `data/combat/arenas.json`
+  - `data/combat/arena_traits.json`
+
+Required guardrails:
+
+- runtime encounter enemies must reference known species, traits, and positive levels
+- runtime encounter arena definitions must reference known arena templates and arena traits
+- runtime encounter species must only pull skills that resolve from `skills.json`
+- runtime `task_host` definitions must satisfy roster/reference rules, including nested `publish_task` follow-up tasks
+- questline `START_COMBAT.encounter_id` must resolve to an encounter loaded from active `encounters_*.json`
 
 ### Level B: Editor / Import Pipelines
 
