@@ -212,11 +212,15 @@
   - 在 `combat orchestration v1` 完成后，把剩余仍依赖 fallback 的主路径继续收口到统一 action queue
   - 这一阶段不再做新架构形态探索，而是做“剩余面缩减 + 旧兼容层变薄”
 - 默认执行顺序：
-  1. `Queue Condition Effects Cutover V1`
-  2. `Queue Attribute-Source Confidence Cutover V1`
-  3. `Queue Residual Card Compat Cleanup V1`
-  4. `Queue Fallback Boundary Tests V1`
+  1. `Queue Red Hand Generation Cutover V1`
+  2. `Queue Red Utility Trigger Cutover V1`
+  3. `Queue White Pointer Core Cutover V1`
+  4. `Queue Active Fallback Boundary Tests V1`
   5. `Legacy Effect Executor Thin-Compat Pass V1`
+- 当前状态（`2026-03-16`）：
+  - 上述 5 个串行 cutover/收尾任务已完成
+  - `Combat Queue Full Cutover` 这一轮可以视为已收口
+  - 后续若继续推进，不再是 phase-2 主链重构，而是按具体复杂 effect 继续缩小 fallback 面
 - 总边界：
   - 不重写整个战斗系统
   - 不做 UI 节点化
@@ -224,69 +228,82 @@
   - 保留 `PlayCardTransaction` 作为出牌事务入口
   - 允许少量短期 fallback，但不接受继续扩散旧执行器分支
 
-### P2. Queue Condition Effects Cutover V1
+### P2. Queue Red Hand Generation Cutover V1
 
 - 目标：
-  - 先把条件型高价值效果从“整个 effect fallback”推进到“条件判定后继续走 queue”
-  - 优先处理当前已知活跃卡：
-    - `theorist_clash`
-    - `theorist_purity`
+  - 先把红色现役里最集中的“向手牌生成新牌”路径收口到 queue
+  - 优先覆盖：
+    - `create_card_in_hand`
+    - `red_create_random_red_in_hand`
+    - `red_create_random_offcolor_in_hand`
 - 主要输入：
   - `contexts/combat/application/orchestration/effect_planner.py`
-  - `contexts/combat/domain/effects/executor.py`
-  - 条件型卡牌回归测试
+  - `contexts/combat/application/orchestration/action_executor.py`
+  - `contexts/combat/domain/effects/impl/pile.py`
+  - `contexts/combat/domain/effects/impl/red.py`
+  - 红色生成类卡牌 focused tests
 - 预期输出：
-  - 一版最小条件判定支持，只覆盖当前活跃卡所需语义
-  - 条件满足时继续产出 `CombatAction[]`
-  - 条件不满足时保持稳定 no-op 或兼容行为
+  - 一版最小“生成到手牌”动作合同
+  - planner 能把固定生成与随机生成映射成 queue actions
+  - frontier bonus / 临时费用改写 / 同批次 frontier 标记继续保持现语义
 - 边界：
-  - 不扩成通用条件脚本系统
-  - 不预先覆盖内容库里所有 condition 形态
+  - 不扩成通用卡牌工厂 DSL
+  - 不顺手处理抽牌、弃牌、猜牌等其他红色特殊效果
 - 完成标准：
-  - `theorist_clash` / `theorist_purity` 不再因为 condition 整体掉回旧路径
-  - effect 顺序与现有回归一致
+  - 现役红色“生成到手牌”主链不再因为该 effect 类型整体 fallback
+  - 随机池过滤、生成数量、frontier 语义与当前回归一致
 
-### P2. Queue Attribute-Source Confidence Cutover V1
+### P2. Queue Red Utility Trigger Cutover V1
 
 - 目标：
-  - 处理 `confidence` 中仍高价值但未进 planner 的 `attribute_source` 分支
-  - 先查清并收口 `prestige` 的真实运行时来源与取值规则
+  - 继续收口红色现役里仍高频但语义简单的小工具效果
+  - 优先评估并处理：
+    - `gain_energy`
+    - `red_mark_next_frontier`
+    - 可直接表达成最小 follow-up action 的红色 trigger 效果
 - 主要输入：
   - `contexts/combat/application/orchestration/effect_planner.py`
-  - `contexts/combat/domain/effects/simple_support.py`
-  - `theorist_publish_paper` 相关内容与测试
+  - `contexts/combat/application/orchestration/action_executor.py`
+  - `contexts/combat/domain/effects/impl/core.py`
+  - `contexts/combat/domain/effects/impl/red.py`
+  - 红色 utility 卡牌 focused tests
 - 预期输出：
-  - 一版受控的 attribute-source confidence planner 支持
-  - 共享计算 helper 或明确的运行时取值 seam
-  - `theorist_publish_paper` 的 planned path 回归测试
+  - 一版受控的小型 utility action 集合
+  - 不再需要把简单能量/标记类效果塞回 legacy executor
+  - planner-safe / fallback 边界更清楚
 - 边界：
-  - 不臆造不存在的 `prestige` 语义
-  - 不把所有 attribute source 一次性泛化
+  - 不提前处理红色复杂猜牌、随机弃牌连锁、按费用打伤害等组合效果
+  - 不把所有 trigger 效果泛化成通用条件脚本
 - 完成标准：
-  - `theorist_publish_paper` 不再因为 `attribute_source` 强制 fallback
-  - planner 与旧语义对齐，有测试护栏
+  - 简单 utility 效果不再成为高频 fallback 面
+  - 剩余红色 fallback 主要集中到复杂组合型效果
 
-### P2. Queue Residual Card Compat Cleanup V1
+### P2. Queue White Pointer Core Cutover V1
 
 - 目标：
-  - 继续收拢少量仍依赖卡牌级兼容逻辑的路径
-  - 让 fallback policy 只承接非常小的残余面，而不是继续长成第二执行器
+  - 收口白色现役里最核心、最常用的一段指针链路
+  - 优先覆盖：
+    - `pointer_engine`
+    - `pointer_warp`
+    - `white_pointer_focus_burst`
+    - `white_pointer_burst_from_x`
 - 主要输入：
-  - `contexts/combat/application/orchestration/fallback_action_policy.py`
-  - `contexts/combat/application/orchestration/card_play_orchestrator.py`
-  - 相关卡牌 focused tests
+  - `contexts/combat/domain/effects/impl/pointer_queue_white.py`
+  - `contexts/combat/application/orchestration/effect_planner.py`
+  - `contexts/combat/application/orchestration/action_executor.py`
+  - 白色指针 focused tests
 - 预期输出：
-  - 一版更清楚的 residual compat 白名单
-  - 能继续 action 化的卡牌 follow-up 改走 planned action 或更薄的 post-policy
-  - fallback policy 文档化当前职责边界
+  - 一版最小白色指针动作合同
+  - 指针初始化、位移、burst 伤害进入显式 queue
+  - 指针相关顺序不再依赖 effect body 隐式串联
 - 边界：
-  - 不为了少数特例引入大而泛的动作 DSL
-  - 不追求把所有复杂卡一轮清零
+  - 不一轮吃掉全部白色 reposition / summary / sequence / lock queue 组合
+  - 不顺手重写整套 pointer runtime
 - 完成标准：
-  - fallback policy 不再承担新的主路径特例
-  - 剩余 compat 行为可枚举、可测试、可解释
+  - 现役白色指针核心卡不再默认回落到旧路径
+  - 指针主链的状态推进与 burst 结算有 focused tests 护栏
 
-### P2. Queue Fallback Boundary Tests V1
+### P2. Queue Active Fallback Boundary Tests V1
 
 - 目标：
   - 把 planned path / fallback path 的边界固定成可回归测试，而不是口头约定
@@ -296,8 +313,9 @@
   - `tests/combat/test_play_card_transaction.py`
 - 预期输出：
   - 一组 focused tests，覆盖：
-    - condition 进入 planned path
-    - attribute-source confidence 进入 planned path
+    - 红色生成效果进入 planned path
+    - 红色 utility 效果进入 planned path
+    - 白色指针核心进入 planned path
     - mixed planned/fallback effect 顺序稳定
     - fallback 保持受控且不会吞掉 follow-up queue 语义
 - 边界：
@@ -329,6 +347,116 @@
 - 完成标准：
   - 旧执行器不再是默认扩展点
   - queue/orchestrator 成为明确主入口
+
+### P2. Combat Queue Residual Closure（phase-2 后收尾）
+
+- 总目标：
+  - 在 `Combat Queue Full Cutover` 已收口之后，把 active `red/white` 里剩余仍依赖 fallback 的 effect 继续按小切片收口
+  - 这一轮不再是新架构阶段，而是“剩余 effect 缩面 + 边界测试更新”
+- 默认执行顺序：
+  1. `Queue White Direct Effects Cutover V1`
+  2. `Queue White Queue State Cutover V1`
+  3. `Queue White Reposition Core Cutover V1`
+  4. `Queue Red Complex Draw Branch Cutover V1`
+  5. `Queue Final Active Fallback Boundary Pass V1`
+- 当前状态（`2026-03-16`）：
+  - 前 3 个白色 residual cutover 已完成
+  - active white fallback 已基本收缩到 `swap_with_paper`
+  - 默认下一步切 `Queue Red Complex Draw Branch Cutover V1`
+- 总边界：
+  - 不重写整个 combat runtime
+  - 不做 UI 节点化
+  - 不把 queue 泛化成脚本 DSL
+  - 允许极少数跨上下文/剧情专用 effect 继续保留 fallback，但必须集中、可测、可点名
+
+### P2. Queue White Direct Effects Cutover V1
+
+- 目标：
+  - 把白色里“不改敌人队列顺序、只做直接结算”的 effect 收进口到 planner
+  - 优先覆盖：
+    - `white_endpoint_damage`
+    - `white_confidence_half_damage`
+    - `white_reposition_summary`
+    - `white_regulated_from_x`
+    - `white_focus_pull_damage`
+- 主要输入：
+  - `contexts/combat/application/orchestration/effect_planner.py`
+  - `contexts/combat/application/orchestration/action_executor.py`
+  - `tests/combat/test_effect_planner.py`
+  - 白色 focused/integration tests
+- 预期输出：
+  - 不新增脚本解释层，只新增收尾所需的最小 action 组合
+  - 这些 effect 不再默认落回 legacy executor
+- 边界：
+  - 不在这一轮处理 `reposition` 本体
+  - 不重写 pointer runtime
+- 完成标准：
+  - 以上 effect 进入 planned path
+  - 原有白色行为回归不退化
+
+### P2. Queue White Queue State Cutover V1
+
+- 目标：
+  - 把白色里“修改队列状态但不涉及复杂条件分支”的 effect 收进口到 queue
+  - 优先覆盖：
+    - `lock_queue`
+    - `sequence_damage`
+    - `queue_reverse`
+- 主要输入：
+  - `contexts/combat/application/orchestration/effect_planner.py`
+  - `contexts/combat/application/orchestration/action_executor.py`
+  - `tests/combat/test_action_queue.py`
+  - `tests/combat/test_active_queue_boundaries.py`
+- 预期输出：
+  - 最小 queue-state actions
+  - 顺序、tween metadata、状态标记仍保持现有语义
+- 边界：
+  - 不顺手吞掉 `reposition`
+  - 不扩成通用队列编辑 DSL
+- 完成标准：
+  - `lock_queue / sequence_damage / queue_reverse` 不再依赖 fallback 主体
+  - active 边界测试更新为新 planned path
+
+### P2. Queue White Reposition Core Cutover V1
+
+- 目标：
+  - 单独处理 `reposition` 这条较重链路
+  - 保留当前显式语义：
+    - pointer target 校验
+    - lock/limit 判定
+    - tween metadata
+    - reposition count
+    - power hook
+    - no-move bonus
+- 当前不优先的原因：
+  - 相比其他残余 effect，它涉及的运行时副作用最多
+  - 更适合作为白色收尾的最后一刀
+- 当前状态（`2026-03-16`）：
+  - 已完成
+  - `reposition` 已进入 planned path
+  - 保留了 pointer target 校验、lock/limit、tween、reposition count、power hook、no-move bonus
+
+### P2. Queue Red Complex Draw Branch Cutover V1
+
+- 目标：
+  - 收口红色剩余“先抽/先生成，再按结果分支”的复杂 effect
+  - 优先覆盖：
+    - `red_guess_draw_type`
+    - `red_draw_then_random_damage_from_costs`
+    - `red_random_hand_discount_then_discard`
+    - `play_top_of_draw_then_exhaust`
+- 边界：
+  - 不扩成通用随机脚本系统
+  - 优先保留当前 pile/随机语义一致
+
+### P2. Queue Final Active Fallback Boundary Pass V1
+
+- 目标：
+  - 在上面几刀之后，重新扫描 active `red/white` effect 类型
+  - 把“仍然允许 fallback 的最后列表”固化成文档和 focused tests
+- 完成标准：
+  - active fallback 面缩到极小且可枚举
+  - 后续若继续推进，就不再叫“队列化主工程”，而是逐 effect 微收口
 
 ### P2. Thesis Aggregate Boundary Review
 
