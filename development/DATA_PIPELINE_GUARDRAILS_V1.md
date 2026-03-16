@@ -29,7 +29,6 @@ guardrails.
 - Current active packs:
   - `red`
   - `white`
-  - `theorist`
 
 Required guardrails:
 

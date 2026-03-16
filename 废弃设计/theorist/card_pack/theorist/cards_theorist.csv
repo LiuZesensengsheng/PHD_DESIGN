@@ -1,0 +1,112 @@
+﻿card_id,name_key,description_key,color,type,rarity,cost,target,exhausts_on_play,ethereal,unplayable,tags_json,schema_version,innate
+theorist_sword_boomerang,随机过程,对随机敌人造成 3 点伤害 3 次。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_sword_boomerang_upgraded,随机过程+,对随机敌人造成 3 点伤害 4 次。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_bash,高阶微积分,对敌人造成 8 点伤害。施加 2 层破防。,COLORLESS,Attack,Common,2,,,,,,v1
+theorist_bash_upgraded,高阶微积分+,对敌人造成 10 点伤害。施加 3 层破防。,COLORLESS,Attack,Common,2,,,,,,v1
+theorist_pester,追问,造成 3 点伤害。消耗。,COLORLESS,Attack,Common,1,,true,,,,v1
+theorist_publish_paper,论文发表,获得 5 点自信。基于你的学术声望，获得额外自信。,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_iron_wave,作用力和反作用力,获得 5 点自信。造成 5 点伤害。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_iron_wave_upgraded,作用力和反作用力+,获得 7 点自信。造成 7 点伤害。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_pommel_strike,运筹学,造成 9 点伤害。抽 1 张牌。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_pommel_strike_upgraded,运筹学+,造成 10 点伤害。抽 2 张牌。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_shrug_it_off,“好的”,获得 8 点自信。抽 1 张牌。,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_shrug_it_off_upgraded,“好的”+,获得 11 点自信。抽 1 张牌。,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_twin_strike,共轭,造成 5 点伤害两次。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_twin_strike_upgraded,共轭+,造成 7 点伤害两次。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_cleave,群论,对所有敌人造成 8 点伤害。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_cleave_upgraded,群论+,对所有敌人造成 11 点伤害。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_thunderclap,你们不对！,对所有敌人造成 4 点伤害并施加 1 层破防。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_thunderclap_upgraded,你们不对！+,对所有敌人造成 7 点伤害并施加 1 层破防。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_anger,那我问你,造成 6 点伤害。将此牌的 1 张复制品置入你的弃牌堆。,COLORLESS,Attack,Common,0,,,,,,v1
+theorist_anger_upgraded,那我问你+,造成 8 点伤害。将此牌的 1 张复制品置入你的弃牌堆。,COLORLESS,Attack,Common,0,,,,,,v1
+theorist_clash,理论洁癖,仅当手牌中所有牌都是攻击牌时才能打出。造成 14 点伤害。,COLORLESS,Attack,Common,0,,,,,,v1
+theorist_clash_upgraded,理论洁癖+,仅当手牌中所有牌都是攻击牌时才能打出。造成 18 点伤害。,COLORLESS,Attack,Common,0,,,,,,v1
+theorist_headbutt,易得,造成 9 点伤害。将弃牌堆中的一张牌置于抽牌堆顶。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_headbutt_upgraded,易得+,造成 12 点伤害。将弃牌堆中的一张牌置于抽牌堆顶。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_armaments,深呼吸,获得 5 点自信。升级手中一张牌，持续到战斗结束。,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_armaments_upgraded,深呼吸+,获得 5 点自信。升级手中所有牌，持续到战斗结束。,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_flex,紧急科研,获得 2 点严谨度。在你的回合结束时，失去 2 点严谨度。,COLORLESS,Skill,Common,0,,,,,,v1
+theorist_flex_upgraded,紧急科研+,获得 4 点严谨度。在你的回合结束时，失去 4 点严谨度。,COLORLESS,Skill,Common,0,,,,,,v1
+theorist_deep_study,深入研究,选择手牌中一张深度核心卡牌，使其思想深度+2。,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_body_slam,论文发表,造成等同于你自信值的伤害。,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_body_slam_upgraded,论文发表+,造成等同于你自信值的伤害。,COLORLESS,Attack,Common,0,,,,,,v1
+theorist_strike,基础理论,造成6点伤害,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_strike_upgraded,基础理论+,造成9点伤害,COLORLESS,Attack,Common,1,,,,,,v1
+theorist_defend,基本假设,获得5点自信,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_defend_upgraded,基本假设+,获得8点自信,COLORLESS,Skill,Common,1,,,,,,v1
+theorist_bludgeon,派对结束,造成 32 点伤害。,COLORLESS,Attack,Rare,3,,,,,,v1
+theorist_barricade,壁垒,你的自信在回合结束时不再失去。,COLORLESS,Power,Rare,3,,,,,,v1
+theorist_barricade_upgraded,壁垒+,你的自信在回合结束时不再失去。,COLORLESS,Power,Rare,2,,,,,,v1
+theorist_shockwave,降维打击,对所有敌人施加 3 层虚弱和破防。消耗。,COLORLESS,Skill,Rare,2,,,,,,v1
+theorist_berserk,狂暴,在你的回合开始时，获得 1 点能量。,COLORLESS,Power,Rare,0,,,,,,v1
+theorist_berserk_upgraded,狂暴+,在你的回合开始时，获得 2 点能量。,COLORLESS,Power,Rare,0,,,,,,v1
+theorist_combust,燃烧,在你的回合结束时，失去 1 点生命，对所有敌人造成 5 点伤害。,COLORLESS,Power,Rare,1,,,,,,v1
+theorist_combust_upgraded,燃烧+,在你的回合结束时，失去 1 点生命，对所有敌人造成 7 点伤害。,COLORLESS,Power,Rare,1,,,,,,v1
+theorist_intimidate,拍马屁,对所有敌人施加 1 层虚弱。消耗。,COLORLESS,Skill,Rare,0,,,,,,v1
+theorist_uppercut,显然,造成 13 点伤害。施加 1 层虚弱和 1 层破防。,COLORLESS,Attack,Rare,2,,,,,,v1
+theorist_bludgeon_upgraded,派对结束+,造成 42 点伤害。,COLORLESS,Attack,Rare,3,,,,,,v1
+theorist_impervious,自我催眠,获得 30 点自信。消耗。,COLORLESS,Skill,Rare,2,,true,,,,v1
+theorist_impervious_upgraded,自我催眠+,获得 40 点自信。消耗。,COLORLESS,Skill,Rare,2,,true,,,,v1
+theorist_offering,灵感迸发,消耗。失去 5 点生命，抽 3 张牌，弃 1 张牌。,COLORLESS,Skill,Rare,0,,true,,,,v1
+theorist_offering_upgraded,灵感迸发+,消耗。失去 5 点生命，抽 5 张牌，弃 1 张牌。,COLORLESS,Skill,Rare,0,,true,,,,v1
+theorist_dark_embrace,黑暗拥抱,每当有卡牌被消耗，抽1张牌。,COLORLESS,Power,Rare,1,,,,,,v1
+theorist_fiend_fire,罪火,消耗你的手牌。每张手牌对随机敌人造成 7 点伤害。,COLORLESS,Attack,Rare,2,,,,,,v1
+theorist_juggernaut,重甲,每当你获得自信，造成 5 点伤害。,COLORLESS,Power,Rare,2,,,,,,v1
+theorist_corruption,堕落,技能牌费用变为0，并在使用后消耗。,COLORLESS,Power,Rare,3,,,,,,v1
+theorist_carnage,量子力学,虚无。造成 20 点伤害。,COLORLESS,Attack,Rare,2,,,true,,,v1
+theorist_carnage_upgraded,量子力学+,虚无。造成 28 点伤害。,COLORLESS,Attack,Rare,2,,,true,,,v1
+theorist_exhume,考古式科研,将消耗堆中的一张牌置入手牌。消耗。,COLORLESS,Skill,Rare,1,,true,,,,v1,
+theorist_exhume_upgraded,考古式科研+,将消耗堆中的一张牌置入手牌。将一张`STC：烤面包机`置入手牌。消耗。,COLORLESS,Skill,Rare,1,,true,,,,v1,
+theorist_stc_toaster,STC：烤面包机,为你恢复2点生命值。消耗。,COLORLESS,Skill,Special,1,,,,,,v1
+theorist_peaked_form,头顶尖尖,造成 10 点伤害。消耗。,COLORLESS,Attack,Special,0,,true,,,,v1
+curse_chaos,心魔：混乱,一张临时诅咒牌。不可打出。回合结束消耗。,COLORLESS,Curse,Special,1,,,true,true,,v1
+curse_myopia,心魔：近视,一张临时诅咒牌。不可打出。回合结束消耗。,COLORLESS,Curse,Special,1,,,true,true,,v1
+curse_weakness,心魔：软弱,一张临时诅咒牌。不可打出。回合结束消耗。,COLORLESS,Curse,Special,1,,,true,true,,v1
+curse_hesitation,心魔：犹疑,一张临时诅咒牌。不可打出。回合结束消耗。,COLORLESS,Curse,Special,1,,,true,true,,v1
+curse_wither,心魔：枯萎,一张临时诅咒牌。不可打出。回合结束消耗。,COLORLESS,Curse,Special,1,,,true,true,,v1
+theorist_inflame,正则化,获得 2 点严谨度。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_spot_weakness,挑衅,如果敌人的意图是攻击，获得 3 点力量。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_spot_weakness_upgraded,挑衅+,如果敌人的意图是攻击，获得 4 点力量。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_disarm,缴械,使敌人力量 -2。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_disarm_upgraded,缴械+,使敌人力量 -3。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_evolve,进化,每当你抽到一张状态牌时，抽1张牌。,COLORLESS,Power,Uncommon,1,,,,,,v1
+theorist_evolve_upgraded,进化+,每当你抽到一张状态牌时，抽2张牌。,COLORLESS,Power,Uncommon,1,,,,,,v1
+theorist_clothesline,高度抽象,造成 12 点伤害。施加 2 层虚弱。,COLORLESS,Attack,Uncommon,2,,,,,,v1
+theorist_demon_form,第一性原理,在每回合开始时，获得 2 点严谨。,COLORLESS,Power,Uncommon,3,,,,,,v1
+theorist_metallicize,不动点原理,在你的回合结束时，获得 3 点自信。,COLORLESS,Power,Uncommon,0,,,,,,v1
+theorist_inflame_upgraded,正则化+,获得 3 点严谨度。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_heavy_blade,高阶范数,造成 14 点伤害。严谨度对此牌效果翻 3 倍。,COLORLESS,Attack,Uncommon,2,,,,,,v1
+theorist_heavy_blade_upgraded,高阶范数+,造成 14 点伤害。严谨度对此牌效果翻 5 倍。,COLORLESS,Attack,Uncommon,2,,,,,,v1
+theorist_purity,理论洁癖,如果你手牌中所有牌都是技能牌，则获得 10 点自信。,COLORLESS,Skill,Uncommon,0,,,,,,v1
+theorist_whirlwind,深度穷举,对所有敌人造成 5 点伤害 X 次。,COLORLESS,Attack,Uncommon,X,,,,,,v1
+theorist_seeing_red,深度思考,获得 2 点能量。消耗。,COLORLESS,Skill,Uncommon,1,,true,,,,v1
+theorist_seeing_red_upgraded,深度思考+,获得 2 点能量。消耗。,COLORLESS,Skill,Uncommon,0,,true,,,,v1
+theorist_bloodletting,拧大腿,失去 2 点生命，获得 1 点能量。,COLORLESS,Skill,Uncommon,0,,,,,,v1
+theorist_bloodletting_upgraded,拧大腿+,失去 2 点生命，获得 2 点能量。,COLORLESS,Skill,Uncommon,0,,,,,,v1
+theorist_rupture,知耻,每当你因卡牌失去生命，获得 1 点严谨度。,COLORLESS,Power,Uncommon,1,,,,,,v1
+theorist_rupture_upgraded,知耻+,每当你因卡牌失去生命，获得 2 点严谨度。,COLORLESS,Power,Uncommon,1,,,,,,v1
+theorist_battle_trance,头脑风暴,抽 3 张牌。本回合你无法再抽牌。,COLORLESS,Skill,Uncommon,0,,,,,,v1
+theorist_battle_trance_upgraded,头脑风暴+,抽 4 张牌。本回合你无法再抽牌。,COLORLESS,Skill,Uncommon,0,,,,,,v1
+theorist_theoretical_breakthrough,理论突破,抽2张牌。随机为一张深度核心卡牌思想深度+3。消耗。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_brutality,上早八,(固有) 在你的回合开始时，损失 1 点生命并抽 1 张牌。,COLORLESS,Power,Uncommon,0,,,,,,v1,true
+theorist_entrench,膨胀,使你当前的自信翻倍。,COLORLESS,Skill,Uncommon,2,,,,,,v1
+theorist_entrench_upgraded,膨胀+,使你当前的自信翻倍。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_limit_break,尤里卡！,使你的严谨翻倍。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_rampage,贝塞尔曲线,造成 8 点伤害。此牌在本场战斗中每次被打出，伤害增加 5。,COLORLESS,Attack,Uncommon,1,,,,,,v1
+theorist_rampage_upgraded,贝塞尔曲线+,造成 8 点伤害。此牌在本场战斗中每次被打出，伤害增加 8。,COLORLESS,Attack,Uncommon,1,,,,,,v1
+theorist_hemokinesis,钻牛角尖,获得 2 点压力。造成 15 点伤害。,COLORLESS,Attack,Uncommon,1,,,,,,v1
+theorist_hemokinesis_upgraded,钻牛角尖+,获得 2 点压力。造成 20 点伤害。,COLORLESS,Attack,Uncommon,1,,,,,,v1
+theorist_dropkick,微分流型,造成 5 点伤害。如果敌人处于 破防 状态，则获得 1 点能量并抽 1 张牌。,COLORLESS,Attack,Uncommon,1,,,,,,v1
+theorist_dropkick_upgraded,微分流型+,造成 8 点伤害。如果敌人处于 破防 状态，则获得 1 点能量并抽 1 张牌。,COLORLESS,Attack,Uncommon,1,,,,,,v1
+theorist_havoc,随机执行,打出抽牌堆顶的牌并将其消耗。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_warcry,战吼,抽2张。将一张手牌置于抽牌堆顶。消耗。,COLORLESS,Skill,Uncommon,0,,true,,,,v1
+theorist_true_grit,真勇,消耗一张随机手牌。获得 7 点自信。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_true_grit_upgraded,真勇+,消耗一张指定手牌。获得 9 点自信。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_burning_pact,灼热契约,消耗一张手牌。抽2张。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_dual_wield,双持,复制一张攻击或能力牌。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_second_wind,回光返照,消耗所有非攻击牌。每张获得 5 点自信。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_sever_soul,割魂,消耗所有非攻击牌。造成18点伤害。,COLORLESS,Attack,Uncommon,2,,,,,,v1
+theorist_infernal_blade,地狱之刃,将1张随机攻击置入手牌。本回合其费用为0。,COLORLESS,Skill,Uncommon,1,,,,,,v1
+theorist_feel_no_pain,无感,每当有卡牌被消耗，获得3点自信。,COLORLESS,Power,Uncommon,1,,,,,,v1
+theorist_rage,暴怒,本回合每当你打出一张攻击牌，获得3点自信。,COLORLESS,Power,Uncommon,0,,,,,,v1
+

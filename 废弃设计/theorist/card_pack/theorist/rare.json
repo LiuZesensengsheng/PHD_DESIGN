@@ -1,0 +1,330 @@
+{
+    "cards": [
+        {
+            "card_id": "theorist_bludgeon",
+            "name_key": "派对结束",
+            "description_key": "造成 32 点伤害。",
+            "cost": 3,
+            "type": "Attack",
+            "rarity": "Rare",
+            "upgraded_card_id": "theorist_bludgeon_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 32,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_barricade",
+            "name_key": "壁垒",
+            "description_key": "你的自信在回合结束时不再失去。",
+            "cost": 3,
+            "type": "Power",
+            "rarity": "Rare",
+            "upgraded_card_id": "theorist_barricade_upgraded",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_barricade_upgraded",
+            "name_key": "壁垒+",
+            "description_key": "你的自信在回合结束时不再失去。",
+            "cost": 2,
+            "type": "Power",
+            "rarity": "Rare",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_shockwave",
+            "name_key": "降维打击",
+            "description_key": "对所有敌人施加 3 层虚弱和破防。消耗。",
+            "cost": 2,
+            "type": "Skill",
+            "rarity": "Rare",
+            "exhausts": true,
+            "effects": [
+                {"type": "status", "status_type": "Weak", "duration": 3, "target": "all_enemies"},
+                {"type": "status", "status_type": "Vulnerable", "duration": 3, "target": "all_enemies"}
+            ]
+        },
+        {
+            "card_id": "theorist_berserk",
+            "name_key": "狂暴",
+            "description_key": "在你的回合开始时，获得 1 点能量。",
+            "cost": 0,
+            "type": "Power",
+            "rarity": "Rare",
+            "upgraded_card_id": "theorist_berserk_upgraded",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_berserk_upgraded",
+            "name_key": "狂暴+",
+            "description_key": "在你的回合开始时，获得 2 点能量。",
+            "cost": 0,
+            "type": "Power",
+            "rarity": "Rare",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_combust",
+            "name_key": "燃烧",
+            "description_key": "在你的回合结束时，失去 1 点生命，对所有敌人造成 5 点伤害。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Rare",
+            "upgraded_card_id": "theorist_combust_upgraded",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_combust_upgraded",
+            "name_key": "燃烧+",
+            "description_key": "在你的回合结束时，失去 1 点生命，对所有敌人造成 7 点伤害。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Rare",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_intimidate",
+            "name_key": "拍马屁",
+            "description_key": "对所有敌人施加 1 层虚弱。消耗。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Rare",
+            "exhausts": true,
+            "effects": [
+                {"type": "status", "status_type": "Weak", "duration": 1, "target": "all_enemies"}
+            ]
+        },
+        {
+            "card_id": "theorist_uppercut",
+            "name_key": "显然",
+            "description_key": "造成 13 点伤害。施加 1 层虚弱和 1 层破防。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Rare",
+            "effects": [
+                {"type": "damage", "value": 13, "target": "selected_enemy"},
+                {"type": "status", "status_type": "Weak", "duration": 1, "target": "selected_enemy"},
+                {"type": "status", "status_type": "Vulnerable", "duration": 1, "target": "selected_enemy"}
+            ]
+        }
+        ,
+        {
+            "card_id": "theorist_bludgeon_upgraded",
+            "name_key": "派对结束+",
+            "description_key": "造成 42 点伤害。",
+            "cost": 3,
+            "type": "Attack",
+            "rarity": "Rare",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 42,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_impervious",
+            "name_key": "自我催眠",
+            "description_key": "获得 30 点自信。消耗。",
+            "cost": 2,
+            "type": "Skill",
+            "rarity": "Rare",
+            "upgraded_card_id": "theorist_impervious_upgraded",
+            "exhausts_on_play": true,
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 30,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_impervious_upgraded",
+            "name_key": "自我催眠+",
+            "description_key": "获得 40 点自信。消耗。",
+            "cost": 2,
+            "type": "Skill",
+            "rarity": "Rare",
+            "exhausts_on_play": true,
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 40,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_offering",
+            "name_key": "灵感迸发",
+            "description_key": "消耗。失去 5 点生命，抽 3 张牌，弃 1 张牌。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Rare",
+            "exhausts_on_play": true,
+            "upgraded_card_id": "theorist_offering_upgraded",
+            "effects": [
+                {
+                    "type": "lose_health",
+                    "value": 5,
+                    "target": "player"
+                },
+                {
+                    "type": "draw",
+                    "count": 3,
+                    "target": "player"
+                },
+                {
+                    "type": "discard_card",
+                    "count": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_offering_upgraded",
+            "name_key": "灵感迸发+",
+            "description_key": "消耗。失去 5 点生命，抽 5 张牌，弃 1 张牌。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Rare",
+            "exhausts_on_play": true,
+            "effects": [
+                {
+                    "type": "lose_health",
+                    "value": 5,
+                    "target": "player"
+                },
+                {
+                    "type": "draw",
+                    "count": 5,
+                    "target": "player"
+                },
+                {
+                    "type": "discard_card",
+                    "count": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_dark_embrace",
+            "name_key": "黑暗拥抱",
+            "description_key": "每当有卡牌被消耗，抽1张牌。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Rare",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_fiend_fire",
+            "name_key": "罪火",
+            "description_key": "消耗你的手牌。每张手牌对随机敌人造成 7 点伤害。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Rare",
+            "effects": [
+                {"type": "exhaust_hand_then_damage", "value_per_card": 7, "target": "random_enemy"}
+            ]
+        },
+        {
+            "card_id": "theorist_juggernaut",
+            "name_key": "重甲",
+            "description_key": "每当你获得自信，造成 5 点伤害。",
+            "cost": 2,
+            "type": "Power",
+            "rarity": "Rare",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_corruption",
+            "name_key": "堕落",
+            "description_key": "技能牌费用变为0，并在使用后消耗。",
+            "cost": 3,
+            "type": "Power",
+            "rarity": "Rare",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_carnage",
+            "name_key": "量子力学",
+            "description_key": "虚无。造成 20 点伤害。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Rare",
+            "ethereal": true,
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 20,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_carnage_upgraded",
+            "name_key": "量子力学+",
+            "description_key": "虚无。造成 28 点伤害。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Rare",
+            "ethereal": true,
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 28,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_exhume",
+            "name_key": "考古式科研",
+            "description_key": "将消耗堆中的一张牌置入手牌。消耗。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Rare",
+            "exhausts": true,
+            "upgraded_card_id": "theorist_exhume_upgraded",
+            "effects": [
+                {
+                    "type": "exhume",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_exhume_upgraded",
+            "name_key": "考古式科研+",
+            "description_key": "将消耗堆中的一张牌置入手牌。将一张`STC：烤面包机`置入手牌。消耗。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Rare",
+            "exhausts": true,
+            "effects": [
+                {
+                    "type": "exhume",
+                    "target": "player"
+                },
+                {
+                    "type": "create_card_in_hand",
+                    "card_id_to_create": "theorist_stc_toaster"
+                }
+            ]
+        }
+    ]
+}

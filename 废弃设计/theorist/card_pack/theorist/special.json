@@ -1,0 +1,98 @@
+{
+    "cards": [
+        {
+            "card_id": "theorist_stc_toaster",
+            "name_key": "STC：烤面包机",
+            "description_key": "为你恢复2点生命值。消耗。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Special",
+            "exhausts": true,
+            "effects": [
+                {
+                    "type": "reduce_stress",
+                    "value": 2,
+                    "target": "player"
+                }
+            ]
+        }
+        ,
+        {
+            "card_id": "theorist_peaked_form",
+            "name_key": "头顶尖尖",
+            "description_key": "造成 10 点伤害。消耗。",
+            "cost": 0,
+            "type": "Attack",
+            "rarity": "Special",
+            "exhausts_on_play": true,
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 10,
+                    "target": "selected_enemy"
+                }
+            ]
+        }
+        ,
+        {
+            "card_id": "curse_chaos",
+            "name_key": "心魔：混乱",
+            "description_key": "一张临时诅咒牌。不可打出。回合结束消耗。",
+            "cost": 1,
+            "type": "Curse",
+            "rarity": "Special",
+            "unplayable": true,
+            "ethereal": true,
+            "exhausts": true,
+            "effects": []
+        },
+        {
+            "card_id": "curse_myopia",
+            "name_key": "心魔：近视",
+            "description_key": "一张临时诅咒牌。不可打出。回合结束消耗。",
+            "cost": 1,
+            "type": "Curse",
+            "rarity": "Special",
+            "unplayable": true,
+            "ethereal": true,
+            "exhausts": true,
+            "effects": []
+        },
+        {
+            "card_id": "curse_weakness",
+            "name_key": "心魔：软弱",
+            "description_key": "一张临时诅咒牌。不可打出。回合结束消耗。",
+            "cost": 1,
+            "type": "Curse",
+            "rarity": "Special",
+            "unplayable": true,
+            "ethereal": true,
+            "exhausts": true,
+            "effects": []
+        },
+        {
+            "card_id": "curse_hesitation",
+            "name_key": "心魔：犹疑",
+            "description_key": "一张临时诅咒牌。不可打出。回合结束消耗。",
+            "cost": 1,
+            "type": "Curse",
+            "rarity": "Special",
+            "unplayable": true,
+            "ethereal": true,
+            "exhausts": true,
+            "effects": []
+        },
+        {
+            "card_id": "curse_wither",
+            "name_key": "心魔：枯萎",
+            "description_key": "一张临时诅咒牌。不可打出。回合结束消耗。",
+            "cost": 1,
+            "type": "Curse",
+            "rarity": "Special",
+            "unplayable": true,
+            "ethereal": true,
+            "exhausts": true,
+            "effects": []
+        }
+    ]
+}

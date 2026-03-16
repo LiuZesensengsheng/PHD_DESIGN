@@ -1,0 +1,638 @@
+{
+    "cards": [
+        {
+            "card_id": "theorist_inflame",
+            "name_key": "正则化",
+            "description_key": "获得 2 点严谨度。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "rigor",
+                    "value": 2,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_spot_weakness",
+            "name_key": "挑衅",
+            "description_key": "如果敌人的意图是攻击，获得 3 点力量。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_spot_weakness_upgraded",
+            "effects": [
+                {"type": "gain_strength_if_enemy_attacking", "value": 3, "target": "player"}
+            ]
+        },
+        {
+            "card_id": "theorist_spot_weakness_upgraded",
+            "name_key": "挑衅+",
+            "description_key": "如果敌人的意图是攻击，获得 4 点力量。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "gain_strength_if_enemy_attacking", "value": 4, "target": "player"}
+            ]
+        },
+        {
+            "card_id": "theorist_disarm",
+            "name_key": "缴械",
+            "description_key": "使敌人力量 -2。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_disarm_upgraded",
+            "effects": [
+                {"type": "reduce_enemy_strength", "value": 2, "target": "selected_enemy"}
+            ]
+        },
+        {
+            "card_id": "theorist_disarm_upgraded",
+            "name_key": "缴械+",
+            "description_key": "使敌人力量 -3。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "reduce_enemy_strength", "value": 3, "target": "selected_enemy"}
+            ]
+        },
+        {
+            "card_id": "theorist_evolve",
+            "name_key": "进化",
+            "description_key": "每当你抽到一张状态牌时，抽1张牌。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_evolve_upgraded",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_evolve_upgraded",
+            "name_key": "进化+",
+            "description_key": "每当你抽到一张状态牌时，抽2张牌。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_clothesline",
+            "name_key": "高度抽象",
+            "description_key": "造成 12 点伤害。施加 2 层虚弱。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "damage", "value": 12, "target": "selected_enemy"},
+                {"type": "status", "status_type": "Weak", "duration": 2, "target": "selected_enemy"}
+            ]
+        },
+        {
+            "card_id": "theorist_demon_form",
+            "name_key": "第一性原理",
+            "description_key": "在每回合开始时，获得 2 点严谨。",
+            "cost": 3,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_metallicize",
+            "name_key": "不动点原理",
+            "description_key": "在你的回合结束时，获得 3 点自信。",
+            "cost": 0,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_inflame_upgraded",
+            "name_key": "正则化+",
+            "description_key": "获得 3 点严谨度。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "rigor",
+                    "value": 3,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_heavy_blade",
+            "name_key": "高阶范数",
+            "description_key": "造成 14 点伤害。严谨度对此牌效果翻 3 倍。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 14,
+                    "rigor_multiplier": 3,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_heavy_blade_upgraded",
+            "name_key": "高阶范数+",
+            "description_key": "造成 14 点伤害。严谨度对此牌效果翻 5 倍。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 14,
+                    "rigor_multiplier": 5,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_purity",
+            "name_key": "理论洁癖",
+            "description_key": "如果你手牌中所有牌都是技能牌，则获得 10 点自信。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 10,
+                    "target": "player",
+                    "condition": {
+                        "type": "all_cards_in_hand_are_of_type",
+                        "card_type": "Skill"
+                    }
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_whirlwind",
+            "name_key": "深度穷举",
+            "description_key": "对所有敌人造成 5 点伤害 X 次。",
+            "cost": "X",
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 5,
+                    "hit_count": "X",
+                    "target": "all_enemies"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_seeing_red",
+            "name_key": "深度思考",
+            "description_key": "获得 2 点能量。消耗。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "exhausts_on_play": true,
+            "upgraded_card_id": "theorist_seeing_red_upgraded",
+            "effects": [
+                {
+                    "type": "energy",
+                    "value": 2,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_seeing_red_upgraded",
+            "name_key": "深度思考+",
+            "description_key": "获得 2 点能量。消耗。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "exhausts_on_play": true,
+            "effects": [
+                {
+                    "type": "energy",
+                    "value": 2,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_bloodletting",
+            "name_key": "拧大腿",
+            "description_key": "失去 2 点生命，获得 1 点能量。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_bloodletting_upgraded",
+            "effects": [
+                {
+                    "type": "lose_health",
+                    "value": 2,
+                    "target": "player"
+                },
+                {
+                    "type": "energy",
+                    "value": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_bloodletting_upgraded",
+            "name_key": "拧大腿+",
+            "description_key": "失去 2 点生命，获得 2 点能量。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "lose_health",
+                    "value": 2,
+                    "target": "player"
+                },
+                {
+                    "type": "energy",
+                    "value": 2,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_rupture",
+            "name_key": "知耻",
+            "description_key": "每当你因卡牌失去生命，获得 1 点严谨度。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_rupture_upgraded",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_rupture_upgraded",
+            "name_key": "知耻+",
+            "description_key": "每当你因卡牌失去生命，获得 2 点严谨度。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_battle_trance",
+            "name_key": "头脑风暴",
+            "description_key": "抽 3 张牌。本回合你无法再抽牌。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "draw",
+                    "count": 3,
+                    "target": "none"
+                },
+                {"type": "draw_lock", "enabled": true, "target": "none"}
+            ]
+        },
+        {
+            "card_id": "theorist_battle_trance_upgraded",
+            "name_key": "头脑风暴+",
+            "description_key": "抽 4 张牌。本回合你无法再抽牌。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "draw",
+                    "count": 4,
+                    "target": "none"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_theoretical_breakthrough",
+            "name_key": "理论突破",
+            "description_key": "抽2张牌。随机为一张深度核心卡牌思想深度+3。消耗。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "exhausts": true,
+            "effects": [
+                {
+                    "type": "draw",
+                    "count": 2
+                },
+                {
+                    "type": "add_academic_depth",
+                    "value": 3,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_brutality",
+            "name_key": "上早八",
+            "description_key": "(固有) 在你的回合开始时，损失 1 点生命并抽 1 张牌。",
+            "cost": 0,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "innate": true,
+            "effects": [
+                {
+                    "type": "lose_health",
+                    "value": 1,
+                    "target": "player"
+                },
+                {
+                    "type": "draw",
+                    "count": 1,
+                    "target": "none"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_entrench",
+            "name_key": "膨胀",
+            "description_key": "使你当前的自信翻倍。",
+            "cost": 2,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_entrench_upgraded",
+            "effects": [
+                {
+                    "type": "double_confidence",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_entrench_upgraded",
+            "name_key": "膨胀+",
+            "description_key": "使你当前的自信翻倍。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "double_confidence",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_limit_break",
+            "name_key": "尤里卡！",
+            "description_key": "使你的严谨翻倍。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "double_rigor", "target": "player"}
+            ]
+        },
+        {
+            "card_id": "theorist_rampage",
+            "name_key": "贝塞尔曲线",
+            "description_key": "造成 8 点伤害。此牌在本场战斗中每次被打出，伤害增加 5。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_rampage_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 8,
+                    "increase_on_play": 5,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_rampage_upgraded",
+            "name_key": "贝塞尔曲线+",
+            "description_key": "造成 8 点伤害。此牌在本场战斗中每次被打出，伤害增加 8。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 8,
+                    "increase_on_play": 8,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_hemokinesis",
+            "name_key": "钻牛角尖",
+            "description_key": "获得 2 点压力。造成 15 点伤害。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "lose_health",
+                    "value": 2,
+                    "target": "player"
+                },
+                {
+                    "type": "damage",
+                    "value": 15,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_hemokinesis_upgraded",
+            "name_key": "钻牛角尖+",
+            "description_key": "获得 2 点压力。造成 20 点伤害。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {
+                    "type": "lose_health",
+                    "value": 2,
+                    "target": "player"
+                },
+                {
+                    "type": "damage",
+                    "value": 20,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_dropkick",
+            "name_key": "微分流型",
+            "description_key": "造成 5 点伤害。如果敌人处于 破防 状态，则获得 1 点能量并抽 1 张牌。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "script_id": "handle_dropkick_logic",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 5,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_dropkick_upgraded",
+            "name_key": "微分流型+",
+            "description_key": "造成 8 点伤害。如果敌人处于 破防 状态，则获得 1 点能量并抽 1 张牌。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "script_id": "handle_dropkick_logic",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 8,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_havoc",
+            "name_key": "随机执行",
+            "description_key": "打出抽牌堆顶的牌并将其消耗。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "play_top_of_draw_then_exhaust", "target": "none"}
+            ]
+        },
+        {
+            "card_id": "theorist_warcry",
+            "name_key": "战吼",
+            "description_key": "抽2张。将一张手牌置于抽牌堆顶。消耗。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "exhausts_on_play": true,
+            "effects": [
+                {"type": "draw", "count": 2, "target": "none"},
+                {"type": "put_hand_card_on_top_of_draw", "target": "card_in_hand"}
+            ]
+        },
+        {
+            "card_id": "theorist_true_grit",
+            "name_key": "真勇",
+            "description_key": "消耗一张随机手牌。获得 7 点自信。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "upgraded_card_id": "theorist_true_grit_upgraded",
+            "effects": [
+                {"type": "exhaust_from_hand", "targeted": false, "target": "none"},
+                {"type": "confidence", "value": 7, "target": "player"}
+            ]
+        },
+        {
+            "card_id": "theorist_true_grit_upgraded",
+            "name_key": "真勇+",
+            "description_key": "消耗一张指定手牌。获得 9 点自信。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "exhaust_from_hand", "targeted": true, "target": "card_in_hand"},
+                {"type": "confidence", "value": 9, "target": "player"}
+            ]
+        },
+        {
+            "card_id": "theorist_burning_pact",
+            "name_key": "灼热契约",
+            "description_key": "消耗一张手牌。抽2张。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "exhaust_from_hand", "targeted": true, "target": "card_in_hand"},
+                {"type": "draw", "count": 2, "target": "none"}
+            ]
+        },
+        {
+            "card_id": "theorist_dual_wield",
+            "name_key": "双持",
+            "description_key": "复制一张攻击或能力牌。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "copy_card_in_hand", "count": 1, "allowed_types": ["Attack", "Power"], "target": "card_in_hand"}
+            ]
+        },
+        {
+            "card_id": "theorist_second_wind",
+            "name_key": "回光返照",
+            "description_key": "消耗所有非攻击牌。每张获得 5 点自信。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "exhaust_all_non_attack_then_block", "block_per_card": 5, "target": "player"}
+            ]
+        },
+        {
+            "card_id": "theorist_sever_soul",
+            "name_key": "割魂",
+            "description_key": "消耗所有非攻击牌。造成18点伤害。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "exhaust_all_non_attack_in_hand", "target": "none"},
+                {"type": "damage", "value": 18, "target": "selected_enemy"}
+            ]
+        },
+        {
+            "card_id": "theorist_infernal_blade",
+            "name_key": "地狱之刃",
+            "description_key": "将1张随机攻击置入手牌。本回合其费用为0。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Uncommon",
+            "effects": [
+                {"type": "create_random_attack_in_hand", "cost_override": 0, "target": "player"}
+            ]
+        },
+        {
+            "card_id": "theorist_feel_no_pain",
+            "name_key": "无感",
+            "description_key": "每当有卡牌被消耗，获得3点自信。",
+            "cost": 1,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "effects": []
+        },
+        {
+            "card_id": "theorist_rage",
+            "name_key": "暴怒",
+            "description_key": "本回合每当你打出一张攻击牌，获得3点自信。",
+            "cost": 0,
+            "type": "Power",
+            "rarity": "Uncommon",
+            "effects": []
+        }
+    ]
+}

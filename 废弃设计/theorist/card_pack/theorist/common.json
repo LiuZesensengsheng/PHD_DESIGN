@@ -1,0 +1,698 @@
+{
+    "cards": [
+        {
+            "card_id": "theorist_sword_boomerang",
+            "name_key": "随机过程",
+            "description_key": "对随机敌人造成 3 点伤害 3 次。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 3,
+                    "hit_count": 3,
+                    "target": "random_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_sword_boomerang_upgraded",
+            "name_key": "随机过程+",
+            "description_key": "对随机敌人造成 3 点伤害 4 次。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 3,
+                    "hit_count": 4,
+                    "target": "random_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_bash",
+            "name_key": "高阶微积分",
+            "description_key": "对敌人造成 8 点伤害。施加 2 层破防。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 8,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "status",
+                    "status_type": "Vulnerable",
+                    "duration": 2,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_bash_upgraded",
+            "name_key": "高阶微积分+",
+            "description_key": "对敌人造成 10 点伤害。施加 3 层破防。",
+            "cost": 2,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 10,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "status",
+                    "status_type": "Vulnerable",
+                    "duration": 3,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_pester",
+            "name_key": "追问",
+            "description_key": "造成 3 点伤害。消耗。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "exhausts_on_play": true,
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 3,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_publish_paper",
+            "name_key": "论文发表",
+            "description_key": "获得 5 点自信。基于你的学术声望，获得额外自信。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 5,
+                    "attribute_source": "prestige",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_iron_wave",
+            "name_key": "作用力和反作用力",
+            "description_key": "获得 5 点自信。造成 5 点伤害。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_iron_wave_upgraded",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 5,
+                    "target": "player"
+                },
+                {
+                    "type": "damage",
+                    "value": 5,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_iron_wave_upgraded",
+            "name_key": "作用力和反作用力+",
+            "description_key": "获得 7 点自信。造成 7 点伤害。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 7,
+                    "target": "player"
+                },
+                {
+                    "type": "damage",
+                    "value": 7,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_pommel_strike",
+            "name_key": "运筹学",
+            "description_key": "造成 9 点伤害。抽 1 张牌。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_pommel_strike_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 9,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "draw",
+                    "count": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_pommel_strike_upgraded",
+            "name_key": "运筹学+",
+            "description_key": "造成 10 点伤害。抽 2 张牌。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 10,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "draw",
+                    "count": 2,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_shrug_it_off",
+            "name_key": "“好的”",
+            "description_key": "获得 8 点自信。抽 1 张牌。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_shrug_it_off_upgraded",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 8,
+                    "target": "player"
+                },
+                {
+                    "type": "draw",
+                    "count": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_shrug_it_off_upgraded",
+            "name_key": "“好的”+",
+            "description_key": "获得 11 点自信。抽 1 张牌。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 11,
+                    "target": "player"
+                },
+                {
+                    "type": "draw",
+                    "count": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_twin_strike",
+            "name_key": "共轭",
+            "description_key": "造成 5 点伤害两次。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_twin_strike_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 5,
+                    "hit_count": 2,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_twin_strike_upgraded",
+            "name_key": "共轭+",
+            "description_key": "造成 7 点伤害两次。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 7,
+                    "hit_count": 2,
+                    "target": "selected_enemy"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_cleave",
+            "name_key": "群论",
+            "description_key": "对所有敌人造成 8 点伤害。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_cleave_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 8,
+                    "target": "all_enemies"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_cleave_upgraded",
+            "name_key": "群论+",
+            "description_key": "对所有敌人造成 11 点伤害。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 11,
+                    "target": "all_enemies"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_thunderclap",
+            "name_key": "你们不对！",
+            "description_key": "对所有敌人造成 4 点伤害并施加 1 层破防。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_thunderclap_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 4,
+                    "target": "all_enemies"
+                },
+                {
+                    "type": "status",
+                    "status_type": "Vulnerable",
+                    "duration": 1,
+                    "target": "all_enemies"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_thunderclap_upgraded",
+            "name_key": "你们不对！+",
+            "description_key": "对所有敌人造成 7 点伤害并施加 1 层破防。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 7,
+                    "target": "all_enemies"
+                },
+                {
+                    "type": "status",
+                    "status_type": "Vulnerable",
+                    "duration": 1,
+                    "target": "all_enemies"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_anger",
+            "name_key": "那我问你",
+            "description_key": "造成 6 点伤害。将此牌的 1 张复制品置入你的弃牌堆。",
+            "cost": 0,
+            "type": "Attack",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_anger_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 6,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "create_card",
+                    "card_id_to_create": "theorist_anger",
+                    "destination_pile": "discard_pile",
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_anger_upgraded",
+            "name_key": "那我问你+",
+            "description_key": "造成 8 点伤害。将此牌的 1 张复制品置入你的弃牌堆。",
+            "cost": 0,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 8,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "create_card",
+                    "card_id_to_create": "theorist_anger_upgraded",
+                    "destination_pile": "discard_pile",
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_clash",
+            "name_key": "理论洁癖",
+            "description_key": "仅当手牌中所有牌都是攻击牌时才能打出。造成 14 点伤害。",
+            "cost": 0,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 14,
+                    "target": "selected_enemy",
+                    "condition": {
+                        "type": "all_cards_in_hand_are_of_type",
+                        "card_type": "Attack"
+                    }
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                },
+                {
+                    "type": "rigor",
+                    "value": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_clash_upgraded",
+            "name_key": "理论洁癖+",
+            "description_key": "仅当手牌中所有牌都是攻击牌时才能打出。造成 18 点伤害。",
+            "cost": 0,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 18,
+                    "target": "selected_enemy",
+                    "condition": {
+                        "type": "all_cards_in_hand_are_of_type",
+                        "card_type": "Attack"
+                    }
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                },
+                {
+                    "type": "rigor",
+                    "value": 1,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_headbutt",
+            "name_key": "易得",
+            "description_key": "造成 9 点伤害。将弃牌堆中的一张牌置于抽牌堆顶。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 9,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_headbutt_upgraded",
+            "name_key": "易得+",
+            "description_key": "造成 12 点伤害。将弃牌堆中的一张牌置于抽牌堆顶。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 12,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_armaments",
+            "name_key": "深呼吸",
+            "description_key": "获得 5 点自信。升级手中一张牌，持续到战斗结束。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 5,
+                    "target": "player"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_armaments_upgraded",
+            "name_key": "深呼吸+",
+            "description_key": "获得 5 点自信。升级手中所有牌，持续到战斗结束。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 5,
+                    "target": "player"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_flex",
+            "name_key": "紧急科研",
+            "description_key": "获得 2 点严谨度。在你的回合结束时，失去 2 点严谨度。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "temporary_rigor",
+                    "value": 2,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_flex_upgraded",
+            "name_key": "紧急科研+",
+            "description_key": "获得 4 点严谨度。在你的回合结束时，失去 4 点严谨度。",
+            "cost": 0,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "temporary_rigor",
+                    "value": 4,
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_deep_study",
+            "name_key": "深入研究",
+            "description_key": "选择手牌中一张深度核心卡牌，使其思想深度+2。",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "add_academic_depth",
+                    "value": 2,
+                    "target_type": "random",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_body_slam",
+            "name_key": "论文发表",
+            "description_key": "造成等同于你自信值的伤害。",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "upgraded_card_id": "theorist_body_slam_upgraded",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 0,
+                    "value_from_stat": "confidence",
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_body_slam_upgraded",
+            "name_key": "论文发表+",
+            "description_key": "造成等同于你自信值的伤害。",
+            "cost": 0,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 0,
+                    "value_from_stat": "confidence",
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_strike",
+            "name_key": "基础理论",
+            "description_key": "造成6点伤害",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 6,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_strike_upgraded",
+            "name_key": "基础理论+",
+            "description_key": "造成9点伤害",
+            "cost": 1,
+            "type": "Attack",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "damage",
+                    "value": 9,
+                    "target": "selected_enemy"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_defend",
+            "name_key": "基本假设",
+            "description_key": "获得5点自信",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 5,
+                    "target": "player"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        },
+        {
+            "card_id": "theorist_defend_upgraded",
+            "name_key": "基本假设+",
+            "description_key": "获得8点自信",
+            "cost": 1,
+            "type": "Skill",
+            "rarity": "Common",
+            "effects": [
+                {
+                    "type": "confidence",
+                    "value": 8,
+                    "target": "player"
+                },
+                {
+                    "type": "consume_rigor",
+                    "target": "player"
+                }
+            ]
+        }
+    ]
+}

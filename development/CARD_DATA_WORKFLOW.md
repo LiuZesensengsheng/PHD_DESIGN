@@ -22,7 +22,6 @@ The active packs covered by the current pipeline health checks are:
 
 - `red`
 - `white`
-- `theorist`
 
 ## Editing Workflow
 
