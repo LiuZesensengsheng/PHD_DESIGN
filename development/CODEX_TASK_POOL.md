@@ -163,6 +163,276 @@
   - 先把 task resolution 和 card play 两条最贵主路径切稳
   - 这一块适合在前几步稳定后继续收口
 
+### P1. Campaign UI Handoff Orchestration（按时间优先级串行）
+
+- 适用前提：
+  - 当近期目标变成“让另一个人尽快安全接手 UI 开发”时，优先切换到这一组任务
+  - 这组任务按时间优先级排序，不按架构完整度排序
+  - 默认目标不是把 campaign 一次性重构成完整 DDD，而是先做出可交接的稳定中层
+- 总目标：
+  - 让 UI 开发主要停留在 `ui/`、`ui_runtime/`、`view` 与少量 presenter/adapter
+  - 避免 UI 直接依赖 `CampaignState` 深层字段、散装 transition 写入和隐式流程顺序
+  - 先做“可安全协作”的编排层，再继续决定后续是否深挖 DDD / 节点化
+- 默认执行顺序：
+  1. `Campaign UI Interaction Contract V1`
+  2. `Campaign Modal Lock Contract V1`
+  3. `Campaign Block Click Orchestrator V1`
+  4. `Campaign End Turn Orchestrator V1`
+  5. `Campaign Transition Request Contract V1`
+  6. `Campaign Startup Seam Cleanup V1`
+  7. `Campaign Event Input Split V1`
+  8. `Campaign Thesis Submission Flow Cut V1`
+  9. `Campaign Runtime UI Boundary V1`
+  10. `Campaign UI Handoff Tests V1`
+  11. `Campaign UI Handoff Doc V1`
+  12. `Campaign Hotspot Defer List V1`
+- 总边界：
+  - 不要求先把 campaign 全量重写成完整 DDD
+  - 不为了交接 UI 先全面铺开节点树
+  - 不顺手做大规模视觉重构
+  - 允许保留少量 legacy/mixed-mode 兼容层，但必须明确“UI 不该直接碰”
+- 完成标准：
+  - 新 UI 开发有一组稳定入口可依赖
+  - 高风险主路径不再要求 UI 直接理解业务细节
+  - 有最小测试和文档护栏支撑并行协作
+
+### P1. Campaign UI Interaction Contract V1
+
+- 目标：
+  - 先定义 campaign UI 可以安全依赖的稳定入口与禁止越界边界
+- 主要输入：
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/`
+  - `docs/development/UI_ARCHITECTURE_V1.md`
+  - `docs/development/ARCHITECTURE_RUNTIME_NODES_VS_DOMAIN_BOUNDARIES_V1.md`
+- 预期输出：
+  - 一份 UI 交互契约说明
+  - 明确 UI 允许调用的入口，例如：
+    - block click
+    - end turn request
+    - modal choice submit
+    - runtime widget event
+  - 明确禁止 UI 直接改写的 state/runtime 字段
+- 边界：
+  - 不先改视觉
+  - 不先做大规模代码搬迁
+- 完成标准：
+  - 能明确回答“UI 层可以依赖什么，不可以依赖什么”
+  - 后续任务可围绕这份契约继续收口
+
+### P1. Campaign Modal Lock Contract V1
+
+- 目标：
+  - 把 campaign 里 modal 的 `show/hide/lock/unlock/event consume` 统一成一套规则
+- 主要输入：
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/campaign_modal_dispatch_service.py`
+  - `contexts/campaign/services/campaign_input_lock_service.py`
+  - `contexts/campaign/services/modal_coordinator.py`
+  - 相关 campaign modal tests
+- 预期输出：
+  - 一套显式 modal 锁协议
+  - 一组 focused tests，覆盖事件消费顺序和 owner 语义
+- 边界：
+  - 不顺手改整套 UI 树
+  - 不做 UI 视觉层重写
+- 完成标准：
+  - UI 协作者不需要猜 modal 锁语义
+  - 底层点击/按键不会再绕过 blocking modal
+
+### P1. Campaign Block Click Orchestrator V1
+
+- 目标：
+  - 把 `block click -> 业务判断 -> transition/request` 收成一个显式编排入口
+- 主要输入：
+  - `contexts/campaign/services/campaign_mouse_event_service.py`
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/transition_helper.py`
+  - `contexts/campaign/services/thesis_slice.py`
+- 预期输出：
+  - 一版 block-click orchestrator 或同级 use-case seam
+  - UI event adapter 只负责把点击翻译成调用，不再自己承载业务分支
+- 边界：
+  - 不要求这一步处理全部 thesis 细节
+  - 不顺手重写 hit-test/view math
+- 完成标准：
+  - block 点击主路径有单一入口
+  - combat/event/non-combat 分支顺序更显式、更可测
+
+### P1. Campaign End Turn Orchestrator V1
+
+- 目标：
+  - 把 `end turn` 推进顺序固定成 UI 可安全依赖的显式入口
+- 主要输入：
+  - `contexts/campaign/services/campaign_turn_orchestrator.py`
+  - `contexts/campaign/services/end_turn_service.py`
+  - `contexts/campaign/state.py`
+- 预期输出：
+  - 统一的 end-turn 请求入口
+  - focused tests，保护 turn advance / board stabilize / side effects 顺序
+- 边界：
+  - 不顺手清空所有 campaign 旧逻辑
+  - 不把 track geometry 和 DDL snake 全部改写
+- 完成标准：
+  - UI 只发起“结束回合”请求
+  - 回合推进顺序不再散落在 UI 事件和 runtime update 中
+
+### P1. Campaign Transition Request Contract V1
+
+- 目标：
+  - 统一 campaign 发往 combat / deck / ending / 其他 state 的 transition 请求格式
+- 主要输入：
+  - `contexts/campaign/services/transition_helper.py`
+  - `contexts/campaign/services/campaign_route_resolution_service.py`
+  - `contexts/shared/domain/contracts.py`
+  - `contexts/campaign/state.py`
+- 预期输出：
+  - 一版稳定 transition request contract
+  - focused tests，保护 request payload shape 和 startup return path
+- 边界：
+  - 不做跨全仓库 state machine 重构
+  - 不顺手改 legacy 入口以外的所有调用方
+- 完成标准：
+  - UI 不再直接散装改 `persistent`
+  - transition 数据 shape 可被文档和测试直接说明
+
+### P1. Campaign Startup Seam Cleanup V1
+
+- 目标：
+  - 把 startup/hydration/effects 继续收口成 UI 不需要理解的后台流程
+- 主要输入：
+  - `contexts/campaign/services/campaign_startup_hydration_service.py`
+  - `contexts/campaign/services/campaign_startup_effects_service.py`
+  - `contexts/campaign/state.py`
+  - `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+- 预期输出：
+  - 更清晰的 startup seam
+  - 更少的 UI 启动期隐式副作用暴露给外层
+- 边界：
+  - 不要求 startup 逻辑完全纯化
+  - 不顺手做存档系统重写
+- 完成标准：
+  - UI 开发不需要知道 hydration/effects 细节才能安全改启动表现
+
+### P1. Campaign Event Input Split V1
+
+- 目标：
+  - 把 campaign 里的“输入适配”与“业务编排”进一步拆开
+- 主要输入：
+  - `contexts/campaign/services/campaign_mouse_event_service.py`
+  - `contexts/campaign/services/campaign_keyboard_event_service.py`
+  - `contexts/campaign/services/campaign_ui_button_event_service.py`
+  - `contexts/campaign/state.py`
+- 预期输出：
+  - presentation/event adapter 与 application orchestration 的更清晰边界
+  - 少量 host/protocol 或 seam 方法，避免 event service 继续膨胀
+- 边界：
+  - 不要求一次性清掉全部 `self.state.*`
+  - 不重写所有输入交互
+- 完成标准：
+  - pygame event handling 不再继续成为默认业务入口
+  - 业务判断和 UI 事件翻译职责更清楚
+
+### P1. Campaign Thesis Submission Flow Cut V1
+
+- 目标：
+  - 把 thesis 里最常碰 UI 的提交/弹窗/确认链路单独收口
+- 主要输入：
+  - `contexts/campaign/services/thesis_meta_service.py`
+  - `contexts/campaign/services/thesis_judgment_flow_service.py`
+  - `contexts/campaign/services/thesis_publication_flow_service.py`
+  - `contexts/campaign/state.py`
+- 预期输出：
+  - 一版 thesis submission/use-case seam
+  - UI 不再直接依赖 `_blocks`、meta、persistent 的散装写入
+- 边界：
+  - 不要求 thesis 全链路聚合化完成
+  - 不顺手做完整 thesis DDD 重构
+- 完成标准：
+  - 提交/确认/发表相关 UI 可通过统一入口驱动
+  - 该链路的主要状态写入更集中
+
+### P1. Campaign Runtime UI Boundary V1
+
+- 目标：
+  - 明确 runtime node/widget 与编排层之间的边界，便于别人专注做节点树/UI 表现
+- 主要输入：
+  - `contexts/campaign/ui_runtime/`
+  - `contexts/campaign/state.py`
+  - `docs/development/UI_ARCHITECTURE_V1.md`
+  - `docs/development/ARCHITECTURE_RUNTIME_NODES_VS_DOMAIN_BOUNDARIES_V1.md`
+- 预期输出：
+  - runtime UI 责任说明
+  - 约定 runtime widget 只负责节点、命中、局部动画、局部状态
+- 边界：
+  - 不要求把全 campaign UI 都迁成节点树
+  - 不在这一轮扩成完整引擎层
+- 完成标准：
+  - 新 UI 开发者知道哪些逻辑该进 `ui_runtime/`，哪些不该进
+
+### P1. Campaign UI Handoff Tests V1
+
+- 目标：
+  - 用 focused tests 固定“交接 UI 所需”的高价值边界
+- 主要输入：
+  - campaign existing tests
+  - block click / end turn / modal / transition 相关实现
+- 预期输出：
+  - 一组最小 handoff contract tests，覆盖：
+    - block click
+    - end turn request
+    - modal lock/event consume
+    - transition request payload
+    - thesis submission 主链
+- 边界：
+  - 不把测试写成 UI-heavy 大集成
+  - 不追求覆盖所有边角 case
+- 完成标准：
+  - UI 交接不再完全依赖口头说明
+  - 高风险边界能被回归测试直接保护
+
+### P1. Campaign UI Handoff Doc V1
+
+- 目标：
+  - 给后续 UI 开发者一份最短可执行的 handoff 文档
+- 主要输入：
+  - 上述收口结果
+  - `docs/development/UI_ARCHITECTURE_V1.md`
+  - `docs/development/ARCHITECTURE_BOUNDARIES.md`
+- 预期输出：
+  - 一页文档说明：
+    - 能改什么
+    - 不该碰什么
+    - 从哪些入口接 UI
+    - 哪些热点暂时保留 legacy
+- 边界：
+  - 不写成长篇架构论文
+  - 不重复现有大段文档内容
+- 完成标准：
+  - 新 UI 协作者能快速开工
+  - 项目方可以用这份文档做交接基线
+
+### P1. Campaign Hotspot Defer List V1
+
+- 目标：
+  - 明确哪些 campaign 热点先不收，避免 UI handoff 工程无限扩 scope
+- 主要输入：
+  - `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+  - `contexts/campaign/services/thesis_meta_service.py`
+  - `contexts/campaign/services/track_block_service.py`
+  - 当前 UI handoff 主线成果
+- 预期输出：
+  - 一份 defer list，明确：
+    - 哪些热点继续保留
+    - 为什么暂缓
+    - 什么信号出现时再继续收口
+- 边界：
+  - 不把 defer list 写成“永不处理”
+  - 不因为热点存在就阻塞 UI 交接
+- 完成标准：
+  - 任务边界可控
+  - 团队知道哪些 legacy 风险是已知且暂时接受的
+	
 ## 待定 / 需要更多前置条件
 
 ### P2. 三端精英前置机制评估
