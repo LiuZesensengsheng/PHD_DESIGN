@@ -822,7 +822,14 @@
   - added `contexts/campaign/services/thesis_block_mutation_service.py`
   - `ThesisSubmissionFlowService`, `ThesisJudgmentFlowService`, and `ThesisRoundService` now route thesis block-list mutations through the shared block seam
   - added focused coverage in `tests/campaign/test_thesis_block_mutation_service.py`
-  - default next step: `Thesis Verdict Follow-Up Contract V1`
+  - completed `Thesis Verdict Follow-Up Contract V1`
+  - added focused verdict-order contract coverage in `tests/campaign/test_thesis_verdict_follow_up_contract.py`
+  - completed `Thesis Aggregate Invariant Tests V1`
+  - added thesis aggregate consistency coverage in `tests/campaign/test_thesis_aggregate_invariants.py`
+  - completed `Thesis State Host Narrowing V1`
+  - added narrower host protocols for thesis write/block/submission/judgment seams in `contexts/campaign/services/campaign_service_protocols.py`
+  - `ThesisSubmissionFlowService` and `ThesisJudgmentFlowService` no longer default to broad untyped `CampaignState` dependencies
+  - default next step: reopen thesis aggregate review only when a new hotspot appears; otherwise continue with broader campaign aggregate review
 
 - Recommended serial cuts:
   1. `Thesis Block Mutation Consolidation V1`
@@ -866,6 +873,8 @@
 - Expected output:
   - thinner, better-ordered verdict application mainline
   - focused regression around reject/accept/major/minor sequencing
+- Status (`2026-03-17`):
+  - complete
 
 #### P2. Thesis Aggregate Invariant Tests V1
 
@@ -876,6 +885,8 @@
   - `tests/campaign/test_campaign_ui_handoff_contracts.py`
 - Expected output:
   - focused invariants covering tier/runtime/meta/block consistency
+- Status (`2026-03-17`):
+  - complete
 
 #### P2. Thesis State Host Narrowing V1
 
@@ -886,6 +897,8 @@
   - `contexts/campaign/services/thesis_*.py`
 - Expected output:
   - narrower host protocols around the matured thesis seams
+- Status (`2026-03-17`):
+  - complete
 
 - 目标：
   - 明确 thesis 线当前谁是事实聚合根、哪些状态修改必须走统一入口，而不是继续散落在 `CampaignState`、service 和临时字典之间
