@@ -111,6 +111,7 @@ This cut does not:
 
 ## Next Cut
 
-The next highest-value campaign handoff task is:
+This boundary is now part of the minimum campaign UI handoff pack.
 
-- `Campaign UI Handoff Tests V1`
+Further follow-up should be targeted widget/runtime seams or hotspot cleanup,
+not another broad runtime-boundary pass.

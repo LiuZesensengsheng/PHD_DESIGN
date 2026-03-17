@@ -483,7 +483,18 @@
   - 新 UI 协作者能快速开工
   - 项目方可以用这份文档做交接基线
 
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_UI_HANDOFF_DOC_V1.md`
+  - the incoming UI developer now has one short handoff note covering safe work areas, host seams, contract tests, and stop-signs
+  - default next step: `Campaign Hotspot Defer List V1`
+
 ### P1. Campaign Hotspot Defer List V1
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_HOTSPOT_DEFER_LIST_V1.md`
+  - the remaining campaign legacy hotspots are now explicitly deferred instead of silently expanding scope
+  - the `Campaign UI Handoff Orchestration` track can now be treated as closed for this phase
 
 - 目标：
   - 明确哪些 campaign 热点先不收，避免 UI handoff 工程无限扩 scope

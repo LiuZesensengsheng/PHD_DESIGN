@@ -269,12 +269,11 @@ When another developer works on campaign UI, the safe collaboration model is:
 
 ## Immediate Follow-Up Cuts
 
-This contract is the precondition for the next campaign handoff tasks.
+This contract, together with the runtime boundary, handoff tests, handoff doc,
+and hotspot defer list, now forms the minimum campaign UI handoff pack.
 
-The next highest-value cuts are:
-
-1. `Campaign UI Handoff Doc V1`
-2. `Campaign Hotspot Defer List V1`
+Further follow-up should default to targeted hotspot cleanup or feature-driven
+new seams, not another broad UI architecture pass.
 
 These cuts should turn today's implicit boundaries into explicit ones.
 
