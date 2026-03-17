@@ -946,6 +946,200 @@
   - 当前 campaign 仍处于 mixed-mode UI 过渡期
   - 需要先继续观察 block / route / reward 高频改动路径
 
+### P2. Campaign vs Task Area Boundary V1
+
+- Goal:
+  - define the architectural split between `Campaign` as shell and `Task Area`
+    as the campaign scheduling subdomain
+  - make `track/task line/block/event bubble` ownership explicit before further
+    board-side refactors
+- Main inputs:
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/domain/block_dto.py`
+  - `contexts/campaign/services/track_block_service.py`
+  - `docs/design/campaign/GANTT_TASKS_EVENTS.md`
+  - `docs/design/PAPER_LINE_TRACK_SERVICE_SPEC.md`
+  - `docs/development/CAMPAIGN_UI_HANDOFF_DOC_V1.md`
+- Expected output:
+  - one boundary RFC
+  - one recommended vocabulary map
+  - one small-step follow-up sequence instead of a vague aggregate rewrite
+- Boundaries:
+  - do not force a full `Track` aggregate rewrite now
+  - do not reopen broad UI handoff scope
+  - do not pretend `Task Area` is a sibling runtime state
+- Completion criteria:
+  - can explain clearly:
+    - what belongs to `Campaign`
+    - what belongs to `Task Area`
+    - why `Event Bubble` is not a `Block`
+    - why thesis is a specialization on top of task-area primitives
+
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_TASK_AREA_BOUNDARY_V1.md`
+  - recommendation: treat `Campaign` as outer shell and `Task Area` as named
+    scheduling subdomain inside campaign
+  - default next step: `Task Area Terminology Alignment V1`
+
+### P2. Task Area Terminology Alignment V1
+
+- Goal:
+  - align active docs and runtime comments around:
+    - `Campaign`
+    - `Task Area`
+    - `Task Line / Track`
+    - `Block`
+    - `Event Bubble`
+- Main inputs:
+  - `docs/development/CAMPAIGN_TASK_AREA_BOUNDARY_V1.md`
+  - active campaign development docs
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/track_block_service.py`
+- Expected output:
+  - small terminology cleanup pass
+  - no behavioral change
+- Boundaries:
+  - do not mass-rename every historical design doc
+  - do not introduce new runtime abstractions yet
+- Completion criteria:
+  - current architecture docs and the most active runtime files stop using
+    `campaign` as the name for both shell and task-board subdomain
+
+- Status (`2026-03-17`):
+  - complete
+  - aligned active docs:
+    - `docs/development/CAMPAIGN_UI_HANDOFF_DOC_V1.md`
+    - `docs/development/CAMPAIGN_HOTSPOT_DEFER_LIST_V1.md`
+    - `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+  - aligned runtime terminology comments/docstrings:
+    - `contexts/campaign/state.py`
+    - `contexts/campaign/services/track_block_service.py`
+    - `contexts/campaign/services/campaign_visible_blocks_service.py`
+    - `contexts/campaign/services/line_bubble_service.py`
+  - kept scope documentation-only; no behavior change
+  - default next step: `Task Area Write-Path Contract V1`
+
+### P2. Task Area Write-Path Contract V1
+
+- Goal:
+  - identify and tighten the real task-area write paths around block mutation
+    and board stabilization
+- Main inputs:
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/track_block_service.py`
+  - task-area callers in thesis/meeting/startup flows
+- Expected output:
+  - one explicit write-path note or seam set for task-area mutations
+  - smaller risk of ad hoc `_blocks` mutation spreading
+- Boundaries:
+  - do not force repository-style abstraction yet
+  - do not rewrite DDL snake or fusion rules for theory's sake
+- Completion criteria:
+  - can point to the preferred task-area mutation entrypoints for the
+    highest-frequency writers
+
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_TASK_AREA_WRITE_PATH_CONTRACT_V1.md`
+  - added state seams:
+    - `get_next_task_area_track_index()`
+    - `apply_task_area_blueprint_plans(plans)`
+  - migrated external writers:
+    - `contexts/campaign/services/thesis_blueprint_app_service.py`
+    - `contexts/campaign/services/campaign_keyboard_event_service.py`
+  - added focused coverage:
+    - `tests/campaign/test_task_area_write_path_contract.py`
+    - `tests/campaign/test_campaign_keyboard_event_service.py`
+  - default next step: `Task Area Invariant Tests V1`
+
+### P2. Task Area Invariant Tests V1
+
+- Goal:
+  - lock the current task-area invariants with focused tests
+- Main inputs:
+  - `contexts/campaign/services/track_block_service.py`
+  - campaign block and line-bubble tests
+- Expected output:
+  - focused coverage for:
+    - no logical overlap
+    - trailing DDL enforcement
+    - fusion safety
+    - event-bubble vs block separation
+- Boundaries:
+  - do not expand into UI-heavy integration tests
+  - do not wait for a full aggregate rewrite to add protection
+- Completion criteria:
+  - future task-area refactors can fail fast on broken board invariants
+
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_TASK_AREA_INVARIANT_TESTS_V1.md`
+  - added focused coverage:
+    - `tests/campaign/test_task_area_invariants.py`
+  - invariant pack now explicitly protects:
+    - no logical overlap on the same track
+    - trailing DDL per task line
+    - event-bubble vs block separation
+  - default next step: `Task Area Host Narrowing V1`
+
+### P2. Task Area Host Narrowing V1
+
+- Goal:
+  - narrow mature task-area services away from broad `CampaignState` access
+    where the seam is already stable
+- Main inputs:
+  - `contexts/campaign/services/track_block_service.py`
+  - `contexts/campaign/services/line_bubble_service.py`
+  - `contexts/campaign/state.py`
+- Expected output:
+  - narrower host/seam notes or protocols for task-area services with clear ROI
+- Boundaries:
+  - do not widen into a fake universal facade
+  - stop if the protocol starts mirroring too much internal state
+- Completion criteria:
+  - at least one task-area hotspot becomes easier to reason about without
+    increasing abstraction noise
+
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_TASK_AREA_HOST_NARROWING_V1.md`
+  - added narrower task-area host protocols in:
+    - `contexts/campaign/services/campaign_service_protocols.py`
+  - narrowed mature services:
+    - `contexts/campaign/services/line_bubble_service.py`
+    - `contexts/campaign/services/thesis_blueprint_app_service.py`
+  - added thin host seams on `CampaignState`:
+    - `lock_gossip_inputs()`
+    - `unlock_gossip_inputs()`
+    - `ensure_task_area_thesis_meta(...)`
+    - `clear_saved_thesis_tier_for_track(...)`
+  - added focused stub-host coverage:
+    - `tests/campaign/test_campaign_dependency_narrowing_services.py`
+  - default next step: `Track Aggregate Re-evaluation V1`
+
+### P2. Track Aggregate Re-evaluation V1
+
+- Goal:
+  - revisit whether a true `Track` aggregate is worth doing after the task-area
+    naming, write paths, and invariants are clearer
+- Current lower-priority reason:
+  - the current task-board hotspot is still geometry-heavy
+  - the team now needs clearer boundaries more than deeper purity
+  - this decision should be made after smaller task-area cuts, not before
+
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/TRACK_AGGREGATE_REEVALUATION_V1.md`
+  - recommendation:
+    - do not promote a full `Track` aggregate now
+    - keep the current incremental `Task Area` model
+    - only revisit aggregate promotion when explicit track identity or shared
+      lane-local writer pressure appears
+  - default next step:
+    - keep task-area work on seam-driven maintenance for now
+    - do not open a full aggregate rewrite without a new trigger
+
 ### P2. Repository Boundary Cleanup V1
 
 - 目标：

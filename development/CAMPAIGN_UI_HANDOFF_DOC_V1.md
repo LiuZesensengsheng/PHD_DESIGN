@@ -9,6 +9,16 @@ Give the incoming campaign UI developer a short, executable handoff note:
 - which internals to avoid
 - which tests protect the current contract
 
+## Terminology
+
+In this handoff note:
+
+- `Campaign` means the outer shell: lifecycle, transitions, modal/input
+  ownership, startup, and return flow
+- `Task Area` means the central scheduling board inside campaign
+- `Track` or `Task Line` means one lane inside that task area
+- `Event Bubble` means a task-area overlay, not a schedulable block
+
 ## Safe Work Areas
 
 The safest places for new campaign UI work are:
@@ -65,7 +75,7 @@ Do not treat the following as stable UI contract:
 - direct transition payload writes into `persistent`
 - direct `persistent` writes from runtime widgets
 - `ThesisMetaService` as a presentation API
-- `TrackBlockService` as a UI extension surface
+- `TrackBlockService` as a task-area UI extension surface
 - `CampaignMouseEventService` as the place to add more business rules
 
 ## Runtime UI Rule
@@ -79,8 +89,8 @@ Do not treat the following as stable UI contract:
 
 If a widget needs a business consequence, stop at a `CampaignState` seam.
 
-Do not put campaign routing, thesis rules, or transition wiring inside
-`ui_runtime`.
+Do not put campaign-shell routing, task-area rules, or transition wiring
+inside `ui_runtime`.
 
 ## Recommended Test Checks
 
@@ -111,7 +121,8 @@ Stop and ask for a new orchestration seam if the UI change would require:
 The current handoff model is:
 
 - UI owns presentation and local runtime behavior
-- `CampaignState` owns lifecycle and stable entrypoints
+- `CampaignState` owns the campaign shell and stable entrypoints
+- task-area rules stay behind state seams and services instead of leaking into UI
 - services own sequencing and business consequences
 
 That is enough for parallel UI work without waiting for a full DDD rewrite or a

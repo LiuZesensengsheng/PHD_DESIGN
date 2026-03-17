@@ -5,6 +5,12 @@
 Record which campaign hotspots we are intentionally not expanding during the
 current UI handoff phase, so the UI collaboration scope stays controlled.
 
+Terminology note:
+
+- `Campaign` here means the outer shell plus its internal subdomains
+- `TrackBlockService` is specifically a `Task Area` hotspot inside campaign, not
+  a general campaign-shell service
+
 ## Defer Now
 
 ### `contexts/campaign/services/thesis_meta_service.py`
@@ -25,7 +31,7 @@ Revisit when:
 
 Why defer:
 
-- it is dominated by board geometry, layout mutation, and campaign runtime rules
+- it is dominated by board geometry, layout mutation, and task-area runtime rules
 - it is not the best place to chase UI handoff safety right now
 - abstracting it too early would likely create a wide facade without reducing real risk
 
