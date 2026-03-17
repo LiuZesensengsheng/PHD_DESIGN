@@ -455,6 +455,13 @@
   - UI 交接不再完全依赖口头说明
   - 高风险边界能被回归测试直接保护
 
+- Status (`2026-03-17`):
+  - complete
+  - output: `tests/campaign/test_campaign_ui_handoff_contracts.py`
+  - handoff pack now locks block click, end-turn request, modal-owner guard, transition request surface, and thesis submission seam
+  - deeper existing tests remain as detailed behavior coverage; this pack is the compact UI-safe surface contract
+  - default next step: `Campaign UI Handoff Doc V1`
+
 ### P1. Campaign UI Handoff Doc V1
 
 - 目标：

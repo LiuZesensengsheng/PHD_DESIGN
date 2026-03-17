@@ -273,9 +273,8 @@ This contract is the precondition for the next campaign handoff tasks.
 
 The next highest-value cuts are:
 
-1. `Campaign UI Handoff Tests V1`
-2. `Campaign UI Handoff Doc V1`
-3. `Campaign Hotspot Defer List V1`
+1. `Campaign UI Handoff Doc V1`
+2. `Campaign Hotspot Defer List V1`
 
 These cuts should turn today's implicit boundaries into explicit ones.
 
