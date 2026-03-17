@@ -64,15 +64,21 @@ Meaning:
 Stable enough for current UI work:
 
 - `CampaignState.handle_clicked_block(block)`
-- `CampaignState.end_turn()`
+- `CampaignState.request_end_turn(staged=False)`
 - `CampaignState.request_ending(trigger_reason, extra=...)`
 
 Meaning:
 
 - UI may forward a resolved block click into the host seam
-- UI may request end-turn
+- UI may request end-turn through one explicit request seam
 - UI may request ending transition
 - UI should not manually reproduce the downstream business sequence
+
+Compatibility note:
+
+- `CampaignState.end_turn()` still exists in V1 as a compatibility wrapper for
+  actual turn advancement
+- new UI-facing code should prefer `request_end_turn(...)`
 
 ### Transition Request Surface
 
@@ -239,10 +245,10 @@ This contract is the precondition for the next campaign handoff tasks.
 
 The next highest-value cuts are:
 
-1. `Campaign End Turn Orchestrator V1`
-2. `Campaign Transition Request Contract V1`
-3. `Campaign Startup Seam Cleanup V1`
-4. `Campaign Event Input Split V1`
+1. `Campaign Transition Request Contract V1`
+2. `Campaign Startup Seam Cleanup V1`
+3. `Campaign Event Input Split V1`
+4. `Campaign Thesis Submission Flow Cut V1`
 
 These cuts should turn today's implicit boundaries into explicit ones.
 

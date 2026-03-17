@@ -294,6 +294,13 @@
   - UI 只发起“结束回合”请求
   - 回合推进顺序不再散落在 UI 事件和 runtime update 中
 
+- 当前状态（`2026-03-17`）：
+  - 已完成
+  - 产出：`docs/development/CAMPAIGN_END_TURN_ORCHESTRATOR_V1.md`
+  - 已新增 `CampaignEndTurnOrchestrator`
+  - 已补 focused tests，覆盖 direct/staged request、forced-DDL block 和 UI adapter 委派
+  - 默认下一步：`Campaign Transition Request Contract V1`
+
 ### P1. Campaign Transition Request Contract V1
 
 - 目标：
