@@ -714,7 +714,9 @@
 - 当前状态（`2026-03-16`）：
   - 前 3 个白色 residual cutover 已完成
   - active white fallback 已基本收缩到 `swap_with_paper`
-  - 默认下一步切 `Queue Red Complex Draw Branch Cutover V1`
+  - `2026-03-17` 更新：
+    - `Queue Red Complex Draw Branch Cutover V1` 已完成
+    - 默认下一步切 `Queue Final Active Fallback Boundary Pass V1`
 - 总边界：
   - 不重写整个 combat runtime
   - 不做 UI 节点化
@@ -800,6 +802,31 @@
 - 边界：
   - 不扩成通用随机脚本系统
   - 优先保留当前 pile/随机语义一致
+- Status (`2026-03-17`):
+  - complete
+  - added dedicated queue actions for the remaining active red complex draw branch:
+    - `RedGuessDrawTypeAction`
+    - `RedRandomHandDiscountThenDiscardAction`
+    - `RedDrawThenRandomDamageFromCostsAction`
+    - `PlayTopOfDrawThenExhaustAction`
+  - moved the following effect types onto the planned path:
+    - `red_guess_draw_type`
+    - `red_random_hand_discount_then_discard`
+    - `red_draw_then_random_damage_from_costs`
+    - `play_top_of_draw_then_exhaust`
+  - kept legacy behavior aligned around:
+    - draw-result branching and extra draw follow-up
+    - random hand discount plus discard ordering
+    - drawn-card base-cost burst damage
+    - top-of-draw nested effect resolution followed by forced exhaust
+  - added focused coverage in:
+    - `tests/combat/test_action_queue.py`
+    - `tests/combat/test_active_queue_boundaries.py`
+  - validation:
+    - `python -m pytest tests/combat/test_action_queue.py tests/combat/test_active_queue_boundaries.py -q`
+    - `python -m pytest tests/combat/test_effect_planner.py tests/combat/test_card_play_orchestrator.py tests/combat/test_json_red_cards.py -q`
+    - `python -m pytest tests/combat -q`
+  - default next step: `Queue Final Active Fallback Boundary Pass V1`
 
 ### P2. Queue Final Active Fallback Boundary Pass V1
 
@@ -945,6 +972,19 @@
 - 当前不优先的原因：
   - 当前 campaign 仍处于 mixed-mode UI 过渡期
   - 需要先继续观察 block / route / reward 高频改动路径
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_AGGREGATE_CANDIDATE_REVIEW_V1.md`
+  - conclusion:
+    - `Campaign` remains a shell/orchestration owner, not a promoted aggregate root
+    - `Task Area` remains a real subdomain but is not ready for full aggregate promotion
+    - the closest mature aggregate candidate is track-local `Thesis` progression, not the whole campaign shell
+  - small seam landed:
+    - `CampaignState.get_campaign_blocks_for_track(track_index)`
+    - `ThesisWritePathService` and `ThesisMetaService` now use the track-local read seam instead of open-coded full-list scans
+  - focused validation:
+    - `python -m pytest tests/campaign/test_thesis_write_path_service.py tests/campaign/test_thesis_submission_flow_service.py tests/campaign/test_thesis_aggregate_invariants.py tests/campaign/test_campaign_guardrail_flow_contracts.py tests/campaign/test_campaign_dependency_narrowing_services.py tests/campaign/test_campaign_ui_state_contracts.py -q`
+  - default next step: `Aggregate Invariant Tests V1`
 
 ### P2. Campaign vs Task Area Boundary V1
 
@@ -1140,6 +1180,160 @@
     - keep task-area work on seam-driven maintenance for now
     - do not open a full aggregate rewrite without a new trigger
 
+### P2. Campaign Orchestration Closure V1
+
+- Goal:
+  - close the current campaign orchestration phase around shell invariants,
+    encounter request safety, and small session-access seams so follow-up work
+    can stay UI-first instead of reopening broad architecture churn
+- Recommended serial cuts:
+  1. `Orchestration Aggregate Invariants V1`
+  2. `Encounter Contract Expansion V1`
+  3. `Persistent / Session Access Cleanup V1`
+  4. `Orchestration Closure Doc V1`
+  5. `Focused Smoke Pack V1`
+- Status (`2026-03-17`):
+  - complete
+  - outputs:
+    - `docs/development/CAMPAIGN_ORCHESTRATION_CLOSURE_V1.md`
+    - `docs/development/CAMPAIGN_ORCHESTRATION_SMOKE_PACK_V1.md`
+  - default next step:
+    - treat campaign orchestration as closed for this phase
+    - reopen only when a concrete seam trigger appears during UI or content work
+
+#### P2. Orchestration Aggregate Invariants V1
+
+- Goal:
+  - lock the current campaign-shell orchestration boundaries with executable
+    invariants instead of relying on recent memory
+- Main inputs:
+  - `contexts/campaign/state.py`
+  - startup/cleanup/route-resolution tests
+  - thesis combat-sync and publication follow-up flows
+- Expected output:
+  - one compact invariant pack around startup-cleanup roundtrip, one-shot route
+    resolution, and consume-once thesis sync behavior
+- Boundaries:
+  - do not wait for a formal aggregate root rewrite
+  - do not turn this into a UI-heavy end-to-end suite
+- Status (`2026-03-17`):
+  - complete
+  - added `tests/campaign/test_campaign_orchestration_aggregate_invariants.py`
+  - locked:
+    - cleanup/startup shell roundtrip
+    - route-resolution consume-once behavior across startup + cleanup
+    - thesis combat-sync apply-once behavior
+
+#### P2. Encounter Contract Expansion V1
+
+- Goal:
+  - tighten the campaign-side encounter request contract around block click,
+    state-level combat requests, and transition payload shape
+- Main inputs:
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/campaign_block_click_orchestrator.py`
+  - `contexts/shared/domain/contracts.py`
+- Expected output:
+  - trimmed and validated encounter ids before combat transition requests mutate
+    shell state
+  - widened request-contract regressions for invalid encounter input
+- Boundaries:
+  - do not reopen combat content validation scope
+  - keep this at the campaign orchestration boundary, not a new cross-repo
+    encounter initiative
+- Status (`2026-03-17`):
+  - complete
+  - `CampaignState.request_combat_transition()` now rejects blank encounter ids
+    before mutating `pending_block_id`
+  - added request-contract coverage for trimmed and rejected encounter ids in:
+    - `tests/campaign/test_campaign_transition_request_contract.py`
+
+#### P2. Persistent / Session Access Cleanup V1
+
+- Goal:
+  - move a few remaining orchestration-phase session writes off ad hoc service
+    access and behind thin host/store intent seams
+- Main inputs:
+  - `contexts/campaign/domain/session_store.py`
+  - `contexts/campaign/services/meeting_flow_app_service.py`
+  - `contexts/campaign/services/thesis_publication_flow_service.py`
+  - `contexts/campaign/services/thesis_slice.py`
+  - `contexts/campaign/state.py`
+- Expected output:
+  - narrower service responsibilities around:
+    - meeting-turn handled persistence
+    - innovation placeholder selection persistence
+    - thesis combat-sync consume-once access
+- Boundaries:
+  - do not introduce repository-style abstractions
+  - prefer one or two explicit shell/store seams over a fake universal facade
+- Status (`2026-03-17`):
+  - complete
+  - added thin shell/store seams for:
+    - meeting-turn handled persistence
+    - innovation placeholder choice recording
+    - thesis combat-sync payload consumption
+  - widened focused coverage in:
+    - `tests/campaign/test_campaign_session_store.py`
+    - `tests/campaign/test_meeting_flow_app_service.py`
+    - `tests/campaign/test_campaign_dependency_narrowing_services.py`
+
+#### P2. Orchestration Closure Doc V1
+
+- Goal:
+  - write down the stable campaign orchestration surface, deferred hotspots, and
+    explicit reopen triggers so future UI work does not rely on chat memory
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_ORCHESTRATION_CLOSURE_V1.md`
+
+#### P2. Focused Smoke Pack V1
+
+- Goal:
+  - define the small regression pack that should be the default confidence check
+    for future campaign orchestration touches
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_ORCHESTRATION_SMOKE_PACK_V1.md`
+
+### P2. DDD Layer Planning RFC V1
+
+- Goal:
+  - decide what the repo should mean by "DDD layer progress" after the campaign
+    orchestration closure and combat queue cutover work
+  - avoid mixing action queue, aggregate promotion, and repository scope into
+    one oversized cleanup phase
+- Main inputs:
+  - `docs/development/CAMPAIGN_ORCHESTRATION_CLOSURE_V1.md`
+  - `docs/development/TRACK_AGGREGATE_REEVALUATION_V1.md`
+  - `docs/development/ARCHITECTURE_BOUNDARIES.md`
+  - `contexts/combat/application/orchestration/*`
+  - `contexts/shared/save/*`
+  - `contexts/campaign/services/thesis_*`
+  - `contexts/campaign/services/track_block_service.py`
+- Expected output:
+  - one L3 RFC that answers:
+    - how to treat action queue maturity
+    - which aggregate candidates are real
+    - where repositories are worth keeping narrow
+    - what the phased DDD order should be if reopened later
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/DDD_LAYER_PLANNING_V1.md`
+  - recommendation:
+    - treat combat queueing as a bounded sequencing substrate, not the main DDD blocker
+    - keep repositories narrow and IO-focused
+    - treat aggregate work as selective and trigger-driven
+  - recommended future DDD order if reopened:
+    1. `Repository Boundary Cleanup V1`
+    2. `Campaign Aggregate Candidate Review`
+    3. `Aggregate Invariant Tests V1`
+    4. `State Host Facade V1`
+    5. reopen thesis/task-area aggregate work only on a new hotspot
+  - default next step:
+    - keep the overall project priority UI-first
+    - do not open queue + aggregate + repository work as one combined epic
+
 ### P2. Repository Boundary Cleanup V1
 
 - 目标：
@@ -1163,6 +1357,14 @@
 - 当前不优先的原因：
   - 当前最成熟的 repository 样板主要集中在 save/load
   - 需要先把更高优先级的编排层和 runtime seams 做稳
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/REPOSITORY_BOUNDARY_CLEANUP_V1.md`
+  - kept `SaveRepository` / `FileSaveRepository` as the real shared repository boundary
+  - kept `CampaignSessionStore` as a typed session helper/store seam, not a universal repository candidate
+  - `GameStateMachine` save-slot operations now use an injectable `save_slot_service_factory` seam instead of open-coded `FileSaveRepository(...)` construction in each method
+  - added focused seam coverage in `tests/shared/test_state_machine_save_slots.py`
+  - default next step: `Campaign Aggregate Candidate Review`
 
 ### P2. Aggregate Invariant Tests V1
 
@@ -1185,6 +1387,22 @@
 - 当前不优先的原因：
   - 需要先完成部分聚合边界判断，否则测试目标容易飘
   - 当前更优先的是继续把运行时 seam 和 contract 收清
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/AGGREGATE_INVARIANT_TESTS_V1.md`
+  - added focused aggregate-candidate coverage in:
+    - `tests/campaign/test_campaign_aggregate_invariants.py`
+  - locked the current high-value invariants around:
+    - cleanup/startup roundtrip preserving multi-track thesis partition
+    - track-local thesis tier writes staying isolated across tracks
+    - thesis verdict follow-up mutating only the target track
+  - explicitly built on the existing invariant packs:
+    - `tests/campaign/test_campaign_orchestration_aggregate_invariants.py`
+    - `tests/campaign/test_task_area_invariants.py`
+    - `tests/campaign/test_thesis_aggregate_invariants.py`
+  - focused validation:
+    - `python -m pytest tests/campaign/test_campaign_aggregate_invariants.py tests/campaign/test_thesis_aggregate_invariants.py tests/campaign/test_campaign_orchestration_aggregate_invariants.py tests/campaign/test_task_area_invariants.py -q`
+  - default next step: `State Host Facade V1`
 
 ### P2. State Host Facade V1
 
@@ -1193,6 +1411,22 @@
 - 当前不优先的原因：
   - 需要先通过 `依赖倒置与编排层收口 v1` 找到最高 ROI 的切口
   - 还不适合全量统一
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/STATE_HOST_FACADE_V1.md`
+  - narrowed `ThesisMetaService` onto a focused `ThesisMetaHost` instead of broad `state: Any`
+  - added thin `CampaignState` thesis facade seam methods for:
+    - submission completion delegation
+    - publication modal delegation
+    - innovation placeholder follow-up delegation
+  - kept `TrackBlockService` and full campaign-wide facade work deferred
+  - added focused stub-host coverage in:
+    - `tests/campaign/test_campaign_dependency_narrowing_services.py`
+  - focused validation:
+    - `python -m pytest tests/campaign/test_campaign_dependency_narrowing_services.py tests/campaign/test_thesis_write_path_service.py tests/campaign/test_thesis_submission_flow_service.py tests/campaign/test_thesis_publication_flow_service.py tests/campaign/test_thesis_judgment_flow_service.py tests/campaign/test_thesis_aggregate_invariants.py tests/campaign/test_campaign_guardrail_flow_contracts.py tests/campaign/test_thesis_innovation_placeholder_flow.py -q`
+  - default next step:
+    - treat the current DDD follow-up sequence as closed for this phase
+    - reopen only on a new hotspot trigger
 
 ### P2. Encounter Contract Expansion
 
