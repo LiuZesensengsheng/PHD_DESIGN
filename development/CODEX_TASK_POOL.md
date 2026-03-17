@@ -373,6 +373,14 @@
   - pygame event handling 不再继续成为默认业务入口
   - 业务判断和 UI 事件翻译职责更清楚
 
+- 当前状态（`2026-03-17`）：
+  - 已完成
+  - 产出：`docs/development/CAMPAIGN_EVENT_INPUT_SPLIT_V1.md`
+  - 已新增 `CampaignEventInputOrchestrator`
+  - mouse/button/keyboard adapter 中剩余 gossip/idea/meeting/choice-toggle intent 已切到 state seam
+  - 已补 focused tests，覆盖 debounce、meeting entry、choice toggle 和 line-bubble 委派
+  - 默认下一步：`Campaign Thesis Submission Flow Cut V1`
+
 ### P1. Campaign Thesis Submission Flow Cut V1
 
 - 目标：

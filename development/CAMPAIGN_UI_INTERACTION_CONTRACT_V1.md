@@ -65,12 +65,16 @@ Stable enough for current UI work:
 
 - `CampaignState.handle_clicked_block(block)`
 - `CampaignState.request_end_turn(staged=False)`
+- `CampaignState.request_gossip_entry()`
+- `CampaignState.request_idea_selection()`
+- `CampaignState.request_choice_toggle()`
 - `CampaignState.request_ending(trigger_reason, extra=...)`
 
 Meaning:
 
 - UI may forward a resolved block click into the host seam
 - UI may request end-turn through one explicit request seam
+- UI may trigger supported campaign-side input intents through explicit request seams
 - UI may request ending transition
 - UI should not manually reproduce the downstream business sequence
 
@@ -248,10 +252,10 @@ This contract is the precondition for the next campaign handoff tasks.
 
 The next highest-value cuts are:
 
-1. `Campaign Event Input Split V1`
-2. `Campaign Thesis Submission Flow Cut V1`
-3. `Campaign Runtime UI Boundary V1`
-4. `Campaign UI Handoff Tests V1`
+1. `Campaign Thesis Submission Flow Cut V1`
+2. `Campaign Runtime UI Boundary V1`
+3. `Campaign UI Handoff Tests V1`
+4. `Campaign UI Handoff Doc V1`
 
 These cuts should turn today's implicit boundaries into explicit ones.
 
