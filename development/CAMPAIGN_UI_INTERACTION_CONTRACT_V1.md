@@ -82,18 +82,21 @@ Compatibility note:
 
 ### Transition Request Surface
 
-Transition payload construction is owned by `TransitionHelper`:
+Stable state-level transition seams now exposed by `CampaignState`:
 
-- `to_deck()`
-- `to_event(block_id)`
-- `to_combat(block_id, encounter_id)`
-- `to_combat_dev(encounter_id)`
-- `to_ending(trigger_reason, extra=...)`
+- `request_deck_view()`
+- `request_event_block(block_id)`
+- `request_combat_block(block_id, encounter_id)`
+- `request_dev_combat(encounter_id)`
+- `request_meeting()`
+- `request_ending(trigger_reason, extra=...)`
 
 Meaning:
 
-- UI may trigger state transitions only through explicit transition helpers or
-  future equivalent application seams
+- UI may trigger state transitions only through explicit state request seams
+- transition payload construction remains owned by `TransitionHelper` and shared
+  contract helpers
+- UI must not call `state.tx.*` directly
 - UI must not write transition payloads directly into `persistent`
 
 ### View / Runtime Presentation Surface
@@ -245,10 +248,10 @@ This contract is the precondition for the next campaign handoff tasks.
 
 The next highest-value cuts are:
 
-1. `Campaign Transition Request Contract V1`
-2. `Campaign Startup Seam Cleanup V1`
-3. `Campaign Event Input Split V1`
-4. `Campaign Thesis Submission Flow Cut V1`
+1. `Campaign Startup Seam Cleanup V1`
+2. `Campaign Event Input Split V1`
+3. `Campaign Thesis Submission Flow Cut V1`
+4. `Campaign Runtime UI Boundary V1`
 
 These cuts should turn today's implicit boundaries into explicit ones.
 

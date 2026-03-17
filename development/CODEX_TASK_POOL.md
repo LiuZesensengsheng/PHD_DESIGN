@@ -320,6 +320,14 @@
   - UI 不再直接散装改 `persistent`
   - transition 数据 shape 可被文档和测试直接说明
 
+- 当前状态（`2026-03-17`）：
+  - 已完成
+  - 产出：`docs/development/CAMPAIGN_TRANSITION_REQUEST_CONTRACT_V1.md`
+  - 已新增 state-level request seams，覆盖 deck/event/combat/dev-combat/meeting/ending
+  - UI/event adapter、meeting prompt、thesis event/combat 路径已切到统一 request seam
+  - 已补 focused tests，覆盖 payload shape、state seam、startup return path 和 UI 委派
+  - 默认下一步：`Campaign Startup Seam Cleanup V1`
+
 ### P1. Campaign Startup Seam Cleanup V1
 
 - 目标：
