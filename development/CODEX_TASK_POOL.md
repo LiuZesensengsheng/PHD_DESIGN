@@ -400,6 +400,14 @@
   - 提交/确认/发表相关 UI 可通过统一入口驱动
   - 该链路的主要状态写入更集中
 
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_THESIS_SUBMISSION_FLOW_CUT_V1.md`
+  - added `ThesisSubmissionFlowService`
+  - `CampaignState` now exposes `check_and_prompt_thesis_submission()` and `request_thesis_submission_for_writing_block(block)`
+  - `ThesisMetaService` and `ThesisSlice` now delegate thesis submission flow through the unified seam
+  - focused regressions cover submission prompt, writing removal, review-chain activation, and publication-flow modal-lock compatibility
+
 ### P1. Campaign Runtime UI Boundary V1
 
 - 目标：

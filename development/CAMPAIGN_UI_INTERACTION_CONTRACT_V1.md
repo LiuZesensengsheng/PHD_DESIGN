@@ -66,8 +66,11 @@ Stable enough for current UI work:
 - `CampaignState.handle_clicked_block(block)`
 - `CampaignState.request_end_turn(staged=False)`
 - `CampaignState.request_gossip_entry()`
+- `CampaignState.request_gossip_entry_debounced(now_ms=...)`
 - `CampaignState.request_idea_selection()`
+- `CampaignState.request_meeting_entry()`
 - `CampaignState.request_choice_toggle()`
+- `CampaignState.request_line_bubble_press(ui_element)`
 - `CampaignState.request_ending(trigger_reason, extra=...)`
 
 Meaning:
@@ -83,6 +86,20 @@ Compatibility note:
 - `CampaignState.end_turn()` still exists in V1 as a compatibility wrapper for
   actual turn advancement
 - new UI-facing code should prefer `request_end_turn(...)`
+
+### Thesis Submission Seams
+
+Stable enough for thesis-writing related UI/runtime work:
+
+- `CampaignState.check_and_prompt_thesis_submission()`
+- `CampaignState.request_thesis_submission_for_writing_block(block)`
+
+Meaning:
+
+- thesis-writing interactions should go through explicit host seams
+- UI/runtime code should not reproduce writing-block completion checks locally
+- writing-block removal, review-chain activation, and submission-history writes
+  remain orchestration-owned
 
 ### Transition Request Surface
 
@@ -150,7 +167,7 @@ The following areas should own campaign process logic:
 - modal dispatch and input lock coordination
 - turn advancement sequencing
 - block click routing
-- thesis submission / publication orchestration
+- thesis submission / judgment / publication orchestration
 
 UI may call into these seams.
 
@@ -252,10 +269,10 @@ This contract is the precondition for the next campaign handoff tasks.
 
 The next highest-value cuts are:
 
-1. `Campaign Thesis Submission Flow Cut V1`
-2. `Campaign Runtime UI Boundary V1`
-3. `Campaign UI Handoff Tests V1`
-4. `Campaign UI Handoff Doc V1`
+1. `Campaign Runtime UI Boundary V1`
+2. `Campaign UI Handoff Tests V1`
+3. `Campaign UI Handoff Doc V1`
+4. `Campaign Hotspot Defer List V1`
 
 These cuts should turn today's implicit boundaries into explicit ones.
 
