@@ -812,6 +812,14 @@
 
 ### P2. Thesis Aggregate Boundary Review
 
+- Status (`2026-03-17`):
+  - partial progress via `Thesis Write-Path Consolidation V1`
+  - added `contexts/campaign/services/thesis_write_path_service.py`
+  - `ThesisMetaService` now delegates thesis tier/meta/publication/submission-history writes to the shared write-path seam
+  - `ThesisSubmissionFlowService` now records submitted rounds through the shared write seam instead of mutating meta inline
+  - added focused coverage in `tests/campaign/test_thesis_write_path_service.py`
+  - default next step: shrink remaining thesis block-mutation writes around round activation/removal into a similar seam
+
 - 目标：
   - 明确 thesis 线当前谁是事实聚合根、哪些状态修改必须走统一入口，而不是继续散落在 `CampaignState`、service 和临时字典之间
 - 主要输入：
