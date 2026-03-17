@@ -716,7 +716,8 @@
   - active white fallback 已基本收缩到 `swap_with_paper`
   - `2026-03-17` 更新：
     - `Queue Red Complex Draw Branch Cutover V1` 已完成
-    - 默认下一步切 `Queue Final Active Fallback Boundary Pass V1`
+    - `Queue Final Active Fallback Boundary Pass V1` 已完成
+    - active fallback allowlist 已收口到仅剩 `thesis_swap_with_paper`
 - 总边界：
   - 不重写整个 combat runtime
   - 不做 UI 节点化
@@ -833,6 +834,17 @@
 - 目标：
   - 在上面几刀之后，重新扫描 active `red/white` effect 类型
   - 把“仍然允许 fallback 的最后列表”固化成文档和 focused tests
+- Status (`2026-03-17`):
+  - complete
+  - widened planned-path support for:
+    - multi-target simple `status`
+    - `red_scribble_finisher`
+  - added executable active-card boundary scan in
+    `tests/combat/test_active_queue_boundaries.py`
+  - final active fallback allowlist is now:
+    - `thesis_swap_with_paper`
+  - future queue work should reopen per named residual effect, not as another
+    broad queue-architecture phase
 - 完成标准：
   - active fallback 面缩到极小且可枚举
   - 后续若继续推进，就不再叫“队列化主工程”，而是逐 effect 微收口
