@@ -818,7 +818,74 @@
   - `ThesisMetaService` now delegates thesis tier/meta/publication/submission-history writes to the shared write-path seam
   - `ThesisSubmissionFlowService` now records submitted rounds through the shared write seam instead of mutating meta inline
   - added focused coverage in `tests/campaign/test_thesis_write_path_service.py`
-  - default next step: shrink remaining thesis block-mutation writes around round activation/removal into a similar seam
+  - completed `Thesis Block Mutation Consolidation V1`
+  - added `contexts/campaign/services/thesis_block_mutation_service.py`
+  - `ThesisSubmissionFlowService`, `ThesisJudgmentFlowService`, and `ThesisRoundService` now route thesis block-list mutations through the shared block seam
+  - added focused coverage in `tests/campaign/test_thesis_block_mutation_service.py`
+  - default next step: `Thesis Verdict Follow-Up Contract V1`
+
+- Recommended serial cuts:
+  1. `Thesis Block Mutation Consolidation V1`
+  2. `Thesis Verdict Follow-Up Contract V1`
+  3. `Thesis Aggregate Invariant Tests V1`
+  4. `Thesis State Host Narrowing V1`
+
+#### P2. Thesis Block Mutation Consolidation V1
+
+- Goal:
+  - move thesis block-list mutation ownership out of `submission/judgment` flow services
+  - centralize:
+    - review-chain activation for submitted round
+    - writing-block removal
+    - round-block removal after verdict
+    - next dormant round activation
+- Main inputs:
+  - `contexts/campaign/services/thesis_submission_flow_service.py`
+  - `contexts/campaign/services/thesis_judgment_flow_service.py`
+  - `contexts/campaign/services/thesis_round_service.py`
+  - `contexts/campaign/state.py`
+- Expected output:
+  - one dedicated thesis block mutation seam/service
+  - focused tests for thesis block activation/removal behavior
+- Status (`2026-03-17`):
+  - complete
+
+#### P2. Thesis Verdict Follow-Up Contract V1
+
+- Goal:
+  - make thesis verdict follow-up order explicit after the block-mutation seam lands
+  - protect ordering across:
+    - verdict record
+    - tag writes
+    - block mutation
+    - next-round activation
+    - publication/combat follow-up
+- Main inputs:
+  - `contexts/campaign/services/thesis_judgment_flow_service.py`
+  - `tests/campaign/test_thesis_judgment_flow_service.py`
+- Expected output:
+  - thinner, better-ordered verdict application mainline
+  - focused regression around reject/accept/major/minor sequencing
+
+#### P2. Thesis Aggregate Invariant Tests V1
+
+- Goal:
+  - lock the current thesis aggregate boundaries with executable contract tests
+- Main inputs:
+  - `tests/campaign/test_thesis_*`
+  - `tests/campaign/test_campaign_ui_handoff_contracts.py`
+- Expected output:
+  - focused invariants covering tier/runtime/meta/block consistency
+
+#### P2. Thesis State Host Narrowing V1
+
+- Goal:
+  - reduce thesis services' reliance on broad `CampaignState` access
+- Main inputs:
+  - `contexts/campaign/services/campaign_service_protocols.py`
+  - `contexts/campaign/services/thesis_*.py`
+- Expected output:
+  - narrower host protocols around the matured thesis seams
 
 - 目标：
   - 明确 thesis 线当前谁是事实聚合根、哪些状态修改必须走统一入口，而不是继续散落在 `CampaignState`、service 和临时字典之间
