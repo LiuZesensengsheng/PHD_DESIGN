@@ -220,6 +220,11 @@
   - 能明确回答“UI 层可以依赖什么，不可以依赖什么”
   - 后续任务可围绕这份契约继续收口
 
+- 当前状态（`2026-03-17`）：
+  - 已完成
+  - 产出：`docs/development/CAMPAIGN_UI_INTERACTION_CONTRACT_V1.md`
+  - 默认下一步：`Campaign Modal Lock Contract V1`
+
 ### P1. Campaign Modal Lock Contract V1
 
 - 目标：
@@ -240,6 +245,12 @@
   - UI 协作者不需要猜 modal 锁语义
   - 底层点击/按键不会再绕过 blocking modal
 
+- 当前状态（`2026-03-17`）：
+  - 已完成
+  - 产出：`docs/development/CAMPAIGN_MODAL_LOCK_CONTRACT_V1.md`
+  - 已补 focused tests，覆盖 owner 语义、冲突拒绝和 reward/meeting prompt defer
+  - 默认下一步：`Campaign Block Click Orchestrator V1`
+
 ### P1. Campaign Block Click Orchestrator V1
 
 - 目标：
@@ -258,6 +269,12 @@
 - 完成标准：
   - block 点击主路径有单一入口
   - combat/event/non-combat 分支顺序更显式、更可测
+
+- 当前状态（`2026-03-17`）：
+  - 已完成
+  - 产出：`docs/development/CAMPAIGN_BLOCK_CLICK_ORCHESTRATOR_V1.md`
+  - 已补 focused tests，覆盖分支顺序、combat/event wiring 和事件层委派
+  - 默认下一步：`Campaign End Turn Orchestrator V1`
 
 ### P1. Campaign End Turn Orchestrator V1
 
