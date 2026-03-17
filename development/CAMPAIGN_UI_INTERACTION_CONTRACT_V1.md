@@ -248,10 +248,10 @@ This contract is the precondition for the next campaign handoff tasks.
 
 The next highest-value cuts are:
 
-1. `Campaign Startup Seam Cleanup V1`
-2. `Campaign Event Input Split V1`
-3. `Campaign Thesis Submission Flow Cut V1`
-4. `Campaign Runtime UI Boundary V1`
+1. `Campaign Event Input Split V1`
+2. `Campaign Thesis Submission Flow Cut V1`
+3. `Campaign Runtime UI Boundary V1`
+4. `Campaign UI Handoff Tests V1`
 
 These cuts should turn today's implicit boundaries into explicit ones.
 

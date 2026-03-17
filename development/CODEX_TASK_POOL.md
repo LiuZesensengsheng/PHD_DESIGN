@@ -346,6 +346,14 @@
 - 完成标准：
   - UI 开发不需要知道 hydration/effects 细节才能安全改启动表现
 
+- 当前状态（`2026-03-17`）：
+  - 已完成
+  - 产出：`docs/development/CAMPAIGN_STARTUP_SEAM_CLEANUP_V1.md`
+  - 已新增 `CampaignStartupOrchestrator`
+  - `CampaignState.startup()` 已收成 lifecycle entrypoint + orchestrator mainline
+  - 已补 focused tests，覆盖 startup 顺序和 startup-flag failure reset
+  - 默认下一步：`Campaign Event Input Split V1`
+
 ### P1. Campaign Event Input Split V1
 
 - 目标：
