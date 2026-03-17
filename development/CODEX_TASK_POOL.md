@@ -426,6 +426,14 @@
 - 完成标准：
   - 新 UI 开发者知道哪些逻辑该进 `ui_runtime/`，哪些不该进
 
+- Status (`2026-03-17`):
+  - complete
+  - output: `docs/development/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
+  - added `tests/campaign/test_campaign_runtime_ui_boundary_contract.py`
+  - documented `CampaignView` runtime hooks and the `ui_runtime` ownership line
+  - protected local runtime-widget event/update/render delegation and phone-widget-local interaction
+  - default next step: `Campaign UI Handoff Tests V1`
+
 ### P1. Campaign UI Handoff Tests V1
 
 - 目标：

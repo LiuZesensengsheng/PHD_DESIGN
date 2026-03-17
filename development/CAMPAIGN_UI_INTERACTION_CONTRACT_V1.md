@@ -241,6 +241,10 @@ Runtime nodes/widgets are allowed to own:
 - local animation timing
 - local hit-testing
 
+The current V1 boundary for this area is documented in:
+
+- `docs/development/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
+
 Runtime nodes/widgets are not allowed to own:
 
 - route resolution policy
@@ -269,10 +273,9 @@ This contract is the precondition for the next campaign handoff tasks.
 
 The next highest-value cuts are:
 
-1. `Campaign Runtime UI Boundary V1`
-2. `Campaign UI Handoff Tests V1`
-3. `Campaign UI Handoff Doc V1`
-4. `Campaign Hotspot Defer List V1`
+1. `Campaign UI Handoff Tests V1`
+2. `Campaign UI Handoff Doc V1`
+3. `Campaign Hotspot Defer List V1`
 
 These cuts should turn today's implicit boundaries into explicit ones.
 
