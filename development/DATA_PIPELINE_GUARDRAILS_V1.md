@@ -74,7 +74,7 @@ Required guardrails:
 - runtime encounter enemies must reference known species, traits, and positive levels
 - runtime encounter arena definitions must reference known arena templates and arena traits
 - runtime encounter species must only pull skills that resolve from `skills.json`
-- runtime `task_host` definitions must satisfy roster/reference rules, including nested `publish_task` follow-up tasks
+- runtime `chore_host` definitions must satisfy roster/reference rules, while legacy `task_host` / `publish_task` payloads remain valid compatibility aliases
 - questline `START_COMBAT.encounter_id` must resolve to an encounter loaded from active `encounters_*.json`
 
 ### Level B: Editor / Import Pipelines
