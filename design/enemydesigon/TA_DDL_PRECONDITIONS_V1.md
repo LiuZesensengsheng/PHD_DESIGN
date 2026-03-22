@@ -37,7 +37,7 @@
 
 当前已经有：
 
-- `CombatTaskHost`
+- `CombatChoreHost`
 - 最多 3 个琐事槽
 - 共享倒计时
 - 琐事完成后重置共享倒计时
@@ -53,7 +53,7 @@
 
 - `transform_enemy`
 - `apply_enemy_buff`
-- `publish_task`
+- `publish_chore`
 
 这意味着：
 
@@ -90,9 +90,9 @@ DDL 精英设计里一个核心点是：
 
 推荐最小做法：
 
-- 给 `CombatTaskHost` 增加只读查询：
-  - `active_task_count()`
-  - `failed_task_count()`
+- 给 `CombatChoreHost` 增加只读查询：
+  - `active_chore_count()`
+  - `failed_chore_count()`
 - 让敌人 intent 条件或 damage 计算能够读取这些统计
 
 ### 2. 缺少“倒计时固定压成 1”的 encounter 级覆写
@@ -121,7 +121,7 @@ DDL 精英的设计不是单一琐事，而是：
 - 持续加压
 - 琐事结束后还会继续来
 
-当前 `publish_task` 已经能链式发布，但我们还没有建立：
+当前 `publish_chore` 已经能链式发布，但我们还没有建立：
 
 - “每回合自动补琐事”
 - “维持场上琐事密度”
@@ -142,11 +142,11 @@ DDL 精英的设计不是单一琐事，而是：
 
 DDL 精英要比较像设计稿，最好支持：
 
-- 基础伤害 + (`active_task_count * N`)
+- 基础伤害 + (`active_chore_count * N`)
 
 如果没有这层，就只能退化成：
 
-- active_task_count 达到某阈值后切更强 intent
+- active_chore_count 达到某阈值后切更强 intent
 
 这两者都能做，但体验不一样。
 
@@ -181,7 +181,7 @@ DDL 精英要比较像设计稿，最好支持：
 
 如果下一步真做 DDL 精英，我建议它的第一版只依赖这 4 件事：
 
-1. `CombatTaskHost` 可配置为共享倒计时固定 1
+1. `CombatChoreHost` 可配置为共享倒计时固定 1
 2. DDL 精英能每回合或固定阶段发布一个预定义琐事
 3. DDL 精英的高伤 intent 能按未完成琐事数分档
 4. 琐事失败仍然能通过现有 resolution actions 继续加压
@@ -198,9 +198,9 @@ DDL 精英要比较像设计稿，最好支持：
 
 如果后面要真正实现 DDL 精英，建议顺序是：
 
-1. 给 `CombatTaskHost` 增加琐事数量查询接口
-2. 给 TA encounter/task host 增加 `shared_max_countdown = 1` 配置能力
-3. 给 DDL 精英做“按 active task 数分档”的 intent
+1. 给 `CombatChoreHost` 增加琐事数量查询接口
+2. 给 TA encounter/chore host 增加 `shared_max_countdown = 1` 配置能力
+3. 给 DDL 精英做“按 active chore 数分档”的 intent
 4. 给 encounter 配一条固定琐事发布链
 5. 最后再补更复杂的琐事池和演出
 

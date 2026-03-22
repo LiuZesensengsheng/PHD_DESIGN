@@ -56,7 +56,7 @@
 
 最小琐事实例建议至少有这些字段：
 
-- `task_id`
+- `chore_id`
 - `title`
 - `kind`
 - `target_enemy_id`
@@ -83,7 +83,7 @@
 
 建议字段：
 
-- `tasks`
+- `chores`
 - `max_slots`
 - `shared_countdown`
 - `shared_max_countdown`
@@ -103,15 +103,15 @@
 
 琐事宿主第一版只需要支持 4 个动作：
 
-1. `publish_task(task)`
-2. `complete_task(task_id)`
+1. `publish_chore(chore)`
+2. `complete_chore(chore_id)`
 3. `tick_countdown()`
 4. `collect_resolution_actions()`
 
 说明：
 
-- `publish_task`：在迟到学生登场或某个 trigger 满足时发布琐事
-- `complete_task`：当目标敌人死亡或被视为处理完时完成琐事
+- `publish_chore`：在迟到学生登场或某个 trigger 满足时发布琐事
+- `complete_chore`：当目标敌人死亡或被视为处理完时完成琐事
 - `tick_countdown`：按固定时机把共享倒计时 -1
 - `collect_resolution_actions`：把成功/失败要触发的动作交给上层执行，不由琐事宿主直接改敌人列表
 
@@ -137,7 +137,7 @@
 
 新增类似：
 
-- `contexts/combat/domain/task_host.py`
+- `contexts/combat/domain/chore_host.py`
 
 并在：
 
@@ -145,7 +145,7 @@
 
 里给 `CombatState` 增加：
 
-- `task_host: Optional[CombatTaskHost] = None`
+- `chore_host: Optional[CombatChoreHost] = None`
 
 ### 为什么不建议挂在 Enemy 上
 
@@ -167,10 +167,10 @@
    - 倒计时设为 3
 
 2. 每个敌方回合开始
-   - `task_host.tick_countdown()`
+   - `chore_host.tick_countdown()`
 
 3. 如果迟到学生在倒计时前被击破/处理
-   - `complete_task(task_id)`
+   - `complete_chore(chore_id)`
    - 本次不触发失败分支
 
 4. 如果倒计时归零且琐事未完成
@@ -244,7 +244,7 @@
 
 ### 第一步
 
-新增最小 `CombatTaskHost`
+新增最小 `CombatChoreHost`
 
 只支持：
 
@@ -255,7 +255,7 @@
 
 ### 第二步
 
-在 `CombatState` 挂上 `task_host`
+在 `CombatState` 挂上 `chore_host`
 
 并在战斗 turn 时机里加：
 
@@ -286,7 +286,7 @@
 
 如果下一步要真正开始实现第三批点名主题敌人，推荐顺序是：
 
-1. 先做 `CombatTaskHost` 最小版
+1. 先做 `CombatChoreHost` 最小版
 2. 只服务 `迟到学生 / 代到学生`
 3. 验证“deadline -> failure -> enemy transform”这条链
 4. 之后再决定是否扩成 TA 通用琐事系统
