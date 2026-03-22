@@ -59,7 +59,7 @@
   - `contexts/combat/domain/services/play_card_transaction.py`
   - `contexts/combat/domain/effects/executor.py`
   - `contexts/combat/mvc/model.py`
-  - `contexts/combat/domain/task_host.py`
+  - `contexts/combat/domain/chore_host.py`
 - 预期输出：
   - 一版最小动作合同与队列骨架
   - 一组 focused tests，覆盖 `push_front` / `push_back` / `drain`
@@ -73,25 +73,25 @@
   - 至少几类基础动作可通过执行器稳定落状态
   - 后续任务可以在这套骨架上继续串行推进
 
-### P1. Task Resolution Orchestration Cutover V1
+### P1. Chore Resolution Orchestration Cutover V1
 
 - 目标：
-  - 先把 `CombatTaskHost` 的 resolution actions 并入统一动作队列
-  - 消除 `CombatModel._apply_task_resolution_actions()` 里的大分支解释器
+  - 先把 `CombatChoreHost` 的 resolution actions 并入统一动作队列
+  - 消除 `CombatModel._apply_chore_resolution_actions()` 里的大分支解释器
 - 主要输入：
-  - `contexts/combat/domain/task_host.py`
+  - `contexts/combat/domain/chore_host.py`
   - `contexts/combat/mvc/model.py`
   - `contexts/combat/mvc/factory.py`
 - 预期输出：
-  - `TaskResolutionOrchestrator`
-  - `CombatTaskResolutionAction -> CombatAction` 的映射层
+  - `ChoreResolutionOrchestrator`
+  - `CombatChoreResolutionAction -> CombatAction` 的映射层
   - 任务宿主倒计时 / 发布后续任务 / 变身 / 敌人 buff 的 focused tests
 - 边界：
   - 不扩写新的 task host 抽象运动
   - 不把 card play 主路径一起大改
 - 完成标准：
-  - task resolution 主路径切到新队列
-  - 旧 `_apply_task_resolution_actions()` 主解释逻辑删除或降为薄适配层
+  - chore resolution 主路径切到新队列
+  - 旧 `_apply_chore_resolution_actions()` 主解释逻辑删除或降为薄适配层
   - 任务链式发布和倒计时回归不退化
 
 ### P1. Card Play Orchestrator Entry Cutover V1
@@ -160,7 +160,7 @@
 - 目标：
   - 显式整理 enemy turn start / end、task tick、turn checkpoint 的流程点
 - 当前不优先的原因：
-  - 先把 task resolution 和 card play 两条最贵主路径切稳
+  - 先把 chore resolution 和 card play 两条最贵主路径切稳
   - 这一块适合在前几步稳定后继续收口
 
 ### P1. Campaign UI Handoff Orchestration（按时间优先级串行）
@@ -547,12 +547,12 @@
 - 当前不优先的原因：
   - 机制建设优先级更高
 
-### P2. Combat Task Host V2（在 task resolution cutover 后再继续）
+### P2. Combat Chore Host V2（在 chore resolution cutover 后再继续）
 
 - 目标：
-  - 在现有 shared task host、链式 `publish_task`、DDL 压力表达已经可跑的基础上，把任务宿主沉淀成更稳定的战斗中层能力
+  - 在现有 shared chore host、链式 `publish_chore`、DDL 压力表达已经可跑的基础上，把琐事宿主沉淀成更稳定的战斗中层能力
 - 当前已落地基线：
-  - `CombatTaskHost` 已挂到 `CombatState`
+  - `CombatChoreHost` 已挂到 `CombatState`
   - 点名主题共享宿主、链式后续任务、DDL 一回合倒计时与失败分档表达已存在
 - 当前不优先的原因：
   - 当前更高 ROI 的切口是先把 resolution path 并入统一编排层

@@ -8,8 +8,8 @@
 
 术语说明：
 
-- 本文在 TA 线设计语义上，把玩家不断被迫处理的 `task` 统一称为“琐事”。
-- 当前工程代码已经以 `chore` / `chore_host` / `publish_chore` 为主；文中出现 `task` / `task_host` / `publish_task` 时应视为兼容别名。
+- 本文在 TA 线设计语义上，把玩家不断被迫处理的战斗内 `chore` 统一称为“琐事”。
+- 当前工程代码统一使用 `chore` / `chore_host` / `publish_chore`；文中若出现旧的 `task` 说法，应视为历史命名，而不是当前实现接口。
 
 本轮不直接实现 DDL 精英，也不顺手把 TA 全琐事系统做完。目标是把它拆成：
 

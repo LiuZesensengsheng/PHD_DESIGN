@@ -136,7 +136,7 @@
 
 ### ??
 
-- `python -m pytest tests/combat/test_task_host.py -q`
+- `python -m pytest tests/combat/test_chore_host.py -q`
 - `python -m pytest tests/combat/test_ta_runtime_encounters.py -q`
 - `python -m pytest tests/scripts/test_generate_ta_enemy_content.py -q`
 - `python -m pytest -q`
