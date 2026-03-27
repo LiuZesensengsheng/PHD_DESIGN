@@ -12,7 +12,6 @@
 - `Player.start_turn()`
 - `Player.dispatch_turn_start_reactions(...)`
 - `Player.dispatch_combat_event_reactions(...)`
-- `Player._dispatch_combat_event_reactions(...)`
 - `Player._run_legacy_turn_start_reactions(...)`
 - `Player._run_legacy_combat_event_reactions(...)`
 
