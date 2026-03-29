@@ -36,6 +36,13 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Run targeted pytest coverage:
   - `python -m pytest <path-or-test> -q`
 
+### Combat Mainline Gate
+
+- Run the structural combat compat-zero precheck:
+  - `python scripts/check_combat_compat_zero.py`
+- Run the combat mainline allowlist gate:
+  - `python -m pytest tests/combat/test_combat_mainline_allowlist_v1.py -q`
+
 ### Snapshot / Save Debugging
 
 - Compare two machine snapshots:

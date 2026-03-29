@@ -31,9 +31,16 @@
   "name_en": "Class Rep",
   "description_zh": "回合开始获得3点格挡。",
   "description_en": "At turn start, gain 3 Block.",
-  "hook": "on_turn_start"  // 可选：提示触发窗口
+  "windows": ["ENEMY_START"]
 }
 ```
+
+说明：
+- `windows` 是正式触发声明，当前推荐只使用：
+  - `COMBAT_START_REACTIONS`
+  - `ENEMY_START`
+  - `ENEMY_END`
+- `hook` 仅保留给旧蓝图导入兼容，不再建议写入新 JSON。
 
 ### 1.2 Intent
 ```json
@@ -67,7 +74,7 @@
 - 意图行列：`intent_id,intent_name_zh,type,weight,cooldown,conditions,effects_flat,intent_notes`
 
 扁平写法：
-- `passives_flat`: `课代表:on_turn_start=block3|困倦:on_turn_start=skip25%`
+- `passives_flat`: `课代表:ENEMY_START=block3|困倦:ENEMY_START=skip25%`
 - `effects_flat`: `damage(7)；status(Vulnerable,1->player)`（多效果用全角分号分隔）
 
 ---
@@ -91,7 +98,7 @@
   "role_tags": ["priority_target"],
   "max_hp": 80,
   "passives": [
-    { "id": "signin_only", "name_zh": "只为签到", "description_zh": "点名回合开始：签到进度+1（至多3）。", "hook": "on_turn_start" }
+    { "id": "signin_only", "name_zh": "只为签到", "description_zh": "点名回合开始：签到进度+1（至多3）。", "windows": ["ENEMY_START"] }
   ],
   "intents": [
     { "id": "scan_qr", "name_zh": "扫码签到", "type": "Power", "weight": 40, "cooldown": 0,
