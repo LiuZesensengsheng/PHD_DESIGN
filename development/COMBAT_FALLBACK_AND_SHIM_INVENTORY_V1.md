@@ -2,49 +2,20 @@
 
 ## Purpose
 
-Track the remaining localized fallback and compatibility surfaces after the Phase A-D mainline cleanup.
+Track the remaining queue-external fallback surfaces after the compat-zero cleanup.
 
-This document is not a list of approved regressions. It is a migration inventory for seams that still exist, but no longer own combat ordering semantics.
+This document is no longer a list of allowed compatibility shims. The localized Player and `EffectExecutor` shims were physically deleted on `2026-03-30`.
 
-## Local Compatibility Shims
+## Cleared Local Compatibility Shims
 
-### Player Failure Stubs
-
-File:
-- [player.py](/D:/PHD_SIMULATER/contexts/combat/domain/player.py)
-
-Items:
-- `_run_legacy_turn_start_reactions(...)`
-- `_run_legacy_combat_event_reactions(...)`
-
-Current status:
-- allowed to exist locally
-- zero call-sites required
-- both raise immediately if reached
-
-Exit condition:
-- delete both methods after confirming no tooling/tests still rely on their presence
-
-### EffectExecutor Old-Name Wrappers
-
-File:
-- [executor.py](/D:/PHD_SIMULATER/contexts/combat/domain/effects/executor.py)
-
-Items:
-- `execute_legacy_card_fallback(...)`
-- `execute_card_effects(...)`
-- `execute_legacy_effect_data_fallback(...)`
-- `execute_effect_data(...)`
-- `execute_legacy_effect_fallback(...)`
-- `execute_effect(...)`
-
-Current status:
-- allowed to exist only inside `EffectExecutor`
-- zero Python call-sites required outside the wrapper class itself
-- active mainline must use `execute_card_fallback(...)`, `execute_effect_payload(...)`, `execute_effect_once(...)`
-
-Exit condition:
-- delete wrappers after one full expansion cycle stays green with zero reintroduction pressure
+- `Player._run_legacy_turn_start_reactions(...)`: deleted
+- `Player._run_legacy_combat_event_reactions(...)`: deleted
+- `EffectExecutor.execute_legacy_card_fallback(...)`: deleted
+- `EffectExecutor.execute_card_effects(...)`: deleted
+- `EffectExecutor.execute_legacy_effect_data_fallback(...)`: deleted
+- `EffectExecutor.execute_effect_data(...)`: deleted
+- `EffectExecutor.execute_legacy_effect_fallback(...)`: deleted
+- `EffectExecutor.execute_effect(...)`: deleted
 
 ## Queue-External Fallback Surfaces
 
@@ -97,4 +68,4 @@ Migration question:
 
 ## Next Default Use
 
-When we plan the next combat runtime cleanup pass, use this document as the starting migration list instead of rediscovering seams by repo search.
+When we plan the next combat runtime cleanup pass, start from this list instead of rediscovering queue-external fallback seams by repo search.
