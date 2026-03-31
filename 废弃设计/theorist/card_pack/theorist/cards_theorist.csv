@@ -1,4 +1,4 @@
-﻿card_id,name_key,description_key,color,type,rarity,cost,target,exhausts_on_play,ethereal,unplayable,tags_json,schema_version,innate
+card_id,name_key,description_key,color,type,rarity,cost,target,exhausts_on_play,ethereal,unplayable,tags_json,schema_version,innate
 theorist_sword_boomerang,随机过程,对随机敌人造成 3 点伤害 3 次。,COLORLESS,Attack,Common,1,,,,,,v1
 theorist_sword_boomerang_upgraded,随机过程+,对随机敌人造成 3 点伤害 4 次。,COLORLESS,Attack,Common,1,,,,,,v1
 theorist_bash,高阶微积分,对敌人造成 8 点伤害。施加 2 层破防。,COLORLESS,Attack,Common,2,,,,,,v1
