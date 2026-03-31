@@ -1,4 +1,4 @@
-﻿card_id,seq,effect_type,target,value,count,frontier_bonus,cap,temp_cost_delta,card_id_to_create,only_attack,base,per_scribble,params_json
+card_id,seq,effect_type,target,value,count,frontier_bonus,cap,temp_cost_delta,card_id_to_create,only_attack,base,per_scribble,params_json
 theorist_sword_boomerang,1,damage,random_enemy,3,,,,,,,,,"{""hit_count"":3}"
 theorist_sword_boomerang,2,consume_rigor,player,,,,,,,,,,
 theorist_sword_boomerang_upgraded,1,damage,random_enemy,3,,,,,,,,,"{""hit_count"":4}"

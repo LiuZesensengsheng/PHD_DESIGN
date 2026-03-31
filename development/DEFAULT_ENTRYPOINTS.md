@@ -36,6 +36,15 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Run targeted pytest coverage:
   - `python -m pytest <path-or-test> -q`
 
+### Architecture / Encoding Guardrails
+
+- Validate architecture boundaries:
+  - `python scripts/validate_architecture.py`
+- Run static contract and naming guards:
+  - `python -m pytest tests/test_contract_police.py tests/shared/test_naming_and_contract_guards.py -q`
+- Run text encoding and line-ending guards:
+  - `python -m pytest tests/shared/test_text_encoding_guards.py -q`
+
 ### Combat Mainline Gate
 
 - Run the structural combat compat-zero precheck:
