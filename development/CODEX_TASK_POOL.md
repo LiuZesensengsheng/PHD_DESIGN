@@ -713,11 +713,14 @@
   5. `Queue Final Active Fallback Boundary Pass V1`
 - 当前状态（`2026-03-16`）：
   - 前 3 个白色 residual cutover 已完成
-  - active white fallback 已基本收缩到 `swap_with_paper`
+  - active white fallback 曾基本收缩到 `swap_with_paper`
   - `2026-03-17` 更新：
     - `Queue Red Complex Draw Branch Cutover V1` 已完成
     - `Queue Final Active Fallback Boundary Pass V1` 已完成
     - active fallback allowlist 已收口到仅剩 `thesis_swap_with_paper`
+  - `2026-03-31` 更新：
+    - `swap_with_paper` 已进入 planned path
+    - active `red/white` fallback 边界扫描已收口到 `0`
 - 总边界：
   - 不重写整个 combat runtime
   - 不做 UI 节点化
@@ -841,8 +844,9 @@
     - `red_scribble_finisher`
   - added executable active-card boundary scan in
     `tests/combat/test_active_queue_boundaries.py`
-  - final active fallback allowlist is now:
-    - `thesis_swap_with_paper`
+  - `2026-03-31` update:
+    - `swap_with_paper` moved onto the planned path
+    - final active fallback allowlist is now empty
   - future queue work should reopen per named residual effect, not as another
     broad queue-architecture phase
 - 完成标准：
