@@ -35,6 +35,20 @@ This document is no longer a list of allowed compatibility shims. The localized 
   - factory, effect registry, planner, action executor, and `CombatState` now all recognize them through minimal state-carrier semantics
   - current scope is intentionally narrow: these effects can now resolve through the mainline and persist state, but their richer trigger semantics are still future work
 
+## Active Pack Boundary
+
+- As of `2026-03-31`, the active `red/white` runtime card scan in
+  [test_active_queue_boundaries.py](/D:/PHD_SIMULATER/tests/combat/test_active_queue_boundaries.py)
+  expects the explicit fallback allowlist to stay at `0`.
+- As of `2026-04-01`, the wrap-up gate rerun kept that boundary green together with:
+  - `scripts/check_combat_compat_zero.py`
+  - `tests/combat/test_combat_mainline_allowlist_v1.py`
+  - `tests/combat`
+  - `tests/simulation`
+- This does **not** mean the runtime has no fallback code paths anywhere.
+- It means the checked-in active `red/white` card packs no longer require a named
+  active-effect fallback exception.
+
 ## Queue-External Fallback Surfaces
 
 These are still real runtime seams, but they are no longer compatibility-owned. They use the neutral fallback API and remain valid until we explicitly queue them or decide to keep them.
