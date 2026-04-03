@@ -33,6 +33,9 @@
 - New enemy passives must declare `windows`; checked-in enemy JSON must not use `hook`.
 - Card-play and top-of-draw mainline must stay queue-only.
 - `reposition` must use an explicit enemy target in mainline; do not silently infer the pointer target when input is missing.
+- Enemy-turn helper paths must reuse the phase-machine mainline; do not keep local log-and-continue loops for enemy action steps.
+- Enemy action step callback failures must stop the sequence instead of silently continuing to later steps.
+- Intent selection must surface an empty cooldown/condition-filtered pool as `None` instead of choosing from filtered-out candidates.
 - New combat effect families must either:
   - plan into queue actions
   - return `[]` when they are intentionally a no-op under current conditions

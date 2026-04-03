@@ -37,6 +37,15 @@ This document is no longer a list of allowed compatibility shims. The localized 
 - Reposition target fallback removal:
   - as of `2026-04-03`, `reposition` no longer infers the pointer target when card play does not provide an explicit enemy target
   - queue planning for `reposition` now requires an explicit `target_id`
+- `JuggernautPower` damage commit fallback removal:
+  - as of `2026-04-03`, `JuggernautPower` no longer falls back to `enemy.take_damage(...)` when `DamageService.apply_damage_to_enemy_and_commit(...)` fails
+  - commit failures now stay visible as an explicit runtime error path instead of silently switching damage semantics
+- Enemy-turn step fallback removal:
+  - as of `2026-04-03`, `CombatModel.enemy_turn()` no longer keeps a local log-and-continue loop for enemy action steps
+  - enemy-turn aliases now reuse the phase-machine mainline, and step callback failures stop the sequence instead of continuing to later steps
+- `DefaultIntentSelector` filtered-pool fallback removal:
+  - as of `2026-04-03`, it returns `None` when cooldown/condition filtering leaves no weighted candidate
+  - it no longer chooses from filtered-out candidates in that case
 - Design-v2 storage effect families:
   - as of `2026-03-31`, `add_steadfast_token` and `add_paradigm` are no longer unknown content-only effect types
   - factory, effect registry, planner, action executor, and `CombatState` now all recognize them through minimal state-carrier semantics
@@ -60,6 +69,8 @@ This document is no longer a list of allowed compatibility shims. The localized 
 - `ActionExecutor._resolve_top_card_effects(...)` is queue-only for effect resolution.
 - Planner-negative effects in combat mainline are now explicit errors, not silent alternate execution paths.
 - `reposition` is now an explicit-target mechanic, not a pointer-target fallback mechanic.
+- Enemy-turn aliases now reuse the phase-machine mainline, and enemy action step failures are explicit instead of log-and-continue.
+- `DefaultIntentSelector` now surfaces an empty filtered pool as `None` instead of choosing from filtered-out candidates.
 - New combat effect families must either:
   - gain planner/action support
   - intentionally plan as `[]` when their condition does nothing
