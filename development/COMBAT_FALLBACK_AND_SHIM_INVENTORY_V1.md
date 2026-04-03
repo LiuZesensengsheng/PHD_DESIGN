@@ -40,6 +40,12 @@ This document is no longer a list of allowed compatibility shims. The localized 
 - `JuggernautPower` damage commit fallback removal:
   - as of `2026-04-03`, `JuggernautPower` no longer falls back to `enemy.take_damage(...)` when `DamageService.apply_damage_to_enemy_and_commit(...)` fails
   - commit failures now stay visible as an explicit runtime error path instead of silently switching damage semantics
+- `DamageService` commit fallback removal:
+  - as of `2026-04-03`, `DamageService.apply_damage_to_enemy_and_commit(...)` no longer assumes a hit committed successfully when `enemy.commit_damage(...)` raises
+  - it also no longer retries through an aggregated commit path when per-event commit handling breaks
+- Demo trait damage fallback removal:
+  - as of `2026-04-03`, `ExtravertTrait` and `FeelingTrait` no longer fall back to direct `enemy.take_damage(...)` when unified enemy damage application fails
+  - their damage semantics now stay aligned with the shared damage service instead of switching onto a direct-write side path
 - Enemy-turn step fallback removal:
   - as of `2026-04-03`, `CombatModel.enemy_turn()` no longer keeps a local log-and-continue loop for enemy action steps
   - enemy-turn aliases now reuse the phase-machine mainline, and step callback failures stop the sequence instead of continuing to later steps
@@ -69,6 +75,8 @@ This document is no longer a list of allowed compatibility shims. The localized 
 - `ActionExecutor._resolve_top_card_effects(...)` is queue-only for effect resolution.
 - Planner-negative effects in combat mainline are now explicit errors, not silent alternate execution paths.
 - `reposition` is now an explicit-target mechanic, not a pointer-target fallback mechanic.
+- Shared enemy damage commit now uses explicit per-event commit semantics instead of silent assume-success or aggregate fallback semantics.
+- Demo trait retaliation/ping damage no longer switches to direct `enemy.take_damage(...)` when unified damage application fails.
 - Enemy-turn aliases now reuse the phase-machine mainline, and enemy action step failures are explicit instead of log-and-continue.
 - `DefaultIntentSelector` now surfaces an empty filtered pool as `None` instead of choosing from filtered-out candidates.
 - New combat effect families must either:

@@ -33,6 +33,8 @@
 - New enemy passives must declare `windows`; checked-in enemy JSON must not use `hook`.
 - Card-play and top-of-draw mainline must stay queue-only.
 - `reposition` must use an explicit enemy target in mainline; do not silently infer the pointer target when input is missing.
+- Shared enemy damage commit must not silently assume success or retry through aggregate fallback when `commit_damage(...)` fails.
+- Trait/power damage reactions must not switch to direct `enemy.take_damage(...)` as a backup path when unified damage application fails.
 - Enemy-turn helper paths must reuse the phase-machine mainline; do not keep local log-and-continue loops for enemy action steps.
 - Enemy action step callback failures must stop the sequence instead of silently continuing to later steps.
 - Intent selection must surface an empty cooldown/condition-filtered pool as `None` instead of choosing from filtered-out candidates.
