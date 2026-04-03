@@ -32,6 +32,7 @@ Separate long-running simulation capability from short CI tests.
 
 - `contexts/simulation` package skeleton is established.
 - `HeadlessCombatSimulationExecutor` runs real combat logic in headless mode.
+- `HeadlessCombatSimulationExecutor` now requires explicit valid enemies and loadable card packs; it no longer fabricates fallback enemies or fallback packs.
 - `tools/simulation/validate_scenarios.py` validates scenario payloads quickly.
 - `config/simulation/metric_targets_v1.json` defines initial metric redlines/targets.
 - Fast tests under `tests/simulation` verify package behavior.

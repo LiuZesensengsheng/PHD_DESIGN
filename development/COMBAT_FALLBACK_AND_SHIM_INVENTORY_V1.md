@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Track the remaining queue-external fallback surfaces after the compat-zero cleanup.
+Track combat fallback ownership after the compat-zero cleanup.
 
-This document is no longer a list of allowed compatibility shims. The localized Player and `EffectExecutor` shims were physically deleted on `2026-03-30`.
+This document is no longer a list of allowed compatibility shims. The localized Player and `EffectExecutor` shims were physically deleted on `2026-03-30`, and the remaining card-play/top-card runtime fallback seams were removed from mainline on `2026-04-03`.
 
 ## Cleared Local Compatibility Shims
 
@@ -20,82 +20,78 @@ This document is no longer a list of allowed compatibility shims. The localized 
 ## Recently Resolved Runtime Seams
 
 - `PlayTopOfDrawThenExhaustEffect.execute(...)`:
-  - as of `2026-03-31`, it no longer loops top-card effects locally through `execute_effect_once(...)`
-  - direct fallback execution now delegates into `ActionExecutor` so top-of-draw resolution reuses the queue-native top-card path
+  - as of `2026-03-31`, it no longer loops top-card effects locally through the direct-exec helper that is now named `execute_effect_once_direct(...)`
+  - top-card resolution now reuses `ActionExecutor` ownership instead of effect-local sequencing
 - `swap_with_paper`:
   - as of `2026-03-31`, the active white thesis card no longer depends on per-effect fallback
   - planner now maps it into a queue action and `ActionExecutor` toggles `paper_ally.is_front` directly
-  - `tests/combat/test_active_queue_boundaries.py` active fallback scan is now expected to stay at zero
 - Shared per-effect resolution spine:
-  - as of `2026-03-31`, `CardPlayOrchestrator._resolve_effects_one_by_one(...)` and `ActionExecutor._resolve_top_card_effects(...)` now share `effect_resolution_runner.py`
-  - planner dispatch, `execute_effect_once(...)` fallback, fallback follow-up collection, and nested action draining now run through one implementation
-  - card-play timing windows remain owned by `CardPlayOrchestrator`, so the timing contract stays local while the runtime skeleton is deduplicated
+  - as of `2026-03-31`, card play and top-of-draw started sharing `effect_resolution_runner.py`
+  - as of `2026-04-03`, that shared runner became queue-only
+  - unplanned effects now raise `QueueOnlyPlanningError` instead of silently falling back through direct execution
+  - effects whose conditions are intentionally not met now plan as `[]`, so "no-op" is explicit and stable
+- Card-play / top-of-draw mainline fallback removal:
+  - as of `2026-04-03`, `CardPlayOrchestrator` no longer keeps full-card fallback or per-effect fallback branches
+  - as of `2026-04-03`, `ActionExecutor._resolve_top_card_effects(...)` no longer keeps a hybrid fallback path
+  - `fallback_action_policy.py` was deleted
+- Reposition target fallback removal:
+  - as of `2026-04-03`, `reposition` no longer infers the pointer target when card play does not provide an explicit enemy target
+  - queue planning for `reposition` now requires an explicit `target_id`
 - Design-v2 storage effect families:
   - as of `2026-03-31`, `add_steadfast_token` and `add_paradigm` are no longer unknown content-only effect types
   - factory, effect registry, planner, action executor, and `CombatState` now all recognize them through minimal state-carrier semantics
-  - current scope is intentionally narrow: these effects can now resolve through the mainline and persist state, but their richer trigger semantics are still future work
 
 ## Active Pack Boundary
 
 - As of `2026-03-31`, the active `red/white` runtime card scan in
   [test_active_queue_boundaries.py](/D:/PHD_SIMULATER/tests/combat/test_active_queue_boundaries.py)
   expects the explicit fallback allowlist to stay at `0`.
-- As of `2026-04-01`, the wrap-up gate rerun kept that boundary green together with:
+- As of `2026-04-03`, the queue-only follow-up kept that boundary green together with:
   - `scripts/check_combat_compat_zero.py`
   - `tests/combat/test_combat_mainline_allowlist_v1.py`
   - `tests/combat`
   - `tests/simulation`
-- This does **not** mean the runtime has no fallback code paths anywhere.
-- It means the checked-in active `red/white` card packs no longer require a named
-  active-effect fallback exception.
+- This still does **not** mean the runtime has no direct-effect helpers anywhere.
+- It means the checked-in combat mainline and active `red/white` packs no longer rely on queue-external fallback branches during card play or top-card resolution.
 
-## Queue-External Fallback Surfaces
+## Mainline Status
 
-These are still real runtime seams, but they are no longer compatibility-owned. They use the neutral fallback API and remain valid until we explicitly queue them or decide to keep them.
+- `CardPlayOrchestrator` is queue-only for effect resolution.
+- `ActionExecutor._resolve_top_card_effects(...)` is queue-only for effect resolution.
+- Planner-negative effects in combat mainline are now explicit errors, not silent alternate execution paths.
+- `reposition` is now an explicit-target mechanic, not a pointer-target fallback mechanic.
+- New combat effect families must either:
+  - gain planner/action support
+  - intentionally plan as `[]` when their condition does nothing
+  - or stay outside mainline in tests/tools until they are modeled properly
 
-### CardPlayOrchestrator Full-Card Fallback
+## Remaining Direct Execution Helpers Outside Mainline
 
-File:
-- [card_play_orchestrator.py](/D:/PHD_SIMULATER/contexts/combat/application/orchestration/card_play_orchestrator.py)
+These helpers still exist, but they are no longer mainline fallback seams:
 
-Current behavior:
-- when effect planning is unavailable, runtime falls back through `execute_card_fallback(...)`
+- [executor.py](/D:/PHD_SIMULATER/contexts/combat/domain/effects/executor.py)
+  - `execute_effect_payload_direct(...)`
+  - `execute_effect_once_direct(...)`
 
-Migration question:
-- should more effect families be planned/queued so this path becomes rarer
+Current intended use:
 
-### CardPlayOrchestrator Per-Effect Fallback
+- targeted tests
+- low-level effect implementation coverage
+- tooling or debug flows that explicitly opt into direct execution
 
-File:
-- [card_play_orchestrator.py](/D:/PHD_SIMULATER/contexts/combat/application/orchestration/card_play_orchestrator.py)
+Not intended use:
 
-Current behavior:
-- when `EffectPlanner.plan(...)` returns `None`, runtime falls back through `execute_effect_once(...)`
-- the per-effect planning and fallback skeleton is now shared with top-of-draw through `effect_resolution_runner.py`
-
-Migration question:
-- which remaining effect types are still planner-negative, and which deserve queue-native implementations next
-
-### ActionExecutor Top-Of-Draw Inline Resolution
-
-File:
-- [action_executor.py](/D:/PHD_SIMULATER/contexts/combat/application/orchestration/action_executor.py)
-
-Current behavior:
-- `_resolve_top_card_effects(...)` plans queued actions when possible
-- otherwise it falls back through `execute_effect_once(...)`
-- its planner/fallback/follow-up ordering now reuses the same shared runner as card play
-
-Migration question:
-- should we keep the hybrid path or continue by shrinking planner-negative effect coverage until this fallback becomes rare enough to treat as intentional
+- card-play orchestrator mainline
+- top-of-draw inline mainline
+- new hybrid "plan if possible, otherwise direct execute" branches
 
 ## Next Default Use
 
-When we plan the next combat runtime cleanup pass, start from this list instead of rediscovering queue-external fallback seams by repo search.
+When combat runtime work resumes, start from planner coverage or effect modeling questions instead of reintroducing fallback seams into orchestrators.
 
 ## Phase 2B Note
 
-- A repository scan over `data/cards` now reports zero effect types that are unknown to the planner/mainline by type.
+- A repository scan over `data/cards` reports zero effect types that are unknown to the planner/mainline by type.
 - The next non-visual runtime step is no longer parser/planner recognition; it is deciding whether to:
   - activate the design-v2 pack in the runtime load path
   - or implement the first real trigger semantics for `paradigm` / `steadfast`

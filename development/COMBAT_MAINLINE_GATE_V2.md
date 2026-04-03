@@ -12,6 +12,7 @@
 
 - Combat mainline call-sites are compat-zero for the core seams we targeted in Phase A-E.
 - The remaining localized compat shims that V2 originally tolerated are now physically deleted.
+- Card-play and top-of-draw effect resolution are queue-only as of `2026-04-03`.
 - V2 now means both of these are true:
   - mainline call-sites are zero
   - old shim definitions are also zero
@@ -30,10 +31,13 @@
 - New trait/power timing reactions must be window-native only.
 - New trait/power event reactions must be event-native only.
 - New enemy passives must declare `windows`; checked-in enemy JSON must not use `hook`.
-- New fallback execution code must use:
-  - `execute_card_fallback(...)`
-  - `execute_effect_payload(...)`
-  - `execute_effect_once(...)`
+- Card-play and top-of-draw mainline must stay queue-only.
+- `reposition` must use an explicit enemy target in mainline; do not silently infer the pointer target when input is missing.
+- New combat effect families must either:
+  - plan into queue actions
+  - return `[]` when they are intentionally a no-op under current conditions
+  - or remain outside mainline until their queue contract is modeled
+- Direct helper execution such as `execute_effect_payload_direct(...)` / `execute_effect_once_direct(...)` is test/tool-only unless we explicitly open a new runtime decision.
 - Orchestrators, action executors, effect impls, preview/simulation helpers, and content-facing runtime code must not call removed old `EffectExecutor` names directly.
 
 ## Required Pre-Expansion Checks
@@ -58,6 +62,7 @@ Run these before merging a package that adds combat content or changes combat ru
 - old `EffectExecutor` API definitions in Python code = `0`
 - old `EffectExecutor` API call-sites in Python code = `0`
 - legacy fallback helper names in card-play/action-executor mainline = `0`
+- queue-external fallback seams in card-play/action-executor mainline = `0`
 
 ## Regression Suite
 
@@ -74,7 +79,7 @@ The minimum gate suite for V2 is:
 
 ## Remaining Runtime Inventory
 
-The remaining queue-external or fallback-heavy seams are tracked in:
+Current queue-only ownership and any remaining direct-execution helpers outside mainline are tracked in:
 
 - [COMBAT_FALLBACK_AND_SHIM_INVENTORY_V1.md](/D:/PHD_SIMULATER/docs/development/COMBAT_FALLBACK_AND_SHIM_INVENTORY_V1.md)
 
@@ -86,7 +91,7 @@ We should only claim a stricter post-V2 gate when all of the following are true:
 
 - queue-external fallback-heavy seams have an explicit migration decision:
   - queue them
-  - keep them intentionally
+  - keep them intentionally outside mainline
   - or retire them
 - preview/runtime/simulation parity remains stable through an expansion pass
 - at least one additional expansion pass lands while the current zero-tolerance gate stays green

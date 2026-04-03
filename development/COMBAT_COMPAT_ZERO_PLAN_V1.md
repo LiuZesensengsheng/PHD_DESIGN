@@ -5,6 +5,7 @@
 - Plan created to drive Phase A-E of the combat compat-zero cleanup
 - Main implementation phases landed on `2026-03-29`
 - Remaining localized shims were hard-deleted on `2026-03-30`
+- Queue-only follow-up for card-play/top-card mainline landed on `2026-04-03`
 - This plan is now completed for its original scope
 
 ## Original Goal
@@ -39,6 +40,9 @@ Push combat runtime from "thin compat shell" to "compat-zero mainline" so future
   - `execute_card_fallback(...)`
   - `execute_effect_payload(...)`
   - `execute_effect_once(...)`
+- later queue-only follow-up work renamed the surviving direct helpers to explicit test/tool-only names:
+  - `execute_effect_payload_direct(...)`
+  - `execute_effect_once_direct(...)`
 
 ### Phase E
 
@@ -63,8 +67,8 @@ The "forbid new compat seam" rule is maintained by tests and precheck, not by co
 
 ## Remaining Work After Compat-Zero
 
-The next cleanup work is no longer about compatibility shims. It is about queue-external fallback surfaces and deeper StS-style runtime evolution:
+The next cleanup work is no longer about compatibility shims. The card-play/top-card fallback seams are already removed from mainline, so future work is about deeper StS-style runtime evolution:
 
-- reduce fallback-heavy execution paths
+- keep direct execution helpers out of combat mainline unless a new explicit decision says otherwise
 - improve preview/runtime/simulation parity on harder content
 - keep expanding on top of the timing/event/window mainline only
