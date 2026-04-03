@@ -52,6 +52,12 @@ This document is no longer a list of allowed compatibility shims. The localized 
 - `DefaultIntentSelector` filtered-pool fallback removal:
   - as of `2026-04-03`, it returns `None` when cooldown/condition filtering leaves no weighted candidate
   - it no longer chooses from filtered-out candidates in that case
+- `EffectExecutor` selected-enemy first-enemy fallback removal:
+  - as of `2026-04-03`, direct `SELECTED_ENEMY` target resolution no longer defaults to `state.enemies[0]` when card input does not provide a target
+  - selected-enemy direct resolution now requires either:
+    - an explicit enemy target
+    - or an active pointer target
+  - otherwise it resolves to `[]` and leaves the missing-target contract visible
 - Design-v2 storage effect families:
   - as of `2026-03-31`, `add_steadfast_token` and `add_paradigm` are no longer unknown content-only effect types
   - factory, effect registry, planner, action executor, and `CombatState` now all recognize them through minimal state-carrier semantics
@@ -75,6 +81,7 @@ This document is no longer a list of allowed compatibility shims. The localized 
 - `ActionExecutor._resolve_top_card_effects(...)` is queue-only for effect resolution.
 - Planner-negative effects in combat mainline are now explicit errors, not silent alternate execution paths.
 - `reposition` is now an explicit-target mechanic, not a pointer-target fallback mechanic.
+- Direct `SELECTED_ENEMY` resolution no longer silently retargets to the first living enemy when input is incomplete.
 - Shared enemy damage commit now uses explicit per-event commit semantics instead of silent assume-success or aggregate fallback semantics.
 - Demo trait retaliation/ping damage no longer switches to direct `enemy.take_damage(...)` when unified damage application fails.
 - Enemy-turn aliases now reuse the phase-machine mainline, and enemy action step failures are explicit instead of log-and-continue.
