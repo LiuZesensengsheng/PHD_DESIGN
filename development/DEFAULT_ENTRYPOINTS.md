@@ -13,6 +13,24 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 ## Current Default Entrypoints
 
+### Environment Setup
+
+- Install runtime dependencies:
+  - `py -3.11 -m pip install -r requirements.txt`
+- Install development dependencies:
+  - `py -3.11 -m pip install -r requirements-dev.txt`
+- Install build-only dependencies:
+  - `py -3.11 -m pip install -r requirements-build.txt`
+
+### Repository Smoke Baseline
+
+- Run the default repo-wide smoke baseline:
+  - `python scripts/run_repo_smoke_baseline.py`
+- List the included smoke groups:
+  - `python scripts/run_repo_smoke_baseline.py --list`
+- Run one smoke group only:
+  - `python scripts/run_repo_smoke_baseline.py --group <group>`
+
 ### Project Memory Maintenance
 
 - Refresh the latest weekly summary:
