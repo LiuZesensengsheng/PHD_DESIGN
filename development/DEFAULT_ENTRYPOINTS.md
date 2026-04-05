@@ -47,6 +47,15 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Validate active content/data pipeline contracts:
   - `python -m pytest tests/scripts/test_data_pipeline_contracts.py -q`
 
+### Combat Analysis
+
+- Generate the profile-aware combat-analysis reference report:
+  - `python scripts/generate_combat_analysis_reference_report.py --profile-id <profile-id>`
+- Scaffold a new character profile file without registering it:
+  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <中文名>`
+- Validate the profile scaffold script:
+  - `python -m pytest tests/scripts/test_scaffold_combat_analysis_profile.py -q`
+
 ### Headless / Regression Checks
 
 - Run headless regression helpers:
