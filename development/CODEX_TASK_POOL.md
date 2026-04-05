@@ -1460,6 +1460,273 @@
   - 敌人与任务机制仍在继续落地
   - 现在做深平衡容易产生假精确
 
+### P1. Combat Analysis Capability Iteration V1（按顺序串行）
+
+- 适用前提：
+  - 当前 `tools/combat_analysis/` 已有稳定主 benchmark：
+    - 正样本 `14/14`
+    - 负样本 `13/13`
+    - near-neighbor `12/12`
+    - 主 benchmark 当前 `PASS`
+  - 当前 `relic-aware` 仍处于诊断层：
+    - 严格通过 `13/13`
+    - 新增预期 package/axis 恢复 `11/13`
+    - cross-density 提升 `12/13`
+  - exploratory 层已接入：
+    - upgrade-sensitive `4/4`
+  - 因此下一阶段不应该直接扩大功能面，而应该先把“遗物诊断 -> 表达增强 -> 分层 benchmark -> 扩验证集”做扎实
+- 总目标：
+  - 让 `combat_analysis` 从“能解释一批卡组”推进到“能稳定解释遗物修正、时序窗口与近邻差异”
+  - 先提升模型可信度，再进入敌人压力与推荐系统
+- 默认执行顺序：
+  1. `Combat Analysis Relic Failure Analysis V1`
+  2. `Combat Analysis Relic Calibration Round 1`
+  3. `Combat Analysis Semantic / Timing Expressivity V1`
+  4. `Combat Analysis Benchmark Layering V1`
+  5. `Combat Analysis Validation Expansion V1`
+  6. `Combat Analysis Enemy Pressure Profile V1`
+  7. `Combat Analysis Matchup Analysis V1`
+  8. `Combat Analysis Recommendation V1`
+- 总边界：
+  - 不在 relic-aware 仍未稳定前，把它并入主硬门槛
+  - 不在验证集还偏薄时，急着扩太多新机制
+  - 不把遗物简单当成普通手牌；继续坚持
+    `persistent pseudo-card + possible rule modifier`
+  - 推荐系统放到最后，建立在稳定 benchmark 与 matchup 能力之上
+
+#### P1. Combat Analysis Relic Failure Analysis V1
+
+- 目标：
+  - 把当前 relic-aware 未严格通过的 `10/13` case 做稳定误差拆解
+  - 明确失败主因到底是：
+    - 缺包
+    - 缺轴
+    - 时序表达不够
+    - pseudo-card 权重不对
+    - 规则修改器建模不足
+- 主要输入：
+  - `tools/combat_analysis/reports/relic_samples/__init__.py`
+  - `tools/combat_analysis/adapters/sts_reference/relic_sample_decks.py`
+  - `tools/combat_analysis/adapters/sts_reference/core_relic_links.py`
+  - `tools/combat_analysis/reports/generated/sts1_ironclad_full_v1_snapshot.json`
+- 预期输出：
+  - 一份稳定的 relic failure report
+  - 一组 failure type 统计
+  - 每个失败 case 的主因标注与短解释
+- 边界：
+  - 先不调权重
+  - 先不扩样本
+  - 先做“为什么没过”的稳定解释层
+- 完成标准：
+  - `13` 个 relic sample 全部有稳定失败归因
+  - `10/13` 失败 case 至少能归并成少数可行动类型
+  - 报告可以直接回答“缺包 / 缺轴 / 时序 / pseudo-card / rule modifier”几个问题
+- 当前状态（`2026-04-05`）：
+  - 已完成
+  - 产出：`tools/combat_analysis/reports/relic_failures/__init__.py`
+  - 已形成稳定 failure report，能按缺包 / 缺轴 / 时序 / rule modifier / pseudo-card weight 做归因
+
+#### P1. Combat Analysis Relic Calibration Round 1
+
+- 目标：
+  - 校准遗物 pseudo-card 与 rule-modifier 的第一轮建模
+  - 把 relic-aware 严格通过从 `3/13` 提到至少 `8/13`
+- 重点对象：
+  - `Snecko Eye`
+  - `Runic Pyramid`
+  - `Calipers`
+  - `Necronomicon`
+  - `Medical Kit`
+  - `Mark of Pain`
+- 重点问题：
+  - 这些遗物很多不是“纯收益牌”
+  - 更像“规则修改器 + 持续环境”
+- 主要输入：
+  - `tools/combat_analysis/adapters/sts_reference/core_relic_links.py`
+  - `tools/combat_analysis/adapters/sts_reference/data/sts1_ironclad_core_relic_links_v1.json`
+  - `tools/combat_analysis/reports/relic_samples/__init__.py`
+- 预期输出：
+  - 更新后的 relic pseudo-card 投影
+  - 更明确的 rule-modifier 标记与解释
+  - relic-aware 结果回升报告
+- 边界：
+  - 不把所有遗物一起纳入
+  - 只调核心机制遗物
+  - 不动主 benchmark 硬门槛
+- 完成标准：
+  - 严格通过至少 `8/13`
+  - 失败 case 不再集中卡在明显漏语义上
+  - cross-density / confidence 的回升方向与语义改善一致
+- 当前状态（`2026-04-05`）：
+  - 已完成
+  - 核心遗物 pseudo-card + rule-modifier 校准已落地
+  - 当前 strict pass 已提升到 `13/13`
+
+#### P1. Combat Analysis Semantic / Timing Expressivity V1
+
+- 目标：
+  - 强化模型对“包识别对了，但 confidence / cross-density 不合理”的解释力
+  - 提高时序型遗物、延迟收益型构筑、规则改写型联动的可读性
+- 优先补的语义：
+  - `frontload`
+  - `scaling`
+  - `utility`
+  - `multiplier`
+  - `payoff_support`
+  - `highroll`
+- 优先补的时序能力：
+  - 跨回合保留
+  - 费用压缩
+  - 留牌
+  - 延迟收益
+  - 条件成立窗口
+- 主要输入：
+  - `tools/combat_analysis/model/`
+  - `tools/combat_analysis/projections/`
+  - `tools/combat_analysis/analysis/`
+  - relic failure / calibration 结果
+- 预期输出：
+  - 更稳定的语义轴或状态表达
+  - 补充的 near-neighbor / relic-aware 解释能力
+  - 对特殊时序联动更合理的 confidence / density 变化
+- 边界：
+  - 不先扩敌人
+  - 不直接跳推荐系统
+  - 不为了覆盖率引入假精确
+- 完成标准：
+  - 关键遗物样本不再频繁出现“识别到了壳，但没识别到真正收益窗口”
+  - 近邻卡与时序卡的分离更稳定
+- 当前状态（`2026-04-05`）：
+  - 已完成
+  - 已补 `frontload / scaling / utility / multiplier / payoff_support / highroll` 的表达承载
+  - 已补 supporting packages / supporting axes，用于更好描述资源、留牌、控制等二级但关键收益
+
+#### P1. Combat Analysis Benchmark Layering V1
+
+- 目标：
+  - 把 benchmark 明确拆成三层，避免探索性样本把主 gate 拖红
+- 分层目标：
+  - `core benchmark`
+    - 主硬门槛，继续保持稳定
+  - `relic benchmark`
+    - 次级门槛，先做 tuning dashboard
+  - `exploratory benchmark`
+    - 新机制、新样本、新假设，不并入主 gate
+- 主要输入：
+  - `tools/combat_analysis/reports/snapshots/__init__.py`
+  - `tools/combat_analysis/reports/markdown/__init__.py`
+  - `tools/combat_analysis/reports/html/__init__.py`
+  - `tests/toolkit/combat_analysis/test_reports.py`
+- 预期输出：
+  - 分层 benchmark summary
+  - 更清晰的 snapshot 结构
+  - HTML / markdown 中的分层展示
+- 边界：
+  - 不改变主 benchmark 的通过标准
+  - 不把 exploratory 失败解释成主模型退化
+- 完成标准：
+  - 主 benchmark 继续稳定 `PASS`
+  - relic-aware 有自己的次级门槛与趋势显示
+  - exploratory 样本可以持续增加而不污染主 gate
+- 当前状态（`2026-04-05`）：
+  - 已完成
+  - snapshot / markdown / html 已形成 `core / relic / exploratory` 三层 benchmark 展示
+  - relic benchmark 保持次级门槛，exploratory benchmark 保持独立探索层
+
+#### P1. Combat Analysis Validation Expansion V1
+
+- 目标：
+  - 先扩验证集，而不是先扩功能面
+  - 先证明模型更可信，再谈更广覆盖
+- 重点扩充：
+  - 更多正样本
+  - 更像真实构筑的负样本
+  - upgrade 敏感样本
+  - 更多 near-neighbor 对比
+- 主要输入：
+  - `tools/combat_analysis/adapters/sts_reference/data/`
+  - `tools/combat_analysis/reports/snapshots/__init__.py`
+  - `tests/toolkit/combat_analysis/`
+- 预期输出：
+  - 更厚的样本库
+  - 稳定 benchmark 回归层
+  - 更新后的 snapshot JSON 与 HTML 报告
+- 边界：
+  - 不为了凑数量降低样本质量
+  - 正负样本都要保留明确的解释意图
+- 完成标准：
+  - core / relic / exploratory 三层都有明确样本边界
+  - upgrade-sensitive 与 near-neighbor 成为稳定验证维度
+- 当前状态（`2026-04-05`）：
+  - 已完成
+  - 验证集已扩到 `14` 正样本、`13` 负样本、`12` near-neighbor、`4` upgrade-sensitive
+  - 参考报告产物已刷新为新的 snapshot JSON + 单页 HTML
+
+#### P2. Combat Analysis Enemy Pressure Profile V1
+
+- 目标：
+  - 开始把敌人看成 pressure object，而不是单纯敌人列表
+- 主要输入：
+  - `tools/combat_analysis/model/enemies/`
+  - `tools/combat_analysis/model/encounters/`
+  - 现有 pressure / state / axis 语言
+- 预期输出：
+  - 第一版 enemy pressure profile
+  - hallways / elites / bosses 的基础压力维度
+- 边界：
+  - 先做压力画像，不先做完整敌人模拟
+- 完成标准：
+  - 可以用统一语言描述敌人给卡组施加的关键压力
+- 当前状态（`2026-04-05`）：
+  - 已完成
+  - 已新增 `tools/combat_analysis/adapters/sts_reference/enemy_pressure.py`
+  - 已形成首批 STS enemy pressure profile 种子集
+
+#### P2. Combat Analysis Matchup Analysis V1
+
+- 目标：
+  - 让 deck/package 可以与 pressure profile 做 matchup 分析
+- 主要输入：
+  - deck identity / package closure
+  - enemy pressure profile
+- 预期输出：
+  - deck/package vs pressure 的 matchup 结论
+  - 一组可解释的“擅长 / 害怕”结构结论
+- 边界：
+  - 先做结构 matchup，不做复杂对局模拟器
+- 完成标准：
+  - 已知流派能在压力维度上表现出合理强弱差异
+- 当前状态（`2026-04-05`）：
+  - 已完成
+  - 已新增 `tools/combat_analysis/analysis/matchup/__init__.py`
+  - 现阶段采用统一 axis 空间 + state coverage 的结构型 matchup 分析
+
+#### P2. Combat Analysis Recommendation V1
+
+- 目标：
+  - 在 benchmark、relic、matchup 都稳定后，再做推荐系统
+- 主要能力：
+  - draft recommendation
+  - pivot recommendation
+  - relic-aware 组合建议
+  - pressure-aware 风险提醒
+- 主要输入：
+  - validation benchmark
+  - relic-aware identity
+  - matchup analysis
+- 预期输出：
+  - 第一版推荐策略
+  - 与结构风险绑定的解释型建议
+- 边界：
+  - 推荐必须建立在已经验证的结构能力上
+  - 不用“看起来聪明”的启发式替代 benchmark
+- 完成标准：
+  - 推荐结论能追溯到 package / relic / pressure 证据
+- 当前状态（`2026-04-05`）：
+  - 已完成当前轮
+  - draft recommendation 已接入 enemy-pressure-aware pick 解释
+  - 后续优先级转向扩大样本库与继续校准遗物/敌人覆盖面，而不是提前扩推荐花样
+
 ### P3. 内容接入工作流
 
 - 目标：
