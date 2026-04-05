@@ -20,6 +20,17 @@ Use this index to decide where to read and where to write project knowledge.
 - Use for architecture boundaries, working rules, stable design constraints, and workflow agreements
 - Use `docs/development/DEFAULT_ENTRYPOINTS.md` as the default memory source for recurring tooling commands
 
+### Tool-Local Subsystems
+
+- `tools/<name>/README.md`
+- Use for serious analysis/design subsystems that are expected to hold both living docs
+  and executable code later
+- Register only the subsystem entrypoint here; do not duplicate the full internal spec in
+  both `docs/` and `tools/`
+- Current registered subsystem:
+  - `tools/combat_analysis/README.md`
+  - source-of-truth entry for the combat-analysis model
+
 ### Weekly Memory
 
 - `docs/logs/weekly/YYYY-Www.md`
@@ -55,6 +66,8 @@ Use this index to decide where to read and where to write project knowledge.
 - Write daily progress into the dated daily log
 - Write compressed weekly context into `docs/logs/weekly/`
 - Write stable conclusions into `docs/development/`
+- When a subsystem's detailed spec is expected to grow code, keep its local source of
+  truth under `tools/<name>/` and register its `README.md` entrypoint here
 - Write decision outcomes into `docs/pm/DECISION_LOG.md`
 - Write independent AI-executable work into `docs/development/CODEX_TASK_POOL.md`
 - Do not store current branch status or recent progress in skill bodies

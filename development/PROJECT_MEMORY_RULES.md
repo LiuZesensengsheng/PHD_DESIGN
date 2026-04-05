@@ -38,6 +38,15 @@ Keep project continuity in files so AI and human collaborators can resume work w
 - Do not turn daily logs into large design documents
 - Default recurring commands should live in `docs/development/DEFAULT_ENTRYPOINTS.md`, not in chat memory
 
+### 2.5 Tool-Local Subsystems Can Own Detailed Living Specs
+
+- When an analysis/design area is expected to gain executable code, its detailed local
+  spec may live under `tools/<name>/`
+- The tool-local `README.md` is the entrypoint for that subsystem
+- `docs/development/` should keep the stable project-wide rule or discovery pointer, not
+  a duplicated copy of the subsystem's full internal model
+- Register the subsystem entrypoint in `docs/development/PROJECT_MEMORY_INDEX.md`
+
 ### 3. Skills Store Methods, Not State
 
 - Skills should define repeatable workflows
