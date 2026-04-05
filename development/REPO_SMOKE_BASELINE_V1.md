@@ -39,6 +39,7 @@ Coverage:
 - `scripts/check_combat_compat_zero.py`
 - focused combat mainline gate tests
 - combat smoke-pack coverage
+- combat UI targeting / controller guardrails for drag-to-play white-card flows
 
 ### 2. Campaign Orchestration
 
