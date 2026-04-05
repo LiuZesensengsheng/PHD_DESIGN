@@ -51,6 +51,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 - Generate the profile-aware combat-analysis reference report:
   - `python scripts/generate_combat_analysis_reference_report.py --profile-id <profile-id>`
+- Generate the cross-profile combat-analysis portfolio understanding report:
+  - `python scripts/generate_combat_analysis_portfolio_report.py`
 - Scaffold a new character profile file without registering it:
   - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <中文名>`
 - Validate the profile scaffold script:

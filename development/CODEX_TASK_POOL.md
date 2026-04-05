@@ -289,6 +289,8 @@
   2. 再按角色逐个稳辅助层
   3. 先扩验证集，再扩模型表面
   4. 辅助层稳定后，再继续 `enemy pressure -> matchup -> recommendation`
+- 当前默认观察入口：
+  - 先刷 `combat_analysis_portfolio_report` 看组合级数据理解，再决定下一轮该补哪一层
 - 下一轮候选方向：
   - 扩 STS 正负样本与 near-neighbor
   - 继续做遗物 / 时序 / 状态表达校准
