@@ -12,7 +12,6 @@ Before this cut, thesis submission behavior was still split across several
 places:
 
 - `ThesisSlice.handle_non_combat_block(...)`
-- `ThesisMetaService.check_and_prompt_thesis_tier(...)`
 - `ThesisMetaService.open_submission_for_writing_block(...)`
 - `ThesisMetaService.submit_round_from_writing(...)`
 - raw `CampaignState` block/meta mutation
@@ -58,15 +57,14 @@ This leaves V1 ownership as:
 
 ## Compatibility Notes
 
-V1 intentionally keeps compatibility wrappers on `ThesisMetaService` for:
+The temporary `check_and_prompt_thesis_tier()` compatibility wrapper has been
+removed.
 
-- `check_and_prompt_thesis_tier()`
-- `open_submission_for_writing_block(...)`
-- `submit_round_from_writing(...)`
+The stable seams to use are now:
 
-Existing callers and tests can continue using those names during migration, but
-new flow work should prefer the state seam and the dedicated submission flow
-ownership.
+- `CampaignState.check_and_prompt_thesis_submission()`
+- `ThesisMetaService.open_submission_for_writing_block(...)`
+- `ThesisMetaService.submit_round_from_writing(...)`
 
 ## Non-Goals
 

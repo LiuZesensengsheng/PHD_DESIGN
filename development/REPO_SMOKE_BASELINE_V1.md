@@ -49,6 +49,8 @@ Purpose:
 Coverage:
 
 - campaign UI-safe shell seams
+- interaction-sequence click/modal regressions
+- campaign simplification guardrails
 - transition request contracts
 - encounter contract checks
 - orchestration aggregate invariants

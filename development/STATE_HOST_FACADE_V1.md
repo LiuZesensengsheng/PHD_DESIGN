@@ -136,14 +136,10 @@ Code-side result:
 
 - added `ThesisMetaHost` to `contexts/campaign/services/campaign_service_protocols.py`
 - `ThesisMetaService` no longer takes `state: Any`
-- `CampaignState` now exposes thin thesis facade seam methods for:
-  - `submit_thesis_round_from_writing(...)`
-  - `show_thesis_publication_modal(...)`
-  - `open_thesis_innovation_draw_placeholder_modal(...)`
-  - `record_thesis_innovation_placeholder_choice(...)`
-  - `pick_thesis_innovation_placeholder_candidates(...)`
-- `ThesisMetaService` now delegates through those seam methods instead of
-  reaching into nested state-owned service objects directly
+- `CampaignState` keeps the stable thesis submission seam
+  `submit_thesis_round_from_writing(...)`
+- temporary publication/innovation forwarding wrappers were later removed once
+  `ThesisPublicationFlowService` became the only active path
 - track-local tier reads now rely on
   `get_campaign_blocks_for_track(track_index)` instead of raw `_blocks`
   fallback scanning

@@ -51,6 +51,47 @@
   - `2026-03-16` 判定更新：`combat orchestration v1` 已可视为完成，后续转入更小切片的 chore / card-play / planner / policy 收口
   - v1 之后的剩余 fallback 面默认只包括条件型、属性来源型和其他小众复杂效果
 
+### P1. Campaign Simplification V1
+
+- 目标：
+  - 在不重开整轮 UI 重写、全量 DDD 推进或节点树迁移的前提下，完成一轮 campaign 侧的 targeted simplification
+  - 让当前 mixed-mode campaign 架构更容易读、更安全扩展，也更便于 Codex 长时间连续协作
+- Current execution rules:
+  - follow `docs/development/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md` serially
+  - `2026-04-05`: `Phase 0` landed
+  - `2026-04-05`: `Phase 1` landed: removed residual thesis / meeting compat wrappers and old headless meeting paths
+  - `2026-04-05`: `Phase 2` landed: moved `CampaignState` service wiring into a dedicated service bundle while keeping stable host attrs/seams
+  - `2026-04-05`: `Phase 3` landed: split `MeetingService` into focused selection / shop / event-flow helpers while keeping the stable service surface
+  - `2026-04-05`: `Phase 4` landed: split campaign mouse input into dedicated intent resolution + dispatch helpers while preserving click priority and state seams
+  - `2026-04-05`: the mainline simplification pass is effectively complete through `Phase 4`
+  - `Phase 5` is now a triggered backlog slice, not an automatic next step
+  - only start `Phase 5` when near-term roadmap work directly touches DDL / fusion / compaction rules or shared board invariants
+  - do not mix this with a large UI rewrite, full DDD push, or full node migration work
+- Main inputs:
+  - `docs/development/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md`
+  - `docs/development/UI_ARCHITECTURE_V1.md`
+  - `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+  - `docs/development/CAMPAIGN_HOTSPOT_DEFER_LIST_V1.md`
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/meeting_service.py`
+  - `contexts/campaign/services/campaign_mouse_event_service.py`
+  - `contexts/campaign/services/track_block_service.py`
+  - `contexts/campaign/services/thesis_meta_service.py`
+- 预期输出：
+  - 简化计划、热点文档和任务系统状态保持同步
+  - focused guardrail tests + `scripts/run_repo_smoke_baseline.py` 保护关键 seams
+  - 一轮以删旧路径、收紧 host seams、拆高 ROI 热点为主的 campaign targeted refactor
+- 边界：
+  - 不做 whole-campaign facade
+  - 不做 full `CampaignView` rewrite
+  - 不做 repository-everywhere
+  - 不做 purity-driven `Track` aggregate promotion
+  - 不把 runtime UI 演进扩成另一轮全局架构重写
+- 当前阶段判断：
+  - `Phase 0` 到 `Phase 4` 已完成并可视为当前主线收口
+  - `Phase 5` 只保留为 triggered backlog，不再视为自动下一步
+  - 只有近期待做直接触及 DDL / fusion / compaction 或 shared board invariants 时才启动
+
 ### P1. Combat Action Contracts + Queue Skeleton V1
 
 - 目标：
