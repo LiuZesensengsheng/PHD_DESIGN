@@ -280,10 +280,25 @@
 - 当前状态（`2026-04-05`）：
   - `Combat Analysis Capability Iteration V1` 已完成并归档
   - 下一轮不沿用旧 checklist，等样本缺口和校准目标更清楚后再重新拆任务
+- 当前下一轮规则：
+  - 保持 `source facts -> reviewed annotation -> projection`
+  - 不直接从卡牌文本跳共享语义
+  - 只有同一种失败模式在多个角色重复出现时，才上升为共享语义
+- 当前建议顺序：
+  1. 先稳 core benchmark
+  2. 再按角色逐个稳辅助层
+  3. 先扩验证集，再扩模型表面
+  4. 辅助层稳定后，再继续 `enemy pressure -> matchup -> recommendation`
 - 下一轮候选方向：
   - 扩 STS 正负样本与 near-neighbor
-  - 继续扩敌人 pressure 报告可视化
   - 继续做遗物 / 时序 / 状态表达校准
+  - 继续扩敌人 pressure 报告可视化
+  - 继续观察值得共享化的时序语义：
+    - `hold / retain / cross-turn value`
+    - `delayed resolution / delayed payoff`
+    - `conditional trigger window`
+    - `threshold burst window`
+  - 保持角色私有复杂度留在 `projection_gap`，不要过早污染共享层
 - 当前不优先的原因：
   - 先观察本轮 benchmark / snapshot / HTML 报告是否稳定
   - 下一轮最好基于新增失败样本重新定义主攻点
