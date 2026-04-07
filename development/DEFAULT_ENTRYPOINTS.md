@@ -53,10 +53,16 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/generate_combat_analysis_reference_report.py --profile-id <profile-id>`
 - Generate the cross-profile combat-analysis portfolio understanding report:
   - `python scripts/generate_combat_analysis_portfolio_report.py`
+- Write a reviewed Design Loop v1 input template:
+  - `python scripts/run_combat_analysis_design_loop.py --write-template <path>`
+- Run a local Design Loop v1 review from a reviewed JSON input:
+  - `python scripts/run_combat_analysis_design_loop.py --input <path> --output-dir <dir>`
 - Scaffold a new character profile file without registering it:
   - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <中文名>`
 - Validate the profile scaffold script:
   - `python -m pytest tests/scripts/test_scaffold_combat_analysis_profile.py -q`
+- Validate Design Loop v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_design_loop.py tests/scripts/test_run_combat_analysis_design_loop.py -q`
 
 ### Headless / Regression Checks
 
