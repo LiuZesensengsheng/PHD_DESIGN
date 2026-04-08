@@ -51,6 +51,50 @@
   - `2026-03-16` 判定更新：`combat orchestration v1` 已可视为完成，后续转入更小切片的 chore / card-play / planner / policy 收口
   - v1 之后的剩余 fallback 面默认只包括条件型、属性来源型和其他小众复杂效果
 
+### P1. Narrative Pipeline V1
+
+- 目标：
+  - 为叙事事件建立一条清晰的 `draft -> normalized source -> build -> runtime -> acceptance` 管线
+  - 统一当前 narrative/questline 主链与 legacy campaign-event 路线，避免继续双真相增长
+  - 让策划与 Codex 可以在不碰 runtime 细节的前提下稳定扩写 narrative 内容
+- Current execution rules:
+  - follow `docs/development/NARRATIVE_PIPELINE_V1.md`
+  - use `docs/development/NARRATIVE_PIPELINE_TASK_TABLE_V1.md` as the rollout order
+  - treat `data/questlines/*.json` as the active runtime path during migration
+  - do not add new growth to `contexts/campaign/infrastructure/events/*.json`
+  - do not retire legacy narrative runtime files until:
+    - migration inventory exists
+    - normalized source schema exists
+    - source -> runtime build parity is proven on the active tutorial path
+  - prefer serial rollout, not multiple competing narrative architecture branches
+- Main inputs:
+  - `docs/development/NARRATIVE_PIPELINE_V1.md`
+  - `docs/development/NARRATIVE_PIPELINE_TASK_TABLE_V1.md`
+  - `docs/development/DATA_PIPELINE_GUARDRAILS_V1.md`
+  - `contexts/shared/quest_loader.py`
+  - `contexts/shared/quest_runtime.py`
+  - `contexts/narrative/application/service.py`
+  - `contexts/event/state.py`
+  - `data/questlines/`
+  - `data/events_drafts/`
+  - `data/events_src/`
+- 预期输出：
+  - 一套 normalized narrative source schema
+  - draft/source/build tooling for narrative content
+  - tutorial narrative path migrated onto the new source/build model
+  - narrative scenario acceptance tests covering the active tutorial event/combat/reward path
+  - a clear legacy retirement plan for the old campaign event route
+- 边界：
+  - 不重写 `EventState` 展示层
+  - 不把 narrative pipeline 扩成通用脚本 VM
+  - 不把 combat event bus 与 narrative event pipeline 混为一谈
+  - 不在 schema 尚未稳定前一口气迁完所有 legacy narrative content
+  - 不让 runtime 直接读 draft 文件
+- 当前阶段判断：
+  - `Phase 0` 可以视为已准备完成
+  - 默认下一步是 `Phase 1 + Phase 2`
+  - 在 tutorial path 构建等价 build 之前，不应删除全部 legacy narrative 内容
+
 ### P1. Campaign Simplification V1
 
 - 目标：

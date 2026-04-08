@@ -122,6 +122,31 @@ Required guardrails:
 - draft CSV files must validate successfully
 - IDs, required fields, phases, and weights must remain valid
 
+#### Narrative Source Schema Pilot
+
+- Draft input:
+  - `data/narrative_drafts/tutorial/questline_tutorial.draft.json`
+- Draft validation/import scripts:
+  - `scripts/validate_narrative_draft.py`
+  - `scripts/import_narrative_draft_to_src.py`
+- Normalized source:
+  - `data/narrative_src/packs/tutorial/*`
+- Source schema IO / validation module:
+  - `scripts/narrative_src_io.py`
+- Source -> runtime build script:
+  - `scripts/build_narrative_runtime.py`
+
+Required guardrails:
+
+- draft format must validate
+- required pack files must exist
+- manifest shape must stay stable
+- CSV headers must stay stable
+- basic node / choice / consequence / condition reference rules must stay valid
+- reading and rewriting the pack through the schema IO module must be deterministic
+- source -> runtime build payload must stay in parity with
+  `data/questlines/questline_tutorial.json`
+
 ### Level C: Design Specs
 
 Design docs that mention CSV or JSON formats are not automatically part of the

@@ -47,6 +47,17 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Validate active content/data pipeline contracts:
   - `python -m pytest tests/scripts/test_data_pipeline_contracts.py -q`
 
+### Narrative Pipeline
+
+- Validate tutorial narrative draft input:
+  - `python scripts/validate_narrative_draft.py --draft data/narrative_drafts/tutorial/questline_tutorial.draft.json`
+- Import tutorial draft into normalized source:
+  - `python scripts/import_narrative_draft_to_src.py --draft data/narrative_drafts/tutorial/questline_tutorial.draft.json --out-dir data/narrative_src/packs/tutorial`
+- Check source -> runtime parity for tutorial questline:
+  - `python scripts/build_narrative_runtime.py --pack-dir data/narrative_src/packs/tutorial --output data/questlines/questline_tutorial.json --check`
+- Check all narrative source packs against runtime outputs (with collision checks):
+  - `python scripts/build_narrative_runtime.py --all --pack-root data/narrative_src/packs --check`
+
 ### Combat Analysis
 
 - Generate the profile-aware combat-analysis reference report:
