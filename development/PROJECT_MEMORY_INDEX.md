@@ -30,6 +30,8 @@ Use this index to decide where to read and where to write project knowledge.
 - Current registered subsystem:
   - `tools/combat_analysis/README.md`
   - source-of-truth entry for the combat-analysis model
+  - `tools/delivery_tracker/README.md`
+  - source-of-truth entry for the delivery-tracker model and generated current-report flow
 
 ### Weekly Memory
 

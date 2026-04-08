@@ -38,6 +38,13 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Generate a specific weekly summary draft directly:
   - `python scripts/generate_weekly_summary.py --year <year> --week <week>`
 
+### Delivery Tracker
+
+- Generate the current delivery markdown/json report:
+  - `python scripts/generate_delivery_report.py`
+- Generate the current delivery report for a specific focus horizon:
+  - `python scripts/generate_delivery_report.py --focus-horizon <internal_playtest|closed_test|ea_launch|v1_0|future>`
+
 ### Card Data Pipeline
 
 - Regenerate active card runtime JSON:
