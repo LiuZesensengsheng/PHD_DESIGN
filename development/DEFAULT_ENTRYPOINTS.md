@@ -77,14 +77,26 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_combat_analysis_design_loop.py --input <path> --output-dir <dir>`
 - Run a local Deck Skeleton Assist sidecar review from a reviewed JSON input:
   - `python scripts/run_combat_analysis_deck_skeleton_sidecar.py --input <path> --output-dir <dir>`
+- Write a fast card-design loop input template:
+  - `python scripts/run_fast_card_design_loop.py --write-template <path>`
+- Run a fast card-design loop review from a reviewed JSON input:
+  - `python scripts/run_fast_card_design_loop.py --input <path> --output-dir <dir>`
+- Write a fast draft-session input template (3-pick-1 with optional discard):
+  - `python scripts/run_fast_draft_session.py --write-template <path>`
+- Run a fast draft session from a reviewed JSON input:
+  - `python scripts/run_fast_draft_session.py --input <path> --output-dir <dir>`
 - Scaffold a new character profile file without registering it:
-  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <中文名>`
+  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <涓枃鍚?`
 - Validate the profile scaffold script:
   - `python -m pytest tests/scripts/test_scaffold_combat_analysis_profile.py -q`
 - Validate Design Loop v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_loop.py tests/scripts/test_run_combat_analysis_design_loop.py -q`
 - Validate Deck Skeleton Sidecar v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/scripts/test_run_combat_analysis_deck_skeleton_sidecar.py -q`
+- Validate fast card-design loop v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q`
+- Validate fast draft-session v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_draft_session.py -q`
 
 ### Headless / Regression Checks
 
