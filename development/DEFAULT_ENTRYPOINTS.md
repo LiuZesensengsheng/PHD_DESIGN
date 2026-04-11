@@ -115,6 +115,11 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 - Validate architecture boundaries:
   - `python scripts/validate_architecture.py`
+- Validate resource contract boundaries:
+  - `python scripts/check_resource_contracts.py`
+- Check asset manifest/enums consistency:
+  - `python scripts/check_asset_manifest_consistency.py`
+  - strict mode (fail on drift): `python scripts/check_asset_manifest_consistency.py --strict`
 - Run campaign simplification guardrails:
   - `python -m pytest tests/campaign/test_campaign_simplification_guardrails_v1.py -q`
 - Run static contract and naming guards:
