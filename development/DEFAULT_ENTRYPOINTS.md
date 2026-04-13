@@ -97,6 +97,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q`
 - Validate fast draft-session v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_draft_session.py -q`
+- Validate enemy-design isolation guardrails:
+  - `python -m pytest tests/toolkit/combat_analysis/test_enemy_design_guardrails.py -q`
 
 ### Headless / Regression Checks
 
