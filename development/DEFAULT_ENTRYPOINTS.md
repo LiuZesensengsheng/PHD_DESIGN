@@ -86,7 +86,7 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Run a fast draft session from a reviewed JSON input:
   - `python scripts/run_fast_draft_session.py --input <path> --output-dir <dir>`
 - Scaffold a new character profile file without registering it:
-  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <涓枃鍚?`
+  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <娑擃厽鏋冮崥?`
 - Validate the profile scaffold script:
   - `python -m pytest tests/scripts/test_scaffold_combat_analysis_profile.py -q`
 - Validate Design Loop v1:
@@ -99,6 +99,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_draft_session.py -q`
 - Validate enemy-design isolation guardrails:
   - `python -m pytest tests/toolkit/combat_analysis/test_enemy_design_guardrails.py -q`
+- Validate project card-design assist reviewed cases v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py -q`
+- Validate project enemy-design assist reviewed cases v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_project_enemy_design_cases_v1.py -q`
+- Validate project design-assist sidecar CLI contracts v1:
+  - `python -m pytest tests/scripts/test_project_design_assist_sidecar_contracts_v1.py -q`
 
 ### Headless / Regression Checks
 
@@ -111,6 +117,11 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 - Validate architecture boundaries:
   - `python scripts/validate_architecture.py`
+- Validate resource contract boundaries:
+  - `python scripts/check_resource_contracts.py`
+- Check asset manifest/enums consistency:
+  - `python scripts/check_asset_manifest_consistency.py`
+  - strict mode (fail on drift): `python scripts/check_asset_manifest_consistency.py --strict`
 - Run campaign simplification guardrails:
   - `python -m pytest tests/campaign/test_campaign_simplification_guardrails_v1.py -q`
 - Run static contract and naming guards:

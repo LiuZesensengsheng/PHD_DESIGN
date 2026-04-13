@@ -79,6 +79,8 @@ Purpose:
 Coverage:
 
 - card/data pipeline contracts
+- resource contract guards
+- asset manifest consistency check
 - text encoding guards
 - naming/contract police guards
 

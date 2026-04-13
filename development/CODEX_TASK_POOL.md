@@ -319,6 +319,35 @@
   - 敌人与任务机制仍在继续落地
   - 现在做深平衡容易产生假精确
 
+### P2. Resource Guardrail Convergence V1
+
+- 目标：
+  - 在现有 `scripts/check_resource_contracts.py` 与 `scripts/check_asset_manifest_consistency.py` 骨架之上，逐步收敛资源入口与清单漂移
+  - 让资源问题尽量在 repo guard / smoke baseline 阶段暴露，而不是在运行期或打包期才发现
+- 当前已落地基线：
+  - `repo-guards` 已包含 resource contract 与 asset manifest consistency 检查
+  - manifest / enum 漂移已修复
+  - 当前仍有一批 `assets/` 硬编码路径告警，主要集中在 campaign / combat / deck / loading / main_menu / shared ui
+- 主要输入：
+  - `scripts/check_resource_contracts.py`
+  - `scripts/check_asset_manifest_consistency.py`
+  - `scripts/run_repo_smoke_baseline.py`
+  - `contexts/shared/infrastructure/assets/`
+  - 当前告警文件清单
+- 预期输出：
+  - 一份按优先级分组的资源入口迁移清单
+  - 第一批高价值运行时路径从硬编码 `assets/` 收口到统一资源入口
+  - 更小的 allowlist / 更少的 warning 数量
+  - 条件成熟时，把部分 warning 升级为 hard-fail contract
+- 边界：
+  - 不做一次性“全仓库统一资源系统重写”
+  - 不为了资源治理重开整轮 UI / rendering 重构
+  - 不在当前主线优先级之前抢占 combat / campaign 主路径工作
+- 当前不优先的原因：
+  - 资源 guardrail 骨架已经落地，短期风险已从“不可见”降到“可见”
+  - 剩余问题主要是工程债收敛，不是阻断当前近期主线的 P0
+  - 更适合按模块顺手收口，而不是立刻开一条重型治理支线
+
 ### P2. Combat Analysis 下一轮拆分
 
 - 当前状态（`2026-04-05`）：
