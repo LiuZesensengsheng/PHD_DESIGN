@@ -77,6 +77,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_combat_analysis_design_loop.py --input <path> --output-dir <dir>`
 - Run a local Deck Skeleton Assist sidecar review from a reviewed JSON input:
   - `python scripts/run_combat_analysis_deck_skeleton_sidecar.py --input <path> --output-dir <dir>`
+- Run the STS package similarity benchmark from reviewed shell fixtures:
+  - `python scripts/run_package_similarity_benchmark.py --input tests/fixtures/combat_analysis/s34_sts_package_similarity_benchmark_v0 --output-dir <dir>`
 - Run the fun-proxy calibration sidecar from reviewed deck benchmark inputs:
   - `python scripts/run_fun_proxy_calibration.py --input tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --output-dir <dir>`
 - Run the fun enemy-design probe sidecar from reviewed deck + forum inputs:
@@ -97,6 +99,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_design_loop.py tests/scripts/test_run_combat_analysis_design_loop.py -q`
 - Validate Deck Skeleton Sidecar v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/scripts/test_run_combat_analysis_deck_skeleton_sidecar.py -q`
+- Validate the STS package similarity benchmark v0:
+  - `python -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py -q`
 - Validate fast card-design loop v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q`
 - Validate fast draft-session v1:
