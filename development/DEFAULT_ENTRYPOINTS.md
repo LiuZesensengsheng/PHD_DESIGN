@@ -77,6 +77,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_combat_analysis_design_loop.py --input <path> --output-dir <dir>`
 - Run a local Deck Skeleton Assist sidecar review from a reviewed JSON input:
   - `python scripts/run_combat_analysis_deck_skeleton_sidecar.py --input <path> --output-dir <dir>`
+- Run the fun-proxy calibration sidecar from reviewed deck benchmark inputs:
+  - `python scripts/run_fun_proxy_calibration.py --input tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --output-dir <dir>`
+- Run the fun enemy-design probe sidecar from reviewed deck + forum inputs:
+  - `python scripts/run_fun_enemy_design_probe.py --reviewed-pack tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --forum-input tests/fixtures/combat_analysis/forum_weak_labels_v1 --review-input tests/fixtures/combat_analysis/forum_deck_case_bridge_v1/review_annotations_v1.json --session-focus enemy_design --output-dir <dir>`
 - Write a fast card-design loop input template:
   - `python scripts/run_fast_card_design_loop.py --write-template <path>`
 - Run a fast card-design loop review from a reviewed JSON input:
@@ -103,6 +107,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py -q`
 - Validate project enemy-design assist reviewed cases v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_project_enemy_design_cases_v1.py -q`
+- Validate fun-proxy calibration sidecar v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_fun_proxy_calibration_v1.py tests/scripts/test_run_fun_proxy_calibration.py -q`
+- Validate fun enemy-design probe sidecar v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_fun_enemy_design_probe.py -q`
 - Validate project design-assist sidecar CLI contracts v1:
   - `python -m pytest tests/scripts/test_project_design_assist_sidecar_contracts_v1.py -q`
 
