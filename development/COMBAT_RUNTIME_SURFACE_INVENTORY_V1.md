@@ -137,11 +137,14 @@ Repository scan on `2026-04-18` shows the following patterns:
   - `CombatModel._prune_defeated_enemies_and_adjust_pointer()` remains a
     compatibility wrapper for tests and legacy callers, not a mainline
     orchestration dependency
-  - the coordinator has now been split again into:
+  - the coordinator has now been split into named collaborators:
+    - `EnemyChoreFollowUpPolicy`
     - `EnemyPointerRetargetPolicy`
     - `EnemyTweenMetadataPlanner`
   - that makes pointer/tween behavior separately testable and prepares the path
     toward future `plan -> presentation gate -> commit` cleanup flow
+  - chore completion and follow-up resolution are now also explicit runtime
+    ownership instead of private coordinator internals
 - test-heavy seams:
   - `effect_executor`
   - `card_play_orchestrator`
@@ -193,8 +196,9 @@ Repository scan on `2026-04-18` shows the following patterns:
     cleanup
   - second slice landed: pointer retarget and tween metadata are now separate
     policy / planner collaborators
-  - remaining work is shrinking the compatibility wrapper further and deciding
-    whether chore follow-up should also become its own named cleanup policy
+  - third slice landed: chore follow-up is now its own named cleanup policy
+  - remaining work is shrinking the compatibility wrapper further, not untangling
+    unnamed cleanup internals
 - ideal/judgment follow-up seam:
   - absorb `_inject_heart_demons(...)`
 
