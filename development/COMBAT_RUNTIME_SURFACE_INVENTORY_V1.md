@@ -37,13 +37,17 @@ non-constructor surface members plus the plain `session` host reference.
 
 More important than the raw total:
 
-- transitional seams still referenced by non-test runtime code: `3`
-- transitional seams currently referenced only by tests: `8`
+- transitional seams still referenced by non-test runtime code: `0`
+- transitional seams currently referenced only by tests: `12`
 
-That means the **actual runtime-mainline seam backlog is small but real**. The
-highest-value governance work is not "shrink every exposed member at once". It
-is to eliminate the `3` transitional seams that production runtime code still
-depends on.
+That means the **runtime-mainline backlog for host-private combat seams is
+closed for this migration slice**. The remaining work is no longer "get
+orchestrators off old helpers". It is to decide how much of the remaining
+compatibility facade should:
+
+- stay as intentional test/tool surface
+- move to direct `session` / collaborator usage in tests
+- or be hard-deleted once compatibility pressure is actually gone
 
 ## CombatModel Explicit Surface
 
@@ -115,8 +119,8 @@ Current count: `12`
 
 Of these `12` seams:
 
-- `3` are still touched by non-test runtime code
-- `9` are currently test-only compatibility surface
+- `0` are still touched by non-test runtime code
+- `12` are currently test-only compatibility surface
 
 ## Observed Usage Snapshot
 
@@ -127,11 +131,19 @@ Repository scan on `2026-04-18` shows the following patterns:
   - `play_card(...)`: `125` references across `22` files
   - `end_turn()`: `28` references across `12` files
   - `get_renderable_state()`: `18` references across `8` files
-- orchestration still touches a few private compatibility seams:
-  - `player_turn_orchestrator.py` uses
-    `model._inject_turn_start_environment_cards(...)` and
-    `model._decay_player_block_at_turn_start(...)`
-  - `ideal_policy.py` uses `model._inject_heart_demons(...)`
+- runtime mainline no longer touches the last turn-start / heart-demon
+  compatibility helpers:
+  - `PlayerTurnOrchestrator` now depends on:
+    - `PlayerBlockDecayPolicy`
+    - `DefaultTurnStartEnvironmentInjector`
+  - `IdealPolicy` and `CombatPostResolutionPolicy` now depend on:
+    - `HeartDemonService`
+- enemy-turn ownership is also more explicit than the earlier inventory pass:
+  - `TurnFlowOrchestrator` now delegates start/end housekeeping to:
+    - `EnemyTurnStartPolicy`
+    - `EnemyTurnEndPolicy`
+  - enemy-side block decay moved into:
+    - `EnemyBlockDecayPolicy`
 - `enemy cleanup` runtime ownership has already moved off the host-private seam:
   - `TurnFlowOrchestrator` now depends on explicit `EnemyCleanupCoordinator`
   - `CombatModel._prune_defeated_enemies_and_adjust_pointer()` remains a
@@ -166,11 +178,11 @@ Repository scan on `2026-04-18` shows the following patterns:
 
 - `CombatModel` is no longer a broad runtime host, but it is still a meaningful
   compatibility facade.
-- The largest remaining compatibility pressure is not controller/view code.
-  It is a small set of orchestration and test paths that still depend on
-  private runtime helpers.
-- The current backlog is easier to reason about as `3` runtime-owned seam
-  clusters, not as `12` equally urgent members.
+- The runtime-mainline migration goal for this slice is met:
+  production combat orchestration no longer depends on the last three
+  host-private helper seams.
+- The remaining pressure is mostly test/compat cleanup, not gameplay runtime
+  ownership confusion.
 - The current surface is already narrow enough that future work should stop
   adding new members and instead either:
   - move new callers to `session`
@@ -188,29 +200,22 @@ Repository scan on `2026-04-18` shows the following patterns:
 - Do not add new dynamic passthrough or generic forwarding back into
   `CombatModel`.
 
-### Likely high-ROI follow-up seams
+### Completed in this slice
 
-- turn-start host seam:
-  - absorb `_inject_turn_start_environment_cards(...)`
-  - absorb `_decay_player_block_at_turn_start(...)`
-- enemy-turn cleanup seam:
-  - first slice landed: explicit `EnemyCleanupCoordinator` now owns mainline
-    cleanup
-  - second slice landed: pointer retarget and tween metadata are now separate
-    policy / planner collaborators
-  - third slice landed: chore follow-up is now its own named cleanup policy
-  - remaining work is shrinking the compatibility wrapper further, not untangling
-    unnamed cleanup internals
-- ideal/judgment follow-up seam:
-  - absorb `_inject_heart_demons(...)`
-
-Translated into concrete backlog count:
-
-- priority `P1`: `3` runtime-owned transitional seams
+- turn-start host seam absorbed:
   - `_inject_turn_start_environment_cards(...)`
   - `_decay_player_block_at_turn_start(...)`
+- ideal/judgment follow-up seam absorbed:
   - `_inject_heart_demons(...)`
-- priority `P2`: `9` test-only transitional seams
+- enemy-turn start/end housekeeping split into explicit policies:
+  - `EnemyTurnStartPolicy`
+  - `EnemyTurnEndPolicy`
+  - `EnemyBlockDecayPolicy`
+
+Translated into current backlog count:
+
+- priority `P1`: `0` runtime-owned transitional seams
+- priority `P2`: `12` test-only transitional seams
   - `_handle_after_card_play(...)`
   - `_apply_chore_resolution_actions(...)`
   - `_prune_defeated_enemies_and_adjust_pointer()`
@@ -218,8 +223,18 @@ Translated into concrete backlog count:
   - `_check_combat_end()`
   - `_handle_card_played(...)`
   - `_process_chore_host_enemy_turn_start()`
+  - `_inject_turn_start_environment_cards(...)`
+  - `_decay_player_block_at_turn_start(...)`
+  - `_inject_heart_demons(...)`
   - `_phase_banner`
   - `_enemy_action_banner`
+
+### Likely next cuts
+
+- move test-only callers toward `session` or explicit collaborators where that
+  improves clarity instead of preserving broad `CombatModel` ownership
+- decide which remaining helper methods are still worth keeping as explicit
+  compatibility wrappers and which can be deleted after the next migration pass
 
 ### Guardrail
 
