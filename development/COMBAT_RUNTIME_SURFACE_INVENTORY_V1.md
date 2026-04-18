@@ -145,6 +145,8 @@ Repository scan on `2026-04-18` shows the following patterns:
     toward future `plan -> presentation gate -> commit` cleanup flow
   - chore completion and follow-up resolution are now also explicit runtime
     ownership instead of private coordinator internals
+  - the enemy-cleanup mainline now reaches chore resolution through the explicit
+    `ChoreResolutionOrchestrator`, not through a generic callback seam
 - test-heavy seams:
   - `effect_executor`
   - `card_play_orchestrator`
