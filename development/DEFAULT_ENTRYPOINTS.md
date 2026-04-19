@@ -95,6 +95,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_fast_card_synthesis_closure.py --write-template <path>`
 - Run the fast card synthesis closure sidecar from a reviewed JSON input:
   - `python scripts/run_fast_card_synthesis_closure.py --input <path> --output-dir <dir>`
+- Run a unified project design-assist session in one mode:
+  - `python scripts/run_project_design_assist_session.py --mode <card|enemy|synthesis> --input <path> --output-dir <dir>`
+- Run a unified project design-assist batch session:
+  - `python scripts/run_project_design_assist_session.py --batch-input <path>`
 - Write a fast draft-session input template (3-pick-1 with optional discard):
   - `python scripts/run_fast_draft_session.py --write-template <path>`
 - Run a fast draft session from a reviewed JSON input:
