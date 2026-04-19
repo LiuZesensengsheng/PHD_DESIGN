@@ -132,6 +132,36 @@ Repository scan on `2026-04-18` shows the following patterns:
     - `EnemyTurnEndPolicy`
   - enemy-side block decay moved into:
     - `EnemyBlockDecayPolicy`
+- combat startup ownership is now explicit too:
+  - `CombatSession.start_combat()` delegates to `CombatStartOrchestrator`
+  - startup sequencing no longer lives inline on the session host:
+    - starter deck bootstrap
+    - combat-start reaction dispatch
+    - opening shuffle / innate move / opening draw
+    - first-player-turn handoff
+- stress-threshold judgment handling is now explicit:
+  - `CombatSession` wires the `StressThresholdReached` subscription only
+  - `StressThresholdHandler` owns:
+    - target ideal selection
+    - verdict application
+    - `JudgmentResolved` publish
+    - combat-loss marking on judgment-flow failure
+- enemy-turn sequence driving is now explicit:
+  - `CombatSession` delegates enemy-turn timed progression to `EnemyTurnRuntimeDriver`
+  - the runtime driver now owns:
+    - enemy-turn entry sequencing
+    - step progression / drain-to-completion
+    - enemy action banner updates during execution
+- presentation shaping is now explicit:
+  - `CombatPresentationBridge` remains the lower-level lease/log/consumer owner
+  - `CombatPresentationRuntime` now owns:
+    - phase/enemy banner event shaping
+    - card-play / enemy-step presentation payload shaping
+    - command-gate delegation facade used by the session
+- runtime collaborator assembly is now explicit:
+  - `CombatSession.__init__` no longer constructs the full collaborator graph inline
+  - `build_default_combat_session_services(...)` now acts as the default composition root
+  - `CombatSessionServices` is the explicit bundle attached by the session host
 - `enemy cleanup` runtime ownership has already moved off the host-private seam:
   - `TurnFlowOrchestrator` now depends on explicit `EnemyCleanupCoordinator`
   - `CombatModel._prune_defeated_enemies_and_adjust_pointer()` remains a
@@ -194,6 +224,21 @@ Repository scan on `2026-04-18` shows the following patterns:
   - `EnemyTurnStartPolicy`
   - `EnemyTurnEndPolicy`
   - `EnemyBlockDecayPolicy`
+- combat-start host body absorbed:
+  - startup sequencing now lives in `CombatStartOrchestrator`
+  - `CombatSession.start_combat()` stays as the stable runtime entrypoint only
+- stress-threshold host body absorbed:
+  - judgment event flow now lives in `StressThresholdHandler`
+  - the session keeps only event subscription wiring
+- enemy-turn driver host body absorbed:
+  - timed enemy-turn progression now lives in `EnemyTurnRuntimeDriver`
+  - the session keeps phase-machine entrypoints only
+- presentation shaping host body absorbed:
+  - banner/event payload shaping now lives in `CombatPresentationRuntime`
+  - the bridge remains the lower-level presentation lease/log owner
+- composition-root body absorbed:
+  - default runtime collaborator assembly now lives in `build_default_combat_session_services(...)`
+  - the session host now attaches a bundle instead of constructing each collaborator inline
 
 Translated into current backlog count:
 
@@ -204,6 +249,11 @@ Translated into current backlog count:
 
 - no private `CombatModel` compatibility seams remain in the active runtime
   inventory for this migration line
+- the remaining `CombatSession` cleanup is now optional shape work rather than
+  urgent ownership repair:
+  - save/load facade extraction if we want an even thinner host
+  - trimming how many collaborators remain explicitly attached on the session
+    surface
 - move test-only callers toward `session` or explicit collaborators where that
   improves clarity instead of preserving broad `CombatModel` ownership
 - decide which remaining helper methods are still worth keeping as explicit
