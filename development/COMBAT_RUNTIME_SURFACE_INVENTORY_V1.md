@@ -18,6 +18,9 @@ It answers:
 
 - `CombatSession` is the canonical combat runtime host for UI, headless, and
   save/load.
+- session-local mutable runtime data is now hosted behind
+  `CombatSessionRuntimeState`; `CombatSession` keeps compatibility properties for
+  current render/tests while local host data is being tightened.
 - `CombatModel` is still present as a compatibility facade because controller,
   some orchestration paths, and many tests still construct or receive
   `CombatModel`.
@@ -28,17 +31,17 @@ It answers:
 
 ## Quantitative Baseline
 
-Repository scan on `2026-04-18` shows `CombatModel` currently exposes `44`
+Repository scan on `2026-04-19` shows `CombatModel` currently exposes `32`
 non-constructor surface members plus the plain `session` host reference.
 
 - stable shared surface: `16`
 - test/tool surface: `16`
-- transitional compatibility surface: `12`
+- transitional compatibility surface: `0`
 
 More important than the raw total:
 
 - transitional seams still referenced by non-test runtime code: `0`
-- transitional seams currently referenced only by tests: `12`
+- transitional seams currently referenced only by tests: `0`
 
 That means the **runtime-mainline backlog for host-private combat seams is
 closed for this migration slice**. The remaining work is no longer "get
@@ -97,30 +100,15 @@ compatibility facade should:
 
 ### 3. Transitional private compatibility seams
 
-These are the main remaining signs that some orchestration/tests still treat
-`CombatModel` like the old runtime host:
+The current `CombatModel` surface no longer exposes any remaining private
+combat-runtime compatibility seam methods or properties.
 
-- `_handle_after_card_play(...)`
-- `_apply_chore_resolution_actions(...)`
-- `_prune_defeated_enemies_and_adjust_pointer()`
-- `_update_enemy_turn(...)`
-- `_inject_turn_start_environment_cards(...)`
-- `_check_combat_end()`
-- `_handle_card_played(...)`
-- `_process_chore_host_enemy_turn_start()`
-- `_decay_player_block_at_turn_start(...)`
-- `_inject_heart_demons(...)`
-- `_phase_banner`
-- `_enemy_action_banner`
+Current count: `0`
 
-These are compatibility-owned seams, not the preferred runtime ownership model.
-
-Current count: `12`
-
-Of these `12` seams:
+Of these `0` seams:
 
 - `0` are still touched by non-test runtime code
-- `12` are currently test-only compatibility surface
+- `0` are currently test-only compatibility surface
 
 ## Observed Usage Snapshot
 
@@ -159,15 +147,10 @@ Repository scan on `2026-04-18` shows the following patterns:
     ownership instead of private coordinator internals
   - the enemy-cleanup mainline now reaches chore resolution through the explicit
     `ChoreResolutionOrchestrator`, not through a generic callback seam
-- test-heavy seams:
+- test-heavy shared/testing surface:
   - `effect_executor`
   - `card_play_orchestrator`
   - `player_turn_orchestrator`
-  - `_update_enemy_turn(...)`
-  - `_phase_banner`
-  - `_enemy_action_banner`
-  - `_handle_after_card_play(...)`
-  - `_check_combat_end()`
 - session-first usage already exists in a few key places:
   - `contexts/simulation/headless_combat_executor.py`
   - presentation contract tests
@@ -215,22 +198,12 @@ Repository scan on `2026-04-18` shows the following patterns:
 Translated into current backlog count:
 
 - priority `P1`: `0` runtime-owned transitional seams
-- priority `P2`: `12` test-only transitional seams
-  - `_handle_after_card_play(...)`
-  - `_apply_chore_resolution_actions(...)`
-  - `_prune_defeated_enemies_and_adjust_pointer()`
-  - `_update_enemy_turn(...)`
-  - `_check_combat_end()`
-  - `_handle_card_played(...)`
-  - `_process_chore_host_enemy_turn_start()`
-  - `_inject_turn_start_environment_cards(...)`
-  - `_decay_player_block_at_turn_start(...)`
-  - `_inject_heart_demons(...)`
-  - `_phase_banner`
-  - `_enemy_action_banner`
+- priority `P2`: `0` test-only transitional seams
 
 ### Likely next cuts
 
+- no private `CombatModel` compatibility seams remain in the active runtime
+  inventory for this migration line
 - move test-only callers toward `session` or explicit collaborators where that
   improves clarity instead of preserving broad `CombatModel` ownership
 - decide which remaining helper methods are still worth keeping as explicit
