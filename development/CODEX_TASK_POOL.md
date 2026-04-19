@@ -1,62 +1,62 @@
-# Codex 任务池
+# Codex 浠诲姟姹?
 
-## 用途
+## 鐢ㄩ€?
 
-这份文档只记录一类事情：
+杩欎唤鏂囨。鍙褰曚竴绫讳簨鎯咃細
 
-- 哪些任务适合 Codex 独立连续执行几小时
-- 这些任务需要什么输入
-- 产出是什么
-- 哪些任务已经可以直接做，哪些还需要先继续定
-- 已完成的大块任务只保留热区索引，详细记录移动到 `docs/development/task_pool_archive/`
+- 鍝簺浠诲姟閫傚悎 Codex 鐙珛杩炵画鎵ц鍑犲皬鏃?
+- 杩欎簺浠诲姟闇€瑕佷粈涔堣緭鍏?
+- 浜у嚭鏄粈涔?
+- 鍝簺浠诲姟宸茬粡鍙互鐩存帴鍋氾紝鍝簺杩橀渶瑕佸厛缁х画瀹?
+- 宸插畬鎴愮殑澶у潡浠诲姟鍙繚鐣欑儹鍖虹储寮曪紝璇︾粏璁板綍绉诲姩鍒?`docs/development/task_pool_archive/`
 
-这份文档不是：
+杩欎唤鏂囨。涓嶆槸锛?
 
-- 日报
-- 架构原则文档
-- 决策日志
+- 鏃ユ姤
+- 鏋舵瀯鍘熷垯鏂囨。
+- 鍐崇瓥鏃ュ織
 
-## 使用方式
+## 浣跨敤鏂瑰紡
 
-每次选择任务时，先确认 4 件事：
+姣忔閫夋嫨浠诲姟鏃讹紝鍏堢‘璁?4 浠朵簨锛?
 
-1. 任务是否仍符合当前优先级
-2. 输入文档或数据是否已经存在
-3. 完成标准是否足够清楚
-4. 是否适合低监督连续执行
+1. 浠诲姟鏄惁浠嶇鍚堝綋鍓嶄紭鍏堢骇
+2. 杈撳叆鏂囨。鎴栨暟鎹槸鍚﹀凡缁忓瓨鍦?
+3. 瀹屾垚鏍囧噯鏄惁瓒冲娓呮
+4. 鏄惁閫傚悎浣庣洃鐫ｈ繛缁墽琛?
 
-## 任务选择规则
+## 浠诲姟閫夋嫨瑙勫垯
 
-优先交给 Codex 的任务：
+浼樺厛浜ょ粰 Codex 鐨勪换鍔★細
 
-- 输入文件明确
-- 输出文件明确
-- 测试标准明确
-- 不依赖高频人工审美判断
-- 不依赖实时试玩手感
+- 杈撳叆鏂囦欢鏄庣‘
+- 杈撳嚭鏂囦欢鏄庣‘
+- 娴嬭瘯鏍囧噯鏄庣‘
+- 涓嶄緷璧栭珮棰戜汉宸ュ缇庡垽鏂?
+- 涓嶄緷璧栧疄鏃惰瘯鐜╂墜鎰?
 
-暂时不要交给 Codex 长时间独立推进的任务：
+鏆傛椂涓嶈浜ょ粰 Codex 闀挎椂闂寸嫭绔嬫帹杩涚殑浠诲姟锛?
 
-- 纯视觉打磨
-- 最终剧情语气定稿
-- 高主观性的 UX 调整
-- 最后阶段的纯手感平衡
+- 绾瑙夋墦纾?
+- 鏈€缁堝墽鎯呰姘斿畾绋?
+- 楂樹富瑙傛€х殑 UX 璋冩暣
+- 鏈€鍚庨樁娈电殑绾墜鎰熷钩琛?
 
-## 当前活跃任务
+## 褰撳墠娲昏穬浠诲姟
 
-- 当前推荐执行方式：
-  - 先做 `combat orchestration v1`，暂不碰 UI 节点化
-  - 串行推进，不并行开多条 combat 主路径重构
-  - 允许短期迁移窗口，但不接受长期双轨
-  - `2026-03-16` 判定更新：`combat orchestration v1` 已可视为完成，后续转入更小切片的 chore / card-play / planner / policy 收口
-  - v1 之后的剩余 fallback 面默认只包括条件型、属性来源型和其他小众复杂效果
+- 褰撳墠鎺ㄨ崘鎵ц鏂瑰紡锛?
+  - 鍏堝仛 `combat orchestration v1`锛屾殏涓嶇 UI 鑺傜偣鍖?
+  - 涓茶鎺ㄨ繘锛屼笉骞惰寮€澶氭潯 combat 涓昏矾寰勯噸鏋?
+  - 鍏佽鐭湡杩佺Щ绐楀彛锛屼絾涓嶆帴鍙楅暱鏈熷弻杞?
+  - `2026-03-16` 鍒ゅ畾鏇存柊锛歚combat orchestration v1` 宸插彲瑙嗕负瀹屾垚锛屽悗缁浆鍏ユ洿灏忓垏鐗囩殑 chore / card-play / planner / policy 鏀跺彛
+  - v1 涔嬪悗鐨勫墿浣?fallback 闈㈤粯璁ゅ彧鍖呮嫭鏉′欢鍨嬨€佸睘鎬ф潵婧愬瀷鍜屽叾浠栧皬浼楀鏉傛晥鏋?
 
 ### P1. Narrative Pipeline V1
 
-- 目标：
-  - 为叙事事件建立一条清晰的 `draft -> normalized source -> build -> runtime -> acceptance` 管线
-  - 统一当前 narrative/questline 主链与 legacy campaign-event 路线，避免继续双真相增长
-  - 让策划与 Codex 可以在不碰 runtime 细节的前提下稳定扩写 narrative 内容
+- 鐩爣锛?
+  - 涓哄彊浜嬩簨浠跺缓绔嬩竴鏉℃竻鏅扮殑 `draft -> normalized source -> build -> runtime -> acceptance` 绠＄嚎
+  - 缁熶竴褰撳墠 narrative/questline 涓婚摼涓?legacy campaign-event 璺嚎锛岄伩鍏嶇户缁弻鐪熺浉澧為暱
+  - 璁╃瓥鍒掍笌 Codex 鍙互鍦ㄤ笉纰?runtime 缁嗚妭鐨勫墠鎻愪笅绋冲畾鎵╁啓 narrative 鍐呭
 - Current execution rules:
   - follow `docs/development/NARRATIVE_PIPELINE_V1.md`
   - use `docs/development/NARRATIVE_PIPELINE_TASK_TABLE_V1.md` as the rollout order
@@ -78,28 +78,28 @@
   - `data/questlines/`
   - `data/events_drafts/`
   - `data/events_src/`
-- 预期输出：
-  - 一套 normalized narrative source schema
+- 棰勬湡杈撳嚭锛?
+  - 涓€濂?normalized narrative source schema
   - draft/source/build tooling for narrative content
   - tutorial narrative path migrated onto the new source/build model
   - narrative scenario acceptance tests covering the active tutorial event/combat/reward path
   - a clear legacy retirement plan for the old campaign event route
-- 边界：
-  - 不重写 `EventState` 展示层
-  - 不把 narrative pipeline 扩成通用脚本 VM
-  - 不把 combat event bus 与 narrative event pipeline 混为一谈
-  - 不在 schema 尚未稳定前一口气迁完所有 legacy narrative content
-  - 不让 runtime 直接读 draft 文件
-- 当前阶段判断：
-  - `Phase 0` 可以视为已准备完成
-  - 默认下一步是 `Phase 1 + Phase 2`
-  - 在 tutorial path 构建等价 build 之前，不应删除全部 legacy narrative 内容
+- 杈圭晫锛?
+  - 涓嶉噸鍐?`EventState` 灞曠ず灞?
+  - 涓嶆妸 narrative pipeline 鎵╂垚閫氱敤鑴氭湰 VM
+  - 涓嶆妸 combat event bus 涓?narrative event pipeline 娣蜂负涓€璋?
+  - 涓嶅湪 schema 灏氭湭绋冲畾鍓嶄竴鍙ｆ皵杩佸畬鎵€鏈?legacy narrative content
+  - 涓嶈 runtime 鐩存帴璇?draft 鏂囦欢
+- 褰撳墠闃舵鍒ゆ柇锛?
+  - `Phase 0` 鍙互瑙嗕负宸插噯澶囧畬鎴?
+  - 榛樿涓嬩竴姝ユ槸 `Phase 1 + Phase 2`
+  - 鍦?tutorial path 鏋勫缓绛変环 build 涔嬪墠锛屼笉搴斿垹闄ゅ叏閮?legacy narrative 鍐呭
 
 ### P1. Campaign Simplification V1
 
-- 目标：
-  - 在不重开整轮 UI 重写、全量 DDD 推进或节点树迁移的前提下，完成一轮 campaign 侧的 targeted simplification
-  - 让当前 mixed-mode campaign 架构更容易读、更安全扩展，也更便于 Codex 长时间连续协作
+- 鐩爣锛?
+  - 鍦ㄤ笉閲嶅紑鏁磋疆 UI 閲嶅啓銆佸叏閲?DDD 鎺ㄨ繘鎴栬妭鐐规爲杩佺Щ鐨勫墠鎻愪笅锛屽畬鎴愪竴杞?campaign 渚х殑 targeted simplification
+  - 璁╁綋鍓?mixed-mode campaign 鏋舵瀯鏇村鏄撹銆佹洿瀹夊叏鎵╁睍锛屼篃鏇翠究浜?Codex 闀挎椂闂磋繛缁崗浣?
 - Current execution rules:
   - follow `docs/development/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md` serially
   - `2026-04-05`: `Phase 0` landed
@@ -121,289 +121,354 @@
   - `contexts/campaign/services/campaign_mouse_event_service.py`
   - `contexts/campaign/services/track_block_service.py`
   - `contexts/campaign/services/thesis_meta_service.py`
-- 预期输出：
-  - 简化计划、热点文档和任务系统状态保持同步
-  - focused guardrail tests + `scripts/run_repo_smoke_baseline.py` 保护关键 seams
-  - 一轮以删旧路径、收紧 host seams、拆高 ROI 热点为主的 campaign targeted refactor
-- 边界：
-  - 不做 whole-campaign facade
-  - 不做 full `CampaignView` rewrite
-  - 不做 repository-everywhere
-  - 不做 purity-driven `Track` aggregate promotion
-  - 不把 runtime UI 演进扩成另一轮全局架构重写
-- 当前阶段判断：
-  - `Phase 0` 到 `Phase 4` 已完成并可视为当前主线收口
-  - `Phase 5` 只保留为 triggered backlog，不再视为自动下一步
-  - 只有近期待做直接触及 DDL / fusion / compaction 或 shared board invariants 时才启动
+- 棰勬湡杈撳嚭锛?
+  - 绠€鍖栬鍒掋€佺儹鐐规枃妗ｅ拰浠诲姟绯荤粺鐘舵€佷繚鎸佸悓姝?
+  - focused guardrail tests + `scripts/run_repo_smoke_baseline.py` 淇濇姢鍏抽敭 seams
+  - 涓€杞互鍒犳棫璺緞銆佹敹绱?host seams銆佹媶楂?ROI 鐑偣涓轰富鐨?campaign targeted refactor
+- 杈圭晫锛?
+  - 涓嶅仛 whole-campaign facade
+  - 涓嶅仛 full `CampaignView` rewrite
+  - 涓嶅仛 repository-everywhere
+  - 涓嶅仛 purity-driven `Track` aggregate promotion
+  - 涓嶆妸 runtime UI 婕旇繘鎵╂垚鍙︿竴杞叏灞€鏋舵瀯閲嶅啓
+- 褰撳墠闃舵鍒ゆ柇锛?
+  - `Phase 0` 鍒?`Phase 4` 宸插畬鎴愬苟鍙涓哄綋鍓嶄富绾挎敹鍙?
+  - `Phase 5` 鍙繚鐣欎负 triggered backlog锛屼笉鍐嶈涓鸿嚜鍔ㄤ笅涓€姝?
+  - 鍙湁杩戞湡寰呭仛鐩存帴瑙﹀強 DDL / fusion / compaction 鎴?shared board invariants 鏃舵墠鍚姩
+
+### P1. Campaign Self Refactor V1
+
+- Goal:
+  - run one campaign-only refactor pass focused on shell ownership, thesis
+    write-path convergence, and task-area internal rule clarity
+  - improve stability, DDD readiness, and AI safety without reopening `view`,
+    visual runtime, or shared architecture
+- Current execution rules:
+  - follow `docs/development/CAMPAIGN_SELF_REFACTOR_PLAN_V1.md` serially
+  - `2026-04-18`: `Phase 0` landed: scope freeze, task entry, daily-log
+    handoff, and baseline validation pack
+  - `2026-04-18`: `Phase 1` landed: grouped service surfaces now install on
+    `CampaignState` while preserving legacy service aliases and stable
+    `request_*` seams
+  - `2026-04-18`: `Phase 2` landed: thesis atomic checkpoint/restore and
+    session tier/publication writes now route through explicit campaign thesis
+    seams instead of being duplicated across multiple thesis services
+  - `2026-04-18`: `Phase 3` landed: `TrackBlockService` now keeps the same
+    stable public surface while its overlap, DDL snake, fusion, and layout
+    rules are split into smaller internal rule units
+  - `2026-04-18`: `Phase 4` landed: campaign self-refactor guardrails/docs are
+    refreshed and this task is now downgraded to closed reference memory
+  - do not mix this task with a `CampaignView` rewrite, visual-runtime
+    extraction, shared-utils pass, or full node migration work
+  - stop and re-scope if progress requires broad edits under
+    `contexts/campaign/view.py`, `contexts/campaign/rendering/`,
+    `contexts/campaign/ui_runtime/`, or `contexts/shared/`
+- Main inputs:
+  - `docs/development/CAMPAIGN_SELF_REFACTOR_PLAN_V1.md`
+  - `docs/development/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md`
+  - `docs/development/CAMPAIGN_AGGREGATE_CANDIDATE_REVIEW_V1.md`
+  - `docs/development/AGGREGATE_INVARIANT_TESTS_V1.md`
+  - `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+  - `contexts/campaign/state.py`
+  - `contexts/campaign/services/campaign_state_service_bundle.py`
+  - `contexts/campaign/services/thesis_write_path_service.py`
+  - `contexts/campaign/services/thesis_meta_service.py`
+  - `contexts/campaign/services/thesis_submission_flow_service.py`
+  - `contexts/campaign/services/thesis_round_service.py`
+  - `contexts/campaign/services/thesis_slice.py`
+  - `contexts/campaign/services/track_block_service.py`
+  - `contexts/campaign/domain/thesis_runtime_state.py`
+  - `contexts/campaign/domain/session_store.py`
+- Expected outputs:
+  - a thinner `CampaignState` shell with stable external seams preserved
+  - clearer thesis main write paths and stronger track-local isolation
+  - `TrackBlockService` kept as the stable task-area facade but with smaller
+    internal rule units
+  - updated campaign guardrails/docs for the new phase
+- Boundaries:
+  - do not treat this as a whole-campaign aggregate promotion
+  - do not start visual-runtime / node / rendering refactors here
+  - do not widen this into repository-everywhere or shared cleanup
+  - do not reopen stable request seams without a concrete trigger
+- Current phase judgment:
+  - `Phase 0` landed
+  - `Phase 1` landed
+  - `Phase 2` landed
+  - `Phase 3` landed
+  - `Phase 4` landed
+  - mainline complete: keep this task as closed reference memory, not as the
+    default next active move
+  - if a change requires broad `view` or `shared` edits, pause and split a
+    separate task
 
 ### P1. Combat Action Contracts + Queue Skeleton V1
 
-- 目标：
-  - 建立最小 `CombatAction`、`ResolutionContext`、`ActionQueue`、`ActionExecutor`
-  - 先把“动作语义”和“顺序执行入口”立起来，而不是一次性迁完所有 effect
-- 主要输入：
+- 鐩爣锛?
+  - 寤虹珛鏈€灏?`CombatAction`銆乣ResolutionContext`銆乣ActionQueue`銆乣ActionExecutor`
+  - 鍏堟妸鈥滃姩浣滆涔夆€濆拰鈥滈『搴忔墽琛屽叆鍙ｂ€濈珛璧锋潵锛岃€屼笉鏄竴娆℃€ц縼瀹屾墍鏈?effect
+- 涓昏杈撳叆锛?
   - `contexts/combat/domain/services/play_card_transaction.py`
   - `contexts/combat/domain/effects/executor.py`
   - `contexts/combat/mvc/model.py`
   - `contexts/combat/domain/chore_host.py`
-- 预期输出：
-  - 一版最小动作合同与队列骨架
-  - 一组 focused tests，覆盖 `push_front` / `push_back` / `drain`
-  - 一份简短说明，约定后续新复杂机制优先走新编排口
-- 边界：
-  - 不切 UI
-  - 不全量迁移卡牌效果
-  - 不顺手重写 `CombatModel`
-- 完成标准：
-  - 队列骨架可独立测试
-  - 至少几类基础动作可通过执行器稳定落状态
-  - 后续任务可以在这套骨架上继续串行推进
+- 棰勬湡杈撳嚭锛?
+  - 涓€鐗堟渶灏忓姩浣滃悎鍚屼笌闃熷垪楠ㄦ灦
+  - 涓€缁?focused tests锛岃鐩?`push_front` / `push_back` / `drain`
+  - 涓€浠界畝鐭鏄庯紝绾﹀畾鍚庣画鏂板鏉傛満鍒朵紭鍏堣蛋鏂扮紪鎺掑彛
+- 杈圭晫锛?
+  - 涓嶅垏 UI
+  - 涓嶅叏閲忚縼绉诲崱鐗屾晥鏋?
+  - 涓嶉『鎵嬮噸鍐?`CombatModel`
+- 瀹屾垚鏍囧噯锛?
+  - 闃熷垪楠ㄦ灦鍙嫭绔嬫祴璇?
+  - 鑷冲皯鍑犵被鍩虹鍔ㄤ綔鍙€氳繃鎵ц鍣ㄧǔ瀹氳惤鐘舵€?
+  - 鍚庣画浠诲姟鍙互鍦ㄨ繖濂楅鏋朵笂缁х画涓茶鎺ㄨ繘
 
 ### P1. Chore Resolution Orchestration Cutover V1
 
-- 目标：
-  - 先把 `CombatChoreHost` 的 resolution actions 并入统一动作队列
-  - 消除 `CombatModel._apply_chore_resolution_actions()` 里的大分支解释器
-- 主要输入：
+- 鐩爣锛?
+  - 鍏堟妸 `CombatChoreHost` 鐨?resolution actions 骞跺叆缁熶竴鍔ㄤ綔闃熷垪
+  - 娑堥櫎 `CombatModel._apply_chore_resolution_actions()` 閲岀殑澶у垎鏀В閲婂櫒
+- 涓昏杈撳叆锛?
   - `contexts/combat/domain/chore_host.py`
   - `contexts/combat/mvc/model.py`
   - `contexts/combat/mvc/factory.py`
-- 预期输出：
+- 棰勬湡杈撳嚭锛?
   - `ChoreResolutionOrchestrator`
-  - `CombatChoreResolutionAction -> CombatAction` 的映射层
-  - 任务宿主倒计时 / 发布后续任务 / 变身 / 敌人 buff 的 focused tests
-- 边界：
-  - 不扩写新的 task host 抽象运动
-  - 不把 card play 主路径一起大改
-- 完成标准：
-  - chore resolution 主路径切到新队列
-  - 旧 `_apply_chore_resolution_actions()` 主解释逻辑删除或降为薄适配层
-  - 任务链式发布和倒计时回归不退化
+  - `CombatChoreResolutionAction -> CombatAction` 鐨勬槧灏勫眰
+  - 浠诲姟瀹夸富鍊掕鏃?/ 鍙戝竷鍚庣画浠诲姟 / 鍙樿韩 / 鏁屼汉 buff 鐨?focused tests
+- 杈圭晫锛?
+  - 涓嶆墿鍐欐柊鐨?task host 鎶借薄杩愬姩
+  - 涓嶆妸 card play 涓昏矾寰勪竴璧峰ぇ鏀?
+- 瀹屾垚鏍囧噯锛?
+  - chore resolution 涓昏矾寰勫垏鍒版柊闃熷垪
+  - 鏃?`_apply_chore_resolution_actions()` 涓昏В閲婇€昏緫鍒犻櫎鎴栭檷涓鸿杽閫傞厤灞?
+  - 浠诲姟閾惧紡鍙戝竷鍜屽€掕鏃跺洖褰掍笉閫€鍖?
 
 ### P1. Card Play Orchestrator Entry Cutover V1
 
-- 目标：
-  - 为出牌建立显式编排入口，减少“`CardPlayed` 事件 + `CombatModel` 订阅”承担主流程的程度
-- 主要输入：
+- 鐩爣锛?
+  - 涓哄嚭鐗屽缓绔嬫樉寮忕紪鎺掑叆鍙ｏ紝鍑忓皯鈥渀CardPlayed` 浜嬩欢 + `CombatModel` 璁㈤槄鈥濇壙鎷呬富娴佺▼鐨勭▼搴?
+- 涓昏杈撳叆锛?
   - `contexts/combat/domain/player.py`
   - `contexts/combat/domain/services/play_card_transaction.py`
   - `contexts/combat/mvc/model.py`
-- 预期输出：
+- 棰勬湡杈撳嚭锛?
   - `CardPlayOrchestrator`
-  - 明确的出牌编排入口与后处理 checkpoint
-  - 一份简短说明，记录 `CardPlayed` 在迁移期内是通知还是主入口
-- 边界：
-  - 不要求此阶段把所有 effect 都改成 action
-  - 保留事务层校验 / 扣费 / 回滚逻辑
-- 完成标准：
-  - 出牌主路径有单一编排入口
-  - 卡牌后处理顺序比当前更显式
-  - 不再继续向旧 `CombatModel` 直执行路径堆新复杂逻辑
+  - 鏄庣‘鐨勫嚭鐗岀紪鎺掑叆鍙ｄ笌鍚庡鐞?checkpoint
+  - 涓€浠界畝鐭鏄庯紝璁板綍 `CardPlayed` 鍦ㄨ縼绉绘湡鍐呮槸閫氱煡杩樻槸涓诲叆鍙?
+- 杈圭晫锛?
+  - 涓嶈姹傛闃舵鎶婃墍鏈?effect 閮芥敼鎴?action
+  - 淇濈暀浜嬪姟灞傛牎楠?/ 鎵ｈ垂 / 鍥炴粴閫昏緫
+- 瀹屾垚鏍囧噯锛?
+  - 鍑虹墝涓昏矾寰勬湁鍗曚竴缂栨帓鍏ュ彛
+  - 鍗＄墝鍚庡鐞嗛『搴忔瘮褰撳墠鏇存樉寮?
+  - 涓嶅啀缁х画鍚戞棫 `CombatModel` 鐩存墽琛岃矾寰勫爢鏂板鏉傞€昏緫
 
 ### P1. High-Frequency Effect Planner V1
 
-- 目标：
-  - 先把高频、低风险卡牌效果改成“先规划动作，再顺序执行”
-- 主要输入：
+- 鐩爣锛?
+  - 鍏堟妸楂橀銆佷綆椋庨櫓鍗＄墝鏁堟灉鏀规垚鈥滃厛瑙勫垝鍔ㄤ綔锛屽啀椤哄簭鎵ц鈥?
+- 涓昏杈撳叆锛?
   - `contexts/combat/domain/effects/executor.py`
   - `contexts/combat/domain/effects/impl/core.py`
-  - 高频战斗回归测试
-- 预期输出：
-  - 一版最小 `EffectPlanner`
-  - 至少 4 类高频效果 action 化：
-    - 单体伤害
-    - 格挡
-    - 抽牌
-    - 上 buff / debuff
-- 边界：
-  - 不一次性迁 60 类 effect
-  - pile / pointer / 强随机复杂牌先不求一轮做完
-- 完成标准：
-  - 高频效果通过 queue 稳定结算
-  - 结算顺序、连锁 follow-up 和后续扩展点更显式
-  - 旧执行器只保留有限兼容用途，不再扩新逻辑
+  - 楂橀鎴樻枟鍥炲綊娴嬭瘯
+- 棰勬湡杈撳嚭锛?
+  - 涓€鐗堟渶灏?`EffectPlanner`
+  - 鑷冲皯 4 绫婚珮棰戞晥鏋?action 鍖栵細
+    - 鍗曚綋浼ゅ
+    - 鏍兼尅
+    - 鎶界墝
+    - 涓?buff / debuff
+- 杈圭晫锛?
+  - 涓嶄竴娆℃€ц縼 60 绫?effect
+  - pile / pointer / 寮洪殢鏈哄鏉傜墝鍏堜笉姹備竴杞仛瀹?
+- 瀹屾垚鏍囧噯锛?
+  - 楂橀鏁堟灉閫氳繃 queue 绋冲畾缁撶畻
+  - 缁撶畻椤哄簭銆佽繛閿?follow-up 鍜屽悗缁墿灞曠偣鏇存樉寮?
+  - 鏃ф墽琛屽櫒鍙繚鐣欐湁闄愬吋瀹圭敤閫旓紝涓嶅啀鎵╂柊閫昏緫
 
 ### P1. Combat Post-Resolution Policies V1
 
-- 目标：
-  - 把清理死亡敌人、卡牌去向、异色后处理、战斗结束检查收成统一 checkpoint
-- 主要输入：
+- 鐩爣锛?
+  - 鎶婃竻鐞嗘浜℃晫浜恒€佸崱鐗屽幓鍚戙€佸紓鑹插悗澶勭悊銆佹垬鏂楃粨鏉熸鏌ユ敹鎴愮粺涓€ checkpoint
+- 涓昏杈撳叆锛?
   - `contexts/combat/mvc/model.py`
   - `contexts/combat/domain/services/pile_service.py`
   - `contexts/combat/domain/services/ideal_policy.py`
-- 预期输出：
-  - 一组 post-resolution policy/helper
-  - focused regression tests，保护 card route / prune / combat end 顺序
-- 边界：
-  - 不做 UI 侧动画编排
-  - 不顺手改 render state 协议
-- 完成标准：
-  - 出牌与任务动作结算后的收尾路径更统一
-  - 顺序错误不再依赖隐式调用链兜住
+- 棰勬湡杈撳嚭锛?
+  - 涓€缁?post-resolution policy/helper
+  - focused regression tests锛屼繚鎶?card route / prune / combat end 椤哄簭
+- 杈圭晫锛?
+  - 涓嶅仛 UI 渚у姩鐢荤紪鎺?
+  - 涓嶉『鎵嬫敼 render state 鍗忚
+- 瀹屾垚鏍囧噯锛?
+  - 鍑虹墝涓庝换鍔″姩浣滅粨绠楀悗鐨勬敹灏捐矾寰勬洿缁熶竴
+  - 椤哄簭閿欒涓嶅啀渚濊禆闅愬紡璋冪敤閾惧厹浣?
 
 ### P2. Turn Flow Orchestration V1
 
-- 目标：
-  - 显式整理 enemy turn start / end、task tick、turn checkpoint 的流程点
-- 当前不优先的原因：
-  - 先把 chore resolution 和 card play 两条最贵主路径切稳
-  - 这一块适合在前几步稳定后继续收口
+- 鐩爣锛?
+  - 鏄惧紡鏁寸悊 enemy turn start / end銆乼ask tick銆乼urn checkpoint 鐨勬祦绋嬬偣
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 鍏堟妸 chore resolution 鍜?card play 涓ゆ潯鏈€璐典富璺緞鍒囩ǔ
+  - 杩欎竴鍧楅€傚悎鍦ㄥ墠鍑犳绋冲畾鍚庣户缁敹鍙?
 
-## 已归档完成任务（热区只保留索引）
+## 宸插綊妗ｅ畬鎴愪换鍔★紙鐑尯鍙繚鐣欑储寮曪級
 
 - `Campaign UI Handoff Orchestration`
-  - 已在 `2026-03-17` 收口，完整子任务、主要产出与重开条件见 `docs/development/task_pool_archive/2026-03_2026-04_completed.md`
-- `Combat Queue Full Cutover` 与 `Combat Queue Residual Closure`
-  - phase-2 与 residual 收尾均已归档，active `red/white` fallback 边界已在 `2026-03-31` 收口到 `0`
+  - 宸插湪 `2026-03-17` 鏀跺彛锛屽畬鏁村瓙浠诲姟銆佷富瑕佷骇鍑轰笌閲嶅紑鏉′欢瑙?`docs/development/task_pool_archive/2026-03_2026-04_completed.md`
+- `Combat Queue Full Cutover` 涓?`Combat Queue Residual Closure`
+  - phase-2 涓?residual 鏀跺熬鍧囧凡褰掓。锛宎ctive `red/white` fallback 杈圭晫宸插湪 `2026-03-31` 鏀跺彛鍒?`0`
 - `Campaign Aggregate / Orchestration Closure`
-  - thesis、task-area、DDD follow-up 的本轮收口已归档
+  - thesis銆乼ask-area銆丏DD follow-up 鐨勬湰杞敹鍙ｅ凡褰掓。
 - `Combat Analysis Capability Iteration V1`
-  - 当前轮已在 `2026-04-05` 完成；下一轮应重新拆任务，不再把 V1 checklist 长期留在热区
+  - 褰撳墠杞凡鍦?`2026-04-05` 瀹屾垚锛涗笅涓€杞簲閲嶆柊鎷嗕换鍔★紝涓嶅啀鎶?V1 checklist 闀挎湡鐣欏湪鐑尯
 
-## 待定 / 需要更多前置条件
+## 寰呭畾 / 闇€瑕佹洿澶氬墠缃潯浠?
 
-### P2. 三端精英前置机制评估
+### P2. 涓夌绮捐嫳鍓嶇疆鏈哄埗璇勪及
 
-- 目标：
-  - 盘清“微信 / QQ / 邮箱”三端精英需要的最小宿主能力
-- 当前不优先的原因：
-  - 复杂度高于 DDL 精英
-  - 依赖更重的精英专属规则
+- 鐩爣锛?
+  - 鐩樻竻鈥滃井淇?/ QQ / 閭鈥濅笁绔簿鑻遍渶瑕佺殑鏈€灏忓涓昏兘鍔?
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 澶嶆潅搴﹂珮浜?DDL 绮捐嫳
+  - 渚濊禆鏇撮噸鐨勭簿鑻变笓灞炶鍒?
 
-### P2. 敌人数值基线 v1
+### P2. 鏁屼汉鏁板€煎熀绾?v1
 
-- 目标：
-  - 给普通敌 / 精英 / boss 建第一版数值曲线
-- 当前不优先的原因：
-  - TA 主题机制还在继续落地
-  - 现在先做数值会产生假精确
+- 鐩爣锛?
+  - 缁欐櫘閫氭晫 / 绮捐嫳 / boss 寤虹涓€鐗堟暟鍊兼洸绾?
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - TA 涓婚鏈哄埗杩樺湪缁х画钀藉湴
+  - 鐜板湪鍏堝仛鏁板€间細浜х敓鍋囩簿纭?
 
-### P2. 红白卡第二轮调数
+### P2. 绾㈢櫧鍗＄浜岃疆璋冩暟
 
-- 目标：
-  - 只修首轮平衡后暴露的问题卡
-- 当前不优先的原因：
-  - 需要更多试玩反馈
+- 鐩爣锛?
+  - 鍙慨棣栬疆骞宠　鍚庢毚闇茬殑闂鍗?
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 闇€瑕佹洿澶氳瘯鐜╁弽棣?
 
-### P2. Headless 平衡检查
+### P2. Headless 骞宠　妫€鏌?
 
-- 目标：
-  - 建立轻量的无 UI 平衡体检
-- 当前不优先的原因：
-  - 机制建设优先级更高
+- 鐩爣锛?
+  - 寤虹珛杞婚噺鐨勬棤 UI 骞宠　浣撴
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 鏈哄埗寤鸿浼樺厛绾ф洿楂?
 
-### P2. Combat Chore Host V2（在 chore resolution cutover 后再继续）
+### P2. Combat Chore Host V2锛堝湪 chore resolution cutover 鍚庡啀缁х画锛?
 
-- 目标：
-  - 在现有 shared chore host、链式 `publish_chore`、DDL 压力表达已经可跑的基础上，把琐事宿主沉淀成更稳定的战斗中层能力
-- 当前已落地基线：
-  - `CombatChoreHost` 已挂到 `CombatState`
-  - 点名主题共享宿主、链式后续任务、DDL 一回合倒计时与失败分档表达已存在
-- 当前不优先的原因：
-  - 当前更高 ROI 的切口是先把 resolution path 并入统一编排层
-  - 若过早继续扩宿主抽象，容易在主路径尚未切稳前形成新的双轨
+- 鐩爣锛?
+  - 鍦ㄧ幇鏈?shared chore host銆侀摼寮?`publish_chore`銆丏DL 鍘嬪姏琛ㄨ揪宸茬粡鍙窇鐨勫熀纭€涓婏紝鎶婄悙浜嬪涓绘矇娣€鎴愭洿绋冲畾鐨勬垬鏂椾腑灞傝兘鍔?
+- 褰撳墠宸茶惤鍦板熀绾匡細
+  - `CombatChoreHost` 宸叉寕鍒?`CombatState`
+  - 鐐瑰悕涓婚鍏变韩瀹夸富銆侀摼寮忓悗缁换鍔°€丏DL 涓€鍥炲悎鍊掕鏃朵笌澶辫触鍒嗘。琛ㄨ揪宸插瓨鍦?
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 褰撳墠鏇撮珮 ROI 鐨勫垏鍙ｆ槸鍏堟妸 resolution path 骞跺叆缁熶竴缂栨帓灞?
+  - 鑻ヨ繃鏃╃户缁墿瀹夸富鎶借薄锛屽鏄撳湪涓昏矾寰勫皻鏈垏绋冲墠褰㈡垚鏂扮殑鍙岃建
 
 ### P2. Encounter Contract Expansion
 
-- 目标：
-  - 扩 encounter / enemy / task-chain 的内容 contract、字段约束和引用校验
-- 当前不优先的原因：
-  - 当前先把活跃 TA 主线做稳
-  - 需要在现有运行链上确定最常见的坏数据形态
+- 鐩爣锛?
+  - 鎵?encounter / enemy / task-chain 鐨勫唴瀹?contract銆佸瓧娈电害鏉熷拰寮曠敤鏍￠獙
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 褰撳墠鍏堟妸娲昏穬 TA 涓荤嚎鍋氱ǔ
+  - 闇€瑕佸湪鐜版湁杩愯閾句笂纭畾鏈€甯歌鐨勫潖鏁版嵁褰㈡€?
 
 ### P2. Balance Report Script V1
 
-- 目标：
-  - 建立轻量数值体检脚本，先做异常发现，不做复杂平衡 AI
-- 当前不优先的原因：
-  - 敌人与任务机制仍在继续落地
-  - 现在做深平衡容易产生假精确
+- 鐩爣锛?
+  - 寤虹珛杞婚噺鏁板€间綋妫€鑴氭湰锛屽厛鍋氬紓甯稿彂鐜帮紝涓嶅仛澶嶆潅骞宠　 AI
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 鏁屼汉涓庝换鍔℃満鍒朵粛鍦ㄧ户缁惤鍦?
+  - 鐜板湪鍋氭繁骞宠　瀹规槗浜х敓鍋囩簿纭?
 
 ### P2. Resource Guardrail Convergence V1
 
-- 目标：
-  - 在现有 `scripts/check_resource_contracts.py` 与 `scripts/check_asset_manifest_consistency.py` 骨架之上，逐步收敛资源入口与清单漂移
-  - 让资源问题尽量在 repo guard / smoke baseline 阶段暴露，而不是在运行期或打包期才发现
-- 当前已落地基线：
-  - `repo-guards` 已包含 resource contract 与 asset manifest consistency 检查
-  - manifest / enum 漂移已修复
-  - 当前仍有一批 `assets/` 硬编码路径告警，主要集中在 campaign / combat / deck / loading / main_menu / shared ui
-- 主要输入：
+- 鐩爣锛?
+  - 鍦ㄧ幇鏈?`scripts/check_resource_contracts.py` 涓?`scripts/check_asset_manifest_consistency.py` 楠ㄦ灦涔嬩笂锛岄€愭鏀舵暃璧勬簮鍏ュ彛涓庢竻鍗曟紓绉?
+  - 璁╄祫婧愰棶棰樺敖閲忓湪 repo guard / smoke baseline 闃舵鏆撮湶锛岃€屼笉鏄湪杩愯鏈熸垨鎵撳寘鏈熸墠鍙戠幇
+- 褰撳墠宸茶惤鍦板熀绾匡細
+  - `repo-guards` 宸插寘鍚?resource contract 涓?asset manifest consistency 妫€鏌?
+  - manifest / enum 婕傜Щ宸蹭慨澶?
+  - 褰撳墠浠嶆湁涓€鎵?`assets/` 纭紪鐮佽矾寰勫憡璀︼紝涓昏闆嗕腑鍦?campaign / combat / deck / loading / main_menu / shared ui
+- 涓昏杈撳叆锛?
   - `scripts/check_resource_contracts.py`
   - `scripts/check_asset_manifest_consistency.py`
   - `scripts/run_repo_smoke_baseline.py`
   - `contexts/shared/infrastructure/assets/`
-  - 当前告警文件清单
-- 预期输出：
-  - 一份按优先级分组的资源入口迁移清单
-  - 第一批高价值运行时路径从硬编码 `assets/` 收口到统一资源入口
-  - 更小的 allowlist / 更少的 warning 数量
-  - 条件成熟时，把部分 warning 升级为 hard-fail contract
-- 边界：
-  - 不做一次性“全仓库统一资源系统重写”
-  - 不为了资源治理重开整轮 UI / rendering 重构
-  - 不在当前主线优先级之前抢占 combat / campaign 主路径工作
-- 当前不优先的原因：
-  - 资源 guardrail 骨架已经落地，短期风险已从“不可见”降到“可见”
-  - 剩余问题主要是工程债收敛，不是阻断当前近期主线的 P0
-  - 更适合按模块顺手收口，而不是立刻开一条重型治理支线
+  - 褰撳墠鍛婅鏂囦欢娓呭崟
+- 棰勬湡杈撳嚭锛?
+  - 涓€浠芥寜浼樺厛绾у垎缁勭殑璧勬簮鍏ュ彛杩佺Щ娓呭崟
+  - 绗竴鎵归珮浠峰€艰繍琛屾椂璺緞浠庣‖缂栫爜 `assets/` 鏀跺彛鍒扮粺涓€璧勬簮鍏ュ彛
+  - 鏇村皬鐨?allowlist / 鏇村皯鐨?warning 鏁伴噺
+  - 鏉′欢鎴愮啛鏃讹紝鎶婇儴鍒?warning 鍗囩骇涓?hard-fail contract
+- 杈圭晫锛?
+  - 涓嶅仛涓€娆℃€р€滃叏浠撳簱缁熶竴璧勬簮绯荤粺閲嶅啓鈥?
+  - 涓嶄负浜嗚祫婧愭不鐞嗛噸寮€鏁磋疆 UI / rendering 閲嶆瀯
+  - 涓嶅湪褰撳墠涓荤嚎浼樺厛绾т箣鍓嶆姠鍗?combat / campaign 涓昏矾寰勫伐浣?
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 璧勬簮 guardrail 楠ㄦ灦宸茬粡钀藉湴锛岀煭鏈熼闄╁凡浠庘€滀笉鍙鈥濋檷鍒扳€滃彲瑙佲€?
+  - 鍓╀綑闂涓昏鏄伐绋嬪€烘敹鏁涳紝涓嶆槸闃绘柇褰撳墠杩戞湡涓荤嚎鐨?P0
+  - 鏇撮€傚悎鎸夋ā鍧楅『鎵嬫敹鍙ｏ紝鑰屼笉鏄珛鍒诲紑涓€鏉￠噸鍨嬫不鐞嗘敮绾?
 
-### P2. Combat Analysis 下一轮拆分
+### P2. Combat Analysis 涓嬩竴杞媶鍒?
 
-- 当前状态（`2026-04-05`）：
-  - `Combat Analysis Capability Iteration V1` 已完成并归档
-  - 下一轮不沿用旧 checklist，等样本缺口和校准目标更清楚后再重新拆任务
-- 当前下一轮规则：
-  - 保持 `source facts -> reviewed annotation -> projection`
-  - 不直接从卡牌文本跳共享语义
-  - 只有同一种失败模式在多个角色重复出现时，才上升为共享语义
-- 当前建议顺序：
-  1. 先稳 core benchmark
-  2. 再按角色逐个稳辅助层
-  3. 先扩验证集，再扩模型表面
-  4. 辅助层稳定后，再继续 `enemy pressure -> matchup -> recommendation`
-- 当前默认观察入口：
-  - 先刷 `combat_analysis_portfolio_report` 看组合级数据理解，再决定下一轮该补哪一层
-- 下一轮候选方向：
-  - 扩 STS 正负样本与 near-neighbor
-  - 继续做遗物 / 时序 / 状态表达校准
-  - 继续扩敌人 pressure 报告可视化
-  - 继续观察值得共享化的时序语义：
+- 褰撳墠鐘舵€侊紙`2026-04-05`锛夛細
+  - `Combat Analysis Capability Iteration V1` 宸插畬鎴愬苟褰掓。
+  - 涓嬩竴杞笉娌跨敤鏃?checklist锛岀瓑鏍锋湰缂哄彛鍜屾牎鍑嗙洰鏍囨洿娓呮鍚庡啀閲嶆柊鎷嗕换鍔?
+- 褰撳墠涓嬩竴杞鍒欙細
+  - 淇濇寔 `source facts -> reviewed annotation -> projection`
+  - 涓嶇洿鎺ヤ粠鍗＄墝鏂囨湰璺冲叡浜涔?
+  - 鍙湁鍚屼竴绉嶅け璐ユā寮忓湪澶氫釜瑙掕壊閲嶅鍑虹幇鏃讹紝鎵嶄笂鍗囦负鍏变韩璇箟
+- 褰撳墠寤鸿椤哄簭锛?
+  1. 鍏堢ǔ core benchmark
+  2. 鍐嶆寜瑙掕壊閫愪釜绋宠緟鍔╁眰
+  3. 鍏堟墿楠岃瘉闆嗭紝鍐嶆墿妯″瀷琛ㄩ潰
+  4. 杈呭姪灞傜ǔ瀹氬悗锛屽啀缁х画 `enemy pressure -> matchup -> recommendation`
+- 褰撳墠榛樿瑙傚療鍏ュ彛锛?
+  - 鍏堝埛 `combat_analysis_portfolio_report` 鐪嬬粍鍚堢骇鏁版嵁鐞嗚В锛屽啀鍐冲畾涓嬩竴杞琛ュ摢涓€灞?
+- 涓嬩竴杞€欓€夋柟鍚戯細
+  - 鎵?STS 姝ｈ礋鏍锋湰涓?near-neighbor
+  - 缁х画鍋氶仐鐗?/ 鏃跺簭 / 鐘舵€佽〃杈炬牎鍑?
+  - 缁х画鎵╂晫浜?pressure 鎶ュ憡鍙鍖?
+  - 缁х画瑙傚療鍊煎緱鍏变韩鍖栫殑鏃跺簭璇箟锛?
     - `hold / retain / cross-turn value`
     - `delayed resolution / delayed payoff`
     - `conditional trigger window`
     - `threshold burst window`
-  - 保持角色私有复杂度留在 `projection_gap`，不要过早污染共享层
-- 当前不优先的原因：
-  - 先观察本轮 benchmark / snapshot / HTML 报告是否稳定
-  - 下一轮最好基于新增失败样本重新定义主攻点
+  - 淇濇寔瑙掕壊绉佹湁澶嶆潅搴︾暀鍦?`projection_gap`锛屼笉瑕佽繃鏃╂薄鏌撳叡浜眰
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 鍏堣瀵熸湰杞?benchmark / snapshot / HTML 鎶ュ憡鏄惁绋冲畾
+  - 涓嬩竴杞渶濂藉熀浜庢柊澧炲け璐ユ牱鏈噸鏂板畾涔変富鏀荤偣
 
-### P3. 内容接入工作流
+### P3. 鍐呭鎺ュ叆宸ヤ綔娴?
 
-- 目标：
-  - 文档化新卡牌 / 新敌人 / 新特质接入流程
-- 当前不优先的原因：
-  - 当前更需要先把 TA 线和数据链继续做稳
+- 鐩爣锛?
+  - 鏂囨。鍖栨柊鍗＄墝 / 鏂版晫浜?/ 鏂扮壒璐ㄦ帴鍏ユ祦绋?
+- 褰撳墠涓嶄紭鍏堢殑鍘熷洜锛?
+  - 褰撳墠鏇撮渶瑕佸厛鎶?TA 绾垮拰鏁版嵁閾剧户缁仛绋?
 
-## 最近完成
+## 鏈€杩戝畬鎴?
 
 - `Combat Analysis Capability Iteration V1`
-  - 当前轮完成并已归档
+  - 褰撳墠杞畬鎴愬苟宸插綊妗?
 - `Combat Queue Full Cutover` / `Combat Queue Residual Closure`
-  - active `red/white` fallback 边界已在 `2026-03-31` 收口到 `0`
+  - active `red/white` fallback 杈圭晫宸插湪 `2026-03-31` 鏀跺彛鍒?`0`
 - `Campaign UI Handoff Orchestration`
-  - 交接链已完成并已归档
+  - 浜ゆ帴閾惧凡瀹屾垚骞跺凡褰掓。
 - `Campaign Aggregate / Orchestration Closure`
-  - thesis / task-area / DDD follow-up 的本轮收口已完成并归档
-- 更早完成项：
-  - 见 `docs/development/task_pool_archive/2026-03_2026-04_completed.md`
-  - 以及最近周报、日报与专项文档
+  - thesis / task-area / DDD follow-up 鐨勬湰杞敹鍙ｅ凡瀹屾垚骞跺綊妗?
+- 鏇存棭瀹屾垚椤癸細
+  - 瑙?`docs/development/task_pool_archive/2026-03_2026-04_completed.md`
+  - 浠ュ強鏈€杩戝懆鎶ャ€佹棩鎶ヤ笌涓撻」鏂囨。
 
-## 退出规则
+## 閫€鍑鸿鍒?
 
-当出现以下任一情况时，任务应该从活跃区移走：
+褰撳嚭鐜颁互涓嬩换涓€鎯呭喌鏃讹紝浠诲姟搴旇浠庢椿璺冨尯绉昏蛋锛?
 
-- 已经实现
-- 被新的设计决策阻塞
-- 不再适合当前生产阶段
-- 需要持续高频人工主观反馈
+- 宸茬粡瀹炵幇
+- 琚柊鐨勮璁″喅绛栭樆濉?
+- 涓嶅啀閫傚悎褰撳墠鐢熶骇闃舵
+- 闇€瑕佹寔缁珮棰戜汉宸ヤ富瑙傚弽棣?

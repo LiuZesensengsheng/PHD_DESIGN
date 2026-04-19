@@ -40,26 +40,30 @@ Terminology note:
   - switched from broad `CampaignState` assumptions to `TaskAreaBlueprintHost`
   - thesis blueprint follow-up now uses explicit task-area seams for meta prep and saved-tier cleanup
   - current direct `self.state.*` touches after the cut: `0`
+- `contexts/campaign/services/thesis_meta_service.py`
+  - phase-2 thesis convergence delegated main write-path persistence to `ThesisWritePathService`
+  - current direct `self.state.*` touches after the cut: `10`
+  - status: no longer the highest-priority dependency hotspot in this refactor line
+- `contexts/campaign/services/track_block_service.py`
+  - phase-3 kept the stable task-area facade but split internal rules into:
+    - `TrackLayoutRules`
+    - `_TrackDdlSnakeRules`
+    - `_TrackFusionRules`
+  - current direct `self.state.*` touches after the cut: `24`
+  - current stance: future task-area edits should prefer those helper boundaries instead of widening the facade again
 
 ## Remaining Hotspots
 
-- `contexts/campaign/services/thesis_meta_service.py`
-  - current direct `self.state.*` touches: `56`
-  - status: hotspot, but intentionally not in this task
-  - reason: split submission flow, tier-tag mutation, and publication handoff responsibilities first; do not hide a monolith behind a wide host
-- `contexts/campaign/services/track_block_service.py`
-  - current direct `self.state.*` touches: `38`
-  - status: hotspot, but intentionally not in this task
-  - reason: mostly task-area board geometry and runtime mutation rules; do not force repository-style or facade-style abstraction here yet
+- `contexts/campaign/services/thesis_slice.py`
+  - current direct `self.state.*` touches: `39`
+  - status: still the main remaining campaign-side dependency hotspot
+  - reason: it behaves as a convenience facade across multiple thesis seams, so further narrowing should wait for a concrete follow-up rather than another cleanliness-only pass
 
 ## Lower-ROI Targets For Now
 
 - `contexts/campaign/services/campaign_mouse_event_service.py`
-  - current direct `self.state.*` touches: `39`
-  - reason: still mixes view math, hit-testing, runtime widgets, and transition orchestration; responsibility split is higher ROI than DIP here
-- `contexts/campaign/services/thesis_slice.py`
-  - current direct `self.state.*` touches: `38`
-  - reason: already behaves like a facade over multiple thesis services; further narrowing should follow later thesis-runtime consolidation
+  - current direct `self.state.*` touches: `3`
+  - reason: this is no longer a real dependency hotspot after the intent split; keep it watched as an adapter/orchestration seam, not as a primary narrowing target
 
 ## Conclusion
 
@@ -67,9 +71,12 @@ Terminology note:
   - orchestration-heavy startup flows
   - modal-to-transition seams
   - state-machine boundary helpers with stable collaborator contracts
+- Stable enough after this refactor line:
+  - `track_block_service` as a task-area facade with smaller internal rule units
+  - `thesis_meta_service` as a UI/orchestration seam over a dedicated write path
 - Not worth forcing right now:
-  - `thesis_meta_service` before its responsibilities are split
-  - `track_block_service` while it is still dominated by task-area board geometry rules
+  - another `track_block_service` abstraction pass without new task-area behavior pressure
+  - a second thesis facade rewrite without a concrete identity or writer-collision trigger
 - Rule of thumb:
   - prefer narrow host protocols that expose business-intent methods
   - if a protocol starts needing many internal fields, stop and add a thin `CampaignState` seam method instead

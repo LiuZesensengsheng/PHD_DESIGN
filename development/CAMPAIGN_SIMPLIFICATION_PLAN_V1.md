@@ -103,6 +103,7 @@ Current status:
 - `2026-04-05`: Phase 4 landed
 - `2026-04-05`: the mainline simplification pass is effectively complete through Phase 4
 - `2026-04-05`: Phase 5 moved to triggered backlog; do not auto-start it without near-term board-rule pressure
+- `2026-04-18`: the later internal `TrackBlockService` split landed under `CAMPAIGN_SELF_REFACTOR_PLAN_V1.md` without reopening the broader simplification plan
 
 ## Baseline Snapshot
 
@@ -110,15 +111,15 @@ The current simplification baseline is:
 
 - `CampaignState`: shell host with stable `request_*` seams retained
 - `CampaignView`: still large, but not the primary simplification target now
-- `ThesisMetaService`: narrowed once already, but still a hotspot
-- `TrackBlockService`: real hotspot, intentionally deferred for broad abstraction
-- `CampaignMouseEventService`: short file, but still a mixed adapter/orchestration seam
+- `ThesisMetaService`: now routes its main write path through `ThesisWritePathService`
+- `TrackBlockService`: stable task-area facade with smaller internal rule units
+- `CampaignMouseEventService`: no longer a dependency hotspot after the intent split
 
 Hotspot touch counts recorded in `CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`:
 
-- `ThesisMetaService`: `56`
-- `TrackBlockService`: `38`
-- `CampaignMouseEventService`: `39`
+- `ThesisMetaService`: `10`
+- `TrackBlockService`: `24`
+- `CampaignMouseEventService`: `3`
 - `ThesisSlice`: `38`
 
 These are observability metrics, not hard-fail test budgets.
@@ -217,8 +218,9 @@ Trigger signals:
 
 Current stance:
 
-- keep this slice prepared, but deferred by default
-- only start when one of the trigger signals becomes part of the near-term roadmap, not just a cleanliness concern
+- this slice was originally deferred by default
+- `2026-04-18`: the allowed internal policy split later landed under `CAMPAIGN_SELF_REFACTOR_PLAN_V1.md`
+- do not reopen it automatically unless a new board-rule trigger appears
 
 Allowed cut:
 
@@ -302,8 +304,8 @@ These are useful review signals, but too brittle for immediate hard-fail tests.
 The project should currently treat this plan as:
 
 1. Phase 0 through Phase 4 complete
-2. Keep Phase 5 prepared but deferred until upcoming work directly touches DDL / fusion / compaction or shared board invariants
-3. Let near-term campaign follow-up stay focused on active roadmap work instead of starting a cleanliness-only `TrackBlockService` refactor
+2. The previously deferred Phase 5 internal `TrackBlockService` split later landed under the campaign self-refactor line on `2026-04-18`
+3. Treat the simplification plan as closed for now; future campaign follow-up should start from active roadmap work or a new concrete blocker, not from reopening old cleanup phases
 
 That keeps the simplicity gains already landed, without reopening a real
 task-area hotspot before it becomes the critical path.
