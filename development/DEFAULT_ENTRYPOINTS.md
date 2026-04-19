@@ -87,6 +87,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_fast_card_design_loop.py --write-template <path>`
 - Run a fast card-design loop review from a reviewed JSON input:
   - `python scripts/run_fast_card_design_loop.py --input <path> --output-dir <dir>`
+- Write a fast card synthesis bridge input template:
+  - `python scripts/run_fast_card_synthesis_bridge.py --write-template <path>`
+- Run the constrained fast card synthesis bridge from a reviewed JSON input:
+  - `python scripts/run_fast_card_synthesis_bridge.py --input <path> --output-dir <dir>`
 - Write a fast draft-session input template (3-pick-1 with optional discard):
   - `python scripts/run_fast_draft_session.py --write-template <path>`
 - Run a fast draft session from a reviewed JSON input:
@@ -103,6 +107,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py -q`
 - Validate fast card-design loop v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q`
+- Validate fast card synthesis bridge v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/scripts/test_run_fast_card_synthesis_bridge.py -q`
 - Validate fast draft-session v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_draft_session.py -q`
 - Validate enemy-design isolation guardrails:
