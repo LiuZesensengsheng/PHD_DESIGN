@@ -130,6 +130,15 @@ These services may coordinate lock behavior:
 
 These services should not bypass owner-aware release semantics.
 
+Current seam rule:
+
+- active services should read lock state through `ModalCoordinator`
+- active services should read meeting-prompt UI identity/hit-test state through
+  `MeetingPromptUiService`
+- do not add new direct reads of `_input_locked`, `_input_lock_owner`,
+  `_meeting_prompt_window`, `_meeting_enter_btn`, `_meeting_skip_btn`, or
+  `_meeting_enter_hovered` outside the storage owners
+
 In this cut, `LineBubbleService` and thesis judgment unlock flow were also
 aligned to reuse the coordinated owner behavior instead of blindly clearing the
 lock.
