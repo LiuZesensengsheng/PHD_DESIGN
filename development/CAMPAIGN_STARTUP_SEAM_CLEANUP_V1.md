@@ -3,9 +3,9 @@
 ## Goal
 
 Move campaign startup order behind one explicit orchestration seam so UI work
-does not need to understand startup hydration, route-return consumption, reward
-opening, and startup-only side effects as scattered `CampaignState.startup()`
-details.
+does not need to understand startup hydration, lifecycle-owned return
+resolution, interrupt rechecks, and startup-only side effects as scattered
+`CampaignState.startup()` details.
 
 ## Why This Exists
 
@@ -16,10 +16,8 @@ startup order still lived inline inside `CampaignState.startup()`:
 - session hydration
 - route-return transition consumption
 - startup-only effects
-- reward modal auto-open
 - startup status/inspiration refresh
 - forced-DDL refresh
-- startup meeting prompt
 
 That made the startup path correct but too implicit for safe UI handoff work.
 
@@ -47,13 +45,13 @@ V1 startup order is now:
 5. mark startup mode active
 6. bootstrap startup presentation shell
 7. hydrate campaign/session runtime data
-8. consume route-return startup transitions
-9. apply startup-only effects
-10. open startup reward modal if requested
+8. refresh lifecycle hook bindings
+9. consume route-return startup transitions through lifecycle-owned `RETURN_RESOLUTION`
+10. apply startup-only effects
 11. refresh startup status UI
 12. initialize inspiration UI state
 13. refresh forced-DDL state
-14. show startup meeting prompt if due
+14. recheck turn interrupt gates
 15. clear startup mode flag
 
 ## Ownership Split
@@ -68,7 +66,7 @@ V1 startup order is now:
 
 - restoring campaign snapshot/runtime blocks
 - loading thesis meta and paper-tag snapshots
-- backfilling combat encounter ids
+- failing fast when restored combat blocks are structurally invalid
 - applying thesis-combat sync payload
 - default deck initialization
 
@@ -76,7 +74,6 @@ V1 startup order is now:
 
 - initial board seed when campaign is empty
 - pending meeting add-line effect
-- reward-id-to-open result for startup follow-up UI
 
 ### CampaignState Owns
 
@@ -114,7 +111,7 @@ This cut does not:
 
 - redesign startup hydration data shapes
 - replace route-return transition queueing
-- remove startup side effects such as reward auto-open
+- remove startup side effects such as initial board seeding or pending add-line application
 - make startup fully pure or side-effect free
 
 ## Verification
@@ -124,13 +121,14 @@ V1 is currently protected by focused tests covering:
 - orchestrator step order
 - startup-flag reset on failure
 - hydration and startup-effects host seams
-- startup reward-open protocol
-- startup route-return block resolution
-- startup meeting prompt lifecycle
+- startup route-return lifecycle handoff
+- startup interrupt recheck lifecycle
+- startup hydration fail-fast on invalid combat blocks
 - startup thesis combat tag sync
 
 ## Next Cut
 
-The next highest-value campaign handoff task is:
+The next highest-value startup-side follow-up is:
 
-- `Campaign Event Input Split V1`
+- continue deleting residual startup-only compatibility wrappers once broader
+  lifecycle and state call sites are fully converged

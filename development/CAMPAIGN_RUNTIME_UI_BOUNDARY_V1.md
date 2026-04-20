@@ -19,22 +19,17 @@ resolution, thesis rules, transition wiring, or persistent writes get hidden.
 
 ## Current Runtime UI Surface
 
-The current runtime UI boundary is centered on these view hooks:
+The old `CampaignView` runtime-ui compatibility hooks have now been removed.
 
-- `CampaignView.handle_runtime_ui_event(event)`
-- `CampaignView.update_runtime_ui(dt)`
-- `CampaignView.render_runtime_ui(surface)`
-
-`CampaignState` currently owns dispatch order around those hooks:
+`CampaignState` currently owns dispatch order around the remaining campaign UI ingress:
 
 1. modal dispatch
 2. input-lock guard
-3. runtime UI event handling
-4. keyboard/mouse/button/hover adapters
+3. keyboard/mouse/button/hover adapters
 
-That means runtime widgets may consume local interaction, but they are still
-hosted by the campaign lifecycle rather than becoming their own application
-layer.
+That means retained/runtime UI work must now stay local to the concrete
+view/rendering/widget path instead of depending on a generic `CampaignView`
+compat hook layer.
 
 ## What Runtime UI Owns
 
@@ -75,7 +70,6 @@ owned by `CampaignState` or a campaign orchestration service.
 When a UI collaborator touches `ui_runtime`, the safe default is:
 
 - keep new logic local if it only changes runtime presentation or local widget interaction
-- use `CampaignView` runtime hooks for retained widget wiring
 - stop and ask for a state/service seam before adding business branching
 - do not import campaign thesis/transition services into runtime widgets
 - do not write `persistent` from runtime widgets
@@ -86,7 +80,7 @@ The current ownership split is:
 
 - `runtime_ui.py`: retained runtime widget tree assembly and local dispatch
 - `phone_widget.py`: local widget state, hover, animation, and local click behavior
-- `CampaignView`: runtime widget host hooks for event/update/render
+- `CampaignView`: presentation host only, without generic runtime-ui compat hooks
 - `CampaignState`: lifecycle host and dispatch ordering
 - `contexts/campaign/services/*`: business/orchestration ownership
 
@@ -94,9 +88,9 @@ The current ownership split is:
 
 V1 is protected by focused contract tests covering:
 
-- runtime UI event consumption short-circuits downstream business adapters
-- runtime UI update runs through the state/view host path
-- view runtime hooks delegate to the retained runtime UI module
+- campaign event routing now reaches business adapters directly after modal/input-lock checks
+- shared UI override polling stays on the state/view host path without a runtime-ui shim layer
+- removed `CampaignView` runtime-ui compat hooks do not reappear
 - `PhoneWidget` local notification interaction stays widget-local
 - runtime debug toggle remains local and non-consuming
 

@@ -101,7 +101,8 @@ Route-return handling remains owned by `CampaignRouteResolutionService`.
 Its V1 rule is:
 
 - consume route-resolved transitions from the shared queue
-- resolve returned campaign blocks through `CampaignState.resolve_returned_route_block(...)`
+- hand the resolved transitions to lifecycle-owned `RETURN_RESOLUTION`
+- let return-phase cleanup remove campaign blocks through the board-mutation seam
 - keep reward-open follow-up data separate from the transition request surface
 
 That means startup return flow is still contract-backed rather than relying on

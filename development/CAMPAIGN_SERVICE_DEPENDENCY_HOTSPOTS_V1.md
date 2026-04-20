@@ -17,7 +17,7 @@ Terminology note:
   - current direct `self.state.*` touches after the cut: `0`
 - `contexts/campaign/services/campaign_route_resolution_service.py`
   - switched from `state: Any` to `RouteResolutionHost`
-  - route-resolved block cleanup now goes through `CampaignState.resolve_returned_route_block()`
+  - route-resolved block cleanup now terminates in lifecycle-owned return resolution plus `CampaignBoardMutationService.remove_resolved_route_block(...)`
   - current direct `self.state.*` touches after the cut: `0`
 - `contexts/campaign/services/campaign_startup_hydration_service.py`
   - switched from `state: Any` to `StartupHydrationHost`
