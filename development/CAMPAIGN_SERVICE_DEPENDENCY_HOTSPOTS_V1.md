@@ -36,6 +36,10 @@ Terminology note:
   - task-area overlay lookup now reads blocks through `get_campaign_blocks()`
   - gossip lock release now goes through explicit host seams instead of `_unlock_gossip_inputs`
   - current direct `self.state.*` touches after the cut: `0`
+- `contexts/campaign/services/gossip_flow_app_service.py`
+  - gossip modal lock ownership now routes only through `ModalCoordinator`
+  - on-hide unlock no longer depends on the private `CampaignState._unlock_gossip_inputs()` seam
+  - current direct raw `_input_locked` fallback writes after the cut: `0`
 - `contexts/campaign/services/thesis_blueprint_app_service.py`
   - switched from broad `CampaignState` assumptions to `TaskAreaBlueprintHost`
   - thesis blueprint follow-up now uses explicit task-area seams for meta prep and saved-tier cleanup
@@ -49,6 +53,8 @@ Terminology note:
     - `TrackLayoutRules`
     - `_TrackDdlSnakeRules`
     - `_TrackFusionRules`
+  - later compat cleanup removed the old `_next_id()` state seam and the synthetic fused-id fallback
+  - fused block id allocation now routes through the stable `allocate_campaign_block_id()` host seam
   - current direct `self.state.*` touches after the cut: `24`
   - current stance: future task-area edits should prefer those helper boundaries instead of widening the facade again
 

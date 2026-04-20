@@ -94,9 +94,8 @@ Campaign input ingress still follows this order:
 
 1. `CampaignModalDispatchService.dispatch(event)`
 2. `CampaignInputLockService.handle_locked_event(event)`
-3. runtime UI handling
-4. keyboard/mouse/button adapters
-5. orchestration seams
+3. keyboard/mouse/button adapters
+4. orchestration seams
 
 Meaning:
 
@@ -135,6 +134,9 @@ In this cut, `LineBubbleService` and thesis judgment unlock flow were also
 aligned to reuse the coordinated owner behavior instead of blindly clearing the
 lock.
 
+`GossipFlowApplicationService` now also routes lock acquire/release only
+through `ModalCoordinator` instead of keeping a direct raw-field fallback.
+
 ## Non-Goals
 
 This contract does not:
@@ -143,6 +145,12 @@ This contract does not:
 - convert all campaign UI into one modal framework
 - redesign modal visuals
 - remove legacy `_input_locked` storage from `CampaignState`
+
+Current nuance:
+
+- raw storage still exists on `CampaignState`
+- direct service-side fallback writes should stay deleted
+- owner-aware lock mutation should stay centralized in `ModalCoordinator`
 
 ## Safe UI Collaboration Rule
 
