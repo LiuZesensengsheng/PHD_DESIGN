@@ -57,6 +57,15 @@ Terminology note:
   - fused block id allocation now routes through the stable `allocate_campaign_block_id()` host seam
   - current direct `self.state.*` touches after the cut: `24`
   - current stance: future task-area edits should prefer those helper boundaries instead of widening the facade again
+- `contexts/campaign/services/campaign_state_service_bundle.py`
+  - reward opening now funnels through one grouped seam:
+    - `CampaignState.open_reward(...)`
+    - `CampaignRewardServiceGroup.open_reward(...)`
+  - direct host aliases `state.reward` / `state.post_combat_reward` were removed
+  - reward cleanup now also routes through explicit host seam
+    `reset_reward_runtime_state()`
+  - current stance: future reward entry/cancellation work should start from the
+    grouped reward seam instead of restoring service aliases on `CampaignState`
 
 ## Remaining Hotspots
 
