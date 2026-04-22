@@ -27,9 +27,14 @@ It answers:
   - `enemy_action_banner`
 - the older underscore-shaped session reads remain only as compatibility
   wrappers and should no longer be the default render/test contract.
-- `CombatModel` is still present as a compatibility facade because controller,
-  some orchestration paths, and many tests still construct or receive
-  `CombatModel`.
+- headed combat mainline no longer constructs `CombatModel` eagerly:
+  - `build_combat_scene_runtime(...)` now wires `CombatController` directly to
+    `CombatSession`
+  - `CombatState` now uses `session` as its internal runtime host
+- `CombatModel` is still present as a compatibility facade for:
+  - legacy scene/factory tuple callers
+  - `CombatState.model` compatibility access
+  - headless/test helpers and legacy tests
 - `CombatModel` no longer uses broad `__getattr__` / `__setattr__` passthrough.
   Its surface is now explicit.
 - New runtime work should prefer `session` directly unless a caller still needs
@@ -145,6 +150,13 @@ Repository scan on `2026-04-18` shows the following patterns:
     - combat-start reaction dispatch
     - opening shuffle / innate move / opening draw
     - first-player-turn handoff
+- headed composition is now session-first end to end:
+  - `CombatController` can render from `CombatSession` through
+    `CombatRenderStateAssembler`
+  - `CombatScene` lazily materializes `CombatModel` only when legacy callers ask
+    for `scene.model` / `to_legacy_tuple()`
+  - `CombatState` lazily materializes `CombatModel` only when older code/tests
+    explicitly access `state.model`
 - stress-threshold judgment handling is now explicit:
   - `CombatSession` wires the `StressThresholdReached` subscription only
   - `StressThresholdHandler` owns:
@@ -198,8 +210,8 @@ Repository scan on `2026-04-18` shows the following patterns:
 - `CombatModel` is no longer a broad runtime host, but it is still a meaningful
   compatibility facade.
 - The runtime-mainline migration goal for this slice is met:
-  production combat orchestration no longer depends on the last three
-  host-private helper seams.
+  production combat orchestration and headed combat startup no longer depend on
+  eager `CombatModel` construction.
 - The remaining pressure is mostly test/compat cleanup, not gameplay runtime
   ownership confusion.
 - The current surface is already narrow enough that future work should stop
@@ -216,6 +228,10 @@ Repository scan on `2026-04-18` shows the following patterns:
   current migration phase.
 - Prefer `model.session` or direct `CombatSession` injection for new headless,
   save/load, or presentation-side work.
+- Prefer removing legacy access points over adding new ones:
+  - `CombatScene.model`
+  - `CombatScene.to_legacy_tuple()`
+  - `CombatState.model`
 - Do not add new dynamic passthrough or generic forwarding back into
   `CombatModel`.
 
