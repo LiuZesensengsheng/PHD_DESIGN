@@ -30,11 +30,20 @@ It answers:
 - headed combat mainline no longer constructs `CombatModel` eagerly:
   - `build_combat_scene_runtime(...)` now wires `CombatController` directly to
     `CombatSession`
-  - `CombatState` now uses `session` as its internal runtime host
+  - `CombatScene` now exposes only the session-first bundle:
+    - `event_bus`
+    - `asset_manager`
+    - `session`
+    - `view`
+    - `controller`
+  - `CombatState` now uses `session` as its only runtime host surface
+  - `run_combat.py` now enters through `build_combat_scene_runtime(...)`
+- headless simulation no longer keeps a `_build_model(...)` compat entry:
+  - `HeadlessCombatSimulationExecutor` now exposes session-first build only
+  - timing/parity simulation tests now build directly through `CombatSession`
 - `CombatModel` is still present as a compatibility facade for:
-  - legacy scene/factory tuple callers
-  - `CombatState.model` compatibility access
-  - headless/test helpers and legacy tests
+  - lazily materialized test helpers
+  - legacy tests that still construct the facade explicitly
 - `CombatModel` no longer uses broad `__getattr__` / `__setattr__` passthrough.
   Its surface is now explicit.
 - New runtime work should prefer `session` directly unless a caller still needs
@@ -42,8 +51,12 @@ It answers:
 
 ## Quantitative Baseline
 
-Repository scan on `2026-04-19` shows `CombatModel` currently exposes `32`
-non-constructor surface members plus the plain `session` host reference.
+Repository scan on `2026-04-22` shows `CombatModel` is now an explicitly
+allowlisted facade:
+
+- `12` property getters
+- `19` non-constructor methods
+- the plain `session` host reference
 
 - stable shared surface: `16`
 - test/tool surface: `16`
@@ -123,7 +136,8 @@ Of these `0` seams:
 
 ## Observed Usage Snapshot
 
-Repository scan on `2026-04-18` shows the following patterns:
+Repository scan baseline from `2026-04-18`, plus headed-entry recheck on
+`2026-04-22`, shows the following patterns:
 
 - high-frequency shared usage:
   - `state`: `235` references across `28` files
@@ -153,10 +167,10 @@ Repository scan on `2026-04-18` shows the following patterns:
 - headed composition is now session-first end to end:
   - `CombatController` can render from `CombatSession` through
     `CombatRenderStateAssembler`
-  - `CombatScene` lazily materializes `CombatModel` only when legacy callers ask
-    for `scene.model` / `to_legacy_tuple()`
-  - `CombatState` lazily materializes `CombatModel` only when older code/tests
-    explicitly access `state.model`
+  - `CombatScene` no longer exposes `model` or `to_legacy_tuple()`
+  - `CombatState` no longer exposes `model`
+  - top-level headed entry (`run_combat.py`) now consumes the session-first
+    bundle directly
 - stress-threshold judgment handling is now explicit:
   - `CombatSession` wires the `StressThresholdReached` subscription only
   - `StressThresholdHandler` owns:
@@ -204,6 +218,7 @@ Repository scan on `2026-04-18` shows the following patterns:
   - presentation contract tests
   - render-state contract tests
   - headless executor tests
+  - `tests/helpers/combat_runtime.py` fixture assembly
 
 ## What This Means
 
@@ -212,8 +227,20 @@ Repository scan on `2026-04-18` shows the following patterns:
 - The runtime-mainline migration goal for this slice is met:
   production combat orchestration and headed combat startup no longer depend on
   eager `CombatModel` construction.
+- The old headed compat entrypoints are physically gone:
+  - `CombatScene.model`
+  - `CombatScene.to_legacy_tuple()`
+  - `CombatState.model`
+  - `HeadlessCombatSimulationExecutor._build_model(...)`
+- the remaining `CombatModel` pressure is now measurable and test-heavy:
+  - `57` repo hits across `30` test/helper files
+  - `19` direct legacy `CombatModel(state=..., event_bus=...)` constructions
 - The remaining pressure is mostly test/compat cleanup, not gameplay runtime
   ownership confusion.
+- test helpers are also moving to session-first by default:
+  - `CombatRuntimeFixture` now stores `session` eagerly
+  - `CombatRuntimeFixture.model` is now a lazy compatibility property instead
+    of default fixture assembly behavior
 - The current surface is already narrow enough that future work should stop
   adding new members and instead either:
   - move new callers to `session`
@@ -228,10 +255,9 @@ Repository scan on `2026-04-18` shows the following patterns:
   current migration phase.
 - Prefer `model.session` or direct `CombatSession` injection for new headless,
   save/load, or presentation-side work.
-- Prefer removing legacy access points over adding new ones:
-  - `CombatScene.model`
-  - `CombatScene.to_legacy_tuple()`
-  - `CombatState.model`
+- Prefer removing residual test-only construction paths over adding new ones:
+  - direct `CombatModel(state=..., event_bus=...)` in legacy tests
+  - helper convenience surfaces that still hand out `model`
 - Do not add new dynamic passthrough or generic forwarding back into
   `CombatModel`.
 
@@ -278,8 +304,8 @@ Translated into current backlog count:
     surface
 - move test-only callers toward `session` or explicit collaborators where that
   improves clarity instead of preserving broad `CombatModel` ownership
-- decide which remaining helper methods are still worth keeping as explicit
-  compatibility wrappers and which can be deleted after the next migration pass
+- decide whether the lazy `CombatRuntimeFixture.model` convenience should remain
+  a test-only seam or be deleted after the next migration pass
 
 ### Guardrail
 
