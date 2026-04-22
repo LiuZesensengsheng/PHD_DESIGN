@@ -224,17 +224,24 @@ Rule:
 These aliases should not be treated as permanent retained seams yet:
 
 - `hit_test_service`
-- `lifecycle_binding`
 - `turn_orchestrator`
 - `end_turn_orchestrator`
-- `block_click_orchestrator`
-- `event_input_orchestrator`
 
 Current stance:
 
 - they are still direct today
 - they are plausible next cleanup candidates
 - they should be evaluated individually, not deleted as a batch for symmetry
+
+Update on `2026-04-22`:
+
+- the first interaction cleanup slice already removed the direct aliases for:
+  - `lifecycle_binding`
+  - `block_click_orchestrator`
+  - `event_input_orchestrator`
+- those services now stay grouped under `state.interaction_services.*`
+- the review-next bucket is therefore smaller than when this document was first
+  written
 
 ### 4. Use State-Level Intent Seams Instead Of Re-Exporting Leaf Services
 
