@@ -233,8 +233,17 @@ Repository scan baseline from `2026-04-18`, plus headed-entry recheck on
   - `CombatState.model`
   - `HeadlessCombatSimulationExecutor._build_model(...)`
 - the remaining `CombatModel` pressure is now measurable and test-heavy:
-  - `57` repo hits across `30` test/helper files
-  - `19` direct legacy `CombatModel(state=..., event_bus=...)` constructions
+  - `50` repo hits across `24` test/helper files
+  - direct legacy `CombatModel(state=..., event_bus=...)` constructions: `0`
+  - remaining appearances are now mostly:
+    - `CombatModel(session=...)` in legacy tests
+    - `CombatModel` imports/type annotations in test helpers
+    - one guard test that prevents the legacy constructor from returning
+- a second low-risk runtime-test migration pass is now complete:
+  - phase-machine / timing / event / steadfast / smoke tests that only exercise
+    runtime semantics now build and assert directly on `CombatSession`
+  - the remaining explicit facade pressure is more clearly concentrated in
+    render/presentation/controller/content-facing tests plus helper seams
 - The remaining pressure is mostly test/compat cleanup, not gameplay runtime
   ownership confusion.
 - test helpers are also moving to session-first by default:
@@ -256,7 +265,7 @@ Repository scan baseline from `2026-04-18`, plus headed-entry recheck on
 - Prefer `model.session` or direct `CombatSession` injection for new headless,
   save/load, or presentation-side work.
 - Prefer removing residual test-only construction paths over adding new ones:
-  - direct `CombatModel(state=..., event_bus=...)` in legacy tests
+  - direct `CombatModel(session=...)` in legacy tests where session/facade is no longer needed
   - helper convenience surfaces that still hand out `model`
 - Do not add new dynamic passthrough or generic forwarding back into
   `CombatModel`.
