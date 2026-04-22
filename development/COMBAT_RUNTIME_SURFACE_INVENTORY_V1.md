@@ -42,7 +42,6 @@ It answers:
   - `HeadlessCombatSimulationExecutor` now exposes session-first build only
   - timing/parity simulation tests now build directly through `CombatSession`
 - `CombatModel` is still present as a compatibility facade for:
-  - lazily materialized test helpers
   - legacy tests that still construct the facade explicitly
 - `CombatModel` no longer uses broad `__getattr__` / `__setattr__` passthrough.
   Its surface is now explicit.
@@ -233,11 +232,12 @@ Repository scan baseline from `2026-04-18`, plus headed-entry recheck on
   - `CombatState.model`
   - `HeadlessCombatSimulationExecutor._build_model(...)`
 - the remaining `CombatModel` pressure is now measurable and test-heavy:
-  - `50` repo hits across `24` test/helper files
+  - `62` explicit `CombatModel` references across `23` test files
+  - those references are now concentrated in legacy
+    render/presentation/controller/content tests plus guard coverage
   - direct legacy `CombatModel(state=..., event_bus=...)` constructions: `0`
   - remaining appearances are now mostly:
     - `CombatModel(session=...)` in legacy tests
-    - `CombatModel` imports/type annotations in test helpers
     - one guard test that prevents the legacy constructor from returning
 - a second low-risk runtime-test migration pass is now complete:
   - phase-machine / timing / event / steadfast / smoke tests that only exercise
@@ -246,10 +246,11 @@ Repository scan baseline from `2026-04-18`, plus headed-entry recheck on
     render/presentation/controller/content-facing tests plus helper seams
 - The remaining pressure is mostly test/compat cleanup, not gameplay runtime
   ownership confusion.
-- test helpers are also moving to session-first by default:
-  - `CombatRuntimeFixture` now stores `session` eagerly
-  - `CombatRuntimeFixture.model` is now a lazy compatibility property instead
-    of default fixture assembly behavior
+- test helpers are now session-first by default:
+  - `CombatRuntimeFixture` stores `session` eagerly and no longer exposes
+    `model`
+  - `HeadlessTestBase` now drives commands through `session` instead of keeping
+    a parallel `self.model` seam
 - The current surface is already narrow enough that future work should stop
   adding new members and instead either:
   - move new callers to `session`
@@ -313,8 +314,8 @@ Translated into current backlog count:
     surface
 - move test-only callers toward `session` or explicit collaborators where that
   improves clarity instead of preserving broad `CombatModel` ownership
-- decide whether the lazy `CombatRuntimeFixture.model` convenience should remain
-  a test-only seam or be deleted after the next migration pass
+- continue deleting direct `CombatModel(session=...)` usage where tests no
+  longer need the facade surface
 
 ### Guardrail
 
