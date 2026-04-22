@@ -21,6 +21,12 @@ It answers:
 - session-local mutable runtime data is now hosted behind
   `CombatSessionRuntimeState`; `CombatSession` keeps compatibility properties for
   current render/tests while local host data is being tightened.
+- render-facing session reads now have explicit public accessors:
+  - `current_phase`
+  - `phase_banner`
+  - `enemy_action_banner`
+- the older underscore-shaped session reads remain only as compatibility
+  wrappers and should no longer be the default render/test contract.
 - `CombatModel` is still present as a compatibility facade because controller,
   some orchestration paths, and many tests still construct or receive
   `CombatModel`.
