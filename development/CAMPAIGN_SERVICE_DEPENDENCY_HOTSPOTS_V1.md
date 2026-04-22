@@ -64,6 +64,12 @@ Terminology note:
   - direct host aliases `state.reward` / `state.post_combat_reward` were removed
   - reward cleanup now also routes through explicit host seam
     `reset_reward_runtime_state()`
+  - thesis/social direct host aliases were later removed as well:
+    - thesis runtime/services now route through `state.thesis_services.*`
+    - social runtime/services now route through `state.social_services.*`
+  - retained direct shell/runtime seams vs review-next direct aliases are now
+    documented in:
+    - `docs/development/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`
   - current stance: future reward entry/cancellation work should start from the
     grouped reward seam instead of restoring service aliases on `CampaignState`
 
