@@ -224,8 +224,6 @@ Rule:
 These aliases should not be treated as permanent retained seams yet:
 
 - `hit_test_service`
-- `turn_orchestrator`
-- `end_turn_orchestrator`
 
 Current stance:
 
@@ -240,8 +238,16 @@ Update on `2026-04-22`:
   - `block_click_orchestrator`
   - `event_input_orchestrator`
 - those services now stay grouped under `state.interaction_services.*`
+- the second interaction cleanup slice later removed the direct aliases for:
+  - `turn_orchestrator`
+  - `end_turn_orchestrator`
+- lifecycle and return-resolution paths now prefer state-level host seams such
+  as:
+  - `advance_campaign_turn()`
+  - `request_end_turn(...)`
 - the review-next bucket is therefore smaller than when this document was first
-  written
+  written and is now effectively narrowed to:
+  - `hit_test_service`
 
 ### 4. Use State-Level Intent Seams Instead Of Re-Exporting Leaf Services
 

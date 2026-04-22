@@ -69,13 +69,21 @@ Terminology note:
     - social runtime/services now route through `state.social_services.*`
   - selected interaction direct aliases were later removed as well:
     - `state.lifecycle_binding`
+    - `state.turn_orchestrator`
+    - `state.end_turn_orchestrator`
     - `state.block_click_orchestrator`
     - `state.event_input_orchestrator`
   - `CampaignState` request/host seams now route through grouped interaction
     ownership instead:
     - `state.interaction_services.lifecycle_binding`
+    - `state.interaction_services.turn_orchestrator`
+    - `state.interaction_services.end_turn_orchestrator`
     - `state.interaction_services.block_click_orchestrator`
     - `state.interaction_services.event_input_orchestrator`
+  - lifecycle and staged-endturn internal callers now also prefer explicit
+    state seams instead of peeking at the removed direct aliases:
+    - `advance_campaign_turn()`
+    - `request_end_turn(...)`
   - retained direct shell/runtime seams vs review-next direct aliases are now
     documented in:
     - `docs/development/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`
