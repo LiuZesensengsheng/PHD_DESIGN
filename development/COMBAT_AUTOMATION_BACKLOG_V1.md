@@ -1,171 +1,45 @@
 # Combat Automation Backlog V1
 
-## Problem
+## Status
 
-The combat MVC-removal work is now in a late migration phase:
+This document is now **historical pre-decision context**, not the active
+execution plan.
 
-- `CombatSession` is already the canonical runtime host.
-- broad test/helper `CombatModel` usage has been cut down sharply.
-- the remaining `CombatModel` references are now mostly intentional
-  facade/render contract coverage.
+It was superseded on `2026-04-23` by:
 
-What is still missing is not one giant refactor. It is a clean split between:
+- `docs/pm/DECISION_LOG.md`
+  - `DL-20260423-01`
+- `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+- `docs/development/COMBAT_RUNTIME_SURFACE_INVENTORY_V1.md`
 
-1. what we still want to keep as an explicit facade contract
-2. what should continue being deleted from legacy test usage
-3. what is actually a separate runtime/content bug cluster and should stop being
-   mixed into MVC-removal work
+The old recommendation in this file to freeze `CombatModel` as a tiny facade is
+obsolete. `G1` has completed and the legacy MVC facade modules are now deleted.
 
-This document is meant to be stable enough for future automations to use as the
-default execution plan.
+## Retained Takeaways
 
-## Constraints
+Even though the old freeze recommendation is obsolete, these points remain
+useful:
 
-- No `combat_view` behavior change in this cleanup line.
-- No combat content schema/save change in this cleanup line.
-- Prefer session-first migration over large rewrites.
-- Keep mainline runtime stable for UI, headless, and save/load.
-- Automation should avoid blending:
-  - facade-deletion work
-  - render/presentation contract work
-  - red-content runtime bug fixing
-
-## Complexity
-
-### Essential complexity
-
-- `CombatController` / render / presentation tests still need a stable runtime
-  adapter shape somewhere.
-- Some tests genuinely verify `CombatModel` as a facade contract, not just as an
-  accidental host.
-- A known `red` power cluster still has behavior gaps under direct
-  `CombatSession` execution.
-
-### Accidental complexity
-
-- Old tests used `CombatModel` even when they only needed:
-  - `session.play_card(...)`
-  - `session.state`
-  - `CombatRenderStateAssembler.build(session)`
-- The old migration backlog mixed together:
-  - test cleanup
-  - facade design
-  - unrelated content/runtime failures
-
-## Options
-
-### Option A: keep pushing to hard-delete `CombatModel` immediately
-
-- Migrate the remaining 4 test files off the facade.
-- Rework render/presentation contracts around raw `session` or assembler output.
-- Then delete `CombatModel`.
-
-Pros:
-
-- most aggressive simplification
-- fewer public surfaces long-term
-
-Cons:
-
-- higher coordination cost with render/presentation behavior
-- easier to accidentally destabilize controller/view contracts
-- weak payoff right now because only a very small explicit facade surface remains
-
-### Option B: freeze `CombatModel` as a tiny explicit facade for now, and split red failures into a separate backlog
-
-- Treat the remaining 4 files as intentional facade/render contract coverage.
-- Do not add new members to `CombatModel`.
-- Continue using `CombatSession` directly everywhere else.
-- Track the red-content failure cluster separately.
-
-Pros:
-
-- lowest-risk path
-- keeps automation tasks narrow and unambiguous
-- matches the current code reality
-- best for AI safety: fewer mixed-purpose tasks
-
-Cons:
-
-- `CombatModel` still exists for a while
-- full MVC-removal headline is deferred rather than fully “done”
-
-### Option C: formally keep `CombatModel` as a long-lived presentation adapter
-
-- Stop treating it as temporary.
-- Document it as the permanent UI/presentation adapter.
-
-Pros:
-
-- simple story for UI callers
-- no need for final deletion push
-
-Cons:
-
-- risks fossilizing a compatibility shell
-- easier for new logic to drift back into the wrong layer
-- works against the current “session-first runtime host” direction
-
-## Risks
-
-- If we choose Option A now, we may spend effort deleting a facade that is
-  still useful as a small contract boundary for render/presentation tests.
-- If we choose Option C, the repository may slowly grow new logic back into
-  `CombatModel`.
-- If we do not split the red failure cluster away from MVC-removal work,
-  automations will keep producing noisy mixed diffs and unclear progress.
-
-## Recommendation
-
-Choose **Option B** now.
-
-That means:
-
-- freeze `CombatModel` as a tiny explicit facade
-- keep only explicit facade/render contract tests on it
-- stop migrating those remaining 4 files unless we later make a conscious
-  decision to delete the facade contract itself
-- treat the remaining red failures as a separate runtime/content workstream
-
-This is the best tradeoff for stability, clarity, and automation friendliness.
-
-## Counter-Review
-
-The main argument against Option B is that it may let the facade linger too
-long. That concern is real.
-
-Why it is still the recommended path:
-
-- the remaining explicit facade footprint is already very small
-- the current pressure is no longer mainline runtime confusion
-- the red failure cluster is now the more valuable cleanup target
-- deleting a 4-file, 16-reference facade later is cheap once render/presentation
-  ownership is even clearer
-
-So the right move is not “never delete `CombatModel`.” It is “do not force the
-last deletion step into the wrong batch.”
-
-## Decision Summary
-
-- Decision: `CombatModel` remains temporarily as a **frozen tiny facade**.
-- Rule: no new `CombatModel` surface growth.
-- Rule: all new runtime/content tests should use `CombatSession` directly.
-- Rule: the remaining `CombatModel` tests are intentional contract coverage.
-- Rule: the `red` power failure cluster is a separate backlog from MVC-removal.
+- keep compat-zero cleanup separate from red runtime/content bug fixing
+- keep compat-zero cleanup separate from `combat_view`, animation, and save
+  schema work
+- prefer small serial validation packs over mixed-purpose large refactors
+- keep the automation stop condition explicit whenever a task touches a
+  different risk boundary
 
 ## Current Snapshot
 
-As of `2026-04-23`:
+As of `2026-04-23`, after `G1` completion:
 
-- remaining explicit `CombatModel` references under `tests/combat`: `16`
-- remaining files: `4`
-- files:
+- `contexts/combat/mvc/model.py`: deleted
+- `contexts/combat/mvc/factory.py`: deleted
+- live runtime/test/script imports or constructions of the removed modules: `0`
+- remaining textual mentions under `tests/combat`: `2` files
   - `tests/combat/test_combat_runtime_host_migration_v1.py`
-  - `tests/combat/test_combat_render_state_contracts.py`
-  - `tests/combat/test_combat_presentation_contract_v1.py`
   - `tests/combat/test_combat_runtime_surface_inventory_v1.py`
+- those remaining mentions are explicit removal guards only
 
-Known red-content/runtime failures to treat separately:
+Known red-content/runtime failures that still stay in a separate backlog:
 
 - `test_red_frontier_damage_core_adds_damage_to_frontier_card`
 - `test_red_cross_amplify_first_non_red_gives_draw_and_confidence_once`
@@ -173,101 +47,35 @@ Known red-content/runtime failures to treat separately:
 - `test_red_last_line_grants_red_energy_once_on_first_frontier`
 - `test_red_frontier_continuous_draw_draws_on_each_frontier_play`
 
-## Automation Queue
+## Active Automation Queue
 
-### A1. Keep facade surface frozen
+The active serialized queue is no longer "freeze facade vs delete facade." That
+question is already resolved.
 
-Goal:
+Use `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md` as the
+execution source of truth:
 
-- guard against new `CombatModel` growth
+1. completed: `G1` MVC facade plane removal
+2. next: `G2` session wrapper tightening
+3. then: `G3` `turn_context` bridge collapse
+4. then: `G4` low-value test/import shim cleanup
+5. finally: `G5` retained adapter review
 
-Automation-safe:
+## Default Validation Discipline
 
-- yes
-
-Expected actions:
-
-- run:
-  - `py -3.11 -m pytest tests/combat/test_combat_runtime_surface_inventory_v1.py -q`
-- if a new `CombatModel` member appears, update neither code nor docs
-  automatically; open a decision-needed summary instead
-
-Stop condition:
-
-- inventory test is green
-
-### A2. Maintain session-first default for new tests
-
-Goal:
-
-- ensure newly added combat tests do not drift back to `CombatModel`
-
-Automation-safe:
-
-- yes
-
-Expected actions:
-
-- search:
-  - `rg -n "CombatModel\\(session=|from contexts\\.combat\\.mvc\\.model import CombatModel" tests/combat`
-- if new non-contract files appear, migrate them to:
-  - `session.play_card(...)`
-  - `session.state`
-  - `CombatRenderStateAssembler.build(session)`
-
-Stop condition:
-
-- only the 4 allowlisted contract files remain
-
-### A3. Red power/runtime bug triage
-
-Goal:
-
-- resolve the 5 known red failures as separate runtime/content work
-
-Automation-safe:
-
-- yes, but one failure family at a time
-
-Expected order:
-
-1. inspect one failing test
-2. reproduce it in isolation
-3. identify whether the gap is:
-   - power registration
-   - frontier flag propagation
-   - timing dispatch
-   - expected-value drift
-4. patch the smallest correct runtime/content fix
-5. rerun the isolated test, then the red-card file
-
-Stop condition:
-
-- each failure fixed in a separate small commit when possible
-
-### A4. Optional future decision: delete the facade contract
-
-Goal:
-
-- revisit whether the remaining 4 files should stay on `CombatModel`
-
-Automation-safe:
-
-- no, this is decision-gated
-
-Decision trigger:
-
-- only revisit after the red runtime/content cluster is clean
-- and only if we want to remove `get_renderable_state()` as a facade contract
-
-### A5. Default validation pack for automation
-
-Use this after each small step:
+After each small compat-zero step:
 
 - `py -3.11 -m pytest tests/combat/test_combat_runtime_surface_inventory_v1.py -q`
 - `py -3.11 -m pytest tests/shared/test_text_encoding_guards.py -q`
 
-Use this after red-runtime fixes:
+After `G2-G4` slice work:
+
+- rerun the focused validation pack named in
+  `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+- do not jump from a compat cleanup diff straight into unrelated red-content
+  failures
+
+After separate red-runtime fixes:
 
 - `py -3.11 -m pytest tests/combat/test_json_red_cards.py -q`
 

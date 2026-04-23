@@ -51,6 +51,122 @@
   - `2026-03-16` 判定更新：`combat orchestration v1` 已可视为完成，后续转入更小切片的 chore / card-play / planner / policy 收口
   - v1 之后的剩余 fallback 面默认只包括条件型、属性来源型和其他小众复杂效果
 
+### P1. Combat Global Compat-Zero (Engineering Surface)
+
+- 目标：
+  - 在已完成 `runtime-mainline compat-zero` 的基础上，继续清掉 combat
+    剩余的工程兼容层
+  - 把 `CombatModel` / MVC facade、session underscore compat、`state -> turn_context`
+    桥、低价值 test/import shim 分阶段收口
+  - 让后续 automation 可以沿着稳定 backlog 持续推进，而不是每次重新判断边界
+- Current execution rules:
+  - follow `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+  - default target is `engineering zero`, not `strict historical/save zero`
+  - do not start long-running execution until the decision gates in that doc are accepted
+  - keep this work separate from:
+    - red runtime/content bug fixes
+    - animation/video blocking semantics
+    - `combat_view` behavior changes
+    - save schema redesign
+  - once decisions are accepted, execute serially:
+    - `G1` MVC facade plane removal
+    - `G2` session wrapper tightening
+    - `G3` `turn_context` bridge collapse
+    - `G4` low-value test/import shim cleanup
+    - `G5` retained adapter review
+- Main inputs:
+  - `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+  - `docs/development/COMBAT_RUNTIME_SURFACE_INVENTORY_V1.md`
+  - `docs/development/COMBAT_AUTOMATION_BACKLOG_V1.md`
+  - `contexts/combat/`
+  - `tests/combat/`
+- 预期输出：
+  - combat 全域兼容层的分阶段删除或显式保留决策
+  - automation-safe backlog + stop condition + validation pack
+  - 更薄的 combat engineering surface
+- 边界：
+  - 不把 save backward compatibility 当作默认首轮删除目标
+  - 不顺手处理 unrelated red content failures
+  - 不混入视觉或动画实现
+  - 不在同一批里同时做多个高风险兼容层大删改
+- 当前阶段判断：
+  - 规划文档已建立
+  - `2026-04-23` 已接受 `Engineering Zero` 决策包，见 `docs/pm/DECISION_LOG.md`
+  - 默认自动化执行顺序为 `G1 -> G2 -> G3 -> G4 -> G5`
+  - `2026-04-23` `G1` 已完成：
+    - `CombatModel` / `mvc.factory` 已物理删除
+    - live runtime/test/script import surface 已归零
+    - 仅保留两处测试中的 removal guard 文本断言
+  - `2026-04-23` `G2` 已完成：
+    - `CombatSession` underscore compat wrapper 已物理删除
+    - live `session._...` wrapper read surface 已归零
+    - guard 已更新为禁止 wrapper 静默回流
+  - `2026-04-23` `G3` 第一小批已完成：
+    - `action_executor.py`、`pointer_queue_white.py`、`misc.py`、
+      `pile_service.py` 的本批 runtime 读写已改为直接走
+      `state.turn_context`
+    - 对应测试与 guard 已收紧到同一基线
+  - `2026-04-23` `G3` 第二小批已完成：
+    - `enemy_tween_planner.py` 已改为直接写 `state.turn_context`
+    - `CombatState` 上的 `enemy_tween_*` 桥属性已物理删除
+    - `enemy cleanup / tween planner` 相关测试与 guard 已同步收口
+  - `2026-04-23` `G3` 第三小批已完成：
+    - `player.py`、`powers.py`、`effects/base.py`、
+      `effects/impl/red.py`、`effects/impl/pile.py`、
+      `traits_demo_impl.py` 的本批 helper/fallback 已改为优先创建并使用
+      `state.turn_context`
+    - `CombatState` 上一批非 tween bridge 属性已物理删除：
+      - `draw_locked`
+      - `reposition_count_this_turn`
+      - `reposition_limit_per_turn`
+      - `frontier_batch_counter`
+      - `red_extra_draw_context`
+      - `red_frontier_damage_bonus_current_play`
+      - `red_offcolor_damage_bonus_current_play`
+      - `force_frontier_next_cards`
+      - `traits_double_current_effects`
+      - `scribble_played_this_turn`
+    - core-state contract 与 compat-zero guard 已同步到新基线
+  - `2026-04-23` `G3` 第四小批已完成：
+    - `render_state_assembler.py` 已改为从 `state.turn_context` 读取
+      `lock_queue_active`
+    - `CombatState.lock_queue_active` bridge 已物理删除
+    - render-state contract 与 compat-zero guard 已同步到新基线
+  - `2026-04-23` `G3` 第五小批已完成：
+    - `action_executor.py` 的 frontier batch reservation 与
+      `render_state_assembler.py` 的 frontier usage projection
+      已改为直接走 `state.turn_context`
+    - `CombatState` 上最后两项 bridge 属性已物理删除：
+      - `frontier_used_batches`
+      - `non_red_played_this_turn`
+    - render/red touched tests 与 compat-zero guard 已同步到新基线
+  - `2026-04-23` `G4` 第一小批已完成：
+    - `tests/combat/test_damage_service.py` 已改为直接从
+      `contexts.combat.domain.effects.impl.core` 导入 `DamageEffect`
+    - `contexts/combat/domain/effects/implementations.py` 已物理删除
+    - compat-zero guard 已更新为禁止该 shim 文件和旧导入路径回流
+  - `2026-04-23` `G4` 第二小批已完成：
+    - `tests/combat/test_action_queue.py` 已改为直接通过
+      `ChoreResolutionPlanner` 做 chore-resolution mapping 覆盖
+    - `ChoreResolutionOrchestrator._map_actions(...)` 已物理删除
+    - compat-zero guard 已更新为禁止该 shim 方法与旧调用形态回流
+  - `2026-04-23` `G4` 第三小批已完成：
+    - `Enemy.select_skill_for_turn()` /
+      `Enemy.use_selected_skill()` 已物理删除
+    - compat-zero guard 已更新为禁止这两个 enemy legacy method 的定义与调用回流
+  - `2026-04-23` `G5` retained adapter review 已完成：
+    - save backward-compat migration / session save host 被正式归类为 retained backward-compat boundary
+    - `ModelEnvironmentArenaEffect` / `DefaultTurnStartEnvironmentInjector` 被正式归类为 intentional runtime adapter
+    - `CardInstance.card_id` / `CardInstance.cost_for_player(...)` 被正式归类为 stable convenience contract
+    - `EffectContext` 不属于 retained adapter，后续若处理应作为单独的 dead scaffold 小清理
+    - player scalar energy / colored pool convergence 不属于 compat-zero 收尾，应另开专题线
+  - 当前这条 automation-safe compat-zero 执行线已在 `Engineering Zero` 意义上闭环
+  - save backward compatibility 仍不属于首轮自动删除范围
+  - 后续若继续做 combat 工程收口，应拆为独立专题而不是继续沿这条 compat-zero 主线顺推：
+    - save lifecycle / schema decision
+    - energy contract convergence
+    - dead scaffold cleanup
+
 ### P1. Narrative Pipeline V1
 
 - 目标：

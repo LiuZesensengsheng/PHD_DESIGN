@@ -2,332 +2,171 @@
 
 ## Purpose
 
-Record the current combat runtime host surface after `CombatSession` became the
-canonical runtime owner and `CombatModel` was reduced to an explicit
-compatibility facade.
+Record the current combat runtime host surface after `G1` of
+`global compat-zero` removed the legacy MVC facade modules.
 
-This document is intentionally about **surface shape**, not content semantics.
-It answers:
+This document is intentionally about **engineering surface**, not content
+semantics. It answers:
 
-- what `CombatModel` still exposes today
-- which parts are stable shared entrypoints vs temporary compatibility seams
-- where repo usage is still concentrated
-- which cuts are safest next
+- what the active combat runtime host is now
+- which `CombatSession` members still form the public engineering surface
+- which remaining seams are still planned compat cleanup
+- what should stay out of this workstream
 
 ## Current Host Shape
 
 - `CombatSession` is the canonical combat runtime host for UI, headless, and
   save/load.
-- session-local mutable runtime data is now hosted behind
-  `CombatSessionRuntimeState`; `CombatSession` keeps compatibility properties for
-  current render/tests while local host data is being tightened.
-- render-facing session reads now have explicit public accessors:
+- session-local mutable host data is attached through
+  `CombatSessionRuntimeState`.
+- render-facing session reads have explicit public accessors:
   - `current_phase`
   - `phase_banner`
   - `enemy_action_banner`
-- the older underscore-shaped session reads remain only as compatibility
-  wrappers and should no longer be the default render/test contract.
-- headed combat mainline no longer constructs `CombatModel` eagerly:
-  - `build_combat_scene_runtime(...)` now wires `CombatController` directly to
-    `CombatSession`
-  - `CombatScene` now exposes only the session-first bundle:
-    - `event_bus`
-    - `asset_manager`
-    - `session`
-    - `view`
-    - `controller`
-  - `CombatState` now uses `session` as its only runtime host surface
-  - `run_combat.py` now enters through `build_combat_scene_runtime(...)`
-- headless simulation no longer keeps a `_build_model(...)` compat entry:
-  - `HeadlessCombatSimulationExecutor` now exposes session-first build only
-  - timing/parity simulation tests now build directly through `CombatSession`
-- `CombatModel` is still present as a compatibility facade for:
-  - legacy tests that still construct the facade explicitly
-- `CombatModel` no longer uses broad `__getattr__` / `__setattr__` passthrough.
-  Its surface is now explicit.
-- New runtime work should prefer `session` directly unless a caller still needs
-  the compatibility facade.
+- the old underscore-shaped session compatibility wrappers are now removed:
+  - `_phase`
+  - `_phase_banner`
+  - `_enemy_action_banner`
+  - `_enemy_action_steps`
+  - `_current_enemy_action`
+  - `_enemy_action_timer`
+- there is no active `CombatModel` module or `mvc.factory` module anymore:
+  - `contexts/combat/mvc/model.py`: deleted
+  - `contexts/combat/mvc/factory.py`: deleted
+- headed combat composition is session-first end to end:
+  - `build_combat_scene_runtime(...)` returns the session-first runtime bundle
+  - `CombatController` renders from `CombatSession` through
+    `CombatRenderStateAssembler`
+  - `CombatState` stores `session` as its only runtime host surface
+  - `run_combat.py` enters through the session-first builder
+- headless/test helper composition is also session-first:
+  - `HeadlessCombatSimulationExecutor` builds `CombatSession` directly
+  - `tests/helpers/combat_runtime.py` no longer exposes `model`
+  - `tests/helpers/headless_test_base.py` no longer keeps `self.model`
+- tooling has been updated to the same baseline:
+  - `scripts/debug_imports.py` now imports `CombatSession`
 
 ## Quantitative Baseline
 
-Repository scan on `2026-04-22` shows `CombatModel` is now an explicitly
-allowlisted facade:
+As of `2026-04-23`:
 
-- `12` property getters
-- `19` non-constructor methods
-- the plain `session` host reference
+- deleted MVC facade modules: `2`
+- live runtime/test/script imports or constructions of the removed modules: `0`
+- deleted `CombatSession` underscore compat wrappers: `6`
+- live `session._...` wrapper reads outside guard coverage: `0`
+- remaining textual mentions of removed MVC paths under `tests/combat`: `2`
+  files
+  - `tests/combat/test_combat_runtime_host_migration_v1.py`
+  - `tests/combat/test_combat_runtime_surface_inventory_v1.py`
+- those remaining mentions are explicit removal guards, not live usage
+- `check_combat_compat_zero.py` is green on this baseline
 
-- stable shared surface: `16`
-- test/tool surface: `16`
-- transitional compatibility surface: `0`
+## Public `CombatSession` Surface
 
-More important than the raw total:
+### Stable host/state surface
 
-- transitional seams still referenced by non-test runtime code: `0`
-- transitional seams currently referenced only by tests: `0`
+- `state`
+- `event_bus`
+- `phase_machine`
 
-That means the **runtime-mainline backlog for host-private combat seams is
-closed for this migration slice**. The remaining work is no longer "get
-orchestrators off old helpers". It is to decide how much of the remaining
-compatibility facade should:
+### Runtime collaborator surface kept explicit for now
 
-- stay as intentional test/tool surface
-- move to direct `session` / collaborator usage in tests
-- or be hard-deleted once compatibility pressure is actually gone
+- `effect_executor`
+- `card_play_orchestrator`
+- `player_turn_orchestrator`
 
-## CombatModel Explicit Surface
+### Presentation/runtime reads
 
-### 1. Shared entrypoints that are still reasonable to keep for now
+- `busy_reason`
+- `presentation_consumer`
+- `presentation_log`
+- `pending_presentation`
+- `current_phase`
+- `phase_banner`
+- `enemy_action_banner`
 
-- host/state:
-  - `session`
-  - `state`
-  - `event_bus`
-  - `phase_machine`
-- runtime commands:
-  - `start_combat()`
-  - `end_turn()`
-  - `play_card(...)`
-  - `update(...)`
-  - `enemy_turn()`
-  - `is_player_turn()`
-  - `can_accept_commands()`
-- render/save:
-  - `get_renderable_state()`
-  - `create_save_snapshot(...)`
-  - `to_snapshot_dict(...)`
-  - `apply_save_snapshot(...)`
-  - `from_snapshot_dict(...)`
+### Runtime command and presentation methods
 
-### 2. Test / tooling seams that are still intentionally exposed
+- `start_combat()`
+- `end_turn()`
+- `play_card(...)`
+- `update(...)`
+- `enemy_turn()`
+- `is_player_turn()`
+- `can_accept_commands()`
+- `drain_pending_presentation()`
+- `set_presentation_consumer(...)`
+- `acquire_command_lock(...)`
+- `release_command_lock(...)`
+- `clear_command_locks()`
+- `acknowledge_presentation_event(...)`
+- `acknowledge_presentation_lease(...)`
+- `create_save_snapshot(...)`
+- `to_snapshot_dict(...)`
+- `apply_save_snapshot(...)`
+- `from_snapshot_dict(...)`
 
-- runtime collaborators:
-  - `effect_executor`
-  - `card_play_orchestrator`
-  - `player_turn_orchestrator`
-- runtime toggles:
-  - `auto_draw_on_turn_start`
-  - `_async_enemy_sequence`
-- presentation compatibility:
-  - `busy_reason`
-  - `presentation_consumer`
-  - `presentation_log`
-  - `pending_presentation`
-  - `drain_pending_presentation()`
-  - `set_presentation_consumer(...)`
-  - `acquire_command_lock(...)`
-  - `release_command_lock(...)`
-  - `clear_command_locks()`
-  - `acknowledge_presentation_event(...)`
-  - `acknowledge_presentation_lease(...)`
+## Mainline Ownership Snapshot
 
-### 3. Transitional private compatibility seams
+The runtime host is now thin enough that the main ownership points are explicit:
 
-The current `CombatModel` surface no longer exposes any remaining private
-combat-runtime compatibility seam methods or properties.
+- startup sequencing:
+  - `CombatStartOrchestrator`
+- enemy-turn timed progression:
+  - `EnemyTurnRuntimeDriver`
+- presentation shaping and gate-facing event payloads:
+  - `CombatPresentationRuntime`
+  - `CombatPresentationBridge`
+- stress-threshold judgment resolution:
+  - `StressThresholdHandler`
+- enemy cleanup / pointer / tween follow-up:
+  - `EnemyCleanupCoordinator`
+  - `EnemyChoreFollowUpPolicy`
+  - `EnemyPointerRetargetPolicy`
+  - `EnemyTweenMetadataPlanner`
+- default collaborator assembly:
+  - `build_default_combat_session_services(...)`
+  - `CombatSessionServices`
 
-Current count: `0`
+## Remaining Compat Backlog After `G2`
 
-Of these `0` seams:
+### Active next phases
 
-- `0` are still touched by non-test runtime code
-- `0` are currently test-only compatibility surface
+- `G3`: collapse the `state.xxx -> state.turn_context.xxx` bridge
+- `G4`: delete low-value test/import shims
+- `G5`: document intentionally retained adapters and stop
 
-## Observed Usage Snapshot
+### Explicitly retained for now
 
-Repository scan baseline from `2026-04-18`, plus headed-entry recheck on
-`2026-04-22`, shows the following patterns:
+- save backward-compat migration paths
+- adapter-like survivors such as:
+  - `ModelEnvironmentArenaEffect`
+  - `CardInstance.card_id`
+  - `CardInstance.cost_for_player(...)`
 
-- high-frequency shared usage:
-  - `state`: `235` references across `28` files
-  - `play_card(...)`: `125` references across `22` files
-  - `end_turn()`: `28` references across `12` files
-  - `get_renderable_state()`: `18` references across `8` files
-- runtime mainline no longer touches the last turn-start / heart-demon
-  compatibility helpers:
-  - `PlayerTurnOrchestrator` now depends on:
-    - `PlayerBlockDecayPolicy`
-    - `DefaultTurnStartEnvironmentInjector`
-  - `IdealPolicy` and `CombatPostResolutionPolicy` now depend on:
-    - `HeartDemonService`
-- enemy-turn ownership is also more explicit than the earlier inventory pass:
-  - `TurnFlowOrchestrator` now delegates start/end housekeeping to:
-    - `EnemyTurnStartPolicy`
-    - `EnemyTurnEndPolicy`
-  - enemy-side block decay moved into:
-    - `EnemyBlockDecayPolicy`
-- combat startup ownership is now explicit too:
-  - `CombatSession.start_combat()` delegates to `CombatStartOrchestrator`
-  - startup sequencing no longer lives inline on the session host:
-    - starter deck bootstrap
-    - combat-start reaction dispatch
-    - opening shuffle / innate move / opening draw
-    - first-player-turn handoff
-- headed composition is now session-first end to end:
-  - `CombatController` can render from `CombatSession` through
-    `CombatRenderStateAssembler`
-  - `CombatScene` no longer exposes `model` or `to_legacy_tuple()`
-  - `CombatState` no longer exposes `model`
-  - top-level headed entry (`run_combat.py`) now consumes the session-first
-    bundle directly
-- stress-threshold judgment handling is now explicit:
-  - `CombatSession` wires the `StressThresholdReached` subscription only
-  - `StressThresholdHandler` owns:
-    - target ideal selection
-    - verdict application
-    - `JudgmentResolved` publish
-    - combat-loss marking on judgment-flow failure
-- enemy-turn sequence driving is now explicit:
-  - `CombatSession` delegates enemy-turn timed progression to `EnemyTurnRuntimeDriver`
-  - the runtime driver now owns:
-    - enemy-turn entry sequencing
-    - step progression / drain-to-completion
-    - enemy action banner updates during execution
-- presentation shaping is now explicit:
-  - `CombatPresentationBridge` remains the lower-level lease/log/consumer owner
-  - `CombatPresentationRuntime` now owns:
-    - phase/enemy banner event shaping
-    - card-play / enemy-step presentation payload shaping
-    - command-gate delegation facade used by the session
-- runtime collaborator assembly is now explicit:
-  - `CombatSession.__init__` no longer constructs the full collaborator graph inline
-  - `build_default_combat_session_services(...)` now acts as the default composition root
-  - `CombatSessionServices` is the explicit bundle attached by the session host
-- `enemy cleanup` runtime ownership has already moved off the host-private seam:
-  - `TurnFlowOrchestrator` now depends on explicit `EnemyCleanupCoordinator`
-  - `CombatModel._prune_defeated_enemies_and_adjust_pointer()` remains a
-    compatibility wrapper for tests and legacy callers, not a mainline
-    orchestration dependency
-  - the coordinator has now been split into named collaborators:
-    - `EnemyChoreFollowUpPolicy`
-    - `EnemyPointerRetargetPolicy`
-    - `EnemyTweenMetadataPlanner`
-  - that makes pointer/tween behavior separately testable and prepares the path
-    toward future `plan -> presentation gate -> commit` cleanup flow
-  - chore completion and follow-up resolution are now also explicit runtime
-    ownership instead of private coordinator internals
-  - the enemy-cleanup mainline now reaches chore resolution through the explicit
-    `ChoreResolutionOrchestrator`, not through a generic callback seam
-- test-heavy shared/testing surface:
-  - `effect_executor`
-  - `card_play_orchestrator`
-  - `player_turn_orchestrator`
-- session-first usage already exists in a few key places:
-  - `contexts/simulation/headless_combat_executor.py`
-  - presentation contract tests
-  - render-state contract tests
-  - headless executor tests
-  - `tests/helpers/combat_runtime.py` fixture assembly
+### Separate backlog that must stay separate
+
+- red runtime/content failures in `tests/combat/test_json_red_cards.py`
+- animation/video blocking semantics
+- `combat_view` behavior or visual work
+- save schema redesign
 
 ## What This Means
 
-- `CombatModel` is no longer a broad runtime host, but it is still a meaningful
-  compatibility facade.
-- The runtime-mainline migration goal for this slice is met:
-  production combat orchestration and headed combat startup no longer depend on
-  eager `CombatModel` construction.
-- The old headed compat entrypoints are physically gone:
-  - `CombatScene.model`
-  - `CombatScene.to_legacy_tuple()`
-  - `CombatState.model`
-  - `HeadlessCombatSimulationExecutor._build_model(...)`
-- the remaining `CombatModel` pressure is now measurable and test-heavy:
-  - `16` explicit `CombatModel` references across `4` test files
-  - those references are now concentrated in legacy
-    render/presentation/facade contract tests plus guard coverage
-  - direct legacy `CombatModel(state=..., event_bus=...)` constructions: `0`
-  - remaining appearances are now mostly:
-    - `CombatModel(session=...)` in explicit facade/render contract tests
-    - one guard test that prevents the legacy constructor from returning
-- a second low-risk runtime-test migration pass is now complete:
-  - phase-machine / timing / event / steadfast / smoke tests that only exercise
-    runtime semantics now build and assert directly on `CombatSession`
-  - content / queue / pointer / controller-runtime / render-input tests that
-    did not need the facade now also build directly on `CombatSession`
-  - the remaining explicit facade pressure is now narrowly concentrated in
-    render/presentation/facade contract coverage only
-- a small known residual failure cluster remains outside the migration surface:
-  - several `red` power/content tests still fail under direct `CombatSession`
-    usage as existing runtime/content issues, not as `CombatModel` migration
-    regressions
-- The remaining pressure is mostly test/compat cleanup, not gameplay runtime
-  ownership confusion.
-- test helpers are now session-first by default:
-  - `CombatRuntimeFixture` stores `session` eagerly and no longer exposes
-    `model`
-  - `HeadlessTestBase` now drives commands through `session` instead of keeping
-    a parallel `self.model` seam
-- The current surface is already narrow enough that future work should stop
-  adding new members and instead either:
-  - move new callers to `session`
-  - or create one small named seam for the specific collaborator that still
-    needs host access
+- `CombatSession` is no longer sharing host status with a parallel MVC facade.
+- the combat engineering surface is smaller and more legible:
+  - there is one active runtime host
+  - the remaining compat work is now concentrated in named cleanup slices
+- the next cleanup no longer needs to debate whether `CombatModel` should stay:
+  that question is already resolved by deletion
+- the remaining risk is now in field-bridge collapse and later shim cleanup,
+  not in host-wrapper ambiguity
 
-## Recommended Next Cuts
+## Guardrail
 
-### Safe next cuts
-
-- Keep `CombatModel` stable for shared command/render/save entrypoints during the
-  current migration phase.
-- Prefer `model.session` or direct `CombatSession` injection for new headless,
-  save/load, or presentation-side work.
-- Prefer removing residual test-only construction paths over adding new ones:
-  - direct `CombatModel(session=...)` in legacy tests where session/facade is no longer needed
-  - helper convenience surfaces that still hand out `model`
-- Do not add new dynamic passthrough or generic forwarding back into
-  `CombatModel`.
-
-### Completed in this slice
-
-- turn-start host seam absorbed:
-  - `_inject_turn_start_environment_cards(...)`
-  - `_decay_player_block_at_turn_start(...)`
-- ideal/judgment follow-up seam absorbed:
-  - `_inject_heart_demons(...)`
-- enemy-turn start/end housekeeping split into explicit policies:
-  - `EnemyTurnStartPolicy`
-  - `EnemyTurnEndPolicy`
-  - `EnemyBlockDecayPolicy`
-- combat-start host body absorbed:
-  - startup sequencing now lives in `CombatStartOrchestrator`
-  - `CombatSession.start_combat()` stays as the stable runtime entrypoint only
-- stress-threshold host body absorbed:
-  - judgment event flow now lives in `StressThresholdHandler`
-  - the session keeps only event subscription wiring
-- enemy-turn driver host body absorbed:
-  - timed enemy-turn progression now lives in `EnemyTurnRuntimeDriver`
-  - the session keeps phase-machine entrypoints only
-- presentation shaping host body absorbed:
-  - banner/event payload shaping now lives in `CombatPresentationRuntime`
-  - the bridge remains the lower-level presentation lease/log owner
-- composition-root body absorbed:
-  - default runtime collaborator assembly now lives in `build_default_combat_session_services(...)`
-  - the session host now attaches a bundle instead of constructing each collaborator inline
-
-Translated into current backlog count:
-
-- priority `P1`: `0` runtime-owned transitional seams
-- priority `P2`: `0` test-only transitional seams
-
-### Likely next cuts
-
-- no private `CombatModel` compatibility seams remain in the active runtime
-  inventory for this migration line
-- the remaining `CombatSession` cleanup is now optional shape work rather than
-  urgent ownership repair:
-  - save/load facade extraction if we want an even thinner host
-  - trimming how many collaborators remain explicitly attached on the session
-    surface
-- move test-only callers toward `session` or explicit collaborators where that
-  improves clarity instead of preserving broad `CombatModel` ownership
-- keep the remaining `CombatModel` tests intentional and explicit unless we
-  later decide to delete the facade contract itself
-- treat the surviving `red` power failure cluster as a separate runtime/content
-  backlog, not as a blocker for the session-first migration
-
-### Guardrail
-
-- `CombatModel` surface growth should be explicit and reviewed.
-- If a new member is added to `CombatModel`, update:
-  - this inventory
-  - the surface allowlist test
+- do not reintroduce `CombatModel` or `mvc.factory`
+- new runtime/content tests should use `CombatSession` directly unless the test
+  is explicitly asserting removal of the old facade
+- if the explicit `CombatSession` surface grows, update:
+  - `tests/combat/test_combat_runtime_surface_inventory_v1.py`
+  - this inventory document
