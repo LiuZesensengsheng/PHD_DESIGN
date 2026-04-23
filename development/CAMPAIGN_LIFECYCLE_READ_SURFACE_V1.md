@@ -4,6 +4,7 @@
 
 Campaign lifecycle now has explicit runtime result contracts for:
 
+- startup
 - turn loop
 - return resolution
 
@@ -11,6 +12,7 @@ But reading lifecycle state still required callers to inspect several separate
 machine fields:
 
 - `current_phase`
+- `last_startup_result`
 - `last_turn_cycle_result`
 - `last_return_resolution_result`
 
@@ -33,9 +35,10 @@ still scattered.
 The lifecycle machine genuinely has:
 
 1. current runtime phase
-2. possibly active runtime step
-3. the latest turn-loop outcome
-4. the latest return-resolution outcome
+2. latest startup outcome
+3. possibly active runtime step
+4. the latest turn-loop outcome
+5. the latest return-resolution outcome
 
 Those are real read concerns and should be surfaced together.
 
@@ -108,6 +111,8 @@ Current snapshot fields:
 
 - `current_phase`
 - `active_step`
+- `startup_status`
+- `startup_blocking_step`
 - `turn_cycle_status`
 - `turn_cycle_blocking_step`
 - `turn_cycle_turn_advanced`
@@ -117,6 +122,8 @@ Current snapshot fields:
 
 Current convenience properties:
 
+- `startup_completed`
+- `startup_interrupt_blocked`
 - `turn_idle_entered`
 - `interrupt_blocked`
 - `has_return_transitions`
