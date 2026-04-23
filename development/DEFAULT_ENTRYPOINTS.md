@@ -81,6 +81,20 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_package_similarity_benchmark.py --input tests/fixtures/combat_analysis/s34_sts_package_similarity_benchmark_v0 --output-dir <dir>`
 - Run the STS catalog holdout benchmark from reviewed Ironclad fixtures:
   - `python scripts/run_sts_catalog_holdout_benchmark.py --input tests/fixtures/combat_analysis/s35_sts_catalog_holdout_benchmark_v1 --output-dir <dir>`
+- Export deterministic ranking rows from reviewed STS holdout benchmark fixtures:
+  - `python scripts/run_sts_catalog_holdout_ranking_export.py --input tests/fixtures/combat_analysis/s35_sts_catalog_holdout_benchmark_v1 --output-dir <dir>`
+- Export one aggregate deterministic ranking dataset across the current reviewed `STS1` holdout surface:
+  - `python scripts/run_sts_catalog_holdout_ranking_export.py --input tests/fixtures/combat_analysis/sts_catalog_holdout_ranking_export_v1/sts1_external_holdout_reviewed_manifest_v1.json --output-dir <dir>`
+- Export deterministic ranking rows from reviewed retrieval fixtures:
+  - `python scripts/run_reviewed_retrieval_ranking_export.py --input tests/fixtures/combat_analysis/retrieval --output-dir <dir>`
+- Export deterministic ranking rows from the reviewed closed-set pick-ranking benchmark:
+  - `python scripts/run_pick_ranking_export.py --input tests/fixtures/combat_analysis/pick_ranking/pick_ranking_cases_v1.json --output-dir <dir>`
+- Train and evaluate the offline pick-ranking pairwise reranker from an export snapshot:
+  - `python scripts/run_pick_ranking_pairwise_reranker.py --input <pick-ranking-export-snapshot.json> --output-dir <dir>`
+- Train and evaluate the offline reviewed retrieval pairwise reranker from an export snapshot:
+  - `python scripts/run_reviewed_retrieval_pairwise_reranker.py --input <retrieval-ranking-export-snapshot.json> --output-dir <dir>`
+- Train and evaluate the offline STS holdout pairwise reranker from an export snapshot:
+  - `python scripts/run_sts_catalog_holdout_pairwise_reranker.py --input <ranking-export-snapshot.json> --output-dir <dir>`
 - Run the fun-proxy calibration sidecar from reviewed deck benchmark inputs:
   - `python scripts/run_fun_proxy_calibration.py --input tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --output-dir <dir>`
 - Run the fun enemy-design probe sidecar from reviewed deck + forum inputs:
@@ -117,6 +131,18 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py -q`
 - Validate the STS catalog holdout benchmark v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_v1.py tests/scripts/test_run_sts_catalog_holdout_benchmark.py -q`
+- Validate the STS catalog holdout ranking export v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_ranking_export.py tests/scripts/test_run_sts_catalog_holdout_ranking_export.py -q`
+- Validate the reviewed retrieval ranking export v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_reviewed_retrieval_ranking_export.py tests/scripts/test_run_reviewed_retrieval_ranking_export.py -q`
+- Validate the pick-ranking export v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_pick_ranking_export.py tests/scripts/test_run_pick_ranking_export.py -q`
+- Validate the pick-ranking pairwise reranker v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_pick_ranking_pairwise_reranker.py tests/scripts/test_run_pick_ranking_pairwise_reranker.py -q`
+- Validate the reviewed retrieval pairwise reranker v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_reviewed_retrieval_pairwise_reranker.py tests/scripts/test_run_reviewed_retrieval_pairwise_reranker.py -q`
+- Validate the STS catalog holdout pairwise reranker v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_pairwise_reranker.py tests/scripts/test_run_sts_catalog_holdout_pairwise_reranker.py -q`
 - Validate fast card-design loop v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q`
 - Validate fast card synthesis bridge v1:
