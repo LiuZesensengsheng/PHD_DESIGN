@@ -150,6 +150,40 @@ Current stance:
 New campaign reaction logic should stop reading raw `domain_events` directly
 unless it is specifically working on low-level recovery/rollback behavior.
 
+## Current Consumer Baseline
+
+The first production trigger consumers now live in:
+
+- `contexts/campaign/services/campaign_trigger_reaction_service.py`
+
+Important runtime rule:
+
+- production consumers should **not** drain the trigger queue during normal
+  gameplay
+- instead, the reaction service tracks `last_processed_sequence` and replays
+  only new trigger records
+
+Current production reactions:
+
+- `AFTER_COMBAT_RETURN`
+  - if the player owns `trait_introvert`, grant `+1 inspiration`
+- `AFTER_FORCED_DDL_REFRESH`
+  - advance `line_bubbles`
+  - if the player owns `trait_extravert`, increment the gossip badge once more
+- `DdlAteBlock`
+  - queue one pending forced-event payload
+  - surface it through `TURN_INTERRUPTS -> FORCED_EVENT_GATE`
+
+Current ownership split after this cut:
+
+- lifecycle hook binding still owns stable shell/system window hooks such as:
+  - elapsed-time label refresh
+  - baseline gossip badge increment
+- built-in line-bubble / introvert / extravert reactions are no longer owned by
+  lifecycle hook registration
+- those reactions now run through the trigger surface so future trait/event work
+  has one explicit campaign reaction path
+
 ## Rollback Contract
 
 Trigger collection must stay atomic with turn advancement.
