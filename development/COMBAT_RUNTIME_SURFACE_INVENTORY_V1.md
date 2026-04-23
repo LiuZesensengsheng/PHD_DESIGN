@@ -232,18 +232,24 @@ Repository scan baseline from `2026-04-18`, plus headed-entry recheck on
   - `CombatState.model`
   - `HeadlessCombatSimulationExecutor._build_model(...)`
 - the remaining `CombatModel` pressure is now measurable and test-heavy:
-  - `62` explicit `CombatModel` references across `23` test files
+  - `16` explicit `CombatModel` references across `4` test files
   - those references are now concentrated in legacy
-    render/presentation/controller/content tests plus guard coverage
+    render/presentation/facade contract tests plus guard coverage
   - direct legacy `CombatModel(state=..., event_bus=...)` constructions: `0`
   - remaining appearances are now mostly:
-    - `CombatModel(session=...)` in legacy tests
+    - `CombatModel(session=...)` in explicit facade/render contract tests
     - one guard test that prevents the legacy constructor from returning
 - a second low-risk runtime-test migration pass is now complete:
   - phase-machine / timing / event / steadfast / smoke tests that only exercise
     runtime semantics now build and assert directly on `CombatSession`
-  - the remaining explicit facade pressure is more clearly concentrated in
-    render/presentation/controller/content-facing tests plus helper seams
+  - content / queue / pointer / controller-runtime / render-input tests that
+    did not need the facade now also build directly on `CombatSession`
+  - the remaining explicit facade pressure is now narrowly concentrated in
+    render/presentation/facade contract coverage only
+- a small known residual failure cluster remains outside the migration surface:
+  - several `red` power/content tests still fail under direct `CombatSession`
+    usage as existing runtime/content issues, not as `CombatModel` migration
+    regressions
 - The remaining pressure is mostly test/compat cleanup, not gameplay runtime
   ownership confusion.
 - test helpers are now session-first by default:
@@ -314,8 +320,10 @@ Translated into current backlog count:
     surface
 - move test-only callers toward `session` or explicit collaborators where that
   improves clarity instead of preserving broad `CombatModel` ownership
-- continue deleting direct `CombatModel(session=...)` usage where tests no
-  longer need the facade surface
+- keep the remaining `CombatModel` tests intentional and explicit unless we
+  later decide to delete the facade contract itself
+- treat the surviving `red` power failure cluster as a separate runtime/content
+  backlog, not as a blocker for the session-first migration
 
 ### Guardrail
 
