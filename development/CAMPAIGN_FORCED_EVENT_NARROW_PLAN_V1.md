@@ -366,6 +366,15 @@ Deliverables:
 - guardrail tests or architecture assertions against direct forced-event modal
   opens from unrelated services
 
+Current V1 landing choice:
+
+- prefer an explicit catalog hook before adding a second product-heavy
+  forced-event family
+- the first landed hook lives in:
+  - `contexts/campaign/domain/campaign_forced_event_catalog.py`
+- `CampaignTriggerReactionService` now routes mapped triggers through that
+  catalog and then enqueues the runtime owner
+
 Validation:
 
 - focused new forced-event tests
