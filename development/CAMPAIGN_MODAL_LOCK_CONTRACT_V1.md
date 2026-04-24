@@ -94,9 +94,8 @@ Campaign input ingress still follows this order:
 
 1. `CampaignModalDispatchService.dispatch(event)`
 2. `CampaignInputLockService.handle_locked_event(event)`
-3. runtime UI handling
-4. keyboard/mouse/button adapters
-5. orchestration seams
+3. keyboard/mouse/button adapters
+4. orchestration seams
 
 Meaning:
 
@@ -131,9 +130,21 @@ These services may coordinate lock behavior:
 
 These services should not bypass owner-aware release semantics.
 
+Current seam rule:
+
+- active services should read lock state through `ModalCoordinator`
+- active services should read meeting-prompt UI identity/hit-test state through
+  `MeetingPromptUiService`
+- do not add new direct reads of `_input_locked`, `_input_lock_owner`,
+  `_meeting_prompt_window`, `_meeting_enter_btn`, `_meeting_skip_btn`, or
+  `_meeting_enter_hovered` outside the storage owners
+
 In this cut, `LineBubbleService` and thesis judgment unlock flow were also
 aligned to reuse the coordinated owner behavior instead of blindly clearing the
 lock.
+
+`GossipFlowApplicationService` now also routes lock acquire/release only
+through `ModalCoordinator` instead of keeping a direct raw-field fallback.
 
 ## Non-Goals
 
@@ -143,6 +154,12 @@ This contract does not:
 - convert all campaign UI into one modal framework
 - redesign modal visuals
 - remove legacy `_input_locked` storage from `CampaignState`
+
+Current nuance:
+
+- raw storage still exists on `CampaignState`
+- direct service-side fallback writes should stay deleted
+- owner-aware lock mutation should stay centralized in `ModalCoordinator`
 
 ## Safe UI Collaboration Rule
 

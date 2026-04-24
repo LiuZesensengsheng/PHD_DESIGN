@@ -79,8 +79,11 @@ These internal flows may still perform actual advancement:
 - `EndTurnService`
 - internal state-owned route resolution that is already past the UI request step
 
-In V1, `CampaignState.end_turn()` remains as a compatibility wrapper, but it is
-no longer the preferred UI-facing seam.
+`CampaignState.end_turn()` has now been removed.
+
+UI-facing code should use `CampaignState.request_end_turn(...)`, while
+orchestration-owned advancement continues through `advance_campaign_turn()`,
+`CampaignEndTurnOrchestrator`, and lifecycle ownership.
 
 ## Non-Goals
 

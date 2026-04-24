@@ -8,7 +8,7 @@ execution plan.
 It was superseded on `2026-04-23` by:
 
 - `docs/pm/DECISION_LOG.md`
-  - `DL-20260423-01`
+  - `DL-20260423-02`
 - `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
 - `docs/development/COMBAT_RUNTIME_SURFACE_INVENTORY_V1.md`
 

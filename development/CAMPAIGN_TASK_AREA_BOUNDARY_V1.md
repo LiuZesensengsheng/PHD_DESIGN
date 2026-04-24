@@ -27,8 +27,10 @@ Current evidence:
 - `contexts/campaign/domain/block_dto.py` is the real runtime shape for
   schedulable blocks
 - `contexts/campaign/services/track_block_service.py` owns most board mutation
-  rules such as normalization, fusion, DDL snake, compaction, and actionable
-  block detection
+  rules such as normalization, fusion, DDL snake, compaction
+- `contexts/campaign/services/campaign_action_line_projection_service.py`
+  owns action-line runtime projection such as actionable-today / forced-DDL
+  detection
 - design docs already distinguish `Task Block` from `Event Bubble`, and
   distinguish task lines from the full campaign shell
 
@@ -213,6 +215,7 @@ Current modules that fit the task area:
 
 - `contexts/campaign/domain/block_dto.py`
 - `contexts/campaign/services/track_block_service.py`
+- `contexts/campaign/services/campaign_action_line_projection_service.py`
 - `contexts/campaign/services/campaign_visible_blocks_service.py`
 - `contexts/campaign/services/line_bubble_service.py`
 

@@ -95,21 +95,48 @@ them:
   - route-resolution consume-once behavior
   - thesis combat-sync consume-once behavior
 
+### 5. Task-Area Internal Rule Splits Keep Stable Board Outcomes
+
+Protected by:
+
+- `tests/campaign/test_track_block_service_overlap_guard.py`
+- `tests/campaign/test_track_block_service_ddl.py`
+- `tests/campaign/test_track_block_service_fusion_thesis_nodes.py`
+- `tests/campaign/test_task_area_invariants.py`
+- `tests/campaign/test_campaign_domain_events.py`
+
+Key rule:
+
+- task-area internals may split into smaller rule helpers, but overlap safety,
+  DDL pressure behavior, fusion outcomes, and emitted domain events must remain
+  stable at the facade boundary
+
+What is now checked:
+
+- illegal logical overlap still hard-fails in development-time guards
+- DDL snake still distinguishes:
+  - no-op chase
+  - just-touched no-op
+  - single-step eat
+- thesis task-area event/combat nodes still follow the same fusion rule as
+  other non-DDL blocks
+- task-area fusion and DDL-eat steps still emit the expected domain events
+
 ## Validation
 
 Focused regression pack passed:
 
-- `python -m pytest tests/campaign/test_campaign_aggregate_invariants.py tests/campaign/test_thesis_aggregate_invariants.py tests/campaign/test_campaign_orchestration_aggregate_invariants.py tests/campaign/test_task_area_invariants.py -q`
+- `python -m pytest tests/campaign/test_campaign_aggregate_invariants.py tests/campaign/test_thesis_aggregate_invariants.py tests/campaign/test_campaign_orchestration_aggregate_invariants.py tests/campaign/test_task_area_invariants.py tests/campaign/test_track_block_service_overlap_guard.py tests/campaign/test_track_block_service_ddl.py tests/campaign/test_track_block_service_fusion_thesis_nodes.py -q`
 
 ## Recommendation
 
-Treat aggregate-candidate invariants as "good enough" for this phase.
+Treat aggregate-candidate invariants and task-area split guardrails as "good
+enough" for this refactor line.
 
-If DDD work continues now, the next highest-ROI step is:
+There is no automatic next DDD step from this note.
 
-1. `State Host Facade V1`
+Only reopen this line if:
 
-with one rule:
-
-- only narrow services whose responsibilities are already stable
-- do not reopen `TrackBlockService` or force a whole-campaign facade
+- thesis identity pressure grows beyond `track_index`
+- task-area rules need another behavior change that current helper boundaries
+  no longer contain

@@ -15,7 +15,7 @@ not vocabulary drift but write-path drift.
 Before this cut, some task-area writers were still open-coding patterns like:
 
 - compute next track index from `_blocks`
-- call `TrackService.apply_blueprint(...)`
+- call `TaskAreaPlanApplyService.apply_blueprint(...)`
 - assign back into `_blocks`
 - manually call stabilization helpers
 
@@ -75,8 +75,6 @@ These mutations remain internal implementation details for now:
 
 - `TrackBlockService`
   - owns task-area board algorithms such as fusion and DDL snake
-- `EndTurnService`
-  - still performs staged in-sequence fusion writes as part of its runtime flow
 - `ThesisBlockMutationService`
   - owns thesis-local block removal and dormant-round activation
 
@@ -90,7 +88,7 @@ The rule is:
 
 Do not add new external writers that:
 
-- assign `state._blocks = ...` after `TrackService.apply_blueprint(...)`
+- assign `state._blocks = ...` after `TaskAreaPlanApplyService.apply_blueprint(...)`
 - compute next track indices by open-coding `_blocks` scans
 - call `_normalize_no_overlap()` and `_ensure_last_block_is_ddl_per_track()`
   directly from outer app services when `stabilize_campaign_board()` or
