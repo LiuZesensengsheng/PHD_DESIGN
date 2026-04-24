@@ -81,11 +81,10 @@ Meaning:
 - UI may request ending transition
 - UI should not manually reproduce the downstream business sequence
 
-Compatibility note:
+Current rule:
 
-- `CampaignState.end_turn()` still exists in V1 as a compatibility wrapper for
-  actual turn advancement
-- new UI-facing code should prefer `request_end_turn(...)`
+- `CampaignState.end_turn()` has been removed
+- UI-facing code must use `request_end_turn(...)`
 
 ### Thesis Submission Seams
 
@@ -124,9 +123,6 @@ Meaning:
 
 Presentation-facing helpers currently exposed by `CampaignView`:
 
-- `handle_runtime_ui_event(event)`
-- `update_runtime_ui(dt)`
-- `render_runtime_ui(surface)`
 - `draw_layers(...)`
 - `show_choice_toggle(visible)`
 - `screen_to_canvas(screen_pos)`
