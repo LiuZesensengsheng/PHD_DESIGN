@@ -156,6 +156,24 @@ Supporting seam tightening:
 - `CampaignTurnOrchestrator.advance_turn()` now returns the transition context
 - `CampaignState.advance_campaign_turn()` now forwards that explicit context
   instead of discarding it
+- `CampaignEndTurnOrchestrator.request_end_turn_result()` now preserves the
+  explicit turn-cycle result for callers that need the lifecycle outcome
+- `CampaignState.request_end_turn_result()` mirrors that explicit end-turn
+  result seam at the campaign shell host
+- keyboard/mouse/ui-button ingress should keep calling
+  `CampaignState.request_end_turn*()` host seams rather than reaching directly
+  into lifecycle-machine timing APIs
+
+Current status on `2026-04-24`:
+
+- a hard-fail campaign guardrail now keeps:
+  - `campaign_frame_orchestrator.py`
+  - keyboard/mouse/ui-button ingress services
+  free of direct turn-timing calls such as:
+  - `run_turn_cycle()`
+  - `run_turn_transition()`
+  - `run_turn_interrupts()`
+  - `advance_campaign_turn()`
 
 ## Counter-Review
 
