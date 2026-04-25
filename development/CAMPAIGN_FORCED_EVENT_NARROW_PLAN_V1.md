@@ -246,6 +246,14 @@ This avoids reintroducing:
 - frame-time prompt checks
 - direct modal opens from arbitrary business services
 
+Current status on `2026-04-24`:
+
+- a hard-fail campaign guardrail now keeps lifecycle-step gate wiring on the
+  `CampaignState.handle_pending_forced_campaign_event()` host seam
+- `interrupt_gate_steps.py` is therefore guarded against directly touching:
+  - forced-event runtime ownership
+  - forced-event presenter ownership
+
 ### 5. Split Presentation Behind A Dedicated Seam
 
 Recommended seam:
@@ -308,6 +316,21 @@ Scope:
 - move modal-open logic out of `CampaignTriggerReactionService`
 - gate/runtime owner now call presenter instead of `gossip_modal` directly
 
+Current status on `2026-04-24`:
+
+- a curated import/reference guardrail now keeps the stable non-presentation
+  forced-event boundary files free of:
+  - direct `gossip_modal` references
+  - direct presenter-service imports
+- the same non-presentation owner path is now also guarded against direct UI
+  framework imports such as:
+  - `pygame`
+  - `pygame_gui`
+  - `contexts.shared.ui`
+  - `contexts.campaign.view`
+  - `contexts.campaign.ui_runtime`
+  - `contexts.campaign.rendering`
+
 Deliverables:
 
 - explicit presenter service
@@ -333,6 +356,16 @@ Scope:
   - multiple events are queued
   - a present attempt fails
 - ensure gate semantics remain deterministic
+
+Current status on `2026-04-24`:
+
+- forced-event runtime now fail-closes by promoting the next pending event to
+  `active` when the presenter ownership probe itself fails
+- the no-presenter gate path also keeps the promoted `active` event available
+  for later retry instead of leaving queue state implicit
+- a hard-fail guardrail now also keeps queue ownership split so:
+  - pending/active state remains in `CampaignForcedEventRuntimeService`
+  - `CampaignForcedEventPresentationService` stays presentation-only
 
 Deliverables:
 

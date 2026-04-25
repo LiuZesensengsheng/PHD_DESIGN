@@ -114,6 +114,7 @@ Current V1 contract:
   - `COMPLETED_WITH_INTERRUPT_BLOCK`
 - the result also keeps these nested/runtime details explicit:
   - `return_resolution_result`
+  - `interrupt_gate_result`
   - `interrupt_context`
   - `blocking_step`
   - `final_phase`
@@ -124,8 +125,10 @@ Supporting seam tightening:
 
 - `CampaignStartupOrchestrator.startup(...)` now delegates the startup mainline
   through `lifecycle_machine.run_startup(...)`
-- `CampaignState.recheck_turn_interrupts()` now returns the interrupt context
-  instead of discarding it
+- `CampaignState.recheck_turn_interrupts_result()` now provides the explicit
+  interrupt-gate result seam used by startup orchestration
+- `CampaignStartupResult.interrupt_context` remains available as a
+  compatibility read-through to the nested interrupt-gate result
 - lifecycle snapshot now also exposes startup summary fields:
   - `startup_status`
   - `startup_blocking_step`

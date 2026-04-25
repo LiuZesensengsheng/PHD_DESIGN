@@ -682,3 +682,100 @@ to pure baseline ordering by configuration and stop promotion at the shadow laye
 2. Train a small interpretable reranker offline.
 3. Keep automation focused on reviewed coverage growth, export stability, and shadow
    evaluation before any default-on promotion.
+
+### [DL-20260424-01] Campaign 下一轮采用 Boundary Hardening 主线
+
+- 日期：2026-04-24
+- 负责人：Team
+- 状态：Accepted
+- 关联：`docs/development/CAMPAIGN_BOUNDARY_HARDENING_V1.md`,
+  `docs/development/CODEX_TASK_POOL.md`,
+  `docs/development/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`,
+  `docs/development/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
+
+#### 背景
+Campaign 侧的前两轮主线已经基本完成：
+
+- `Campaign Simplification V1`
+- `Campaign Self Refactor V1`
+- forced-event narrow plan 的既定切片
+- lifecycle result / snapshot / read-surface 收口
+
+当前真正缺少的不是再来一轮 broad cleanup，而是把已经接受的方向变成一条可自动化、可暂停、可恢复的边界硬化主线。否则后续自动化很容易把：
+
+- lifecycle contract tightening
+- trigger / forced-event ownership
+- direct seam review
+- `services` 目录纯化
+- `thesis_slice` / task-area hotspot 清理
+
+重新混成一条范围失真的大任务。
+
+#### 决策
+接受 `Campaign Boundary Hardening V1` 作为下一轮 active campaign architecture line，并冻结以下规则：
+
+1. scope 限定在 `campaign/tests/docs`
+2. 目标是 boundary hardening，而不是 broad cleanup 或目录纯化
+3. 本轮不做物理 `services -> application/ui` 迁移
+4. `hit_test_service` 只作为 optional late-phase seam review
+5. `thesis_slice` 与 task-area hotspot 继续保持 triggered backlog，只有出现真实 writer/identity 或 board-rule 压力时才重开
+6. hard-fail 只覆盖已稳定的 campaign boundary 规则；touch count、文件长度等指标保持 report-only
+7. 每个自动化 slice 都必须同步：
+   - task pool
+   - 相关长期文档
+   - 当日日志
+8. 默认验证节奏为：
+   - slice 级 targeted tests
+   - phase close 跑 `py -3.11 -m pytest tests/campaign -q`
+   - line closure 或高风险阶段收口时再跑 smoke baseline
+
+#### 人类工作量影响（核心）
+- 减少的人类工时：减少后续每轮自动化前对 campaign 下一步边界的重新判断成本。
+- 增加的人类工时：需要一次性接受 hard-fail / report-only、主线 / optional / backlog 的更细分类。
+- 对关键路径的变化：把 campaign 下一步从“看情况再决定做哪块清理”切成“按 phase 串行推进的边界硬化线”。
+
+#### AI 工作量假设
+AI / automation 适合继续做：
+
+- lifecycle contract closure
+- trigger / forced-event boundary closure
+- campaign-side guardrail hardening
+- optional `hit_test_service` seam review
+
+仍需人工决策的部分：
+
+- 是否重开 `CampaignView` / visual-runtime / shared cleanup
+- 是否启动 `thesis_slice` 或 task-area hotspot 的新专题线
+- 将来是否值得做物理 `services` taxonomy migration
+
+#### 备选方案
+1. 维持当前 docs 现状，只做 feature-driven 局部修补。
+2. 直接重开更大范围的 campaign purity / taxonomy cleanup。
+
+#### 风险与触发信号
+- 风险：自动化将 boundary hardening 线重新做成 broad cleanup。
+- 触发信号：开始大范围触碰 `contexts/campaign/view.py`、`rendering/**`、`ui_runtime/**` 或 `contexts/shared/**`。
+- 风险：把 `thesis_slice` 和 task-area hotspot 当作 cleanliness 任务提前拉回主线。
+- 触发信号：没有新的 writer/identity / board-rule 压力，却开始大规模改动 `thesis_slice` 或 `track_block_service`。
+- 风险：将不稳定指标硬升级为 hard-fail，导致 guardrail 噪音高于收益。
+- 触发信号：touch count、文件长度、职责数量这类波动指标开始频繁阻断正常推进。
+
+#### 验证计划
+- 成功指标：
+  - 下一轮 campaign 自动化有单一 source-of-truth。
+  - lifecycle / trigger / forced-event / direct-seam 规则不再需要依赖多份旧文档拼接判断。
+  - `thesis_slice`、task-area hotspot、目录纯化没有误并入同一条执行线。
+- 检查日期：每个 phase 收口后检查一次。
+
+#### 回滚方案
+若该主线被证明仍然范围过宽或收益不足：
+
+- 不口头改线，必须新增 decision log 显式替代。
+- 将失败 phase 作为 queued / backlog task 降级。
+- 保留已接受的 supporting docs，不通过删除历史来假装从未做过该判断。
+
+#### 后续动作
+1. 新增 `docs/development/CAMPAIGN_BOUNDARY_HARDENING_V1.md` 作为主文档。
+2. 更新 `docs/development/CODEX_TASK_POOL.md` 的 active campaign task。
+3. 在 daily log 中记录本次 decision freeze。
+4. 后续 automation 默认按 `Phase 0 -> Phase 1 -> Phase 2 -> Phase 3 -> optional Phase 4` 串行执行。

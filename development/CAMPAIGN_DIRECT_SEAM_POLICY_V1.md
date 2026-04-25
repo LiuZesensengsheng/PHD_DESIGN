@@ -249,6 +249,14 @@ Update on `2026-04-22`:
   written and is now effectively narrowed to:
   - `hit_test_service`
 
+Update on `2026-04-24`:
+
+- a hard-fail campaign guardrail now locks host-installed direct service
+  aliases to:
+  - the stable whitelist above
+  - grouped-only reward/thesis/social ownership
+  - the optional review-next `hit_test_service` survivor only
+
 ### 4. Use State-Level Intent Seams Instead Of Re-Exporting Leaf Services
 
 When a business action needs to stay easy to call, prefer state-level intent

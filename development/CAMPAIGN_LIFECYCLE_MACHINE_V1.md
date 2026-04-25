@@ -326,6 +326,21 @@ Recommended initial windows:
 These windows should be dispatched by the lifecycle layer, not by arbitrary UI
 or adapter services.
 
+Current status on `2026-04-24`:
+
+- lifecycle-side trigger dispatch is now additionally guarded so:
+  - `CampaignLifecycleContext.dispatch_window()` keeps using
+    `CampaignState.record_campaign_window_trigger()` and
+    `CampaignState.process_campaign_trigger_reactions()`
+  - lifecycle context/step files do not couple directly to:
+    - `interaction_services.trigger_surface`
+    - `interaction_services.trigger_reactions`
+    - forced-event runtime/presenter owners
+- the lifecycle package is now also guarded against direct imports of:
+  - UI frameworks such as `pygame` / `pygame_gui`
+  - presentation paths such as `campaign.view` / `ui_runtime` / `rendering`
+  - `contexts.campaign.services`
+
 ### 4. Naming Rule
 
 Do not use the generic word `Node` for this architecture.

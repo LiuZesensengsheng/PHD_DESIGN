@@ -50,27 +50,102 @@ Do not treat a task as a long-running Codex lane when it is mainly:
 
 ## Active Tasks
 
-### A1. Campaign Lifecycle And Forced-Event Narrowing
+### A1. Campaign Boundary Hardening V1
 
 - Goal:
-  - continue campaign lifecycle tightening through explicit runtime contracts,
-    trigger ownership, and forced-event seams
-  - keep campaign shell behavior stable while reducing hidden timing paths
+  - harden the current campaign architecture around lifecycle ownership,
+    trigger/forced-event ownership, direct seam policy, and executable
+    guardrails
+  - keep campaign shell behavior stable without reopening broad cleanup or
+    directory-purity work
 - Source of truth:
+  - `docs/development/CAMPAIGN_BOUNDARY_HARDENING_V1.md`
   - `docs/development/CAMPAIGN_FORCED_EVENT_NARROW_PLAN_V1.md`
+  - `docs/development/CAMPAIGN_INTERRUPT_GATE_CONTRACT_V1.md`
   - `docs/development/CAMPAIGN_LIFECYCLE_MACHINE_V1.md`
   - `docs/development/CAMPAIGN_LIFECYCLE_READ_SURFACE_V1.md`
   - `docs/development/CAMPAIGN_TURN_LOOP_CONTRACT_V1.md`
   - `docs/development/CAMPAIGN_RETURN_RESOLUTION_CONTRACT_V1.md`
   - `docs/development/CAMPAIGN_STARTUP_CONTRACT_V1.md`
+  - `docs/development/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`
+  - `docs/development/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
 - Current status:
-  - forced-event narrow plan V1 reached its intended stop line on `2026-04-23`
-  - lifecycle result and snapshot surfaces are now explicit
-  - further work should stay narrow and contract-driven
-- Boundaries:
-  - do not widen into a full interrupt platform rewrite
-  - do not reopen `CampaignView` or visual-runtime work
-  - do not redesign save compatibility in the same slice
+  - decision-frozen on `2026-04-24`
+  - `Phase 1` lifecycle contract closure completed on `2026-04-24`
+  - turn-loop, return-resolution, standalone interrupt-gate, and startup
+    nested interrupt-gate result surfaces are now explicit
+  - the UI-facing end-turn host seam now also preserves the explicit
+    turn-cycle result through `request_end_turn_result()`
+  - `py -3.11 -m pytest tests/campaign -q` passed for the `Phase 1` close
+  - `Phase 2` trigger and forced-event boundary closure completed on
+    `2026-04-24`
+  - forced-event owner closure now includes:
+    - a curated import/reference guardrail that keeps stable non-presentation
+      forced-event owners free of direct `gossip_modal` references and
+      presenter imports
+    - fail-closed runtime gate semantics that preserve explicit `active`
+      ownership during presenter-probe failure and no-presenter retry paths
+  - `py -3.11 -m pytest tests/campaign -q` passed for the `Phase 2` close
+  - `Phase 3` campaign boundary gates completed on `2026-04-24`
+  - the phase-close validation pack passed:
+    - `py -3.11 -m pytest tests/campaign -q`
+  - the first `Phase 3` hard-fail guardrail locked explicit lifecycle result
+    seams on the startup/end-turn/state host path
+  - a second `Phase 3` hard-fail guardrail now keeps `CampaignState` direct
+    service alias installation whitelist-based:
+    - stable shell/runtime ports remain direct
+    - reward/thesis/social families stay grouped-only
+    - optional `hit_test_service` review-next status is preserved without
+      freezing it as a permanent seam
+  - a third `Phase 3` hard-fail guardrail now keeps turn timing ownership out
+    of frame/event-ingress paths:
+    - keyboard/mouse/ui-button ingress stays on
+      `CampaignState.request_end_turn*()`
+    - frame/event services may not reach directly into lifecycle-machine turn
+      advancement
+  - a fourth `Phase 3` hard-fail guardrail now keeps forced-event ownership
+    split on the accepted runtime/presenter line:
+    - stable non-presentation forced-event owners stay UI-framework free
+    - pending/active queue state stays in runtime ownership, not presenter
+  - a fifth `Phase 3` hard-fail guardrail now keeps forced-event gate wiring
+    on the `CampaignState` host seam:
+    - lifecycle-step gate code may not couple directly to runtime/presenter
+    - `CampaignState.handle_pending_forced_campaign_event()` remains the
+      stable handoff point
+  - a sixth `Phase 3` hard-fail guardrail now keeps lifecycle-side trigger
+    dispatch on `CampaignState` host seams:
+    - lifecycle context/step files may not couple directly to
+      `trigger_surface` / `trigger_reactions`
+    - trigger windows and reactions continue to route through the state host
+      seam
+  - a seventh `Phase 3` hard-fail guardrail now keeps
+    `contexts/campaign/lifecycle/**` free of direct UI-framework and
+    campaign-service imports
+  - forced-event narrow plan V1 already reached its intended stop line on
+    `2026-04-23`
+  - the mainline hard-fail guardrail baseline is now sufficient to close
+    `Phase 3` without reopening broad cleanup
+  - the active next move is no longer another mandatory guardrail slice; only
+    the optional `Phase 4` `hit_test_service` review remains in-line
+- Current rules:
+  - keep the scope inside `campaign/tests/docs`
+  - do not reopen `CampaignView`, visual-runtime extraction, or shared cleanup
+  - do not start physical `services -> application/ui` migration in this line
+  - treat `hit_test_service` as optional late-phase review only
+  - keep `thesis_slice` and task-area hotspot follow-up as triggered backlog
+  - hard-fail only stable boundary rules; keep touch counts/file lengths
+    report-only
+  - per slice:
+    - run targeted validation only
+    - update daily log
+    - update task pool / long-term docs when phase status changes
+- Validation rhythm:
+  - slice level:
+    - focused tests only
+  - phase close:
+    - `py -3.11 -m pytest tests/campaign -q`
+  - line closure or explicitly high-risk phase:
+    - `py -3.11 scripts/run_repo_smoke_baseline.py`
 
 ### A2. Narrative Pipeline V1
 
