@@ -91,13 +91,14 @@ Stop and ask before doing any of the following:
 ## Current Migration Debt
 
 - Large orchestrator modules still need responsibility splits:
-  - `design_engine/constrained_synthesis.py` remaining ranking, tuning, and variant
-    construction helpers
+  - `design_engine/constrained_synthesis.py` remaining tuning and variant construction
+    helpers
   - `design_engine/design_candidate_scout.py`
-  - `design_engine/synthesis_closure.py` remaining closure/replay orchestration helpers
-  - `design_studio/sts_catalog_holdout_benchmark.py` remaining evaluation/similarity helpers
-  - `reports/html/sts_profile.py` still owns a large single-page template and can later
-    split CSS/JS/template sections if report-lane conflicts continue.
+  - `design_engine/synthesis_closure.py` remaining replay orchestration helpers
+  - `design_studio/sts_catalog_holdout_benchmark.py` remaining case replay/evaluation
+    mainline helpers
+  - `reports/html/sts_profile_template.py` still owns a large single-page static
+    template and can later split CSS/JS sections if report-lane conflicts continue.
 
 ## First Milestone Exit Criteria
 
@@ -114,12 +115,19 @@ Stop and ask before doing any of the following:
   module.
 - Constrained synthesis mutation delta/role/state helpers are outside the synthesis
   orchestration module.
+- Constrained synthesis ranked-candidate selection and diversity guardrails are outside
+  the synthesis orchestration module.
 - Fast-card synthesis closure report/snapshot/plain-data rendering is outside closure
   orchestration.
+- Fast-card synthesis closure projection helpers, fixture loading, and cluster
+  diagnostics are outside closure orchestration.
 - STS catalog holdout loading and artifact/report/delta/manifest helpers are outside
+  the benchmark evaluation module.
+- STS catalog holdout similarity metrics and diagnostic bucket aggregation are outside
   the benchmark evaluation module.
 - STS HTML public package entrypoint is thin; the large profile renderer lives in its
   own report-lane module.
+- STS profile HTML template text is separated from the renderer injection logic.
 - Focused regression packs pass for touched surfaces.
 - Reviewed benchmark/calibration loading lives outside `design_engine`.
 
