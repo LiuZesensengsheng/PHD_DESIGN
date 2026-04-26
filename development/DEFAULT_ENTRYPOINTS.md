@@ -111,6 +111,22 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_fast_card_synthesis_closure.py --write-template <path>`
 - Run the fast card synthesis closure sidecar from a reviewed JSON input:
   - `python scripts/run_fast_card_synthesis_closure.py --input <path> --output-dir <dir>`
+- Read the autonomy design-assist runbook:
+  - `tools/combat_analysis/docs/AUTONOMY_DESIGN_ASSIST_RUNBOOK_V1.md`
+- Write a Design Candidate Scout single-session input template:
+  - `python scripts/run_design_candidate_scout.py --write-template <path>`
+- Run a report-only Design Candidate Scout single-session review:
+  - `python scripts/run_design_candidate_scout.py --input <path> --output-dir <dir>`
+- Write a Design Candidate Scout batch manifest template:
+  - `python scripts/run_design_candidate_scout.py --write-batch-template <path>`
+- Run a report-only Design Candidate Scout batch review:
+  - `python scripts/run_design_candidate_scout.py --batch-input <path> --output-dir <dir>`
+- Write a bounded candidate shadow manifest template:
+  - `python scripts/run_bounded_candidate_shadow.py --write-template <path>`
+- Run a report-only bounded candidate shadow review:
+  - `python scripts/run_bounded_candidate_shadow.py --input <path> --output-dir <dir>`
+- Run the reviewed mechanism-axis viability benchmark:
+  - `python scripts/run_mechanism_axis_viability_benchmark.py --input tests/fixtures/combat_analysis/mechanism_axis_viability_v1 --output-dir <dir>`
 - Run a unified project design-assist session in one mode:
   - `python scripts/run_project_design_assist_session.py --mode <card|enemy|synthesis> --input <path> --output-dir <dir>`
 - Run a unified project design-assist batch session:
@@ -149,6 +165,14 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/scripts/test_run_fast_card_synthesis_bridge.py -q`
 - Validate fast card synthesis closure v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_synthesis_closure.py tests/scripts/test_run_fast_card_synthesis_closure.py -q`
+- Validate Design Candidate Scout v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_design_candidate_scout.py tests/scripts/test_run_design_candidate_scout.py -q`
+- Validate bounded candidate shadow v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_bounded_candidate_shadow.py tests/scripts/test_run_bounded_candidate_shadow.py -q`
+- Validate the reviewed mechanism-axis viability benchmark:
+  - `python -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_viability_v1.py tests/scripts/test_run_mechanism_axis_viability_benchmark.py -q`
+- Validate retrieval persistent-miss lane-local probes:
+  - `python -m pytest tests/toolkit/combat_analysis/test_reviewed_retrieval_persistent_miss_probe_pack.py -q`
 - Validate fast draft-session v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_draft_session.py -q`
 - Validate enemy-design isolation guardrails:
