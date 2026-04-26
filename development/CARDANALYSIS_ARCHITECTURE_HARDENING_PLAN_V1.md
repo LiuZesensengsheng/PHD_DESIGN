@@ -92,7 +92,6 @@ Stop and ask before doing any of the following:
 
 - Large orchestrator modules still need responsibility splits:
   - `design_engine/design_candidate_scout.py`
-  - `design_engine/synthesis_closure.py` remaining replay orchestration helpers
   - `design_studio/sts_catalog_holdout_benchmark.py` remaining case replay/evaluation
     mainline helpers
   - `reports/html/sts_profile_template.py` still owns a large single-page static
@@ -121,6 +120,8 @@ Stop and ask before doing any of the following:
   orchestration.
 - Fast-card synthesis closure projection helpers, fixture loading, and cluster
   diagnostics are outside closure orchestration.
+- Fast-card synthesis closure reviewed fixture replay mainline is outside closure
+  orchestration.
 - STS catalog holdout loading and artifact/report/delta/manifest helpers are outside
   the benchmark evaluation module.
 - STS catalog holdout similarity metrics and diagnostic bucket aggregation are outside
