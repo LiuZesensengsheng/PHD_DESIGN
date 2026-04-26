@@ -43,6 +43,9 @@ Out of scope:
 - Report-only CLI manifests must include `evaluation_mode=report_only` and must not
   expose `overall_pass` or `hard_gates` unless the underlying evaluator already owns
   explicit hard gates.
+- Report-only surface changes must preserve the canonical registry in
+  `tools/combat_analysis/report_only_surface_registry.py`; overlapping V1 modules
+  should be treated as consolidation inputs instead of direct merge candidates.
 
 ## Validation Levels
 
@@ -189,6 +192,23 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_fun_benchmark_v1.py t
 
 Add STS holdout tests if package health affects catalog recovery or ranking features.
 
+### Report-Only Surface Or CLI Change
+
+Use for deck compression/removal reports, mechanism fun/health reports, card package
+health reports, design iteration briefs, evidence bundle wiring, or default-entrypoint
+updates for those surfaces.
+
+Minimum tests:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_report_only_surface_registry_v1.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/shared/test_text_encoding_guards.py -q
+```
+
+Also run the owning evaluator and CLI test for every touched surface. Do not merge a
+new parallel V1 module when the same semantic surface is already registered; consolidate
+its useful fields, fixtures, or tests into the canonical owner.
+
 ## Holdout Case Rules
 
 ### Must Add Holdout
@@ -261,7 +281,7 @@ Architecture and encoding:
 
 ```powershell
 git diff --check
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/shared/test_text_encoding_guards.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/toolkit/combat_analysis/test_report_only_surface_registry_v1.py tests/shared/test_text_encoding_guards.py -q
 ```
 
 Mechanism axis and project assist:

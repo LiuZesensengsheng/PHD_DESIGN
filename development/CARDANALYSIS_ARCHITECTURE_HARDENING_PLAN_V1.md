@@ -19,12 +19,31 @@ Use an incremental hardening path:
 4. Keep scout, bounded shadow, and learned ranking report-only/default-off unless a
    later human decision explicitly promotes them.
 5. Preserve existing snapshots and reports while moving code.
+6. Keep report-only evaluation surfaces behind a canonical registry so parallel V1
+   modules do not drift semantically.
+
+## Report-Only Surface Checkpoint
+
+The current canonical report-only surface map lives in
+`docs/development/CARDANALYSIS_REPORT_ONLY_SURFACE_REGISTRY_V1.md` and
+`tools/combat_analysis/report_only_surface_registry.py`.
+
+New work should consolidate into those surfaces instead of creating overlapping V1
+modules. In particular:
+
+- `deck_compression_model_v1` should consolidate into `deck_compression_report_v1`.
+- `mechanism_fun_health_evaluator_v1` should consolidate into
+  `mechanism_fun_health_v1`.
+- `cardanalysis_evidence_bundle_v1` may collect normalized summaries and review
+  conflicts, but must not become pass/fail authority.
 
 ## Non-Negotiable Boundaries
 
 - `combat_analysis` is not gameplay runtime.
 - `combat_analysis` is not the card data source of truth.
 - `design_engine` must not grow new direct imports from `design_studio`.
+- Do not add duplicate report-only V1 modules for an already registered semantic
+  surface.
 - Scout and bounded candidate shadow remain report-only, default-off, and
   human-review-required.
 - Learned/modelized work starts with ranking/reranking only.
@@ -128,6 +147,9 @@ Stop and ask before doing any of the following:
   uncertainty-note helpers are outside the benchmark contract module.
 - STS package similarity benchmark fixture loading/payload validation and
   report/snapshot/manifest rendering are outside the benchmark orchestration module.
+- Report-only deck compression, mechanism fun/health, card package health, design
+  iteration brief, and evidence bundle surfaces have canonical owners recorded in the
+  report-only surface registry.
 - STS HTML public package entrypoint is thin; the large profile renderer lives in its
   own report-lane module.
 - STS profile HTML template text is separated from the renderer injection logic.

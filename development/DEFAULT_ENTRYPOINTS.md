@@ -87,6 +87,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_combat_analysis_deck_skeleton_sidecar.py --input <path> --output-dir <dir>`
 - Run the STS package similarity benchmark from reviewed shell fixtures:
   - `python scripts/run_package_similarity_benchmark.py --input tests/fixtures/combat_analysis/s34_sts_package_similarity_benchmark_v0 --output-dir <dir>`
+- Run the report-only card package health benchmark from reviewed fixtures:
+  - `python scripts/run_card_package_health_benchmark.py --input tests/fixtures/combat_analysis/card_package_health_v1 --output-dir <dir>`
 - Run the STS catalog holdout benchmark from reviewed Ironclad fixtures:
   - `python scripts/run_sts_catalog_holdout_benchmark.py --input tests/fixtures/combat_analysis/s35_sts_catalog_holdout_benchmark_v1 --output-dir <dir>`
 - Export deterministic ranking rows from reviewed STS holdout benchmark fixtures:
@@ -119,6 +121,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_fast_card_design_loop.py --write-template <path>`
 - Run a fast card-design loop review from a reviewed JSON input:
   - `python scripts/run_fast_card_design_loop.py --input <path> --output-dir <dir>`
+- Write a report-only design iteration brief input template:
+  - `python scripts/run_design_iteration_brief.py --write-template <path>`
+- Run a report-only design iteration brief from a reviewed JSON input:
+  - `python scripts/run_design_iteration_brief.py --input <path> --output-dir <dir>`
 - Write a fast card synthesis bridge input template:
   - `python scripts/run_fast_card_synthesis_bridge.py --write-template <path>`
 - Run the constrained fast card synthesis bridge from a reviewed JSON input:
@@ -161,6 +167,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/scripts/test_run_combat_analysis_deck_skeleton_sidecar.py -q`
 - Validate the STS package similarity benchmark v0:
   - `python -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py -q`
+- Validate report-only card package health v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_card_package_health_v1.py tests/scripts/test_run_card_package_health_benchmark.py -q`
 - Validate the STS catalog holdout benchmark v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_v1.py tests/scripts/test_run_sts_catalog_holdout_benchmark.py -q`
 - Validate the STS catalog holdout ranking export v1:
@@ -177,6 +185,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_pairwise_reranker.py tests/scripts/test_run_sts_catalog_holdout_pairwise_reranker.py -q`
 - Validate fast card-design loop v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q`
+- Validate report-only design iteration brief v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_design_iteration_brief_v1.py tests/scripts/test_run_design_iteration_brief.py -q`
 - Validate fast card synthesis bridge v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/scripts/test_run_fast_card_synthesis_bridge.py -q`
 - Validate fast card synthesis closure v1:
@@ -205,6 +215,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_deck_compression_report.py tests/scripts/test_run_deck_compression_report.py -q`
 - Validate report-only mechanism fun/health benchmark CLI v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_mechanism_fun_health_benchmark_v1.py tests/scripts/test_run_mechanism_fun_health_benchmark.py -q`
+- Validate cardanalysis report-only surface registry:
+  - `python -m pytest tests/toolkit/combat_analysis/test_report_only_surface_registry_v1.py -q`
 - Validate project design-assist sidecar CLI contracts v1:
   - `python -m pytest tests/scripts/test_project_design_assist_sidecar_contracts_v1.py -q`
 
