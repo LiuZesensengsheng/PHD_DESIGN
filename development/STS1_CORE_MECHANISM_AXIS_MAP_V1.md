@@ -30,8 +30,8 @@ Out of scope:
 
 | Tier | Meaning | Current Surface |
 | --- | --- | --- |
-| Explicit contract | Family vocabulary and card-role specs are versioned and imported below `design_studio`. | `13` mechanism families, `7` viability dimensions |
-| Reviewed viability | Pairwise reviewed cases check whether a mechanism shell is online, repeatable, and coherent. | `41` cases across all `13` families |
+| Explicit contract | Family vocabulary and card-role specs are versioned and imported below `design_studio`. | `14` mechanism families, `7` viability dimensions |
+| Reviewed viability | Pairwise reviewed cases check whether a mechanism shell is online, repeatable, and coherent. | `44` cases across all `14` families |
 | Reviewed holdout intent | Catalog holdout fixtures use mechanism-axis intent for recovery and ranking pressure. | `62` `STS1` holdout cases across Ironclad, Silent, Watcher, and Defect |
 | Project-card assist | Project card-design fixtures verify mechanism-axis ranking behavior in project card pools. | `5` reviewed mechanism-axis cases |
 | Not claimed | Named archetypes without explicit family specs and reviewed contrasts. | Missing-axis backlog below |
@@ -63,8 +63,9 @@ The current evaluator judges mechanism viability through these dimensions:
 | `power_focus_scaling` | Defect | 16 | 3 | Separates repeatable Defragment/Biased Cognition/Echo Form/Heatsinks/Storm-style scaling plans from generic power soup, copied-payoff fantasy, and Awakened One risk traps. | Needs middle cases for Creative AI variance, Echo Form ordering, and power/focus/orb primary-plan conflicts. |
 | `poison` | Silent | 12 | 3 | Separates poison support lock from finisher-only, Catalyst burst traps, and branch-split hybrids. | Needs more cases for poison stall, Nightmare/Burst overlap, and Envenom cross-scaling boundaries. |
 | `retain` | Watcher/Silent setup | 12 | 5 | Separates clean retained setup windows from hybrid soup, setup-tax tunnels, Alpha tax, and over-taxed burst plans. | Establishment is represented, but not yet a broad retained-cost-reduction axis. |
+| `scry_control` | Watcher | 11 | 3 | Separates recurring scry-selection density from stance goodstuff, payoff-only thin-deck tunnels, and one-shot burst filtering. | Current positive evidence is a partial-shell scry anchor; needs a full Foresight/Weave/Nirvana positive deck_fun case before claiming a complete online engine. |
 | `shiv` | Silent | 8 | 3 | Separates real shiv swarm support/glue from payoff greed, Envenom split, and raw hand-dump behavior. | Needs more block/dex/After Image and Kunai/Shuriken-style relic adjacency before claiming full shiv ecosystem coverage. |
-| `stance_mantra` | Watcher | 17 | 3 | Separates stance/mantra threshold closure and divinity support from almost-loop and generic stance goodstuff. | Scry-only, pressure points, Alpha/Omega, and divinity-only burst are not standalone families. |
+| `stance_mantra` | Watcher | 17 | 3 | Separates stance/mantra threshold closure and divinity support from almost-loop and generic stance goodstuff. | Pressure points, Alpha/Omega, and divinity-only burst are not standalone families. |
 | `strength_scaling` | Ironclad | 13 | 3 | Separates real Spot Weakness/Inflame/Limit Break/Reaper strength shells from raw attack piles, payoff-only strength splits, and Demon Form slow-scaling soup. | Needs more medium-strength cases for Rupture/self-damage overlap, multi-hit relic adjacency, and strength/block crossover. |
 | `block_engine` | Ironclad/Silent | 13 | 3 | Separates retained block conversion, Body Slam/Entrench payoff, and Silent dex/carryover engines from ordinary mitigation or defensive goodstuff. | Needs more middle cases for Calipers, Feel No Pain overlap, and non-Silent dex/relic block-adjacent shells. |
 
@@ -80,14 +81,14 @@ needed to tell whether a design candidate supports an online deck plan:
 - Silent: `shiv`, `poison`, `draw_engine`, `discard_cycle`, `retain`, and `block_engine` adjacency.
 - Defect: `orb_control`, `frost_control`, and `power_focus_scaling` around orb
   control, frost/focus closure, and repeatable power/focus scaling.
-- Watcher: `stance_mantra`, retained setup, and threshold closure.
+- Watcher: `stance_mantra`, `scry_control`, retained setup, and threshold closure.
 
 This is enough to support meaningful mechanism-aware design discussion and reviewed
 benchmarking. It is not enough to say the system understands all `STS1` archetypes.
 
 As a planning estimate:
 
-- explicit reviewed family coverage: `13` families
+- explicit reviewed family coverage: `14` families
 - strong reviewed contrast coverage: above half of the high-signal `STS1` mechanism
   surface
 - named archetype taxonomy coverage: below half, because several famous archetypes are
@@ -106,7 +107,15 @@ The first P0 family expansion is now represented in reviewed viability fixtures:
 | `frost_control` | Defect | frost focus shell vs lightning greed; focus payoff without orb density; defensive stall without scaling |
 | `power_focus_scaling` | Defect | focus scaling shell vs generic powers; Echo Form payoff-only; Awakened One risk contrast |
 
-### P1: Add After P0
+### P1: Started Specialist Expansion
+
+The first P1 family expansion is now represented in reviewed viability fixtures:
+
+| Family | Main Character | Reviewed Contrast Shape |
+| --- | --- | --- |
+| `scry_control` | Watcher | scry selection shell vs stance goodstuff; Weave/Nirvana payoff-only expectations without recurring trigger density; persistent engine vs one-shot filter |
+
+### P1: Remaining After Scry Control
 
 These are important but either narrower, more exactness-sensitive, or easier to confuse
 with existing families.
@@ -115,7 +124,6 @@ with existing families.
 | --- | --- | --- | --- |
 | `zero_cost_claw` | Defect | Claw, All for One, Scrape, and zero-cost recursion are not well represented by `orb_control`. | Claw density shell vs zero-cost soup; All for One payoff-only; Scrape draw-risk gap |
 | `dark_orb_burst` | Defect | Dark orb timing is a distinct setup/release plan. | dark setup shell vs orb goodstuff; release payoff without setup; frost/dark split timing gap |
-| `scry_control` | Watcher | Scry can be a control/selection engine even without full stance/mantra ownership. | scry selection shell vs stance goodstuff; payoff-only Weave/Nirvana; setup-tax gap |
 | `self_damage_status` | Ironclad | Rupture, Brutality, Pain/status synergies, and wound/status packages are under-modeled. | self-damage scaling shell vs damage tax; status payoff-only; exhaust overlap conflict |
 | `copy_exactness` | Silent/Watcher | Nightmare, Burst, Omniscience, and Grand Finale plans need exactness-aware positives, not only negative gap checks. | copy setup shell vs fantasy overlap; Grand Finale exactness shell vs draw pile; payoff-only copy gap |
 
@@ -147,7 +155,6 @@ Recommended next parallel batch:
 
 - Worker A: `zero_cost_claw`
 - Worker B: `dark_orb_burst`
-- Worker C: `scry_control`
 - Worker D: `copy_exactness`
 
 These can write mostly separate fixture files, with one coordinated edit to
@@ -157,7 +164,7 @@ These can write mostly separate fixture files, with one coordinated edit to
 
 The current cardanalysis mechanism-axis layer is ready for STS1-style design review
 around online-shell detection. It should be treated as a reviewed contrast surface with
-`13` explicit families, not as a complete STS1 archetype ontology.
+`14` explicit families, not as a complete STS1 archetype ontology.
 
 The next capability jump should come from mechanism fun/health evaluation,
 deck-compression/removal modeling, and card-package health evaluation, with P1 family
