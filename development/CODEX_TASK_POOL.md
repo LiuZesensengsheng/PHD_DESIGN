@@ -165,6 +165,14 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - source/build tooling
   - tutorial-path parity proof
   - acceptance tests for the active narrative route
+- Validation rhythm:
+  - schema/tooling slices:
+    - focused script and unit tests for the touched importer, builder, or validator
+  - parity close:
+    - `python scripts/build_narrative_runtime.py --all --pack-root data/narrative_src/packs --check`
+    - focused acceptance tests for the active tutorial route
+  - cross-context risk:
+    - run the relevant campaign/cross-context smoke tests before closing the line
 
 ## Queued Tasks
 
