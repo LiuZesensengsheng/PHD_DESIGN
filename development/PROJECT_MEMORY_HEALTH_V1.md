@@ -101,6 +101,18 @@ Run this check:
   `DEFAULT_ENTRYPOINTS.md`, `CODEX_TASK_POOL.md`, or weekly/daily log rules
 - before deciding whether a memory warning should be promoted into a hard guardrail
 
+## Oversized Daily Log Response
+
+When a hot daily log is oversized:
+
+1. Confirm a weekly bridge exists for that week.
+2. Replace the daily log with a concise handoff summary.
+3. Move stable facts into the relevant long-term docs, decision log, task pool, or
+   weekly summary.
+4. Keep a `Compression Notes` section that says the original detailed log remains
+   recoverable from git history.
+5. Do not create a new long-term document merely to preserve transient execution detail.
+
 ## Escalation Rule
 
 Keep new checks report-only until they satisfy all of these:
