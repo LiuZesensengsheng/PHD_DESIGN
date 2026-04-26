@@ -107,6 +107,14 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_fun_proxy_calibration.py --input tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --output-dir <dir>`
 - Run the fun enemy-design probe sidecar from reviewed deck + forum inputs:
   - `python scripts/run_fun_enemy_design_probe.py --reviewed-pack tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --forum-input tests/fixtures/combat_analysis/forum_weak_labels_v1 --review-input tests/fixtures/combat_analysis/forum_deck_case_bridge_v1/review_annotations_v1.json --session-focus enemy_design --output-dir <dir>`
+- Write a report-only deck compression/removal input template:
+  - `python scripts/run_deck_compression_report.py --write-template <path>`
+- Run a report-only deck compression/removal review from a JSON input:
+  - `python scripts/run_deck_compression_report.py --input <path> --output-dir <dir>`
+- Write a report-only mechanism fun/health benchmark input template:
+  - `python scripts/run_mechanism_fun_health_benchmark.py --write-template <path>`
+- Run the report-only mechanism fun/health benchmark from reviewed fixtures:
+  - `python scripts/run_mechanism_fun_health_benchmark.py --input tests/fixtures/combat_analysis/mechanism_fun_health_v1 --output-dir <dir>`
 - Write a fast card-design loop input template:
   - `python scripts/run_fast_card_design_loop.py --write-template <path>`
 - Run a fast card-design loop review from a reviewed JSON input:
@@ -193,6 +201,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_fun_proxy_calibration_v1.py tests/scripts/test_run_fun_proxy_calibration.py -q`
 - Validate fun enemy-design probe sidecar v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_fun_enemy_design_probe.py -q`
+- Validate report-only deck compression/removal CLI v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_deck_compression_report.py tests/scripts/test_run_deck_compression_report.py -q`
+- Validate report-only mechanism fun/health benchmark CLI v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_mechanism_fun_health_benchmark_v1.py tests/scripts/test_run_mechanism_fun_health_benchmark.py -q`
 - Validate project design-assist sidecar CLI contracts v1:
   - `python -m pytest tests/scripts/test_project_design_assist_sidecar_contracts_v1.py -q`
 
