@@ -40,6 +40,9 @@ Out of scope:
   ranking or synthesis recovery claims.
 - Report-only/modelization paths may be validated by exports, reranker, and shadow
   tests, but they must not become legality, schema, hard gate, or closure authority.
+- Report-only CLI manifests must include `evaluation_mode=report_only` and must not
+  expose `overall_pass` or `hard_gates` unless the underlying evaluator already owns
+  explicit hard gates.
 
 ## Validation Levels
 
@@ -120,6 +123,12 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit/combat_analysis/test_scorecard_fragile_samples.py tests/toolkit/combat_analysis/test_scorecard_samples.py tests/toolkit/combat_analysis/test_scorecard_ordering_pairs.py -q
 ```
 
+For the report-only mechanism fun/health fixture surface, also run:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_fun_health_benchmark_v1.py tests/scripts/test_run_mechanism_fun_health_benchmark.py -q
+```
+
 Also run deck review/portfolio CLIs if the evaluator feeds designer-facing deck
 reports:
 
@@ -141,6 +150,12 @@ Minimum tests:
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_analysis.py tests/toolkit/combat_analysis/test_matchup_gap.py tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit/combat_analysis/test_scorecard_fragile_samples.py -q
+```
+
+For the report-only deck compression/removal payload surface, also run:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_compression_report.py tests/scripts/test_run_deck_compression_report.py -q
 ```
 
 Add profile tests for any affected character catalog:
