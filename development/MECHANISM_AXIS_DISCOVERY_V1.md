@@ -111,3 +111,7 @@ The first source-mining fixture is:
 Night of Full Moon has a separate PvE deckbuilder fixture:
 
 `tests/fixtures/combat_analysis/mechanism_axis_discovery_v1/mechanism_axis_source_mining_night_of_full_moon_v1.json`
+
+The first post-mining triage shortlist lives in:
+
+`docs/development/MECHANISM_AXIS_PROBE_SHORTLIST_V1.md`

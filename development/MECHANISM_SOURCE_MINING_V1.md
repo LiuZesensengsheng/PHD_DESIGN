@@ -80,6 +80,15 @@ Current size:
 - Keep generic draw/energy/discard/compression power separate from named mechanism
   identity unless the base axis is explicitly the mechanism, such as
   `discard_velocity` or `removal_thinning_conversion`.
+- Current design feedback deprioritizes Night of Full Moon werewolf-style and
+  mechanic-style loops for the first probe batch. Keep them out of immediate
+  source-mining expansion unless a later decision reopens them.
+
+## Next Stage
+
+The first triage output lives in:
+
+`docs/development/MECHANISM_AXIS_PROBE_SHORTLIST_V1.md`
 
 ## First-Pass Validation
 
