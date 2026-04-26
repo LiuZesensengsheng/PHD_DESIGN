@@ -43,7 +43,8 @@ The first seed pack covers:
 - sacrifice and ability transfer: Inscryption
 - position redirection: Into the Breach
 - inventory adjacency: Backpack Hero
-- single-player PvE deckbuilder resources and delayed effects: Night of Full Moon
+- single-player PvE deckbuilder resources, delayed effects, and elemental spell
+  packages: Night of Full Moon
 
 ## Current Fixture Pack
 
@@ -60,12 +61,13 @@ Night of Full Moon is tracked in a separate fixture:
 
 Current size:
 
-- `5` Night of Full Moon candidates
+- `6` Night of Full Moon candidates
 - action-point tempo budget
 - prayer countdown queue
 - blessing rule modifiers
 - counter reaction windows
 - spell/mana type engine
+- elemental status rotation
 
 ## Review Rules
 
