@@ -33,13 +33,19 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 ### Project Memory Maintenance
 
+- Show the current project memory recovery digest:
+  - `python scripts/show_project_memory_digest.py`
+- Export the project memory recovery digest as JSON:
+  - `python scripts/show_project_memory_digest.py --json`
+- Validate the project memory digest contract:
+  - `python -m pytest tests/scripts/test_show_project_memory_digest.py -q`
 - Run the project memory health report:
   - `python scripts/check_project_memory_health.py`
 - Run the project memory health report in strict mode:
   - `python scripts/check_project_memory_health.py --strict`
 - Export the project memory health report as JSON:
   - `python scripts/check_project_memory_health.py --json`
-- Validate the project memory health checker:
+- Validate the current project memory health contract:
   - `python -m pytest tests/scripts/test_check_project_memory_health.py -q`
 - Refresh the latest weekly summary:
   - `python -m pytest tests/scripts/test_generate_weekly_summary.py -q`

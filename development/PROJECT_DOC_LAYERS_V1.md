@@ -70,6 +70,7 @@ Keep project continuity in files with a simple four-layer model that works for p
 ## Health Check Layer
 
 - Path: `scripts/check_project_memory_health.py`
+- Test contract: `tests/scripts/test_check_project_memory_health.py`
 - Source of truth: `docs/development/PROJECT_MEMORY_HEALTH_V1.md`
 - Purpose: report drift in the file-based memory scaffold
 - Use for:
@@ -82,6 +83,20 @@ Keep project continuity in files with a simple four-layer model that works for p
   - replacing human promotion judgment
   - validating every tool command
   - blocking unrelated work on report-only warnings
+
+## Digest Layer
+
+- Path: `scripts/show_project_memory_digest.py`
+- Source of truth: `docs/development/PROJECT_MEMORY_DIGEST_V1.md`
+- Purpose: read-only hot-memory recovery snapshot
+- Use for:
+  - branch-switch recovery
+  - post-merge orientation
+  - deciding which source-of-truth files need deeper reading
+- Do not use for:
+  - replacing canonical docs
+  - promoting facts automatically
+  - validating implementation behavior
 
 ## Read Order
 
@@ -104,3 +119,4 @@ For a non-trivial task, read in this order:
 - write major decisions to the decision log
 - write candidate independent work to the task pool
 - run the project memory health report after heavy memory-system changes
+- run the project memory digest when recovering context after branch switches or merges

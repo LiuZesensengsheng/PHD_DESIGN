@@ -101,6 +101,8 @@ Promotion targets should stay explicit:
 
 - Use `python scripts/check_project_memory_health.py` to inspect the health of the
   file-based memory scaffold.
+- Keep reusable health-check logic in `scripts/`, but let pytest own the
+  current-repository green-state contract by calling that script logic.
 - Default mode should warn about drift without blocking unrelated product work.
 - Use `--strict` only for dedicated memory-maintenance passes.
 - Promote a warning into a hard-fail rule only after it is stable, low-noise, and has
@@ -121,6 +123,8 @@ Promotion targets should stay explicit:
 ### Daytime Execution
 
 - Read `AGENTS.md`
+- Optionally run `python scripts/show_project_memory_digest.py` after branch switches,
+  merges, or long gaps to decide which hot-memory files need closer reading
 - Read relevant long-term docs
 - Read today's log and the most recent prior useful log
 - Execute against the recorded plan
