@@ -98,3 +98,12 @@ python scripts/run_mechanism_axis_discovery.py --write-template <path>
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_discovery_v1.py tests/scripts/test_run_mechanism_axis_discovery.py -q
 ```
+
+## Source Mining
+
+External game-mechanic collection lives in
+`docs/development/MECHANISM_SOURCE_MINING_V1.md`.
+
+The first source-mining fixture is:
+
+`tests/fixtures/combat_analysis/mechanism_axis_discovery_v1/mechanism_axis_source_mining_pack1_v1.json`
