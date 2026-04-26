@@ -43,6 +43,7 @@ The first seed pack covers:
 - sacrifice and ability transfer: Inscryption
 - position redirection: Into the Breach
 - inventory adjacency: Backpack Hero
+- single-player PvE deckbuilder resources and delayed effects: Night of Full Moon
 
 ## Current Fixture Pack
 
@@ -52,6 +53,19 @@ Current size:
 
 - `20` cross-game candidates
 - `1` intentional generic draw/energy negative case
+
+Night of Full Moon is tracked in a separate fixture:
+
+`tests/fixtures/combat_analysis/mechanism_axis_discovery_v1/mechanism_axis_source_mining_night_of_full_moon_v1.json`
+
+Current size:
+
+- `5` Night of Full Moon candidates
+- action-point tempo budget
+- prayer countdown queue
+- blessing rule modifiers
+- counter reaction windows
+- spell/mana type engine
 
 ## Review Rules
 

@@ -107,3 +107,7 @@ External game-mechanic collection lives in
 The first source-mining fixture is:
 
 `tests/fixtures/combat_analysis/mechanism_axis_discovery_v1/mechanism_axis_source_mining_pack1_v1.json`
+
+Night of Full Moon has a separate PvE deckbuilder fixture:
+
+`tests/fixtures/combat_analysis/mechanism_axis_discovery_v1/mechanism_axis_source_mining_night_of_full_moon_v1.json`
