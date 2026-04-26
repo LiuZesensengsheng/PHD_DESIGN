@@ -90,8 +90,6 @@ Stop and ask before doing any of the following:
 
 ## Current Migration Debt
 
-- `design_engine.synthesis_closure` still imports `design_studio` benchmark/calibration
-  loaders in its default runner.
 - Large orchestrator modules still need responsibility splits:
   - `design_engine/constrained_synthesis.py`
   - `design_engine/design_candidate_scout.py`
@@ -101,16 +99,16 @@ Stop and ask before doing any of the following:
 
 ## First Milestone Exit Criteria
 
-- No `design_engine -> design_studio` imports except an explicit temporary allowlist.
+- No `design_engine -> design_studio` imports.
 - Shared mechanism-axis contracts live below `design_studio`.
 - Bounded shadow artifact parsing is outside the bounded shadow orchestrator.
 - Focused regression packs pass for touched surfaces.
-- Daily log records which import edges remain as migration debt.
+- Reviewed benchmark/calibration loading lives outside `design_engine`.
 
 ## Second Milestone Exit Criteria
 
-- `synthesis_closure` accepts benchmark/calibration inputs through an explicit adapter
-  boundary instead of default-importing `design_studio`.
+- `synthesis_closure` continues to accept benchmark/calibration inputs through an
+  explicit adapter boundary instead of default-importing `design_studio`.
 - Artifact readers/writers exist for the major scout/shadow/export snapshots.
 - Report rendering consumes stable payloads and does not recompute engine decisions.
 - Workers can operate on contract, engine, benchmark, modelization, report, and docs
