@@ -30,8 +30,8 @@ Out of scope:
 
 | Tier | Meaning | Current Surface |
 | --- | --- | --- |
-| Explicit contract | Family vocabulary and card-role specs are versioned and imported below `design_studio`. | `11` mechanism families, `7` viability dimensions |
-| Reviewed viability | Pairwise reviewed cases check whether a mechanism shell is online, repeatable, and coherent. | `35` cases across all `11` families |
+| Explicit contract | Family vocabulary and card-role specs are versioned and imported below `design_studio`. | `13` mechanism families, `7` viability dimensions |
+| Reviewed viability | Pairwise reviewed cases check whether a mechanism shell is online, repeatable, and coherent. | `41` cases across all `13` families |
 | Reviewed holdout intent | Catalog holdout fixtures use mechanism-axis intent for recovery and ranking pressure. | `62` `STS1` holdout cases across Ironclad, Silent, Watcher, and Defect |
 | Project-card assist | Project card-design fixtures verify mechanism-axis ranking behavior in project card pools. | `5` reviewed mechanism-axis cases |
 | Not claimed | Named archetypes without explicit family specs and reviewed contrasts. | Missing-axis backlog below |
@@ -58,7 +58,9 @@ The current evaluator judges mechanism viability through these dimensions:
 | `draw_engine` | Mostly Silent, cross-character utility | 12 | 3 | Separates repeatable draw support from raw draw piles and exact-payoff traps. | Grand Finale-style exactness is tested as a negative gap, not a positive axis. |
 | `discard_cycle` | Silent | 10 | 2 | Separates repeatable discard/resource conversion from payoff-only or one-shot hand dumps. | Needs thicker mid-strength cases for Reflex/Tactician density, Sneaky Strike, and Concentrate tradeoffs. |
 | `loop` | Cross-character, especially Ironclad/Watcher | 24 | 4 | Detects loop closure, almost-loop failure, threshold gaps, and draw-bridge density. | Strength, block, Sundial, and stance infinites are partially adjacent, not separate owned axes. |
-| `orb_control` | Defect | 14 | 3 | Separates focus-backed orb control and lightning cycle from generic power soup and Thunder Strike greed. | Frost stall, dark orb burst, Claw/zero-cost, and power/focus scaling are not first-class families. |
+| `orb_control` | Defect | 14 | 3 | Separates focus-backed orb control and lightning cycle from generic power soup and Thunder Strike greed. | Dark orb burst and Claw/zero-cost are not first-class families. |
+| `frost_control` | Defect | 10 | 3 | Separates frost/focus defensive closure from lightning greed, focus payoff without orb density, and defensive orb stall without scaling. | Needs middle cases for frost/dark split timing, Consume/slot pressure, and relic-dependent frost stall. |
+| `power_focus_scaling` | Defect | 16 | 3 | Separates repeatable Defragment/Biased Cognition/Echo Form/Heatsinks/Storm-style scaling plans from generic power soup, copied-payoff fantasy, and Awakened One risk traps. | Needs middle cases for Creative AI variance, Echo Form ordering, and power/focus/orb primary-plan conflicts. |
 | `poison` | Silent | 12 | 3 | Separates poison support lock from finisher-only, Catalyst burst traps, and branch-split hybrids. | Needs more cases for poison stall, Nightmare/Burst overlap, and Envenom cross-scaling boundaries. |
 | `retain` | Watcher/Silent setup | 12 | 5 | Separates clean retained setup windows from hybrid soup, setup-tax tunnels, Alpha tax, and over-taxed burst plans. | Establishment is represented, but not yet a broad retained-cost-reduction axis. |
 | `shiv` | Silent | 8 | 3 | Separates real shiv swarm support/glue from payoff greed, Envenom split, and raw hand-dump behavior. | Needs more block/dex/After Image and Kunai/Shuriken-style relic adjacency before claiming full shiv ecosystem coverage. |
@@ -76,8 +78,8 @@ needed to tell whether a design candidate supports an online deck plan:
 
 - Ironclad: `exhaust`, `strength_scaling`, `block_engine`, draw bridge, and loop-adjacent closure.
 - Silent: `shiv`, `poison`, `draw_engine`, `discard_cycle`, `retain`, and `block_engine` adjacency.
-- Defect: `orb_control` around focus-backed control, lightning cycle, and power-soup
-  contrasts.
+- Defect: `orb_control`, `frost_control`, and `power_focus_scaling` around orb
+  control, frost/focus closure, and repeatable power/focus scaling.
 - Watcher: `stance_mantra`, retained setup, and threshold closure.
 
 This is enough to support meaningful mechanism-aware design discussion and reviewed
@@ -85,22 +87,24 @@ benchmarking. It is not enough to say the system understands all `STS1` archetyp
 
 As a planning estimate:
 
-- explicit reviewed family coverage: `11` families
-- strong reviewed contrast coverage: about half of the high-signal `STS1` mechanism
+- explicit reviewed family coverage: `13` families
+- strong reviewed contrast coverage: above half of the high-signal `STS1` mechanism
   surface
 - named archetype taxonomy coverage: below half, because several famous archetypes are
   still only adjacent or absent
 
 ## Missing Core Axis Backlog
 
-### P0: Fill First
+### P0: Completed Baseline Expansion
 
-These gaps are common, high-signal, and likely to improve card-design evaluation quickly.
+The first P0 family expansion is now represented in reviewed viability fixtures:
 
-| Candidate Family | Main Character | Why It Matters | First Contrasts To Add |
-| --- | --- | --- | --- |
-| `frost_control` | Defect | Frost/focus stall is a core Defect plan and should not be collapsed into generic orb control. | frost focus shell vs lightning greed; focus payoff without orb density; defensive stall without scaling |
-| `power_focus_scaling` | Defect | Creative AI, Defragment, Echo Form, Biased Cognition, and power payoffs need a path distinct from power soup. | focus scaling shell vs generic powers; Echo Form payoff-only; Awakened One risk contrast |
+| Family | Main Character | Reviewed Contrast Shape |
+| --- | --- | --- |
+| `strength_scaling` | Ironclad | real strength shell vs raw attack pile; Limit Break payoff-only gap; Demon Form slow scaling vs immediate support shell |
+| `block_engine` | Ironclad/Silent | Barricade/Body Slam shell vs defensive pile; dex/block shell vs raw mitigation; payoff-only Body Slam gap |
+| `frost_control` | Defect | frost focus shell vs lightning greed; focus payoff without orb density; defensive stall without scaling |
+| `power_focus_scaling` | Defect | focus scaling shell vs generic powers; Echo Form payoff-only; Awakened One risk contrast |
 
 ### P1: Add After P0
 
@@ -139,19 +143,22 @@ Each new family can be developed independently with this minimum shape:
    correctly.
 4. Keep learned/reranker paths report-only and default-off.
 
-Recommended first parallel batch:
+Recommended next parallel batch:
 
-- Worker C: `frost_control`
-- Worker D: `power_focus_scaling`
+- Worker A: `zero_cost_claw`
+- Worker B: `dark_orb_burst`
+- Worker C: `scry_control`
+- Worker D: `copy_exactness`
 
-These write to mostly separate fixture files, with one coordinated edit to
+These can write mostly separate fixture files, with one coordinated edit to
 `mechanism_axis_contracts.py`.
 
 ## Current Bottom Line
 
 The current cardanalysis mechanism-axis layer is ready for STS1-style design review
 around online-shell detection. It should be treated as a reviewed contrast surface with
-`11` explicit families, not as a complete STS1 archetype ontology.
+`13` explicit families, not as a complete STS1 archetype ontology.
 
-The next capability jump should come from adding missing families and reviewed
-contrasts, not from tightening architecture rules.
+The next capability jump should come from mechanism fun/health evaluation,
+deck-compression/removal modeling, and card-package health evaluation, with P1 family
+expansion continuing in parallel.
