@@ -36,9 +36,11 @@ The machine-readable mirror lives in
 ## Known Consolidation Inputs
 
 - `deck_compression_model_v1` should consolidate into
-  `deck_compression_report_v1`.
+  `deck_compression_report_v1`; useful pieces are persistent thinning visibility,
+  deck-size sensitivity reason codes, and removal/transform/exhaust distinctions.
 - `mechanism_fun_health_evaluator_v1` should consolidate into
-  `mechanism_fun_health_v1`.
+  `mechanism_fun_health_v1`; useful pieces are explicit degeneracy signal visibility,
+  review-pack completeness indicators, and reviewer-readiness documentation.
 
 ## Validation
 
