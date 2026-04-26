@@ -104,6 +104,8 @@ Stop and ask before doing any of the following:
 - Bounded shadow artifact parsing is outside the bounded shadow orchestrator.
 - Design-candidate scout mechanism evidence matching/summary logic is outside the
   scout orchestration module.
+- Design-candidate scout report/snapshot rendering is outside the scout orchestration
+  module.
 - Focused regression packs pass for touched surfaces.
 - Reviewed benchmark/calibration loading lives outside `design_engine`.
 
