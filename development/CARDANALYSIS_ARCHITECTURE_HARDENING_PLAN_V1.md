@@ -91,7 +91,7 @@ Stop and ask before doing any of the following:
 ## Current Migration Debt
 
 - Large orchestrator modules still need responsibility splits:
-  - `design_engine/constrained_synthesis.py`
+  - `design_engine/constrained_synthesis.py` mutation, ranking, and tuning helpers
   - `design_engine/design_candidate_scout.py`
   - `design_engine/synthesis_closure.py`
   - `design_studio/sts_catalog_holdout_benchmark.py`
@@ -108,6 +108,8 @@ Stop and ask before doing any of the following:
   module.
 - Bounded candidate shadow report/snapshot rendering is outside the bounded shadow
   orchestration module.
+- Constrained synthesis report/snapshot rendering is outside the synthesis orchestration
+  module.
 - Focused regression packs pass for touched surfaces.
 - Reviewed benchmark/calibration loading lives outside `design_engine`.
 
