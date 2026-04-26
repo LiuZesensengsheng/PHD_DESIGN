@@ -22,6 +22,19 @@ Use an incremental hardening path:
 6. Keep report-only evaluation surfaces behind a canonical registry so parallel V1
    modules do not drift semantically.
 
+## Current Integration Policy
+
+Use one active cardanalysis integration branch while this hardening wave is open:
+
+- `codex/04-26-cardanalysis-architecture-hardening` is the current integration branch.
+- Existing satellite branches are consolidation inputs, not ongoing development bases.
+- New cardanalysis work should branch from the integration branch, or from `master`
+  after the integration branch lands.
+- Do not merge overlapping V1 report-only branches directly when the canonical surface
+  already exists; copy or port useful fields into the registered owner instead.
+- Prefer one reviewed integration PR over multiple long-lived cardanalysis PRs that
+  redefine the same semantics.
+
 ## Report-Only Surface Checkpoint
 
 The current canonical report-only surface map lives in
