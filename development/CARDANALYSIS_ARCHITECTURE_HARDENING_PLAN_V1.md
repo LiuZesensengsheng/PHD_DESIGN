@@ -106,6 +106,8 @@ Stop and ask before doing any of the following:
   scout orchestration module.
 - Design-candidate scout report/snapshot rendering is outside the scout orchestration
   module.
+- Bounded candidate shadow report/snapshot rendering is outside the bounded shadow
+  orchestration module.
 - Focused regression packs pass for touched surfaces.
 - Reviewed benchmark/calibration loading lives outside `design_engine`.
 
