@@ -102,6 +102,8 @@ Stop and ask before doing any of the following:
 - No `design_engine -> design_studio` imports.
 - Shared mechanism-axis contracts live below `design_studio`.
 - Bounded shadow artifact parsing is outside the bounded shadow orchestrator.
+- Design-candidate scout mechanism evidence matching/summary logic is outside the
+  scout orchestration module.
 - Focused regression packs pass for touched surfaces.
 - Reviewed benchmark/calibration loading lives outside `design_engine`.
 
