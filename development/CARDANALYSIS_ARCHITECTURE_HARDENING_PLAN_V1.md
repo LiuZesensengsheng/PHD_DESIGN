@@ -92,8 +92,6 @@ Stop and ask before doing any of the following:
 
 - Large orchestrator modules still need responsibility splits:
   - `design_engine/design_candidate_scout.py`
-  - `design_studio/sts_catalog_holdout_benchmark.py` remaining case replay/evaluation
-    mainline helpers
   - `reports/html/sts_profile_template.py` still owns a large single-page static
     template and can later split CSS/JS sections if report-lane conflicts continue.
 
@@ -126,6 +124,8 @@ Stop and ask before doing any of the following:
   the benchmark evaluation module.
 - STS catalog holdout similarity metrics and diagnostic bucket aggregation are outside
   the benchmark evaluation module.
+- STS catalog holdout case replay, variant evaluation, projection lookup, and
+  uncertainty-note helpers are outside the benchmark contract module.
 - STS HTML public package entrypoint is thin; the large profile renderer lives in its
   own report-lane module.
 - STS profile HTML template text is separated from the renderer injection logic.
