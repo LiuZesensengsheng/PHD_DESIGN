@@ -49,6 +49,9 @@ modules. In particular:
   `mechanism_fun_health_v1`.
 - `cardanalysis_evidence_bundle_v1` may collect normalized summaries and review
   conflicts, but must not become pass/fail authority.
+- `mechanism_axis_discovery_v1` is the canonical report-only surface for early
+  mechanism-axis exploration, foundation-axis dependency review, and first parameter
+  probe selection.
 
 ## Non-Negotiable Boundaries
 
@@ -161,8 +164,8 @@ Stop and ask before doing any of the following:
 - STS package similarity benchmark fixture loading/payload validation and
   report/snapshot/manifest rendering are outside the benchmark orchestration module.
 - Report-only deck compression, mechanism fun/health, card package health, design
-  iteration brief, and evidence bundle surfaces have canonical owners recorded in the
-  report-only surface registry.
+  iteration brief, mechanism-axis discovery, and evidence bundle surfaces have
+  canonical owners recorded in the report-only surface registry.
 - STS HTML public package entrypoint is thin; the large profile renderer lives in its
   own report-lane module.
 - STS profile HTML template text is separated from the renderer injection logic.

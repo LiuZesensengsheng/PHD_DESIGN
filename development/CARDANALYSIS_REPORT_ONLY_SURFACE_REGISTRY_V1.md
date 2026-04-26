@@ -16,6 +16,7 @@ parallel V1 modules with overlapping meaning.
 | `mechanism_fun_health_v1` | `tools/combat_analysis/design_studio/mechanism_fun_health_benchmark.py` | `scripts/run_mechanism_fun_health_benchmark.py` | `mechanism_fun_health_summary` |
 | `card_package_health_v1` | `tools/combat_analysis/design_studio/card_package_health.py` | `scripts/run_card_package_health_benchmark.py` | `card_package_health_summary` |
 | `design_iteration_brief_v1` | `tools/combat_analysis/design_engine/design_iteration_brief.py` | `scripts/run_design_iteration_brief.py` | `design_iteration_summary` |
+| `mechanism_axis_discovery_v1` | `tools/combat_analysis/design_engine/mechanism_axis_discovery.py` | `scripts/run_mechanism_axis_discovery.py` | `mechanism_axis_discovery_summary` |
 | `cardanalysis_evidence_bundle_v1` | `tools/combat_analysis/design_engine/cardanalysis_evidence_bundle.py` | none | evidence bundle root |
 
 The machine-readable mirror lives in
