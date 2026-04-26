@@ -126,6 +126,8 @@ Stop and ask before doing any of the following:
   the benchmark evaluation module.
 - STS catalog holdout case replay, variant evaluation, projection lookup, and
   uncertainty-note helpers are outside the benchmark contract module.
+- STS package similarity benchmark fixture loading/payload validation and
+  report/snapshot/manifest rendering are outside the benchmark orchestration module.
 - STS HTML public package entrypoint is thin; the large profile renderer lives in its
   own report-lane module.
 - STS profile HTML template text is separated from the renderer injection logic.
