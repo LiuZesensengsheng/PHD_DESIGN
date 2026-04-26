@@ -19,6 +19,8 @@ Use this index to decide where to read and where to write project knowledge.
 - `docs/development/*.md`
 - Use for architecture boundaries, working rules, stable design constraints, and workflow agreements
 - Use `docs/development/DEFAULT_ENTRYPOINTS.md` as the default memory source for recurring tooling commands
+- Use `docs/development/PROJECT_MEMORY_HEALTH_V1.md` as the source of truth for
+  memory-scaffold health checks and escalation rules
 
 ### Tool-Local Subsystems
 
@@ -77,4 +79,6 @@ Use this index to decide where to read and where to write project knowledge.
 ## Command Recovery
 
 - Use `docs/development/DEFAULT_ENTRYPOINTS.md` for recurring command memory.
+- Use `python scripts/check_project_memory_health.py` when memory scaffolding may have
+  drifted after high-velocity work.
 - Use the hot-memory read order above for project context recovery.

@@ -67,6 +67,22 @@ Keep project continuity in files with a simple four-layer model that works for p
   - today's exact status
   - unresolved high-subjectivity design debates
 
+## Health Check Layer
+
+- Path: `scripts/check_project_memory_health.py`
+- Source of truth: `docs/development/PROJECT_MEMORY_HEALTH_V1.md`
+- Purpose: report drift in the file-based memory scaffold
+- Use for:
+  - missing core memory files
+  - stale or missing daily/weekly memory
+  - oversized hot daily logs
+  - task-pool entries without source-of-truth or validation expectations
+  - command-memory growth that may need local runbook extraction
+- Do not use for:
+  - replacing human promotion judgment
+  - validating every tool command
+  - blocking unrelated work on report-only warnings
+
 ## Read Order
 
 For a non-trivial task, read in this order:
@@ -87,3 +103,4 @@ For a non-trivial task, read in this order:
 - write stable rules to `docs/development/`
 - write major decisions to the decision log
 - write candidate independent work to the task pool
+- run the project memory health report after heavy memory-system changes

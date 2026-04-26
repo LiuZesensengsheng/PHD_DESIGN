@@ -97,6 +97,16 @@ Promotion targets should stay explicit:
   - `codex/03-10-enemy-balance-v1`
 - Use the date without the year unless there is a specific reason to disambiguate
 
+### 7. Memory Health Checks Stay Report-First
+
+- Use `python scripts/check_project_memory_health.py` to inspect the health of the
+  file-based memory scaffold.
+- Default mode should warn about drift without blocking unrelated product work.
+- Use `--strict` only for dedicated memory-maintenance passes.
+- Promote a warning into a hard-fail rule only after it is stable, low-noise, and has
+  an obvious fix path.
+- Keep the source-of-truth policy in `docs/development/PROJECT_MEMORY_HEALTH_V1.md`.
+
 ## Default Workflow
 
 ### Night Planning
@@ -105,6 +115,8 @@ Promotion targets should stay explicit:
 - Generate or refresh the weekly summary when the week closes
 - Promote any stable decisions into the right long-term document
 - Leave a concrete next-step note for the next session
+- Run the project memory health report when the session had heavy doc, task-pool, or
+  decision-log churn
 
 ### Daytime Execution
 

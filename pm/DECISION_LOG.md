@@ -779,3 +779,64 @@ AI / automation 适合继续做：
 2. 更新 `docs/development/CODEX_TASK_POOL.md` 的 active campaign task。
 3. 在 daily log 中记录本次 decision freeze。
 4. 后续 automation 默认按 `Phase 0 -> Phase 1 -> Phase 2 -> Phase 3 -> optional Phase 4` 串行执行。
+
+### [DL-20260426-01] Project Memory Health 采用 report-first 治理
+
+- 日期：2026-04-26
+- 负责人：Team
+- 状态：Accepted
+- 关联：`docs/development/PROJECT_MEMORY_HEALTH_V1.md`,
+  `scripts/check_project_memory_health.py`,
+  `docs/development/PROJECT_MEMORY_RULES.md`
+
+#### 背景
+项目记忆系统已经依赖 `AGENTS.md`、长期开发文档、任务池、决策日志、
+daily log 和 weekly summary 共同维持上下文连续性。近期开发速度很高，
+如果 daily/weekly、任务池或默认入口滞后，后续 AI 会话会重新增加读取噪音和
+误判风险。
+
+#### 决策
+新增轻量 `Project Memory Health` 检查，并采用 report-first 默认策略：
+
+1. 默认入口为 `python scripts/check_project_memory_health.py`。
+2. 默认模式只对结构性缺失使用 `FAIL`，对节奏漂移和体量膨胀使用 `WARN`。
+3. `--strict` 仅用于专门的记忆系统维护批次。
+4. warning 只有在稳定、低噪音、修复路径明确时，才考虑升级为 hard-fail。
+5. 继续保持 Markdown 文件为 source of truth，不引入数据库或重型记忆平台。
+
+#### 人类工作量影响（核心）
+- 减少的人类工时：更早发现 daily/weekly 滞后、任务池缺验证、入口文件膨胀等
+  可恢复性问题。
+- 增加的人类工时：需要在高强度 session 后查看一次健康报告并判断是否需要收口。
+- 对关键路径的变化：不阻断功能开发；只在记忆维护分支或 strict 模式下收紧。
+
+#### AI 工作量假设
+AI 适合维护检查脚本、补文档入口、运行 report 并提出收口建议。人工仍决定哪些
+warning 应该升级为硬规则，以及哪些信息值得晋升到长期文档。
+
+#### 备选方案
+1. 不加检查，继续依赖人工记得维护 daily/weekly。
+2. 直接把所有记忆漂移规则做成 hard-fail。
+
+#### 风险与触发信号
+- 风险：健康检查变成低价值噪音。
+- 触发信号：warning 经常出现但没有明确修复动作，或阻碍无关功能开发。
+- 风险：默认入口继续膨胀成工具大全。
+- 触发信号：`DEFAULT_ENTRYPOINTS.md` 持续增长，且 subsystem 细节没有回收到本地
+  runbook。
+
+#### 验证计划
+- 成功指标：
+  - `python scripts/check_project_memory_health.py` 能输出清晰的 fail/warn 摘要。
+  - focused tests 覆盖缺今日志、缺核心文件、strict warning 行为。
+  - 默认入口和记忆规则能指向该检查。
+- 检查日期：每次记忆系统维护分支收口时检查。
+
+#### 回滚方案
+如果检查噪音高于收益，保留文档策略但从默认入口移除 strict 建议，并将脚本降级为
+手动诊断工具。
+
+#### 后续动作
+1. 运行 focused tests。
+2. 运行默认健康报告。
+3. 根据报告决定是否需要 weekly summary 或 entrypoint 压缩 follow-up。
