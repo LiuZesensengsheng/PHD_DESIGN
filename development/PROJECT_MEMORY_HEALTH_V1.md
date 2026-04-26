@@ -31,6 +31,18 @@ Use JSON mode when another script or automation needs to consume the report:
 python scripts/check_project_memory_health.py --json
 ```
 
+## Test-Backed Contract
+
+The script owns reusable analysis logic and the human/automation CLI. Pytest owns the
+current-repository health contract.
+
+- `tests/scripts/test_check_project_memory_health.py` calls `analyze_project_memory(...)`
+  against the real checkout and expects `0 fail / 0 warning`.
+- fixture-style tests in the same file cover missing logs, missing core files, strict
+  mode, JSON output, and handoff-section drift.
+- repo-state tests derive `today` from the latest dated daily log so the contract is
+  not flaky when an old branch is checked out later.
+
 ## Current Posture
 
 The health check is **report-first** by default.
@@ -52,6 +64,7 @@ The health check is **report-first** by default.
   - `docs/development/PROJECT_MEMORY_INDEX.md`
   - `docs/development/PROJECT_MEMORY_RULES.md`
   - `docs/development/CODEX_TASK_POOL.md`
+  - `docs/development/PROJECT_MEMORY_DIGEST_V1.md`
   - `docs/pm/DECISION_LOG.md`
 - hot-memory cross-links in `AGENTS.md` and `PROJECT_MEMORY_INDEX.md`
 - today's daily log presence
@@ -65,6 +78,7 @@ The health check is **report-first** by default.
 - oversized hot daily logs from the last 7 days
 - latest weekly summary age
 - whether `DEFAULT_ENTRYPOINTS.md` registers the health check
+- whether `DEFAULT_ENTRYPOINTS.md` registers the memory digest
 - active task-pool source-of-truth and validation expectations
 
 ## Output Modes
