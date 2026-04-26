@@ -47,7 +47,7 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/check_project_memory_health.py --json`
 - Validate the current project memory health contract:
   - `python -m pytest tests/scripts/test_check_project_memory_health.py -q`
-- Refresh the latest weekly summary:
+- Validate the weekly summary generator:
   - `python -m pytest tests/scripts/test_generate_weekly_summary.py -q`
 - Generate a specific weekly summary draft directly:
   - `python scripts/generate_weekly_summary.py --year <year> --week <week>`
@@ -223,6 +223,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Run static contract and naming guards:
   - `python -m pytest tests/test_contract_police.py tests/shared/test_naming_and_contract_guards.py -q`
 - Run text encoding and line-ending guards:
+  - `python scripts/check_text_encoding.py`
+- Validate text encoding and line-ending guard contracts:
   - `python -m pytest tests/shared/test_text_encoding_guards.py -q`
 
 ### Combat Mainline Gate

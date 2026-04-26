@@ -81,7 +81,7 @@ Coverage:
 - card/data pipeline contracts
 - resource contract guards
 - asset manifest consistency check
-- text encoding guards
+- text encoding script
 - naming/contract police guards
 
 ## When To Run It
