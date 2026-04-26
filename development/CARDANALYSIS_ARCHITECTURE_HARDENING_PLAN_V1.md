@@ -91,8 +91,6 @@ Stop and ask before doing any of the following:
 ## Current Migration Debt
 
 - Large orchestrator modules still need responsibility splits:
-  - `design_engine/constrained_synthesis.py` remaining tuning and variant construction
-    helpers
   - `design_engine/design_candidate_scout.py`
   - `design_engine/synthesis_closure.py` remaining replay orchestration helpers
   - `design_studio/sts_catalog_holdout_benchmark.py` remaining case replay/evaluation
@@ -117,6 +115,8 @@ Stop and ask before doing any of the following:
   orchestration module.
 - Constrained synthesis ranked-candidate selection and diversity guardrails are outside
   the synthesis orchestration module.
+- Constrained synthesis tuning-goal derivation and tuned variant construction are
+  outside the synthesis orchestration module.
 - Fast-card synthesis closure report/snapshot/plain-data rendering is outside closure
   orchestration.
 - Fast-card synthesis closure projection helpers, fixture loading, and cluster
