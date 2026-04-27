@@ -1364,3 +1364,154 @@ Newly named derived signals:
 
 Use `rumor_seeded` next. It can test the boundary where a conflict actor adds an
 unverified factual claim and crosses from rivalry into rumor spread.
+
+## Working Log: 2026-04-27 Round 8
+
+### Round Event
+
+`rumor_seeded`
+
+This round converts a faction conflict into a rumor only after a new unverified
+factual claim appears. The rumor is about opportunistic staging of the faction
+claim, not a revival of the old debunked bug accusation.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_rumor_seeded_001",
+  "event_type": "rumor_seeded",
+  "turn": 26,
+  "visibility": "public_bbs",
+  "source_actor": "rival_lab_b_analyst",
+  "target_refs": [
+    "deck_theory_faction",
+    "evt_20260427_faction_claim_001",
+    "conflict_claim_legitimacy_025_001"
+  ],
+  "evidence": {
+    "claim_text_ref": "claim_faction_planned_the_achievement_takeover",
+    "source_clarity": 0.43,
+    "claim_specificity": 0.61,
+    "evidence_gap": 0.64,
+    "spread_velocity": 0.48,
+    "containment_pressure": 0.36,
+    "old_debunked_claim_ref": "rumor_deck_is_bugged_001"
+  },
+  "faction_refs": ["rival_lab_b", "deck_theory_faction", "lab_a"]
+}
+```
+
+### Model Increment
+
+This slice adds a new-rumor path:
+
+`rumor_seeded -> rumor state -> credibility split -> containment hook`
+
+Newly named derived signals:
+
+- `source_clarity`: how traceable the rumor source is.
+- `claim_specificity`: how concrete the rumor claim is.
+- `evidence_gap`: distance between the claim and public evidence.
+- `spread_velocity`: speed of reply/repost propagation.
+- `containment_pressure`: moderator, correction, or skeptical pressure against
+  spread.
+- `old_claim_collision`: whether the new rumor tries to reuse a corrected
+  rumor's memory.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "status": "rumor_containment_needed",
+    "updated_turn": 26,
+    "topic_heat": 0.91,
+    "reply_pressure": 0.69,
+    "public_sentiment": 0.34,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "unverified_claim_label_required": true,
+      "old_debunked_claim_reuse_blocked": true
+    }
+  },
+  "participant_roles": {
+    "rival_lab_b_analyst": "rumor_source",
+    "deck_theory_faction": "rumor_target",
+    "player": "indirect_subject",
+    "lab_a": "skeptical_witness",
+    "moderator": "containment_owner"
+  },
+  "stance_distribution": {
+    "support": 0.19,
+    "skepticism": 0.23,
+    "theorycraft": 0.08,
+    "rumor_amplification": 0.21,
+    "factional_rivalry": 0.22,
+    "moderator_neutral": 0.07
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_faction_claim_staged_001",
+    "claim_type": "opportunistic_faction_claim",
+    "rumor_credibility": 0.31,
+    "heat": 0.46,
+    "source_clarity": 0.43,
+    "claim_specificity": 0.61,
+    "evidence_gap": 0.64,
+    "spread_velocity": 0.48,
+    "containment_pressure": 0.36,
+    "old_claim_collision": true,
+    "debunk_status": "unresolved"
+  },
+  "heat_delta": {
+    "topic_heat": 0.05,
+    "conflict_heat": 0.12,
+    "rumor_heat": 0.36,
+    "reply_pressure": 0.07
+  },
+  "relationship_delta": {
+    "rival_lab_b_analyst->deck_theory_faction": -0.06,
+    "deck_theory_faction->rival_lab_b_analyst": -0.10,
+    "player->rival_lab_b_analyst": -0.03,
+    "moderator->rival_lab_b_analyst": -0.02
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "rumor_debunked",
+      "condition": "public evidence directly addresses the staged-claim rumor"
+    },
+    {
+      "hook_type": "private_leak",
+      "condition": "source posts private evidence to support the rumor"
+    },
+    {
+      "hook_type": "scandal",
+      "condition": "rumor credibility and heat both exceed escalation threshold"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `source_clarity`, `claim_specificity`, `evidence_gap`,
+  `spread_velocity`, `containment_pressure`, and `old_claim_collision`.
+- A rumor can start from conflict only when a factual claim appears.
+- If `old_claim_collision` is true, keep corrected memory visible and block
+  silent reuse of the debunked bug claim.
+- Initial credibility rises with specificity and source clarity, but falls with
+  evidence gap and containment pressure.
+- Spread velocity increases heat even when credibility stays low.
+
+### Risks
+
+- Rumor heat and rumor credibility must remain separate.
+- The model should not treat faction rivalry as evidence.
+- A new rumor must not quietly merge into the old corrected bug rumor.
+
+### Next Round Entry
+
+Use `private_leak` next. It can test what happens when a rumor source tries to
+support an unresolved rumor with boundary-sensitive private material.
