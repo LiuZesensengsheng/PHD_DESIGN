@@ -2425,3 +2425,173 @@ Newly named derived signals:
 
 Use a reply-pressure / silent-lurker threshold next. It can test why actors may
 keep memory and interest without posting, preserving hooks for future events.
+
+## Working Log: 2026-04-27 Round 15
+
+### Round Transition
+
+`reply_pressure`
+
+This round models actors who remember the topic and keep interest, but do not
+reply because social risk, thread archive state, or weak trigger match keeps
+them below the posting threshold.
+
+Minimal input:
+
+```json
+{
+  "transition_id": "tick_20260427_reply_pressure_001",
+  "transition_type": "reply_pressure",
+  "turn": 40,
+  "target_refs": [
+    "bbs_thread_boss_defeated_033_001",
+    "memory_player_boss_defeat_033_001",
+    "rumor_faction_claim_staged_001"
+  ],
+  "actors": [
+    "mentor_a",
+    "rival_lab_b_analyst",
+    "quiet_spectator_c",
+    "deck_theory_faction"
+  ],
+  "inputs": {
+    "thread_status": "slow_decay_active",
+    "base_reply_pressure": 0.24,
+    "memory_trigger_match": 0.46,
+    "social_risk": 0.41,
+    "notification_pressure": 0.22,
+    "moderation_friction": 0.33
+  }
+}
+```
+
+### Model Increment
+
+This slice adds a silent-memory path:
+
+`actor memory -> reply threshold check -> lurk state -> future hook readiness`
+
+Newly named derived signals:
+
+- `lurker_interest`: actor interest that remains below public reply threshold.
+- `reply_threshold`: per-actor threshold for posting.
+- `social_risk`: actor cost of entering the thread.
+- `memory_trigger_match`: match between current prompt and actor memory.
+- `notification_pressure`: external nudge to revisit the thread.
+- `future_hook_readiness`: likelihood that the actor responds to a later event.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_boss_defeated_033_001",
+    "status": "low_activity_observed",
+    "updated_turn": 40,
+    "topic_heat": 0.52,
+    "reply_pressure": 0.24,
+    "thread_lifetime": 2,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "correction_pin_active": true,
+      "summary_only_scandal_refs": true
+    }
+  },
+  "participant_roles": {
+    "mentor_a": "authority_lurker",
+    "rival_lab_b_analyst": "risk_aware_skeptic",
+    "quiet_spectator_c": "memory_holder",
+    "deck_theory_faction": "low_pressure_supporter"
+  },
+  "actor_reply_state": {
+    "mentor_a": {
+      "actor_interest": 0.48,
+      "lurker_interest": 0.44,
+      "reply_threshold": 0.66,
+      "social_risk": 0.52,
+      "future_hook_readiness": 0.41,
+      "decision": "lurk"
+    },
+    "rival_lab_b_analyst": {
+      "actor_interest": 0.55,
+      "lurker_interest": 0.50,
+      "reply_threshold": 0.72,
+      "social_risk": 0.61,
+      "future_hook_readiness": 0.47,
+      "decision": "lurk_with_rival_memory"
+    },
+    "quiet_spectator_c": {
+      "actor_interest": 0.37,
+      "lurker_interest": 0.35,
+      "reply_threshold": 0.58,
+      "social_risk": 0.28,
+      "future_hook_readiness": 0.29,
+      "decision": "silent_memory"
+    },
+    "deck_theory_faction": {
+      "actor_interest": 0.51,
+      "lurker_interest": 0.39,
+      "reply_threshold": 0.57,
+      "social_risk": 0.33,
+      "future_hook_readiness": 0.52,
+      "decision": "wait_for_new_evidence"
+    }
+  },
+  "stance_distribution": {
+    "support": 0.31,
+    "skepticism": 0.13,
+    "theorycraft": 0.18,
+    "silent_memory": 0.27,
+    "moderator_neutral": 0.11
+  },
+  "heat_delta": {
+    "topic_heat": -0.07,
+    "reply_pressure": -0.03,
+    "memory_accessibility": 0.04,
+    "future_hook_readiness": 0.06
+  },
+  "relationship_delta": {
+    "mentor_a->player": 0.00,
+    "rival_lab_b_analyst->deck_theory_faction": 0.00,
+    "deck_theory_faction->player": 0.01
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "combat_result",
+      "condition": "new public result raises memory_trigger_match above reply threshold"
+    },
+    {
+      "hook_type": "npc_conflict",
+      "condition": "rival_lab_b_analyst receives a lower social_risk prompt"
+    },
+    {
+      "hook_type": "faction_event",
+      "condition": "deck_theory_faction waits for new evidence before claiming again"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `actor_reply_state`, `lurker_interest`, `reply_threshold`,
+  `social_risk`, `memory_trigger_match`, `notification_pressure`, and
+  `future_hook_readiness`.
+- Reply decision should compare actor interest plus trigger match and
+  notification pressure against reply threshold plus social and moderation risk.
+- Actors can keep `silent_memory` without changing public stance distribution
+  much.
+- Lurking should preserve future hooks without increasing current thread heat.
+
+### Risks
+
+- If every interested actor posts, the model becomes too noisy.
+- If lurkers do not store future readiness, later events lose social continuity.
+- Silent memory should not create relationship delta unless a later public
+  action reveals it.
+
+### Next Round Entry
+
+Next useful work is a schema pass: extract the stable payload fields from these
+rounds into a compact draft contract before any implementation code is written.
