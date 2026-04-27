@@ -290,3 +290,178 @@ Newly named derived signals:
 Use `rumor_debunked` next. It is the smallest useful follow-up because it tests
 credibility reduction, heat backlash, stance migration, relationship repair, and
 memory correction without needing UI or final prose.
+
+## Working Log: 2026-04-27 Round 2
+
+### Round Event
+
+`rumor_debunked`
+
+This round continues from `rumor_deck_is_bugged_001` created by the previous
+`player_used_unusual_deck` slice.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_debunk_001",
+  "event_type": "rumor_debunked",
+  "turn": 19,
+  "visibility": "public_thread_update",
+  "source_actor": "moderator",
+  "target_refs": [
+    "rumor_deck_is_bugged_001",
+    "bbs_thread_unusual_deck_018_001",
+    "player",
+    "rival_grad_a"
+  ],
+  "evidence": {
+    "debunk_source_type": "moderator_pinned_evidence",
+    "evidence_visibility": 0.86,
+    "debunk_authority": 0.74,
+    "proof_density_after": 0.84,
+    "contradiction_strength": 0.69
+  },
+  "faction_refs": ["deck_theory_faction", "lab_a", "rival_lab_b"]
+}
+```
+
+### Model Increment
+
+This slice adds the first correction path:
+
+`rumor_debunked -> credibility drop -> stance migration -> memory correction`
+
+Newly named derived signals:
+
+- `debunk_authority`: trust granted to the actor or system presenting the
+  correction.
+- `evidence_visibility`: how many participants can inspect the correction
+  without relying on hearsay.
+- `belief_inertia`: resistance from actors who already posted or aligned around
+  the rumor.
+- `backfire_risk`: chance that heat rises while credibility falls.
+- `memory_correction_strength`: likelihood that future recalls remember the
+  corrected state instead of the original rumor.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "topic_id": "topic_unusual_low_cost_recursion_001",
+    "source_event_ids": [
+      "evt_20260427_unusual_deck_001",
+      "evt_20260427_debunk_001"
+    ],
+    "status": "cooling_after_correction",
+    "opened_turn": 18,
+    "updated_turn": 19,
+    "thread_lifetime": 2,
+    "topic_heat": 0.57,
+    "reply_pressure": 0.34,
+    "public_sentiment": 0.27,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "repeat_debunked_claim_requires_new_evidence": true,
+      "correction_pin_active": true
+    }
+  },
+  "participant_roles": {
+    "player": "silent_subject_rehabilitated",
+    "rival_grad_a": "skeptic_under_correction",
+    "mentor_a": "authority_lurker_positive",
+    "deck_theory_faction": "evidence_explainer",
+    "lab_a": "supportive_witness",
+    "moderator": "correction_anchor"
+  },
+  "stance_distribution": {
+    "support": 0.42,
+    "skepticism": 0.16,
+    "theorycraft": 0.24,
+    "mockery": 0.06,
+    "correction_acceptance": 0.09,
+    "moderator_neutral": 0.03
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_deck_is_bugged_001",
+    "claim_type": "mechanism_misread",
+    "rumor_credibility": 0.11,
+    "heat": 0.25,
+    "debunk_status": "debunked_with_visible_evidence",
+    "evidence_gap": 0.16,
+    "memory_correction_strength": 0.72,
+    "backfire_risk": 0.18
+  },
+  "heat_delta": {
+    "topic_heat": -0.14,
+    "rumor_heat": -0.19,
+    "reply_pressure": -0.24
+  },
+  "relationship_delta": {
+    "player->deck_theory_faction": 0.04,
+    "deck_theory_faction->player": 0.06,
+    "rival_grad_a->player": -0.01,
+    "mentor_a->player": 0.05,
+    "moderator->rival_grad_a": -0.02
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "public_achievement",
+      "condition": "corrected unusual-deck win remains in public memory for 2 turns"
+    },
+    {
+      "hook_type": "misunderstanding",
+      "condition": "low-belief-inertia actor repeats the old claim without malice"
+    },
+    {
+      "hook_type": "faction_event",
+      "condition": "rival_lab_b contests the correction source instead of the evidence"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `debunk_authority` as a credibility-delta multiplier.
+- Added `evidence_visibility` as a stance-migration multiplier.
+- Added `belief_inertia` as resistance to correction for prior posters and
+  faction-aligned skeptics.
+- Added `backfire_risk` so a correction can reduce `rumor_credibility` while
+  briefly keeping `topic_heat` alive.
+- Added `memory_correction_strength` so later topics can recall "debunked
+  unusual-deck claim" instead of only "unusual-deck rumor."
+
+Concrete transition:
+
+1. Find the target rumor by `target_refs`.
+2. Compute `credibility_drop` from `debunk_authority`, `evidence_visibility`,
+   `contradiction_strength`, and current `rumor_credibility`.
+3. Lower `rumor_credibility`; clamp at `0.0`.
+4. Move stances from `skepticism` and `mockery` toward
+   `correction_acceptance`, `support`, or `silent_lurking` based on
+   `belief_inertia`.
+5. Reduce `reply_pressure` unless `backfire_risk` crosses a local threshold.
+6. Write a memory correction entry when `memory_correction_strength >= 0.60`.
+7. Apply small relationship repair toward actors who provided or accepted
+   visible evidence.
+
+### Risks
+
+- A debunk path can become too moralizing if the model assumes every correction
+  is fully trusted. `debunk_authority` and `belief_inertia` should stay separate.
+- A low-trust correction can create heat backlash; the model must allow heat and
+  credibility to move in opposite directions.
+- Memory correction should not erase the old rumor completely. Future recall
+  needs both the original claim and the corrected status.
+- This still does not define persistence ownership. Keep memory as a payload
+  concept until a save boundary is chosen.
+
+### Next Round Entry
+
+Use `misunderstanding` next. It is the smallest next case because it can reuse
+the corrected rumor memory and test whether actors repeat old claims with low
+malice, medium heat, and repairable relationship damage.
