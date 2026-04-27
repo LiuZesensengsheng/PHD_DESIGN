@@ -267,6 +267,33 @@ Out of scope:
   - Define `economy_state` labels for upgrade, removal, shop, event, transform,
     healing pressure, route risk, and opportunity cost.
 
+### 2026-04-27 Round 10
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - Which `economy_state` labels are needed to explain route credibility without
+    pretending the model knows exact campaign path probability?
+- Model increment:
+  - Added economy dimensions and labels for upgrade breakpoints, removal access,
+    shop windows, event assumptions, transform quality, healing pressure, opportunity
+    cost, and route risk.
+  - Clarified that economy labels modify online timing and reachability claims, not
+    deck legality or encounter readiness.
+- Assumptions:
+  - Economy context should preserve unknowns rather than silently treating missing
+    shops, events, or gold as no burden.
+  - Healing pressure can consume the same resource budget as upgrades, removals, or
+    shop purchases and should be visible.
+- Risks:
+  - Route labels may look like probability estimates if reports omit
+    `route_context_unknown`.
+  - Upgrade and removal evidence may be over-credited when their opportunity costs
+    are not recorded.
+- Next round entry:
+  - Define `compression_state` labels that distinguish persistent removal,
+    transform, in-combat exhaust, discard filtering, draw selection, and deck-size
+    sensitivity.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -343,6 +370,55 @@ Labeling rules:
 - A deck can move backward when new evidence shows route burden, off-axis drag, or
   starter pollution was understated.
 - Do not expose maturity labels as `pass`, `fail`, `ready`, or `blocked`.
+
+### Economy State Labels
+
+`economy_state` describes route evidence and resource pressure. It should explain how
+upgrades, removals, shops, events, transforms, healing, and opportunity costs affect
+online timing claims.
+
+Minimum dimensions:
+
+| Dimension | Meaning |
+| --- | --- |
+| `upgrade_progress` | Whether required upgrade breakpoints are absent, assumed, or visible. |
+| `removal_access` | What evidence exists for persistent card removal. |
+| `shop_window` | Whether a shop can plausibly solve a route need and at what opportunity cost. |
+| `event_window` | Whether event help is known, unknown, or too speculative to credit. |
+| `transform_quality` | Whether transforms improved alignment, hurt alignment, or remain unknown. |
+| `healing_pressure` | Whether survival needs compete with upgrades, removals, or purchases. |
+| `resource_surplus` | Whether the run has spare gold, upgrade windows, or routing slack. |
+| `route_risk` | How uncertain the economy path remains. |
+
+Recommended labels:
+
+| Label | Meaning | Curve Effect |
+| --- | --- | --- |
+| `economy_unknown` | Route context is missing or not reviewed. | Keep online claims conditional. |
+| `upgrade_breakpoint_absent` | A named upgrade requirement is not visible. | Delay the relevant timing claim. |
+| `upgrade_breakpoint_visible` | A named upgrade requirement is satisfied or credibly available. | May advance only that specific claim. |
+| `removal_route_visible` | Removal access or actual removal progress is recorded. | Supports compression and route credibility. |
+| `removal_opportunity_cost_high` | Removal competes with buying support, upgrading, healing, or relic choices. | Holds or conditions online claims. |
+| `shop_window_open` | Shop access could plausibly solve a missing route need. | Supports a route-dependent claim, not guaranteed access. |
+| `shop_window_expensive` | Shop solves one need while crowding out another. | Add opportunity-cost notes. |
+| `event_route_unknown` | Event help is possible but not evidenced. | Preserve unknown; do not credit as route solution. |
+| `transform_quality_known_good` | Transform removed pollution and added aligned value. | Can support route credibility. |
+| `transform_quality_unknown` | Transform removed a card but replacement quality is unknown. | Do not treat as pure removal. |
+| `healing_pressure_high` | Survival or rest needs compete with upgrades/removals. | Delay or condition power spike assumptions. |
+| `economy_surplus_visible` | Spare resource windows are visible after core needs. | May reduce route risk, still advisory. |
+| `route_risk_high` | The path to claimed online state depends on uncertain economy events. | Use route-dependent labels. |
+
+Economy-state rules:
+
+- Unknown route context should remain `economy_unknown`, not zero burden.
+- A shop or event can support `route_dependent_online`; it cannot prove
+  `generally_online` without additional evidence.
+- Upgrade labels should name the exact breakpoint they affect.
+- Removal and transform should stay separate because transform adds replacement
+  quality risk.
+- Healing pressure is a first-class economy label when survival competes with power
+  growth.
+- Economy labels cannot emit pass/fail or hard-gate language.
 
 ### Player Strength Vector
 
