@@ -1829,3 +1829,156 @@ Newly named derived signals:
 
 Use `combat_result` next. It can test whether a later public performance fact
 competes with scandal memory and reopens ordinary performance discussion.
+
+## Working Log: 2026-04-27 Round 11
+
+### Round Event
+
+`combat_result`
+
+This round models a later public combat result after scandal lockdown. The goal
+is to let new performance evidence compete with scandal memory without erasing
+the scandal or granting achievement-level prestige.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_combat_result_001",
+  "event_type": "combat_result",
+  "turn": 30,
+  "visibility": "public_after_combat",
+  "source_actor": "combat_result_feed",
+  "target_refs": [
+    "player",
+    "scandal_privacy_boundary_028_001",
+    "package_low_cost_recursion_public_v0"
+  ],
+  "evidence": {
+    "combat_outcome": "standard_win",
+    "outcome_salience": 0.52,
+    "performance_margin": 0.44,
+    "performance_consistency": 0.58,
+    "audience_overlap": 0.42,
+    "scandal_competition": 0.37,
+    "package_signal_visible": true
+  },
+  "faction_refs": ["deck_theory_faction", "lab_a", "rival_lab_b"]
+}
+```
+
+### Model Increment
+
+This slice adds a performance-rebalance path:
+
+`combat_result -> performance memory update -> scandal competition -> thread thaw`
+
+Newly named derived signals:
+
+- `outcome_salience`: how discussion-worthy the combat result is.
+- `performance_consistency`: whether this result fits prior public memory.
+- `scandal_competition`: how strongly new performance facts compete with
+  scandal attention.
+- `ordinary_discussion_pull`: pull back toward low-risk performance analysis.
+- `memory_rebalance`: shift of accessible memory from scandal to performance.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "status": "limited_performance_reopen",
+    "updated_turn": 30,
+    "topic_heat": 0.74,
+    "reply_pressure": 0.36,
+    "public_sentiment": 0.24,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "summary_only_scandal_refs": true,
+      "performance_discussion_allowed": true
+    }
+  },
+  "participant_roles": {
+    "combat_result_feed": "performance_evidence_source",
+    "player": "combat_subject",
+    "deck_theory_faction": "package_memory_interpreter",
+    "rival_lab_b": "skeptical_observer",
+    "moderator": "boundary_keeper"
+  },
+  "stance_distribution": {
+    "support": 0.26,
+    "skepticism": 0.17,
+    "theorycraft": 0.23,
+    "privacy_concern": 0.15,
+    "factional_rivalry": 0.10,
+    "moderator_neutral": 0.09
+  },
+  "performance_state": {
+    "combat_memory_id": "memory_player_standard_win_030_001",
+    "combat_outcome": "standard_win",
+    "outcome_salience": 0.52,
+    "performance_margin": 0.44,
+    "performance_consistency": 0.58,
+    "ordinary_discussion_pull": 0.33,
+    "memory_rebalance": 0.21
+  },
+  "scandal_state": {
+    "scandal_id": "scandal_privacy_boundary_028_001",
+    "scandal_severity": 0.68,
+    "boundary_breach_score": 0.81,
+    "scandal_competition": 0.37,
+    "status": "active_but_competed"
+  },
+  "heat_delta": {
+    "topic_heat": -0.26,
+    "scandal_heat": -0.11,
+    "performance_heat": 0.27,
+    "reply_pressure": 0.06
+  },
+  "relationship_delta": {
+    "deck_theory_faction->player": 0.03,
+    "rival_lab_b->player": 0.01,
+    "moderator->thread_participants": 0.02
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "boss_defeated",
+      "condition": "future combat result crosses high salience threshold"
+    },
+    {
+      "hook_type": "rumor_debunked",
+      "condition": "performance discussion surfaces evidence about staged-claim rumor"
+    },
+    {
+      "hook_type": "decay",
+      "condition": "no new scandal or combat event occurs for several turns"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `performance_state`, `outcome_salience`, `performance_consistency`,
+  `scandal_competition`, `ordinary_discussion_pull`, and `memory_rebalance`.
+- Ordinary combat results create performance memory, not prestige memory, unless
+  salience crosses a higher achievement threshold.
+- If `scandal_competition` is moderate, scandal remains accessible but no longer
+  owns all reply pressure.
+- If `summary_only_scandal_refs` is active, old private details remain blocked
+  during performance discussion.
+
+### Risks
+
+- New combat results must not erase boundary incidents.
+- Ordinary performance should not be inflated into boss-tier prestige.
+- Reopening discussion can reintroduce privacy risk if summary-only boundaries
+  are not carried forward.
+
+### Next Round Entry
+
+Use `boss_defeated` next. It can test the high-salience version of combat
+success and whether it creates a separate achievement thread rather than only
+thawing the old one.
