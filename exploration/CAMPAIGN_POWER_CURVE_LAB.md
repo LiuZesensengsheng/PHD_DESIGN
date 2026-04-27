@@ -168,6 +168,33 @@ Out of scope:
   - Define 2-3 more encounter archetypes that use these modifiers, especially a
     build-phase payoff-only detector and a pivot compression-route probe.
 
+### 2026-04-27 Round 6
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - Which encounter archetypes should consume `online_timing_modifier` output first
+    without turning modifier labels into monster numbers or pass/fail authority?
+- Model increment:
+  - Added three modifier-driven encounter archetypes:
+    `build_payoff_only_detector`, `pivot_compression_route_probe`, and
+    `mature_over_online_texture_probe`.
+  - Bound each archetype to the modifier labels it should read, the pressure axes it
+    may request, the validation question it asks, and the interpretation boundary it
+    must preserve.
+- Assumptions:
+  - Modifier-driven archetypes should expose why an online claim is conditional,
+    route-dependent, delayed, or texture-risky.
+  - An archetype can ask for pressure shape, but not specific damage, health, enemy
+    counts, or blocking verdicts.
+- Risks:
+  - `payoff_only_detector` could become a hidden deck-quality gate if reports omit
+    the advisory boundary.
+  - `over_online` probes may be mistaken for anti-infinite legality checks unless
+    encounter notes preserve remaining constraints and texture questions.
+- Next round entry:
+  - Define qualitative enemy pressure phase bands so archetype pressure requests have
+    consistent low/medium/high language by phase.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -943,6 +970,78 @@ Design reading:
 - Avoid:
   - monster numbers in this model document
   - treating anti-infinite pressure as proof that an infinite is invalid
+
+### `build_payoff_only_detector`
+
+- Phases: `build`
+- Reads modifiers:
+  - `hold_conditional`
+  - `delay_online_claim`
+  - early `route_dependent`
+- Primary pressure:
+  - `frontload_damage`
+  - `defense_check`
+  - low `multi_enemy_pressure`
+  - low `status_pollution`
+- Validation question:
+  - Does the deck have support, bridge, and survival evidence behind its payoff, or
+    is it carrying a high-ceiling card that cannot shape the build phase yet?
+- Interpretation boundary:
+  - Report `payoff_supported`, `bridge_missing`, `survival_window_missing`, or
+    `route_context_unknown`; do not report pass/fail.
+- Avoid:
+  - requiring final-shell compression
+  - punishing every non-online mechanism
+  - using status or disruption high enough to test pivot assumptions too early
+
+### `pivot_compression_route_probe`
+
+- Phases: `pivot`
+- Reads modifiers:
+  - `route_dependent`
+  - `stale_check_needed`
+  - `hold_conditional`
+- Primary pressure:
+  - `draw_disruption`
+  - `energy_tax`
+  - `mechanism_disruption`
+  - `defense_check`
+  - optional low-to-medium `status_pollution`
+- Validation question:
+  - Is the mechanism conditionally online because of ordinary draw/resource variance,
+    or because the deck still needs a credible removal, transform, or early exhaust
+    route before the claim is honest?
+- Interpretation boundary:
+  - Report the missing route evidence directly; do not treat missing removal,
+    transform quality, or early exhaust access as a failure state.
+- Avoid:
+  - hard counters to the exact mechanism
+  - equating discard filtering with persistent deck compression
+  - assuming shop, event, or transform access is guaranteed
+
+### `mature_over_online_texture_probe`
+
+- Phases: `mature`, `late`
+- Reads modifiers:
+  - `advance_online_claim`
+  - `stale_check_needed`
+  - `over_online`
+- Primary pressure:
+  - `scaling_race`
+  - `burst_check`
+  - `defense_check`
+  - `mechanism_disruption`
+  - trace or low report-only `anti_infinite_pressure`
+- Validation question:
+  - Does a highly repeatable mechanism still leave meaningful encounter texture,
+    constraints, and recovery questions, or does it flatten the requested pressure?
+- Interpretation boundary:
+  - Report `texture_visible`, `constraints_visible`, `pressure_flattened_risk`, or
+    `anti_infinite_review_needed`; do not declare a loop invalid.
+- Avoid:
+  - monster numbers
+  - legality language
+  - treating a high-ceiling combo as unhealthy by category
 
 ## Future Cardanalysis Interface Draft
 
