@@ -294,6 +294,31 @@ Out of scope:
     transform, in-combat exhaust, discard filtering, draw selection, and deck-size
     sensitivity.
 
+### 2026-04-27 Round 11
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - Which `compression_state` labels prevent the model from treating removal,
+    transform, in-combat exhaust, discard filtering, and draw selection as the same
+    kind of compression?
+- Model increment:
+  - Added compression dimensions and labels for persistent thinning, transform
+    quality, early/late exhaust, filtering-only effects, draw selection, deck-size
+    sensitivity, curated-deck assumptions, and compression tax.
+  - Added rules for how compression labels may affect online timing without becoming
+    reachability authority.
+- Assumptions:
+  - Persistent removal changes campaign reachability differently from combat-only
+    filtering or selection.
+  - Compression benefits must name their tax: draw spent, energy spent, setup turn,
+    or opportunity cost.
+- Risks:
+  - Combat filtering may be over-credited as permanent deck thinning.
+  - Curated deck examples can hide starter cleanup cost unless explicitly labeled.
+- Next round entry:
+  - Add a curve checkpoint review checklist so future checkpoints can be reviewed for
+    evidence, authority boundary, phase fit, and missing economy/compression context.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -419,6 +444,58 @@ Economy-state rules:
 - Healing pressure is a first-class economy label when survival competes with power
   growth.
 - Economy labels cannot emit pass/fail or hard-gate language.
+
+### Compression State Labels
+
+`compression_state` describes how the effective deck changes across the campaign and
+inside an encounter. It must preserve the difference between persistent thinning and
+combat-only mitigation.
+
+Minimum dimensions:
+
+| Dimension | Meaning |
+| --- | --- |
+| `persistent_sources` | Removal or known transform effects that change the deck outside combat. |
+| `combat_sources` | Exhaust, self-exhaust, discard, draw, selection, retain, or recursion effects during combat. |
+| `deck_size_sensitivity` | How much extra deck size or starter pollution hurts the mechanism. |
+| `starter_basic_count` | Visible starter Strike/Defend or equivalent baseline drag. |
+| `off_plan_card_count` | Non-starter cards that dilute the intended line. |
+| `arrival_timing` | Whether compression arrives before the mechanism needs to work. |
+| `compression_tax` | Draw, energy, setup turn, card loss, or opportunity cost paid to compress. |
+| `invalid_equivalences` | Compression assumptions that must not be collapsed together. |
+
+Recommended labels:
+
+| Label | Meaning | Curve Effect |
+| --- | --- | --- |
+| `compression_unknown` | Compression context is missing. | Keep reachability conditional. |
+| `no_persistent_thinning` | No out-of-combat thinning is visible. | Do not advance removal progress. |
+| `removal_thinning_visible` | Actual or credible persistent removal is recorded. | Supports route-level reachability. |
+| `transform_quality_known_good` | Transform removed drag and added aligned value. | Supports route credibility with note. |
+| `transform_quality_unknown` | Transform happened, but replacement quality is not known. | Do not count as clean removal. |
+| `self_exhaust_setup_visible` | Setup cards remove themselves after use. | Supports in-combat effective thinning. |
+| `targeted_exhaust_early` | The deck can remove unwanted cards before the key online window. | Supports conditional online claims. |
+| `targeted_exhaust_late` | Exhaust exists but likely arrives after the mechanism needed help. | Keep online timing conditional. |
+| `discard_filtering_only` | Discard improves hand quality but does not remove future draws. | Do not count as persistent compression. |
+| `draw_selection_only` | Selection finds pieces but does not thin pollution by itself. | Supports reachability only with caveats. |
+| `deck_size_sensitive_high` | Reliability falls sharply with extra cards or basics. | Add route-dependent or compression-needed notes. |
+| `curated_deck_skips_removal_cost` | Example shell omits starter cleanup cost. | Preserve route burden visibility. |
+| `compression_tax_competes_with_assembly` | The compression tool costs the same draw, energy, or turn window the mechanism needs. | Delay or condition online timing. |
+
+Compression-state rules:
+
+- Removal, transform, exhaust, discard filtering, and draw selection should remain
+  separate labels even when they all improve a final shell.
+- Persistent removal can support `removal_progress`; discard filtering and draw
+  selection cannot.
+- Transform can support compression only when replacement quality is known or marked
+  as unknown with explicit caveats.
+- Exhaust supports online timing only when it arrives early enough and does not
+  consume the same resources required by the mechanism.
+- High deck-size sensitivity should downgrade broad reachability language to
+  `online_if_compressed` or `route_dependent_online`.
+- Curated examples should record when they skip starter-deck cleanup cost.
+- Compression labels cannot produce pass/fail authority.
 
 ### Player Strength Vector
 
