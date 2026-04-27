@@ -2595,3 +2595,90 @@ Newly named derived signals:
 
 Next useful work is a schema pass: extract the stable payload fields from these
 rounds into a compact draft contract before any implementation code is written.
+
+## Working Log: 2026-04-27 Schema Pass
+
+### Round Event
+
+`schema_pass`
+
+This is not a new in-game event. It consolidates the stable payload shape from
+the first 15 exploration rounds into:
+
+- `docs/exploration/GOSSIP_BBS_SOCIAL_SIMULATION_CONTRACT_V1.md`
+
+### Model Increment
+
+This pass turns the lab examples into an implementation-facing contract:
+
+- added a schema coverage checklist for actor, faction, relationship edge,
+  event, topic, rumor, post, reply, thread, stance, credibility, heat, memory,
+  decay, and moderation boundary;
+- added minimal `ActorState`, `PostState`, and `ReplyState` records so the
+  entity vocabulary is no longer only prose;
+- expanded supported `visibility` values with `public_thread_update` and
+  `public_thread_reply`;
+- aligned thread status, debunk status, moderation boundary, and hook enums
+  with the exploration samples;
+- normalized multi-thread transition output through `additional_thread_states`
+  instead of one-off names such as `active_thread_state`;
+- kept the first implementation target limited to typed envelopes, typed core
+  records, in-memory state, pure transition stubs, and fixture tests.
+
+### Example Contract `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_schema_pass_001",
+    "parent_thread_id": null,
+    "topic_id": "topic_schema_contract_v1",
+    "source_event_ids": ["schema_pass_20260427_001"],
+    "status": "active",
+    "opened_turn": 0,
+    "updated_turn": 0,
+    "thread_lifetime": 0,
+    "topic_heat": 0.0,
+    "reply_pressure": 0.0,
+    "public_sentiment": 0.0,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "summary_only_mode": false
+    }
+  },
+  "additional_thread_states": {},
+  "participant_roles": {},
+  "stance_distribution": {},
+  "heat_delta": {},
+  "relationship_delta": {},
+  "next_event_hooks": []
+}
+```
+
+### New State Variables / Transition Rules
+
+- No new gameplay state variable was introduced in this pass.
+- Added a contract rule: new enum or status values must update both the
+  contract and this lab log in the same slice.
+- Added a contract rule: `public_thread_update` and `public_thread_reply` should
+  attach to an existing thread when possible before spawning a new thread.
+- Added a contract rule: hooks remain suggestions and must not execute campaign,
+  narrative, UI, reward, or persistence behavior by themselves.
+
+### Risks
+
+- The contract may look implementation-ready enough to invite campaign/save
+  coupling too early; keep the first code slice domain-only.
+- The lab examples still contain early names such as `active_thread_state` and
+  `not_debunked`; implementation fixtures should normalize them through the
+  contract.
+- Adding `PostState` and `ReplyState` can tempt final BBS prose storage. These
+  records should store structured role/stance signals only.
+
+### Next Round Entry
+
+Start the first code slice with typed domain records and fixture tests for
+`player_used_unusual_deck`, `rumor_seeded`, `rumor_debunked`,
+`public_achievement`, `decay`, and `reply_pressure`. Do not integrate with UI,
+campaign save state, real LLM text generation, or `cardanalysis`.
