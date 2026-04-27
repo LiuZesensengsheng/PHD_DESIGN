@@ -319,6 +319,31 @@ Out of scope:
   - Add a curve checkpoint review checklist so future checkpoints can be reviewed for
     evidence, authority boundary, phase fit, and missing economy/compression context.
 
+### 2026-04-27 Round 12
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What review checklist should every future `curve_checkpoint` satisfy before it is
+    used as an encounter validation prompt?
+- Model increment:
+  - Added a curve checkpoint review checklist with required review areas, accepted
+    review states, and minimum blocking-language checks.
+  - Added explicit checks for evidence state, phase fit, player vector reasons,
+    deck maturity, economy, compression, enemy pressure, archetype link, cardanalysis
+    inputs, stale triggers, and authority boundary.
+- Assumptions:
+  - A checkpoint can be useful while incomplete, as long as its missing evidence is
+    visible.
+  - Checklist status should change advisory use, not create pass/fail authority.
+- Risks:
+  - Checklist language can drift into a gate if future tools use `complete` as a
+    blocking requirement.
+  - Missing economy or compression context may still be silently ignored if payloads
+    omit `unknown` labels.
+- Next round entry:
+  - Add report-only payload variants for starter, build, pivot, and mature contexts
+    so consumers can see how the same contract adapts by phase.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -1040,6 +1065,53 @@ The evidence state should answer:
 
 The current V0 checkpoint examples should be treated as `hypothesis_draft` until a
 later run reviews them against campaign economy and reward pacing.
+
+## Curve Checkpoint Review Checklist
+
+The checklist helps a designer or future tool review whether a `curve_checkpoint` is
+usable as an encounter validation prompt. It is not a gate and does not authorize
+monster numbers.
+
+Checklist status labels:
+
+| Status | Meaning |
+| --- | --- |
+| `not_started` | The checkpoint has not been reviewed for this area. |
+| `present` | The area exists, but quality or evidence has not been reviewed. |
+| `review_needed` | The area is present and has a named uncertainty. |
+| `reviewed_advisory` | The area is reviewed enough for advisory planning. |
+| `stale_check_needed` | A known change may invalidate the checkpoint. |
+| `out_of_scope` | The area is intentionally not part of this checkpoint. |
+
+Required review areas:
+
+| Area | Minimum Question | Required Output |
+| --- | --- | --- |
+| `checkpoint_identity` | Does the checkpoint name phase, round hint, design question, and evidence state? | `checkpoint_id`, `phase`, `round_index_hint`, `design_question`, `evidence_state` |
+| `authority_boundary` | Does it clearly avoid pass/fail, hard gates, and monster stat authority? | `evaluation_mode=report_only`, `authority_boundary`, `must_not_expose` |
+| `phase_fit` | Does the pressure fit the phase band or name why it intentionally spikes? | `phase_read`, `enemy_pressure_phase_band`, optional `spike_reason` |
+| `player_power_reasoning` | Do player vector scores carry reason codes and uncertainty? | `player_power_reason_code` entries or `reason_codes_missing` |
+| `deck_maturity` | Does the checkpoint name assembly shape rather than only strength? | `maturity_label`, density notes, fallback visibility |
+| `mechanism_online` | Does it state absent/assembling/conditional/online/over-online with prerequisites? | `mechanism_online_timing`, activation paths, missing prerequisites |
+| `economy_context` | Are upgrades, removals, shops, events, transforms, healing, and opportunity costs known or unknown? | `economy_state` labels, `route_risk` |
+| `compression_context` | Are removal, transform, exhaust, filtering, selection, and deck-size sensitivity separated? | `compression_state` labels and invalid equivalences |
+| `enemy_pressure` | Does the pressure request state the encounter question, not monster numbers? | pressure axes, qualitative bands, primary validation question |
+| `encounter_archetype` | Is the checkpoint tied to a validation shape or intentionally archetype-free? | `encounter_archetype_id` or `out_of_scope` note |
+| `cardanalysis_inputs` | Are upstream report-only signals named without making them authority? | source surfaces, missing source evidence, `advisory_only` |
+| `staleness` | What changes would make the checkpoint unreliable? | stale triggers and freshness label |
+| `next_evidence` | What should the next run, review, or playtest observe? | concrete evidence need, not a verdict |
+
+Review rules:
+
+- A checkpoint with missing evidence can still be used as a `discussion_seed` or
+  `validation_prompt` if the missing evidence is explicit.
+- `reviewed_advisory` does not mean balanced, final, or ready for implementation.
+- Any checkpoint that exposes `overall_pass`, `hard_gates`, `blocking_verdict`, or
+  monster stat targets is outside V1.
+- `stale_check_needed` should preserve the checkpoint for history while stopping it
+  from being treated as current planning context.
+- If economy or compression context is unknown, the checklist should say `unknown`;
+  it should not leave the field blank.
 
 ## Curve Checkpoint Examples V0
 
