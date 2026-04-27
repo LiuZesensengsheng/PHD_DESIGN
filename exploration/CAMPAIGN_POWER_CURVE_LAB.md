@@ -195,6 +195,30 @@ Out of scope:
   - Define qualitative enemy pressure phase bands so archetype pressure requests have
     consistent low/medium/high language by phase.
 
+### 2026-04-27 Round 7
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - How should enemy pressure requests use `low`, `medium`, and `high` by phase
+    without becoming monster stat guidance?
+- Model increment:
+  - Added `enemy_pressure_phase_band` as qualitative language for pressure intensity
+    by campaign phase.
+  - Added a phase band table that marks normal axes, caution axes, and out-of-phase
+    pressure for `starter`, `early`, `build`, `pivot`, `mature`, and `late`.
+- Assumptions:
+  - Pressure bands should describe encounter questions, not numeric damage, health,
+    action count, or enemy roster size.
+  - A later encounter can exceed a normal band only if it records the design reason
+    and evidence need.
+- Risks:
+  - Designers may read `high` as a stat target unless future payloads keep the
+    qualitative wording visible.
+  - Phase bands may need revision after economy and reward pacing are reviewed.
+- Next round entry:
+  - Add a compact player power reason-code taxonomy so vector changes can explain
+    why a score moved without relying on scalar-only output.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -498,6 +522,49 @@ Compression should alter curve interpretation before it alters any score authori
 | `pivot` | Introduce `mechanism_disruption`, `draw_disruption`, or `energy_tax` in small doses to test conditional online claims. |
 | `mature` | Combine `scaling_race`, `burst_check`, and `defense_check` to validate whether the deck has both ceiling and fallback. |
 | `late` | Use multi-axis pressure including `anti_infinite_pressure`, but keep it report-only and avoid declaring player loops invalid by model output alone. |
+
+### Enemy Pressure Phase Bands
+
+`enemy_pressure_phase_band` is a qualitative advisory layer for archetypes and
+checkpoints. It keeps pressure language consistent while avoiding monster stat
+implementation.
+
+Band meanings:
+
+| Band | Meaning | Must Not Mean |
+| --- | --- | --- |
+| `avoid` | Do not use this pressure as a normal phase expectation. | The axis is illegal or can never appear. |
+| `trace` | Mention only as observation or light texture. | A hidden numeric minimum. |
+| `low` | Small prompt that should not dominate the encounter question. | Guaranteed low damage or trivial enemy behavior. |
+| `medium` | Main pressure axis for the phase or archetype. | A fixed balance target. |
+| `high` | Strong late or special-purpose validation pressure that needs a reason. | Permission to hard-counter the player. |
+| `spike_only` | Use only for an explicit one-off pressure spike or scripted validation beat. | A default phase expectation. |
+
+Default phase bands:
+
+| Phase | Normal Medium Axes | Low Or Trace Axes | Caution / Avoid Axes |
+| --- | --- | --- | --- |
+| `starter` | `frontload_damage`, `defense_check` | `multi_enemy_pressure` | avoid `draw_disruption`, `energy_tax`, `mechanism_disruption`, `anti_infinite_pressure` |
+| `early` | `frontload_damage`, `defense_check` | `multi_enemy_pressure`, `status_pollution` | avoid `mechanism_disruption`; keep `draw_disruption` trace only |
+| `build` | `frontload_damage`, `defense_check`, `multi_enemy_pressure` | `status_pollution`, `draw_disruption`, `energy_tax` | avoid hard mechanism disruption and anti-infinite pressure |
+| `pivot` | `defense_check`, `draw_disruption`, `mechanism_disruption`, `status_pollution` | `frontload_damage`, `energy_tax`, `scaling_race` | keep `anti_infinite_pressure` trace only |
+| `mature` | `scaling_race`, `defense_check`, `burst_check`, `mechanism_disruption` | `draw_disruption`, `energy_tax`, `multi_enemy_pressure` | use anti-infinite pressure only as report-only low/trace |
+| `late` | `scaling_race`, `burst_check`, `defense_check`, `multi_enemy_pressure` | `draw_disruption`, `energy_tax`, `mechanism_disruption`, `anti_infinite_pressure` | `high` anti-infinite pressure needs explicit review context |
+
+Band use rules:
+
+- A checkpoint may request only qualitative bands unless a later monster-tuning owner
+  explicitly creates a numeric implementation.
+- `high` should name the validation reason and the expected observation, not a
+  damage or health target.
+- `avoid` means "not a default ask for this phase"; it can be overridden only by a
+  named tutorial, boss, elite, or special validation context.
+- `spike_only` should record why the spike exists and which normal phase assumption
+  it is intentionally testing.
+- A pressure band cannot produce `overall_pass`, `overall_fail`, `hard_gate`, or
+  readiness authority.
+- If several axes are `medium` or higher, the archetype should state the primary
+  design question so the encounter does not become an unfocused all-axis test.
 
 ## Report-Only Payload Draft
 
