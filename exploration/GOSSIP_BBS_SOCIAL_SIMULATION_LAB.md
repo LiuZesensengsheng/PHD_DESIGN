@@ -1213,3 +1213,154 @@ Newly named derived signals:
 
 Use `npc_conflict` next. It can test whether the rival challenge becomes a
 relationship conflict rather than immediately becoming a rumor.
+
+## Working Log: 2026-04-27 Round 7
+
+### Round Event
+
+`npc_conflict`
+
+This round models a rival analyst challenging the faction claim around the
+player's achievement. The conflict is public, but the model keeps it as a
+relationship and stance dispute unless someone adds an unverified factual claim.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_npc_conflict_001",
+  "event_type": "npc_conflict",
+  "turn": 25,
+  "visibility": "public_bbs",
+  "source_actor": "rival_lab_b_analyst",
+  "target_refs": [
+    "deck_theory_faction",
+    "player",
+    "evt_20260427_faction_claim_001"
+  ],
+  "evidence": {
+    "conflict_kind": "claim_legitimacy_challenge",
+    "grievance_strength": 0.56,
+    "conflict_visibility": 0.68,
+    "evidence_quality": 0.46,
+    "tone_pressure": 0.52,
+    "mediation_capacity": 0.39,
+    "repair_offer_strength": 0.18
+  },
+  "faction_refs": ["rival_lab_b", "deck_theory_faction", "lab_a"]
+}
+```
+
+### Model Increment
+
+This slice adds a conflict-before-rumor path:
+
+`npc_conflict -> relationship dispute -> stance polarization -> escalation hook`
+
+Newly named derived signals:
+
+- `grievance_strength`: how strongly the source actor objects to the target.
+- `conflict_visibility`: public reach of the dispute.
+- `tone_pressure`: likelihood that replies shift from analysis to personal
+  attack or faction pile-on.
+- `mediation_capacity`: ability of moderators or respected actors to keep the
+  dispute bounded.
+- `repair_offer_strength`: visible attempt to cool or clarify the conflict.
+- `escalation_risk`: chance that conflict becomes `rumor_seeded` or `scandal`.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "status": "relationship_conflict_active",
+    "updated_turn": 25,
+    "topic_heat": 0.86,
+    "reply_pressure": 0.62,
+    "public_sentiment": 0.43,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "claim_requires_evidence_above": 0.55,
+      "faction_label_attack_blocked": true
+    }
+  },
+  "participant_roles": {
+    "rival_lab_b_analyst": "conflict_source",
+    "deck_theory_faction": "conflict_target",
+    "player": "disputed_subject",
+    "lab_a": "possible_mediator",
+    "moderator": "tone_boundary_keeper"
+  },
+  "stance_distribution": {
+    "support": 0.24,
+    "skepticism": 0.19,
+    "theorycraft": 0.12,
+    "prestige_claim": 0.16,
+    "factional_rivalry": 0.22,
+    "moderator_neutral": 0.07
+  },
+  "conflict_state": {
+    "conflict_id": "conflict_claim_legitimacy_025_001",
+    "source_actor": "rival_lab_b_analyst",
+    "target_actor": "deck_theory_faction",
+    "grievance_strength": 0.56,
+    "conflict_visibility": 0.68,
+    "tone_pressure": 0.52,
+    "mediation_capacity": 0.39,
+    "repair_offer_strength": 0.18,
+    "escalation_risk": 0.47,
+    "rumor_boundary_crossed": false
+  },
+  "heat_delta": {
+    "topic_heat": 0.04,
+    "faction_heat": 0.10,
+    "conflict_heat": 0.33,
+    "rumor_heat": 0.00,
+    "reply_pressure": 0.08
+  },
+  "relationship_delta": {
+    "rival_lab_b_analyst->deck_theory_faction": -0.09,
+    "deck_theory_faction->rival_lab_b_analyst": -0.07,
+    "player->rival_lab_b_analyst": -0.02,
+    "lab_a->player": 0.01
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "relationship_repair",
+      "condition": "repair_offer_strength increases before escalation_risk exceeds 0.60"
+    },
+    {
+      "hook_type": "rumor_seeded",
+      "condition": "conflict source adds an unverified factual accusation"
+    },
+    {
+      "hook_type": "moderation_boundary",
+      "condition": "tone_pressure exceeds mediation_capacity"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `conflict_state` as separate from `rumor_state`.
+- Added `grievance_strength`, `conflict_visibility`, `tone_pressure`,
+  `mediation_capacity`, `repair_offer_strength`, and `escalation_risk`.
+- If no unverified factual claim is present, keep `rumor_boundary_crossed` false.
+- If `tone_pressure > mediation_capacity`, increase reply pressure and
+  relationship damage.
+- If `repair_offer_strength` rises before escalation, reduce conflict heat
+  without changing topic memory.
+
+### Risks
+
+- Public conflict can be mistaken for rumor just because it is heated.
+- Over-strong moderation can erase useful rivalry and make the BBS too flat.
+- Relationship damage should be directed, not applied as global dislike.
+
+### Next Round Entry
+
+Use `rumor_seeded` next. It can test the boundary where a conflict actor adds an
+unverified factual claim and crosses from rivalry into rumor spread.
