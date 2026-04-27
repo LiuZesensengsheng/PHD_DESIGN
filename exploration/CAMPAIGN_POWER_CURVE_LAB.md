@@ -219,6 +219,28 @@ Out of scope:
   - Add a compact player power reason-code taxonomy so vector changes can explain
     why a score moved without relying on scalar-only output.
 
+### 2026-04-27 Round 8
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What reason-code vocabulary should explain player power vector changes without
+    making the scalar scores authoritative?
+- Model increment:
+  - Added `player_power_reason_code` conventions and reusable reason-code families.
+  - Split positive, negative, and uncertainty reasons so reports can preserve why a
+    vector moved and what evidence is still missing.
+- Assumptions:
+  - Reason codes should be short, stable labels that can be grouped by axis and
+    evidence scope.
+  - A negative reason code should create a review prompt, not a deck failure verdict.
+- Risks:
+  - Too many free-form reason codes could make reports hard to compare across
+    checkpoints.
+  - Scalar scores may still look more precise than the supporting reasons justify.
+- Next round entry:
+  - Define `deck_maturity_state` labels so package assembly, payoff-only risk,
+    starter pollution, and off-axis drag can be described consistently.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -265,6 +287,65 @@ Every score should carry reason codes.
 | `mechanism_online_rate` | The core mechanism becomes active often enough to shape encounter planning. |
 | `combo_reachability` | Required pieces, states, draw, energy, and compression can align in time. |
 | `fail_state_resilience` | The deck can still function when the main plan misses, is disrupted, or arrives late. |
+
+### Player Power Reason Codes
+
+`player_power_reason_code` explains why a player strength vector moved. It should be
+visible next to each scalar estimate, because the score is only useful when the
+supporting evidence and uncertainty are named.
+
+Minimum reason-code fields:
+
+```json
+{
+  "code": "draw_bridge_present",
+  "axis": "draw_velocity",
+  "polarity": "supports",
+  "evidence_scope": "deck_state",
+  "phase_relevance": ["build", "pivot"],
+  "uncertainty": "route_context_unknown"
+}
+```
+
+Recommended fields:
+
+| Field | Meaning |
+| --- | --- |
+| `code` | Stable short label such as `upgrade_breakpoint_met` or `starter_pollution_high`. |
+| `axis` | One player strength vector field or `multi_axis`. |
+| `polarity` | `supports`, `pressures`, `conditions`, or `unknown`. |
+| `evidence_scope` | `deck_state`, `route_state`, `combat_state`, `encounter_observed`, or `assumption`. |
+| `phase_relevance` | Phase labels where the reason matters most. |
+| `uncertainty` | Named missing evidence, not an implied zero. |
+
+Reusable reason-code families:
+
+| Family | Example Codes | Typical Axes |
+| --- | --- | --- |
+| `frontload_access` | `efficient_attack_added`, `early_tempo_upgrade`, `frontload_still_starter_bound` | `frontload`, `fail_state_resilience` |
+| `defense_reliability` | `redundant_block_sources`, `block_draw_variance`, `defense_scaling_bridge` | `block_reliability`, `fail_state_resilience` |
+| `draw_and_selection` | `draw_bridge_present`, `selection_reduces_miss`, `draw_disruption_sensitive` | `draw_velocity`, `combo_reachability` |
+| `energy_window` | `upgrade_breakpoint_met`, `temporary_energy_burst`, `energy_tax_sensitive` | `energy_burst`, `combo_reachability` |
+| `compression_route` | `persistent_removal_seen`, `targeted_exhaust_bridge`, `discard_filtering_not_persistent` | `deck_compression`, `removal_progress`, `mechanism_online_rate` |
+| `mechanism_support` | `support_before_payoff`, `payoff_without_bridge`, `trigger_density_low` | `mechanism_online_rate`, `scaling` |
+| `combo_alignment` | `pieces_align_with_draw`, `state_prerequisite_missing`, `exactness_route_unknown` | `combo_reachability`, `mechanism_online_rate` |
+| `fail_state_backup` | `backup_frontload_plan`, `fallback_block_plan`, `main_plan_miss_brittle` | `fail_state_resilience`, `frontload`, `block_reliability` |
+| `route_uncertainty` | `shop_access_unknown`, `transform_quality_unknown`, `removal_opportunity_cost_high` | `removal_progress`, `deck_compression`, `mechanism_online_rate` |
+
+Reason-code rules:
+
+- Each non-zero score should have at least one supporting, conditioning, or pressure
+  reason code.
+- A score increase from route evidence should name whether the route is known,
+  assumed, or unknown.
+- Negative codes should use `pressures` or `conditions`; they should not emit
+  `fail`, `reject`, or `invalid`.
+- Scalar-only output is incomplete for this model. If reason codes are missing, the
+  checkpoint should report `reason_codes_missing`.
+- The same code may affect multiple axes, but the payload should name the affected
+  axes explicitly instead of hiding the relationship in prose.
+- Codes should stay stable enough for later cardanalysis mapping; one-off prose can
+  live in `notes`.
 
 ### Enemy Pressure Vector
 
