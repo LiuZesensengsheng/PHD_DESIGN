@@ -210,6 +210,146 @@ expected_report_questions:
 keeps charge timing as the main decision. It should be rejected if draw, energy, or raw
 payoff numbers become the real identity.
 
+## Parameter Brief Template: `charge_turns`
+
+This template is the first reusable brief format for a single parameter probe. It keeps
+the work at role and evidence level. It must not become card text, final numbers, a
+hard gate, or a learned promotion feature.
+
+Use this when the smallest current question is:
+
+- How many turns should a delayed setup ask for before the release feels earned but not
+  dead?
+
+### Brief Shape
+
+```yaml
+design_candidate_brief:
+  brief_id: charge_turns_delayed_release_probe_v1
+  evaluation_mode: report_only
+  mechanism_candidate:
+    axis_id: delayed_charge_release
+    axis_question: can charge timing stay meaningful after foundation support is added?
+  parameter_target:
+    name: charge_turns
+    probe_band: short_to_medium
+    companion_parameter: fail_state_floor
+    forbidden_claims:
+      - exact_balance_number
+      - final_card_text
+      - hard_gate_pass
+      - autonomous_promotion
+  foundation_dependencies:
+    required:
+      - defense_or_tempo_buffer
+      - visible_progress_state
+      - release_conversion
+    optional:
+      - draw_selection
+      - retain_or_timing_hold
+      - limited_energy_smoothing
+    identity_risks:
+      - swallowed_by_draw
+      - swallowed_by_energy
+      - generic_goodstuff
+  package_skeleton:
+    anchor: creates or tracks delayed charge progress
+    support: keeps the player alive or productive while charge builds
+    glue: lets the player adjust release timing without solving the whole line
+    payoff: converts charge into at least two distinct release modes
+    safety_valve: turns partial charge into useful output when full release misses
+  report_requests:
+    mechanism_axis_discovery_summary:
+      - foundation_dependency_vector
+      - axis_agency_preservation
+      - first_parameter_probe
+    mechanism_fun_health_summary:
+      - agency
+      - payoff_texture
+      - setup_tax
+      - fail_state_value
+      - variance_pressure
+      - matchup_elasticity
+    card_package_health_summary:
+      - package_density
+      - support_payoff_balance
+      - glue_quality
+      - anchor_clarity
+      - goodstuff_risk
+      - payoff_only_risk
+    deck_compression_summary:
+      - deck_compression_requirement
+      - starter_pollution_tolerance
+      - removal_access_dependency
+    design_iteration_summary:
+      - reject_revise_promote_recommendation
+      - primary_rejection_reason
+      - next_parameter_to_probe
+```
+
+### Evidence Mapping
+
+| Canonical surface | Evidence needed for `charge_turns` | Red flag |
+| --- | --- | --- |
+| `mechanism_axis_discovery_v1` | Shows that charge/release is the named axis and draw, energy, or defense are support axes. | Foundation support becomes the real axis. |
+| `mechanism_fun_health_v1` | Shows release timing has matchup-dependent choices and setup turns are not dead turns. | The player waits for a fixed countdown with no meaningful choices. |
+| `card_package_health_v1` | Shows anchor, support, glue, payoff, and safety valve roles are all visible. | Payoff appears before support/glue, or broad value hides weak package identity. |
+| `deck_compression_report_v1` | Shows whether seeing anchor plus payoff requires a compact deck or route-specific removal. | The brief assumes repeated contact without naming compression or starter pollution. |
+| `design_iteration_brief_v1` | States whether to reject, revise one parameter, or send the role brief to human review. | The brief sounds certain while report evidence is thin or conflicting. |
+| `cardanalysis_evidence_bundle_v1` | Keeps all report summaries inspectable and separated by owner. | Aggregation hides disagreement or turns report-only evidence into pass/fail authority. |
+
+### Probe Bands
+
+The lab should describe `charge_turns` with bands rather than exact balance numbers.
+
+| Band | Interpretation | Main review pressure |
+| --- | --- | --- |
+| `immediate` | The release can happen before delayed play is really established. | Risk of `generic_goodstuff` or low combo aspiration. |
+| `short` | The player can usually release after a small, readable setup window. | Check whether the setup has enough agency to avoid automatic play. |
+| `medium` | The charge asks for a visible commitment and should create a real release moment. | Check `setup_tax`, `fail_state_value`, and matchup elasticity. |
+| `long` | The charge becomes a high-commitment plan that must defend itself while building. | Risk of `setup_tax_too_high` and `fail_state_missing`. |
+| `exact_or_variable` | The release asks for exact timing or variable timing control. | Risk of `variance_pressure`, payoff-only exactness, or draw/retain swallowing the axis. |
+
+For the first report-only pass, prefer probing `short` versus `medium`. Do not search
+`long` until the safety valve is explicit. Do not search `exact_or_variable` until the
+brief can show why exactness improves agency instead of only increasing brittleness.
+
+### Companion Safety Valve: `fail_state_floor`
+
+`charge_turns` should never be reviewed alone. Every delayed setup brief must name a
+`fail_state_floor`:
+
+- `partial_progress`: partial charge still converts into a smaller useful result
+- `defensive_buffer`: charge setup also protects the player during the setup window
+- `selection_recovery`: missed release improves later timing or card access
+- `state_conversion`: unused charge changes mode instead of becoming blank
+- `none_visible`: no recoverable miss is present
+
+If the safety valve is `none_visible`, the default recommendation is `revise`, not
+`promote`, even when the dream payoff is exciting.
+
+### Decision Wording
+
+The template uses three advisory outcomes:
+
+| Outcome | Meaning |
+| --- | --- |
+| `reject` | Stop this candidate for a named `rejection_reason`; do not expand the package skeleton. |
+| `revise` | Keep the mechanism axis, but change one parameter or one missing role. |
+| `promote` | Send the role-level brief to human review or a future reviewed fixture task. |
+
+`promote` requires all of the following report-only signals:
+
+- charge timing remains the primary agency source
+- setup turns have useful output before full payoff
+- package skeleton includes visible support and glue before payoff
+- safety valve is not `none_visible`
+- compression and removal assumptions are named, even if unknown
+- goodstuff and payoff-only risks are explicitly addressed
+
+These are not hard gates. They are the minimum wording discipline for avoiding false
+confidence in an autonomous-design brief.
+
 ## Rejection Reasons
 
 These are advisory reasons for report-only review. They do not create hard gates.
@@ -271,3 +411,44 @@ Next round entry:
   report-only brief template that maps expected evidence from the canonical surfaces.
   Do not add code, fixtures, or generated cards unless a later task explicitly asks for
   that implementation slice.
+
+### 2026-04-27 Slice 2
+
+Evaluation/design problem:
+
+- Turn the vague `charge_turns` next step into a reusable report-only brief template
+  that still cannot generate formal cards or claim hard-gate authority.
+
+Model increment:
+
+- Added `Parameter Brief Template: charge_turns`.
+- Made `fail_state_floor` a required companion parameter for delayed setup probes.
+- Mapped the brief to the canonical evidence bundle sections for mechanism discovery,
+  fun/health, package health, deck compression, design iteration, and evidence bundle
+  ownership.
+
+Example mechanism/package:
+
+- Continued using `delayed_charge_release`.
+- Kept the package at role level: anchor, support, glue, payoff, safety valve.
+- Introduced `short` versus `medium` as the first useful probe band, avoiding exact
+  numeric balance claims.
+
+Judgment rules:
+
+- `charge_turns` should be described as a probe band, not a final number.
+- `fail_state_floor=none_visible` forces a `revise` recommendation by wording
+  discipline, not by hard gate.
+- `promote` requires visible support/glue before payoff and explicit compression
+  assumptions, but still only means human-review queue.
+
+Failure case:
+
+- If longer charge only makes the payoff larger while setup turns do not create agency,
+  partial value, or matchup adaptation, record `setup_tax_too_high` plus
+  `fail_state_missing` and revise the safety valve before touching payoff ambition.
+
+Next round entry:
+
+- Define a compact `evidence_bundle` handoff checklist for this template so future
+  runs can tell which canonical report is missing without merging report ownership.
