@@ -822,5 +822,15 @@ Current code entrypoints:
 - `tests/gossip_bbs_social_simulation/`
 - `tests/fixtures/gossip_bbs_social_simulation/first_slice_cases_v1.json`
 
+Current implemented event coverage:
+
+- first slice:
+  - `player_used_unusual_deck`
+  - `rumor_seeded`
+  - `rumor_debunked`
+  - `public_achievement`
+- post-first-slice extension:
+  - `combat_result`
+
 Do not implement UI, persistence migration, or campaign integration in the first
 code slice.

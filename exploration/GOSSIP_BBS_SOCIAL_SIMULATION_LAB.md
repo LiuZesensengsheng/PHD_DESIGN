@@ -2756,3 +2756,74 @@ rumor state through code rather than prose-only examples:
 Use `combat_result` or `boss_defeated` next if continuing implementation. These
 are natural next code slices because they test performance/milestone memory
 without requiring UI, prose generation, database work, or cardanalysis calls.
+
+## Working Log: 2026-04-27 Combat Result Code Slice
+
+### Round Event
+
+`combat_result`
+
+This pass promotes the already-explored `combat_result` path into the sidecar
+implementation.
+
+### Model Increment
+
+This slice adds one new implemented event to
+`contexts/gossip_bbs_social_simulation/transitions.py`:
+
+- `combat_result -> performance memory update -> scandal competition -> thread thaw`
+
+The code now emits:
+
+- `thread_state.status = limited_performance_reopen`
+- `performance_state`
+- `scandal_state.status = active_but_competed`
+- optional `package_state` when `package_signal_visible = true`
+- `memory_state` for the public performance memory
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "status": "limited_performance_reopen",
+    "moderation_boundary": {
+      "summary_only_scandal_refs": true,
+      "performance_discussion_allowed": true
+    }
+  },
+  "path_states": {
+    "performance_state": {
+      "combat_outcome": "standard_win"
+    },
+    "scandal_state": {
+      "status": "active_but_competed"
+    }
+  }
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added one implemented-event set beyond the original first slice:
+  `IMPLEMENTED_EVENT_TYPES = FIRST_SLICE_EVENT_TYPES + combat_result`.
+- `combat_result` prefers reopening an existing thread from state when possible;
+  otherwise it falls back to a new thread id.
+- Ordinary performance creates `performance` memory, not `prestige` memory.
+- Moderate `scandal_competition` lowers scandal heat without deleting scandal
+  boundary memory.
+
+### Risks
+
+- The current reopen heuristic is intentionally simple. Later integration may
+  need a stronger thread-selection policy than “reuse explicit thread ref or the
+  first known thread.”
+- Performance memory is now stored in `memory_state`, but no campaign/narrative
+  owner exists yet for long-term scheduling.
+- `combat_result` remains deterministic scaffolding, not tuned simulation math.
+
+### Next Round Entry
+
+Use `boss_defeated` next. It is the smallest next event because it extends the
+same performance/milestone lane while introducing parent-thread split behavior
+and long-memory anchors.
