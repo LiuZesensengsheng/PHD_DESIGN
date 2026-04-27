@@ -431,6 +431,7 @@ active:
 | Record | Owner path | Stable fields |
 | --- | --- | --- |
 | `package_state` | `new_card_package_seen`, package-linked success | `package_topic_id`, `package_signal`, `observation_confidence`, `package_identity_uncertainty`, `theorycraft_pressure`, `public_memory_status` |
+| `faction_state` | `faction_event` | `claiming_faction`, `claim_strength`, `claim_legitimacy`, `identity_capture_risk`, `rivalry_pressure`, `alignment_delta` |
 | `prestige_state` | `public_achievement` | `achievement_memory_id`, `actor_id`, `achievement_kind`, `prestige_memory_strength`, `decay_resistance`, `attribution_confidence`, `faction_claim_pressure` |
 | `conflict_state` | `npc_conflict` | `conflict_id`, `source_actor`, `target_actor`, `grievance_strength`, `conflict_visibility`, `tone_pressure`, `mediation_capacity`, `repair_offer_strength`, `escalation_risk` |
 | `leak_state` | `private_leak` | `leak_id`, `privacy_risk`, `leak_authenticity`, `redaction_level`, `source_exposure_risk`, `public_relevance`, `evidence_quarantine` |
@@ -824,14 +825,19 @@ Current code entrypoints:
 
 Current implemented event coverage:
 
-- first slice:
+- all currently supported upstream event types:
+  - `combat_result`
+  - `boss_defeated`
   - `player_used_unusual_deck`
+  - `new_card_package_seen`
+  - `npc_conflict`
+  - `faction_event`
+  - `scandal`
+  - `misunderstanding`
   - `rumor_seeded`
   - `rumor_debunked`
   - `public_achievement`
-- post-first-slice extension:
-  - `combat_result`
-  - `boss_defeated`
+  - `private_leak`
 
 Do not implement UI, persistence migration, or campaign integration in the first
 code slice.

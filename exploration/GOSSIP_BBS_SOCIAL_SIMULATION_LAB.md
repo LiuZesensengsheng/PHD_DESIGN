@@ -2912,3 +2912,109 @@ in-memory state instead of remaining report-only payloads.
 Use `new_card_package_seen` next. It is the smallest remaining event because it
 can reuse the now-implemented package-linked memory path without pulling in UI,
 campaign integration, database work, or `cardanalysis`.
+
+## Working Log: 2026-04-27 Remaining Six Event Code Slice
+
+### Round Event
+
+`remaining_six_events_code_slice`
+
+This pass lands the remaining six unsupported event paths in one continuous
+implementation sweep:
+
+- `misunderstanding`
+- `new_card_package_seen`
+- `faction_event`
+- `npc_conflict`
+- `private_leak`
+- `scandal`
+
+### Model Increment
+
+This slice completes the current upstream event surface for
+`gossip_bbs_social_simulation_model_v1`:
+
+- `misunderstanding -> corrected-rumor reactivation without reseeding`
+- `new_card_package_seen -> accusation cooling into labeled theorycraft`
+- `faction_event -> contested identity claim and alignment drift`
+- `npc_conflict -> relationship dispute without automatic rumor creation`
+- `private_leak -> leak quarantine before credibility transfer`
+- `scandal -> lockdown-capable boundary heat without rumor-truth collapse`
+
+The code now emits:
+
+- `package_state`, `faction_state`, `conflict_state`, `leak_state`, and
+  `scandal_state` as structured path records;
+- `state_patches` entries that can populate `packages`, `factions`,
+  `conflicts`, `leaks`, and `scandals` in `GossipSimulationState`;
+- full fixture coverage for all supported upstream event types under
+  `tests/fixtures/gossip_bbs_social_simulation/first_slice_cases_v1.json`.
+
+### Example `thread_state`
+
+```json
+{
+  "new_card_package_seen": {
+    "thread_state": {
+      "status": "converted_to_theorycraft"
+    }
+  },
+  "misunderstanding": {
+    "thread_state": {
+      "status": "briefly_reactivated_by_misunderstanding"
+    }
+  },
+  "faction_event": {
+    "thread_state": {
+      "status": "faction_claim_contested"
+    }
+  },
+  "npc_conflict": {
+    "thread_state": {
+      "status": "relationship_conflict_active"
+    }
+  },
+  "private_leak": {
+    "thread_state": {
+      "status": "leak_quarantined"
+    }
+  },
+  "scandal": {
+    "thread_state": {
+      "status": "scandal_lockdown"
+    }
+  }
+}
+```
+
+### New State Variables / Transition Rules
+
+- `IMPLEMENTED_EVENT_TYPES` now covers the full current `SUPPORTED_EVENT_TYPES`
+  set.
+- `new_card_package_seen` writes package memory and converts old accusation heat
+  into labeled theorycraft pressure.
+- `misunderstanding` keeps the original corrected rumor record and attaches a
+  mistaken-repeat episode instead of opening a fresh rumor.
+- `faction_event` can drift faction alignment and claim pressure while keeping
+  unknown player consent explicit.
+- `npc_conflict` writes `conflict_state` and keeps `rumor_boundary_crossed =
+  false` until an explicit accusation arrives.
+- `private_leak` can raise privacy heat while blocking credibility transfer.
+- `scandal` can attach high boundary heat and lockdown moderation without
+  implying rumor truth.
+
+### Risks
+
+- The package canonicalization heuristic is still lightweight and may need a
+  stronger shared naming contract later.
+- Several exploration-only moderation hints remain deliberately unmodeled as
+  typed fields; the implementation keeps the smaller stable contract surface for
+  now.
+- All six new transitions are still deterministic scaffolding, not tuned social
+  simulation.
+
+### Next Round Entry
+
+Stop opening new event families. The next useful pass is a V1 closeout sweep:
+cross-event invariants, naming normalization, and thread/topic selection
+consistency without adding UI, campaign integration, persistence, or LLM prose.
