@@ -344,6 +344,31 @@ Out of scope:
   - Add report-only payload variants for starter, build, pivot, and mature contexts
     so consumers can see how the same contract adapts by phase.
 
+### 2026-04-27 Round 13
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What phase-specific report-only payload variants help consumers understand how the
+    same campaign power curve contract should be used at starter, build, pivot, and
+    mature checkpoints?
+- Model increment:
+  - Added compact payload variants for starter baseline, build assembly, pivot
+    route-dependent online, and mature ceiling/recovery contexts.
+  - Kept each variant qualitative, advisory, and explicit about `must_not_expose`.
+- Assumptions:
+  - Phase variants should reduce ambiguity for consumers without creating separate
+    contracts.
+  - Mature variants can mention anti-infinite pressure only as report-only trace or
+    review context.
+- Risks:
+  - Examples may be copied as templates and treated as required fields unless future
+    implementation keeps the contract version and optionality clear.
+  - Pivot route-dependent examples may overfit to compression-heavy decks if future
+    examples do not include non-combo plans.
+- Next round entry:
+  - Add a future cardanalysis field mapping that names which report-only surfaces can
+    supply curve context and which fields must remain advisory.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -977,6 +1002,148 @@ Band use rules:
       "first_cycle_survival_check",
       "fallback_plan_visibility"
     ]
+  }
+}
+```
+
+### Report-Only Payload Variants
+
+These variants show how the same contract can be narrowed by phase. They are examples,
+not schemas or implementation requirements.
+
+#### `starter_payload_variant`
+
+```json
+{
+  "campaign_power_curve_model": {
+    "contract_version": "campaign_power_curve_model_v1",
+    "evaluation_mode": "report_only",
+    "campaign_round": {"phase": "starter", "round_index": 1},
+    "curve_checkpoint": {
+      "checkpoint_id": "starter_round_1_baseline_survival_v0",
+      "evidence_state": {"label": "hypothesis_draft"},
+      "review_only_verdict": "baseline_observation_needed",
+      "must_not_expose": ["overall_pass", "hard_gates", "monster_numbers"]
+    },
+    "player_power_state_focus": [
+      "frontload",
+      "block_reliability",
+      "fail_state_resilience"
+    ],
+    "deck_maturity_state": {
+      "maturity_label": "starter_heavy",
+      "starter_pollution": "expected"
+    },
+    "mechanism_online_state": {"online_label": "absent"},
+    "enemy_pressure_profile": {
+      "frontload_damage": "medium",
+      "defense_check": "medium",
+      "status_pollution": "avoid",
+      "mechanism_disruption": "avoid"
+    },
+    "encounter_validation_needs": [
+      "baseline_survival_visibility",
+      "no_mechanism_required"
+    ]
+  }
+}
+```
+
+#### `build_payload_variant`
+
+```json
+{
+  "campaign_power_curve_model": {
+    "contract_version": "campaign_power_curve_model_v1",
+    "evaluation_mode": "report_only",
+    "campaign_round": {"phase": "build", "round_index": 5},
+    "curve_checkpoint": {
+      "checkpoint_id": "build_round_5_identity_assembly_v0",
+      "evidence_state": {"label": "hypothesis_draft"},
+      "review_only_verdict": "assembly_shape_needs_validation",
+      "must_not_expose": ["overall_pass", "hard_gates", "monster_numbers"]
+    },
+    "player_power_state_focus": [
+      "frontload",
+      "draw_velocity",
+      "mechanism_online_rate",
+      "fail_state_resilience"
+    ],
+    "deck_maturity_state": {
+      "maturity_label": "assembling_identity",
+      "payoff_risk": "payoff_only_if_bridge_missing"
+    },
+    "mechanism_online_state": {"online_label": "assembling"},
+    "economy_state": {"route_risk": "unknown"},
+    "compression_state": {"compression_context": "unknown"},
+    "encounter_archetype_id": "build_payoff_only_detector"
+  }
+}
+```
+
+#### `pivot_payload_variant`
+
+```json
+{
+  "campaign_power_curve_model": {
+    "contract_version": "campaign_power_curve_model_v1",
+    "evaluation_mode": "report_only",
+    "campaign_round": {"phase": "pivot", "round_index": 8},
+    "curve_checkpoint": {
+      "checkpoint_id": "pivot_round_8_conditional_online_v0",
+      "evidence_state": {"label": "hypothesis_draft"},
+      "review_only_verdict": "route_dependent_online_needs_probe",
+      "must_not_expose": ["overall_pass", "hard_gates", "monster_numbers"]
+    },
+    "mechanism_online_state": {
+      "online_label": "conditional_online",
+      "missing_prerequisites": ["removal_route", "first_cycle_survival"]
+    },
+    "economy_state": {"route_risk": "high", "removal_access": "unknown"},
+    "compression_state": {
+      "deck_size_sensitivity": "high",
+      "invalid_equivalences": ["discard_filtering_is_not_persistent_removal"]
+    },
+    "enemy_pressure_profile": {
+      "draw_disruption": "medium",
+      "mechanism_disruption": "medium",
+      "energy_tax": "low",
+      "anti_infinite_pressure": "trace"
+    },
+    "encounter_archetype_id": "pivot_compression_route_probe"
+  }
+}
+```
+
+#### `mature_payload_variant`
+
+```json
+{
+  "campaign_power_curve_model": {
+    "contract_version": "campaign_power_curve_model_v1",
+    "evaluation_mode": "report_only",
+    "campaign_round": {"phase": "mature", "round_index": 12},
+    "curve_checkpoint": {
+      "checkpoint_id": "mature_round_12_ceiling_and_recovery_v0",
+      "evidence_state": {"label": "hypothesis_draft"},
+      "review_only_verdict": "ceiling_and_recovery_need_observation",
+      "must_not_expose": ["overall_pass", "hard_gates", "monster_numbers"]
+    },
+    "deck_maturity_state": {"maturity_label": "mature_core"},
+    "mechanism_online_state": {"online_label": "online_or_strong_conditional"},
+    "player_power_state_focus": [
+      "scaling",
+      "block_reliability",
+      "combo_reachability",
+      "fail_state_resilience"
+    ],
+    "enemy_pressure_profile": {
+      "scaling_race": "medium",
+      "burst_check": "medium",
+      "defense_check": "medium",
+      "anti_infinite_pressure": "trace"
+    },
+    "encounter_archetype_id": "mature_scaling_burst_and_fail_state_check"
   }
 }
 ```
