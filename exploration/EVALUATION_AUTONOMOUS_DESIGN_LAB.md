@@ -473,6 +473,71 @@ These are advisory reasons for report-only review. They do not create hard gates
 | `setup_tax_too_high` | The setup asks for too many turns, slots, energy, upgrades, or exact pieces before function. | Can setup pieces do useful work before payoff? |
 | `fail_state_missing` | Missing the release leaves dead cards, wasted turns, or generic survival only. | What partial progress, fallback output, or recoverable miss should exist? |
 
+## Revision Action Map For `charge_turns`
+
+This table turns a `rejection_reason` into one next revision action for the
+`charge_turns` brief. It is deliberately narrow:
+
+- one reason maps to one first action
+- action wording stays at parameter or role-skeleton level
+- actions do not create scores, thresholds, gates, generated cards, or automatic
+  promotion
+
+| `rejection_reason` | First `revision_action` | What to change first | What not to do |
+| --- | --- | --- | --- |
+| `swallowed_by_draw` | `restore_timing_choice` | Add a timing, hold, or release fork that draw alone cannot solve. | Do not add more draw as the fix. |
+| `swallowed_by_energy` | `remove_energy_as_identity` | Make release depend on visible charge state, matchup timing, or conversion choice. | Do not make the payoff merely more expensive or more refunded. |
+| `swallowed_by_discard` | `separate_filter_from_charge` | State whether discard is a trigger, cost, or smoothing support. | Do not treat generic hand cleanup as proof of the charge axis. |
+| `removal_dependency_too_high` | `widen_non_removal_reachability` | Reduce exactness, add in-combat compression, or increase role redundancy. | Do not assume shop/event removal as free reachability. |
+| `payoff_only` | `build_support_before_payoff` | Add support or glue before increasing payoff ambition. | Do not write a bigger release fantasy first. |
+| `generic_goodstuff` | `sharpen_axis_proof` | Name the job that only delayed charge/release can do. | Do not count strong defense, damage, draw, or energy as package proof by itself. |
+| `low_agency_loop` | `add_release_fork` | Add a matchup, timing, target, or safety tradeoff after charge is online. | Do not rely on repeated automatic charge-release cycles. |
+| `matchup_too_narrow` | `add_safety_valve_mode` | Add one alternate line for fast, multi-enemy, action-punisher, or scaling pressure. | Do not average the weakness away with generic value. |
+| `setup_tax_too_high` | `shorten_or_pay_back_setup` | Move from `medium` toward `short`, or make setup turns produce useful output. | Do not compensate only by making the final payoff larger. |
+| `fail_state_missing` | `raise_fail_state_floor` | Choose `partial_progress`, `defensive_buffer`, `selection_recovery`, or `state_conversion`. | Do not keep `fail_state_floor=none_visible` while using `promote` wording. |
+
+### Action Sequencing
+
+When multiple rejection reasons appear, revise in this order:
+
+1. Fix identity swallowing first:
+   `swallowed_by_draw`, `swallowed_by_energy`, `swallowed_by_discard`,
+   `generic_goodstuff`.
+2. Fix skeleton order second:
+   `payoff_only`, `setup_tax_too_high`, `fail_state_missing`.
+3. Fix reachability third:
+   `removal_dependency_too_high`.
+4. Fix matchup and loop texture fourth:
+   `low_agency_loop`, `matchup_too_narrow`.
+
+The sequencing is advisory. Its purpose is to prevent the brief from polishing a payoff
+while the axis identity, setup burden, or fail state is still unresolved.
+
+### Revision Output Shape
+
+Use a compact report-only note:
+
+```yaml
+revision_note:
+  evaluation_mode: report_only
+  source_template: charge_turns_delayed_release_probe_v1
+  rejection_reason: setup_tax_too_high
+  revision_action: shorten_or_pay_back_setup
+  parameter_to_adjust: charge_turns
+  role_to_adjust: support
+  forbidden_changes:
+    - final_card_text
+    - exact_balance_number
+    - hard_gate_threshold
+    - learned_or_reranker_promotion
+  next_review_request:
+    - mechanism_fun_health_summary
+    - card_package_health_summary
+```
+
+If the next revision cannot name exactly one parameter or one package role to adjust,
+the brief is still too broad and should return to `review_only_candidate`.
+
 ## Working Log
 
 ### 2026-04-27 Slice 1
@@ -599,3 +664,42 @@ Next round entry:
 
 - Add one compact `rejection_reason` to `revision_action` mapping for the
   `charge_turns` template, still as docs-only guidance and not as evaluator logic.
+
+### 2026-04-27 Slice 4
+
+Evaluation/design problem:
+
+- Convert `charge_turns` rejection reasons into first revision actions without turning
+  the lab into a scoring or generation system.
+
+Model increment:
+
+- Added `Revision Action Map For charge_turns`.
+- Added advisory action sequencing so identity swallowing is addressed before payoff
+  polishing, reachability claims, or matchup texture.
+- Added a compact `revision_note` shape that keeps the next step at parameter or role
+  level.
+
+Example mechanism/package:
+
+- Continued using `delayed_charge_release`.
+- The example revision note uses `setup_tax_too_high -> shorten_or_pay_back_setup`
+  and adjusts `charge_turns` plus the `support` role.
+
+Judgment rules:
+
+- A revision action must name one first action, one parameter or role to adjust, and
+  the owning report summaries to re-check.
+- If a revision cannot name one parameter or one package role, it is still too broad
+  and should return to `review_only_candidate`.
+- Identity-swallowing failures should be fixed before larger payoff work.
+
+Failure case:
+
+- If the brief responds to `setup_tax_too_high` by only increasing payoff size, keep
+  the rejection reason and require either shorter setup or useful setup output.
+
+Next round entry:
+
+- Add one minimal package-skeleton readiness checklist for `charge_turns`, focused on
+  anchor/support/glue/payoff/safety-valve completeness and still docs-only.
