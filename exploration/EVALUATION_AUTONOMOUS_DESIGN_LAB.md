@@ -350,6 +350,112 @@ The template uses three advisory outcomes:
 These are not hard gates. They are the minimum wording discipline for avoiding false
 confidence in an autonomous-design brief.
 
+## Evidence Bundle Handoff Checklist
+
+This checklist is the third slice for the `charge_turns` template. It describes what a
+complete report-only handoff should contain without changing
+`cardanalysis_evidence_bundle_v1` or adding a new surface.
+
+The existing bundle already allows missing sections. This checklist only explains how
+the lab should interpret those missing sections in a design brief.
+
+### Bundle Envelope
+
+```yaml
+cardanalysis_evidence_bundle_handoff:
+  contract_version: cardanalysis_evidence_bundle_v1
+  evaluation_mode: report_only
+  bundle_id: charge_turns_delayed_release_probe_v1
+  designer_intent:
+    mechanism_target: delayed_charge_release
+    parameter_target: charge_turns
+    companion_parameter: fail_state_floor
+    package_skeleton_level: role_only
+    forbidden_claims:
+      - formal_card
+      - exact_balance_number
+      - hard_gate
+      - default_recommendation_change
+      - learned_or_reranker_promotion
+  expected_sections:
+    mechanism_axis_discovery_summary: required_for_axis_choice
+    mechanism_axis_summary: optional_viability_read_if_available
+    mechanism_fun_health_summary: required_before_promote_wording
+    card_package_health_summary: required_before_promote_wording
+    deck_compression_summary: required_before_reachability_wording
+    design_iteration_summary: required_for_reject_revise_promote_wording
+  allowed_missing_sections: true
+  review_required: true
+```
+
+`mechanism_axis_summary` is included because the current evidence bundle supports it.
+It is not a new lab-owned surface. Treat it as an optional existing viability read that
+can reveal "final shell online" versus "not online" context before the brief asks fun,
+package, or reachability questions.
+
+### Section Checklist
+
+| Bundle section | Handoff question | If missing |
+| --- | --- | --- |
+| `designer_intent` | Does the bundle state `delayed_charge_release`, `charge_turns`, `fail_state_floor`, and role-only scope? | Mark the handoff incomplete; do not infer intent from report text. |
+| `mechanism_axis_discovery_summary` | Was this axis chosen because charge timing preserves agency after foundation support? | Use `needs_parameter_probe`; do not claim the axis was selected. |
+| `mechanism_axis_summary` | Is there an existing viability read for whether the final shell can come online? | Keep online/offline wording unknown; do not block docs-only brief work. |
+| `mechanism_fun_health_summary` | Are agency, payoff texture, setup tax, fail-state value, variance, and matchup elasticity visible? | Use `not_evaluated` for fun/health and avoid `promote` wording. |
+| `card_package_health_summary` | Are anchor, support, glue, payoff, safety valve, density, and anti-goodstuff risks visible? | Use `revise` if payoff/support sequencing is being claimed. |
+| `deck_compression_summary` | Are compression, starter pollution, and removal assumptions named before reachability claims? | Use `reachability_unknown`; do not claim the package is generally reachable. |
+| `design_iteration_summary` | Is there a report-only recommendation and primary reason? | The lab may summarize risks, but should not write `reject`, `revise`, or `promote`. |
+| `evidence_conflicts` | Does the bundle surface conflicts such as positive fun/health with route-dependent compression? | If absent because sections are missing, state `conflicts_not_evaluated`. |
+
+### Completeness Labels
+
+The lab can use these labels in prose. They are not new payload fields and not gates.
+
+| Label | Meaning |
+| --- | --- |
+| `handoff_complete` | All expected sections are present and no required role-level intent is missing. |
+| `handoff_partial` | Enough sections are present to discuss the next revision, but not enough for `promote` wording. |
+| `axis_choice_missing` | `mechanism_axis_discovery_summary` is missing, so axis selection remains unreviewed. |
+| `fun_health_missing` | Fun/health cannot be claimed; use `not_evaluated`. |
+| `package_health_missing` | Package coherence cannot be claimed; avoid package-ready language. |
+| `reachability_missing` | Compression/removal assumptions are absent; avoid reachable-from-run language. |
+| `iteration_recommendation_missing` | The lab can list risks but should not choose reject/revise/promote wording. |
+| `conflicts_not_evaluated` | Missing sections prevent bundle conflict checks from being meaningful. |
+
+### Conflict Review
+
+For `charge_turns`, reviewers should inspect conflicts before reading the final
+recommendation:
+
+- If fun/health is positive but compression is route-dependent, keep the play-pattern
+  praise but downgrade reachability language.
+- If a mechanism-axis summary says the final shell is online but compression is
+  route-dependent, state that online final-shell evidence does not prove normal-run
+  assembly.
+- If package health is positive but fun/health is missing, the package can be coherent
+  while play texture remains unevaluated.
+- If fun/health is positive but package health is missing, the mechanism may be fun in
+  theory while the package skeleton is not yet review-ready.
+
+These conflicts should produce review notes, not automatic rejection.
+
+### Handoff Decision Discipline
+
+Use the most conservative wording supported by present sections:
+
+| Present evidence | Allowed wording |
+| --- | --- |
+| designer intent only | `review_only_candidate` |
+| discovery only | `needs_parameter_probe` |
+| discovery plus package health | `revise_package_skeleton` |
+| discovery plus fun/health | `revise_play_pattern_or_parameter` |
+| discovery plus compression | `reachability_known_or_unknown`, depending on compression report |
+| all expected sections except design iteration | risk summary only, no reject/revise/promote |
+| all expected sections present | `reject`, `revise`, or `promote_to_human_review_queue` |
+
+Do not collapse this table into pass/fail. The purpose is to keep missing evidence
+visible so the next agent can run or request the owning report rather than inventing an
+answer.
+
 ## Rejection Reasons
 
 These are advisory reasons for report-only review. They do not create hard gates.
@@ -452,3 +558,44 @@ Next round entry:
 
 - Define a compact `evidence_bundle` handoff checklist for this template so future
   runs can tell which canonical report is missing without merging report ownership.
+
+### 2026-04-27 Slice 3
+
+Evaluation/design problem:
+
+- Make the `charge_turns` brief resumable by listing exactly which evidence bundle
+  sections are expected and what wording is allowed when each section is missing.
+
+Model increment:
+
+- Added `Evidence Bundle Handoff Checklist`.
+- Included `mechanism_axis_summary` as an optional existing viability read supported by
+  the bundle, while keeping canonical report-only ownership unchanged.
+- Added prose-only completeness labels such as `handoff_partial`,
+  `reachability_missing`, and `iteration_recommendation_missing`.
+
+Example mechanism/package:
+
+- Continued using `delayed_charge_release` with `charge_turns` plus
+  `fail_state_floor`.
+- Kept the bundle handoff at role/summary level; no generated card text, exact balance
+  numbers, or fixture schema changes were introduced.
+
+Judgment rules:
+
+- Missing fun/health means play texture is `not_evaluated`, not bad.
+- Missing deck compression means reachability is unknown, not free.
+- Missing design iteration means the lab may list risks but should not write
+  `reject`, `revise`, or `promote`.
+- Evidence conflicts should produce review notes, not automatic rejection.
+
+Failure case:
+
+- If a future brief claims `promote` while `deck_compression_summary` or
+  `design_iteration_summary` is missing, treat that as false confidence and downgrade
+  the wording to a partial handoff.
+
+Next round entry:
+
+- Add one compact `rejection_reason` to `revision_action` mapping for the
+  `charge_turns` template, still as docs-only guidance and not as evaluator logic.
