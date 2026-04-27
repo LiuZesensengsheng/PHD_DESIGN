@@ -2282,3 +2282,146 @@ Newly named derived signals:
 
 Use a `decay` transition next. It can test how corrected rumors, scandal memory,
 and milestone memory cool at different rates without deleting history.
+
+## Working Log: 2026-04-27 Round 14
+
+### Round Transition
+
+`decay`
+
+This round is a state transition rather than a new upstream event. It applies
+time passage to corrected rumors, scandal memory, performance memory, and the
+new milestone thread.
+
+Minimal input:
+
+```json
+{
+  "transition_id": "tick_20260427_decay_001",
+  "transition_type": "decay",
+  "turn_start": 35,
+  "turn_end": 39,
+  "target_refs": [
+    "bbs_thread_unusual_deck_018_001",
+    "bbs_thread_boss_defeated_033_001",
+    "rumor_faction_claim_staged_001",
+    "scandal_privacy_boundary_028_001",
+    "memory_player_boss_defeat_033_001"
+  ],
+  "inputs": {
+    "quiet_turns": 4,
+    "new_evidence_count": 0,
+    "active_reply_count": 3,
+    "correction_pin_active": true,
+    "milestone_anchor_active": true
+  }
+}
+```
+
+### Model Increment
+
+This slice adds a multi-memory cooling path:
+
+`time -> heat decay -> accessibility shift -> archive decision`
+
+Newly named derived signals:
+
+- `heat_decay_curve`: per-state decay behavior, not one global decay rate.
+- `memory_accessibility`: ease of recalling a memory without a new trigger.
+- `archive_threshold`: point where a thread stops active reply generation.
+- `resurfacing_cost`: heat required for an archived memory to become active.
+- `corrected_claim_retention`: persistence of corrected rumor status after heat
+  fades.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "status": "archived_with_correction_pin",
+    "updated_turn": 39,
+    "topic_heat": 0.31,
+    "reply_pressure": 0.12,
+    "thread_lifetime": 0,
+    "archive_threshold": 0.35,
+    "resurfacing_cost": 0.42,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "correction_pin_active": true,
+      "summary_only_scandal_refs": true
+    }
+  },
+  "active_thread_state": {
+    "thread_id": "bbs_thread_boss_defeated_033_001",
+    "status": "slow_decay_active",
+    "updated_turn": 39,
+    "topic_heat": 0.59,
+    "reply_pressure": 0.24,
+    "thread_lifetime": 3
+  },
+  "memory_state": {
+    "rumor_faction_claim_staged_001": {
+      "memory_accessibility": 0.28,
+      "corrected_claim_retention": 0.83,
+      "rumor_credibility": 0.08
+    },
+    "scandal_privacy_boundary_028_001": {
+      "memory_accessibility": 0.36,
+      "privacy_boundary_retention": 0.79
+    },
+    "memory_player_boss_defeat_033_001": {
+      "memory_accessibility": 0.62,
+      "long_memory_anchor": 0.74
+    }
+  },
+  "heat_delta": {
+    "old_thread_heat": -0.57,
+    "milestone_thread_heat": -0.34,
+    "rumor_heat": -0.33,
+    "scandal_heat": -0.22,
+    "reply_pressure": -0.46
+  },
+  "relationship_delta": {
+    "thread_participants->moderator": 0.01,
+    "public->player": 0.02
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "player_used_unusual_deck",
+      "condition": "same package signal appears and pays resurfacing_cost"
+    },
+    {
+      "hook_type": "misunderstanding",
+      "condition": "actor recalls archived rumor without corrected_claim_retention"
+    },
+    {
+      "hook_type": "reply_pressure",
+      "condition": "lurkers remain interested but below active reply threshold"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `heat_decay_curve`, `memory_accessibility`, `archive_threshold`,
+  `resurfacing_cost`, and `corrected_claim_retention`.
+- Corrected rumor status decays slower than rumor heat.
+- Scandal heat decays, but privacy boundary retention stays high.
+- Milestone memory decays slowest while `long_memory_anchor` remains active.
+- If active thread heat falls below `archive_threshold`, stop active reply
+  generation but keep memory hooks.
+
+### Risks
+
+- Decay must not delete corrected rumor records or privacy boundaries.
+- A single global decay rate would flatten important differences between rumor,
+  scandal, and achievement memory.
+- Archived threads need explicit resurfacing cost to avoid constant reactivation.
+
+### Next Round Entry
+
+Use a reply-pressure / silent-lurker threshold next. It can test why actors may
+keep memory and interest without posting, preserving hooks for future events.
