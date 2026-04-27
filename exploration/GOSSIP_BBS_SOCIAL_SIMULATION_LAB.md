@@ -2827,3 +2827,88 @@ The code now emits:
 Use `boss_defeated` next. It is the smallest next event because it extends the
 same performance/milestone lane while introducing parent-thread split behavior
 and long-memory anchors.
+
+## Working Log: 2026-04-27 Boss Defeated Code Slice
+
+### Round Event
+
+`boss_defeated`
+
+This pass promotes the already-explored `boss_defeated` milestone path into the
+sidecar implementation.
+
+### Model Increment
+
+This slice adds one new implemented event to
+`contexts/gossip_bbs_social_simulation/transitions.py`:
+
+- `boss_defeated -> milestone thread split -> long-memory anchor -> package-linked milestone memory`
+
+The code now emits:
+
+- `thread_state.status = new_milestone_thread`
+- `parent_thread_id` when the event splits away from the older thread
+- `milestone_state`
+- optional `package_state`
+- `memory_state` for the public milestone memory
+- `additional_thread_states` for the cooled parent thread
+
+It also extends `GossipSimulationState.apply_result(...)` to consume
+contract-owned `state_patches`, so `packages` and `milestones` can land in the
+in-memory state instead of remaining report-only payloads.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_boss_defeated_033_001",
+    "parent_thread_id": "bbs_thread_unusual_deck_018_001",
+    "status": "new_milestone_thread",
+    "moderation_boundary": {
+      "scandal_summary_link_only": true,
+      "achievement_thread_split": true
+    }
+  },
+  "additional_thread_states": {
+    "bbs_thread_unusual_deck_018_001": {
+      "status": "limited_performance_reopen"
+    }
+  },
+  "path_states": {
+    "milestone_state": {
+      "milestone_status": "boss_defeat_milestone"
+    },
+    "package_state": {
+      "public_memory_status": "milestone_linked_package_memory"
+    }
+  }
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `boss_defeated` to `IMPLEMENTED_EVENT_TYPES`.
+- If `boss_salience >= 0.80` and `thread_split_pressure >= 0.60`, open a new
+  milestone thread and preserve the old thread through `parent_thread_id`.
+- The old thread can cool through `additional_thread_states`, but it is not
+  deleted or rewritten away.
+- `milestone_state` now writes a long-memory anchor plus a low
+  `memory_decay_rate`.
+- `package_state` and `milestone_state` now flow into contract-owned
+  `state_patches` so they can populate `state.packages` and `state.milestones`.
+
+### Risks
+
+- The package-to-topic slug heuristic is intentionally simple and may need a
+  stronger shared naming contract later.
+- Low-salience `boss_defeated` cases still use coarse fallback behavior; only
+  the high-salience split path is fixture-covered.
+- Transition math is still deterministic scaffolding, not tuned social
+  simulation.
+
+### Next Round Entry
+
+Use `new_card_package_seen` next. It is the smallest remaining event because it
+can reuse the now-implemented package-linked memory path without pulling in UI,
+campaign integration, database work, or `cardanalysis`.

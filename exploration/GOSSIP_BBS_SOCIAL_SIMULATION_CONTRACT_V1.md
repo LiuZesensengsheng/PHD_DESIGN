@@ -831,6 +831,7 @@ Current implemented event coverage:
   - `public_achievement`
 - post-first-slice extension:
   - `combat_result`
+  - `boss_defeated`
 
 Do not implement UI, persistence migration, or campaign integration in the first
 code slice.
