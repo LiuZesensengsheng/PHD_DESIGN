@@ -1672,3 +1672,160 @@ Newly named derived signals:
 
 Use `scandal` next. It can test the escalation case where privacy risk, public
 relevance, and faction conflict combine into a high-heat boundary event.
+
+## Working Log: 2026-04-27 Round 10
+
+### Round Event
+
+`scandal`
+
+This round models escalation after a private leak attempt becomes a public
+boundary incident. The scandal is not "the rumor is true"; it is a high-heat
+public trust and moderation event.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_scandal_001",
+  "event_type": "scandal",
+  "turn": 28,
+  "visibility": "public_bbs",
+  "source_actor": "moderation_feed",
+  "target_refs": [
+    "leak_private_chat_excerpt_027_001",
+    "rumor_faction_claim_staged_001",
+    "deck_theory_faction",
+    "rival_lab_b"
+  ],
+  "evidence": {
+    "scandal_kind": "privacy_boundary_breach",
+    "scandal_severity": 0.72,
+    "boundary_breach_score": 0.81,
+    "institution_attention": 0.54,
+    "containment_failure": 0.46,
+    "trust_collapse": 0.38,
+    "rumor_truth_status": "unresolved"
+  },
+  "faction_refs": ["rival_lab_b", "deck_theory_faction", "lab_a"]
+}
+```
+
+### Model Increment
+
+This slice adds a scandal-boundary path:
+
+`scandal -> high heat boundary event -> trust damage -> intervention hooks`
+
+Newly named derived signals:
+
+- `scandal_severity`: public salience and social damage of the scandal.
+- `boundary_breach_score`: how clearly the event violated moderation limits.
+- `institution_attention`: chance that non-BBS actors notice or react.
+- `containment_failure`: degree to which moderation failed to prevent spread.
+- `trust_collapse`: public loss of trust in actors/factions involved.
+- `rumor_truth_status`: explicit reminder that scandal can be true, false, or
+  unresolved independent of rumor heat.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "status": "scandal_lockdown",
+    "updated_turn": 28,
+    "topic_heat": 1.00,
+    "reply_pressure": 0.30,
+    "public_sentiment": 0.10,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "new_replies_limited": true,
+      "summary_only_mode": true,
+      "institution_attention_flag": true
+    }
+  },
+  "participant_roles": {
+    "moderation_feed": "scandal_status_source",
+    "anonymous_alt_account": "boundary_breach_actor",
+    "rival_lab_b": "faction_under_scrutiny",
+    "deck_theory_faction": "target_under_pressure",
+    "player": "protected_indirect_subject"
+  },
+  "stance_distribution": {
+    "support": 0.10,
+    "skepticism": 0.18,
+    "rumor_amplification": 0.08,
+    "privacy_concern": 0.34,
+    "factional_rivalry": 0.13,
+    "moderator_neutral": 0.17
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_faction_claim_staged_001",
+    "rumor_credibility": 0.29,
+    "heat": 0.49,
+    "debunk_status": "unresolved",
+    "rumor_truth_status": "unresolved",
+    "scandal_attached": true
+  },
+  "scandal_state": {
+    "scandal_id": "scandal_privacy_boundary_028_001",
+    "scandal_severity": 0.72,
+    "boundary_breach_score": 0.81,
+    "institution_attention": 0.54,
+    "containment_failure": 0.46,
+    "trust_collapse": 0.38,
+    "status": "active_lockdown"
+  },
+  "heat_delta": {
+    "topic_heat": 0.05,
+    "rumor_heat": -0.04,
+    "scandal_heat": 0.44,
+    "reply_pressure": -0.27
+  },
+  "relationship_delta": {
+    "public->anonymous_alt_account": -0.14,
+    "public->rival_lab_b": -0.06,
+    "deck_theory_faction->moderator": 0.03,
+    "player->thread_participants": -0.02
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "rumor_debunked",
+      "condition": "review resolves the staged-claim rumor"
+    },
+    {
+      "hook_type": "combat_result",
+      "condition": "a later public combat result competes with scandal memory"
+    },
+    {
+      "hook_type": "moderation_boundary",
+      "condition": "thread requires archive, split, or locked summary"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `scandal_state` with `scandal_severity`, `boundary_breach_score`,
+  `institution_attention`, `containment_failure`, and `trust_collapse`.
+- Scandal heat can rise while rumor credibility falls.
+- If `boundary_breach_score >= 0.75`, move thread toward lockdown or summary-only
+  mode.
+- If `institution_attention >= 0.50`, create hooks for campaign/narrative
+  systems without defining their UI.
+- Protected indirect subjects receive lower relationship damage than active
+  breach actors.
+
+### Risks
+
+- Scandal must not imply rumor truth.
+- Lockdown should reduce reply pressure without deleting memory.
+- Institution attention is only a hook, not a new campaign implementation.
+
+### Next Round Entry
+
+Use `combat_result` next. It can test whether a later public performance fact
+competes with scandal memory and reopens ordinary performance discussion.
