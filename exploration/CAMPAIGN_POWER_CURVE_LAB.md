@@ -508,6 +508,35 @@ Out of scope:
   - Split checkpoint evidence more explicitly by block / reward / encounter support so
     each calibrated phase can say which source class justifies its current label.
 
+### 2026-04-27 Round 19
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - How should a checkpoint explain whether its current evidence label is being held
+    up by board cadence, reward visibility, or encounter-shape coverage?
+- Model increment:
+  - Added `curve_checkpoint.evidence_state.source_support` to the canonical report
+    payload.
+  - Split source support into `block_support`, `reward_support`, and
+    `encounter_support`, each with a status and short summary.
+  - Calibrated those support classes by phase so later checkpoints can say "the board
+    window exists, but reward/encounter support is still weak" instead of collapsing
+    everything into one label.
+- Assumptions:
+  - Board cadence is the strongest current evidence class after Round 18.
+  - Reward support is strong only for the tutorial/starter loop; after that it stays
+    advisory because route economy and pacing are still under-reviewed.
+  - Encounter support is strongest for starter/tutorial baseline and otherwise mostly
+    pressure-shape visibility, not checkpoint confirmation.
+- Risks:
+  - If authors start overriding `source_support` manually without matching source
+    refs, the payload could regain false confidence.
+  - This split improves honesty, but it still does not replace missing playtest or
+    economy-route evidence.
+- Next round entry:
+  - Carry the new support split into the reviewed checkpoints and decide where custom
+    per-checkpoint overrides are worth it instead of phase defaults.
+
 ## Model V1
 
 ### Entity Vocabulary

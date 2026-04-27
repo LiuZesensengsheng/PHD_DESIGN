@@ -78,6 +78,11 @@ Evidence-state defaults must stay phase-calibrated:
   pressure-shape sources exist
 - `curve_checkpoint.evidence_state.calibration_notes` should explain which source
   surfaces justify the current label and which claims remain out of bounds
+- `curve_checkpoint.evidence_state.source_support` should split current support into
+  `block_support`, `reward_support`, and `encounter_support`
+- the current calibration expects `block_support` to be stronger than
+  `reward_support` / `encounter_support` after `starter`; the later phases remain
+  advisory because source visibility is uneven across those support classes
 
 ## Required Payload Sections
 
