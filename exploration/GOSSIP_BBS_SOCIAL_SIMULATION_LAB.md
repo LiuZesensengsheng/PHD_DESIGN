@@ -1055,3 +1055,161 @@ Concrete transition:
 Use `faction_event` next. It can test whether a faction claim over the player's
 achievement creates alignment drift, rivalry pressure, and new hooks without
 turning the BBS model into final narrative text.
+
+## Working Log: 2026-04-27 Round 6
+
+### Round Event
+
+`faction_event`
+
+This round tests a faction trying to claim the player's public achievement as
+evidence for its own school identity. The model should create alignment drift
+and rivalry pressure, not authored faction dialogue.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_faction_claim_001",
+  "event_type": "faction_event",
+  "turn": 24,
+  "visibility": "public_bbs",
+  "source_actor": "deck_theory_faction",
+  "target_refs": [
+    "player",
+    "memory_player_elite_streak_023_001",
+    "package_low_cost_recursion_public_v0"
+  ],
+  "evidence": {
+    "faction_event_kind": "achievement_claimed_as_school_identity",
+    "claim_strength": 0.61,
+    "claim_legitimacy": 0.48,
+    "player_consent_signal": "unknown",
+    "prior_participation": 0.72,
+    "rival_attention": 0.57
+  },
+  "faction_refs": ["deck_theory_faction", "lab_a", "rival_lab_b"]
+}
+```
+
+### Model Increment
+
+This slice adds the first faction-claim path:
+
+`faction_event -> faction claim topic -> alignment drift -> rivalry pressure`
+
+Newly named derived signals:
+
+- `claim_strength`: how forcefully a faction ties the achievement to itself.
+- `claim_legitimacy`: public confidence that the faction has a fair basis for
+  the claim.
+- `identity_capture_risk`: risk that the player's achievement is socially
+  overwritten by faction ownership.
+- `alignment_delta`: faction-level movement toward support, rivalry, or
+  skepticism.
+- `rivalry_pressure`: likelihood that rival factions answer the claim.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "topic_id": "topic_unusual_low_cost_recursion_001",
+    "status": "faction_claim_contested",
+    "updated_turn": 24,
+    "topic_heat": 0.82,
+    "reply_pressure": 0.54,
+    "public_sentiment": 0.49,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "player_consent_unknown_label_required": true,
+      "faction_claim_must_reference_public_event": true
+    }
+  },
+  "participant_roles": {
+    "player": "achievement_subject",
+    "deck_theory_faction": "claiming_faction",
+    "lab_a": "soft_affiliation_support",
+    "rival_lab_b": "rival_counterclaim",
+    "moderator": "boundary_keeper"
+  },
+  "stance_distribution": {
+    "support": 0.31,
+    "skepticism": 0.14,
+    "theorycraft": 0.18,
+    "prestige_claim": 0.22,
+    "factional_rivalry": 0.10,
+    "moderator_neutral": 0.05
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_deck_is_bugged_001",
+    "rumor_credibility": 0.05,
+    "heat": 0.10,
+    "debunk_status": "background_corrected_memory"
+  },
+  "faction_state": {
+    "claiming_faction": "deck_theory_faction",
+    "claim_strength": 0.61,
+    "claim_legitimacy": 0.48,
+    "identity_capture_risk": 0.42,
+    "rivalry_pressure": 0.46,
+    "alignment_delta": {
+      "deck_theory_faction": 0.08,
+      "lab_a": 0.03,
+      "rival_lab_b": -0.05
+    }
+  },
+  "heat_delta": {
+    "topic_heat": 0.04,
+    "prestige_heat": 0.06,
+    "faction_heat": 0.24,
+    "reply_pressure": 0.13
+  },
+  "relationship_delta": {
+    "deck_theory_faction->player": 0.04,
+    "player->deck_theory_faction": -0.01,
+    "rival_lab_b->deck_theory_faction": -0.07,
+    "lab_a->deck_theory_faction": 0.02
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "npc_conflict",
+      "condition": "rival_lab_b challenges the legitimacy of the faction claim"
+    },
+    {
+      "hook_type": "rumor_seeded",
+      "condition": "rival response reframes the claim as opportunistic"
+    },
+    {
+      "hook_type": "faction_event",
+      "condition": "player later accepts or rejects the faction label"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `claim_strength`, `claim_legitimacy`, `identity_capture_risk`,
+  `alignment_delta`, and `rivalry_pressure`.
+- If `player_consent_signal` is unknown, faction claims must stay labeled as
+  claims rather than accepted identity.
+- If `claim_strength > claim_legitimacy`, increase `identity_capture_risk`.
+- Rival factions gain reply pressure when `rival_attention >= 0.50`.
+- Alignment can drift toward the claiming faction without increasing the
+  player's own affinity.
+
+### Risks
+
+- Faction claims can erase player agency if consent is assumed.
+- A faction event can look like final lore if the model emits prose instead of
+  state.
+- Rivalry pressure should not revive the old bug rumor unless a new
+  `rumor_seeded` event explicitly does that.
+
+### Next Round Entry
+
+Use `npc_conflict` next. It can test whether the rival challenge becomes a
+relationship conflict rather than immediately becoming a rumor.
