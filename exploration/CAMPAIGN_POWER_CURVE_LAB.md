@@ -420,6 +420,34 @@ Out of scope:
     assumptions against current campaign economy and reward pacing, then mark the
     affected checkpoints as `source_aligned`, `review_needed`, or `stale_assumption`.
 
+### 2026-04-27 Round 16
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What is the smallest code implementation that turns the lab into a usable
+    report-only surface without crossing into gates, runtime behavior, or monster
+    numbers?
+- Model increment:
+  - Promoted the stable implementation target into
+    `docs/development/CAMPAIGN_POWER_CURVE_MODEL_V1.md`.
+  - Added `campaign_power_curve_report_v1` implementation under
+    `tools/combat_analysis/design_engine/campaign_power_curve_model.py`.
+  - Added `scripts/run_campaign_power_curve_report.py`, reviewed fixture inputs, core
+    model tests, CLI tests, registry wiring, and evidence-bundle section support.
+- Assumptions:
+  - Current campaign reward and encounter data is enough to source-align starter
+    baseline assumptions and keep later-phase economy/compression route context
+    explicitly `unknown` or `review_needed`.
+  - The first implementation should generate plain-data report artifacts only.
+- Risks:
+  - Campaign pacing evidence is still thin for `early`, `build`, `pivot`, `mature`,
+    and `late`, so those phases remain advisory.
+  - Surface registration increases maintenance cost if future work forks a duplicate
+    V1 module instead of extending the canonical owner.
+- Next round entry:
+  - Run focused validation, fix any contract drift, and then ask main-agent review to
+    compare phase/checkpoint assumptions against deeper campaign pacing evidence.
+
 ## Model V1
 
 ### Entity Vocabulary
