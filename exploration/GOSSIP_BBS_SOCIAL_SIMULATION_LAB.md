@@ -1515,3 +1515,160 @@ Newly named derived signals:
 
 Use `private_leak` next. It can test what happens when a rumor source tries to
 support an unresolved rumor with boundary-sensitive private material.
+
+## Working Log: 2026-04-27 Round 9
+
+### Round Event
+
+`private_leak`
+
+This round models a rumor source attempting to support an unresolved rumor with
+private material. The model treats the leak as boundary-sensitive first and
+evidence second.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_private_leak_001",
+  "event_type": "private_leak",
+  "turn": 27,
+  "visibility": "partial_public_claim",
+  "source_actor": "anonymous_alt_account",
+  "target_refs": [
+    "rumor_faction_claim_staged_001",
+    "deck_theory_faction",
+    "rival_lab_b_analyst"
+  ],
+  "evidence": {
+    "leak_kind": "private_chat_excerpt_claim",
+    "privacy_risk": 0.82,
+    "leak_authenticity": 0.34,
+    "redaction_level": 0.28,
+    "source_exposure_risk": 0.69,
+    "public_relevance": 0.46,
+    "moderator_intervention": 0.62
+  },
+  "faction_refs": ["rival_lab_b", "deck_theory_faction"]
+}
+```
+
+### Model Increment
+
+This slice adds a leak-boundary path:
+
+`private_leak -> moderation boundary -> evidence quarantine -> rumor pressure split`
+
+Newly named derived signals:
+
+- `privacy_risk`: harm risk from exposing private material.
+- `leak_authenticity`: estimated authenticity before verification.
+- `redaction_level`: amount of private detail removed.
+- `source_exposure_risk`: risk to the leaking source or bystanders.
+- `public_relevance`: whether the leak is relevant enough to discuss at all.
+- `evidence_quarantine`: state that keeps the leak from immediately raising
+  rumor credibility.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "status": "leak_quarantined",
+    "updated_turn": 27,
+    "topic_heat": 0.95,
+    "reply_pressure": 0.57,
+    "public_sentiment": 0.26,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "leak_content_hidden": true,
+      "redaction_required": true,
+      "authenticity_review_required": true
+    }
+  },
+  "participant_roles": {
+    "anonymous_alt_account": "leak_source",
+    "rival_lab_b_analyst": "rumor_beneficiary",
+    "deck_theory_faction": "leak_target",
+    "player": "indirect_subject",
+    "moderator": "evidence_quarantine_owner"
+  },
+  "stance_distribution": {
+    "support": 0.14,
+    "skepticism": 0.28,
+    "rumor_amplification": 0.17,
+    "privacy_concern": 0.24,
+    "factional_rivalry": 0.10,
+    "moderator_neutral": 0.07
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_faction_claim_staged_001",
+    "rumor_credibility": 0.33,
+    "heat": 0.53,
+    "debunk_status": "unresolved",
+    "evidence_quarantine": true,
+    "privacy_risk": 0.82,
+    "leak_authenticity": 0.34,
+    "public_relevance": 0.46
+  },
+  "leak_state": {
+    "leak_id": "leak_private_chat_excerpt_027_001",
+    "redaction_level": 0.28,
+    "source_exposure_risk": 0.69,
+    "moderator_intervention": 0.62,
+    "allowed_public_summary": "metadata_only",
+    "credibility_transfer_blocked": true
+  },
+  "heat_delta": {
+    "topic_heat": 0.04,
+    "rumor_heat": 0.07,
+    "privacy_heat": 0.34,
+    "reply_pressure": -0.12
+  },
+  "relationship_delta": {
+    "moderator->anonymous_alt_account": -0.06,
+    "deck_theory_faction->rival_lab_b_analyst": -0.04,
+    "player->anonymous_alt_account": -0.03
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "scandal",
+      "condition": "privacy risk stays high while public relevance rises"
+    },
+    {
+      "hook_type": "rumor_debunked",
+      "condition": "authenticity review disproves the leak"
+    },
+    {
+      "hook_type": "moderation_boundary",
+      "condition": "source attempts to repost unredacted private detail"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `privacy_risk`, `leak_authenticity`, `redaction_level`,
+  `source_exposure_risk`, `public_relevance`, and `evidence_quarantine`.
+- If `privacy_risk >= 0.70`, set `private_detail_allowed` false and hide leak
+  content from public state.
+- If `evidence_quarantine` is true, leak authenticity cannot fully transfer into
+  rumor credibility.
+- If `redaction_level < 0.50`, increase moderation pressure and source risk.
+- If public relevance rises after redaction, allow metadata-level discussion,
+  not raw private content.
+
+### Risks
+
+- Leaks can make rumor heat rise even when they should not raise credibility.
+- The model must not store or generate private content.
+- Moderator intervention should reduce reply pressure without erasing the public
+  fact that a leak attempt happened.
+
+### Next Round Entry
+
+Use `scandal` next. It can test the escalation case where privacy risk, public
+relevance, and faction conflict combine into a high-heat boundary event.
