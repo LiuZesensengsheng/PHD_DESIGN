@@ -799,7 +799,7 @@ relationship delta until later public action.
 
 ## First Implementation Target
 
-The first code slice should implement only:
+The first code slice implements only:
 
 1. typed input envelopes
 2. typed output envelope
@@ -814,6 +814,13 @@ The first code slice should implement only:
    - `decay`
    - `reply_pressure`
 6. fixture-based tests copied from the exploration examples
+
+Current code entrypoints:
+
+- `contexts/gossip_bbs_social_simulation/contracts.py`
+- `contexts/gossip_bbs_social_simulation/transitions.py`
+- `tests/gossip_bbs_social_simulation/`
+- `tests/fixtures/gossip_bbs_social_simulation/first_slice_cases_v1.json`
 
 Do not implement UI, persistence migration, or campaign integration in the first
 code slice.

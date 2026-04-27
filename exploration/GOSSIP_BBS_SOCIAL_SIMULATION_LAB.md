@@ -2682,3 +2682,77 @@ Start the first code slice with typed domain records and fixture tests for
 `player_used_unusual_deck`, `rumor_seeded`, `rumor_debunked`,
 `public_achievement`, `decay`, and `reply_pressure`. Do not integrate with UI,
 campaign save state, real LLM text generation, or `cardanalysis`.
+
+## Working Log: 2026-04-27 First Code Slice
+
+### Round Event
+
+`first_code_slice`
+
+This is the first implementation pass after the schema contract. It keeps the
+model as a pure sidecar under:
+
+- `contexts/gossip_bbs_social_simulation/`
+
+### Model Increment
+
+This pass implements the contract's first code target:
+
+- typed `GossipEventInput` and `GossipTransitionInput` envelopes;
+- typed `GossipTransitionResult` output envelope;
+- typed records for actor, topic, thread, post, reply, rumor, memory, faction,
+  relationship edge, and moderation boundary;
+- `GossipSimulationState` as an in-memory serializable state container;
+- pure transition stubs for `player_used_unusual_deck`, `rumor_seeded`,
+  `rumor_debunked`, `public_achievement`, `decay`, and `reply_pressure`;
+- JSON fixture coverage at
+  `tests/fixtures/gossip_bbs_social_simulation/first_slice_cases_v1.json`;
+- focused pytest coverage under `tests/gossip_bbs_social_simulation/`.
+
+### Example `thread_state`
+
+The `player_used_unusual_deck` fixture now produces a structured thread and
+rumor state through code rather than prose-only examples:
+
+```json
+{
+  "thread_state": {
+    "status": "active",
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "theorycraft_label_required": true
+    }
+  },
+  "rumor_state": {
+    "claim_type": "mechanism_misread",
+    "debunk_status": "not_debunked"
+  }
+}
+```
+
+### New State Variables / Transition Rules
+
+- No new gameplay-facing state variable was added beyond the contract.
+- Added a state container rule: transition results may be applied into
+  in-memory `threads`, `rumors`, and `memories` buckets, but this is not a
+  campaign save migration.
+- Added a transition rule: unsupported-but-declared event types raise
+  `NotImplementedError` until they receive focused fixture coverage.
+- Added a fixture rule: first-slice tests use structured JSON input, not final
+  forum copy.
+
+### Risks
+
+- The transition functions are still stubs; their numeric formulas are
+  deterministic scaffolding, not tuned social simulation.
+- `GossipSimulationState.apply_result` is intentionally narrow and should not
+  become persistence ownership.
+- Later integration must decide whether campaign lifecycle, narrative runtime,
+  or a separate scheduler owns event production.
+
+### Next Round Entry
+
+Use `combat_result` or `boss_defeated` next if continuing implementation. These
+are natural next code slices because they test performance/milestone memory
+without requiring UI, prose generation, database work, or cardanalysis calls.
