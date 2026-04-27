@@ -17,6 +17,7 @@ parallel V1 modules with overlapping meaning.
 | `card_package_health_v1` | `tools/combat_analysis/design_studio/card_package_health.py` | `scripts/run_card_package_health_benchmark.py` | `card_package_health_summary` |
 | `design_iteration_brief_v1` | `tools/combat_analysis/design_engine/design_iteration_brief.py` | `scripts/run_design_iteration_brief.py` | `design_iteration_summary` |
 | `mechanism_axis_discovery_v1` | `tools/combat_analysis/design_engine/mechanism_axis_discovery.py` | `scripts/run_mechanism_axis_discovery.py` | `mechanism_axis_discovery_summary` |
+| `evaluation_autonomous_design_model_v1` | `tools/combat_analysis/design_engine/evaluation_autonomous_design_model.py` | `scripts/run_evaluation_autonomous_design_model.py` | evidence bundle root |
 | `cardanalysis_evidence_bundle_v1` | `tools/combat_analysis/design_engine/cardanalysis_evidence_bundle.py` | none | evidence bundle root |
 
 The machine-readable mirror lives in
@@ -31,6 +32,9 @@ The machine-readable mirror lives in
   unless the underlying evaluator already owns explicit hard gates.
 - Evidence bundle output may flag review conflicts, but it must not become pass/fail
   authority.
+- `evaluation_autonomous_design_model_v1` may orchestrate existing summaries and
+  package-skeleton wording, but it must not replace canonical scoring owners or create
+  formal cards.
 - `design_engine` must not import `design_studio`; shared registry data should stay as
   strings or move below both layers.
 
