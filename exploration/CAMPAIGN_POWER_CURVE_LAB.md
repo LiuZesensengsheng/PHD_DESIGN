@@ -241,6 +241,32 @@ Out of scope:
   - Define `deck_maturity_state` labels so package assembly, payoff-only risk,
     starter pollution, and off-axis drag can be described consistently.
 
+### 2026-04-27 Round 9
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - Which `deck_maturity_state` labels are needed to describe package assembly
+    without judging the deck as pass/fail?
+- Model increment:
+  - Added deck maturity labels for starter-heavy, identity hint, assembling identity,
+    payoff-only, bridge-ready, pivot-ready, mature core, goodstuff-resilient, and
+    overfocused-brittle states.
+  - Added dimensions and rules for support density, payoff density,
+    bridge-before-payoff, starter pollution, off-axis drag, redundancy, and fallback
+    plan visibility.
+- Assumptions:
+  - Deck maturity is about shape and assembly evidence, not final strength.
+  - A deck can be immature but healthy for its phase, or mature but brittle under a
+    specific pressure profile.
+- Risks:
+  - `payoff_only` may sound like a verdict unless reports keep it as a package-shape
+    observation.
+  - Goodstuff labels may hide mechanism absence unless support/payoff evidence stays
+    visible.
+- Next round entry:
+  - Define `economy_state` labels for upgrade, removal, shop, event, transform,
+    healing pressure, route risk, and opportunity cost.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -269,6 +295,54 @@ Initial phase bands are hypotheses for discussion only:
 | `pivot` | `7-9` | The run should start proving an identity. Enemy pressure can ask whether the mechanism survives disruption. |
 | `mature` | `10-13` | Core deck shape should be visible. Encounters can test scaling, burst, defense, and fail-state resilience together. |
 | `late` | `14+` | Finished or near-finished decks face multi-axis pressure, anti-infinite pressure, and high consequence checks. |
+
+### Deck Maturity State Labels
+
+`deck_maturity_state` describes the deck shell's assembly shape. It is not a
+strength verdict and should not decide whether a deck passes an encounter.
+
+Minimum dimensions:
+
+| Dimension | Meaning |
+| --- | --- |
+| `maturity_label` | The best current assembly label. |
+| `support_density` | How much glue, setup, trigger, bridge, or enabling support exists. |
+| `payoff_density` | How many cards meaningfully reward the intended mechanism or plan. |
+| `bridge_before_payoff` | Whether the deck can reach payoff conditions before the payoff is asked to carry. |
+| `starter_pollution` | How much baseline starter drag remains visible. |
+| `off_axis_drag` | How many cards pull the deck away from its likely identity. |
+| `redundancy` | Whether the plan has substitute pieces instead of one exact line. |
+| `fallback_plan` | What the deck does when the main mechanism misses or is disrupted. |
+
+Recommended labels:
+
+| Label | Meaning | Typical Phase Read |
+| --- | --- | --- |
+| `starter_heavy` | Starter basics still dominate draws and decision points. | Normal in `starter`; pressure signal by `build` if unmitigated. |
+| `identity_hint` | One or two cards imply a direction, but the deck lacks density or bridge. | Normal in `early`. |
+| `assembling_identity` | Support and payoff are both visible, with named missing prerequisites. | Normal in `build`. |
+| `payoff_only` | A high-ceiling card exists without enough support, bridge, or survival window. | Review prompt in `build` or later. |
+| `support_dense_payoff_light` | Glue is present, but the deck lacks a meaningful reward for setup. | Can be stable but may lack ceiling. |
+| `payoff_dense_support_light` | Multiple payoffs compete before the deck can enable them reliably. | Common pivot risk. |
+| `bridge_ready` | The deck has enough setup, draw, energy, or compression to make payoff attempts credible. | Strong `build` or early `pivot` signal. |
+| `pivot_ready` | The deck can test its mechanism under light disruption and still show a fallback. | Healthy `pivot` label. |
+| `mature_core` | The core shell, support, payoff, redundancy, and fallback are visible. | Expected by `mature`, still advisory. |
+| `goodstuff_resilient` | No single mechanism dominates, but broad frontload/defense/scaling answers remain coherent. | Can compensate for lower mechanism identity. |
+| `overfocused_brittle` | The deck is concentrated on one line and loses texture when pieces miss or are disrupted. | Review prompt, not failure. |
+
+Labeling rules:
+
+- Prefer the label that best explains the next validation need, not the label that
+  sounds strongest.
+- `payoff_only` must name the missing support, bridge, survival, compression, or
+  economy evidence.
+- `goodstuff_resilient` should not hide mechanism absence; it should include the
+  axes that compensate for missing identity.
+- `mature_core` still needs reason codes for fail-state resilience and pressure
+  coverage.
+- A deck can move backward when new evidence shows route burden, off-axis drag, or
+  starter pollution was understated.
+- Do not expose maturity labels as `pass`, `fail`, `ready`, or `blocked`.
 
 ### Player Strength Vector
 
