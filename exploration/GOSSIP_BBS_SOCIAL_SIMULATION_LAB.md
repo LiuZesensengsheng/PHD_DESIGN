@@ -652,3 +652,193 @@ Concrete transition:
 Use `new_card_package_seen` next. It can test whether fresh public evidence
 turns a corrected accusation thread into a lower-risk theorycraft topic without
 coupling to `cardanalysis` internals.
+
+## Working Log: 2026-04-27 Round 4
+
+### Round Event
+
+`new_card_package_seen`
+
+This round continues from the corrected and briefly reactivated unusual-deck
+thread. The purpose is to model fresh public evidence that lets participants
+move from accusation and correction into lower-risk theorycraft.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_card_package_seen_001",
+  "event_type": "new_card_package_seen",
+  "turn": 21,
+  "visibility": "public_after_combat",
+  "source_actor": "spectator_feed",
+  "target_refs": [
+    "bbs_thread_unusual_deck_018_001",
+    "topic_unusual_low_cost_recursion_001",
+    "player",
+    "deck_theory_faction"
+  ],
+  "evidence": {
+    "package_signal": "low_cost_recursion_package_public_v0",
+    "observed_anchor_count": 3,
+    "observation_confidence": 0.67,
+    "repeat_visibility": 0.58,
+    "package_identity_uncertainty": 0.41,
+    "evidence_provenance": "spectator_visible_combat_log"
+  },
+  "faction_refs": ["deck_theory_faction", "lab_a", "rival_lab_b"]
+}
+```
+
+### Model Increment
+
+This slice adds the first evidence-to-theorycraft path:
+
+`new_card_package_seen -> theorycraft topic update -> accusation cooling -> package-memory seed`
+
+Newly named derived signals:
+
+- `package_signal`: public, non-authoritative identity hint for the observed card
+  package.
+- `observed_anchor_count`: count of visible package anchors seen by spectators.
+- `observation_confidence`: how confident public participants are that a coherent
+  package exists.
+- `package_identity_uncertainty`: remaining uncertainty about what the package
+  actually is.
+- `theorycraft_pressure`: likelihood that actors reply with explanation,
+  speculation, or build comparison instead of accusation.
+- `accusation_to_analysis_shift`: amount of stance mass moved from rumor or
+  mockery toward theorycraft.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "topic_id": "topic_unusual_low_cost_recursion_001",
+    "source_event_ids": [
+      "evt_20260427_unusual_deck_001",
+      "evt_20260427_debunk_001",
+      "evt_20260427_misunderstanding_001",
+      "evt_20260427_card_package_seen_001"
+    ],
+    "status": "converted_to_theorycraft",
+    "opened_turn": 18,
+    "updated_turn": 21,
+    "thread_lifetime": 3,
+    "topic_heat": 0.69,
+    "reply_pressure": 0.46,
+    "public_sentiment": 0.31,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "repeat_debunked_claim_requires_new_evidence": true,
+      "correction_pin_active": true,
+      "theorycraft_label_required": true
+    }
+  },
+  "participant_roles": {
+    "player": "observed_package_subject",
+    "spectator_feed": "evidence_source",
+    "deck_theory_faction": "theorycraft_lead",
+    "lab_a": "supportive_witness",
+    "rival_lab_b": "competitive_analyst",
+    "moderator": "boundary_keeper"
+  },
+  "stance_distribution": {
+    "support": 0.34,
+    "skepticism": 0.10,
+    "theorycraft": 0.39,
+    "mockery": 0.03,
+    "correction_acceptance": 0.10,
+    "moderator_neutral": 0.04
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_deck_is_bugged_001",
+    "claim_type": "mechanism_misread",
+    "rumor_credibility": 0.08,
+    "heat": 0.18,
+    "debunk_status": "superseded_by_public_package_evidence",
+    "evidence_gap": 0.09,
+    "memory_correction_strength": 0.75,
+    "accusation_to_analysis_shift": 0.21
+  },
+  "package_state": {
+    "package_topic_id": "package_low_cost_recursion_public_v0",
+    "package_signal": "low_cost_recursion_package_public_v0",
+    "observation_confidence": 0.67,
+    "package_identity_uncertainty": 0.41,
+    "theorycraft_pressure": 0.52,
+    "public_memory_status": "seeded_unconfirmed_package_memory"
+  },
+  "heat_delta": {
+    "topic_heat": 0.06,
+    "rumor_heat": -0.13,
+    "theorycraft_heat": 0.28,
+    "reply_pressure": 0.04
+  },
+  "relationship_delta": {
+    "deck_theory_faction->player": 0.05,
+    "rival_lab_b->player": 0.01,
+    "player->deck_theory_faction": 0.02,
+    "moderator->thread_participants": 0.01
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "public_achievement",
+      "condition": "player wins again while package memory remains active"
+    },
+    {
+      "hook_type": "faction_event",
+      "condition": "deck_theory_faction claims the package as a school identity"
+    },
+    {
+      "hook_type": "player_used_unusual_deck",
+      "condition": "same package signal appears with a different combat outcome"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `package_signal` as a public, non-authoritative package identity hint.
+- Added `observed_anchor_count` as a lightweight evidence-density input.
+- Added `observation_confidence` to keep theorycraft stronger than rumor but
+  weaker than confirmed fact.
+- Added `package_identity_uncertainty` so the model can keep speculation labeled
+  as speculation.
+- Added `theorycraft_pressure` as a reply-pressure subtype.
+- Added `accusation_to_analysis_shift` to explicitly move stance mass away from
+  the old debunked claim.
+
+Concrete transition:
+
+1. Accept `new_card_package_seen` only as a structured public signal; do not call
+   `cardanalysis` or infer package legality.
+2. Match `package_signal` against current topic memory and corrected rumor memory.
+3. If `observation_confidence >= 0.55`, create or update `package_state`.
+4. Reduce old rumor heat when package evidence explains the original ambiguity.
+5. Increase `theorycraft_pressure` and stance mass for `theorycraft`, capped by
+   `package_identity_uncertainty`.
+6. Require a theorycraft label while uncertainty remains above `0.25`.
+7. Seed unconfirmed package memory that future `public_achievement` or repeated
+   combat outcomes can strengthen.
+
+### Risks
+
+- This path can accidentally become a card-analysis evaluator. Keep the input as
+  reviewed public signals only.
+- Theorycraft can become disguised accusation if the moderation boundary does not
+  require uncertainty labels.
+- The package memory is unconfirmed. Future events should be able to strengthen,
+  split, or discard it.
+- Fresh evidence should not delete the debunk record; it supersedes the old
+  accusation with a better explanation.
+
+### Next Round Entry
+
+Use `public_achievement` next. It can test whether repeated success with an
+active package memory converts short-lived theorycraft into public prestige and
+longer-term actor/faction memory.
