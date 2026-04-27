@@ -631,6 +631,491 @@ A `charge_turns` package skeleton is ready for report-only review when it can an
 If any answer would require final card text, exact numbers, or a new evaluator, the
 skeleton is not ready; return to role-level revision.
 
+## Parameter Search Note: `short` Versus `medium` Charge Turns
+
+This note answers the first parameter-search question for `charge_turns`: when should
+the delayed setup read as `short`, and when should it read as `medium`?
+
+It is a band comparison only. It does not choose exact turn counts, costs, card text,
+thresholds, or balance numbers.
+
+### Search Intent
+
+Use `short` versus `medium` when all of these are true:
+
+- The candidate already names `delayed_charge_release` as the primary axis.
+- `fail_state_floor` is present and is not silently assumed.
+- The package skeleton can name at least anchor, support, and payoff.
+- The main uncertainty is setup commitment, not whether the mechanism exists.
+
+If the brief cannot name those facts, return to `review_only_candidate` instead of
+searching a band.
+
+### Band Contrast
+
+| Band | What it should test | Main risk | First report request |
+| --- | --- | --- | --- |
+| `short` | Can a compact charge window create a visible timing choice without becoming immediate value? | `generic_goodstuff`, `low_agency_loop` | `mechanism_fun_health_summary` |
+| `medium` | Can a larger visible commitment create a better release moment without dead setup turns? | `setup_tax_too_high`, `fail_state_missing` | `mechanism_fun_health_summary` plus `card_package_health_summary` |
+
+The first comparison should ask which band preserves agency with the least false
+confidence. `short` is preferable when `medium` only increases payoff ambition.
+`medium` is preferable only when it adds a real timing or matchup choice and the setup
+turns still produce useful output.
+
+### Minimal Parameter Note
+
+```yaml
+parameter_search_note:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  parameter_target: charge_turns
+  candidate_bands:
+    - short
+    - medium
+  companion_parameter: fail_state_floor
+  search_question: preserve_release_agency_without_dead_setup
+  forbidden_claims:
+    - exact_turn_count
+    - final_card_text
+    - hard_gate_threshold
+    - default_recommendation_change
+    - learned_or_reranker_promotion
+  first_review_focus:
+    - agency
+    - setup_tax
+    - fail_state_value
+    - support_payoff_balance
+```
+
+Do not compare `long` until a non-empty safety valve exists. Do not compare
+`exact_or_variable` until the brief explains why exact timing improves agency instead
+of only raising variance pressure.
+
+## Foundation Dependency Budget For `charge_turns`
+
+This note keeps foundation axes from swallowing `delayed_charge_release`.
+
+The candidate is allowed to use draw, energy, retain, filter, defense, damage,
+scaling, compression, discard, or exhaust as support. It should not let those axes
+become the real reason the package works unless the mechanism candidate is renamed.
+
+### Dependency Classes
+
+| Dependency class | Meaning | Review wording |
+| --- | --- | --- |
+| `required_foundation` | The charge axis cannot be reviewed without this support. | Name it before the parameter probe. |
+| `bounded_support` | The foundation helps the charge axis while leaving charge decisions visible. | Keep it as support evidence. |
+| `identity_swallowing_risk` | The foundation axis now creates more agency than charge/release. | Revise identity before payoff work. |
+| `unpriced_dependency` | The brief assumes support but does not name its cost or timing. | Request the owning report before reachability wording. |
+
+### Budget Rules
+
+- Defense can be required, but generic block does not prove the charge package.
+- Draw can smooth setup, but more draw is not a fix for missing release decisions.
+- Energy can enable release, but refund or acceleration cannot be the identity.
+- Retain or filter can preserve agency when it creates a timing or hold decision.
+- Compression can make repeated contact plausible, but deck compression owns the
+  reachability language.
+- Discard can support filtering only if the brief states whether discard is a cost,
+  trigger, or smoothing tool.
+
+### Minimal Dependency Note
+
+```yaml
+foundation_dependency_budget:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  required_foundation:
+    - defense_or_tempo_buffer
+    - visible_progress_state
+  bounded_support:
+    - retain_or_filter_for_release_timing
+  identity_swallowing_risks:
+    - swallowed_by_draw
+    - swallowed_by_energy
+  unpriced_dependencies:
+    - compression_context_unknown
+  first_revision_if_swallowed: restore_timing_choice
+```
+
+If the first proposed fix for a weak `charge_turns` brief is only "add more draw" or
+"add more energy," record `swallowed_by_draw` or `swallowed_by_energy` before tuning
+the payoff.
+
+## Fail-State Floor Probe For `charge_turns`
+
+This note answers the companion-parameter question: what useful output remains when
+the full release misses?
+
+`fail_state_floor` is not a reward for failure. It is the minimum recoverable output
+that prevents delayed setup from becoming dead turns.
+
+### Floor Options
+
+| `fail_state_floor` | Useful when | Weak version |
+| --- | --- | --- |
+| `partial_progress` | Partial charge can become smaller output or later state. | Partial charge is only a worse payoff number. |
+| `defensive_buffer` | Setup turns protect the player while charge builds. | Generic block that would be good in any package. |
+| `selection_recovery` | Missing release improves later timing, access, or hold decisions. | More draw that hides the missed release. |
+| `state_conversion` | Unused charge changes mode or role instead of going blank. | Conversion ignores charge state and becomes value soup. |
+| `none_visible` | No recoverable miss is present yet. | Any `promote` wording is false confidence. |
+
+### Pairing Rules
+
+- `short` can tolerate a lighter floor if setup turns already produce useful output.
+- `medium` needs a named non-empty floor before review-ready wording.
+- `none_visible` should map to `raise_fail_state_floor`, not a larger payoff.
+- The floor must mention charge state, setup timing, or release control to count as
+  mechanism-specific.
+- A floor that is only generic survival should be reviewed as `generic_goodstuff` risk.
+
+### Minimal Floor Note
+
+```yaml
+fail_state_floor_probe:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  parameter_target: charge_turns
+  candidate_band: medium
+  fail_state_floor: partial_progress
+  floor_question: does_partial_charge_still_change_the_next_decision
+  first_revision_if_missing: raise_fail_state_floor
+  next_report_requests:
+    - mechanism_fun_health_summary
+    - card_package_health_summary
+```
+
+If the floor cannot be described without writing final card text, keep the brief at
+role level and mark the next action as `raise_fail_state_floor`.
+
+## Compression Assumption Note For `charge_turns`
+
+This note keeps `charge_turns` from accidentally assuming repeated anchor/payoff
+contact in a compact deck.
+
+The lab does not price removal routes itself. It only records whether compression and
+starter-pollution assumptions are visible enough to request or read the canonical
+`deck_compression_summary`.
+
+### Compression Assumption Labels
+
+Use these labels only in prose:
+
+| Label | Meaning |
+| --- | --- |
+| `compression_named_low` | The brief names why normal deck growth should not erase charge contact. |
+| `compression_named_medium` | The brief expects some thinning, selection, retain, or redundancy but does not require exact compactness. |
+| `compression_route_dependent` | The brief depends on removal, transform quality, or early in-combat compression before the online claim is credible. |
+| `compression_unknown` | The brief does not yet know whether starter pollution breaks contact. |
+| `compression_false_confidence` | The brief claims repeated charge/release contact without naming deck size, redundancy, or route assumptions. |
+
+These labels are not evaluator outputs and should not replace
+`deck_compression_report_v1` wording such as `online_if_compressed` or
+`route_dependent_online`.
+
+### Assumption Rules
+
+- A `short` band can still have high compression pressure if it needs repeated exact
+  contact.
+- A `medium` band can be acceptable with thicker decks only if support and glue provide
+  real redundancy.
+- Retain, filtering, and draw selection can lower variance, but they are not the same
+  as persistent removal.
+- Transform should not be treated as clean removal unless replacement risk is named.
+- In-combat compression only helps if it arrives before charge/release contact matters.
+
+### Minimal Compression Note
+
+```yaml
+compression_assumption_note:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  parameter_target: charge_turns
+  assumption_label: compression_unknown
+  known_context:
+    deck_size: unknown
+    starter_pollution: unknown
+    removal_route: unknown
+  forbidden_wording:
+    - generally_reachable
+    - reliable_loop
+    - hard_gate_pass
+  next_report_request: deck_compression_summary
+```
+
+If the package skeleton is otherwise clear but compression is unknown, use
+`skeleton_reachability_unknown` rather than `promote`.
+
+## Goodstuff And Payoff-Only Triage For `charge_turns`
+
+This note distinguishes a real delayed charge/release package from generic value or a
+single exciting payoff.
+
+### Triage Questions
+
+| Risk | Diagnostic question | First revision action |
+| --- | --- | --- |
+| `generic_goodstuff` | Would the same support be desirable if charge did not exist? | `sharpen_axis_proof` |
+| `payoff_only` | Is the payoff clearer than the anchor, support, or glue? | `build_support_before_payoff` |
+| `skeleton_goodstuff_blur` | Does broad defense, draw, or damage hide weak package identity? | `sharpen_axis_proof` |
+| `skeleton_payoff_only` | Is the role skeleton mostly a release fantasy? | `build_support_before_payoff` |
+
+### Role Proof Rules
+
+- Anchor proof must show visible progress before release.
+- Support proof must help the setup window or charge state specifically.
+- Glue proof must create a timing, hold, bridge, filter, or state-management choice.
+- Payoff proof must be downstream of anchor/support/glue in the brief wording.
+- Safety-valve proof must explain the miss, not only the dream.
+
+### Minimal Triage Note
+
+```yaml
+goodstuff_payoff_triage:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  package_skeleton_readiness: skeleton_payoff_only
+  primary_risk: payoff_only
+  role_to_fix_first: support
+  revision_action: build_support_before_payoff
+  forbidden_fix:
+    - larger_payoff
+    - generic_draw_patch
+    - generic_energy_patch
+```
+
+If a role cannot name why it belongs to delayed charge/release, mark that role as
+unknown instead of counting it as package density.
+
+## Evidence Conflict Triage For `charge_turns`
+
+This note keeps report-only evidence from being collapsed into a single confident
+verdict.
+
+Conflicts should be written as review notes. They should not become hard gates,
+default recommendation changes, or autonomous promotion rules.
+
+### Conflict Notes
+
+| Evidence conflict | Conservative wording |
+| --- | --- |
+| Fun/health positive, compression route-dependent | The play pattern may be attractive, but normal-run reachability remains route-dependent. |
+| Package health positive, fun/health missing | The package may be coherent, but play texture is `not_evaluated`. |
+| Fun/health positive, package health missing | The mechanism may be promising, but the role skeleton is not package-ready. |
+| Discovery positive, package payoff-only | The axis exists, but package assembly must revise support or glue first. |
+| Discovery positive, foundation swallowing risk high | The axis needs identity revision before parameter tuning. |
+| Compression positive, fail state missing | Reachability alone does not make delayed setup healthy. |
+
+### Minimal Conflict Note
+
+```yaml
+evidence_conflict_note:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  conflict:
+    positive_evidence: mechanism_fun_health_summary
+    limiting_evidence: deck_compression_summary
+  conservative_wording: attractive_but_route_dependent
+  allowed_next_action: revise
+  forbidden_next_action: autonomous_promote
+```
+
+When conflicts are unresolved, the design brief should name the next owning report to
+read instead of inventing a combined score.
+
+## Iteration Wording Ladder For `charge_turns`
+
+This note limits how strongly a `charge_turns` brief may speak at each evidence level.
+
+It is wording discipline only. It does not add pass/fail gates or evaluator labels.
+
+### Wording Ladder
+
+| Evidence state | Strongest allowed wording |
+| --- | --- |
+| Axis intent only | `review_only_candidate` |
+| Axis plus parameter note | `needs_report_only_probe` |
+| Axis plus partial skeleton | `revise_package_skeleton` |
+| Skeleton ready, fun/health missing | `package_ready_for_fun_health_review` |
+| Skeleton ready, compression missing | `package_ready_but_reachability_unknown` |
+| All expected reports present, one primary risk remains | `revise_one_parameter_or_role` |
+| All expected reports present, risks named, no false confidence | `promote_to_human_review_queue` |
+
+`promote_to_human_review_queue` is the maximum wording. It does not mean formal card
+generation, default recommendation, learned promotion, or hard-gate pass.
+
+### Minimal Iteration Note
+
+```yaml
+iteration_wording_note:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  evidence_state: skeleton_ready_compression_missing
+  allowed_wording: package_ready_but_reachability_unknown
+  forbidden_wording:
+    - validated_package
+    - generally_reachable
+    - hard_gate_pass
+    - generate_cards
+```
+
+If a brief wants stronger wording than this ladder allows, the next action is to
+request missing evidence, not to smooth the text.
+
+## Enemy Pressure Tolerance Panel For `charge_turns`
+
+This note gives `enemy_pressure_tolerance` a first report-only shape for delayed
+charge/release.
+
+The panel does not simulate encounters or create matchup gates. It names which common
+pressure should be reviewed before a charge package sounds broadly healthy.
+
+### Pressure Panel
+
+| Pressure | Question for `charge_turns` | Failure reason |
+| --- | --- | --- |
+| `fast_pressure` | Can setup turns produce enough output before the release? | `setup_tax_too_high` |
+| `multi_enemy_pressure` | Can release or safety-valve output avoid single-target tunnel vision? | `matchup_too_narrow` |
+| `action_punisher_pressure` | Does the package avoid repeated low-impact charge actions? | `low_agency_loop` |
+| `scaling_pressure` | Can delayed release matter before enemy scaling outpaces it? | `fantasy_only` |
+| `defensive_race_pressure` | Can the package defend while keeping charge state relevant? | `fail_state_missing` |
+
+`fantasy_only` is allowed as a prose diagnosis here because it appears in the
+fun/health review vocabulary. It should not be added to the lab's normalized
+`rejection_reason` list unless a later reviewed implementation task asks for that
+expansion.
+
+### Minimal Pressure Note
+
+```yaml
+enemy_pressure_tolerance_note:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  parameter_target: charge_turns
+  pressure_to_review_first: fast_pressure
+  tolerance_question: do_setup_turns_have_output_before_release
+  likely_revision_action: shorten_or_pay_back_setup
+  next_report_request: mechanism_fun_health_summary
+```
+
+If the package only works in slow fights, use `matchup_too_narrow` or
+`setup_tax_too_high` before increasing payoff ambition.
+
+## Package Density Balance For `charge_turns`
+
+This note keeps `package_density` and `support_payoff_balance` separate.
+
+A package can have many on-theme roles and still be unhealthy if payoff dominates the
+sequence. It can also have low density but a clear next revision if the missing role is
+named.
+
+### Balance Reads
+
+| Read | Healthy sign | Risk sign |
+| --- | --- | --- |
+| `role_density` | Anchor, support, glue, payoff, and safety valve are all represented at role level. | Payoff is the only detailed role. |
+| `support_before_payoff` | Support and glue are described before release ambition. | The brief starts with a finisher. |
+| `redundancy_without_soup` | More than one role can support charge state without becoming generic value. | Extra roles are just draw, block, damage, or energy. |
+| `payoff_texture_balance` | Release can branch or convert state without replacing setup decisions. | Release is one large number. |
+
+### Balance Rules
+
+- More density is not automatically better if it blurs the axis into goodstuff.
+- One clear missing role is better than five vague roles.
+- Support density should be reviewed before payoff upgrades.
+- Glue quality should be reviewed before any exact or variable timing probe.
+- Safety-valve density matters only when it is tied to charge state or setup timing.
+
+### Minimal Balance Note
+
+```yaml
+package_density_balance_note:
+  evaluation_mode: report_only
+  mechanism_candidate: delayed_charge_release
+  package_density_read: partial
+  support_payoff_balance_read: support_before_payoff_missing
+  role_to_fix_first: glue
+  revision_action: restore_timing_choice
+  next_report_request: card_package_health_summary
+```
+
+If density improves by adding generic value, mark `generic_goodstuff` instead of
+calling the skeleton healthier.
+
+## Transfer Note: `discard_outlet_count`
+
+This note checks whether the lab vocabulary can transfer from `charge_turns` to another
+parameter without becoming a card generator.
+
+The second parameter is `discard_outlet_count`. The goal is not to design formal discard
+cards. The goal is to ask when discard remains a mechanism identity rather than generic
+hand cleanup.
+
+### Minimal Transfer Shape
+
+```yaml
+design_candidate_brief:
+  brief_id: discard_outlet_count_identity_probe_v1
+  evaluation_mode: report_only
+  mechanism_candidate:
+    axis_id: discard_velocity_release
+    axis_question: does_discard_create_identity_or_only_filtering
+  parameter_target:
+    name: discard_outlet_count
+    probe_band: low_to_medium
+    companion_parameter: payoff_contact_reliability
+  foundation_dependencies:
+    required:
+      - discard_outlet
+      - discard_payoff_or_resource
+    optional:
+      - draw_selection
+      - hand_size_buffer
+      - energy_smoothing
+    identity_risks:
+      - swallowed_by_discard
+      - swallowed_by_draw
+      - generic_goodstuff
+  package_skeleton:
+    anchor: visible reason discard matters beyond cleanup
+    support: keeps outlet/payoff contact from becoming draw-order fantasy
+    glue: chooses what to discard, hold, or convert
+    payoff: rewards discard timing or accumulated discard state
+    safety_valve: missed outlet still leaves selection, block, or partial resource value
+  report_requests:
+    mechanism_axis_discovery_summary:
+      - foundation_dependency_vector
+      - axis_agency_preservation
+      - first_parameter_probe
+    mechanism_fun_health_summary:
+      - agency
+      - variance_pressure
+      - fail_state_value
+      - payoff_texture
+    card_package_health_summary:
+      - package_density
+      - glue_quality
+      - goodstuff_risk
+      - payoff_only_risk
+    deck_compression_summary:
+      - starter_pollution_tolerance
+      - deck_compression_requirement
+```
+
+### Transfer Rules
+
+- If discard is only a way to see more cards, record `swallowed_by_draw`.
+- If discard is only hand cleanup with no cost, trigger, resource, or release choice,
+  record `swallowed_by_discard`.
+- If the payoff is clear but outlet density is vague, record `payoff_only`.
+- If outlet density is high but every decision is automatic, record `low_agency_loop`.
+- If starter or off-axis cards are assumed to disappear, request
+  `deck_compression_summary`.
+
+This transfer keeps the model parameter-level and role-level. It should not produce
+card text, exact outlet counts, formal discard cards, or default ranking changes.
+
 ## Working Log
 
 ### 2026-04-27 Slice 1
@@ -835,3 +1320,335 @@ Next round entry:
 
 - Add one minimal parameter-search note for the first `short` versus `medium`
   `charge_turns` probe, still using bands and no exact balance numbers.
+
+### 2026-04-27 Slice 6
+
+Evaluation/design problem:
+
+- Decide how to compare `short` versus `medium` `charge_turns` without choosing exact
+  balance numbers.
+
+Model increment:
+
+- Added `Parameter Search Note: short Versus medium Charge Turns`.
+- Defined the first band comparison as a search for release agency without dead setup.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example note compares only `short` and `medium` with `fail_state_floor` as a
+  companion parameter.
+
+Judgment rules:
+
+- Use `short` when `medium` only increases payoff ambition.
+- Use `medium` only when it creates a real timing or matchup decision and setup turns
+  still produce useful output.
+
+Failure case:
+
+- If the brief cannot name axis, companion floor, and basic roles, it returns to
+  `review_only_candidate` instead of searching a band.
+
+Next round entry:
+
+- Add one minimal foundation dependency budget so draw, energy, and other support axes
+  do not swallow the charge identity.
+
+### 2026-04-27 Slice 7
+
+Evaluation/design problem:
+
+- Decide when foundation support helps `charge_turns` and when it becomes the real
+  identity.
+
+Model increment:
+
+- Added `Foundation Dependency Budget For charge_turns`.
+- Split dependencies into `required_foundation`, `bounded_support`,
+  `identity_swallowing_risk`, and `unpriced_dependency`.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release` with defense and visible progress as required
+  foundations, retain/filter as bounded support, and draw/energy as swallowing risks.
+
+Judgment rules:
+
+- Generic block does not prove the package.
+- More draw or more energy is not a fix for missing release decisions.
+- Compression remains owned by the canonical deck compression surface.
+
+Failure case:
+
+- If the first proposed fix is only "add more draw" or "add more energy," record
+  `swallowed_by_draw` or `swallowed_by_energy` before tuning payoff.
+
+Next round entry:
+
+- Add one minimal `fail_state_floor` probe so the companion parameter has its own
+  review discipline.
+
+### 2026-04-27 Slice 8
+
+Evaluation/design problem:
+
+- Decide what useful output remains when the full `charge_turns` release misses.
+
+Model increment:
+
+- Added `Fail-State Floor Probe For charge_turns`.
+- Compared `partial_progress`, `defensive_buffer`, `selection_recovery`,
+  `state_conversion`, and `none_visible`.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example uses `medium` plus `partial_progress` and asks whether partial charge
+  changes the next decision.
+
+Judgment rules:
+
+- `medium` needs a named non-empty floor before review-ready wording.
+- A floor must reference charge state, setup timing, or release control to count as
+  mechanism-specific.
+
+Failure case:
+
+- If the floor is `none_visible`, revise with `raise_fail_state_floor` rather than
+  making the final payoff larger.
+
+Next round entry:
+
+- Add one compression assumption note so repeated anchor/payoff contact is not
+  silently assumed.
+
+### 2026-04-27 Slice 9
+
+Evaluation/design problem:
+
+- Decide how much compression and starter-pollution context must be visible before a
+  `charge_turns` brief discusses reachability.
+
+Model increment:
+
+- Added `Compression Assumption Note For charge_turns`.
+- Defined prose-only assumption labels such as `compression_unknown`,
+  `compression_route_dependent`, and `compression_false_confidence`.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example note sets deck size, starter pollution, and removal route to unknown and
+  requests `deck_compression_summary`.
+
+Judgment rules:
+
+- Retain, filtering, and draw selection are not persistent removal.
+- In-combat compression helps only if it arrives before charge/release contact matters.
+
+Failure case:
+
+- If the skeleton is otherwise clear but compression is unknown, use
+  `skeleton_reachability_unknown` instead of `promote`.
+
+Next round entry:
+
+- Add one goodstuff/payoff-only triage so role density does not hide generic support.
+
+### 2026-04-27 Slice 10
+
+Evaluation/design problem:
+
+- Distinguish a real delayed charge/release package from generic value or a single
+  exciting payoff.
+
+Model increment:
+
+- Added `Goodstuff And Payoff-Only Triage For charge_turns`.
+- Mapped generic-goodstuff and payoff-only risks to the first role-level revision.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example triage marks the skeleton as `skeleton_payoff_only` and fixes support
+  before payoff.
+
+Judgment rules:
+
+- Anchor, support, glue, payoff, and safety valve each need role-specific proof.
+- A role that cannot explain why it belongs to delayed charge/release stays unknown.
+
+Failure case:
+
+- If a brief adds generic draw, block, damage, or energy as package proof, record
+  `generic_goodstuff` rather than counting healthier density.
+
+Next round entry:
+
+- Add one evidence-conflict triage so report-only summaries stay separated.
+
+### 2026-04-27 Slice 11
+
+Evaluation/design problem:
+
+- Decide how to handle conflicting report-only evidence without collapsing it into a
+  hidden score.
+
+Model increment:
+
+- Added `Evidence Conflict Triage For charge_turns`.
+- Listed conservative wording for common conflicts between discovery, fun/health,
+  package health, and compression summaries.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example conflict keeps a positive fun/health read but limits wording because
+  deck compression is route-dependent.
+
+Judgment rules:
+
+- Conflicts produce review notes, not automatic rejection.
+- The brief should name the next owning report instead of inventing a combined score.
+
+Failure case:
+
+- If fun/health is positive but compression is route-dependent, do not call the package
+  generally reachable.
+
+Next round entry:
+
+- Add one iteration wording ladder so the brief cannot overstate thin evidence.
+
+### 2026-04-27 Slice 12
+
+Evaluation/design problem:
+
+- Limit how strongly a `charge_turns` brief may speak at each evidence level.
+
+Model increment:
+
+- Added `Iteration Wording Ladder For charge_turns`.
+- Defined the strongest allowed wording from axis intent through
+  `promote_to_human_review_queue`.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example marks a skeleton-ready but compression-missing case as
+  `package_ready_but_reachability_unknown`.
+
+Judgment rules:
+
+- `promote_to_human_review_queue` is the maximum wording.
+- Stronger wording requires missing evidence, not smoother prose.
+
+Failure case:
+
+- If a brief says `validated_package`, `generally_reachable`, `hard_gate_pass`, or
+  `generate_cards`, it has crossed the lab boundary.
+
+Next round entry:
+
+- Add one enemy-pressure tolerance panel so matchup elasticity has a first review
+  shape for `charge_turns`.
+
+### 2026-04-27 Slice 13
+
+Evaluation/design problem:
+
+- Decide which common enemy pressure should be reviewed before a charge package sounds
+  broadly healthy.
+
+Model increment:
+
+- Added `Enemy Pressure Tolerance Panel For charge_turns`.
+- Listed fast, multi-enemy, action-punisher, scaling, and defensive-race pressure.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example reviews `fast_pressure` first and maps it to
+  `shorten_or_pay_back_setup`.
+
+Judgment rules:
+
+- The panel names review pressure only; it does not simulate encounters or add gates.
+- Slow-fight-only success should be recorded as setup or matchup risk before payoff
+  ambition increases.
+
+Failure case:
+
+- If the package only works after slow uninterrupted setup, use `matchup_too_narrow`
+  or `setup_tax_too_high`.
+
+Next round entry:
+
+- Add one package density balance note so support/payoff order stays visible.
+
+### 2026-04-27 Slice 14
+
+Evaluation/design problem:
+
+- Separate `package_density` from `support_payoff_balance` for `charge_turns`.
+
+Model increment:
+
+- Added `Package Density Balance For charge_turns`.
+- Named `role_density`, `support_before_payoff`, `redundancy_without_soup`, and
+  `payoff_texture_balance` as balance reads.
+
+Example mechanism/package:
+
+- Continued `delayed_charge_release`.
+- The example marks density as partial and fixes the `glue` role first.
+
+Judgment rules:
+
+- More density is not better if it blurs the axis into goodstuff.
+- One clear missing role is better than five vague roles.
+
+Failure case:
+
+- If density improves only through generic value, mark `generic_goodstuff`.
+
+Next round entry:
+
+- Add one transfer note for `discard_outlet_count` to verify the lab vocabulary can
+  move beyond `charge_turns` without generating formal cards.
+
+### 2026-04-27 Slice 15
+
+Evaluation/design problem:
+
+- Test whether the lab vocabulary transfers from `charge_turns` to another parameter
+  while staying report-only and role-level.
+
+Model increment:
+
+- Added `Transfer Note: discard_outlet_count`.
+- Defined a minimal `discard_velocity_release` brief with outlet density, payoff
+  contact reliability, and discard identity risks.
+
+Example mechanism/package:
+
+- Used `discard_velocity_release` as a role-level transfer example.
+- The skeleton names anchor, support, glue, payoff, and safety valve without card text
+  or exact outlet counts.
+
+Judgment rules:
+
+- If discard only sees more cards, record `swallowed_by_draw`.
+- If discard is only hand cleanup, record `swallowed_by_discard`.
+- If outlet density is high but decisions are automatic, record `low_agency_loop`.
+
+Failure case:
+
+- If starter or off-axis cards are assumed away, request `deck_compression_summary`
+  before reachability wording.
+
+Next round entry:
+
+- Either choose the first `discard_outlet_count` band comparison or promote stable lab
+  rules into a long-term development spec after human review.
