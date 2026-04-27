@@ -465,3 +465,190 @@ Concrete transition:
 Use `misunderstanding` next. It is the smallest next case because it can reuse
 the corrected rumor memory and test whether actors repeat old claims with low
 malice, medium heat, and repairable relationship damage.
+
+## Working Log: 2026-04-27 Round 3
+
+### Round Event
+
+`misunderstanding`
+
+This round continues from the corrected memory for `rumor_deck_is_bugged_001`.
+The goal is to model a low-malice actor repeating the old claim because they
+missed the pinned correction, not because they are intentionally reseeding a
+rumor.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_misunderstanding_001",
+  "event_type": "misunderstanding",
+  "turn": 20,
+  "visibility": "public_thread_reply",
+  "source_actor": "peer_observer_b",
+  "target_refs": [
+    "rumor_deck_is_bugged_001",
+    "bbs_thread_unusual_deck_018_001",
+    "player",
+    "moderator"
+  ],
+  "evidence": {
+    "repeated_claim_ref": "rumor_deck_is_bugged_001",
+    "source_memory_access": 0.31,
+    "correction_salience": 0.72,
+    "intent_malice_score": 0.12,
+    "public_repeat_visibility": 0.46,
+    "clarification_latency": 1
+  },
+  "faction_refs": ["lab_a", "deck_theory_faction"]
+}
+```
+
+### Model Increment
+
+This slice adds the first mistaken-repeat path:
+
+`misunderstanding -> brief topic reactivation -> clarification -> repairable relationship damage`
+
+Newly named derived signals:
+
+- `source_memory_access`: how likely the actor was to have seen or recalled the
+  corrected status.
+- `intent_malice_score`: whether the repeat is a misunderstanding or should be
+  escalated into `rumor_seeded`.
+- `correction_salience`: how visible the existing correction is at the moment of
+  repetition.
+- `clarification_latency`: how many turns pass before a correction reply or
+  moderator reminder appears.
+- `repair_window_turns`: how long the model treats the relationship damage as
+  easy to repair.
+- `apology_probability`: chance that the source actor accepts correction and
+  reduces relationship damage.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "topic_id": "topic_unusual_low_cost_recursion_001",
+    "source_event_ids": [
+      "evt_20260427_unusual_deck_001",
+      "evt_20260427_debunk_001",
+      "evt_20260427_misunderstanding_001"
+    ],
+    "status": "briefly_reactivated_by_misunderstanding",
+    "opened_turn": 18,
+    "updated_turn": 20,
+    "thread_lifetime": 2,
+    "topic_heat": 0.63,
+    "reply_pressure": 0.42,
+    "public_sentiment": 0.23,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "repeat_debunked_claim_requires_new_evidence": true,
+      "correction_pin_active": true,
+      "misunderstanding_grace_turns": 1
+    }
+  },
+  "participant_roles": {
+    "player": "silent_subject_slightly_harmed",
+    "peer_observer_b": "mistaken_repeater",
+    "moderator": "correction_reminder",
+    "deck_theory_faction": "patient_explainer",
+    "lab_a": "supportive_witness",
+    "rival_grad_a": "low_activity_skeptic"
+  },
+  "stance_distribution": {
+    "support": 0.39,
+    "skepticism": 0.18,
+    "theorycraft": 0.21,
+    "mockery": 0.05,
+    "correction_acceptance": 0.13,
+    "moderator_neutral": 0.04
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_deck_is_bugged_001",
+    "claim_type": "mechanism_misread",
+    "rumor_credibility": 0.15,
+    "heat": 0.31,
+    "debunk_status": "debunked_but_repeated_by_mistake",
+    "evidence_gap": 0.16,
+    "memory_correction_strength": 0.68,
+    "misunderstanding_episode_id": "misunderstanding_001",
+    "apology_probability": 0.64
+  },
+  "heat_delta": {
+    "topic_heat": 0.06,
+    "rumor_heat": 0.06,
+    "reply_pressure": 0.08
+  },
+  "relationship_delta": {
+    "peer_observer_b->player": -0.03,
+    "player->peer_observer_b": -0.02,
+    "deck_theory_faction->peer_observer_b": 0.01,
+    "moderator->peer_observer_b": -0.01
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "relationship_repair",
+      "condition": "peer_observer_b accepts correction within repair_window_turns"
+    },
+    {
+      "hook_type": "rumor_seeded",
+      "condition": "same actor repeats debunked claim again after clarification"
+    },
+    {
+      "hook_type": "new_card_package_seen",
+      "condition": "fresh public evidence shifts thread from accusation to theorycraft"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `source_memory_access` as a check against whether the actor had a fair
+  chance to know the correction.
+- Added `intent_malice_score` to separate accidental repetition from hostile
+  rumor seeding.
+- Added `correction_salience` to dampen credibility growth when the correction
+  is still visible.
+- Added `clarification_latency` as a heat and relationship-damage multiplier.
+- Added `repair_window_turns` and `apology_probability` for reversible social
+  damage.
+
+Concrete transition:
+
+1. Find the corrected rumor memory by `repeated_claim_ref`.
+2. If `intent_malice_score < 0.30` and `source_memory_access < 0.45`, classify
+   the event as `misunderstanding`.
+3. Keep the original rumor in `debunked` state; attach a
+   `misunderstanding_episode_id` instead of reopening the rumor as new truth.
+4. Increase `topic_heat` and `reply_pressure` by public visibility, but cap
+   `rumor_credibility` when `correction_salience >= 0.60`.
+5. Apply small, repairable relationship damage to the repeated-claim source and
+   target.
+6. If clarification arrives within `repair_window_turns`, move stance toward
+   `correction_acceptance` and reduce long-term relationship damage.
+7. If the same actor repeats after clarification, escalate the next event hook
+   to `rumor_seeded`.
+
+### Risks
+
+- The model must not treat every repeated false claim as harmless. High
+  `intent_malice_score` or repeated behavior should leave the
+  `misunderstanding` path.
+- The model must not erase the harm just because intent is low; relationship
+  damage should still exist, but remain more repairable.
+- If `correction_salience` is too strong, the thread may become sterile and
+  never reactivate. Low source memory access should still create small heat.
+- This still stays outside persistence and UI; `repair_window_turns` is a
+  proposed state variable, not a saved-schema decision.
+
+### Next Round Entry
+
+Use `new_card_package_seen` next. It can test whether fresh public evidence
+turns a corrected accusation thread into a lower-risk theorycraft topic without
+coupling to `cardanalysis` internals.
