@@ -369,6 +369,30 @@ Out of scope:
   - Add a future cardanalysis field mapping that names which report-only surfaces can
     supply curve context and which fields must remain advisory.
 
+### 2026-04-27 Round 14
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - Which cardanalysis report-only surfaces can feed `campaign_power_curve_model_v1`
+    fields, and what must remain advisory?
+- Model increment:
+  - Added a cardanalysis field mapping draft for deck compression, mechanism-axis
+    discovery, card package health, design iteration brief, mechanism fun/health, and
+    evidence bundle surfaces.
+  - Added mapping rules that keep learned/reranker output, hard gates, legality,
+    readiness, and monster numbers outside the curve model.
+- Assumptions:
+  - Cardanalysis can provide evidence and reason codes before the campaign curve has
+    a formal implementation.
+  - The curve model should consume report-only signals as context, not as authority.
+- Risks:
+  - Future integrations may accidentally duplicate existing report-only surfaces
+    instead of mapping to the canonical owners.
+  - Field mappings may look implementation-ready before fixture contracts exist.
+- Next round entry:
+  - Add a lab backlog and final handoff section, then run final verification and
+    report whether this branch is ready for main-agent review.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -1674,6 +1698,56 @@ Potential inputs:
   - use for support/payoff/glue density and off-axis drag
 - `design_iteration_brief_v1`
   - use for setup burden, fail-state risk, and next validation needs
+
+### Cardanalysis Field Mapping Draft
+
+This mapping is a future integration draft. It does not create a new report-only
+surface, CLI, fixture contract, or default entrypoint.
+
+| Cardanalysis Surface | Campaign Curve Fields | Advisory Use | Must Not Do |
+| --- | --- | --- | --- |
+| `deck_compression_report_v1` | `compression_state`, `removal_progress`, `deck_compression`, `combo_reachability`, `online_timing_modifier` | Explain route-dependent online claims, starter pollution, curated deck cleanup cost, and invalid compression equivalences. | Do not convert compression burden into hard failure or exact route probability. |
+| `mechanism_axis_discovery_v1` | `mechanism_online_state`, `mechanism_online_timing`, `mechanism_online_rate`, `combo_reachability` | Name candidate mechanism identity, foundation-axis dependency, activation paths, and missing prerequisites. | Do not select campaign phase, project temperament, legality, or encounter readiness. |
+| `card_package_health_v1` | `deck_maturity_state`, `support_density`, `payoff_density`, `off_axis_drag`, `bridge_before_payoff` | Distinguish assembling identity, payoff-only risk, bridge readiness, redundancy, and slot-fit pressure. | Do not promote package health to deck pass/fail or recommendation authority. |
+| `design_iteration_brief_v1` | `fail_state_resilience`, `setup_burden`, `next_evidence`, `encounter_validation_needs` | Surface setup burden, brittle fail states, backup-plan visibility, and next validation prompts. | Do not create blocking design verdicts or monster tuning requirements. |
+| `mechanism_fun_health_v1` | `over_online` notes, texture risk, degeneracy signals, recovery questions | Provide advisory language for texture flattening, anti-infinite review prompts, and health discussion context. | Do not declare loops invalid or change hard gates. |
+| `cardanalysis_evidence_bundle_v1` | `evidence_refs`, `source_aligned` evidence state, missing source evidence | Attach source refs and cross-surface evidence summaries. | Do not resolve conflicts as pass/fail authority. |
+| learned/reranker shadow output | optional `notes` only after explicit review | Can be cited as experimental context if default-off and clearly labeled. | Must not decide phase, legality, gate status, or curve checkpoint readiness. |
+
+Suggested mapping payload:
+
+```json
+{
+  "cardanalysis_curve_mapping": {
+    "contract_version": "campaign_curve_cardanalysis_mapping_draft_v1",
+    "evaluation_mode": "report_only",
+    "source_surface": "deck_compression_report_v1",
+    "mapped_curve_fields": [
+      "compression_state",
+      "removal_progress",
+      "online_timing_modifier"
+    ],
+    "reason_codes": [
+      "curated_deck_skips_removal_cost",
+      "discard_filtering_is_not_persistent_removal"
+    ],
+    "missing_evidence": ["campaign_route_context"],
+    "authority_boundary": "advisory_context_only"
+  }
+}
+```
+
+Mapping rules:
+
+- Use canonical report-only owners from the registry instead of creating duplicate V1
+  surfaces with overlapping meaning.
+- Keep `evaluation_mode=report_only` visible in any exchanged context.
+- Missing cardanalysis evidence should remain `missing_evidence`, not become a zero
+  score or hidden no-burden assumption.
+- Learned/reranker shadow output can be cited only as explicitly reviewed context and
+  must stay default-off.
+- The campaign curve model may request `encounter_validation_needs`; cardanalysis
+  must not turn those needs into monster stats or hard recommendations.
 
 Potential output context for cardanalysis:
 
