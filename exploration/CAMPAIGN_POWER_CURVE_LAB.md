@@ -63,6 +63,34 @@ Out of scope:
   - Define 3-5 concrete `curve_checkpoint` examples for starter, build, pivot, and
     mature phases, still report-only and without monster numbers.
 
+### 2026-04-27 Round 2
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What is the smallest checkpoint suite that makes the abstract curve vocabulary
+    usable for later encounter validation without adding monster numbers or pass/fail
+    authority?
+- Model increment:
+  - Added four example `curve_checkpoint` records for `starter`, `build`, `pivot`,
+    and `mature`.
+  - Bound each checkpoint to a design question, player-state focus, enemy pressure
+    request, validation need, interpretation notes, and explicit non-authority notes.
+- Assumptions:
+  - Checkpoints should use qualitative pressure bands first; scalar ranges can come
+    later only after the team has real campaign pacing evidence.
+  - A checkpoint is useful when it explains what an encounter should reveal, not when
+    it says whether the deck passed.
+  - `late` is intentionally deferred until the model has a better handle on mature
+    phase fail-state and anti-infinite language.
+- Risks:
+  - The examples may look more certain than they are if later reports omit
+    `evidence_state` and `authority_boundary`.
+  - Mature-phase pressure can easily become hidden numeric tuning if future work jumps
+    straight to enemy stats.
+- Next round entry:
+  - Add a compact `checkpoint_evidence_state` vocabulary so future checkpoints can
+    distinguish hypothetical, reviewed, playtest-observed, and stale assumptions.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -272,6 +300,265 @@ Compression should alter curve interpretation before it alters any score authori
   }
 }
 ```
+
+## Curve Checkpoint Examples V0
+
+These examples are deliberately qualitative. They are not balance targets and do not
+authorize content, gates, or monster numbers.
+
+Each checkpoint should answer:
+
+- what design question is this round asking?
+- which player strength dimensions matter most?
+- which enemy pressure dimensions are being requested?
+- what evidence is missing before the checkpoint should guide real encounters?
+- what authority boundary prevents the checkpoint from becoming a pass/fail decision?
+
+### `starter_round_1_baseline_survival_v0`
+
+```json
+{
+  "curve_checkpoint": {
+    "checkpoint_id": "starter_round_1_baseline_survival_v0",
+    "phase": "starter",
+    "round_index_hint": 1,
+    "evaluation_mode": "report_only",
+    "design_question": "Can the starting deck answer basic pressure without a mechanism?",
+    "player_state_focus": [
+      "frontload",
+      "block_reliability",
+      "fail_state_resilience"
+    ],
+    "expected_player_shape": {
+      "frontload": "low_to_medium",
+      "scaling": "low",
+      "block_reliability": "low_to_medium",
+      "draw_velocity": "low",
+      "energy_burst": "low",
+      "deck_compression": "none",
+      "removal_progress": "none",
+      "mechanism_online_rate": "absent",
+      "combo_reachability": "absent",
+      "fail_state_resilience": "starter_baseline"
+    },
+    "enemy_pressure_request": {
+      "frontload_damage": "low_to_medium",
+      "defense_check": "low",
+      "multi_enemy_pressure": "optional_low",
+      "status_pollution": "avoid",
+      "mechanism_disruption": "avoid",
+      "anti_infinite_pressure": "avoid"
+    },
+    "encounter_validation_need": [
+      "starter_damage_baseline_visibility",
+      "starter_block_baseline_visibility",
+      "no_mechanism_required"
+    ],
+    "interpretation_notes": [
+      "do_not_expect_mechanism_identity",
+      "do_not_punish_low_draw_velocity",
+      "frontload_or_block_failure_is_a_review_prompt_not_a_gate"
+    ],
+    "authority_boundary": "advisory_context_only"
+  }
+}
+```
+
+Design reading:
+
+- This checkpoint is for baseline encounter readability, not archetype validation.
+- It should reveal whether starter friction is visible and survivable.
+- It should avoid status pollution and disruption because those test later deck
+  maturity, not the opening curve.
+
+### `build_round_5_identity_assembly_v0`
+
+```json
+{
+  "curve_checkpoint": {
+    "checkpoint_id": "build_round_5_identity_assembly_v0",
+    "phase": "build",
+    "round_index_hint": 5,
+    "evaluation_mode": "report_only",
+    "design_question": "Is the deck assembling a real identity or only carrying payoff cards?",
+    "player_state_focus": [
+      "frontload",
+      "draw_velocity",
+      "mechanism_online_rate",
+      "fail_state_resilience"
+    ],
+    "deck_maturity_focus": [
+      "support_density",
+      "payoff_density",
+      "bridge_before_payoff",
+      "off_axis_drag"
+    ],
+    "expected_player_shape": {
+      "frontload": "medium",
+      "scaling": "low_to_medium",
+      "block_reliability": "medium_or_gap_visible",
+      "draw_velocity": "low_to_medium",
+      "energy_burst": "low_or_conditional",
+      "deck_compression": "low_or_unknown",
+      "removal_progress": "low_or_unknown",
+      "mechanism_online_rate": "assembling",
+      "combo_reachability": "low",
+      "fail_state_resilience": "partial"
+    },
+    "enemy_pressure_request": {
+      "frontload_damage": "medium",
+      "defense_check": "medium",
+      "multi_enemy_pressure": "low_to_medium",
+      "status_pollution": "low",
+      "draw_disruption": "avoid_or_low",
+      "mechanism_disruption": "avoid"
+    },
+    "encounter_validation_need": [
+      "payoff_only_detection",
+      "bridge_or_support_gap_visibility",
+      "first_identity_pressure_without_hard_counter"
+    ],
+    "interpretation_notes": [
+      "mechanism_not_online_is_expected_for_many_decks",
+      "payoff_present_without_bridge_should_report_assembly_gap",
+      "enemy_pressure_should_not_require_final_shell"
+    ],
+    "authority_boundary": "advisory_context_only"
+  }
+}
+```
+
+Design reading:
+
+- The checkpoint separates an actual assembling identity from a deck that only drafted
+  a high-ceiling payoff.
+- Enemy pressure can ask for consistency, but should not yet hard-counter missing
+  compression or exact combo reachability.
+- This is the first checkpoint where package health language can be useful, especially
+  `slot_fit`, `payoff_timing`, and `bridge_before_payoff`.
+
+### `pivot_round_8_conditional_online_v0`
+
+```json
+{
+  "curve_checkpoint": {
+    "checkpoint_id": "pivot_round_8_conditional_online_v0",
+    "phase": "pivot",
+    "round_index_hint": 8,
+    "evaluation_mode": "report_only",
+    "design_question": "Can the deck keep its main mechanism active under light disruption?",
+    "player_state_focus": [
+      "mechanism_online_rate",
+      "combo_reachability",
+      "draw_velocity",
+      "deck_compression",
+      "fail_state_resilience"
+    ],
+    "expected_player_shape": {
+      "frontload": "medium",
+      "scaling": "medium",
+      "block_reliability": "medium",
+      "draw_velocity": "medium_or_named_gap",
+      "energy_burst": "conditional_or_gap_visible",
+      "deck_compression": "low_to_medium_or_route_dependent",
+      "removal_progress": "low_to_medium_or_unknown",
+      "mechanism_online_rate": "conditional_online",
+      "combo_reachability": "conditional",
+      "fail_state_resilience": "must_be_visible"
+    },
+    "enemy_pressure_request": {
+      "frontload_damage": "medium",
+      "defense_check": "medium",
+      "draw_disruption": "low_to_medium",
+      "energy_tax": "low",
+      "status_pollution": "low_to_medium",
+      "mechanism_disruption": "low_to_medium",
+      "anti_infinite_pressure": "avoid_or_trace_only"
+    },
+    "encounter_validation_need": [
+      "conditional_online_claim_visibility",
+      "compression_route_gap_visibility",
+      "fallback_line_under_disruption"
+    ],
+    "interpretation_notes": [
+      "light_disruption_should_reveal_brittleness_without_becoming_a_hard_counter",
+      "missing_removal_context_should_remain_unknown",
+      "route_dependent_online_is_an_honesty_label_not_a_failure"
+    ],
+    "authority_boundary": "advisory_context_only"
+  }
+}
+```
+
+Design reading:
+
+- This checkpoint is the first real mechanism pressure point.
+- It should expose whether the deck is conditionally online, online-if-compressed, or
+  still payoff-only.
+- It should preserve compression distinctions: removal, transform, exhaust, discard
+  filtering, and draw selection are not equivalent.
+
+### `mature_round_12_ceiling_and_recovery_v0`
+
+```json
+{
+  "curve_checkpoint": {
+    "checkpoint_id": "mature_round_12_ceiling_and_recovery_v0",
+    "phase": "mature",
+    "round_index_hint": 12,
+    "evaluation_mode": "report_only",
+    "design_question": "Does the deck have ceiling, defense, and recovery when the main plan misses?",
+    "player_state_focus": [
+      "scaling",
+      "block_reliability",
+      "mechanism_online_rate",
+      "combo_reachability",
+      "fail_state_resilience"
+    ],
+    "expected_player_shape": {
+      "frontload": "medium_or_solved_by_plan",
+      "scaling": "medium_to_high",
+      "block_reliability": "medium_to_high_or_named_gap",
+      "draw_velocity": "medium_to_high",
+      "energy_burst": "conditional_to_high",
+      "deck_compression": "medium_or_route_dependent",
+      "removal_progress": "medium_or_gap_visible",
+      "mechanism_online_rate": "online_or_strong_conditional",
+      "combo_reachability": "credible_or_route_dependent",
+      "fail_state_resilience": "required_visible"
+    },
+    "enemy_pressure_request": {
+      "frontload_damage": "medium",
+      "scaling_race": "medium_to_high",
+      "defense_check": "medium_to_high",
+      "burst_check": "medium",
+      "multi_enemy_pressure": "medium",
+      "mechanism_disruption": "medium",
+      "anti_infinite_pressure": "trace_or_low_report_only"
+    },
+    "encounter_validation_need": [
+      "ceiling_vs_scaling_race",
+      "defensive_reliability_under_pressure",
+      "main_plan_miss_recovery",
+      "anti_infinite_notes_without_authority"
+    ],
+    "interpretation_notes": [
+      "anti_infinite_pressure_is_not_a_loop_invalidity_verdict",
+      "strong_ceiling_without_fail_state_should_report_review_need",
+      "enemy_numbers_remain_out_of_scope"
+    ],
+    "authority_boundary": "advisory_context_only"
+  }
+}
+```
+
+Design reading:
+
+- Mature pressure can combine scaling, defense, burst, and disruption.
+- This checkpoint should not jump to final monster values. It only defines what a
+  later encounter archetype should reveal.
+- A strong mechanism with poor fail-state resilience should produce a review note, not
+  a blocking verdict.
 
 ## Encounter Archetypes
 
