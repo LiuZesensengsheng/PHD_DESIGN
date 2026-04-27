@@ -448,6 +448,38 @@ Out of scope:
   - Run focused validation, fix any contract drift, and then ask main-agent review to
     compare phase/checkpoint assumptions against deeper campaign pacing evidence.
 
+### 2026-04-27 Round 17
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - How should checkpoint `evidence_state` defaults stay honest once later-phase
+    cases start citing real campaign reward and encounter sources?
+- Model increment:
+  - Calibrated phase-by-phase `evidence_state` defaults in the canonical
+    implementation instead of treating any case with `evidence_refs` as automatically
+    `source_aligned`.
+  - Added phase-specific `calibration_notes`, `missing_evidence`, and late-phase
+    `allowed_use=exploration_prompt` defaults to the report payload.
+  - Updated reviewed fixture cases so `early`, `build`, `pivot`, `mature`, and
+    `late` checkpoints now cite the current campaign sources that justify their
+    advisory status.
+- Assumptions:
+  - Tutorial encounters/rewards are enough to source-align `starter` baseline loop
+    claims.
+  - Reward-service and reward-bundle surfaces justify identity/assembly language, but
+    not persistent removal, upgrade, transform, or shop-route guarantees.
+  - TA encounter files justify pressure-shape language for `pivot` and `mature`,
+    without promoting those checkpoints past `review_needed`.
+- Risks:
+  - Phase calibration can still overstate confidence if future checkpoint authors omit
+    `evidence_refs` or reuse `source_aligned` manually.
+  - Current calibration is keyed to source visibility, not playtest depth; later
+    runtime pacing evidence may still force round-band revisions.
+- Next round entry:
+  - Compare these calibrated defaults against real campaign block sequencing so
+    `early`/`build`/`pivot` round hints reflect actual board pacing, not only reward
+    and encounter surface availability.
+
 ## Model V1
 
 ### Entity Vocabulary

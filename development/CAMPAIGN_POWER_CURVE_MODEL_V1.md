@@ -18,12 +18,14 @@ This spec is source-aligned with the current campaign and combat-analysis surfac
   optional `encounter_id`.
 - Current block vocabulary includes combat, event, shop, boss/elite-like, and DDL
   concepts, but shop economy is not yet a reviewed removal/upgrade route model.
-- Tutorial rewards include card-pool picks and resources. Reward services also expose
-  inspiration, trait, and card-pick paths.
+- Tutorial rewards include card-pool picks and resources. Reward services and the
+  bundle-style post-combat flow also expose inspiration, trait, and card-pick paths.
 - Current campaign rewards do not provide enough evidence to treat removal, transform,
   upgrade, or shop access as guaranteed route solutions.
 - Existing encounter data includes tutorial boss/normal encounters and TA encounters
   with single, duo, multi-enemy, elite, countdown, and chore-host pressure shapes.
+- Those encounter files support pressure-shape language, not late-phase pacing proof,
+  mature checkpoint promotion, or monster-number authority.
 - Cardanalysis report-only surfaces already cover deck compression, package health,
   design iteration, mechanism-axis discovery, mechanism fun/health, and evidence
   bundles. They can provide context, not authority.
@@ -53,11 +55,20 @@ The phase bands remain reviewed assumptions until campaign pacing data is deeper
 | Phase | Round Hint | Current Evidence State | Notes |
 | --- | --- | --- | --- |
 | `starter` | `0-1` | `source_aligned` | Current campaign can represent opening turns and baseline combat/reward loops. |
-| `early` | `2-3` | `review_needed` | Needs more reward pacing evidence before identity timing is trusted. |
-| `build` | `4-6` | `review_needed` | Current card-pick rewards support assembly language, but route economy remains unknown. |
-| `pivot` | `7-9` | `review_needed` | Mechanism online claims need compression/economy evidence before promotion. |
-| `mature` | `10-13` | `review_needed` | Useful as a design target, not yet playtest-observed. |
-| `late` | `14+` | `hypothesis_draft` | Needs explicit late checkpoint and anti-infinite wording review. |
+| `early` | `2-3` | `review_needed` | Reward services show identity-hint paths, but early reward spacing and observation are not yet reviewed. |
+| `build` | `4-6` | `review_needed` | Card-pick rewards support assembly language, but removal, upgrade, and shop routes remain untrusted. |
+| `pivot` | `7-9` | `review_needed` | TA encounter data supports disruption-pressure language, not honest compression/removal route claims. |
+| `mature` | `10-13` | `review_needed` | Mature pressure shapes are source-visible, but ceiling/recovery checkpoints are not playtest-observed. |
+| `late` | `14+` | `hypothesis_draft` | Late pressure is only shape-aligned; checkpoint timing and anti-infinite wording still need dedicated review. |
+
+Evidence-state defaults must stay phase-calibrated:
+
+- non-starter phases do not become `source_aligned` only because they cite current
+  campaign source files
+- `late` defaults to `hypothesis_draft` and `allowed_use=exploration_prompt` even if
+  pressure-shape sources exist
+- `curve_checkpoint.evidence_state.calibration_notes` should explain which source
+  surfaces justify the current label and which claims remain out of bounds
 
 ## Required Payload Sections
 
