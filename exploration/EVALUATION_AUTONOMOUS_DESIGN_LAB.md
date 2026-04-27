@@ -538,6 +538,99 @@ revision_note:
 If the next revision cannot name exactly one parameter or one package role to adjust,
 the brief is still too broad and should return to `review_only_candidate`.
 
+## Package Skeleton Readiness For `charge_turns`
+
+This checklist decides whether a role-level `package_skeleton` is ready to be handed to
+the canonical report-only surfaces. It does not decide whether the package is good, fun,
+balanced, legal, or ready for card generation.
+
+### Readiness Labels
+
+Use these labels only in prose:
+
+| Label | Meaning |
+| --- | --- |
+| `skeleton_ready_for_review` | All five roles are named, the safety valve is non-empty, and the brief states what evidence to request next. |
+| `skeleton_partial` | At least three roles are named, but one required role or evidence request is still vague. |
+| `skeleton_payoff_only` | Payoff is clearer than anchor, support, or glue. |
+| `skeleton_goodstuff_blur` | Support roles are generic value and do not prove delayed charge/release identity. |
+| `skeleton_fail_state_gap` | Safety valve is missing, `none_visible`, or not tied to charge state. |
+| `skeleton_reachability_unknown` | Roles are clear, but compression/removal assumptions are not named. |
+
+These labels should not appear as evaluator outputs unless a later implementation task
+explicitly adds reviewed fixtures and tests.
+
+### Role Checklist
+
+| Role | Required for `charge_turns` review | Common weak version | First revision action |
+| --- | --- | --- | --- |
+| `anchor` | Names the visible charge state or delayed progress source. | Any strong card that happens to wait. | `sharpen_axis_proof` |
+| `support` | Helps the player survive or stay productive while charge builds. | Generic block, damage, draw, or energy that would fit any package. | `build_support_before_payoff` |
+| `glue` | Lets the player adjust timing, hold state, filter, or bridge setup to release. | More throughput without a timing decision. | `restore_timing_choice` |
+| `payoff` | Converts charge into at least two release modes or one release plus a meaningful tradeoff. | One large delayed number. | `add_release_fork` |
+| `safety_valve` | Gives partial progress, defense, selection recovery, or state conversion when full release misses. | `none_visible`, blank miss, or generic survival. | `raise_fail_state_floor` |
+
+### Minimum Skeleton Shape
+
+```yaml
+package_skeleton_readiness:
+  evaluation_mode: report_only
+  source_template: charge_turns_delayed_release_probe_v1
+  readiness_label: skeleton_partial
+  roles:
+    anchor:
+      present: true
+      review_note: visible_charge_state_named
+    support:
+      present: true
+      review_note: setup_turns_have_output
+    glue:
+      present: false
+      review_note: timing_bridge_missing
+    payoff:
+      present: true
+      review_note: release_conversion_named
+    safety_valve:
+      present: true
+      fail_state_floor: partial_progress
+  missing_role_actions:
+    glue: restore_timing_choice
+  next_report_requests:
+    - card_package_health_summary
+    - mechanism_fun_health_summary
+```
+
+If `anchor`, `support`, or `glue` is missing, the skeleton should not use `promote`
+wording. If `payoff` is the only clear role, use `skeleton_payoff_only`. If
+`safety_valve` is missing or `none_visible`, use `skeleton_fail_state_gap` even when
+the other roles are clear.
+
+### Role Completeness Rules
+
+- `anchor` cannot be "the payoff card." The anchor must make progress visible before
+  release.
+- `support` cannot be counted as package proof unless it helps the setup window or the
+  charge state specifically.
+- `glue` must create a timing, hold, bridge, filter, or state-management decision.
+- `payoff` must be staged after anchor/support/glue in the brief wording.
+- `safety_valve` must explain what happens when full release misses.
+- Any role can be `unknown`, but unknown roles force `skeleton_partial` or a narrower
+  failure label.
+
+### Handoff Rule
+
+A `charge_turns` package skeleton is ready for report-only review when it can answer:
+
+1. What is charging?
+2. What keeps the player from paying dead setup turns?
+3. What lets release timing become a choice?
+4. What does the release convert into?
+5. What happens if the full release misses?
+6. Which canonical report should review the next uncertainty?
+
+If any answer would require final card text, exact numbers, or a new evaluator, the
+skeleton is not ready; return to role-level revision.
+
 ## Working Log
 
 ### 2026-04-27 Slice 1
@@ -703,3 +796,42 @@ Next round entry:
 
 - Add one minimal package-skeleton readiness checklist for `charge_turns`, focused on
   anchor/support/glue/payoff/safety-valve completeness and still docs-only.
+
+### 2026-04-27 Slice 5
+
+Evaluation/design problem:
+
+- Decide when a `charge_turns` role-level package skeleton is ready to be handed to
+  canonical report-only review without becoming card generation or a gate.
+
+Model increment:
+
+- Added `Package Skeleton Readiness For charge_turns`.
+- Defined prose-only readiness labels such as `skeleton_ready_for_review`,
+  `skeleton_payoff_only`, `skeleton_goodstuff_blur`, and
+  `skeleton_fail_state_gap`.
+- Added a five-role checklist for anchor, support, glue, payoff, and safety valve.
+
+Example mechanism/package:
+
+- Continued using `delayed_charge_release`.
+- The example readiness payload marks glue missing and maps that missing role to
+  `restore_timing_choice`.
+
+Judgment rules:
+
+- The anchor cannot be the payoff card.
+- Support only counts when it helps the setup window or charge state specifically.
+- Glue must create a timing, hold, bridge, filter, or state-management decision.
+- Safety valve must explain what happens when full release misses.
+- Missing roles keep the skeleton at `skeleton_partial` or a narrower failure label.
+
+Failure case:
+
+- If payoff is the only clear role, label the skeleton `skeleton_payoff_only` and
+  revise support/glue before writing a larger release fantasy.
+
+Next round entry:
+
+- Add one minimal parameter-search note for the first `short` versus `medium`
+  `charge_turns` probe, still using bands and no exact balance numbers.
