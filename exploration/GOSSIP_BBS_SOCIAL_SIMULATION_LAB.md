@@ -1982,3 +1982,157 @@ Newly named derived signals:
 Use `boss_defeated` next. It can test the high-salience version of combat
 success and whether it creates a separate achievement thread rather than only
 thawing the old one.
+
+## Working Log: 2026-04-27 Round 12
+
+### Round Event
+
+`boss_defeated`
+
+This round models a high-salience combat milestone after the old BBS thread has
+partly thawed. The key question is whether the achievement should split into a
+new thread instead of being absorbed by the older scandal-tainted thread.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_boss_defeated_001",
+  "event_type": "boss_defeated",
+  "turn": 33,
+  "visibility": "public_after_combat",
+  "source_actor": "combat_result_feed",
+  "target_refs": [
+    "player",
+    "package_low_cost_recursion_public_v0",
+    "bbs_thread_unusual_deck_018_001"
+  ],
+  "evidence": {
+    "boss_id": "boss_midterm_committee_v0",
+    "boss_salience": 0.86,
+    "performance_margin": 0.62,
+    "repeat_success_count": 4,
+    "audience_overlap": 0.66,
+    "thread_split_pressure": 0.71,
+    "scandal_drag": 0.22
+  },
+  "faction_refs": ["deck_theory_faction", "lab_a", "rival_lab_b"]
+}
+```
+
+### Model Increment
+
+This slice adds a milestone split path:
+
+`boss_defeated -> milestone topic -> new achievement thread -> long memory anchor`
+
+Newly named derived signals:
+
+- `boss_salience`: public importance of the defeated boss.
+- `milestone_status`: whether the result qualifies as ordinary, notable, or
+  milestone.
+- `thread_split_pressure`: pressure to open a clean achievement thread.
+- `scandal_drag`: amount of old scandal memory that follows the topic.
+- `long_memory_anchor`: durable actor memory created by the milestone.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_boss_defeated_033_001",
+    "parent_thread_id": "bbs_thread_unusual_deck_018_001",
+    "topic_id": "topic_boss_defeated_low_cost_recursion_001",
+    "status": "new_milestone_thread",
+    "opened_turn": 33,
+    "thread_lifetime": 7,
+    "topic_heat": 0.93,
+    "reply_pressure": 0.64,
+    "public_sentiment": 0.68,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "scandal_summary_link_only": true,
+      "achievement_thread_split": true
+    }
+  },
+  "participant_roles": {
+    "combat_result_feed": "milestone_evidence_source",
+    "player": "milestone_subject",
+    "deck_theory_faction": "package_interpreter",
+    "lab_a": "prestige_supporter",
+    "rival_lab_b": "skeptical_rival"
+  },
+  "stance_distribution": {
+    "support": 0.45,
+    "skepticism": 0.08,
+    "theorycraft": 0.20,
+    "prestige_claim": 0.18,
+    "privacy_concern": 0.04,
+    "moderator_neutral": 0.05
+  },
+  "milestone_state": {
+    "achievement_memory_id": "memory_player_boss_defeat_033_001",
+    "boss_salience": 0.86,
+    "milestone_status": "boss_defeat_milestone",
+    "thread_split_pressure": 0.71,
+    "scandal_drag": 0.22,
+    "long_memory_anchor": 0.78,
+    "memory_decay_rate": 0.05
+  },
+  "package_state": {
+    "package_topic_id": "package_low_cost_recursion_public_v0",
+    "observation_confidence": 0.79,
+    "package_identity_uncertainty": 0.28,
+    "public_memory_status": "milestone_linked_package_memory"
+  },
+  "heat_delta": {
+    "new_topic_heat": 0.93,
+    "old_thread_heat": -0.14,
+    "prestige_heat": 0.37,
+    "scandal_heat": -0.08
+  },
+  "relationship_delta": {
+    "lab_a->player": 0.10,
+    "deck_theory_faction->player": 0.07,
+    "rival_lab_b->player": 0.03,
+    "public->player": 0.12
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "rumor_debunked",
+      "condition": "milestone evidence helps resolve the staged-claim rumor"
+    },
+    {
+      "hook_type": "faction_event",
+      "condition": "faction claim pressure rises again around the milestone"
+    },
+    {
+      "hook_type": "decay",
+      "condition": "old scandal thread decays while new milestone thread remains active"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `milestone_state`, `boss_salience`, `milestone_status`,
+  `thread_split_pressure`, `scandal_drag`, and `long_memory_anchor`.
+- If `boss_salience >= 0.80` and `thread_split_pressure >= 0.60`, create a new
+  thread with a parent link instead of only updating the old thread.
+- A milestone can lower old scandal heat by competing for attention, but the
+  old thread remains referenced by summary link.
+- `long_memory_anchor` lowers memory decay more strongly than ordinary
+  `combat_result`.
+
+### Risks
+
+- Boss victories can over-clean the scandal if old links are removed.
+- Thread splitting can fragment memory if parent links are missing.
+- Prestige support should not automatically become faction ownership.
+
+### Next Round Entry
+
+Use a `rumor_debunked` backfire variant next. It can test whether resolving the
+staged-claim rumor lowers credibility while briefly raising heat.
