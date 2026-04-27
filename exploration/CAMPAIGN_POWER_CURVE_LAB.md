@@ -117,6 +117,32 @@ Out of scope:
     `assembling`, `conditional_online`, `online`, and `over_online` to evidence needs
     by phase.
 
+### 2026-04-27 Round 4
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - How should the model describe mechanism online timing by phase without turning
+    online labels into pass/fail authority?
+- Model increment:
+  - Added `mechanism_online_timing` as a phase-aware rubric.
+  - Mapped `absent`, `assembling`, `conditional_online`, `online`, and `over_online`
+    to allowed phase reads and evidence needs.
+  - Added transition evidence rules for moving between online labels.
+- Assumptions:
+  - Most healthy decks should not be expected to be `online` before `pivot`.
+  - `conditional_online` is a useful honesty label and should not be treated as a
+    weaker pass/fail grade.
+  - `over_online` is a review prompt for encounter texture, not proof that the player
+    mechanism is invalid.
+- Risks:
+  - Future encounter work could overuse the rubric as a readiness checklist unless
+    reports keep `evaluation_mode=report_only`.
+  - `starter` and `early` labels may need revision once actual campaign reward pacing
+    is observed.
+- Next round entry:
+  - Define how `economy_state` and `compression_state` should modify online timing,
+    especially removal, upgrade, shop, transform, and in-combat exhaust assumptions.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -219,6 +245,81 @@ Mechanism online timing should consider:
 - removal and deck compression
 - enemy-state prerequisites
 - whether the player can survive the setup window
+
+### Mechanism Online Timing Rubric
+
+`mechanism_online_timing` is a report-only interpretation layer over
+`mechanism_online_state`. It describes what evidence is needed for an online label at
+each phase.
+
+It should not answer "is the deck good enough?" It should answer "what kind of online
+claim is honest for this phase and evidence state?"
+
+#### Label Meanings
+
+| Label | Timing Meaning | Evidence Needed |
+| --- | --- | --- |
+| `absent` | No meaningful mechanism identity is visible yet. | No support/payoff relationship, no repeated trigger pattern, or only generic frontload/defense. |
+| `assembling` | Pieces exist, but the deck is still paying setup, density, or bridge costs. | At least one support/payoff link plus visible missing prerequisites. |
+| `conditional_online` | The mechanism works in some fights or draw states, but depends on timing, compression, enemy state, or resource alignment. | Named prerequisites, named failure mode, and at least one credible activation path. |
+| `online` | The mechanism shapes most relevant encounters in the phase without exact luck. | Support/payoff density, draw/resource access, survival window, and fallback evidence. |
+| `over_online` | The mechanism can flatten intended pressure or bypass encounter texture. | High repeatability plus low remaining constraint; still report-only and never a legality verdict. |
+
+#### Phase Expectations
+
+| Phase | Normal Honest Labels | Suspicious Labels | Evidence Notes |
+| --- | --- | --- | --- |
+| `starter` | `absent`, rare `assembling` | `conditional_online`, `online`, `over_online` | A starter checkpoint should not require mechanism identity. If a mechanism appears, it is usually a tutorial/scripted exception or unusually strong starter package. |
+| `early` | `absent`, `assembling` | `online`, `over_online` | First identity hints can appear, but claims should focus on frontload, block, and first support links. |
+| `build` | `assembling`, early `conditional_online` | `over_online` | This is the first phase where support/payoff, bridge-before-payoff, and package density can justify a conditional claim. |
+| `pivot` | `conditional_online`, narrow `online`, remaining `assembling` | `over_online` without review notes | The model should ask whether the mechanism survives light disruption and whether missing compression or economy evidence keeps it conditional. |
+| `mature` | `online`, `conditional_online`, review-only `over_online` | `absent` without strong compensating frontload/scaling | Mature decks should show either a functioning plan or an explicit reason why a non-mechanism plan still answers pressure. |
+| `late` | `online`, `over_online`, strong `conditional_online` | `absent`, weak `assembling` | Late checks may include anti-infinite notes, but those notes cannot declare a player loop invalid. |
+
+#### Transition Evidence
+
+Use these evidence shifts when changing labels:
+
+| Transition | Needed Evidence | Common False Positive |
+| --- | --- | --- |
+| `absent -> assembling` | A support/payoff relationship, repeated trigger, or named package identity appears. | One exciting payoff card without bridge, support, or survival. |
+| `assembling -> conditional_online` | The deck has at least one credible activation path plus named missing prerequisites. | Assuming the best draw sequence is the normal case. |
+| `conditional_online -> online` | Activation works across common draw states or has enough draw, selection, energy, compression, and survival support. | Counting discard filtering as persistent compression or ignoring first-cycle survival. |
+| `online -> over_online` | Repeatability and low constraint begin to flatten enemy pressure or matchup texture. | Treating every loop, infinite, or high-ceiling combo as degenerate by category. |
+| `over_online -> online` | Added costs, constraints, matchup pressure, or player choices keep texture visible. | Hiding anti-infinite concerns because the deck still has some fail states. |
+| `online -> conditional_online` | New evidence shows route dependency, compression burden, unreliable survival, or narrow matchup coverage. | Downgrading because one encounter archetype pressures the deck as intended. |
+
+#### Evidence Fields
+
+Future checkpoints may attach:
+
+```json
+{
+  "mechanism_online_timing": {
+    "label": "conditional_online",
+    "phase": "pivot",
+    "activation_paths": ["support_density_plus_draw_bridge"],
+    "missing_prerequisites": ["removal_route", "first_cycle_survival"],
+    "phase_read": "appropriate_but_needs_validation",
+    "transition_from_prior_phase": "assembling_to_conditional_online",
+    "reason_codes": [
+      "payoff_supported_but_compression_unknown",
+      "light_disruption_should_reveal_brittleness"
+    ],
+    "authority_boundary": "report_only_not_readiness_gate"
+  }
+}
+```
+
+Required conventions:
+
+- `phase_read` must be advisory language, not `pass` or `fail`.
+- `missing_prerequisites` should remain visible instead of being folded into a scalar.
+- `activation_paths` should name why the mechanism can happen, not only that it scored
+  above a threshold.
+- `over_online` must include reason codes for remaining constraints or texture risks.
+- A label change should preserve prior uncertainty when economy or compression context
+  is still unknown.
 
 ### Compression And Removal Rules
 
