@@ -143,6 +143,31 @@ Out of scope:
   - Define how `economy_state` and `compression_state` should modify online timing,
     especially removal, upgrade, shop, transform, and in-combat exhaust assumptions.
 
+### 2026-04-27 Round 5
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - How should economy and compression context modify mechanism online timing without
+    pretending the model knows route probability or monster numbers?
+- Model increment:
+  - Added `online_timing_modifier` rules for economy and compression.
+  - Split persistent route evidence from in-combat mitigation evidence.
+  - Added modifier labels that can advance, delay, condition, or stale-check online
+    timing claims while staying report-only.
+- Assumptions:
+  - Economy evidence changes the route credibility of an online claim, not the final
+    shell's internal coherence.
+  - Compression evidence should distinguish removal, transform, self-exhaust, targeted
+    exhaust, discard filtering, draw selection, and upgrade pressure.
+  - Missing route context should remain `unknown`, not become a hidden zero-cost route.
+- Risks:
+  - Future work could over-credit shops or events as guaranteed access unless the
+    modifier keeps opportunity cost and route risk visible.
+  - Transform can look like removal unless replacement quality is explicitly recorded.
+- Next round entry:
+  - Define 2-3 more encounter archetypes that use these modifiers, especially a
+    build-phase payoff-only detector and a pivot compression-route probe.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -320,6 +345,100 @@ Required conventions:
 - `over_online` must include reason codes for remaining constraints or texture risks.
 - A label change should preserve prior uncertainty when economy or compression context
   is still unknown.
+
+### Economy And Compression Timing Modifiers
+
+`economy_state` and `compression_state` modify the honesty of online timing claims.
+They do not make a mechanism legal, strong, or validated by themselves.
+
+Use modifiers when the same final-shell read could mean different campaign realities:
+
+- the final shell is coherent, but removals are missing
+- the core card is upgraded, but support density is still thin
+- the deck filters well in-combat, but persistent starter pollution remains
+- shop access could solve the route, but only by spending the same economy needed for
+  core cards, upgrades, or survival
+
+#### Modifier Labels
+
+| Label | Meaning | Online Timing Effect |
+| --- | --- | --- |
+| `advance_online_claim` | Route or compression evidence makes an earlier online label more credible. | May move `assembling` toward `conditional_online`, or `conditional_online` toward `online`, with reasons. |
+| `hold_conditional` | Evidence supports activation, but route, economy, or compression gaps remain visible. | Keep `conditional_online` even if final-shell viability looks high. |
+| `delay_online_claim` | Missing route or compression evidence makes the online claim too optimistic for the phase. | Move `online` wording toward `conditional_online`, `online_if_compressed`, or `route_dependent_online`. |
+| `route_dependent` | The mechanism can work, but depends on unverified shop, event, removal, transform, or upgrade access. | Keep online timing advisory and require route notes. |
+| `stale_check_needed` | A prior online assumption may no longer fit current reward, economy, or card-pool pacing. | Do not use the timing claim for new encounter validation until reviewed. |
+
+#### Economy Inputs
+
+| Input | Can Advance Timing When | Should Delay Or Condition Timing When |
+| --- | --- | --- |
+| `upgrade_progress` | A required cost, damage, block, draw, or state breakpoint is already upgraded. | The upgrade competes with survival, core card purchase, or another required breakpoint. |
+| `removal_access` | Actual removals happened, or route evidence makes starter cleanup plausible. | Access is unknown, unaffordable, or competing with core purchases. |
+| `shop_window` | The route has a known shop window and enough economy for the needed action. | The shop is hypothetical, too late, or its opportunity cost is high. |
+| `transform_access` | Replacement quality is known or bounded as on-axis/low-risk. | Replacement quality is unknown, off-axis, high-cost, or could break exactness. |
+| `event_access` | The event is observed or explicitly part of a reviewed route note. | The event is only speculative and should not be counted as available. |
+| `healing_pressure` | The deck can spend economy on upgrades/removal without risking survival. | Healing needs consume the same route budget needed to bring the mechanism online. |
+
+#### Compression Inputs
+
+| Input | Can Advance Timing When | Should Delay Or Condition Timing When |
+| --- | --- | --- |
+| `persistent_removal` | It lowers starter/off-axis pollution before the key phase. | The model only assumes removal because the final shell is compact. |
+| `transform` | The replacement is known to be low-cost, on-axis, or harmless to exactness. | The replacement is unknown or could introduce new draw, cost, or exactness friction. |
+| `self_exhaust_setup` | Setup cards remove themselves before repeat cycles matter. | The setup must be drawn late or competes with the payoff turn. |
+| `targeted_exhaust` | It can remove off-plan cards early enough and safely choose targets. | It arrives after the online window or risks exhausting required pieces. |
+| `bulk_exhaust` | It supports the mechanism and has bounded collateral risk. | It clears too broadly and can erase support, payoff, or defense. |
+| `discard_filtering` | It improves hand quality enough to support a conditional claim. | It is being counted as persistent thinning. |
+| `draw_selection` | It finds pieces without pretending the deck became smaller. | It hides starter pollution or first-cycle survival risk. |
+
+#### Modifier Payload
+
+Future checkpoints may attach:
+
+```json
+{
+  "online_timing_modifiers": {
+    "evaluation_mode": "report_only",
+    "economy_modifiers": [
+      {
+        "source": "removal_access",
+        "label": "route_dependent",
+        "reason_codes": [
+          "starter_basics_still_visible",
+          "shop_access_unknown"
+        ]
+      }
+    ],
+    "compression_modifiers": [
+      {
+        "source": "targeted_exhaust",
+        "label": "hold_conditional",
+        "reason_codes": [
+          "can_remove_pollution_in_combat",
+          "must_draw_compressor_before_loop_window"
+        ]
+      }
+    ],
+    "net_timing_read": "conditional_online_route_dependent",
+    "must_not_expose": ["overall_pass", "hard_gates"]
+  }
+}
+```
+
+Required conventions:
+
+- `net_timing_read` should be explanatory, such as
+  `conditional_online_route_dependent`, not a pass/fail verdict.
+- Unknown economy access should stay `unknown`; do not silently treat it as no burden
+  or guaranteed access.
+- Persistent removal is stronger route evidence than discard filtering.
+- Transform must record replacement-quality assumptions.
+- In-combat compression can support `conditional_online`; it should only support
+  `online` when arrival timing and survival cost are also visible.
+- Upgrade progress can advance timing only for the specific breakpoint it solves.
+- Healing pressure can delay online timing when survival consumes the same economy
+  needed for removal, upgrades, or shop purchases.
 
 ### Compression And Removal Rules
 
