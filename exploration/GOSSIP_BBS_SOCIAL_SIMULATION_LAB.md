@@ -842,3 +842,216 @@ Concrete transition:
 Use `public_achievement` next. It can test whether repeated success with an
 active package memory converts short-lived theorycraft into public prestige and
 longer-term actor/faction memory.
+
+## Working Log: 2026-04-27 Round 5
+
+### Round Event
+
+`public_achievement`
+
+This round continues from the theorycraft conversion path. The purpose is to
+model how repeated public success strengthens social memory without treating the
+success as proof of exact package identity or card-analysis correctness.
+
+Minimal input:
+
+```json
+{
+  "event_id": "evt_20260427_public_achievement_001",
+  "event_type": "public_achievement",
+  "turn": 23,
+  "visibility": "public_after_combat",
+  "source_actor": "combat_result_feed",
+  "target_refs": [
+    "bbs_thread_unusual_deck_018_001",
+    "topic_unusual_low_cost_recursion_001",
+    "package_low_cost_recursion_public_v0",
+    "player",
+    "deck_theory_faction"
+  ],
+  "evidence": {
+    "achievement_kind": "elite_streak_win",
+    "combat_outcome": "elite_win",
+    "repeat_success_count": 2,
+    "active_package_memory_ref": "package_low_cost_recursion_public_v0",
+    "achievement_visibility": 0.74,
+    "attribution_confidence": 0.63,
+    "performance_margin": 0.58,
+    "audience_overlap": 0.49,
+    "counterevidence_pressure": 0.18
+  },
+  "faction_refs": ["deck_theory_faction", "lab_a", "rival_lab_b"]
+}
+```
+
+### Model Increment
+
+This slice adds the first prestige-to-memory path:
+
+`public_achievement -> prestige topic update -> package memory reinforcement -> slower decay`
+
+Newly named derived signals:
+
+- `achievement_visibility`: how easy the public can observe the achievement
+  without private detail.
+- `repeat_success_count`: number of related public successes still reachable in
+  topic memory.
+- `attribution_confidence`: confidence that the active package memory is related
+  to the achievement, not proof that the package identity is exact.
+- `prestige_memory_strength`: long-memory weight attached to the actor's public
+  success.
+- `decay_resistance`: how much the achievement slows normal topic and memory
+  decay.
+- `faction_claim_pressure`: likelihood that a faction starts treating the
+  achievement as evidence for its own identity or doctrine.
+
+### Example `thread_state`
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "topic_id": "topic_unusual_low_cost_recursion_001",
+    "source_event_ids": [
+      "evt_20260427_unusual_deck_001",
+      "evt_20260427_debunk_001",
+      "evt_20260427_misunderstanding_001",
+      "evt_20260427_card_package_seen_001",
+      "evt_20260427_public_achievement_001"
+    ],
+    "status": "prestige_reactivation",
+    "opened_turn": 18,
+    "updated_turn": 23,
+    "thread_lifetime": 5,
+    "topic_heat": 0.78,
+    "reply_pressure": 0.41,
+    "public_sentiment": 0.52,
+    "moderation_boundary": {
+      "private_detail_allowed": false,
+      "personal_attack_allowed": false,
+      "repeat_debunked_claim_requires_new_evidence": true,
+      "correction_pin_active": true,
+      "theorycraft_label_required": true,
+      "achievement_claim_must_reference_public_event": true
+    }
+  },
+  "participant_roles": {
+    "player": "observed_achiever",
+    "combat_result_feed": "achievement_evidence_source",
+    "deck_theory_faction": "prestige_amplifier",
+    "lab_a": "local_supporter",
+    "rival_lab_b": "skeptical_counterweight",
+    "moderator": "boundary_keeper"
+  },
+  "stance_distribution": {
+    "support": 0.42,
+    "skepticism": 0.09,
+    "theorycraft": 0.25,
+    "mockery": 0.02,
+    "prestige_claim": 0.16,
+    "moderator_neutral": 0.06
+  },
+  "rumor_state": {
+    "rumor_id": "rumor_deck_is_bugged_001",
+    "claim_type": "mechanism_misread",
+    "rumor_credibility": 0.05,
+    "heat": 0.12,
+    "debunk_status": "suppressed_by_public_success_memory",
+    "evidence_gap": 0.06,
+    "memory_correction_strength": 0.79,
+    "accusation_to_analysis_shift": 0.25
+  },
+  "package_state": {
+    "package_topic_id": "package_low_cost_recursion_public_v0",
+    "package_signal": "low_cost_recursion_package_public_v0",
+    "observation_confidence": 0.73,
+    "package_identity_uncertainty": 0.34,
+    "theorycraft_pressure": 0.47,
+    "linked_success_count": 2,
+    "public_memory_status": "reinforced_unconfirmed_package_memory"
+  },
+  "prestige_state": {
+    "achievement_memory_id": "memory_player_elite_streak_023_001",
+    "actor_id": "player",
+    "achievement_kind": "elite_streak_win",
+    "prestige_memory_strength": 0.64,
+    "memory_decay_rate": 0.09,
+    "decay_resistance": 0.31,
+    "attribution_confidence": 0.63,
+    "faction_claim_pressure": 0.44,
+    "public_sentiment": 0.52
+  },
+  "heat_delta": {
+    "topic_heat": 0.09,
+    "rumor_heat": -0.06,
+    "theorycraft_heat": 0.10,
+    "prestige_heat": 0.31,
+    "reply_pressure": -0.05
+  },
+  "relationship_delta": {
+    "deck_theory_faction->player": 0.08,
+    "lab_a->player": 0.06,
+    "rival_lab_b->player": 0.02,
+    "player->deck_theory_faction": 0.03
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "faction_event",
+      "condition": "deck_theory_faction claims the achievement as school identity"
+    },
+    {
+      "hook_type": "boss_defeated",
+      "condition": "next achievement crosses a higher public salience threshold"
+    },
+    {
+      "hook_type": "rumor_seeded",
+      "condition": "rival faction reframes the achievement as staged or carried"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `achievement_visibility` as public observability for achievement facts.
+- Added `repeat_success_count` as a compact memory-reinforcement input.
+- Added `attribution_confidence` to separate achievement credit from exact
+  package proof.
+- Added `prestige_memory_strength` as long-memory weight for an actor's public
+  success.
+- Added `decay_resistance` so strong achievements slow but do not remove normal
+  decay.
+- Added `faction_claim_pressure` as the bridge from actor prestige into faction
+  alignment drift.
+
+Concrete transition:
+
+1. Accept `public_achievement` only as a structured public fact; do not grant
+   rewards, write final BBS prose, or evaluate card strength.
+2. Match `active_package_memory_ref` to current topic memory if present.
+3. If `repeat_success_count >= 2` and `achievement_visibility >= 0.60`,
+   increase `prestige_memory_strength`.
+4. If `attribution_confidence >= 0.55`, reinforce package memory but keep it
+   unconfirmed while `package_identity_uncertainty > 0.25`.
+5. Reduce old rumor heat when public success makes the old accusation less
+   useful as an explanation.
+6. Apply `decay_resistance` to topic memory and actor prestige memory, while
+   leaving `memory_decay_rate` nonzero.
+7. Increase `faction_claim_pressure` when a faction has already participated in
+   the theorycraft thread.
+
+### Risks
+
+- Achievement must not become proof of exact package identity. It can strengthen
+  public memory, not certify the mechanism.
+- Prestige can snowball too quickly if `decay_resistance` stacks without a cap.
+- Faction claim pressure can steal agency from the player if every achievement
+  is immediately owned by a faction.
+- The old debunked rumor should stay in corrected memory; the achievement
+  suppresses it rather than deleting it.
+
+### Next Round Entry
+
+Use `faction_event` next. It can test whether a faction claim over the player's
+achievement creates alignment drift, rivalry pressure, and new hooks without
+turning the BBS model into final narrative text.
