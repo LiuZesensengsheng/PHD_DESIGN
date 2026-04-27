@@ -393,6 +393,33 @@ Out of scope:
   - Add a lab backlog and final handoff section, then run final verification and
     report whether this branch is ready for main-agent review.
 
+### 2026-04-27 Round 15
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What backlog and review handoff should close this 10-question expansion without
+    implying implementation readiness?
+- Model increment:
+  - Added a lab backlog with next entry points for campaign economy review, reward
+    pacing review, late-phase anti-infinite wording, checkpoint evidence promotion,
+    non-combo deck examples, and eventual report-only implementation planning.
+  - Added review readiness language that scopes the branch to docs-only,
+    report-only model review.
+- Assumptions:
+  - This branch is suitable for main-agent review as an exploration artifact, not as
+    a runtime implementation.
+  - The next highest-value review is comparing the phase/checkpoint assumptions
+    against real campaign economy and reward pacing.
+- Risks:
+  - Backlog items could be mistaken for approved implementation tasks unless future
+    work keeps them as exploration entry points.
+  - Main-agent review may reject or narrow phase bands after campaign pacing evidence
+    is checked.
+- Next round entry:
+  - Review `starter`, `early`, `build`, `pivot`, `mature`, and `late` round-band
+    assumptions against current campaign economy and reward pacing, then mark the
+    affected checkpoints as `source_aligned`, `review_needed`, or `stale_assumption`.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -1773,3 +1800,46 @@ Interface rules:
   readiness.
 - Treat missing campaign economy context as `unknown`, not as zero burden.
 - Prefer reason codes and validation questions over scalar-only scores.
+
+## Lab Backlog And Review Handoff
+
+This backlog records next exploration entry points. It does not approve runtime work,
+monster implementation, default recommendation changes, learned/reranker promotion, or
+hard-gate behavior.
+
+### Next Entry Points
+
+| Priority | Entry Point | Intended Output |
+| --- | --- | --- |
+| `P0` | Compare phase round bands against real campaign economy and reward pacing. | Update phase assumptions and checkpoint evidence states. |
+| `P0` | Review the four V0 checkpoints against campaign rewards, route choices, and encounter observations. | Mark checkpoints `source_aligned`, `review_needed`, or `stale_assumption`. |
+| `P1` | Add `late` checkpoint examples after mature fail-state and anti-infinite language is reviewed. | Late-phase checkpoint draft with trace-only anti-infinite boundary. |
+| `P1` | Add non-combo and goodstuff deck examples to avoid overfitting the curve model to infinites or exactness shells. | Example checkpoints for frontload/defense/scaling decks without a dominant mechanism. |
+| `P1` | Add encounter archetype examples for status-heavy and multi-enemy pressure once phase bands are reviewed. | Qualitative archetype sketches with pressure-band justifications. |
+| `P2` | Draft a future report-only implementation contract after main-agent review. | Contract proposal only; no CLI, fixture, or default path yet. |
+| `P2` | Decide whether `campaign_power_curve_context_v1` should be exported to cardanalysis reports. | RFC or design note with owner and validation level. |
+
+### Review Readiness
+
+- `ready_for_main_agent_review`: yes, for docs-only exploration review.
+- Review scope:
+  - vocabulary completeness
+  - report-only boundary
+  - phase/checkpoint reasonableness
+  - cardanalysis mapping sanity
+  - missing economy/reward evidence
+- Not ready for:
+  - monster numbers
+  - runtime implementation
+  - hard gates
+  - recommendation default changes
+  - learned/reranker promotion
+
+### Handoff Checklist
+
+- Confirm all payload examples keep `evaluation_mode=report_only`.
+- Confirm no payload exposes `overall_pass`, `hard_gates`, or blocking readiness
+  verdicts.
+- Confirm economy and compression unknowns remain explicit.
+- Confirm encounter archetypes request validation questions rather than enemy stats.
+- Confirm cardanalysis mappings reference canonical report-only surfaces.
