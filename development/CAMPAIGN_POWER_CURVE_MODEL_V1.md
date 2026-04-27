@@ -50,16 +50,25 @@ Out of scope:
 
 ## Phase Bands
 
-The phase bands remain reviewed assumptions until campaign pacing data is deeper.
+The phase bands remain reviewed assumptions, but they are now aligned to the current
+campaign board cadence instead of arbitrary single-turn cuts.
+
+Current source basis:
+
+- startup seed places the baseline campaign line at `start_turn=0,3,6,9`
+- thesis blueprints also default to `between_blocks=3`
+- track normalization preserves one 3-turn window per visible block slot
+
+That makes the current board read most naturally as 3-turn phase windows.
 
 | Phase | Round Hint | Current Evidence State | Notes |
 | --- | --- | --- | --- |
-| `starter` | `0-1` | `source_aligned` | Current campaign can represent opening turns and baseline combat/reward loops. |
-| `early` | `2-3` | `review_needed` | Reward services show identity-hint paths, but early reward spacing and observation are not yet reviewed. |
-| `build` | `4-6` | `review_needed` | Card-pick rewards support assembly language, but removal, upgrade, and shop routes remain untrusted. |
-| `pivot` | `7-9` | `review_needed` | TA encounter data supports disruption-pressure language, not honest compression/removal route claims. |
-| `mature` | `10-13` | `review_needed` | Mature pressure shapes are source-visible, but ceiling/recovery checkpoints are not playtest-observed. |
-| `late` | `14+` | `hypothesis_draft` | Late pressure is only shape-aligned; checkpoint timing and anti-infinite wording still need dedicated review. |
+| `starter` | `0-2` | `source_aligned` | Aligns to the first visible combat window and tutorial baseline loop. |
+| `early` | `3-5` | `review_needed` | Aligns to the second board window, where identity hints may appear but are not yet pacing-reviewed. |
+| `build` | `6-8` | `review_needed` | Aligns to the third board window, where assembly language is credible but route economy remains untrusted. |
+| `pivot` | `9-11` | `review_needed` | Aligns to the fourth board window, where disruption questions begin to make sense. |
+| `mature` | `12-14` | `review_needed` | Aligns to the next full window after pivot, where ceiling/recovery reads become relevant. |
+| `late` | `15+` | `hypothesis_draft` | Starts at the first late review-chain / DDL-adjacent window and remains hypothesis-only. |
 
 Evidence-state defaults must stay phase-calibrated:
 
