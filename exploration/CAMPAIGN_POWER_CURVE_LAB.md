@@ -91,6 +91,32 @@ Out of scope:
   - Add a compact `checkpoint_evidence_state` vocabulary so future checkpoints can
     distinguish hypothetical, reviewed, playtest-observed, and stale assumptions.
 
+### 2026-04-27 Round 3
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - How should a curve checkpoint state its evidence maturity so designers do not
+    mistake a hypothesis for a reviewed or playtest-observed baseline?
+- Model increment:
+  - Added `checkpoint_evidence_state` as a compact report-only vocabulary.
+  - Added default rules for evidence labels, freshness, allowed use, stale triggers,
+    and non-authority boundaries.
+  - Added a small payload extension that can be attached to future checkpoints.
+- Assumptions:
+  - The first checkpoint examples remain `hypothesis_draft` until reviewed against
+    campaign economy, reward pacing, and encounter observations.
+  - Evidence maturity should change how cautiously a checkpoint is used, not whether
+    a deck or encounter passes.
+- Risks:
+  - `playtest_observed` could be read as a tuning target if future reports omit the
+    observation scope and sample caveats.
+  - `reviewed_design` could become stale silently when reward pacing, card pools, or
+    campaign round counts change.
+- Next round entry:
+  - Define a small `mechanism_online_timing` rubric that maps `absent`,
+    `assembling`, `conditional_online`, `online`, and `over_online` to evidence needs
+    by phase.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -242,6 +268,13 @@ Compression should alter curve interpretation before it alters any score authori
     "curve_checkpoint": {
       "checkpoint_id": "pivot_mechanism_online_probe_v1",
       "design_question": "Can the deck keep its mechanism active under light disruption?",
+      "evidence_state": {
+        "label": "hypothesis_draft",
+        "freshness": "new",
+        "allowed_use": "discussion_seed",
+        "missing_evidence": ["campaign_economy_review", "playtest_observation"],
+        "authority_boundary": "not_a_gate"
+      },
       "review_only_verdict": "needs_encounter_validation",
       "must_not_expose": ["overall_pass", "hard_gates"]
     },
@@ -300,6 +333,91 @@ Compression should alter curve interpretation before it alters any score authori
   }
 }
 ```
+
+## Checkpoint Evidence State
+
+`checkpoint_evidence_state` states how mature a checkpoint is. It is report-only
+metadata, not a confidence gate.
+
+The evidence state should answer:
+
+- is this checkpoint a new hypothesis, a design-reviewed assumption, or playtest
+  observation?
+- what evidence is missing before it should guide encounter validation?
+- what changed conditions would make it stale?
+- how may downstream tools or designers use it without treating it as authority?
+
+### Labels
+
+| Label | Meaning | Allowed Use |
+| --- | --- | --- |
+| `hypothesis_draft` | A first-pass model assumption with no reviewed campaign evidence yet. | Use as a discussion seed and checklist prompt only. |
+| `source_aligned` | The checkpoint is aligned with existing report-only docs or cardanalysis signals, but not reviewed as campaign pacing. | Use for planning candidate validation questions. |
+| `reviewed_design` | A designer or main-agent review accepted the checkpoint language for a known campaign slice. | Use as a temporary encounter-design reference, still advisory. |
+| `playtest_observed` | Playtest or replay observations support the checkpoint within a named scope. | Use as stronger evidence for future checkpoint refinement, not as a hard target. |
+| `stale_assumption` | The checkpoint was once useful but may no longer match current card pools, economy, rewards, or encounter pacing. | Keep visible as history; do not use for new validation without review. |
+| `superseded` | A newer checkpoint replaces this one. | Keep only for traceability and migration notes. |
+
+### Minimum Fields
+
+```json
+{
+  "checkpoint_evidence_state": {
+    "label": "hypothesis_draft",
+    "freshness": "new",
+    "evidence_refs": [],
+    "missing_evidence": [
+      "campaign_economy_review",
+      "reward_pacing_review",
+      "encounter_observation"
+    ],
+    "stale_triggers": [
+      "phase_round_band_changed",
+      "reward_pacing_changed",
+      "card_pool_changed",
+      "enemy_pressure_axis_changed"
+    ],
+    "allowed_use": "discussion_seed",
+    "authority_boundary": "not_a_gate"
+  }
+}
+```
+
+### Freshness Labels
+
+| Label | Meaning |
+| --- | --- |
+| `new` | Added this session or not yet revisited. |
+| `current` | Recently checked against the named evidence refs. |
+| `watch` | Still usable, but a known change may invalidate it soon. |
+| `stale` | Should not guide new encounter work until reviewed. |
+
+### Allowed Use Labels
+
+| Label | Meaning |
+| --- | --- |
+| `discussion_seed` | Helps frame a design conversation; no implementation should rely on it. |
+| `validation_prompt` | Can suggest what an encounter or replay should observe. |
+| `temporary_design_reference` | Can guide a narrow design pass until the next review. |
+| `historical_note_only` | Retained for continuity, not active planning. |
+
+### Rules
+
+- Every new checkpoint starts as `hypothesis_draft`.
+- `source_aligned` needs at least one named source doc, report-only signal, or reviewed
+  design note.
+- `reviewed_design` needs explicit human or main-agent review context.
+- `playtest_observed` must name observation scope, such as deck type, phase, encounter
+  family, or replay batch.
+- `stale_assumption` should be preferred over silent deletion when the model may need
+  historical context.
+- Higher evidence maturity does not create pass/fail authority.
+- Missing evidence should remain `unknown` or named explicitly; do not convert it into
+  zero burden.
+- A checkpoint with `authority_boundary` other than `not_a_gate` is outside V1.
+
+The current V0 checkpoint examples should be treated as `hypothesis_draft` until a
+later run reviews them against campaign economy and reward pacing.
 
 ## Curve Checkpoint Examples V0
 
