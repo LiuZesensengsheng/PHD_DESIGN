@@ -135,8 +135,19 @@ They can name pressure axes, validation questions, interpretation boundaries, an
 avoid lists. They must not define enemy rosters, monster stats, damage, health,
 hard counters, or pass/fail outcomes.
 
-Current added profile:
+Current cataloged profiles used by reviewed fixtures:
 
+- `starter_frontload_and_defense_check`: consumes `frontload_damage`,
+  `defense_check`, and optional `multi_enemy_pressure` for baseline survival
+  visibility.
+- `build_payoff_only_detector`: consumes frontload, defense, low multi-enemy, and
+  low status pressure to expose support/bridge/survival gaps.
+- `pivot_compression_route_probe`: consumes draw, energy, mechanism disruption, and
+  defense pressure to keep compression route evidence visible.
+- `mature_scaling_burst_and_fail_state_check`: consumes scaling, burst, defense, and
+  report-only anti-infinite pressure to expose ceiling/recovery questions.
+- `mature_over_online_texture_probe`: consumes mature/late pressure to ask whether a
+  repeatable mechanism still leaves texture and constraints visible.
 - `build_multi_enemy_pressure_spread_probe`: consumes `multi_enemy_pressure`,
   `frontload_damage`, and `defense_check` to ask whether an assembling deck can keep
   target spread, defense, and fallback visibility without requiring a final shell or
@@ -144,6 +155,16 @@ Current added profile:
 - `pivot_status_pollution_tolerance_probe`: consumes `status_pollution`,
   `draw_disruption`, and `defense_check` to ask whether a pivot deck has tolerance,
   cleanup, draw buffer, or fallback visibility under status load.
+
+## Closure State
+
+V1 is ready for main-agent review as a report-only implementation surface. The
+reviewed fixture suite now exercises phase calibration, checkpoint-level source
+support, anti-infinite boundaries, status-heavy pressure, multi-enemy pressure, and
+fixture-wide advisory boundary checks.
+
+This does not promote the model to runtime authority, monster tuning, hard gates,
+recommendation defaults, or learned/reranker behavior.
 
 ## Review Readiness
 

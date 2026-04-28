@@ -646,6 +646,34 @@ Out of scope:
   - Close V1 by aligning spec, lab log, fixtures, tests, and review handoff around the
     canonical report-only surface.
 
+### 2026-04-28 Round 24
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What closure work is needed so `campaign_power_curve_model_v1` can be reviewed as
+    a complete report-only V1 surface, rather than a loose set of exploration
+    increments?
+- Model increment:
+  - Backfilled report-only archetype profiles for every archetype used by the reviewed
+    fixture suite.
+  - Added a fixture-wide test asserting each case remains report-only, non-authority,
+    cataloged, and explicit about anti-infinite boundaries.
+  - Updated the stable spec and lab handoff so completed late/status/multi-enemy work
+    is no longer listed as future implementation work.
+- Assumptions:
+  - V1 completion means reviewable report-only contracts, fixtures, tests, and docs;
+    it does not mean runtime encounter implementation or balance approval.
+  - Main-agent review should focus on evidence quality, phase/checkpoint calibration,
+    and boundary discipline.
+- Risks:
+  - The profile catalog is still qualitative; future monster design must not treat it
+    as a roster or stat source.
+  - `origin/master` has moved since the branch began, so integration review should
+    account for possible mainline drift before merge.
+- Next round entry:
+  - Main-agent review of report-only V1; after review, compare checkpoints against
+    campaign economy, reward route, and playtest observations.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -2117,21 +2145,24 @@ hard-gate behavior.
 
 | Priority | Entry Point | Intended Output |
 | --- | --- | --- |
-| `P0` | Compare phase round bands against real campaign economy and reward pacing. | Update phase assumptions and checkpoint evidence states. |
-| `P0` | Review the four V0 checkpoints against campaign rewards, route choices, and encounter observations. | Mark checkpoints `source_aligned`, `review_needed`, or `stale_assumption`. |
-| `P1` | Add `late` checkpoint examples after mature fail-state and anti-infinite language is reviewed. | Late-phase checkpoint draft with trace-only anti-infinite boundary. |
-| `P1` | Add non-combo and goodstuff deck examples to avoid overfitting the curve model to infinites or exactness shells. | Example checkpoints for frontload/defense/scaling decks without a dominant mechanism. |
-| `P1` | Add encounter archetype examples for status-heavy and multi-enemy pressure once phase bands are reviewed. | Qualitative archetype sketches with pressure-band justifications. |
-| `P2` | Draft a future report-only implementation contract after main-agent review. | Contract proposal only; no CLI, fixture, or default path yet. |
-| `P2` | Decide whether `campaign_power_curve_context_v1` should be exported to cardanalysis reports. | RFC or design note with owner and validation level. |
+| `P0` | Main-agent review of `campaign_power_curve_report_v1` as a report-only surface. | Accept, narrow, or revise the V1 contract and fixture evidence. |
+| `P0` | Compare phase/checkpoint assumptions against campaign economy, reward routes, and playtest observations. | Promote, keep, or downgrade checkpoint evidence labels. |
+| `P1` | Add more non-combo and goodstuff checkpoint examples after review. | Broader fixture coverage for frontload/defense/scaling decks without a dominant mechanism. |
+| `P1` | Decide whether `campaign_power_curve_context_v1` should be exported to cardanalysis reports. | RFC or design note with owner and validation level. |
+| `P2` | Add observed checkpoint packs once real encounter/reward pacing evidence exists. | Reviewed evidence packs; still report-only unless separately approved. |
 
 ### Review Readiness
 
-- `ready_for_main_agent_review`: yes, for docs-only exploration review.
+- `ready_for_main_agent_review`: yes, for report-only V1 implementation and docs
+  review.
 - Review scope:
   - vocabulary completeness
   - report-only boundary
+  - CLI / fixture / test contract shape
   - phase/checkpoint reasonableness
+  - checkpoint-level source support
+  - anti-infinite boundary wording
+  - status-heavy and multi-enemy archetype profile wording
   - cardanalysis mapping sanity
   - missing economy/reward evidence
 - Not ready for:
@@ -2148,4 +2179,6 @@ hard-gate behavior.
   verdicts.
 - Confirm economy and compression unknowns remain explicit.
 - Confirm encounter archetypes request validation questions rather than enemy stats.
+- Confirm archetype profiles stay qualitative and report-only.
+- Confirm anti-infinite boundary fields do not decide loop legality.
 - Confirm cardanalysis mappings reference canonical report-only surfaces.
