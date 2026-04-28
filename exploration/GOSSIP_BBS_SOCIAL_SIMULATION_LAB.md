@@ -3181,3 +3181,111 @@ No remaining V1 sidecar task is currently required before handoff. Future work
 should start only from a new explicit goal, such as integration planning,
 additional reviewed event fixtures, or tuning/evaluation, and should stay
 decision-gated before touching campaign persistence or UI.
+
+## Working Log: 2026-04-28 Integration Planning
+
+### Round Event
+
+`integration_planning`
+
+This is not an in-game event. It reviews how the finished V1 sidecar should
+eventually connect to campaign/combat/narrative facts without breaking the
+domain-only boundary.
+
+### Model Increment
+
+Added:
+
+- `docs/exploration/GOSSIP_BBS_SOCIAL_SIMULATION_INTEGRATION_PLAN_V1.md`
+
+The plan chooses a sidecar reaction pipeline:
+
+1. campaign/combat/narrative systems expose reviewed structured facts;
+2. a campaign-owned adapter maps those facts into `GossipEventInput` or
+   `GossipTransitionInput`;
+3. a campaign-owned runtime service applies the sidecar transitions to an
+   in-memory `GossipSimulationState`;
+4. a later read model exposes copy-free hints to presentation.
+
+No runtime code, UI, save schema, LLM call, database, or `cardanalysis`
+coupling was added.
+
+### Example Adapter Payload
+
+```json
+{
+  "upstream_fact": {
+    "source_window": "AFTER_COMBAT_RETURN",
+    "combat_result_id": "combat_result_018",
+    "turn": 18,
+    "visibility": "public_after_combat",
+    "source_actor": "player",
+    "target_refs": [
+      "encounter_rival_mentor_001"
+    ],
+    "evidence": {
+      "outcome": "win",
+      "public_result": true,
+      "deck_signature_ref": "deck_signature_low_cost_recursion_public"
+    }
+  },
+  "adapter_output": {
+    "events": [
+      {
+        "event_id": "bbs_evt_combat_result_018",
+        "event_type": "combat_result",
+        "turn": 18,
+        "visibility": "public_after_combat",
+        "source_actor": "player",
+        "target_refs": [
+          "encounter_rival_mentor_001"
+        ],
+        "evidence": {
+          "outcome": "win",
+          "public_result": true,
+          "deck_signature_ref": "deck_signature_low_cost_recursion_public"
+        },
+        "faction_refs": []
+      }
+    ],
+    "transitions": [],
+    "warnings": []
+  }
+}
+```
+
+### New State Variables / Transition Rules
+
+- Integration must enter through an explicit adapter/service pair, not direct
+  calls from campaign UI, forced-event runtime, or inline trigger branches.
+- `contexts.gossip_bbs_social_simulation` stays campaign-import-free.
+- First integration state ownership should be runtime-only
+  `GossipSimulationState`.
+- Persistence, read-model consumption, and prose generation are separate later
+  decisions.
+- `AFTER_COMBAT_RETURN`, `AFTER_FORCED_DDL_REFRESH`, and `TURN_IDLE_ENTER` are
+  the best first candidate lifecycle windows, but wiring them is not part of
+  this planning pass.
+
+### Risks
+
+- Adapter facts may be underspecified unless the first code slice uses reviewed
+  fixtures and negative cases.
+- Running decay/reply-pressure from lifecycle windows can double-apply if no
+  per-turn idempotence rule exists.
+- Existing gossip badge/modal services can consume aggregate hints later, but
+  they must not become the BBS state owner.
+- Save persistence is tempting for BBS continuity, but it needs a separate
+  migration decision.
+
+### Next Round Entry
+
+Start with a docs/test-only adapter slice:
+
+- add `GossipBbsEventAdapter` contract;
+- map one reviewed `AFTER_COMBAT_RETURN` fixture to one `combat_result`
+  `GossipEventInput`;
+- add one negative fixture for missing public evidence;
+- do not instantiate runtime service;
+- do not wire lifecycle hooks;
+- do not touch UI, persistence, LLM prose, database, or `cardanalysis`.
