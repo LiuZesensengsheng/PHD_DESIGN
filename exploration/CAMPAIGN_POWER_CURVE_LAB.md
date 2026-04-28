@@ -592,6 +592,32 @@ Out of scope:
   - Add a report-only status-heavy encounter archetype that consumes
     `status_pollution` without turning status into a hard counter.
 
+### 2026-04-28 Round 22
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What status-heavy encounter archetype can consume `status_pollution` while
+    remaining a report-only tolerance probe instead of a hard counter?
+- Model increment:
+  - Added `encounter_archetype_profile` to generated reports.
+  - Added `pivot_status_pollution_tolerance_probe` as a cataloged report-only
+    archetype profile.
+  - Added a reviewed pivot fixture case that requests medium `status_pollution`, low
+    draw disruption, and medium defense pressure without changing authority.
+- Assumptions:
+  - Status-heavy pressure is most honest at pivot or later because earlier phases can
+    confuse status friction with missing mechanism identity.
+  - The first status archetype should ask for tolerance, cleanup, draw buffer, and
+    fallback visibility, not exact status counts.
+- Risks:
+  - Status pressure can become a stealth hard counter if future consumers hide the
+    archetype avoid list.
+  - The current source evidence sees pressure shapes, not a playtest-observed status
+    tolerance checkpoint.
+- Next round entry:
+  - Add a report-only multi-enemy pressure spread archetype that consumes
+    `multi_enemy_pressure` and ties it to fail-state visibility.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -1922,6 +1948,24 @@ Design reading:
   - monster numbers
   - legality language
   - treating a high-ceiling combo as unhealthy by category
+
+### `pivot_status_pollution_tolerance_probe`
+
+- Phases: `pivot`, `mature`
+- Primary pressure:
+  - `status_pollution`
+  - `draw_disruption`
+  - `defense_check`
+- Validation question:
+  - Can a conditionally online deck preserve tolerance, cleanup, draw buffer, or a
+    fallback line under status pollution without being hard-countered?
+- Interpretation boundary:
+  - Report `status_tolerance_visible`, `cleanup_missing`,
+    `draw_buffer_insufficient`, or `fallback_line_obscured`; do not report pass/fail.
+- Avoid:
+  - status as a hard counter
+  - declaring the deck failed because status slowed the first cycle
+  - monster numbers or status-count tuning
 
 ## Future Cardanalysis Interface Draft
 

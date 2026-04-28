@@ -116,6 +116,7 @@ Every generated payload should include:
 - `compression_state`
 - `enemy_pressure_profile`
 - `encounter_validation_needs`
+- `encounter_archetype_profile`
 - `cardanalysis_curve_mapping`
 - `authority_boundary=advisory_context_only`
 
@@ -126,6 +127,19 @@ The payload must not expose:
 - `hard_gates`
 - `blocking_verdict`
 - monster stat targets
+
+## Encounter Archetype Profiles
+
+Archetype profiles are report-only descriptions of what an encounter should reveal.
+They can name pressure axes, validation questions, interpretation boundaries, and
+avoid lists. They must not define enemy rosters, monster stats, damage, health,
+hard counters, or pass/fail outcomes.
+
+Current added profile:
+
+- `pivot_status_pollution_tolerance_probe`: consumes `status_pollution`,
+  `draw_disruption`, and `defense_check` to ask whether a pivot deck has tolerance,
+  cleanup, draw buffer, or fallback visibility under status load.
 
 ## Review Readiness
 
