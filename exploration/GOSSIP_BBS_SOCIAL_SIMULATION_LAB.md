@@ -3289,3 +3289,100 @@ Start with a docs/test-only adapter slice:
 - do not instantiate runtime service;
 - do not wire lifecycle hooks;
 - do not touch UI, persistence, LLM prose, database, or `cardanalysis`.
+
+## Working Log: 2026-04-28 Integration Adapter Contract Slice
+
+### Round Event
+
+`integration_adapter_after_combat_return`
+
+This is not a new simulation event family. It is the first campaign-side
+adapter seam for turning a reviewed `AFTER_COMBAT_RETURN` fact into one existing
+`combat_result` sidecar input.
+
+### Model Increment
+
+Added:
+
+- `contexts/campaign/services/gossip_bbs_event_adapter.py`
+- `tests/campaign/test_gossip_bbs_event_adapter.py`
+
+The adapter adds:
+
+- `GossipBbsAdapterOutput`, a copy-free output envelope containing sidecar
+  events, transitions, and warnings;
+- `GossipBbsEventAdapter.adapt_after_combat_return(...)`;
+- a source-window gate requiring `AFTER_COMBAT_RETURN`;
+- a public-evidence gate requiring `evidence.public_result`;
+- deterministic event ID construction from `combat_result_id`;
+- normalization from upstream `outcome` to sidecar `combat_outcome`.
+
+The tests confirm:
+
+- a reviewed public combat-return fact maps to exactly one `combat_result`
+  `GossipEventInput`;
+- missing public evidence produces no events and a warning;
+- the adapter imports sidecar contracts only, not sidecar transitions, UI,
+  `cardanalysis`, or pygame.
+
+No runtime service, lifecycle hook wiring, UI, persistence, LLM prose,
+database, or `cardanalysis` coupling was added.
+
+### Example Adapter Output
+
+```json
+{
+  "events": [
+    {
+      "event_id": "bbs_evt_combat_result_018",
+      "event_type": "combat_result",
+      "turn": 18,
+      "visibility": "public_after_combat",
+      "source_actor": "combat_result_feed",
+      "target_refs": [
+        "player",
+        "encounter_rival_mentor_001",
+        "package_low_cost_recursion_public_v0"
+      ],
+      "evidence": {
+        "outcome": "win",
+        "public_result": true,
+        "combat_result_id": "combat_result_018",
+        "combat_outcome": "win"
+      },
+      "faction_refs": [
+        "deck_theory_faction",
+        "lab_a"
+      ]
+    }
+  ],
+  "transitions": [],
+  "warnings": []
+}
+```
+
+### New State Variables / Transition Rules
+
+- Adapter output is still input-only; it does not call `simulate_event` and does
+  not mutate `GossipSimulationState`.
+- `public_result` is the first reviewed public-evidence gate for combat-return
+  facts.
+- `source_window` must be `AFTER_COMBAT_RETURN` before combat facts can cross
+  into the sidecar.
+- The adapter may normalize structured keys, but it must not infer deck
+  identity, faction truth, or private details.
+
+### Risks
+
+- The upstream owner for reviewed combat-return facts is still open.
+- `public_result` is intentionally minimal; later slices may need a richer
+  public evidence contract before real campaign wiring.
+- The adapter currently handles only the base `combat_result` path; explicit
+  boss/milestone expansion remains a separate decision.
+
+### Next Round Entry
+
+If integration continues, add a runtime-only `GossipBbsRuntimeService` that can
+apply already-created adapter outputs to an in-memory `GossipSimulationState`.
+Keep it unbound from lifecycle hooks, save data, UI, LLM prose, database, and
+`cardanalysis`.

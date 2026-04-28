@@ -521,7 +521,7 @@ Recommendation:
 
 ## First Implementation Slice
 
-The next code slice should be docs/test-first and narrow:
+The first code slice is docs/test-first and narrow:
 
 1. Add `GossipBbsEventAdapter` contract and fixture tests.
 2. Map exactly one reviewed `AFTER_COMBAT_RETURN` fixture to a
@@ -531,13 +531,17 @@ The next code slice should be docs/test-first and narrow:
 4. Do not instantiate `GossipBbsRuntimeService`.
 5. Do not wire lifecycle hooks.
 
-Expected test target:
+Implemented first-slice surface:
 
-- `tests/campaign/services/test_gossip_bbs_event_adapter.py`
+- `contexts/campaign/services/gossip_bbs_event_adapter.py`
+- `tests/campaign/test_gossip_bbs_event_adapter.py`
 
-Expected validation:
+The test target follows the repository's current campaign test layout, where
+service tests live directly under `tests/campaign/`.
 
-- `py -3.11 -m pytest tests/campaign/services/test_gossip_bbs_event_adapter.py -q`
+Validation:
+
+- `py -3.11 -m pytest tests/campaign/test_gossip_bbs_event_adapter.py -q`
 - `py -3.11 -m pytest tests/gossip_bbs_social_simulation -q`
 - `py -3.11 -m pytest tests/shared/test_text_encoding_guards.py -q`
 - `git diff --check`
