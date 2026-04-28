@@ -18,6 +18,7 @@ parallel V1 modules with overlapping meaning.
 | `design_iteration_brief_v1` | `tools/combat_analysis/design_engine/design_iteration_brief.py` | `scripts/run_design_iteration_brief.py` | `design_iteration_summary` |
 | `mechanism_axis_discovery_v1` | `tools/combat_analysis/design_engine/mechanism_axis_discovery.py` | `scripts/run_mechanism_axis_discovery.py` | `mechanism_axis_discovery_summary` |
 | `evaluation_autonomous_design_model_v1` | `tools/combat_analysis/design_engine/evaluation_autonomous_design_model.py` | `scripts/run_evaluation_autonomous_design_model.py` | evidence bundle root |
+| `position_redirect_code_preflight_v1` | `tools/combat_analysis/design_engine/position_redirect_code_preflight.py` | `scripts/run_position_redirect_code_preflight.py` | `position_redirect_code_preflight_summary` |
 | `cardanalysis_evidence_bundle_v1` | `tools/combat_analysis/design_engine/cardanalysis_evidence_bundle.py` | none | evidence bundle root |
 | `campaign_power_curve_report_v1` | `tools/combat_analysis/design_engine/campaign_power_curve_model.py` | `scripts/run_campaign_power_curve_report.py` | `campaign_power_curve_summary` |
 
@@ -39,6 +40,9 @@ The machine-readable mirror lives in
 - `campaign_power_curve_report_v1` may provide campaign pacing and encounter
   validation context, but it must not define monster stats, hard counters, or runtime
   encounter implementation.
+- `position_redirect_code_preflight_v1` is a report-only code-handoff surface. It may
+  define bounded prototype constraints, but it must not become gameplay runtime,
+  family promotion, or hard-gate authority by itself.
 - `design_engine` must not import `design_studio`; shared registry data should stay as
   strings or move below both layers.
 

@@ -230,6 +230,12 @@ For the campaign power curve report surface:
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py tests/scripts/test_run_campaign_power_curve_report.py -q
 ```
 
+For the position redirect code preflight surface:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_position_redirect_code_preflight_v1.py tests/scripts/test_run_position_redirect_code_preflight.py -q
+```
+
 ## Holdout Case Rules
 
 ### Must Add Holdout

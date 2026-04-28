@@ -115,3 +115,26 @@ Night of Full Moon has a separate PvE deckbuilder fixture:
 The first post-mining triage shortlist lives in:
 
 `docs/development/MECHANISM_AXIS_PROBE_SHORTLIST_V1.md`
+
+## Position Redirect Code Preflight
+
+The first code-handoff preflight surface for a live reviewed candidate is:
+
+`tools/combat_analysis/design_engine/position_redirect_code_preflight.py`
+
+Run it with:
+
+```powershell
+python scripts/run_position_redirect_code_preflight.py --input tests/fixtures/combat_analysis/position_redirect_code_preflight_v1/position_redirect_code_preflight_reviewed_v1.json --output-dir <dir>
+```
+
+Validate it with:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_position_redirect_code_preflight_v1.py tests/scripts/test_run_position_redirect_code_preflight.py -q
+```
+
+This surface is a report-only go/no-go handoff for later bounded implementation. It
+does not promote `position_redirect_threat_control` into a formal mechanism family and
+does not change mechanism-axis contracts, hard gates, synthesis/default
+recommendation, or learned/reranker defaults.

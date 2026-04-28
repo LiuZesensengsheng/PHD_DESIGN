@@ -147,6 +147,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_campaign_power_curve_report.py --write-template <path>`
 - Run a report-only Campaign Power Curve review:
   - `python scripts/run_campaign_power_curve_report.py --input <path> --output-dir <dir>`
+- Write a position redirect code preflight input template:
+  - `python scripts/run_position_redirect_code_preflight.py --write-template <path>`
+- Run a report-only position redirect code preflight from a reviewed JSON input:
+  - `python scripts/run_position_redirect_code_preflight.py --input tests/fixtures/combat_analysis/position_redirect_code_preflight_v1/position_redirect_code_preflight_reviewed_v1.json --output-dir <dir>`
 - Run the reviewed mechanism-axis viability benchmark:
   - `python scripts/run_mechanism_axis_viability_benchmark.py --input tests/fixtures/combat_analysis/mechanism_axis_viability_v1 --output-dir <dir>`
 - Run a unified project design-assist session in one mode:
@@ -195,6 +199,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py tests/scripts/test_run_evaluation_autonomous_design_model.py -q`
 - Validate Campaign Power Curve report v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py tests/scripts/test_run_campaign_power_curve_report.py -q`
+- Validate position redirect code preflight v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_position_redirect_code_preflight_v1.py tests/scripts/test_run_position_redirect_code_preflight.py -q`
 - Validate the reviewed mechanism-axis viability benchmark:
   - `python -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_viability_v1.py tests/scripts/test_run_mechanism_axis_viability_benchmark.py -q`
 - Validate retrieval persistent-miss lane-local probes:
