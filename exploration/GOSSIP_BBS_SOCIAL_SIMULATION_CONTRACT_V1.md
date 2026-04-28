@@ -805,6 +805,14 @@ relationship delta until later public action.
     use only stable hook types.
 15. Output payloads must not contain final prose fields such as `text`, `copy`,
     `dialogue`, or `body`.
+16. A primary `thread_state.thread_id` must not also appear in
+    `additional_thread_states`.
+17. Thread selection should prefer explicit `bbs_thread_` refs, then explicit
+    `topic_` refs, then target-rumor topic matches, then the most recent known
+    thread at or before the event turn.
+18. Package refs emitted into `package_state` and `state_patches["packages"]`
+    should use canonical `package_<slug>` IDs even when input signals contain a
+    redundant `_package_` segment.
 
 ## First Implementation Target
 
@@ -855,6 +863,10 @@ Current V1 closeout guardrails:
   distributions, hook type stability, state patch coverage, rumor
   heat/credibility separation, no final prose fields, leak quarantine, scandal
   truth separation, conflict-before-rumor, and explicit faction consent state.
+- The naming/selection closeout pass verifies target-rumor topic thread
+  attachment, canonical package refs across package/combat/milestone paths, and
+  low-salience `boss_defeated` fallback without duplicate primary/additional
+  thread patches.
 
 Do not implement UI, persistence migration, or campaign integration in the first
 code slice.

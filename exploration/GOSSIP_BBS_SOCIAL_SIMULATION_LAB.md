@@ -3105,3 +3105,79 @@ If V1 continues, use a naming/selection micro-pass only: canonical topic/thread
 selection, package slug consistency, or a small fixture for low-salience
 fallback behavior. Do not open UI, campaign persistence, real BBS prose, LLM
 generation, database work, or `cardanalysis` coupling.
+
+## Working Log: 2026-04-28 V1 Naming / Selection Closeout
+
+### Round Event
+
+`v1_naming_selection_closeout`
+
+This is the final planned V1 micro-pass after the cross-event invariant sweep.
+It does not add a new event family. It tightens remaining behavior around
+thread selection, package ID canonicalization, and low-salience fallback output.
+
+### Model Increment
+
+This pass adds focused tests for the remaining V1 edge cases:
+
+- `public_thread_update` events without an explicit thread ref attach to the
+  matching target-rumor topic thread before falling back to a generic thread;
+- package aliases such as `package_low_cost_recursion_package_public_v0`
+  normalize to `package_low_cost_recursion_public_v0`;
+- `combat_result`, `new_card_package_seen`, and `boss_defeated` now use
+  canonical package refs in their package path states;
+- low-salience `boss_defeated` reuses the parent thread and topic instead of
+  forcing a milestone split;
+- primary `thread_state.thread_id` may no longer be duplicated under
+  `additional_thread_states`.
+
+### Example `thread_state`
+
+Low-salience boss output now remains a parent-thread update:
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_unusual_deck_018_001",
+    "parent_thread_id": null,
+    "topic_id": "topic_unusual_low_cost_recursion_001",
+    "status": "prestige_reactivation"
+  },
+  "additional_thread_states": {},
+  "path_states": {
+    "package_state": {
+      "package_topic_id": "package_low_cost_recursion_public_v0"
+    }
+  }
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added a deterministic thread-selection fallback:
+  1. explicit `bbs_thread_` target ref;
+  2. explicit `topic_` target ref;
+  3. topic from target rumor;
+  4. most recent known thread at or before the event turn;
+  5. event-specific default thread id.
+- Added package canonicalization for package-bearing combat, package, and
+  milestone paths.
+- Added a low-salience `boss_defeated` rule: if split thresholds are not met,
+  keep the parent thread/topic and do not emit a parent duplicate under
+  `additional_thread_states`.
+
+### Risks
+
+- Thread fallback is still deterministic scaffolding; later runtime integration
+  may need caller-owned thread routing if several same-topic threads are active.
+- Package canonicalization only normalizes known public package-like IDs; it does
+  not infer package identity from `cardanalysis`.
+- Low-salience boss behavior is now fixture-covered, but tuning thresholds remain
+  provisional.
+
+### Next Round Entry
+
+No remaining V1 sidecar task is currently required before handoff. Future work
+should start only from a new explicit goal, such as integration planning,
+additional reviewed event fixtures, or tuning/evaluation, and should stay
+decision-gated before touching campaign persistence or UI.
