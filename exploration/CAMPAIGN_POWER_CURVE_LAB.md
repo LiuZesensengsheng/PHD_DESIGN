@@ -618,6 +618,34 @@ Out of scope:
   - Add a report-only multi-enemy pressure spread archetype that consumes
     `multi_enemy_pressure` and ties it to fail-state visibility.
 
+### 2026-04-28 Round 23
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - What multi-enemy archetype can consume `multi_enemy_pressure` while tying the
+    result to deck maturity and fail-state visibility instead of enemy count or AoE
+    requirements?
+- Model increment:
+  - Added `build_multi_enemy_pressure_spread_probe` as a cataloged report-only
+    archetype profile.
+  - Added a reviewed build fixture case that asks for medium multi-enemy pressure,
+    frontload pressure, and defense pressure.
+  - Added focused assertions that the case reports assembling deck maturity and
+    partial fail-state resilience without exposing enemy-count targets or monster
+    numbers.
+- Assumptions:
+  - Multi-enemy pressure is useful in build once it tests target spread and fallback
+    visibility, not final-shell consistency.
+  - A deck can answer spread pressure with pickoff sequencing, defense stability, or
+    fallback plan visibility; AoE should not be the only implied answer.
+- Risks:
+  - Future encounter design could over-read this archetype as enemy roster guidance.
+  - Build-phase multi-enemy pressure still needs observation; current TA encounter
+    sources support shape vocabulary more than checkpoint calibration.
+- Next round entry:
+  - Close V1 by aligning spec, lab log, fixtures, tests, and review handoff around the
+    canonical report-only surface.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -1966,6 +1994,25 @@ Design reading:
   - status as a hard counter
   - declaring the deck failed because status slowed the first cycle
   - monster numbers or status-count tuning
+
+### `build_multi_enemy_pressure_spread_probe`
+
+- Phases: `build`, `pivot`
+- Primary pressure:
+  - `multi_enemy_pressure`
+  - `frontload_damage`
+  - `defense_check`
+- Validation question:
+  - Can an assembling deck keep target spread, defense, and fallback visibility under
+    distributed pressure without requiring a final shell?
+- Interpretation boundary:
+  - Report `target_spread_visible`, `pickoff_gap_visible`,
+    `fallback_line_under_split_pressure`, or `defense_gap_visible`; do not report
+    pass/fail.
+- Avoid:
+  - enemy-count targets
+  - requiring AoE as the only valid answer
+  - monster stats, enemy roster tuning, or declaring the deck failed
 
 ## Future Cardanalysis Interface Draft
 

@@ -137,6 +137,10 @@ hard counters, or pass/fail outcomes.
 
 Current added profile:
 
+- `build_multi_enemy_pressure_spread_probe`: consumes `multi_enemy_pressure`,
+  `frontload_damage`, and `defense_check` to ask whether an assembling deck can keep
+  target spread, defense, and fallback visibility without requiring a final shell or
+  enemy-count target.
 - `pivot_status_pollution_tolerance_probe`: consumes `status_pollution`,
   `draw_disruption`, and `defense_check` to ask whether a pivot deck has tolerance,
   cleanup, draw buffer, or fallback visibility under status load.
