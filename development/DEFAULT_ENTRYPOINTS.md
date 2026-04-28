@@ -139,6 +139,14 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_bounded_candidate_shadow.py --write-template <path>`
 - Run a report-only bounded candidate shadow review:
   - `python scripts/run_bounded_candidate_shadow.py --input <path> --output-dir <dir>`
+- Write an Evaluation Autonomous Design Model input template:
+  - `python scripts/run_evaluation_autonomous_design_model.py --write-template <path>`
+- Run a report-only Evaluation Autonomous Design Model review:
+  - `python scripts/run_evaluation_autonomous_design_model.py --input <path> --output-dir <dir>`
+- Write a Campaign Power Curve report input template:
+  - `python scripts/run_campaign_power_curve_report.py --write-template <path>`
+- Run a report-only Campaign Power Curve review:
+  - `python scripts/run_campaign_power_curve_report.py --input <path> --output-dir <dir>`
 - Run the reviewed mechanism-axis viability benchmark:
   - `python scripts/run_mechanism_axis_viability_benchmark.py --input tests/fixtures/combat_analysis/mechanism_axis_viability_v1 --output-dir <dir>`
 - Run a unified project design-assist session in one mode:
@@ -183,6 +191,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_design_candidate_scout.py tests/scripts/test_run_design_candidate_scout.py -q`
 - Validate bounded candidate shadow v1:
   - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_bounded_candidate_shadow.py tests/scripts/test_run_bounded_candidate_shadow.py -q`
+- Validate Evaluation Autonomous Design Model v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py tests/scripts/test_run_evaluation_autonomous_design_model.py -q`
+- Validate Campaign Power Curve report v1:
+  - `python -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py tests/scripts/test_run_campaign_power_curve_report.py -q`
 - Validate the reviewed mechanism-axis viability benchmark:
   - `python -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_viability_v1.py tests/scripts/test_run_mechanism_axis_viability_benchmark.py -q`
 - Validate retrieval persistent-miss lane-local probes:

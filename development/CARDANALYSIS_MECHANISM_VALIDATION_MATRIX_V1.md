@@ -218,6 +218,18 @@ For the mechanism-axis discovery surface:
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_discovery_v1.py tests/scripts/test_run_mechanism_axis_discovery.py -q
 ```
 
+For the evaluation autonomous design orchestration surface:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py tests/scripts/test_run_evaluation_autonomous_design_model.py -q
+```
+
+For the campaign power curve report surface:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py tests/scripts/test_run_campaign_power_curve_report.py -q
+```
+
 ## Holdout Case Rules
 
 ### Must Add Holdout
