@@ -353,8 +353,15 @@ Implemented behavior before real hook wiring:
 - It delegates state application to `GossipBbsRuntimeService`.
 - It keeps an in-memory duplicate guard keyed by `combat_result_id`.
 - Invalid facts are not marked processed, so corrected facts may be retried.
-- The coordinator is not yet installed on `CampaignStateServiceBundle` and is
-  not yet called by lifecycle hooks.
+- The coordinator is installed as a grouped-only interaction service.
+- `CampaignLifecycleBindingService` registers
+  `system:gossip_bbs_after_combat_return` on `AFTER_COMBAT_RETURN`.
+- `CampaignLifecycleContext.reviewed_after_combat_return_fact` carries at most
+  one reviewed return fact through the return-resolution runtime context.
+- The hook calls the grouped campaign-owned
+  `interaction_services.gossip_bbs_after_combat_return` coordinator.
+- No sidecar transition call is added inline to `CampaignTriggerReactionService`.
+- No save, UI, LLM prose, cardanalysis, or extra lifecycle window wiring is added.
 
 Implemented validation:
 
