@@ -566,6 +566,32 @@ Out of scope:
   - Formalize the late checkpoint and mature/late anti-infinite wording while keeping
     anti-infinite pressure advisory and non-authoritative.
 
+### 2026-04-28 Round 21
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - How should mature and late checkpoints mention anti-infinite pressure without
+    becoming loop legality, deck failure, hard-gate, or monster-number authority?
+- Model increment:
+  - Added `curve_checkpoint.anti_infinite_boundary` to every generated report.
+  - Defined phase policies for anti-infinite pressure: avoid before pivot, trace-only
+    at pivot, trace/low report-only at mature, and low report-only at late.
+  - Added a formal `late_round_15_texture_review_v1` checkpoint example that frames
+    anti-infinite pressure as texture and constraint review only.
+- Assumptions:
+  - Late review is useful even without late pacing evidence if the payload keeps
+    `hypothesis_draft` and `exploration_prompt` visible.
+  - Anti-infinite language belongs near `curve_checkpoint` because it constrains the
+    interpretation of the validation question, not just an enemy pressure band.
+- Risks:
+  - Any downstream consumer that hides `anti_infinite_boundary.must_not_decide` could
+    make the field look more authoritative than intended.
+  - Late checkpoint examples may still be over-copied as balance targets unless
+    reports keep monster numbers out of scope.
+- Next round entry:
+  - Add a report-only status-heavy encounter archetype that consumes
+    `status_pollution` without turning status into a hard counter.
+
 ## Model V1
 
 ### Entity Vocabulary
@@ -1736,6 +1762,48 @@ Design reading:
   later encounter archetype should reveal.
 - A strong mechanism with poor fail-state resilience should produce a review note, not
   a blocking verdict.
+
+### `late_round_15_texture_review_v1`
+
+```json
+{
+  "curve_checkpoint": {
+    "checkpoint_id": "late_round_15_texture_review_v1",
+    "phase": "late",
+    "round_index_hint": 15,
+    "evaluation_mode": "report_only",
+    "design_question": "Does a highly repeatable mechanism still leave meaningful encounter texture?",
+    "expected_player_shape": {
+      "mechanism_online_rate": "online_or_over_online",
+      "combo_reachability": "credible_or_route_dependent",
+      "fail_state_resilience": "unknown_or_review_needed"
+    },
+    "enemy_pressure_request": {
+      "scaling_race": "medium",
+      "burst_check": "medium",
+      "defense_check": "medium",
+      "anti_infinite_pressure": "low_report_only"
+    },
+    "anti_infinite_boundary": {
+      "phase_policy": "low_report_only",
+      "must_not_decide": [
+        "loop_legality",
+        "deck_failure",
+        "hard_gate_status",
+        "monster_stat_targets"
+      ]
+    },
+    "authority_boundary": "advisory_context_only"
+  }
+}
+```
+
+Design reading:
+
+- The late checkpoint can name anti-infinite pressure only as a review prompt for
+  texture and constraint visibility.
+- It cannot declare a loop invalid, fail a deck, set hard-gate state, or imply enemy
+  numbers.
 
 ## Encounter Archetypes
 

@@ -84,6 +84,21 @@ Evidence-state defaults must stay phase-calibrated:
   `reward_support` / `encounter_support` after `starter`; the later phases remain
   advisory because source visibility is uneven across those support classes
 
+## Late And Anti-Infinite Boundary
+
+Late checkpoints may ask whether highly repeatable mechanisms still leave encounter
+texture, constraints, and recovery questions visible. That question is report-only.
+
+`curve_checkpoint.anti_infinite_boundary` must keep this language explicit:
+
+- `starter`, `early`, and `build`: avoid anti-infinite pressure.
+- `pivot`: trace-only future repeatability note.
+- `mature`: trace or low report-only texture/recovery question.
+- `late`: low report-only review context.
+
+The field must not decide loop legality, deck failure, hard-gate status, or monster
+stat targets.
+
 ## Required Payload Sections
 
 Every generated payload should include:
