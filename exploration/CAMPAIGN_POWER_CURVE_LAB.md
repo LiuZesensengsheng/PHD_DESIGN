@@ -1046,7 +1046,7 @@ Future checkpoints may attach:
       "payoff_supported_but_compression_unknown",
       "light_disruption_should_reveal_brittleness"
     ],
-    "authority_boundary": "report_only_not_readiness_gate"
+    "authority_boundary": "advisory_context_only"
   }
 }
 ```
@@ -1251,7 +1251,7 @@ Band use rules:
         "freshness": "new",
         "allowed_use": "discussion_seed",
         "missing_evidence": ["campaign_economy_review", "playtest_observation"],
-        "authority_boundary": "not_a_gate"
+        "authority_boundary": "advisory_context_only"
       },
       "review_only_verdict": "needs_encounter_validation",
       "must_not_expose": ["overall_pass", "hard_gates"]
@@ -1498,7 +1498,7 @@ The evidence state should answer:
       "enemy_pressure_axis_changed"
     ],
     "allowed_use": "discussion_seed",
-    "authority_boundary": "not_a_gate"
+    "authority_boundary": "advisory_context_only"
   }
 }
 ```
@@ -1534,7 +1534,7 @@ The evidence state should answer:
 - Higher evidence maturity does not create pass/fail authority.
 - Missing evidence should remain `unknown` or named explicitly; do not convert it into
   zero burden.
-- A checkpoint with `authority_boundary` other than `not_a_gate` is outside V1.
+- A checkpoint with `authority_boundary` other than `advisory_context_only` is outside V1.
 
 The current V0 checkpoint examples should be treated as `hypothesis_draft` until a
 later run reviews them against campaign economy and reward pacing.
@@ -1579,6 +1579,9 @@ Review rules:
 - A checkpoint with missing evidence can still be used as a `discussion_seed` or
   `validation_prompt` if the missing evidence is explicit.
 - `reviewed_advisory` does not mean balanced, final, or ready for implementation.
+- Checklist review status must not overload `authority_boundary`; use
+  `authority_boundary_review` for review maturity and keep `authority_boundary`
+  canonical as `advisory_context_only`.
 - Any checkpoint that exposes `overall_pass`, `hard_gates`, `blocking_verdict`, or
   monster stat targets is outside V1.
 - `stale_check_needed` should preserve the checkpoint for history while stopping it
