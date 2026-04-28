@@ -340,6 +340,29 @@ Stop lines:
   ambiguous.
 - Do not route through forced-event runtime.
 
+Pre-wire Phase 3 surface:
+
+- `contexts/campaign/services/gossip_bbs_after_combat_return_coordinator.py`
+- `tests/campaign/test_gossip_bbs_after_combat_return_coordinator.py`
+
+Implemented behavior before real hook wiring:
+
+- `GossipBbsAfterCombatReturnCoordinator` owns one narrow hook-facing path for a
+  reviewed `AFTER_COMBAT_RETURN` fact.
+- It delegates mapping to `GossipBbsEventAdapter`.
+- It delegates state application to `GossipBbsRuntimeService`.
+- It keeps an in-memory duplicate guard keyed by `combat_result_id`.
+- Invalid facts are not marked processed, so corrected facts may be retried.
+- The coordinator is not yet installed on `CampaignStateServiceBundle` and is
+  not yet called by lifecycle hooks.
+
+Implemented validation:
+
+- one reviewed combat-return fact applies exactly once;
+- duplicate combat-return facts are blocked before sidecar re-application;
+- invalid facts warn but remain retryable;
+- clearing runtime resets both in-memory state and duplicate guard.
+
 ### Phase 4: Read Model Consumer
 
 Goal:

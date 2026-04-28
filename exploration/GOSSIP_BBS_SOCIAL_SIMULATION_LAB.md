@@ -3469,3 +3469,81 @@ First define the smallest hook-facing coordinator or idempotence guard for
 `AFTER_COMBAT_RETURN`, then wire exactly one reviewed combat-return fact only if
 the lifecycle owner is explicit. Keep save data, UI, LLM prose, database, and
 `cardanalysis` out of scope.
+
+## Working Log: 2026-04-28 After-Combat Coordinator Slice
+
+### Round Event
+
+`integration_after_combat_return_coordinator`
+
+This is not a new simulation event family. It adds the smallest hook-facing
+coordinator for a reviewed `AFTER_COMBAT_RETURN` fact, plus an idempotence
+guard that prevents one combat result from being applied twice.
+
+### Model Increment
+
+Added:
+
+- `contexts/campaign/services/gossip_bbs_after_combat_return_coordinator.py`
+- `tests/campaign/test_gossip_bbs_after_combat_return_coordinator.py`
+
+The coordinator adds:
+
+- `GossipBbsAfterCombatReturnDispatchResult`, a small dispatch envelope
+  reporting `applied`, `duplicate`, `warnings`, and result IDs;
+- `GossipBbsAfterCombatReturnCoordinator.process_fact(...)`;
+- an in-memory processed-fact key:
+  `after_combat_return:<combat_result_id>`;
+- explicit composition of:
+  `reviewed fact -> GossipBbsEventAdapter -> GossipBbsRuntimeService`;
+- `clear_runtime()` for resetting both runtime state and duplicate guard.
+
+The tests confirm:
+
+- one reviewed combat-return fact applies exactly once;
+- the second identical fact is blocked before sidecar re-application;
+- invalid facts emit warnings but are not marked processed;
+- clearing runtime allows a reviewed fact to be replayed;
+- the coordinator stays UI-free, save-free, pygame-free, and
+  `cardanalysis`-free.
+
+This service is intentionally not yet installed on
+`CampaignStateServiceBundle` and is not yet called by lifecycle hooks.
+
+### Example Dispatch Result
+
+```json
+{
+  "fact_key": "after_combat_return:combat_result_018",
+  "applied": true,
+  "duplicate": false,
+  "result_ids": [
+    "result_bbs_evt_combat_result_018"
+  ],
+  "warnings": []
+}
+```
+
+### New State Variables / Transition Rules
+
+- The first duplicate guard key is `after_combat_return:<combat_result_id>`.
+- A fact is marked processed only if sidecar results were actually applied.
+- Invalid or underspecified facts remain retryable after correction.
+- Hook-facing orchestration now exists as a standalone service, but lifecycle
+  ownership is still explicit and separate from this slice.
+
+### Risks
+
+- Duplicate guarding currently keys only on `combat_result_id`; later broader
+  reviewed fact families may need a richer fact identity contract.
+- The coordinator is still standalone, so later hook installation must choose
+  one explicit owner instead of scattering calls.
+- There is still no persistence for processed keys; restart semantics remain
+  runtime-only by design.
+
+### Next Round Entry
+
+If integration continues, the next minimal slice is one explicit lifecycle seam
+only: install this coordinator behind a reviewed `AFTER_COMBAT_RETURN` host
+call or one narrow interaction-service seam, without widening to other windows,
+UI, save data, LLM prose, database, or `cardanalysis`.
