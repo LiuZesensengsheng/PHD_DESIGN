@@ -3018,3 +3018,90 @@ The code now emits:
 Stop opening new event families. The next useful pass is a V1 closeout sweep:
 cross-event invariants, naming normalization, and thread/topic selection
 consistency without adding UI, campaign integration, persistence, or LLM prose.
+
+## Working Log: 2026-04-28 V1 Closeout Invariants
+
+### Round Event
+
+`v1_closeout_invariants`
+
+This is not a new in-game event. It closes the current V1 implementation pass
+by checking that all implemented event and transition outputs obey the same
+structured contract.
+
+### Model Increment
+
+This pass adds cross-event invariant coverage in:
+
+- `tests/gossip_bbs_social_simulation/test_v1_invariants.py`
+
+The invariant suite now checks:
+
+- fixture event keys exactly match `SUPPORTED_EVENT_TYPES`;
+- fixture transition keys exactly match `SUPPORTED_TRANSITION_TYPES`;
+- every simulated result has the required output envelope fields;
+- every primary and additional thread state lands in `state_patches["threads"]`;
+- every emitted rumor and memory record lands in the matching state patch bucket;
+- stance distributions remain normalized;
+- `next_event_hooks` use only stable hook types;
+- output payloads do not contain final prose keys such as `text`, `copy`,
+  `dialogue`, or `body`;
+- `npc_conflict` stays conflict-only until a rumor boundary is explicitly
+  crossed;
+- `private_leak` keeps leak content hidden and blocks credibility transfer while
+  evidence is quarantined;
+- `scandal` keeps rumor truth separate from scandal heat.
+
+### Example `thread_state`
+
+The closeout pass does not add a new gameplay output. It treats every existing
+fixture result as an example and requires at least this invariant shape:
+
+```json
+{
+  "thread_state": {
+    "thread_id": "bbs_thread_example",
+    "status": "contract_owned_status"
+  },
+  "state_patches": {
+    "threads": {
+      "bbs_thread_example": {}
+    }
+  },
+  "stance_distribution": {
+    "support": 0.5,
+    "skepticism": 0.5
+  },
+  "next_event_hooks": [
+    {
+      "hook_type": "decay",
+      "condition": "future stable condition"
+    }
+  ]
+}
+```
+
+### New State Variables / Transition Rules
+
+- Added `SUPPORTED_HOOK_TYPES` as a code-level stable hook surface.
+- Added `FORBIDDEN_PROSE_KEYS` as a code-level payload guardrail.
+- Added `player_consent_signal` to `faction_state` so unknown player consent is
+  explicit in the output, not only implied by relationship deltas.
+- Added a contract rule: emitted thread, rumor, and memory records must be
+  mirrored by `state_patches`.
+
+### Risks
+
+- These invariants intentionally guard structure, not social tuning quality.
+- The invariant suite will catch new hook/status drift only when new values are
+  routed through fixture outputs; future new enum values still need contract and
+  lab-log updates in the same slice.
+- Sequential fixture simulation is a useful closeout pass, but later integration
+  will still need caller-owned event ordering tests.
+
+### Next Round Entry
+
+If V1 continues, use a naming/selection micro-pass only: canonical topic/thread
+selection, package slug consistency, or a small fixture for low-salience
+fallback behavior. Do not open UI, campaign persistence, real BBS prose, LLM
+generation, database work, or `cardanalysis` coupling.

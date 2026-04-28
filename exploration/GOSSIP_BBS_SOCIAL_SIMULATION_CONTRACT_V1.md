@@ -431,7 +431,7 @@ active:
 | Record | Owner path | Stable fields |
 | --- | --- | --- |
 | `package_state` | `new_card_package_seen`, package-linked success | `package_topic_id`, `package_signal`, `observation_confidence`, `package_identity_uncertainty`, `theorycraft_pressure`, `public_memory_status` |
-| `faction_state` | `faction_event` | `claiming_faction`, `claim_strength`, `claim_legitimacy`, `identity_capture_risk`, `rivalry_pressure`, `alignment_delta` |
+| `faction_state` | `faction_event` | `claiming_faction`, `claim_strength`, `claim_legitimacy`, `player_consent_signal`, `identity_capture_risk`, `rivalry_pressure`, `alignment_delta` |
 | `prestige_state` | `public_achievement` | `achievement_memory_id`, `actor_id`, `achievement_kind`, `prestige_memory_strength`, `decay_resistance`, `attribution_confidence`, `faction_claim_pressure` |
 | `conflict_state` | `npc_conflict` | `conflict_id`, `source_actor`, `target_actor`, `grievance_strength`, `conflict_visibility`, `tone_pressure`, `mediation_capacity`, `repair_offer_strength`, `escalation_risk` |
 | `leak_state` | `private_leak` | `leak_id`, `privacy_risk`, `leak_authenticity`, `redaction_level`, `source_exposure_risk`, `public_relevance`, `evidence_quarantine` |
@@ -797,6 +797,14 @@ relationship delta until later public action.
 10. Hooks do not execute side effects outside the gossip model.
 11. New enum/status values must update this contract and the lab log in the
     same slice.
+12. Every result's primary and additional thread states must be represented in
+    `state_patches["threads"]`.
+13. Every emitted `rumor_state` and `memory_state` record must be represented in
+    `state_patches["rumors"]` or `state_patches["memories"]`.
+14. `stance_distribution` must remain normalized, and `next_event_hooks` must
+    use only stable hook types.
+15. Output payloads must not contain final prose fields such as `text`, `copy`,
+    `dialogue`, or `body`.
 
 ## First Implementation Target
 
@@ -838,6 +846,15 @@ Current implemented event coverage:
   - `rumor_debunked`
   - `public_achievement`
   - `private_leak`
+
+Current V1 closeout guardrails:
+
+- `tests/gossip_bbs_social_simulation/test_v1_invariants.py` checks the full
+  fixture event/transition surface against the supported contract.
+- The invariant pass verifies output envelope shape, normalized stance
+  distributions, hook type stability, state patch coverage, rumor
+  heat/credibility separation, no final prose fields, leak quarantine, scandal
+  truth separation, conflict-before-rumor, and explicit faction consent state.
 
 Do not implement UI, persistence migration, or campaign integration in the first
 code slice.
