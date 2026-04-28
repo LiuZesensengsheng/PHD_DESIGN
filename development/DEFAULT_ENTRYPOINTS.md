@@ -219,9 +219,15 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python -m pytest tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_fun_enemy_design_probe.py -q`
 - Validate project design-assist sidecar CLI contracts v1:
   - `python -m pytest tests/scripts/test_project_design_assist_sidecar_contracts_v1.py -q`
-- Read cardanalysis report-only registry and validation matrix:
+- Read cardanalysis north star, case input contract, report-only registry, and validation matrix:
+  - `docs/development/CARDANALYSIS_NORTH_STAR_V1.md`
+  - `docs/development/CARDANALYSIS_CASE_INPUT_CONTRACT_V1.md`
   - `docs/development/CARDANALYSIS_REPORT_ONLY_SURFACE_REGISTRY_V1.md`
   - `docs/development/CARDANALYSIS_MECHANISM_VALIDATION_MATRIX_V1.md`
+- Validate and query the cardanalysis capability dependency/conflict graph:
+  - `python scripts/validate_capability_graph.py`
+  - `python scripts/validate_capability_graph.py --impact <node-id>`
+  - `python scripts/validate_capability_graph.py --batch <node-id> <node-id>`
 
 ### Headless / Regression Checks
 

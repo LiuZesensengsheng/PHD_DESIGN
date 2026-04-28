@@ -840,3 +840,97 @@ warning 应该升级为硬规则，以及哪些信息值得晋升到长期文档
 1. 运行 focused tests。
 2. 运行默认健康报告。
 3. 根据报告决定是否需要 weekly summary 或 entrypoint 压缩 follow-up。
+
+### [DL-20260429-01] Cardanalysis adopts case-backed multi-head direction
+
+- Date: `2026-04-29`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/CARDANALYSIS_NORTH_STAR_V1.md`
+  - `docs/development/CARDANALYSIS_CASE_INPUT_CONTRACT_V1.md`
+  - `docs/development/CARDANALYSIS_CAPABILITY_DEPENDENCY_AND_CONFLICT_GRAPH_V1.md`
+
+#### Background
+
+Recent `cardanalysis` work expanded many report-only and reviewed surfaces:
+mechanism viability, deck compression, fun/health, package health, campaign
+power curve, evidence bundles, autonomous design review, and capability graph
+planning. Continuing to add more independent evaluators without a shared input
+contract would make semantic drift and multi-agent contamination harder to
+control.
+
+#### Decision
+
+Adopt a case-backed multi-head direction for `cardanalysis`:
+
+1. Use a short north-star contract to keep the system focused on mechanism
+   discovery, evaluation, package/campaign reasoning, and autonomous design
+   support.
+2. Use a normalized case input contract as the shared anti-corruption layer for
+   new case-like evidence.
+3. Treat feature projection as the boundary between normalized cases and future
+   capability/model heads.
+4. Keep report-only outputs advisory and preserve reviewed hard-gate ownership.
+5. Register the new direction, case input, normalized case, and feature
+   projection artifacts in the capability dependency/conflict graph.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  future case collection can reuse one input shape instead of inventing a local
+  schema for every new evaluator.
+- Increased human work:
+  new case families need light provenance, review-status, and allowed-consumer
+  metadata.
+- Critical path effect:
+  shifts near-term work from writing more rules toward accumulating and
+  normalizing reusable cases.
+
+#### AI Workload Assumption
+
+AI can help normalize cases, expand reviewed packs, maintain the capability
+graph, and run impact/batch checks. Human review remains required for evidence
+promotion, default-on learned behavior, and any hard-gate authority change.
+
+#### Alternatives
+
+1. Continue adding independent report-only evaluators with local fixture shapes.
+2. Jump directly to a learned end-to-end design model without a normalized case
+   and feature-projection boundary.
+
+#### Risks And Triggers
+
+- Risk:
+  the case input contract grows into a large ontology too early.
+- Trigger:
+  agents start adding typed fields for one-off labels instead of using
+  `feature_hints` first.
+
+- Risk:
+  source-mined or speculative evidence is mistaken for reviewed evidence.
+- Trigger:
+  downstream reports omit `evidence_tier`, `review_status`, or
+  `authority_boundary`.
+
+#### Validation Plan
+
+- Success indicators:
+  - capability graph validates with the new nodes and artifacts,
+  - new case-backed work can declare which artifacts it consumes/provides,
+  - parallel-agent batches can report soft/hard conflicts before implementation.
+- Review cadence:
+  after the first task-node batch is registered.
+
+#### Rollback Plan
+
+If the shared contract proves too heavy, keep the north-star direction but
+downgrade the case input contract to a recommended adapter format rather than a
+default input requirement.
+
+#### Follow-Up
+
+1. Register task nodes for stress/resolve, campaign experience, BBS/social, and
+   case-library normalization work.
+2. Use `scripts/validate_capability_graph.py --batch ...` before assigning the
+   next parallel agent set.
