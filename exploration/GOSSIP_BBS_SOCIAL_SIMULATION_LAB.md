@@ -3386,3 +3386,86 @@ If integration continues, add a runtime-only `GossipBbsRuntimeService` that can
 apply already-created adapter outputs to an in-memory `GossipSimulationState`.
 Keep it unbound from lifecycle hooks, save data, UI, LLM prose, database, and
 `cardanalysis`.
+
+## Working Log: 2026-04-28 Runtime-Only Service Slice
+
+### Round Event
+
+`integration_runtime_service_memory_only`
+
+This is not a new simulation event family. It adds the campaign-owned runtime
+service that can execute already-created adapter outputs against an in-memory
+`GossipSimulationState`.
+
+### Model Increment
+
+Added:
+
+- `contexts/campaign/services/gossip_bbs_runtime_service.py`
+- `tests/campaign/test_gossip_bbs_runtime_service.py`
+
+The runtime service adds:
+
+- `GossipBbsRuntimeApplyResult`, a structured apply envelope containing sidecar
+  results and warnings;
+- `GossipBbsRuntimeService`, a runtime-only state owner for
+  `GossipSimulationState`;
+- `apply_adapter_output(...)`, which applies adapter events before adapter
+  transitions;
+- result lookup by `result_id` and `source_id`;
+- runtime warning accumulation;
+- `clear_runtime()` for in-memory reset only.
+
+The tests confirm:
+
+- a public combat adapter output updates in-memory thread and memory buckets;
+- `combat_result -> reply_pressure -> decay` applies in deterministic order;
+- adapter warnings without sidecar events produce no transition results;
+- the service imports sidecar transition functions but stays free of UI,
+  pygame, `persistent`, `gossip_modal`, and `cardanalysis`.
+
+No lifecycle hook wiring, save schema, UI, LLM prose, database, or
+`cardanalysis` coupling was added.
+
+### Example Runtime Apply Result
+
+```json
+{
+  "result_ids": [
+    "result_bbs_evt_combat_result_018",
+    "result_tick_reply_pressure_019",
+    "result_tick_decay_022"
+  ],
+  "warnings": [],
+  "state_owner": "runtime_only_gossip_simulation_state"
+}
+```
+
+### New State Variables / Transition Rules
+
+- Runtime service owns `GossipSimulationState` for the current process/session
+  only.
+- Adapter events are applied before adapter transitions; within each group,
+  caller-provided tuple order is preserved.
+- Every sidecar result is immediately applied through
+  `GossipSimulationState.apply_result`.
+- Result lookup supports both sidecar `result_id` and source event/transition
+  ID.
+- Adapter warnings are retained but do not block unrelated sidecar events.
+
+### Risks
+
+- Events and transitions are still grouped separately, so a future mixed-order
+  queue may need an explicit operation list rather than two tuples.
+- There is no idempotence guard yet; lifecycle wiring must not call the same
+  adapter output twice for one campaign fact.
+- Runtime state still resets on process/session reset until a separate
+  persistence decision is made.
+
+### Next Round Entry
+
+If integration continues, do not jump straight into broad lifecycle wiring.
+First define the smallest hook-facing coordinator or idempotence guard for
+`AFTER_COMBAT_RETURN`, then wire exactly one reviewed combat-return fact only if
+the lifecycle owner is explicit. Keep save data, UI, LLM prose, database, and
+`cardanalysis` out of scope.

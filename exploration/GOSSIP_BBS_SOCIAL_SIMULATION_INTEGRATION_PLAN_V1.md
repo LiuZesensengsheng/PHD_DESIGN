@@ -286,6 +286,29 @@ Stop lines:
 - No lifecycle hook binding yet unless separately approved.
 - No UI presentation.
 
+Implemented Phase 2 surface:
+
+- `contexts/campaign/services/gossip_bbs_runtime_service.py`
+- `tests/campaign/test_gossip_bbs_runtime_service.py`
+
+Implemented behavior:
+
+- `GossipBbsRuntimeService` owns runtime-only `GossipSimulationState`.
+- `apply_adapter_output(output)` applies events first, then transitions, using
+  the sidecar transition functions and `GossipSimulationState.apply_result`.
+- Results are indexed by both `result_id` and `source_id`.
+- Adapter and transition warnings are accumulated without blocking campaign
+  flow.
+- `clear_runtime()` clears only in-memory runtime state.
+
+Implemented validation:
+
+- public combat adapter output updates runtime thread and memory state;
+- `combat_result -> reply_pressure -> decay` applies in deterministic order;
+- adapter warnings with no events create no sidecar results;
+- runtime imports stay free of UI, pygame, `persistent`, `gossip_modal`, and
+  `cardanalysis`.
+
 ### Phase 3: Lifecycle Hook Wiring
 
 Goal:
