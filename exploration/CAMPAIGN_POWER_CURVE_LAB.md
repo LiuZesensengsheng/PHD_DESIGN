@@ -537,6 +537,35 @@ Out of scope:
   - Carry the new support split into the reviewed checkpoints and decide where custom
     per-checkpoint overrides are worth it instead of phase defaults.
 
+### 2026-04-28 Round 20
+
+- Branch: `codex/04-27-power-curve-model-lab`
+- Minimal question:
+  - Which reviewed checkpoint fixtures need checkpoint-specific `source_support`
+    summaries instead of only phase-level defaults?
+- Model increment:
+  - Added explicit `source_support` overrides to the reviewed build and pivot fixture
+    cases.
+  - Kept the label defaults unchanged: both checkpoints still resolve to
+    `review_needed`, but their support classes now name the exact checkpoint source
+    basis.
+  - Updated focused tests to assert the checkpoint-level block, reward, and encounter
+    support summaries.
+- Assumptions:
+  - Build and pivot are the first checkpoints where phase defaults are too broad:
+    both have source-visible board windows, but different reward and encounter
+    evidence gaps.
+  - Checkpoint overrides should clarify evidence shape, not promote the checkpoint to
+    stronger authority.
+- Risks:
+  - Custom summaries can drift away from source refs if future fixture authors copy
+    them without updating evidence.
+  - More overrides may make reports harder to compare if the vocabulary becomes too
+    free-form.
+- Next round entry:
+  - Formalize the late checkpoint and mature/late anti-infinite wording while keeping
+    anti-infinite pressure advisory and non-authoritative.
+
 ## Model V1
 
 ### Entity Vocabulary
