@@ -252,6 +252,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_campaign_experience_curve.py --input tests/fixtures/combat_analysis/campaign_experience_curve_v1/campaign_experience_curve_cases_v1.json --output-dir <dir>`
 - Validate Campaign Experience Curve v1:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_experience_curve_v1.py tests/scripts/test_run_campaign_experience_curve.py -q`
+- Write a Campaign Advisory Bundle input template:
+  - `python scripts/run_campaign_advisory_bundle.py --write-template <path>`
+- Run a report-only Campaign Advisory Bundle review:
+  - `python scripts/run_campaign_advisory_bundle.py --input tests/fixtures/combat_analysis/campaign_advisory_bundle_v1/campaign_advisory_bundle_cases_v1.json --output-dir <dir>`
+- Validate Campaign Advisory Bundle v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_advisory_bundle_v1.py tests/scripts/test_run_campaign_advisory_bundle.py -q`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
   - `python scripts/validate_capability_graph.py --impact <node-id>`
