@@ -208,6 +208,7 @@ Artifacts:
 - `cardanalysis_north_star_contract`
 - `normalized_design_case`
 - `feature_projection_payload`
+- `case_input_validator_entrypoint`
 - `mechanism_axis_summary`
 - `deck_compression_summary`
 - `mechanism_fun_health_summary`
@@ -224,6 +225,10 @@ Decision:
 
 - `decision_report_only_surfaces_not_authoritative`
 - `decision_cardanalysis_case_backed_multi_head_direction`
+
+Tasks:
+
+- `cardanalysis_case_library_infra_v1`
 
 ## Planning Semantics
 
@@ -324,6 +329,11 @@ review.
 Start adding task nodes for future case-backed work such as campaign pressure,
 stress/resolve, BBS/social read models, mechanism expansion, and case-library
 normalization.
+
+The first registered task node is `cardanalysis_case_library_infra_v1`, which
+tracks the minimal normalized case validator and CLI entrypoint. It is
+review-gated with mechanism discovery and autonomous design because changes to
+case validation can affect their future inputs.
 
 ## Non-Goals For V1
 

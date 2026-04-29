@@ -224,6 +224,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `docs/development/CARDANALYSIS_CASE_INPUT_CONTRACT_V1.md`
   - `docs/development/CARDANALYSIS_REPORT_ONLY_SURFACE_REGISTRY_V1.md`
   - `docs/development/CARDANALYSIS_MECHANISM_VALIDATION_MATRIX_V1.md`
+- Write a cardanalysis normalized case input template:
+  - `python scripts/validate_cardanalysis_case_input.py --write-template <path>`
+- Validate a cardanalysis normalized case input file or directory:
+  - `python scripts/validate_cardanalysis_case_input.py --input <path>`
+- Validate the cardanalysis case input validator:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_case_input_contract_v1.py tests/scripts/test_validate_cardanalysis_case_input.py -q`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
   - `python scripts/validate_capability_graph.py --impact <node-id>`
