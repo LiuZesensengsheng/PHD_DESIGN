@@ -140,10 +140,25 @@ non-parallel-safe conflicts and `severity=soft` for merge-review conflicts.
 
 The nodes may evolve independently but must be reviewed together before merge.
 
+Use this edge only when the current codebase or canonical merge flow creates a
+real master-agent integration obligation:
+
+- shared live consumer/provider behavior,
+- task-to-consumer handoff semantics,
+- or a currently implemented artifact interpretation boundary.
+
+Do not use `review_gated_with` for thematic similarity, shared long-term topic
+area, or future planned integration that has not been wired yet.
+
 ### `invalidates`
 
 A change to the source node should trigger re-review or re-validation of the
 target node.
+
+Use this edge only when the target has a current revalidation obligation caused
+by a live contract, consumed artifact, or implemented interpretation path.
+
+Do not use `invalidates` for broad "might affect wording someday" adjacency.
 
 ### `supersedes`
 
