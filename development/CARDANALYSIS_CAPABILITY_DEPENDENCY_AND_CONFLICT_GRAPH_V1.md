@@ -212,6 +212,7 @@ Artifacts:
 - `normalized_design_case`
 - `feature_projection_payload`
 - `case_input_validator_entrypoint`
+- `existing_asset_case_adapter_entrypoint`
 - `stress_resolve_summary`
 - `campaign_experience_curve_summary`
 - `mechanism_axis_summary`
@@ -234,6 +235,7 @@ Decision:
 Tasks:
 
 - `cardanalysis_case_library_infra_v1`
+- `existing_asset_case_adapter_v1`
 
 ## Planning Semantics
 
@@ -339,6 +341,13 @@ The first registered task node is `cardanalysis_case_library_infra_v1`, which
 tracks the minimal normalized case validator and CLI entrypoint. It is
 review-gated with mechanism discovery and autonomous design because changes to
 case validation can affect their future inputs.
+
+The second registered task node is `existing_asset_case_adapter_v1`, which
+tracks a narrow legacy-fixture export slice into normalized cases without
+claiming canonical ownership of the legacy surfaces themselves. It is
+review-gated with mechanism discovery, autonomous design, and campaign
+experience consumers because adapter semantics can influence how downstream
+case-backed heads read migrated mechanism and campaign evidence.
 
 ## Non-Goals For V1
 

@@ -230,6 +230,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/validate_cardanalysis_case_input.py --input <path>`
 - Validate the cardanalysis case input validator:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_case_input_contract_v1.py tests/scripts/test_validate_cardanalysis_case_input.py -q`
+- Run the existing asset case adapter export:
+  - `python scripts/run_existing_asset_case_adapter.py --input <legacy-json-or-dir> --output-dir <dir>`
+- Validate the existing asset case adapter:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_existing_asset_case_adapter_v1.py tests/scripts/test_run_existing_asset_case_adapter.py -q`
 - Write a cardanalysis feature projection input template:
   - `python scripts/run_cardanalysis_feature_projection.py --write-template <path>`
 - Run a report-only cardanalysis feature projection review:
