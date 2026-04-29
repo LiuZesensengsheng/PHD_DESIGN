@@ -32,6 +32,28 @@ Out of scope:
 - changing legality, schema, threshold, or synthesis hard paths
 - enabling learned/reranker defaults
 
+## Optional Case-Backed Context
+
+`mechanism_axis_discovery_v1` may optionally consume:
+
+- `normalized_design_case`
+- `feature_projection_payload`
+
+These inputs are discovery context only. They may enrich:
+
+- discovery wording,
+- surfaced candidate-axis hints,
+- uncertainty notes,
+- next-review direction.
+
+They must not:
+
+- change discovery labels or scores by themselves,
+- promote source-mined or report-only material into reviewed authority,
+- change mechanism-axis viability hard gates,
+- claim mechanism-family ownership,
+- change default synthesis or learned/reranker behavior.
+
 ## Core Concepts
 
 ### Mechanism Axis
