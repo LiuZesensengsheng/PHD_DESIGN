@@ -102,8 +102,25 @@ Examples:
 
 ### `task`
 
-Reserved for later planning slices. V1 documents the schema but does not yet
-populate task nodes in the canonical registry.
+A merge-planning or handoff slice that may touch implementation, fixture, CLI,
+or migration files without becoming the canonical owner of a capability.
+
+Task nodes are governance aids for parallel work. They make write contamination
+and integration obligations visible to the MasterAgent, but they do not promote
+their outputs to reviewed evidence, hard gates, or default recommendation
+authority.
+
+Rules:
+
+- `write_scope` is required and must be non-empty.
+- `owner_path` is not canonical evaluator ownership for a task; prefer
+  `write_scope` for planning.
+- task `trust_tier` must stay advisory (`report_only` or `source_mined`).
+- tasks must not provide canonical summary, review, bundle, payload, or contract
+  artifacts.
+- tasks may provide narrow entrypoint, adapter, or migration-slice artifacts.
+- task `review_gated_with` and `invalidates` edges must represent real
+  integration obligations, not topic similarity.
 
 ## Edge Types
 
@@ -320,7 +337,10 @@ The validator should check:
 5. missing provider for consumed artifact,
 6. missing owner path for capability node,
 7. write-scope overlap inside an analyzed batch,
-8. hard conflict inside an analyzed batch.
+8. hard conflict inside an analyzed batch,
+9. non-empty `write_scope` for task nodes,
+10. task nodes do not claim reviewed or decision-frozen authority,
+11. task nodes do not provide canonical capability artifacts.
 
 ## Outputs
 
@@ -337,6 +357,7 @@ A text and JSON report describing:
 
 Given one node, show:
 
+- root kind,
 - direct provided artifacts,
 - direct consumer nodes,
 - direct dependent nodes,
@@ -352,6 +373,15 @@ For contract artifacts, direct dependents are often the more important signal:
 they show which capabilities are constrained by the contract even when there are
 no live data consumers.
 
+For task roots, impact reports also include a `task_governance` section with:
+
+- `planning_role=merge_planning_slice`,
+- advisory handoff authority boundary,
+- explicit non-promotion to canonical owner,
+- write scope,
+- allowed task-provided artifacts,
+- review handoff neighbors.
+
 ### Parallel Batch Report
 
 Given a set of nodes, show:
@@ -361,6 +391,13 @@ Given a set of nodes, show:
 - soft conflicts,
 - write-scope overlap,
 - nodes that should be master-agent integrated.
+
+When selected nodes include tasks, batch reports also show:
+
+- selected task nodes,
+- task write scopes for merge contamination review,
+- task handoff edges, including whether each handoff neighbor is in the
+  requested batch.
 
 ## Suggested Rollout
 
@@ -385,9 +422,9 @@ review.
 
 ### Phase 3
 
-Start adding task nodes for future case-backed work such as campaign pressure,
-stress/resolve, BBS/social read models, mechanism expansion, and case-library
-normalization.
+Use task nodes for bounded case-backed work such as case-library
+normalization, adapter migration, or other narrow handoff slices where the
+MasterAgent needs write-scope and review-gate visibility.
 
 The first registered task node is `cardanalysis_case_library_infra_v1`, which
 tracks the minimal normalized case validator and CLI entrypoint. It is
@@ -397,9 +434,14 @@ case validation can affect their future inputs.
 The second registered task node is `existing_asset_case_adapter_v1`, which
 tracks a narrow legacy-fixture export slice into normalized cases without
 claiming canonical ownership of the legacy surfaces themselves. It is
-review-gated with mechanism discovery, autonomous design, and campaign
-experience consumers because adapter semantics can influence how downstream
-case-backed heads read migrated mechanism and campaign evidence.
+review-gated with mechanism discovery and autonomous design because adapter
+semantics can influence how current downstream case-backed heads read migrated
+mechanism evidence.
+
+New report-only model heads such as stress/resolve or campaign experience
+curves should normally be capability nodes, not task nodes, once they have a
+stable owner module and summary artifact. Use a task node only for the bounded
+integration or migration slice around such a model.
 
 ## Non-Goals For V1
 
