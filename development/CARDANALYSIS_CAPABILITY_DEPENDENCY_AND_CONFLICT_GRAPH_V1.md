@@ -116,6 +116,13 @@ Hard dependency. The source node relies on the target node.
 Soft dependency. Missing it should degrade wording or confidence, not break the
 entire node.
 
+Use this edge only when the advisory read surface is already implemented in the
+current code path.
+
+Do not register speculative or "may later" consumers here just to preserve a
+planning idea. Future advisory consumers should stay in docs, daily logs, or
+task-node notes until the implementation actually reads the artifact.
+
 ### `provides`
 
 The source capability or decision produces the target artifact.
