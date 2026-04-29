@@ -202,6 +202,7 @@ Capabilities:
 - `cardanalysis_evidence_bundle_v1`
 - `evaluation_autonomous_design_model_v1`
 - `cardanalysis_case_input_contract_v1`
+- `stress_resolve_model_v1`
 
 Artifacts:
 
@@ -209,6 +210,7 @@ Artifacts:
 - `normalized_design_case`
 - `feature_projection_payload`
 - `case_input_validator_entrypoint`
+- `stress_resolve_summary`
 - `mechanism_axis_summary`
 - `deck_compression_summary`
 - `mechanism_fun_health_summary`
