@@ -162,7 +162,7 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Run a fast draft session from a reviewed JSON input:
   - `python scripts/run_fast_draft_session.py --input <path> --output-dir <dir>`
 - Scaffold a new character profile file without registering it:
-  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <婵炴垶鎼╅崢浠嬪几閸愵喖瑙?`
+  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <濠电偞鍨堕幖鈺呭储娴犲鍑犻柛鎰靛枛鐟?`
 - Validate the profile scaffold script:
   - `python -m pytest tests/scripts/test_scaffold_combat_analysis_profile.py -q`
 - Validate Design Loop v1:
@@ -234,6 +234,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_existing_asset_case_adapter.py --input <legacy-json-or-dir> --output-dir <dir>`
 - Validate the existing asset case adapter:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_existing_asset_case_adapter_v1.py tests/scripts/test_run_existing_asset_case_adapter.py -q`
+- Write a case-projection sample pack input template:
+  - `python scripts/run_case_projection_sample_pack.py --write-template <path>`
+- Run the case-projection sample pack closure over one or more legacy inputs:
+  - `python scripts/run_case_projection_sample_pack.py --input <legacy-json-or-dir-or-manifest> --output-dir <dir>`
+- Validate the case-projection sample pack v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_case_projection_sample_pack_v1.py tests/scripts/test_run_case_projection_sample_pack.py -q`
 - Write a cardanalysis feature projection input template:
   - `python scripts/run_cardanalysis_feature_projection.py --write-template <path>`
 - Run a report-only cardanalysis feature projection review:
