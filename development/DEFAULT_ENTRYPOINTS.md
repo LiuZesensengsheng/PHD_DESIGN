@@ -236,6 +236,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_stress_resolve_model.py --input tests/fixtures/combat_analysis/stress_resolve_model_v1/stress_resolve_cases_v1.json --output-dir <dir>`
 - Validate Stress Resolve Model v1:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_stress_resolve_model_v1.py tests/scripts/test_run_stress_resolve_model.py -q`
+- Write a Campaign Experience Curve input template:
+  - `python scripts/run_campaign_experience_curve.py --write-template <path>`
+- Run a report-only Campaign Experience Curve review:
+  - `python scripts/run_campaign_experience_curve.py --input tests/fixtures/combat_analysis/campaign_experience_curve_v1/campaign_experience_curve_cases_v1.json --output-dir <dir>`
+- Validate Campaign Experience Curve v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_experience_curve_v1.py tests/scripts/test_run_campaign_experience_curve.py -q`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
   - `python scripts/validate_capability_graph.py --impact <node-id>`
