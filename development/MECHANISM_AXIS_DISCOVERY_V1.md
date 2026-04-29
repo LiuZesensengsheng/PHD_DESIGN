@@ -19,6 +19,7 @@ layer can decide whether a promising axis fits the game's ideal tone.
 In scope:
 
 - report-only mechanism-axis candidate review
+- report-only candidate-axis cards as a discovery expression layer
 - base-axis dependency vectors
 - parameter response targets
 - foundation-axis identity override risk
@@ -43,6 +44,7 @@ These inputs are discovery context only. They may enrich:
 
 - discovery wording,
 - surfaced candidate-axis hints,
+- candidate-axis card evidence status and missing-case requests,
 - uncertainty notes,
 - next-review direction.
 
@@ -89,6 +91,31 @@ The key V1 question:
   support?
 
 Good candidates benefit from foundation axes without being replaced by them.
+
+## Candidate Axis Cards
+
+The summary payload now includes a report-only `candidate_axis_cards` section.
+Each card is still discovery output, not a canonical family or promotion claim.
+
+Each card records:
+
+- why the mechanism is worth exploring (`mechanism_promise`),
+- which support axes it appears to need,
+- what it should be compared against so generic throughput does not masquerade as
+  mechanism identity,
+- likely payoff window and failure modes,
+- setup tax plus agency/counterplay notes,
+- case/projection evidence status,
+- missing reviewed cases still needed,
+- the existing `recommended_next_probe` wording,
+- `authority_boundary = advisory_context_only`.
+
+This layer must stay deterministic and downstream-safe:
+
+- it must not rewrite `discovery_label`, `score`, or `recommended_next_probe`,
+- it must not promote source-mined/generated context into reviewed evidence,
+- it must not imply hard-gate viability or formal family ownership,
+- it must not become card generation.
 
 ## Output Labels
 
