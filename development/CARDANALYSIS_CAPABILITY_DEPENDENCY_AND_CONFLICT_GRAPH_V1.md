@@ -111,6 +111,12 @@ populate task nodes in the canonical registry.
 
 Hard dependency. The source node relies on the target node.
 
+Use this edge only when the target is a real prerequisite in the current
+implementation or canonical merge flow.
+
+Do not use `depends_on` for thematic ancestry, future intended integration, or
+because one doc conceptually inspired another.
+
 ### `optional_depends_on`
 
 Soft dependency. Missing it should degrade wording or confidence, not break the
@@ -130,6 +136,13 @@ The source capability or decision produces the target artifact.
 ### `consumes`
 
 The source capability reads the target artifact.
+
+Use this edge only when the current code path reads the artifact as a live input
+surface.
+
+Do not use `consumes` for validators that merely emit or normalize the contract,
+for presence-only source-surface bookkeeping, or for future planned readers that
+have not yet been wired.
 
 ### `conflicts_with`
 
