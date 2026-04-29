@@ -202,6 +202,7 @@ Capabilities:
 - `cardanalysis_evidence_bundle_v1`
 - `evaluation_autonomous_design_model_v1`
 - `cardanalysis_case_input_contract_v1`
+- `cardanalysis_feature_projection_v1`
 - `stress_resolve_model_v1`
 - `campaign_experience_curve_v1`
 

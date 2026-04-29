@@ -230,6 +230,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/validate_cardanalysis_case_input.py --input <path>`
 - Validate the cardanalysis case input validator:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_case_input_contract_v1.py tests/scripts/test_validate_cardanalysis_case_input.py -q`
+- Write a cardanalysis feature projection input template:
+  - `python scripts/run_cardanalysis_feature_projection.py --write-template <path>`
+- Run a report-only cardanalysis feature projection review:
+  - `python scripts/run_cardanalysis_feature_projection.py --input tests/fixtures/combat_analysis/feature_projection_v1/feature_projection_cases_v1.json --output-dir <dir>`
+- Validate Cardanalysis Feature Projection v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_feature_projection_v1.py tests/scripts/test_run_cardanalysis_feature_projection.py -q`
 - Write a Stress Resolve Model input template:
   - `python scripts/run_stress_resolve_model.py --write-template <path>`
 - Run a report-only Stress Resolve Model review:
