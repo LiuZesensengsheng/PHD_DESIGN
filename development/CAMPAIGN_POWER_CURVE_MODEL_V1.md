@@ -80,6 +80,8 @@ Evidence-state defaults must stay phase-calibrated:
   surfaces justify the current label and which claims remain out of bounds
 - `curve_checkpoint.evidence_state.source_support` should split current support into
   `block_support`, `reward_support`, and `encounter_support`
+- `curve_checkpoint.evidence_state.source_support` is evidence/context language only;
+  it must not become approval, gate, or authority vocabulary
 - the current calibration expects `block_support` to be stronger than
   `reward_support` / `encounter_support` after `starter`; the later phases remain
   advisory because source visibility is uneven across those support classes
@@ -98,6 +100,15 @@ texture, constraints, and recovery questions visible. That question is report-on
 
 The field must not decide loop legality, deck failure, hard-gate status, or monster
 stat targets.
+
+`checkpoint_review_checklist` must keep checklist review states separate from
+authority vocabulary. The canonical authority boundary remains only:
+
+- `advisory_context_only`
+
+Checklist readiness should use checklist-specific labels such as
+`present`, `review_needed`, `advisory_ready`, `stale_check_needed`, and
+`out_of_scope`.
 
 ## Required Payload Sections
 

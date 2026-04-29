@@ -1552,7 +1552,7 @@ Checklist status labels:
 | `not_started` | The checkpoint has not been reviewed for this area. |
 | `present` | The area exists, but quality or evidence has not been reviewed. |
 | `review_needed` | The area is present and has a named uncertainty. |
-| `reviewed_advisory` | The area is reviewed enough for advisory planning. |
+| `advisory_ready` | The area is reviewed enough for advisory planning. |
 | `stale_check_needed` | A known change may invalidate the checkpoint. |
 | `out_of_scope` | The area is intentionally not part of this checkpoint. |
 
@@ -1578,7 +1578,7 @@ Review rules:
 
 - A checkpoint with missing evidence can still be used as a `discussion_seed` or
   `validation_prompt` if the missing evidence is explicit.
-- `reviewed_advisory` does not mean balanced, final, or ready for implementation.
+- `advisory_ready` does not mean balanced, final, or ready for implementation.
 - Checklist review status must not overload `authority_boundary`; use
   `authority_boundary_review` for review maturity and keep `authority_boundary`
   canonical as `advisory_context_only`.
@@ -1645,7 +1645,7 @@ Each checkpoint should answer:
     "interpretation_notes": [
       "do_not_expect_mechanism_identity",
       "do_not_punish_low_draw_velocity",
-      "frontload_or_block_failure_is_a_review_prompt_not_a_gate"
+      "frontload_or_block_failure_is_an_advisory_review_prompt"
     ],
     "authority_boundary": "advisory_context_only"
   }
