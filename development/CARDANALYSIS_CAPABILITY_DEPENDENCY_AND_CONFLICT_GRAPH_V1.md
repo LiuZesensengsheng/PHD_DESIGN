@@ -117,6 +117,10 @@ implementation or canonical merge flow.
 Do not use `depends_on` for thematic ancestry, future intended integration, or
 because one doc conceptually inspired another.
 
+`depends_on` is also the correct relation for contract-bound governance edges:
+when a capability is constrained by a canonical contract artifact or frozen
+decision, but does not read that artifact as a live runtime/report input.
+
 ### `optional_depends_on`
 
 Soft dependency. Missing it should degrade wording or confidence, not break the
@@ -143,6 +147,10 @@ surface.
 Do not use `consumes` for validators that merely emit or normalize the contract,
 for presence-only source-surface bookkeeping, or for future planned readers that
 have not yet been wired.
+
+Do not use `consumes` for contract-preservation-only edges such as authority
+boundaries or direction documents unless the current implementation truly reads
+that contract artifact as input data.
 
 ### `conflicts_with`
 
@@ -331,6 +339,7 @@ Given one node, show:
 
 - direct provided artifacts,
 - direct consumer nodes,
+- direct dependent nodes,
 - downstream impacted nodes,
 - review-gated neighbors,
 - conflict neighbors.
@@ -338,6 +347,10 @@ Given one node, show:
 Artifact nodes are first-class impact roots. If the queried root is an artifact,
 the impact report should start from the live consumers of that artifact rather
 than returning an empty downstream set.
+
+For contract artifacts, direct dependents are often the more important signal:
+they show which capabilities are constrained by the contract even when there are
+no live data consumers.
 
 ### Parallel Batch Report
 
