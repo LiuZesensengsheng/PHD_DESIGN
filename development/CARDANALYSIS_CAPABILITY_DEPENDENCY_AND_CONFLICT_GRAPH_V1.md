@@ -335,6 +335,10 @@ Given one node, show:
 - review-gated neighbors,
 - conflict neighbors.
 
+Artifact nodes are first-class impact roots. If the queried root is an artifact,
+the impact report should start from the live consumers of that artifact rather
+than returning an empty downstream set.
+
 ### Parallel Batch Report
 
 Given a set of nodes, show:
