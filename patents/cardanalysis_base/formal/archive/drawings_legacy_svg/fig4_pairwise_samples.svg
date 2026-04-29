@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+    </marker>
+    <style>
+      text { font-family: SimSun, Songti SC, serif; font-size: 23px; fill: #000; }
+      .small { font-size: 18px; }
+      .box { fill: #fff; stroke: #000; stroke-width: 2; }
+      .line { stroke: #000; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <text x="440" y="45">图4</text>
+  <rect class="box" x="120" y="90" width="760" height="100"/>
+  <text x="390" y="145">人工审查样本</text>
+  <text class="small" x="190" y="178">正样本 / 负样本 / 近邻样本 / 误报样本</text>
+  <line class="line" x1="500" y1="190" x2="500" y2="255"/>
+  <rect class="box" x="280" y="255" width="440" height="90"/>
+  <text x="355" y="310">160 样本构造模块</text>
+  <line class="line" x1="500" y1="345" x2="500" y2="410"/>
+  <rect class="box" x="120" y="410" width="760" height="120"/>
+  <text x="390" y="455">成对排序样本</text>
+  <text class="small" x="210" y="495">赢家对象 / 输家对象 / 标签类型 / 差异特征</text>
+  <line class="line" x1="500" y1="530" x2="500" y2="595"/>
+  <rect class="box" x="280" y="595" width="440" height="90"/>
+  <text x="355" y="650">170 学习排序模块</text>
+</svg>
