@@ -58,10 +58,11 @@ The V1 fixture pack lives under:
 tests/fixtures/combat_analysis/mechanism_case_library_v1/
 ```
 
-Initial coverage plus the first four increments is 178 normalized cases:
+Initial coverage plus the first four increments and the targeted round-2 gap
+patch is 182 normalized cases:
 
 - 68 reviewed mechanism cases;
-- 86 human-curated package or route-shape cases;
+- 90 human-curated mechanism, package, or route-shape cases;
 - 12 source-mined reference cases;
 - 12 generated hypotheses.
 
@@ -105,6 +106,11 @@ mechanism packs, four human-curated package packs, one source-mined reference
 pack, and one generated hypothesis pack. The goal is broad near-closeout
 coverage without regressing into oversized files.
 
+The targeted round-2 gap patch adds four human-curated direct mechanism cases
+for the queue targets `curse_pollution` and `stance_mode_switch`. These cases
+stay below reviewed authority and exist only to close the current mechanism-axis
+coverage gap.
+
 ## Pack Layout
 
 The fixture directory is intentionally sharded:
@@ -124,6 +130,7 @@ The fixture directory is intentionally sharded:
 - `mechanism_package_cost_recovery_cases_v1.json`
 - `mechanism_frontier_reference_cases_v1.json`
 - `mechanism_frontier_hypothesis_cases_v1.json`
+- `mechanism_axis_gap_round_2_cases_v1.json`
 
 The goal is not many tiny files for their own sake. The goal is to keep each
 pack reviewable and semantically legible.
