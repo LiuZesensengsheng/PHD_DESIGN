@@ -58,10 +58,11 @@ The V1 fixture pack lives at:
 tests/fixtures/combat_analysis/mechanism_case_library_v1/mechanism_cases_v1.json
 ```
 
-Initial coverage is 32 normalized cases:
+Initial coverage plus the first failure/counterplay increment is 40 normalized
+cases:
 
-- 16 reviewed mechanism cases;
-- 12 human-curated package or route-shape cases;
+- 20 reviewed mechanism cases;
+- 16 human-curated package or route-shape cases;
 - 2 source-mined reference cases;
 - 2 generated hypotheses.
 
@@ -83,6 +84,11 @@ Coverage buckets:
 - curse or pollution as resource
 - summon or temporary object
 - chain, combo, and loop
+
+The first increment adds failure and counterplay probes for draw clutter,
+discard empty-hand collapse, energy hoarding, defense stall, status cleanup
+tax, tutor overfit, temporary-generation execution load, and loop-breaker
+density.
 
 ## Authority Boundary
 
