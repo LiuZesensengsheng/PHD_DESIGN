@@ -52,17 +52,16 @@ It uses:
 
 ## Fixture Pack
 
-The V1 fixture pack lives at:
+The V1 fixture pack lives under:
 
 ```text
-tests/fixtures/combat_analysis/mechanism_case_library_v1/mechanism_cases_v1.json
+tests/fixtures/combat_analysis/mechanism_case_library_v1/
 ```
 
-Initial coverage plus the first failure/counterplay increment is 40 normalized
-cases:
+Initial coverage plus the first two increments is 48 normalized cases:
 
 - 20 reviewed mechanism cases;
-- 16 human-curated package or route-shape cases;
+- 24 human-curated package or route-shape cases;
 - 2 source-mined reference cases;
 - 2 generated hypotheses.
 
@@ -89,6 +88,11 @@ The first increment adds failure and counterplay probes for draw clutter,
 discard empty-hand collapse, energy hoarding, defense stall, status cleanup
 tax, tutor overfit, temporary-generation execution load, and loop-breaker
 density.
+
+The second increment adds package density and brittleness probes for energy
+refunds, status cleanup narrowness, summon payoff/body ratios, mode entry/exit
+ratios, threshold accelerator overbuild, curse payoff density, position anchor
+density, and temporary-generation core-plan drift.
 
 ## Authority Boundary
 
