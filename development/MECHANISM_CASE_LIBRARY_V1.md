@@ -100,6 +100,40 @@ package-ratio probes across draw, discard, energy, defense, status, search,
 exhaust, transform, redirect, charge, stance, threshold, stress, and curse;
 plus source-mined and generated cases that stay below reviewed authority.
 
+## Pack Layout
+
+The fixture directory is intentionally sharded:
+
+- `mechanism_cases_v1.json`
+- `mechanism_failure_counterplay_cases_v1.json`
+- `mechanism_package_density_cases_v1.json`
+- `mechanism_reviewed_constraint_cases_v1.json`
+- `mechanism_package_ratio_cases_v1.json`
+- `mechanism_frontier_reference_and_hypothesis_cases_v1.json`
+
+The goal is not many tiny files for their own sake. The goal is to keep each
+pack reviewable and semantically legible.
+
+## Pack Management Rules
+
+Preferred maintenance rules:
+
+- add new cases as a new semantic shard, not by endlessly growing one legacy
+  file;
+- keep a shard around `8-16` cases when possible;
+- avoid shards larger than `20` cases unless there is a strong review reason;
+- isolate source-mined and generated material from reviewed and human-curated
+  packs when practical;
+- keep focused tests pack-aware, using per-pack counts and tier checks instead
+  of a giant single expected-id list.
+
+Future re-sharding is acceptable as long as:
+
+- case content stays semantically identical,
+- `case_id` values stay stable,
+- source/review boundaries stay unchanged,
+- the contract remains `cardanalysis_case_input_v1`.
+
 ## Authority Boundary
 
 Every case keeps:
