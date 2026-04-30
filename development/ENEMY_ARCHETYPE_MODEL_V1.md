@@ -38,9 +38,14 @@ Out of scope:
 
 ## V1 Artifact
 
-V1 stores one normalized case pack at:
+V1 stores a normalized case-pack directory at:
 
-`tests/fixtures/combat_analysis/enemy_archetype_model_v1/enemy_archetype_cases_v1.json`
+`tests/fixtures/combat_analysis/enemy_archetype_model_v1/`
+
+Current shards:
+
+- `enemy_archetype_cases_v1.json`
+- `enemy_archetype_gap_round_2_cases_v1.json`
 
 The pack is intentionally report-first and case-library-only.
 
@@ -69,7 +74,7 @@ global schema promotions.
 
 ## V1 Coverage
 
-The first pack covers these archetype families:
+The current pack covers these archetype families:
 
 - early pressure tester
 - block tax enemy
@@ -91,6 +96,14 @@ The first pack covers these archetype families:
 - failure-state value probe enemy
 - stress carryover enemy
 - recovery-window validator
+- elite punisher
+- frontload defense check
+- boss phase shift
+
+Some families now intentionally use more than one normalized case under the
+same `primary_axis`. That is a coverage choice, not a schema change: reviewed
+and human-curated variants can coexist without promoting the whole family into
+runtime or hard-gate authority.
 
 ## Advisory Boundary
 
@@ -129,6 +142,14 @@ Each case tries to answer:
 4. what a good partial solve looks like,
 5. what local value remains after imperfect play,
 6. how the pressure should relate to campaign pacing and recovery.
+
+The round-two gap fill especially targets three pressure questions that are
+easy to under-cover if the pack stays one-case-per-axis only:
+
+- how elite encounters punish exposed greedy turns,
+- how early encounter pressure checks immediate defense rather than generic
+  opener stability,
+- how boss fights ask for answer reorientation across phase shifts.
 
 ## Schema Pressure / Future Gaps
 
