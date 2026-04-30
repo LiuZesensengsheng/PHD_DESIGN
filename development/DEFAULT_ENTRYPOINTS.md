@@ -246,6 +246,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_cardanalysis_coverage_gap_report.py --input <case-or-projection-json-or-dir-or-manifest> --output-dir <dir>`
 - Validate Cardanalysis Coverage Gap Report v1:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_coverage_gap_report_v1.py tests/scripts/test_run_cardanalysis_coverage_gap_report.py -q`
+- Write a coverage-guided case queue input template:
+  - `python scripts/run_coverage_guided_case_queue.py --write-template <path>`
+- Run a report-only coverage-guided case queue from a coverage-gap snapshot, manifest, or output directory:
+  - `python scripts/run_coverage_guided_case_queue.py --input <coverage-gap-snapshot-or-manifest-or-output-dir> --output-dir <dir>`
+- Validate Coverage Guided Case Queue v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_coverage_guided_case_queue_v1.py tests/scripts/test_run_coverage_guided_case_queue.py -q`
 - Write a cardanalysis feature projection input template:
   - `python scripts/run_cardanalysis_feature_projection.py --write-template <path>`
 - Run a report-only cardanalysis feature projection review:
