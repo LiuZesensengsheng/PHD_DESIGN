@@ -46,6 +46,7 @@ Current shards:
 
 - `enemy_archetype_cases_v1.json`
 - `enemy_archetype_gap_round_2_cases_v1.json`
+- `enemy_archetype_elite_punisher_longrun_cases_v1.json`
 
 The pack is intentionally report-first and case-library-only.
 
@@ -150,6 +151,11 @@ easy to under-cover if the pack stays one-case-per-axis only:
 - how early encounter pressure checks immediate defense rather than generic
   opener stability,
 - how boss fights ask for answer reorientation across phase shifts.
+
+The long-running case-library lane adds a focused `elite_punisher` shard to
+thicken the current thin-reviewed queue target without changing any consumer or
+runtime behavior. The extra cases focus on contingency-buffer preservation,
+soft counterplay lane diversity, and route-cost accounting.
 
 ## Schema Pressure / Future Gaps
 
