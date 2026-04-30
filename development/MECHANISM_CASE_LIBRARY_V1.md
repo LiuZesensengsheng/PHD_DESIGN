@@ -58,12 +58,12 @@ The V1 fixture pack lives under:
 tests/fixtures/combat_analysis/mechanism_case_library_v1/
 ```
 
-Initial coverage plus the first two increments is 48 normalized cases:
+Initial coverage plus the first three increments is 78 normalized cases:
 
-- 20 reviewed mechanism cases;
-- 24 human-curated package or route-shape cases;
-- 2 source-mined reference cases;
-- 2 generated hypotheses.
+- 32 reviewed mechanism cases;
+- 38 human-curated package or route-shape cases;
+- 4 source-mined reference cases;
+- 4 generated hypotheses.
 
 Coverage buckets:
 
@@ -93,6 +93,12 @@ The second increment adds package density and brittleness probes for energy
 refunds, status cleanup narrowness, summon payoff/body ratios, mode entry/exit
 ratios, threshold accelerator overbuild, curse payoff density, position anchor
 density, and temporary-generation core-plan drift.
+
+The third increment adds 30 extended constraint cases: reviewed timing,
+visibility, cap, interrupt, lockout, and overflow constraints; human-curated
+package-ratio probes across draw, discard, energy, defense, status, search,
+exhaust, transform, redirect, charge, stance, threshold, stress, and curse;
+plus source-mined and generated cases that stay below reviewed authority.
 
 ## Authority Boundary
 
