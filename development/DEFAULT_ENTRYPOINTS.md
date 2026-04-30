@@ -246,6 +246,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_cardanalysis_coverage_gap_report.py --input <case-or-projection-json-or-dir-or-manifest> --output-dir <dir>`
 - Validate Cardanalysis Coverage Gap Report v1:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_coverage_gap_report_v1.py tests/scripts/test_run_cardanalysis_coverage_gap_report.py -q`
+- Write a card package proposal contract template:
+  - `python scripts/validate_card_package_proposal.py --write-template <path>`
+- Validate a card package proposal file or fixture directory:
+  - `python scripts/validate_card_package_proposal.py --input <path>`
+- Validate the card package proposal contract:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_proposal_contract_v1.py tests/scripts/test_validate_card_package_proposal.py -q`
 - Write a cardanalysis feature projection input template:
   - `python scripts/run_cardanalysis_feature_projection.py --write-template <path>`
 - Run a report-only cardanalysis feature projection review:
