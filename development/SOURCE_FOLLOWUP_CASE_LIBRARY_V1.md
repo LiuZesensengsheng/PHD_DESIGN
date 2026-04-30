@@ -38,6 +38,10 @@ The long-running case-library lane also adds followup review notes for:
 - `source_mined_anti_infinite_soft_pressure_enemy_case_v1`
 - `source_mined_draw_disruption_enemy_case_v1`
 - `source_mined_charge_decay_reference_case_v1`
+- `source_mined_mode_cooldown_reference_case_v1`
+- `source_mined_position_zone_reference_case_v1`
+- `source_mined_public_thread_reference_case_v1`
+- `source_mined_stress_cost_reference_case_v1`
 
 Each followup case stores the original target id and queue id under
 `contexts.campaign` and `contexts.experience.source_followup`.
@@ -109,6 +113,10 @@ Coverage:
 - anti-infinite soft pressure followup review note;
 - draw disruption enemy followup review note;
 - charge decay reference followup review note.
+- mode cooldown reference followup review note;
+- position zone reference followup review note;
+- public thread reference followup review note;
+- stress cost reference followup review note.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
