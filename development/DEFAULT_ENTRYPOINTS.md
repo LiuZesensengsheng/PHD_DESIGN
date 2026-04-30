@@ -240,6 +240,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_case_projection_sample_pack.py --input <legacy-json-or-dir-or-manifest> --output-dir <dir>`
 - Validate the case-projection sample pack v1:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_case_projection_sample_pack_v1.py tests/scripts/test_run_case_projection_sample_pack.py -q`
+- Write a cardanalysis coverage-gap scanner input template:
+  - `python scripts/run_cardanalysis_coverage_gap_report.py --write-template <path>`
+- Run a report-only cardanalysis coverage-gap scan:
+  - `python scripts/run_cardanalysis_coverage_gap_report.py --input <case-or-projection-json-or-dir-or-manifest> --output-dir <dir>`
+- Validate Cardanalysis Coverage Gap Report v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_coverage_gap_report_v1.py tests/scripts/test_run_cardanalysis_coverage_gap_report.py -q`
 - Write a cardanalysis feature projection input template:
   - `python scripts/run_cardanalysis_feature_projection.py --write-template <path>`
 - Run a report-only cardanalysis feature projection review:
