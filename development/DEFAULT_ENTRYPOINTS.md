@@ -162,7 +162,7 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Run a fast draft session from a reviewed JSON input:
   - `python scripts/run_fast_draft_session.py --input <path> --output-dir <dir>`
 - Scaffold a new character profile file without registering it:
-  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <婵炴垶鎼╅崢浠嬪几閸愵喖瑙?`
+  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <濠电偞鍨堕幖鈺呭储娴犲鍑犻柛鎰靛枛鐟?`
 - Validate the profile scaffold script:
   - `python -m pytest tests/scripts/test_scaffold_combat_analysis_profile.py -q`
 - Validate Design Loop v1:
@@ -252,6 +252,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/validate_card_package_proposal.py --input <path>`
 - Validate the card package proposal contract:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_proposal_contract_v1.py tests/scripts/test_validate_card_package_proposal.py -q`
+- Write a coverage-guided case queue input template:
+  - `python scripts/run_coverage_guided_case_queue.py --write-template <path>`
+- Run a report-only coverage-guided case queue from a coverage-gap snapshot, manifest, or output directory:
+  - `python scripts/run_coverage_guided_case_queue.py --input <coverage-gap-snapshot-or-manifest-or-output-dir> --output-dir <dir>`
+- Validate Coverage Guided Case Queue v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_coverage_guided_case_queue_v1.py tests/scripts/test_run_coverage_guided_case_queue.py -q`
 - Write a cardanalysis feature projection input template:
   - `python scripts/run_cardanalysis_feature_projection.py --write-template <path>`
 - Run a report-only cardanalysis feature projection review:
