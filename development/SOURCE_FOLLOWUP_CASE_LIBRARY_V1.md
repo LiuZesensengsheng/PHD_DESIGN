@@ -42,6 +42,9 @@ The long-running case-library lane also adds followup review notes for:
 - `source_mined_position_zone_reference_case_v1`
 - `source_mined_public_thread_reference_case_v1`
 - `source_mined_stress_cost_reference_case_v1`
+- `source_mined_social_texture_case_v1`
+- `source_mined_reference_case_v1`
+- `late_round_15_texture_review`
 
 Each followup case stores the original target id and queue id under
 `contexts.campaign` and `contexts.experience.source_followup`.
@@ -117,6 +120,9 @@ Coverage:
 - position zone reference followup review note;
 - public thread reference followup review note;
 - stress cost reference followup review note.
+- social texture followup review note;
+- campaign pressure reference followup review note;
+- late-round texture followup review note.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
