@@ -256,6 +256,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_design_complexity_evaluation.py --write-template <path>`
 - Run a report-only design complexity metric-tree evaluation:
   - `python scripts/run_design_complexity_evaluation.py --input <design-unit-or-card-package-json-or-dir> --output-dir <dir>`
+- Run the design-layering governance fixture:
+  - `python scripts/run_design_complexity_evaluation.py --input tests/fixtures/combat_analysis/design_complexity_evaluation_v1/layering_governance_cases_v1.json --output-dir tmp/combat_analysis/design_complexity_layering_governance_v1`
 - Validate Design Complexity Evaluation v1:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_design_complexity_evaluation_v1.py tests/scripts/test_run_design_complexity_evaluation.py -q`
 - Write a coverage-guided case queue input template:
