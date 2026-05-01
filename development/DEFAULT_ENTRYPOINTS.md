@@ -252,6 +252,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/validate_card_package_proposal.py --input <path>`
 - Validate the card package proposal contract:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_proposal_contract_v1.py tests/scripts/test_validate_card_package_proposal.py -q`
+- Write a design complexity evaluation input template:
+  - `python scripts/run_design_complexity_evaluation.py --write-template <path>`
+- Run a report-only design complexity metric-tree evaluation:
+  - `python scripts/run_design_complexity_evaluation.py --input <design-unit-or-card-package-json-or-dir> --output-dir <dir>`
+- Validate Design Complexity Evaluation v1:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_design_complexity_evaluation_v1.py tests/scripts/test_run_design_complexity_evaluation.py -q`
 - Write a coverage-guided case queue input template:
   - `python scripts/run_coverage_guided_case_queue.py --write-template <path>`
 - Run a report-only coverage-guided case queue from a coverage-gap snapshot, manifest, or output directory:
