@@ -47,6 +47,7 @@ Current shards:
 - `enemy_archetype_cases_v1.json`
 - `enemy_archetype_gap_round_2_cases_v1.json`
 - `enemy_archetype_elite_punisher_longrun_cases_v1.json`
+- `enemy_archetype_source_mined_frontload_references_v1.json`
 
 The pack is intentionally report-first and case-library-only.
 
@@ -100,6 +101,11 @@ The current pack covers these archetype families:
 - elite punisher
 - frontload defense check
 - boss phase shift
+
+The newest source-mined frontload-reference shard adds below-reviewed external
+references for Jaw Worm and Gremlin Nob. These cases thicken
+`frontload_defense_check` coverage while preserving source uncertainty and
+forbidding reviewed evidence claims.
 
 Some families now intentionally use more than one normalized case under the
 same `primary_axis`. That is a coverage choice, not a schema change: reviewed

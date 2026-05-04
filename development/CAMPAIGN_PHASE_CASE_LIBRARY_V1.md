@@ -34,11 +34,11 @@ Out of scope:
 
 ## Fixture Layout
 
-The initial fixture pack contains 8 cases:
+The initial fixture pack contains 10 cases:
 
 | Phase | Count | Role |
 | --- | ---: | --- |
-| `starter` | 6 | Primary queue target; covers opening pressure, first reward comprehension, recovery visibility, basic-axis teaching, enemy-pressure baseline, and route-agency reference. |
+| `starter` | 8 | Primary queue target; covers opening pressure, first reward comprehension, recovery visibility, basic-axis teaching, enemy-pressure baseline, route-agency reference, and two source-mined external starter-pressure references. |
 | `pivot` | 2 | Adjacent contrast only; covers route disruption and recovery-versus-greed. |
 
 Tier distribution:
@@ -47,11 +47,12 @@ Tier distribution:
 | --- | ---: |
 | `reviewed` | 4 |
 | `human_curated` | 3 |
-| `source_mined` | 1 |
+| `source_mined` | 3 |
 
-The source-mined route-agency case is intentionally below reviewed authority. It
-must preserve `reviewed_evidence_claim` in `authority.forbidden_uses` until a
-future human review promotes or rejects it.
+The source-mined route-agency case and the two external starter references are
+intentionally below reviewed authority. They must preserve
+`reviewed_evidence_claim` in `authority.forbidden_uses` until a future human
+review promotes or rejects them.
 
 ## Authority Boundary
 
