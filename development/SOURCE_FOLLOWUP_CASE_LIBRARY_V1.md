@@ -35,14 +35,30 @@ The long-running case-library lane also adds followup review notes for:
 - `generated_redirect_collision_hypothesis_case_v1`
 - `generated_search_public_target_hypothesis_case_v1`
 - `generated_summon_expiry_hypothesis_case_v1`
+- `generated_status_decay_transfer_hypothesis_case_v1`
+- `generated_temporary_generation_memory_budget_hypothesis_case_v1`
+- `generated_transform_pool_exhaust_hypothesis_case_v1`
 - `source_mined_anti_infinite_soft_pressure_enemy_case_v1`
+- `source_mined_chain_fatigue_reference_case_v1`
 - `source_mined_draw_disruption_enemy_case_v1`
 - `source_mined_charge_decay_reference_case_v1`
 - `source_mined_mode_cooldown_reference_case_v1`
+- `source_mined_draw_external_reset_reference_case_v1`
+- `source_mined_discard_reserve_reference_case_v1`
+- `source_mined_charge_decay_reference_v2_case_v1`
+- `source_mined_mode_lockout_reference_v2_case_v1`
+- `source_mined_gremlin_nob_skill_punish_frontload_reference_case_v1`
+- `source_mined_jaw_worm_frontload_defense_reference_case_v1`
 - `source_mined_position_zone_reference_case_v1`
+- `source_mined_position_zone_reference_v2_case_v1`
 - `source_mined_public_thread_reference_case_v1`
 - `source_mined_stress_cost_reference_case_v1`
 - `source_mined_social_texture_case_v1`
+- `source_mined_starter_agency_route_choice_reference_case_v1`
+- `source_mined_starter_cultist_scaling_clock_case_v1`
+- `source_mined_starter_first_three_encounter_mix_case_v1`
+- `source_mined_summon_slot_reference_case_v1`
+- `source_mined_threshold_overflow_reference_v2_case_v1`
 - `source_mined_reference_case_v1`
 - `late_round_15_texture_review`
 
@@ -113,16 +129,39 @@ Coverage:
 - redirect collision followup review note;
 - search public target followup review note;
 - summon expiry followup review note;
+- status decay transfer followup review note;
+- temporary generation memory budget followup review note;
+- transform pool exhaust followup review note;
 - anti-infinite soft pressure followup review note;
+- chain fatigue reference followup review note;
 - draw disruption enemy followup review note;
 - charge decay reference followup review note.
 - mode cooldown reference followup review note;
+- draw external reset reference followup review note;
+- discard reserve reference followup review note;
+- charge decay v2 reference followup review note;
+- mode lockout v2 reference followup review note;
 - position zone reference followup review note;
 - public thread reference followup review note;
 - stress cost reference followup review note.
 - social texture followup review note;
 - campaign pressure reference followup review note;
 - late-round texture followup review note.
+- Gremlin Nob skill-punish frontload reference followup review note;
+- Jaw Worm frontload defense reference followup review note;
+- position zone v2 reference followup review note;
+- starter agency route-choice reference followup review note;
+- starter Cultist scaling-clock reference followup review note;
+- starter first-three encounter mix followup review note;
+- summon slot reference followup review note;
+- threshold overflow reference followup review note;
+- defense reflect counterplay deepening followup review note;
+- draw heat budget stop-point deepening followup review note;
+- energy instability stabilize deepening followup review note;
+- loop safety break breakpoint deepening followup review note;
+- pollution market washout deepening followup review note;
+- recovery window validator relief deepening followup review note;
+- redirect collision lane-pressure deepening followup review note.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
