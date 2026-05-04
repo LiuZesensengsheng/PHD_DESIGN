@@ -162,6 +162,21 @@ Coverage:
 - pollution market washout deepening followup review note;
 - recovery window validator relief deepening followup review note;
 - redirect collision lane-pressure deepening followup review note.
+- chain fatigue branch-cap deepening followup review note;
+- chain fatigue offramp recovery deepening followup review note;
+- private leak redaction-boundary deepening followup review note;
+- private leak escalation-cap deepening followup review note;
+- search public target visibility deepening followup review note;
+- search public target consent-cost deepening followup review note;
+- summon expiry warning-window deepening followup review note;
+- status decay transfer destination deepening followup review note;
+- temporary generation cleanup-checkpoint deepening followup review note;
+- transform pool exhaust refresh-policy deepening followup review note;
+- defense reflect damage-ceiling deepening followup review note;
+- draw heat recovery-cooldown deepening followup review note;
+- energy instability debt-floor deepening followup review note;
+- loop safety break reset-audit deepening followup review note;
+- pollution market price-floor deepening followup review note.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
