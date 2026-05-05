@@ -446,6 +446,12 @@ Coverage:
   energy instability, status pollution, temporary generation, hidden tracking,
   over-tutor, redirect priority opacity, false recovery, and no-value fail
   states.
+- mechanism failure mode followup review notes for reset ambiguity, reward
+  mismatch, forced discard, deck-thin draw loops, support hostage dependencies,
+  refund timing races, cleanup no-sink traps, source stacking opacity, temporary
+  choice paralysis, delayed expiry, status stack-split and cleanse-order risks,
+  transform identity/value-floor collapse, recovery reward bait, public-search
+  private leaks, redirect value feedback opacity, and reflect counterplay tax.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
@@ -464,6 +470,27 @@ modes, not to decide mechanism legality or promote any hypothesis:
 - temporary generation expiry and provenance loss;
 - status duration drift and transform dead offers;
 - false recovery, over-tutor search, and hidden redirect priority.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 26 Mechanism Failure Coverage
+
+Round 26 continues the mechanism-failure slice over generated followup targets
+with another compact advisory-only batch. It focuses on failure-mode review
+questions for:
+
+- chain reset ambiguity and loop-break reward mismatch;
+- draw heat forced-discard agency loss and deck-thin self-loops;
+- energy support-hostage and refund-timing races;
+- pollution cleanup no-sink traps and source stacking opacity;
+- temporary generation choice paralysis and delayed expiry surprises;
+- status stack-split exploits and cleanse-order conflicts;
+- transform identity loss and low-rarity value-floor collapse;
+- recovery-window reward bait;
+- public-target search private-info leakage;
+- redirect prevented-value feedback opacity;
+- defense reflect counterplay tax.
 
 All cases remain `design_note / human_curated / review_needed` and
 `advisory_context_only`.
