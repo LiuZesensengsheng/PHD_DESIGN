@@ -465,6 +465,11 @@ Coverage:
   minimum-output false floors, cleanup choice tax, expiry-order conflicts,
   counterplay-delay mismatch, transform reroll-chase traps, and slow-deck
   recovery-window punish cases.
+- mechanism failure mode followup review notes for hidden exit cost,
+  stall thresholds, redraw exhaustion, rollback safety, source-auth drift,
+  safe-stop reward gaps, batching penalties, narrow relief bands, multi-hop
+  priority drift, lookup-confidence traps, latency gaps, expiry forecast gaps,
+  stop-loss timing, support orphan chains, and chain reentry dropoff.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
@@ -544,6 +549,29 @@ batch. It focuses on review questions for:
 - status decay transfer counterplay-delay mismatch;
 - transform pool reroll-chase traps;
 - recovery-window slow-deck punish cases.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 29 Mechanism Failure Coverage
+
+Round 29 continues the mechanism-failure lane with a 15-case advisory-only
+batch. It focuses on review questions for:
+
+- chain fatigue hidden exit cost and reentry dropoff;
+- defense reflect stall thresholds;
+- draw heat redraw exhaustion;
+- energy instability rollback safety;
+- private leak source-auth drift;
+- loop safety safe-stop reward gaps;
+- pollution market cleanup batching penalties;
+- recovery-window relief that is too narrow;
+- redirect multi-hop priority drift;
+- public-target search lookup-confidence traps;
+- status decay transfer counterplay latency gaps;
+- temporary generation expiry forecast gaps;
+- transform pool exhaust stop-loss timing;
+- summon expiry support orphan chains.
 
 All cases remain `design_note / human_curated / review_needed` and
 `advisory_context_only`.
