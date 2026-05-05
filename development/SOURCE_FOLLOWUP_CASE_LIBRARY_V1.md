@@ -387,6 +387,61 @@ Coverage:
 - recovery window player-choice density followup review note;
 - redirect collision target-lock preview followup review note;
 - public-target search duplicate-result followup review note.
+- chain fatigue loop-vs-combo sample-pair followup review note;
+- chain fatigue external-pressure stopline followup review note;
+- defense reflect attack-type sample-pair followup review note;
+- defense reflect stall break-even followup review note;
+- draw heat shuffle-cycle sample-pair followup review note;
+- draw heat payload-vs-cantrip followup review note;
+- energy instability burst-recovery sample-pair followup review note;
+- energy instability support-dependency followup review note;
+- private leak opt-in consent sample-pair followup review note;
+- private leak visibility-delay sample-pair followup review note;
+- loop safety break repeat-source mixing followup review note;
+- loop safety break reward-preservation sample-pair followup review note;
+- pollution market short-term long-term cost-pair followup review note;
+- pollution market cleanup-access sample-pair followup review note;
+- recovery window pre-spike signal-pair followup review note;
+- recovery window status-pressure pair followup review note;
+- redirect collision ally-enemy target-pair followup review note;
+- redirect collision prevented-value sample-pair followup review note;
+- public-target search open-pool vs filtered-pair followup review note;
+- public-target search decline-option sample-pair followup review note.
+- chain fatigue witness-set sufficiency followup review note;
+- chain fatigue counterexample-coverage followup review note;
+- defense reflect witness-set sufficiency followup review note;
+- defense reflect counterexample-boundary followup review note;
+- draw heat witness-set sufficiency followup review note;
+- draw heat counterexample-scope followup review note;
+- energy instability witness-set sufficiency followup review note;
+- energy instability counterexample-boundary followup review note;
+- private leak witness-set sufficiency followup review note;
+- private leak counterexample-scope followup review note;
+- loop safety break witness-set sufficiency followup review note;
+- loop safety break counterexample-boundary followup review note;
+- pollution market witness-set sufficiency followup review note;
+- pollution market counterexample-scope followup review note;
+- recovery window witness-set sufficiency followup review note;
+- recovery window counterexample-boundary followup review note;
+- redirect collision witness-set sufficiency followup review note;
+- redirect collision counterexample-scope followup review note;
+- public-target search witness-set sufficiency followup review note;
+- public-target search counterexample-boundary followup review note.
+- chain fatigue review-packet readiness followup review note;
+- defense reflect review-packet readiness followup review note;
+- draw heat review-packet readiness followup review note;
+- energy instability review-packet readiness followup review note;
+- private leak review-packet readiness followup review note;
+- loop safety break review-packet readiness followup review note;
+- pollution market review-packet readiness followup review note;
+- recovery window review-packet readiness followup review note;
+- redirect collision review-packet readiness followup review note;
+- public-target search review-packet readiness followup review note;
+- status decay transfer review-packet readiness followup review note;
+- summon expiry review-packet readiness followup review note;
+- temporary generation review-packet readiness followup review note;
+- transform pool exhaust review-packet readiness followup review note;
+- late-round texture review-packet readiness followup review note.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
