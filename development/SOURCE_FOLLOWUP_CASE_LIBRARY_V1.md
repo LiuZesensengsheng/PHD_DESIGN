@@ -452,6 +452,14 @@ Coverage:
   choice paralysis, delayed expiry, status stack-split and cleanse-order risks,
   transform identity/value-floor collapse, recovery reward bait, public-search
   private leaks, redirect value feedback opacity, and reflect counterplay tax.
+- mechanism failure mode followup review notes for cross-source chain leaks,
+  delayed-payoff starvation, nested loop interrupts, invisible soft caps,
+  non-attack reflect lockout, self-damage reflect attribution, shuffle
+  blindness, energy debt memory, burst overcap waste, pollution reward
+  contamination and cleanup timing traps, temporary zone overflow and duplicate
+  token flood, status duration and ownership edge cases, transform scarcity and
+  locked-archetype breaks, recovery relapse, search pool exhaustion, and
+  redirect priority inversion.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
@@ -491,6 +499,27 @@ questions for:
 - public-target search private-info leakage;
 - redirect prevented-value feedback opacity;
 - defense reflect counterplay tax.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 27 Mechanism Failure Coverage
+
+Round 27 continues the mechanism-failure lane with a 20-case advisory-only
+batch. It focuses on review questions for:
+
+- chain cross-source discount leaks and delayed-payoff starvation;
+- loop nested-interrupt leaks and invisible soft caps;
+- defense reflect non-attack lockout and self-damage attribution confusion;
+- draw heat delayed-shuffle blindness;
+- energy debt memory burden and burst-overcap waste;
+- pollution reward-contamination misreads and cleanup-timing traps;
+- temporary generation zone overflow and duplicate-token flood;
+- status negative-duration and owner-swap confusion;
+- transform scarcity spirals and locked-archetype breaks;
+- recovery-window frontloaded relapse;
+- public-target search pool-exhaustion blindness;
+- redirect priority inversion.
 
 All cases remain `design_note / human_curated / review_needed` and
 `advisory_context_only`.
