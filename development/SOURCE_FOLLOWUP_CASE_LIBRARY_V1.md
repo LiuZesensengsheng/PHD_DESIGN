@@ -460,6 +460,11 @@ Coverage:
   token flood, status duration and ownership edge cases, transform scarcity and
   locked-archetype breaks, recovery relapse, search pool exhaustion, and
   redirect priority inversion.
+- mechanism failure mode followup review notes for abort-penalty opacity,
+  manual-abort loss aversion, overblock deadlocks, mulligan-pressure collapse,
+  minimum-output false floors, cleanup choice tax, expiry-order conflicts,
+  counterplay-delay mismatch, transform reroll-chase traps, and slow-deck
+  recovery-window punish cases.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
@@ -520,6 +525,25 @@ batch. It focuses on review questions for:
 - recovery-window frontloaded relapse;
 - public-target search pool-exhaustion blindness;
 - redirect priority inversion.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 28 Mechanism Failure Coverage
+
+Round 28 continues the mechanism-failure lane with a 10-case advisory-only
+batch. It focuses on review questions for:
+
+- chain fatigue abort-penalty opacity;
+- loop safety manual-abort loss aversion;
+- defense reflect overblock deadlocks;
+- draw heat mulligan-pressure collapse;
+- energy instability false minimum-output floors;
+- pollution market cleanup-choice tax;
+- temporary generation expiry-order conflicts;
+- status decay transfer counterplay-delay mismatch;
+- transform pool reroll-chase traps;
+- recovery-window slow-deck punish cases.
 
 All cases remain `design_note / human_curated / review_needed` and
 `advisory_context_only`.
