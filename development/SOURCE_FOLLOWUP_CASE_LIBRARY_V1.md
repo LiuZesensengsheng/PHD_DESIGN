@@ -442,10 +442,31 @@ Coverage:
 - temporary generation review-packet readiness followup review note;
 - transform pool exhaust review-packet readiness followup review note;
 - late-round texture review-packet readiness followup review note.
+- mechanism failure mode followup review notes for loop collapse, draw heat,
+  energy instability, status pollution, temporary generation, hidden tracking,
+  over-tutor, redirect priority opacity, false recovery, and no-value fail
+  states.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
 reviewed evidence.
+
+## Round 25 Mechanism Failure Coverage
+
+Round 25 adds a compact mechanism-failure slice over existing generated
+followup targets. It is meant to accumulate review questions around failure
+modes, not to decide mechanism legality or promote any hypothesis:
+
+- loop collapse and stall loops;
+- draw heat overflow, choice-load, and no-value draw;
+- energy volatility with dead float and debt whiplash;
+- pollution sink failure and source opacity;
+- temporary generation expiry and provenance loss;
+- status duration drift and transform dead offers;
+- false recovery, over-tutor search, and hidden redirect priority.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
 
 ## Validation
 
