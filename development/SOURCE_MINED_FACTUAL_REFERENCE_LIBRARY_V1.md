@@ -87,6 +87,24 @@ These cases are external factual references for future review questions. They
 do not define project enemy data, monster stats, runtime AI, boss phases, or
 campaign pacing.
 
+## Batch 4 Coverage
+
+The fourth batch returns to card and package mechanics with public Slay the
+Spire Wiki factual references. It covers:
+
+- draw-lock plus cost-reset burst turns;
+- selected retain and cross-turn hand planning;
+- discard enablers and unplayable discard payoffs;
+- delayed copy generation and topdeck discount planning;
+- next-card repeat effects across Skill, Power, and Attack examples;
+- card-to-energy and stored-resource cashout;
+- energy or draw now with future Void/Burn pollution;
+- high-cost payoff support-ratio pressure.
+
+These cases remain source-mined and unreviewed. They do not define formal card
+data, package ratios, runtime copy logic, status runtime, energy rules, or
+default synthesis behavior.
+
 ## Validation
 
 ```bash
