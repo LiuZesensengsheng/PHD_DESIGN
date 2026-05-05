@@ -69,6 +69,24 @@ card-package emphasis. It covers:
 These are still source-mined facts only. They do not promote package ratios,
 formal card text, card pools, status runtimes, or search behavior.
 
+## Batch 3 Coverage
+
+The third batch shifts toward enemy pressure and campaign-phase examples:
+
+- early elite preparation windows and debuff clocks;
+- boss status pollution;
+- temporary card loss through minions;
+- charged boss defense checks;
+- boss minion summons and debuff layers;
+- summon caps and summon-board scaling;
+- health-threshold execute pressure;
+- starter boss mode shifts;
+- attack-driven intent volatility.
+
+These cases are external factual references for future review questions. They
+do not define project enemy data, monster stats, runtime AI, boss phases, or
+campaign pacing.
+
 ## Validation
 
 ```bash
