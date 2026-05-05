@@ -105,6 +105,24 @@ These cases remain source-mined and unreviewed. They do not define formal card
 data, package ratios, runtime copy logic, status runtime, energy rules, or
 default synthesis behavior.
 
+## Batch 5 Coverage
+
+The fifth batch completes the first `80` source-mined factual reference target.
+It uses public Slay the Spire Wiki references for Defect and Watcher mechanics:
+
+- Orb-slot capacity, Focus tradeoffs, and first-Orb passive repeat;
+- unique-Orb draw payoff and Frost-draw glue;
+- draw-pile-size energy, pure draw, and targeted draw-pile search;
+- Scry topdeck filtering;
+- Wrath-entry draw and retain-cost payoff;
+- fatal-kill deck upgrade reward bridges;
+- extra-turn timing and ramping energy;
+- Block/Scry and Attack/Scry/Draw multi-role glue.
+
+These cases stay low-authority source-mined facts only. They do not define
+formal card text, runtime timing, Orb rules, Scry UI, campaign reward policy,
+hard gates, learned paths, or default synthesis behavior.
+
 ## Validation
 
 ```bash
