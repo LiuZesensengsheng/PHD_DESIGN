@@ -312,6 +312,81 @@ Coverage:
 - recovery window relapse-signal followup review note;
 - redirect collision priority-preview followup review note;
 - public-target search pool-exhaust negative-control followup review note.
+- chain fatigue reset-abuse boundary followup review note;
+- defense reflect non-damage pressure boundary followup review note;
+- draw heat bottleneck-payoff timing followup review note;
+- energy instability banked-energy boundary followup review note;
+- private leak rebuttal-window followup review note;
+- loop safety break external-trigger collision followup review note;
+- loop safety break no-loop negative-control followup review note;
+- pollution market cleanup-offer visibility followup review note;
+- pollution market burden-sink negative-control followup review note;
+- recovery window resource-type split followup review note;
+- recovery window overheal-waste signal followup review note;
+- redirect collision self-target protection followup review note;
+- redirect collision simultaneous-swap negative-control followup review note;
+- public-target search permission-boundary followup review note;
+- public-target search stale-cache warning followup review note.
+- chain fatigue cross-turn carryover warning followup review note;
+- chain fatigue shared-counter collision followup review note;
+- defense reflect status-damage exclusion followup review note;
+- defense reflect pierce-damage boundary followup review note;
+- draw heat retain-conflict followup review note;
+- draw heat hand-limit preview followup review note;
+- energy instability refund-source attribution followup review note;
+- energy instability dead-turn negative-control followup review note;
+- private leak consent-disclosure contrast followup review note;
+- private leak overcorrection-penalty followup review note;
+- loop safety break manual-abort agency followup review note;
+- pollution market reward-tier scaling followup review note;
+- recovery window deck-speed sensitivity followup review note;
+- redirect collision target-disappears fallback followup review note;
+- public-target search ranking-transparency followup review note.
+- chain fatigue nonrepeat-sequence negative-control followup review note;
+- chain fatigue payoff-chain exception-boundary followup review note;
+- defense reflect overblock no-attack negative-control followup review note;
+- defense reflect retaliation-source boundary followup review note;
+- draw heat zero-cost cycle negative-control followup review note;
+- draw heat shuffle-boundary signal followup review note;
+- energy instability refund-chain abuse negative-control followup review note;
+- energy instability external-source boundary followup review note;
+- private leak public-record contrast followup review note;
+- private leak anonymous-source reliability followup review note;
+- loop safety break interrupt-timing boundary followup review note;
+- pollution market temporary-pollution boundary followup review note;
+- recovery window status-cleanup vs heal boundary followup review note;
+- redirect collision optional-redirect decline followup review note;
+- public-target search noisy-metadata boundary followup review note.
+- chain fatigue source-tag clarity followup review note;
+- chain fatigue payoff-window compression followup review note;
+- defense reflect block-loss tradeoff followup review note;
+- defense reflect enemy-scaling interaction followup review note;
+- draw heat optional-stop signal followup review note;
+- draw heat card-quality tradeoff followup review note;
+- energy instability overdraft-forecast followup review note;
+- energy instability stabilizer-tax followup review note;
+- private leak repair-timing followup review note;
+- private leak reward-exchange boundary followup review note;
+- loop safety break soft-cap visibility followup review note;
+- pollution market cleanup-price disclosure followup review note;
+- recovery window pressure-ramp after relief followup review note;
+- redirect collision queue-order disclosure followup review note;
+- public-target search failed-search value-floor followup review note.
+- chain fatigue interruptible-sequence followup review note;
+- chain fatigue reward-density pressure followup review note;
+- defense reflect counterattack-intent preview followup review note;
+- defense reflect block-floor requirement followup review note;
+- draw heat hand-filtering pressure followup review note;
+- draw heat delayed-heat tick followup review note;
+- energy instability multi-turn debt amortization followup review note;
+- energy instability minimum-output floor followup review note;
+- private leak audience-visibility followup review note;
+- private leak consequence-scaling followup review note;
+- loop safety break partial-refund followup review note;
+- pollution market reward-preview symmetry followup review note;
+- recovery window player-choice density followup review note;
+- redirect collision target-lock preview followup review note;
+- public-target search duplicate-result followup review note.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
