@@ -470,6 +470,10 @@ Coverage:
   safe-stop reward gaps, batching penalties, narrow relief bands, multi-hop
   priority drift, lookup-confidence traps, latency gaps, expiry forecast gaps,
   stop-loss timing, support orphan chains, and chain reentry dropoff.
+- mechanism failure mode followup review notes for exit-momentum rebound,
+  stall ceilings, redraw fatigue, rollback lockouts, provenance conflicts,
+  rebound-gap safe stops, cleanup batch limits, relief-band wobble, multi-hop
+  echo drift, and stale-confidence search.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
@@ -574,6 +578,26 @@ batch. It focuses on review questions for:
 - summon expiry support orphan chains.
 
 All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 30 Mechanism Failure Coverage
+
+Round 30 continues the mechanism-failure lane with a 10-case advisory-only
+batch. It focuses on review questions for:
+
+- chain fatigue exit-momentum rebound;
+- defense reflect stall ceilings;
+- draw heat redraw fatigue;
+- energy instability rollback lockouts;
+- private leak provenance conflicts;
+- loop safety safe-stop rebound gaps;
+- pollution market cleanup batch limits;
+- recovery-window relief-band wobble;
+- redirect collision multi-hop echo drift;
+- public-target search stale confidence.
+
+This completes the requested `mechanism failure modes +90` lane. All cases
+remain `design_note / human_curated / review_needed` and
 `advisory_context_only`.
 
 ## Validation
