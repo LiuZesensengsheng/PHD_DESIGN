@@ -474,6 +474,9 @@ Coverage:
   stall ceilings, redraw fatigue, rollback lockouts, provenance conflicts,
   rebound-gap safe stops, cleanup batch limits, relief-band wobble, multi-hop
   echo drift, and stale-confidence search.
+- plateau closure followup review notes for card-package collapse, enemy
+  pressure, campaign phase coverage, review-readiness safeguards, and
+  report-only application handoff boundaries.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
@@ -599,6 +602,45 @@ batch. It focuses on review questions for:
 This completes the requested `mechanism failure modes +90` lane. All cases
 remain `design_note / human_curated / review_needed` and
 `advisory_context_only`.
+
+## Rounds 31-35 Evidence Plateau Closure
+
+Rounds 31-35 add 86 advisory-only cases and bring the fixture pack to the
+first 500-case plateau.
+
+The closure batches intentionally shift from the completed mechanism-failure
+lane into the remaining evidence-priority lanes:
+
+- Round 31 adds 18 card-package collapse review notes for enabler, payoff,
+  glue, fail-state, counterplay, density, support-ratio, bridge-role, anchor,
+  capstone, safety-valve, low-rarity, status-support, summon-support,
+  campaign-dead-draw, source-mix, reward-density, and role-balance risks.
+- Round 32 adds 17 enemy-pressure review notes for frontload, skill-punish,
+  status pressure, energy tax, draw disruption, summon pressure, scaling
+  clocks, anti-infinite pressure, boss thresholds, mode lockout, charge decay,
+  position zones, recovery windows, redirect loss, over-tutor pressure,
+  reflect stall breakers, and pollution cleanup windows.
+- Round 33 adds 17 campaign-phase review notes for starter, build, pivot,
+  mature, late, recovery, enemy-scaling, event-pressure, source-trace, and
+  review-queue coverage.
+- Round 34 adds 17 review-readiness safeguards for sample pairing,
+  counterexample stoplines, source traces, near duplicates, authority wording,
+  consumer scope, shard drift, source-mined quarantine, generated-hypothesis
+  quarantine, review packets, feature-hint overread, context overclaims,
+  overfit, role evidence, replay evidence, missing negative controls, and
+  plateau exit summaries.
+- Round 35 adds 17 application-readiness handoff notes for feature projection,
+  discovery, fun/health, card package health, campaign power curve, evidence
+  bundle conflicts, autonomous review, iteration briefs, proposal boundaries,
+  synthesis-forbidden boundaries, learned/reranker quarantine, report-only
+  handoff, plateau count, promotion-queue gaps, human triage, and the next
+  coverage seed.
+
+All 86 cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`. They add review questions and evidence-shape notes
+only; they do not create reviewed evidence, official cards, runtime behavior,
+graph changes, report-only registry changes, hard gates, default synthesis,
+learned behavior, or reranker behavior.
 
 ## Validation
 
