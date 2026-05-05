@@ -16,8 +16,9 @@ Use this index to decide where to read and where to write project knowledge.
 
 ### Long-Term Memory
 
-- `docs/development/*.md`
+- `docs/development/**/*.md`
 - Use for architecture boundaries, working rules, stable design constraints, and workflow agreements
+- Use `docs/development/README.md` as the directory map for long-term memory docs
 - Use `docs/development/DEFAULT_ENTRYPOINTS.md` as the default memory source for recurring tooling commands
 - Use `docs/development/PROJECT_MEMORY_HEALTH_V1.md` as the source of truth for
   memory-scaffold health checks and escalation rules
@@ -61,17 +62,28 @@ Use this index to decide where to read and where to write project knowledge.
 
 1. `AGENTS.md`
 2. `docs/development/CURRENT_DIRECTION.md`
-3. Relevant architecture or workflow documents in `docs/development/`
+3. Relevant architecture or workflow documents in `docs/development/` subdirectories
 4. `docs/pm/DECISION_LOG.md` if the task changes direction, scope, or architecture
 5. `docs/logs/daily/<today>.md`
 6. The most recent prior daily log with useful context
 7. The most recent weekly summary with useful context
 
+## Development Directory Map
+
+- `docs/development/architecture/`: cross-cutting architecture, UI, DDD, EEE, and boundary docs
+- `docs/development/campaign/`: campaign runtime, UI, lifecycle, task-area, and campaign-analysis docs
+- `docs/development/cardanalysis/`: case-backed design-analysis contracts, evidence libraries, mechanism axes, and advisory model docs
+- `docs/development/combat/`: combat runtime contracts, gates, compatibility plans, and automation backlogs
+- `docs/development/content/`: formal content-data contracts and balance baselines
+- `docs/development/narrative/`: narrative pipeline, source schema, instance model, and task tables
+- `docs/development/platform/`: repository tooling, smoke baselines, data pipeline guardrails, and test strategy
+- `docs/development/thesis/`: thesis-specific lifecycle, write-path, verdict, and aggregate docs
+
 ## Recommended Write Rules
 
 - Write daily progress into the dated daily log
 - Write compressed weekly context into `docs/logs/weekly/`
-- Write stable conclusions into `docs/development/`
+- Write stable conclusions into the relevant `docs/development/` subdirectory
 - When a subsystem's detailed spec is expected to grow code, keep its local source of
   truth under `tools/<name>/` and register its `README.md` entrypoint here
 - Write decision outcomes into `docs/pm/DECISION_LOG.md`

@@ -24,8 +24,8 @@ Goal:
 
 Inputs:
 
-- `docs/development/NARRATIVE_PIPELINE_V1.md`
-- `docs/development/NARRATIVE_INSTANCE_MODEL_V1.md`
+- `docs/development/narrative/NARRATIVE_PIPELINE_V1.md`
+- `docs/development/narrative/NARRATIVE_INSTANCE_MODEL_V1.md`
 
 Outputs:
 

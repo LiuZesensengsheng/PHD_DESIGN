@@ -59,16 +59,16 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - keep campaign shell behavior stable without reopening broad cleanup or
     directory-purity work
 - Source of truth:
-  - `docs/development/CAMPAIGN_BOUNDARY_HARDENING_V1.md`
-  - `docs/development/CAMPAIGN_FORCED_EVENT_NARROW_PLAN_V1.md`
-  - `docs/development/CAMPAIGN_INTERRUPT_GATE_CONTRACT_V1.md`
-  - `docs/development/CAMPAIGN_LIFECYCLE_MACHINE_V1.md`
-  - `docs/development/CAMPAIGN_LIFECYCLE_READ_SURFACE_V1.md`
-  - `docs/development/CAMPAIGN_TURN_LOOP_CONTRACT_V1.md`
-  - `docs/development/CAMPAIGN_RETURN_RESOLUTION_CONTRACT_V1.md`
-  - `docs/development/CAMPAIGN_STARTUP_CONTRACT_V1.md`
-  - `docs/development/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`
-  - `docs/development/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
+  - `docs/development/campaign/CAMPAIGN_BOUNDARY_HARDENING_V1.md`
+  - `docs/development/campaign/CAMPAIGN_FORCED_EVENT_NARROW_PLAN_V1.md`
+  - `docs/development/campaign/CAMPAIGN_INTERRUPT_GATE_CONTRACT_V1.md`
+  - `docs/development/campaign/CAMPAIGN_LIFECYCLE_MACHINE_V1.md`
+  - `docs/development/campaign/CAMPAIGN_LIFECYCLE_READ_SURFACE_V1.md`
+  - `docs/development/campaign/CAMPAIGN_TURN_LOOP_CONTRACT_V1.md`
+  - `docs/development/campaign/CAMPAIGN_RETURN_RESOLUTION_CONTRACT_V1.md`
+  - `docs/development/campaign/CAMPAIGN_STARTUP_CONTRACT_V1.md`
+  - `docs/development/campaign/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`
+  - `docs/development/campaign/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
 - Current status:
   - decision-frozen on `2026-04-24`
   - `Phase 1` lifecycle contract closure completed on `2026-04-24`
@@ -153,9 +153,9 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - build a stable `draft -> normalized source -> build -> runtime -> acceptance`
     pipeline for narrative content
 - Source of truth:
-  - `docs/development/NARRATIVE_PIPELINE_V1.md`
-  - `docs/development/NARRATIVE_PIPELINE_TASK_TABLE_V1.md`
-  - `docs/development/DATA_PIPELINE_GUARDRAILS_V1.md`
+  - `docs/development/narrative/NARRATIVE_PIPELINE_V1.md`
+  - `docs/development/narrative/NARRATIVE_PIPELINE_TASK_TABLE_V1.md`
+  - `docs/development/platform/DATA_PIPELINE_GUARDRAILS_V1.md`
 - Current rules:
   - keep `data/questlines/*.json` as the active runtime path during migration
   - do not grow new content in legacy campaign-event JSON paths
@@ -186,8 +186,8 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - save lifecycle or schema redesign
   - dead scaffold cleanup
 - Source of truth:
-  - `docs/development/COMBAT_AUTOMATION_BACKLOG_V1.md`
-  - `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+  - `docs/development/combat/COMBAT_AUTOMATION_BACKLOG_V1.md`
+  - `docs/development/combat/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
   - `docs/pm/DECISION_LOG.md`
 - Do not mix into these follow-ups:
   - red content/runtime bug fixes
@@ -223,8 +223,8 @@ These are intentionally not the default next move. Keep them as reference memory
 ### C1. Combat Global Compat-Zero
 
 - Source of truth:
-  - `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
-  - `docs/development/COMBAT_RUNTIME_SURFACE_INVENTORY_V1.md`
+  - `docs/development/combat/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+  - `docs/development/combat/COMBAT_RUNTIME_SURFACE_INVENTORY_V1.md`
   - `docs/pm/DECISION_LOG.md`
 - Closure status:
   - `G1 -> G5` completed on `2026-04-23`
@@ -233,7 +233,7 @@ These are intentionally not the default next move. Keep them as reference memory
 ### C2. Campaign Simplification V1
 
 - Source of truth:
-  - `docs/development/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md`
+  - `docs/development/campaign/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md`
 - Closure status:
   - mainline complete through `Phase 4`
   - `Phase 5` is triggered backlog only
@@ -241,7 +241,7 @@ These are intentionally not the default next move. Keep them as reference memory
 ### C3. Campaign Self Refactor V1
 
 - Source of truth:
-  - `docs/development/CAMPAIGN_SELF_REFACTOR_PLAN_V1.md`
+  - `docs/development/campaign/CAMPAIGN_SELF_REFACTOR_PLAN_V1.md`
 - Closure status:
   - mainline complete through `Phase 4`
   - treat as closed reference memory, not a default next action

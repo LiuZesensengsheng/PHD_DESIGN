@@ -88,7 +88,7 @@ Current size:
 
 The first triage output lives in:
 
-`docs/development/MECHANISM_AXIS_PROBE_SHORTLIST_V1.md`
+`docs/development/cardanalysis/MECHANISM_AXIS_PROBE_SHORTLIST_V1.md`
 
 ## First-Pass Validation
 

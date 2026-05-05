@@ -58,9 +58,9 @@ What is still missing is a single plan that says:
   - no broad `CampaignView` rewrite
   - no whole-campaign aggregate rewrite
 - Preserve the direct seam whitelist from
-  `docs/development/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`.
+  `docs/development/campaign/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`.
 - Preserve the runtime UI boundary from
-  `docs/development/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`.
+  `docs/development/campaign/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`.
 - Do not widen into:
   - `contexts/campaign/view.py`
   - `contexts/campaign/rendering/**`

@@ -9,8 +9,8 @@ It was superseded on `2026-04-23` by:
 
 - `docs/pm/DECISION_LOG.md`
   - `DL-20260423-02`
-- `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
-- `docs/development/COMBAT_RUNTIME_SURFACE_INVENTORY_V1.md`
+- `docs/development/combat/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+- `docs/development/combat/COMBAT_RUNTIME_SURFACE_INVENTORY_V1.md`
 
 The old recommendation in this file to freeze `CombatModel` as a tiny facade is
 obsolete. `G1` has completed and the legacy MVC facade modules are now deleted.
@@ -52,7 +52,7 @@ Known red-content/runtime failures that still stay in a separate backlog:
 The active serialized queue is no longer "freeze facade vs delete facade." That
 question is already resolved.
 
-Use `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md` as the
+Use `docs/development/combat/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md` as the
 execution source of truth:
 
 1. completed: `G1` MVC facade plane removal
@@ -71,7 +71,7 @@ After each small compat-zero step:
 After `G2-G4` slice work:
 
 - rerun the focused validation pack named in
-  `docs/development/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
+  `docs/development/combat/COMBAT_GLOBAL_COMPAT_ZERO_AUTOMATION_V1.md`
 - do not jump from a compat cleanup diff straight into unrelated red-content
   failures
 

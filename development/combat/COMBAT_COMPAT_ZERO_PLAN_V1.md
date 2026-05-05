@@ -46,7 +46,7 @@ Push combat runtime from "thin compat shell" to "compat-zero mainline" so future
 
 ### Phase E
 
-- promoted the active gate to [COMBAT_MAINLINE_GATE_V2.md](/D:/PHD_SIMULATER/docs/development/COMBAT_MAINLINE_GATE_V2.md)
+- promoted the active gate to [COMBAT_MAINLINE_GATE_V2.md](/D:/PHD_SIMULATER/docs/development/combat/COMBAT_MAINLINE_GATE_V2.md)
 - added `scripts/check_combat_compat_zero.py`
 - established the runtime fallback inventory document
 

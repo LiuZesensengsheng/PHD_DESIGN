@@ -429,7 +429,7 @@ Out of scope:
     numbers?
 - Model increment:
   - Promoted the stable implementation target into
-    `docs/development/CAMPAIGN_POWER_CURVE_MODEL_V1.md`.
+    `docs/development/campaign/CAMPAIGN_POWER_CURVE_MODEL_V1.md`.
   - Added `campaign_power_curve_report_v1` implementation under
     `tools/combat_analysis/design_engine/campaign_power_curve_model.py`.
   - Added `scripts/run_campaign_power_curve_report.py`, reviewed fixture inputs, core

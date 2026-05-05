@@ -80,9 +80,9 @@ Why defer:
 
 See also:
 
-- `docs/development/CAMPAIGN_HOTSPOT_DEFER_LIST_V1.md`
-- `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
-- `docs/development/TRACK_AGGREGATE_REEVALUATION_V1.md`
+- `docs/development/campaign/CAMPAIGN_HOTSPOT_DEFER_LIST_V1.md`
+- `docs/development/campaign/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+- `docs/development/thesis/TRACK_AGGREGATE_REEVALUATION_V1.md`
 
 ## Reopen Triggers
 

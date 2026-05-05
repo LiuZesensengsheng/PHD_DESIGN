@@ -86,7 +86,7 @@ Terminology note:
     - `request_end_turn(...)`
   - retained direct shell/runtime seams vs review-next direct aliases are now
     documented in:
-    - `docs/development/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`
+    - `docs/development/campaign/CAMPAIGN_DIRECT_SEAM_POLICY_V1.md`
   - current stance: future reward entry/cancellation work should start from the
     grouped reward seam instead of restoring service aliases on `CampaignState`
 

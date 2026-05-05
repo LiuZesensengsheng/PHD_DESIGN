@@ -32,7 +32,7 @@ Goal:
 
 Inputs:
 
-- `docs/development/NARRATIVE_PIPELINE_V1.md`
+- `docs/development/narrative/NARRATIVE_PIPELINE_V1.md`
 - current narrative runtime files under `data/questlines/`
 - legacy campaign event files under `contexts/campaign/infrastructure/events/`
 

@@ -221,9 +221,9 @@ Turn the new boundaries into durable repo memory and executable checks.
 ### Main Targets
 
 - `tests/campaign/**`
-- `docs/development/AGGREGATE_INVARIANT_TESTS_V1.md`
-- `docs/development/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
-- `docs/development/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md`
+- `docs/development/architecture/AGGREGATE_INVARIANT_TESTS_V1.md`
+- `docs/development/campaign/CAMPAIGN_SERVICE_DEPENDENCY_HOTSPOTS_V1.md`
+- `docs/development/campaign/CAMPAIGN_SIMPLIFICATION_PLAN_V1.md`
 - current daily log / weekly-summary follow-up when needed
 
 ### Intended Cut

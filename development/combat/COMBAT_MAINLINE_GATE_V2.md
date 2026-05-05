@@ -87,7 +87,7 @@ The minimum gate suite for V2 is:
 
 Current queue-only ownership and any remaining direct-execution helpers outside mainline are tracked in:
 
-- [COMBAT_FALLBACK_AND_SHIM_INVENTORY_V1.md](/D:/PHD_SIMULATER/docs/development/COMBAT_FALLBACK_AND_SHIM_INVENTORY_V1.md)
+- [COMBAT_FALLBACK_AND_SHIM_INVENTORY_V1.md](/D:/PHD_SIMULATER/docs/development/combat/COMBAT_FALLBACK_AND_SHIM_INVENTORY_V1.md)
 
 These are runtime migration items, not compatibility-owned seams.
 

@@ -151,7 +151,7 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_discovery_v
 ## Source Mining
 
 External game-mechanic collection lives in
-`docs/development/MECHANISM_SOURCE_MINING_V1.md`.
+`docs/development/cardanalysis/MECHANISM_SOURCE_MINING_V1.md`.
 
 The first source-mining fixture is:
 
@@ -163,7 +163,7 @@ Night of Full Moon has a separate PvE deckbuilder fixture:
 
 The first post-mining triage shortlist lives in:
 
-`docs/development/MECHANISM_AXIS_PROBE_SHORTLIST_V1.md`
+`docs/development/cardanalysis/MECHANISM_AXIS_PROBE_SHORTLIST_V1.md`
 
 ## Position Redirect Code Preflight
 

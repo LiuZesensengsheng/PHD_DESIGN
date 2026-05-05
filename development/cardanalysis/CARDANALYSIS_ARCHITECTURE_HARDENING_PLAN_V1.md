@@ -38,7 +38,7 @@ Use one active cardanalysis integration branch while this hardening wave is open
 ## Report-Only Surface Checkpoint
 
 The current canonical report-only surface map lives in
-`docs/development/CARDANALYSIS_REPORT_ONLY_SURFACE_REGISTRY_V1.md` and
+`docs/development/cardanalysis/CARDANALYSIS_REPORT_ONLY_SURFACE_REGISTRY_V1.md` and
 `tools/combat_analysis/report_only_surface_registry.py`.
 
 New work should consolidate into those surfaces instead of creating overlapping V1

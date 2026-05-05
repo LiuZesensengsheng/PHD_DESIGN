@@ -239,7 +239,7 @@ Runtime nodes/widgets are allowed to own:
 
 The current V1 boundary for this area is documented in:
 
-- `docs/development/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
+- `docs/development/campaign/CAMPAIGN_RUNTIME_UI_BOUNDARY_V1.md`
 
 Runtime nodes/widgets are not allowed to own:
 

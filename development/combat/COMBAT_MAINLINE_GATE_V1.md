@@ -1,6 +1,6 @@
 # Combat Mainline Gate V1
 
-> Superseded by [COMBAT_MAINLINE_GATE_V2.md](/D:/PHD_SIMULATER/docs/development/COMBAT_MAINLINE_GATE_V2.md).
+> Superseded by [COMBAT_MAINLINE_GATE_V2.md](/D:/PHD_SIMULATER/docs/development/combat/COMBAT_MAINLINE_GATE_V2.md).
 
 ## Historical Meaning
 
@@ -22,4 +22,4 @@ Those tolerated shims were fully deleted on `2026-03-30`, which is why V2 is now
 ## Use
 
 - Read this file only as historical context.
-- Use [COMBAT_MAINLINE_GATE_V2.md](/D:/PHD_SIMULATER/docs/development/COMBAT_MAINLINE_GATE_V2.md) for any active combat extension or cleanup work.
+- Use [COMBAT_MAINLINE_GATE_V2.md](/D:/PHD_SIMULATER/docs/development/combat/COMBAT_MAINLINE_GATE_V2.md) for any active combat extension or cleanup work.

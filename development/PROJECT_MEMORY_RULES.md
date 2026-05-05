@@ -65,7 +65,7 @@ Promotion targets should stay explicit:
 
 - long-term direction -> `docs/development/CURRENT_DIRECTION.md`
 - key tradeoffs -> `docs/pm/DECISION_LOG.md`
-- stable workflow or architecture rules -> relevant file in `docs/development/`
+- stable workflow or architecture rules -> relevant file in `docs/development/` subdirectories
 
 ### 5. Read Selectively
 
@@ -80,7 +80,7 @@ Promotion targets should stay explicit:
 - Hot memory:
   - `AGENTS.md`
   - `docs/development/CURRENT_DIRECTION.md`
-  - relevant `docs/development/*.md`
+  - relevant `docs/development/**/*.md`
   - `docs/pm/DECISION_LOG.md`
   - daily logs from the last 7 days
   - the most recent weekly summary
