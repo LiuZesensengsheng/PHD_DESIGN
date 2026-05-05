@@ -48,10 +48,30 @@ references. It covers:
 These cases are useful as source-aware examples for future review packets, not
 as design authority.
 
+## Batch 2 Coverage
+
+The second batch continues public Slay the Spire Wiki factual references with a
+card-package emphasis. It covers:
+
+- exhaust payoff chains;
+- status/curse payoff and relief;
+- Shiv generation and support-density payoff;
+- passive poison clocks;
+- temporary defensive spikes with delayed costs;
+- first-card repeat sequencing;
+- ongoing power generation;
+- focus spike decay;
+- repeat-density scaling;
+- zero-cost recursion;
+- discard retrieval;
+- draw-pile search plus double-play payoff.
+
+These are still source-mined facts only. They do not promote package ratios,
+formal card text, card pools, status runtimes, or search behavior.
+
 ## Validation
 
 ```bash
 python scripts/validate_cardanalysis_case_input.py --input tests/fixtures/combat_analysis/source_mined_factual_reference_library_v1
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_source_mined_factual_reference_library_v1.py -q
 ```
-
