@@ -177,6 +177,141 @@ Coverage:
 - energy instability debt-floor deepening followup review note;
 - loop safety break reset-audit deepening followup review note;
 - pollution market price-floor deepening followup review note.
+- recovery window validator rebuild-budget deepening followup review note;
+- recovery window validator pressure-reentry deepening followup review note;
+- redirect collision resolution-order deepening followup review note;
+- redirect collision partial-value deepening followup review note;
+- defense reflect enemy-signal deepening followup review note;
+- draw heat hand-clog deepening followup review note;
+- energy instability refund-loop deepening followup review note;
+- private leak source-reliability deepening followup review note;
+- chain fatigue counterplay-signal deepening followup review note;
+- loop safety break terminal-payoff deepening followup review note;
+- pollution market sink-capacity deepening followup review note;
+- search public target pool-staleness deepening followup review note;
+- status decay transfer counterplay deepening followup review note;
+- summon expiry support-density deepening followup review note;
+- temporary generation expire-value deepening followup review note.
+- anti-infinite soft-pressure visibility deepening followup review note;
+- chain fatigue reference meter-readability deepening followup review note;
+- charge decay reference spend-timing deepening followup review note;
+- charge decay v2 reference threshold-warning deepening followup review note;
+- discard reserve reference access-window deepening followup review note;
+- draw disruption enemy recovery-signal deepening followup review note;
+- draw external reset reference-boundary deepening followup review note;
+- Gremlin Nob skill-punish escape-line deepening followup review note;
+- Jaw Worm frontload defense recovery-line deepening followup review note;
+- mode cooldown reference reentry-signal deepening followup review note;
+- mode lockout v2 reference soft-lock escape deepening followup review note;
+- position zone reference entry-cost deepening followup review note;
+- position zone v2 reference overlap-rule deepening followup review note;
+- public thread reference moderation-window deepening followup review note;
+- campaign pressure reference review-lens deepening followup review note.
+- chain fatigue exit-value audit followup review note;
+- chain fatigue reset-visibility followup review note;
+- defense reflect block-source separation followup review note;
+- defense reflect overkill-waste followup review note;
+- draw heat priority-queue followup review note;
+- draw heat dead-draw recovery followup review note;
+- energy instability volatility-preview followup review note;
+- energy instability debt-recovery choice followup review note;
+- private leak consent-scope followup review note;
+- private leak delayed-reveal followup review note;
+- loop safety break fail-closed followup review note;
+- pollution market burden-entry visibility followup review note;
+- recovery window validator frequency-audit followup review note;
+- redirect collision fallback-preview followup review note;
+- search public target relevance-decay followup review note.
+- chain fatigue floor negative-control followup review note;
+- chain fatigue branching-trace followup review note;
+- defense reflect multihit-intent followup review note;
+- defense reflect carryover-leak followup review note;
+- draw heat reshuffle-pressure followup review note;
+- draw heat discard-mitigation followup review note;
+- energy instability floor-ceiling band followup review note;
+- energy instability payoff-timing split followup review note;
+- private leak audience-containment followup review note;
+- private leak repair-path followup review note;
+- loop safety break fallback-cashout followup review note;
+- pollution market sink-scarcity signal followup review note;
+- recovery window archetype-sensitivity followup review note;
+- redirect collision multitarget-conflict followup review note;
+- search public target refresh-cost followup review note.
+- chain fatigue resource-blend followup review note;
+- chain fatigue enemy-pressure interlock followup review note;
+- defense reflect no-attack-intent followup review note;
+- defense reflect delayed-cashout followup review note;
+- draw heat hand-size breakpoint followup review note;
+- draw heat skip-draw agency followup review note;
+- energy instability stabilizer-density followup review note;
+- energy instability temporary-energy expiry followup review note;
+- private leak contradictory-source followup review note;
+- private leak social-cooldown followup review note;
+- loop safety break visible-threshold followup review note;
+- pollution market cleanup-timing followup review note;
+- recovery window telegraph-honesty followup review note;
+- redirect collision enemy-intent mismatch followup review note;
+- search public target pool-ownership followup review note.
+- chain fatigue visible-token burden followup review note;
+- defense reflect damage-attribution followup review note;
+- draw heat voluntary-discard timing followup review note;
+- energy instability conservation-audit followup review note;
+- private leak recency-decay followup review note;
+- loop safety break nested-loop conflict followup review note;
+- loop safety break precommit-warning followup review note;
+- pollution market reward-contamination boundary followup review note;
+- pollution market delayed-payback followup review note;
+- recovery window partial-recovery value followup review note;
+- recovery window failed-recovery negative-control followup review note;
+- redirect collision no-target fallback followup review note;
+- redirect collision preview-token economy followup review note;
+- search public target false-positive boundary followup review note;
+- search public target repeat-search fatigue followup review note.
+- status decay transfer duration-visibility followup review note;
+- status decay transfer stack-compression followup review note;
+- status decay transfer return-path followup review note;
+- summon expiry countdown-visibility followup review note;
+- summon expiry replacement-collision followup review note;
+- summon expiry support-orphan followup review note;
+- temporary generation provenance-visibility followup review note;
+- temporary generation choice-load cap followup review note;
+- temporary generation expiry-zone followup review note;
+- transform pool exhaust preview followup review note;
+- transform pool exhaust refresh-cost followup review note;
+- transform pool exhaust no-transform negative-control followup review note;
+- social texture scope-quarantine followup review note;
+- stress cost reference threshold-visibility followup review note;
+- late-round texture authority-boundary followup review note.
+- starter agency route-choice lock-in warning followup review note;
+- starter agency route-choice recovery-option followup review note;
+- starter agency route-choice information-cost followup review note;
+- starter Cultist scaling-clock telegraph followup review note;
+- starter Cultist scaling-clock slow-deck negative-control followup review note;
+- starter Cultist scaling-clock reward-pressure followup review note;
+- starter first-three encounter role-clarity followup review note;
+- starter first-three encounter variance-guard followup review note;
+- starter first-three encounter reward-read followup review note;
+- summon slot ownership followup review note;
+- summon slot overflow-preview followup review note;
+- summon slot support-density boundary followup review note;
+- threshold overflow warning-band followup review note;
+- threshold overflow partial-overflow value followup review note;
+- threshold overflow floor negative-control followup review note.
+- chain fatigue action-ceiling followup review note;
+- chain fatigue failsoft-pause followup review note;
+- defense reflect cap-visibility followup review note;
+- defense reflect block-retention conflict followup review note;
+- draw heat overdraw-waste followup review note;
+- draw heat reorder-relief followup review note;
+- energy instability forecast-window followup review note;
+- energy instability payback-visibility followup review note;
+- private leak audit-trail quarantine followup review note;
+- private leak third-party amplification followup review note;
+- loop safety break exit-reward preview followup review note;
+- pollution market cost-signal followup review note;
+- recovery window relapse-signal followup review note;
+- redirect collision priority-preview followup review note;
+- public-target search pool-exhaust negative-control followup review note.
 
 The cases may help report-only scanners, feature projection, and advisory
 discovery surfaces ask better next-review questions. They do not create
