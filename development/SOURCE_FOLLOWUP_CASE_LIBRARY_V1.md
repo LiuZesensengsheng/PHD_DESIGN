@@ -642,9 +642,30 @@ only; they do not create reviewed evidence, official cards, runtime behavior,
 graph changes, report-only registry changes, hard gates, default synthesis,
 learned behavior, or reranker behavior.
 
+## Human Review Trial 01
+
+The first human review packet trial lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_01_scenarios.md
+docs/qa/cardanalysis/source_followup_review_decision_01.json
+```
+
+The JSON decision shard records the filled packet as a review-decision layer,
+not as source-case promotion:
+
+- 15 packet items reviewed;
+- 12 `accept_seed` entries recorded as reviewed seed candidates;
+- 3 `needs_more_evidence` entries recorded as followup queue items;
+- source followup cases remain `review_needed` and `advisory_context_only`;
+- human preference notes are advisory and forbidden from hard gates, default
+  synthesis, reviewed-evidence claims, runtime authority, and learned/reranker
+  training.
+
 ## Validation
 
 ```bash
 python scripts/validate_cardanalysis_case_input.py --input tests/fixtures/combat_analysis/source_followup_case_library_v1
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_source_followup_case_library_v1.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_source_followup_review_decision_v1.py -q
 ```
