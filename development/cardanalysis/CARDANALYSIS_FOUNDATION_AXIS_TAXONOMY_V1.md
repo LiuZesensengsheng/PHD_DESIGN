@@ -178,6 +178,7 @@ Lightweight human-review packets for this taxonomy:
 | --- | --- | --- |
 | `docs/qa/cardanalysis/foundation_axis_review_packet_01_status_search_temp.md` | status lineage, search/tutor certainty, temporary-generation duration | `status_lineage_cleanup_review_v1`, `search_tutor_certainty_cost_review_v1`, `temporary_generation_duration_origin_review_v1` |
 | `docs/qa/cardanalysis/foundation_axis_review_packet_02_retain_filter_compression.md` | retain/filter setup tax, compression/removal breakpoints | `retain_filter_setup_tax_review_v1`, `compression_removal_breakpoint_review_v1` |
+| `docs/qa/cardanalysis/foundation_axis_review_packet_03_energy_scaling_defense_damage.md` | energy/scaling identity override, defense/damage closure | `energy_scaling_identity_override_review_v1`, `defense_damage_closure_review_v1` |
 
 These packets are review aids only. They are not reviewed evidence, do not promote case
 tiers, and do not change evaluator behavior.
