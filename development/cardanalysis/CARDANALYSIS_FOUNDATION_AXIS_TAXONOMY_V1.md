@@ -170,19 +170,14 @@ Minimum shape for a reviewed packet:
 5. No claim that the request is a hard gate, legality rule, synthesis default,
    learned default, or reviewed STS1 family expansion.
 
-## First Human Review Packet
+## Human Review Packets
 
-The first lightweight human-review packet for this taxonomy is:
+Lightweight human-review packets for this taxonomy:
 
-```text
-docs/qa/cardanalysis/foundation_axis_review_packet_01_status_search_temp.md
-```
+| Packet | Focus | Request IDs |
+| --- | --- | --- |
+| `docs/qa/cardanalysis/foundation_axis_review_packet_01_status_search_temp.md` | status lineage, search/tutor certainty, temporary-generation duration | `status_lineage_cleanup_review_v1`, `search_tutor_certainty_cost_review_v1`, `temporary_generation_duration_origin_review_v1` |
+| `docs/qa/cardanalysis/foundation_axis_review_packet_02_retain_filter_compression.md` | retain/filter setup tax, compression/removal breakpoints | `retain_filter_setup_tax_review_v1`, `compression_removal_breakpoint_review_v1` |
 
-It covers:
-
-- `status_lineage_cleanup_review_v1`
-- `search_tutor_certainty_cost_review_v1`
-- `temporary_generation_duration_origin_review_v1`
-
-The packet is a review aid only. It is not reviewed evidence, does not promote case
-tiers, and does not change evaluator behavior.
+These packets are review aids only. They are not reviewed evidence, do not promote case
+tiers, and do not change evaluator behavior.
