@@ -2,13 +2,13 @@
 
 * 交接 id: `source_followup_review_workflow_handoff`
 * 日期: `2026-05-06`
-* 覆盖范围: 审核包 02-07
+* 覆盖范围: 审核包 02-08
 * 状态: 人工审核工作流说明
 * 运行时影响: 无
 
 ## 一句话版本
 
-现在这条 lane 已经把 90 条待审材料翻译成中文场景。你只需要按审核编号填写 A/B/C/D/E；在你填写之前，它们都只是待审队列，不是 reviewed 证据。
+现在这条 lane 已经把 105 条待审材料翻译成中文场景。你只需要按审核编号填写 A/B/C/D/E；在你填写之前，它们都只是待审队列，不是 reviewed 证据。
 
 ## 先看哪个文件
 
@@ -17,7 +17,7 @@
 1. `docs/qa/cardanalysis/source_followup_review_queue_index.md`
 2. `docs/qa/cardanalysis/source_followup_reviewability_layer_index.md`
 3. `docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.md`
-4. 具体审核包：`source_followup_review_packet_02_scenarios.md` 到 `source_followup_review_packet_07_scenarios.md`
+4. 具体审核包：`source_followup_review_packet_02_scenarios.md` 到 `source_followup_review_packet_08_scenarios.md`
 
 如果你只想快速开始，直接打开第 2 个文件，优先填“可先直接审”的审核编号。
 
@@ -65,7 +65,7 @@
 
 在人工填写结果被读取并另建 decision shard 之前，不能做这些事：
 
-1. 不能说 packet 02-07 已经 reviewed。
+1. 不能说 packet 02-08 已经 reviewed。
 2. 不能把待审条目当成正式卡牌、正式敌人或正式规则。
 3. 不能把 source-mined、generated、human-curated 自动说成 reviewed。
 4. 不能改 runtime、正式卡牌/敌人数据、UI、存档。
@@ -84,9 +84,10 @@
 ## 当前最建议的人工顺序
 
 1. 先填 60 条“可先直接审”里的任意一小批，比如 10-15 条。
-2. 暂时跳过“先补例子”的 30 条，除非你很有感觉。
-3. 对可读性卫生扫描里标出来的相似项，如果你觉得重复，填 D；如果只是相关但不重复，填 A 或 B。
-4. 对缺停止线的条目，如果你觉得说得太大，填 C。
+2. packet 08 是重写候选队列，如果你这轮只想判断可读性和停止线，可以优先填它。
+3. 暂时跳过“先补例子”的 30 条，除非你很有感觉。
+4. 对可读性卫生扫描里标出来的相似项，如果你觉得重复，填 D；如果只是相关但不重复，填 A 或 B。
+5. 对缺停止线的条目，如果你觉得说得太大，填 C。
 
 ## 当前边界
 

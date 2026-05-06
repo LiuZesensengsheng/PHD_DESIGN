@@ -816,6 +816,26 @@ No `source_followup_review_decision_07.json` exists yet because no human review
 result has been provided. All packet 07 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Review Packet 08 Pending Queue
+
+The eighth human review packet is a pending Chinese scenario-level review queue
+for rewrite candidates, concrete-example gaps, and stopline gaps selected from
+the packet 02-07 readability hygiene scan:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_08_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_08_queue.json
+```
+
+Packet 08 re-queues 15 advisory-only items by human-readable review key. It
+does not add new source cases; it asks a human reviewer whether the existing
+packet wording should be kept, supplemented with examples, given a sharper
+stopline, merged, or rewritten before any evidence-promotion discussion.
+
+No `source_followup_review_decision_08.json` exists yet because no human review
+result has been provided. All packet 08 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
 ## Human Reviewability Layer Index
 
 The queue hygiene layer index lives under:
@@ -826,7 +846,9 @@ docs/qa/cardanalysis/source_followup_reviewability_layer_index.json
 ```
 
 It summarizes pending packets 02-07 by reviewability, not by evidence
-promotion:
+promotion. Packet 08 is a followup queue cut from that layer plus the
+readability hygiene scan, so it remains a pending queue rather than a new
+reviewability index:
 
 - 90 pending human-review items remain across packets 02-07;
 - 60 items have Codex initial `A` suggestions and are good candidates to fill
@@ -869,7 +891,7 @@ docs/qa/cardanalysis/source_followup_review_workflow_handoff.json
 ```
 
 It is the one-page entrypoint for a human reviewer who wants to fill pending
-packets 02-07. It explains:
+packets 02-08. It explains:
 
 - which queue files to read first;
 - how to fill A/B/C/D/E decisions;
@@ -896,8 +918,8 @@ the machine-readable hygiene anchor for tests and future unattended batches.
 The index currently records:
 
 - packet 01 as the only packet with a human decision shard;
-- packets 02-07 as pending human review queues;
-- 90 pending human-review items across the six pending packets;
+- packets 02-08 as pending human review queues;
+- 105 pending human-review items across the seven pending packets;
 - no decision shards for pending packets;
 - no source-case promotion and no reviewed-evidence creation.
 

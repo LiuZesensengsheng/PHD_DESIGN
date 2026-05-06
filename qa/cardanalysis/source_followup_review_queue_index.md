@@ -3,7 +3,7 @@
 * 索引 id: `source_followup_review_queue_index`
 * 日期: `2026-05-06`
 * 来源库: `source_followup_case_library_v1`
-* 状态: 1 个已记录人工决策包，6 个待人工审核包
+* 状态: 1 个已记录人工决策包，7 个待人工审核包
 * 运行时影响: 无
 
 ## 这份索引用来做什么
@@ -29,10 +29,11 @@ review_needed / advisory_context_only
 | 05 | 待人工审核 | 15 | 外部参考翻译与 authority 隔离 | 填写审核包 |
 | 06 | 待人工审核 | 15 | 已有人工偏好附近的细分反例 | 填写审核包 |
 | 07 | 待人工审核 | 15 | 队列卫生、合并边界与停止线 | 填写审核包 |
+| 08 | 待人工审核 | 15 | 重写候选、具体例子缺口与停止线补强 | 填写审核包 |
 
 ## 待审总量
 
-当前还有 90 条中文场景等待人工审核。它们已经被翻译成人可读的问题，但仍然只是待审队列：
+当前还有 105 条中文场景等待人工审核。它们已经被翻译成人可读的问题，但仍然只是待审队列：
 
 * 02: 15 条
 * 03: 15 条
@@ -40,6 +41,7 @@ review_needed / advisory_context_only
 * 05: 15 条
 * 06: 15 条
 * 07: 15 条
+* 08: 15 条
 
 ## 已记录决策
 
@@ -69,7 +71,7 @@ docs/qa/cardanalysis/source_followup_reviewability_layer_index.md
 docs/qa/cardanalysis/source_followup_reviewability_layer_index.json
 ```
 
-它把 02-07 的 90 条待审场景分成 60 条可先直接审、30 条先补例子。它只是队列卫生索引，不是人工审核结果，也不创建 reviewed 证据。
+它把 02-07 的 90 条待审场景分成 60 条可先直接审、30 条先补例子。packet 08 是从这层和可读性扫描里再切出来的重写/停止线候选队列。它们都只是队列卫生索引，不是人工审核结果，也不创建 reviewed 证据。
 
 ## 可读性卫生扫描
 
@@ -95,4 +97,4 @@ docs/qa/cardanalysis/source_followup_review_workflow_handoff.json
 
 ## 最高价值下一步
 
-下一轮优先做 packet 08 或打回重写候选队列。建议聚焦已被卫生扫描标出的过抽象、可能重复、缺停止线条目，继续只生成待审队列。
+下一轮优先做 PR-ready 汇总或最终队列卫生复查。packet 08 已经补成待审队列；在没有人工填写结果前，继续不能生成新的 decision shard。

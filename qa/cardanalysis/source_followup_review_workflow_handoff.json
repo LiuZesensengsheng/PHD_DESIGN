@@ -5,7 +5,7 @@
   "status": "human_review_workflow_handoff_only",
   "source_library": "source_followup_case_library_v1",
   "human_markdown_path": "docs/qa/cardanalysis/source_followup_review_workflow_handoff.md",
-  "covers_pending_packets": [2, 3, 4, 5, 6, 7],
+  "covers_pending_packets": [2, 3, 4, 5, 6, 7, 8],
   "authority": {
     "handoff_boundary": "human_review_workflow_handoff_only",
     "source_case_authority_boundary": "advisory_context_only",
@@ -40,7 +40,8 @@
     "docs/qa/cardanalysis/source_followup_review_packet_04_scenarios.md",
     "docs/qa/cardanalysis/source_followup_review_packet_05_scenarios.md",
     "docs/qa/cardanalysis/source_followup_review_packet_06_scenarios.md",
-    "docs/qa/cardanalysis/source_followup_review_packet_07_scenarios.md"
+    "docs/qa/cardanalysis/source_followup_review_packet_07_scenarios.md",
+    "docs/qa/cardanalysis/source_followup_review_packet_08_scenarios.md"
   ],
   "decision_mapping": {
     "A": "accept_seed",
@@ -76,8 +77,8 @@
     "source_case_authority_boundary": "advisory_context_only"
   },
   "next_high_value_slice": {
-    "recommended_focus": "small packet 08 or rewrite-candidate queue over items flagged abstract, duplicate-prone, or missing stoplines",
-    "allowed_output": "pending Chinese scenario packet, rewrite-candidate queue, docs, and focused tests",
+    "recommended_focus": "PR-readiness summary for packet 02-08 pending queues and the no-promotion authority boundary",
+    "allowed_output": "summary document, queue hygiene index update, docs, and focused tests",
     "forbidden_output": "decision shard without human-filled review results"
   }
 }
