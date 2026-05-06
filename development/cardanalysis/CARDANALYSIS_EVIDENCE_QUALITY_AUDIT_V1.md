@@ -76,6 +76,7 @@ Required sections:
 - `mechanism_family_coverage`
 - `mechanism_family_weak_coverage`
 - `review_packet_candidate_queue`
+- `planning_summary`
 - `advisory_only_stopline`
 - `boundary_assertions`
 
@@ -137,6 +138,23 @@ Queue membership is not promotion. It means only:
 ```text
 requires_explicit_human_review_decision_before_any_reviewed_claim
 ```
+
+## Planning Summary
+
+The audit also emits `planning_summary` so a later agent can choose the next
+slice without rereading every risk list. It groups machine-detectable risks into
+plain planning actions such as:
+
+- cluster near-duplicate case-id stems before packaging a later review backlog;
+- separate intentional primary-axis density from possible axis drift;
+- prioritize weak foundation-axis coverage such as `retain`, `filter`, or
+  `scaling`;
+- summarize broad allowed-consumer scope before reusing cases across report-only
+  heads.
+
+The summary is still advisory only. Its recommended slices may update audit
+output, documentation, or focused tests, but they carry the same forbidden-change
+list as the main audit stopline.
 
 ## Advisory-Only Stopline
 
