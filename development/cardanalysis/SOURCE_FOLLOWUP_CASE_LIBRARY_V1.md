@@ -791,6 +791,31 @@ No `source_followup_review_decision_06.json` exists yet because no human review
 result has been provided. All packet 06 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Review Packet 07 Pending Queue
+
+The seventh human review packet is a pending Chinese scenario-level review queue
+for queue hygiene and stopline review before more human time is spent:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_07_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_07_queue.json
+```
+
+Packet 07 covers 15 advisory-only cases for:
+
+- positive/negative sample pairing and counterexample stoplines;
+- near-duplicate risk, fixture-shard wording drift, and human-readable packet
+  readiness;
+- campaign-context overclaim and enemy-reference overfit stoplines;
+- package-role evidence, failure-mode replay, plateau-exit summary, and
+  review-packet role-balance hygiene;
+- source-trace gaps, review-queue layering, fun/health review-request
+  boundaries, and human-review triage bands.
+
+No `source_followup_review_decision_07.json` exists yet because no human review
+result has been provided. All packet 07 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
 ## Human Review Queue Index
 
 The current human review queue overview lives under:
@@ -807,8 +832,8 @@ the machine-readable hygiene anchor for tests and future unattended batches.
 The index currently records:
 
 - packet 01 as the only packet with a human decision shard;
-- packets 02-06 as pending human review queues;
-- 75 pending human-review items across the five pending packets;
+- packets 02-07 as pending human review queues;
+- 90 pending human-review items across the six pending packets;
 - no decision shards for pending packets;
 - no source-case promotion and no reviewed-evidence creation.
 

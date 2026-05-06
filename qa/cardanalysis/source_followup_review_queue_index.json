@@ -29,16 +29,16 @@
     ]
   },
   "summary": {
-    "total_packets": 6,
+    "total_packets": 7,
     "decision_recorded_packets": 1,
-    "pending_queue_packets": 5,
-    "total_review_items": 90,
+    "pending_queue_packets": 6,
+    "total_review_items": 105,
     "decisions_recorded": 15,
-    "pending_human_review": 75,
+    "pending_human_review": 90,
     "source_cases_promoted": 0,
     "decision_shards_created_for_pending_packets": 0,
-    "codex_initial_accept_seed_suggestions_pending": 53,
-    "codex_initial_needs_more_evidence_suggestions_pending": 22
+    "codex_initial_accept_seed_suggestions_pending": 61,
+    "codex_initial_needs_more_evidence_suggestions_pending": 29
   },
   "packets": [
     {
@@ -141,6 +141,23 @@
       "source_cases_promoted": 0,
       "scope_label": "fine-grained followup around existing human preferences: chain fatigue granularity, repeated draw fatigue, energy debt expression, and package enabler density",
       "human_next_action": "fill_packet"
+    },
+    {
+      "packet_number": 7,
+      "packet_id": "source_followup_review_packet_07",
+      "status": "pending_human_review",
+      "scenario_markdown_path": "docs/qa/cardanalysis/source_followup_review_packet_07_scenarios.md",
+      "queue_json_path": "docs/qa/cardanalysis/source_followup_review_packet_07_queue.json",
+      "decision_json_path": null,
+      "total_items": 15,
+      "decisions_recorded": 0,
+      "pending_human_review": 15,
+      "codex_initial_accept_seed_suggestions": 8,
+      "codex_initial_needs_more_evidence_suggestions": 7,
+      "decision_shard_created": false,
+      "source_cases_promoted": 0,
+      "scope_label": "queue hygiene, duplicate or merge boundaries, source-trace gaps, and overclaim stoplines before human review",
+      "human_next_action": "fill_packet"
     }
   ],
   "hygiene": {
@@ -149,7 +166,8 @@
       "source_followup_review_packet_03",
       "source_followup_review_packet_04",
       "source_followup_review_packet_05",
-      "source_followup_review_packet_06"
+      "source_followup_review_packet_06",
+      "source_followup_review_packet_07"
     ],
     "pending_packet_markdown_hides_raw_source_case_ids": true,
     "pending_queues_keep_machine_mappings": true,
@@ -158,9 +176,9 @@
     "requires_explicit_review_before_any_reviewed_claim": true
   },
   "next_high_value_slice": {
-    "packet_id": "source_followup_review_packet_07",
-    "recommended_focus": "queue-noise reduction and stopline review: duplicate candidates, too-abstract scenarios, and items that should be rewritten before human review",
-    "allowed_output": "pending Chinese scenario packet and queue only",
+    "packet_id": "source_followup_review_packet_08",
+    "recommended_focus": "reviewability layering across packets 02-07: ready-to-review items, evidence-needed items, duplicate or merge candidates, and rewrite-before-review items",
+    "allowed_output": "pending Chinese scenario packet, queue hygiene index, or reviewability dashboard only",
     "forbidden_output": "decision shard without human-filled review results"
   }
 }
