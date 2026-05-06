@@ -766,6 +766,30 @@ No `source_followup_review_decision_05.json` exists yet because no human review
 result has been provided. All packet 05 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Review Queue Index
+
+The current human review queue overview lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_queue_index.md
+docs/qa/cardanalysis/source_followup_review_queue_index.json
+```
+
+The Markdown index is the human-facing queue map. It lists packet-level status
+only and keeps raw source case ids out of the review surface. The JSON index is
+the machine-readable hygiene anchor for tests and future unattended batches.
+
+The index currently records:
+
+- packet 01 as the only packet with a human decision shard;
+- packets 02-05 as pending human review queues;
+- 60 pending human-review items across the four pending packets;
+- no decision shards for pending packets;
+- no source-case promotion and no reviewed-evidence creation.
+
+The index remains `queue_status_index_only`; it is not an evidence promotion
+artifact.
+
 ## Validation
 
 ```bash
