@@ -169,3 +169,20 @@ Minimum shape for a reviewed packet:
 4. A local failure state that is not just "numbers too low".
 5. No claim that the request is a hard gate, legality rule, synthesis default,
    learned default, or reviewed STS1 family expansion.
+
+## First Human Review Packet
+
+The first lightweight human-review packet for this taxonomy is:
+
+```text
+docs/qa/cardanalysis/foundation_axis_review_packet_01_status_search_temp.md
+```
+
+It covers:
+
+- `status_lineage_cleanup_review_v1`
+- `search_tutor_certainty_cost_review_v1`
+- `temporary_generation_duration_origin_review_v1`
+
+The packet is a review aid only. It is not reviewed evidence, does not promote case
+tiers, and does not change evaluator behavior.
