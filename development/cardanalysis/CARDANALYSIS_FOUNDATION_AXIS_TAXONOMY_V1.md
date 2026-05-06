@@ -143,3 +143,29 @@ reviewed evidence before making robust design-quality claims:
 - energy/scaling cases that show when throughput becomes identity override;
 - defense/block and damage cases that connect survival, closure, and pressure without
   collapsing into generic rate.
+
+## Foundation Axis Reviewed Evidence Requests
+
+Use these request IDs when planning the next reviewed or human-review packet. They are
+review prompts, not required gates. A request becomes useful only when it is backed by
+explicit case evidence that preserves source tier, review status, and
+`advisory_context_only` authority.
+
+| Request ID | Axes | Positive Evidence To Find | Negative Contrast To Find | Design Question It Unlocks |
+| --- | --- | --- | --- | --- |
+| `status_lineage_cleanup_review_v1` | `status`, `compression_removal` | A burden or modifier with clear owner, duration, payoff, and optional cleanup timing. | Hidden status tax, mandatory cleanup, or burden cards that are pure punishment/free fuel. | Can status create agency without hiding who owns the cost? |
+| `search_tutor_certainty_cost_review_v1` | `search_tutor`, `filter`, `draw` | Certainty with a visible opportunity cost and a usable fallback when the target is irrelevant. | Scripted tutor turns, bullet bloat, or target-zone ambiguity that erases normal variance. | When is certainty a decision rather than a solved route? |
+| `temporary_generation_duration_origin_review_v1` | `temporary_generation`, `status`, `search_tutor` | Bounded generated options with clear origin, count, duration, and discard/expiry behavior. | Option overload, generated cards replacing the core deck, or unclear temporary-object lifecycle. | How much temporary choice can a turn carry before it stops being readable? |
+| `retain_filter_setup_tax_review_v1` | `retain`, `filter`, `draw` | Planning tools that expose a future window while pressure makes holding or filtering costly. | Setup-tax tunnels, fake agency, retained hand crowding, or filter loops that erase variance. | Does planning preserve tension or just delay the obvious play? |
+| `compression_removal_breakpoint_review_v1` | `compression_removal`, `exhaust`, `discard` | Deck shaping that improves reliability while leaving enough friction for normal deck sizes. | Free thinning, perfect consistency, irreversible traps, or compression mistaken for identity. | What friction must remain for the mechanism to keep making choices? |
+| `energy_scaling_identity_override_review_v1` | `energy`, `scaling`, `damage` | Spend or growth timing with caps, decay, pressure, or payoff windows that preserve local choice. | Energy soup, runaway scaling, or raw damage/rate replacing the named mechanism. | When does throughput support the mechanism, and when does it become the mechanism? |
+| `defense_damage_closure_review_v1` | `defense_block`, `damage`, `scaling` | Stabilization that clearly converts into closure, counterattack, or a pressure-readable payoff. | Stall without closure, invulnerable loops, raw damage goodstuff, or no-value payoff miss. | How does survival become progress without collapsing into generic rate? |
+
+Minimum shape for a reviewed packet:
+
+1. One positive and one negative contrast for the request ID.
+2. Clear source/review provenance for each case.
+3. An explicit statement of which foundation axis is support, identity, or constraint.
+4. A local failure state that is not just "numbers too low".
+5. No claim that the request is a hard gate, legality rule, synthesis default,
+   learned default, or reviewed STS1 family expansion.
