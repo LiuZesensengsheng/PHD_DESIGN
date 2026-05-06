@@ -715,6 +715,31 @@ No `source_followup_review_decision_03.json` exists yet because no human review
 result has been provided. All packet 03 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Review Packet 04 Pending Queue
+
+The fourth human review packet is a pending Chinese scenario-level review queue
+for evidence promotion readiness and application handoff boundaries:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_04_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_04_queue.json
+```
+
+Packet 04 covers 15 advisory-only cases for:
+
+- source trace completeness, authority wording, and consumer scope;
+- source-mined and generated-hypothesis quarantine;
+- feature-hint overread and missing negative controls;
+- feature-projection bucket balance and evidence bundle conflict prechecks;
+- autonomous design review-queue boundaries;
+- proposal-contract and synthesis-forbidden boundaries;
+- learned-path quarantine, reranker default-off boundaries, and report-only
+  handoff wording.
+
+No `source_followup_review_decision_04.json` exists yet because no human review
+result has been provided. All packet 04 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
 ## Validation
 
 ```bash
