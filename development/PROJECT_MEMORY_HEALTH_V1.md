@@ -10,6 +10,7 @@ This health check answers:
 - are the core memory files still present?
 - are hot-memory entrypoints still cross-linked?
 - is the daily/weekly memory cadence drifting?
+- is the current monthly recovery summary present?
 - are active task-pool items still tied to sources of truth and validation?
 - is command memory starting to grow beyond a useful index?
 
@@ -77,6 +78,7 @@ The health check is **report-first** by default.
 - latest daily log age
 - oversized hot daily logs from the last 7 days
 - latest weekly summary age
+- current monthly summary presence
 - whether `DEFAULT_ENTRYPOINTS.md` registers the health check
 - whether `DEFAULT_ENTRYPOINTS.md` registers the memory digest
 - active task-pool source-of-truth and validation expectations
@@ -102,7 +104,7 @@ The health check is **report-first** by default.
 - It does not replace human judgment about which facts deserve promotion.
 - It does not read old cold logs by default.
 - It does not validate every command in `DEFAULT_ENTRYPOINTS.md`.
-- It does not make weekly summary generation automatic.
+- It does not make weekly or monthly summary generation automatic.
 - It does not introduce a database, vector store, or separate memory platform.
 
 ## Recommended Use
@@ -112,7 +114,7 @@ Run this check:
 - before ending a high-velocity session
 - before starting a memory-system maintenance branch
 - after changing `AGENTS.md`, `PROJECT_MEMORY_INDEX.md`, `PROJECT_MEMORY_RULES.md`,
-  `DEFAULT_ENTRYPOINTS.md`, `CODEX_TASK_POOL.md`, or weekly/daily log rules
+  `DEFAULT_ENTRYPOINTS.md`, `CODEX_TASK_POOL.md`, or monthly/weekly/daily log rules
 - before deciding whether a memory warning should be promoted into a hard guardrail
 
 ## Oversized Daily Log Response

@@ -43,6 +43,12 @@ Use this index to decide where to read and where to write project knowledge.
 - `docs/logs/weekly/YYYY-Www.md`
 - Use for compressed weekly summaries, promotion suggestions, and older-context recovery without reopening many daily logs
 
+### Monthly Memory
+
+- `docs/logs/monthly/YYYY-MM.md`
+- Use for cross-month recovery, major progress, capability changes, open gaps, and promotion suggestions
+- Use monthly summaries before reopening many old weekly summaries or cold daily logs
+
 ### Task Pool
 
 - `docs/development/CODEX_TASK_POOL.md`
@@ -67,6 +73,7 @@ Use this index to decide where to read and where to write project knowledge.
 5. `docs/logs/daily/<today>.md`
 6. The most recent prior daily log with useful context
 7. The most recent weekly summary with useful context
+8. The latest monthly summary when recovering context across month boundaries
 
 ## Development Directory Map
 
@@ -83,6 +90,7 @@ Use this index to decide where to read and where to write project knowledge.
 
 - Write daily progress into the dated daily log
 - Write compressed weekly context into `docs/logs/weekly/`
+- Write cross-month progress and capability-state context into `docs/logs/monthly/`
 - Write stable conclusions into the relevant `docs/development/` subdirectory
 - When a subsystem's detailed spec is expected to grow code, keep its local source of
   truth under `tools/<name>/` and register its `README.md` entrypoint here
