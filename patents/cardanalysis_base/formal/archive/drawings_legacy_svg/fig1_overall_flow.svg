@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+    </marker>
+    <style>
+      text { font-family: SimSun, Songti SC, serif; font-size: 24px; fill: #000; }
+      .small { font-size: 20px; }
+      .box { fill: #fff; stroke: #000; stroke-width: 2; }
+      .line { stroke: #000; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <text x="440" y="45">图1</text>
+  <rect class="box" x="320" y="70" width="360" height="70"/>
+  <text x="384" y="114">100 内容对象输入</text>
+  <line class="line" x1="500" y1="140" x2="500" y2="185"/>
+  <rect class="box" x="320" y="185" width="360" height="70"/>
+  <text x="384" y="229">110 字段归一化</text>
+  <line class="line" x1="500" y1="255" x2="500" y2="300"/>
+  <rect class="box" x="320" y="300" width="360" height="70"/>
+  <text x="368" y="344">120 压缩语义投影</text>
+  <line class="line" x1="500" y1="370" x2="500" y2="415"/>
+  <rect class="box" x="120" y="415" width="330" height="80"/>
+  <text x="177" y="463">130 卡组结构分析</text>
+  <rect class="box" x="550" y="415" width="330" height="80"/>
+  <text x="607" y="463">140 敌人压力分析</text>
+  <line class="line" x1="450" y1="455" x2="550" y2="455"/>
+  <line class="line" x1="285" y1="495" x2="435" y2="555"/>
+  <line class="line" x1="715" y1="495" x2="565" y2="555"/>
+  <rect class="box" x="320" y="555" width="360" height="70"/>
+  <text x="392" y="599">150 候选评估</text>
+  <line class="line" x1="500" y1="625" x2="500" y2="670"/>
+  <rect class="box" x="320" y="670" width="360" height="40"/>
+  <text class="small" x="392" y="697">180 审计输出</text>
+</svg>
