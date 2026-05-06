@@ -37,8 +37,8 @@
     "pending_human_review": 90,
     "source_cases_promoted": 0,
     "decision_shards_created_for_pending_packets": 0,
-    "codex_initial_accept_seed_suggestions_pending": 61,
-    "codex_initial_needs_more_evidence_suggestions_pending": 29
+    "codex_initial_accept_seed_suggestions_pending": 60,
+    "codex_initial_needs_more_evidence_suggestions_pending": 30
   },
   "packets": [
     {
@@ -84,8 +84,8 @@
       "total_items": 15,
       "decisions_recorded": 0,
       "pending_human_review": 15,
-      "codex_initial_accept_seed_suggestions": 11,
-      "codex_initial_needs_more_evidence_suggestions": 4,
+      "codex_initial_accept_seed_suggestions": 10,
+      "codex_initial_needs_more_evidence_suggestions": 5,
       "decision_shard_created": false,
       "source_cases_promoted": 0,
       "scope_label": "enemy pressure and campaign pacing packet",

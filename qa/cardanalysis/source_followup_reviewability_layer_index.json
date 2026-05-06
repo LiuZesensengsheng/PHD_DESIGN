@@ -1,0 +1,155 @@
+{
+  "schema_version": "cardanalysis_source_followup_reviewability_layer_index_v1",
+  "index_id": "source_followup_reviewability_layer_index",
+  "generated_date": "2026-05-06",
+  "status": "queue_hygiene_index_only",
+  "source_library": "source_followup_case_library_v1",
+  "source_queue_index_path": "docs/qa/cardanalysis/source_followup_review_queue_index.json",
+  "human_markdown_path": "docs/qa/cardanalysis/source_followup_reviewability_layer_index.md",
+  "authority": {
+    "index_boundary": "queue_hygiene_index_only",
+    "source_case_authority_boundary": "advisory_context_only",
+    "promotes_source_cases": false,
+    "creates_reviewed_evidence": false,
+    "creates_decision_shard": false,
+    "modifies_runtime": false,
+    "modifies_formal_card_data": false,
+    "modifies_formal_enemy_data": false,
+    "modifies_ui_or_save": false,
+    "modifies_capability_graph": false,
+    "modifies_report_only_registry": false,
+    "enables_default_synthesis": false,
+    "enables_learned_or_reranker_behavior": false,
+    "forbidden_uses": [
+      "hard_gate_promotion",
+      "legality_decision",
+      "default_synthesis_path",
+      "reviewed_evidence_claim",
+      "runtime_card_authority",
+      "runtime_campaign_authority",
+      "monster_stat_tuning_authority",
+      "learned_or_reranker_training"
+    ]
+  },
+  "summary": {
+    "packets_covered": 6,
+    "covered_packet_numbers": [2, 3, 4, 5, 6, 7],
+    "pending_review_items": 90,
+    "ready_to_review_items": 60,
+    "needs_more_examples_items": 30,
+    "human_marked_duplicate_or_merge_items": 0,
+    "human_marked_rewrite_before_review_items": 0,
+    "stopline_probe_items": 5,
+    "merge_probe_items": 1,
+    "source_trace_probe_items": 1,
+    "decision_shards_created": 0,
+    "source_cases_promoted": 0
+  },
+  "packet_counts": [
+    {
+      "packet_number": 2,
+      "packet_id": "source_followup_review_packet_02",
+      "pending_review_items": 15,
+      "ready_to_review_items": 10,
+      "needs_more_examples_items": 5
+    },
+    {
+      "packet_number": 3,
+      "packet_id": "source_followup_review_packet_03",
+      "pending_review_items": 15,
+      "ready_to_review_items": 10,
+      "needs_more_examples_items": 5,
+      "hygiene_note": "corrected_summary_counts_from_item_level_suggestions"
+    },
+    {
+      "packet_number": 4,
+      "packet_id": "source_followup_review_packet_04",
+      "pending_review_items": 15,
+      "ready_to_review_items": 12,
+      "needs_more_examples_items": 3
+    },
+    {
+      "packet_number": 5,
+      "packet_id": "source_followup_review_packet_05",
+      "pending_review_items": 15,
+      "ready_to_review_items": 10,
+      "needs_more_examples_items": 5
+    },
+    {
+      "packet_number": 6,
+      "packet_id": "source_followup_review_packet_06",
+      "pending_review_items": 15,
+      "ready_to_review_items": 10,
+      "needs_more_examples_items": 5
+    },
+    {
+      "packet_number": 7,
+      "packet_id": "source_followup_review_packet_07",
+      "pending_review_items": 15,
+      "ready_to_review_items": 8,
+      "needs_more_examples_items": 7
+    }
+  ],
+  "primary_layers": {
+    "ready_to_review": {
+      "meaning": "Codex initial suggestion A. This is only a queue-ordering hint, not a human decision.",
+      "count": 60,
+      "item_refs": [
+        "02-01", "02-02", "02-03", "02-04", "02-05", "02-06", "02-08", "02-09", "02-10", "02-13",
+        "03-01", "03-02", "03-04", "03-05", "03-07", "03-08", "03-10", "03-11", "03-12", "03-13",
+        "04-01", "04-02", "04-04", "04-05", "04-07", "04-09", "04-10", "04-11", "04-12", "04-13", "04-14", "04-15",
+        "05-01", "05-04", "05-05", "05-07", "05-08", "05-09", "05-10", "05-12", "05-13", "05-14",
+        "06-01", "06-02", "06-05", "06-06", "06-08", "06-09", "06-10", "06-12", "06-14", "06-15",
+        "07-01", "07-02", "07-03", "07-05", "07-06", "07-07", "07-14", "07-15"
+      ]
+    },
+    "needs_more_examples": {
+      "meaning": "Codex initial suggestion B. These are useful directions that should get concrete examples, contrast pairs, or counterexamples before promotion discussion.",
+      "count": 30,
+      "item_refs": [
+        "02-07", "02-11", "02-12", "02-14", "02-15",
+        "03-03", "03-06", "03-09", "03-14", "03-15",
+        "04-03", "04-06", "04-08",
+        "05-02", "05-03", "05-06", "05-11", "05-15",
+        "06-03", "06-04", "06-07", "06-11", "06-13",
+        "07-04", "07-08", "07-09", "07-10", "07-11", "07-12", "07-13"
+      ]
+    },
+    "duplicate_or_merge_after_human_review": {
+      "meaning": "Reserved for future human D decisions. No human-filled packet has marked pending items for merge yet.",
+      "count": 0,
+      "item_refs": []
+    },
+    "rewrite_before_review_after_human_review": {
+      "meaning": "Reserved for future human E decisions. No human-filled packet has marked pending items for rewrite yet.",
+      "count": 0,
+      "item_refs": []
+    }
+  },
+  "overlay_layers": {
+    "stopline_probes": {
+      "count": 5,
+      "item_refs": ["07-02", "07-06", "07-07", "07-10", "07-14"]
+    },
+    "merge_probe_items": {
+      "count": 1,
+      "item_refs": ["07-03"]
+    },
+    "source_trace_probe_items": {
+      "count": 1,
+      "item_refs": ["07-12"]
+    }
+  },
+  "hygiene": {
+    "uses_review_keys_only": true,
+    "raw_source_case_ids_omitted": true,
+    "requires_human_review_before_decision_shard": true,
+    "requires_explicit_review_before_any_reviewed_claim": true,
+    "source_case_authority_boundary": "advisory_context_only"
+  },
+  "next_high_value_slice": {
+    "recommended_focus": "scan packet 02-07 Chinese scenarios for duplicate titles, too-abstract wording, and missing stopline phrasing",
+    "allowed_output": "queue hygiene index update or pending Chinese scenario packet only",
+    "forbidden_output": "decision shard without human-filled review results"
+  }
+}

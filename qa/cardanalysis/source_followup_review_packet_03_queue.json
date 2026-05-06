@@ -37,8 +37,8 @@
     "pending_human_review": 15,
     "decision_shards_created": 0,
     "source_cases_promoted": 0,
-    "codex_initial_accept_seed_suggestions": 11,
-    "codex_initial_needs_more_evidence_suggestions": 4
+    "codex_initial_accept_seed_suggestions": 10,
+    "codex_initial_needs_more_evidence_suggestions": 5
   },
   "decision_mapping": {
     "A": "accept_seed",

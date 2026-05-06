@@ -816,6 +816,30 @@ No `source_followup_review_decision_07.json` exists yet because no human review
 result has been provided. All packet 07 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Reviewability Layer Index
+
+The queue hygiene layer index lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.md
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.json
+```
+
+It summarizes pending packets 02-07 by reviewability, not by evidence
+promotion:
+
+- 90 pending human-review items remain across packets 02-07;
+- 60 items have Codex initial `A` suggestions and are good candidates to fill
+  first;
+- 30 items have Codex initial `B` suggestions and should get more concrete
+  examples, contrast pairs, or counterexamples before promotion discussion;
+- no pending item has a human duplicate/merge or rewrite decision yet;
+- the layer index corrected a packet 03 summary-count drift so queue-level
+  suggestion counts now match item-level suggestions.
+
+The layer index remains `queue_hygiene_index_only`; it creates no decision
+shard, no reviewed evidence, and no source-case promotion.
+
 ## Human Review Queue Index
 
 The current human review queue overview lives under:

@@ -60,6 +60,17 @@ review_needed / advisory_context_only
 4. 机器队列可以保留映射，但必须写明不晋升、不创建 reviewed 证据、不改运行时。
 5. 每轮只做小批次，并更新文档、daily log 和 focused tests。
 
+## 可审性分层
+
+另有一份可审性分层索引：
+
+```text
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.md
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.json
+```
+
+它把 02-07 的 90 条待审场景分成 60 条可先直接审、30 条先补例子。它只是队列卫生索引，不是人工审核结果，也不创建 reviewed 证据。
+
 ## 最高价值下一步
 
-下一轮优先做 queue hygiene followup index 或审核包 08。建议聚焦 packet 02-07 的“可审性分层”：哪些条目已经可审，哪些需要更多具体例子，哪些可能重复合并，哪些应该打回重写。这样能继续降低待审积压噪音，但仍然只进入待审队列。
+下一轮优先做 queue hygiene followup 或审核包 08。建议扫描 packet 02-07 的中文场景是否有明显重复标题、过抽象措辞或缺失停止线。这样能继续降低待审积压噪音，但仍然只进入待审队列。
