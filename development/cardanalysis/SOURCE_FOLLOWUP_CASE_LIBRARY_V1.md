@@ -740,6 +740,32 @@ No `source_followup_review_decision_04.json` exists yet because no human review
 result has been provided. All packet 04 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Review Packet 05 Pending Queue
+
+The fifth human review packet is a pending Chinese scenario-level review queue
+for source-mined/reference evidence translation and authority quarantine:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_05_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_05_queue.json
+```
+
+Packet 05 covers 15 advisory-only cases for:
+
+- readable repeat soft caps and draw-reset costs;
+- discard reserve meaning, charge-decay visibility, mode-lockout partial value,
+  position-zone readability, summon-slot visibility, and threshold-overflow
+  warnings;
+- anti-infinite soft pressure and draw-disruption preview;
+- starter route agency, starter scaling-clock readability, and first-three
+  encounter teaching rhythm;
+- social texture and campaign pressure references as questions rather than
+  reviewed facts.
+
+No `source_followup_review_decision_05.json` exists yet because no human review
+result has been provided. All packet 05 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
 ## Validation
 
 ```bash
