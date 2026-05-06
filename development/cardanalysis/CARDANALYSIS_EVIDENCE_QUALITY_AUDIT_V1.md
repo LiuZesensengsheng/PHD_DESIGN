@@ -74,6 +74,7 @@ Required sections:
 - `allowed_consumers_audit`
 - `foundation_axis_coverage`
 - `foundation_axis_weak_coverage`
+- `foundation_axis_review_packet_backlog`
 - `mechanism_family_coverage`
 - `mechanism_family_weak_coverage`
 - `review_packet_candidate_queue`
@@ -181,6 +182,25 @@ promotion_action = no_reviewed_promotion
 
 Cluster membership is not a correctness claim and does not request immediate
 human review.
+
+## Foundation Axis Review-Packet Backlog
+
+`foundation_axis_review_packet_backlog` groups weak foundation axes into later
+packet-planning rows. The current intent is to make thin or advisory-only axes
+easier to plan without opening a human-review request during the audit itself.
+
+Each item records:
+
+- axis id and coverage status;
+- reviewed, human-curated, and lower-tier case counts;
+- candidate case IDs from the review-packet queue or coverage matches;
+- a suggested packet-planning action;
+- `promotion_action = no_reviewed_promotion`;
+- `human_review_request = not_requested_by_this_audit`.
+
+For the current fixture scan, the backlog focuses on `retain`, `filter`, and
+`scaling`. This list is a planning inventory, not a claim that those cases are
+correct or ready for reviewed promotion.
 
 ## Advisory-Only Stopline
 
