@@ -83,6 +83,13 @@ A lower-level resource or throughput axis that many mechanisms can use:
 Foundation axes can support a mechanism. They can also claim primary identity when the
 candidate explicitly names that axis, such as `discard_velocity`.
 
+The broader design vocabulary for foundation axes, including `status`,
+`search_tutor`, `temporary_generation`, `defense_block`, and
+`compression_removal` aliases used in card review, lives in
+`docs/development/cardanalysis/CARDANALYSIS_FOUNDATION_AXIS_TAXONOMY_V1.md`.
+That taxonomy is advisory language and does not expand discovery scoring, gates,
+or default synthesis behavior by itself.
+
 ### Axis Agency Preservation
 
 The key V1 question:
