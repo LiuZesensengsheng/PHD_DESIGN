@@ -859,6 +859,27 @@ The scan uses review keys only in the human-facing Markdown. It does not mark
 human D/E decisions, create a decision shard, promote source cases, or create
 reviewed evidence.
 
+## Human Review Workflow Handoff
+
+The reviewer handoff lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.md
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.json
+```
+
+It is the one-page entrypoint for a human reviewer who wants to fill pending
+packets 02-07. It explains:
+
+- which queue files to read first;
+- how to fill A/B/C/D/E decisions;
+- how Codex should convert a filled packet into a decision shard;
+- why pending queues remain below reviewed authority until explicitly filled
+  and recorded.
+
+The handoff is documentation only. It does not create a decision shard, reviewed
+evidence, or source-case promotion.
+
 ## Human Review Queue Index
 
 The current human review queue overview lives under:

@@ -82,6 +82,17 @@ docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.json
 
 它只标记可能重复、过抽象、缺少停止线的审核编号，帮助下一轮改写或交接。它不自动合并、不打回重写、不创建 decision shard。
 
+## 审核交接说明
+
+如果要真正开始人工填写，先看这份一页交接：
+
+```text
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.md
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.json
+```
+
+它说明先看哪些文件、怎么填 A/B/C/D/E、填完后 Codex 会怎么生成 decision shard，以及哪些待审材料绝对不能当 reviewed。
+
 ## 最高价值下一步
 
-下一轮优先做 reviewer workflow/handoff。建议把“先看哪个文件、怎么填、什么不能当 reviewed”写成一页交接说明，继续降低人工审核进入成本。
+下一轮优先做 packet 08 或打回重写候选队列。建议聚焦已被卫生扫描标出的过抽象、可能重复、缺停止线条目，继续只生成待审队列。

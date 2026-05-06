@@ -1,0 +1,83 @@
+{
+  "schema_version": "cardanalysis_source_followup_review_workflow_handoff_v1",
+  "handoff_id": "source_followup_review_workflow_handoff",
+  "generated_date": "2026-05-06",
+  "status": "human_review_workflow_handoff_only",
+  "source_library": "source_followup_case_library_v1",
+  "human_markdown_path": "docs/qa/cardanalysis/source_followup_review_workflow_handoff.md",
+  "covers_pending_packets": [2, 3, 4, 5, 6, 7],
+  "authority": {
+    "handoff_boundary": "human_review_workflow_handoff_only",
+    "source_case_authority_boundary": "advisory_context_only",
+    "promotes_source_cases": false,
+    "creates_reviewed_evidence": false,
+    "creates_decision_shard": false,
+    "modifies_runtime": false,
+    "modifies_formal_card_data": false,
+    "modifies_formal_enemy_data": false,
+    "modifies_ui_or_save": false,
+    "modifies_capability_graph": false,
+    "modifies_report_only_registry": false,
+    "enables_default_synthesis": false,
+    "enables_learned_or_reranker_behavior": false,
+    "forbidden_uses": [
+      "hard_gate_promotion",
+      "legality_decision",
+      "default_synthesis_path",
+      "reviewed_evidence_claim",
+      "runtime_card_authority",
+      "runtime_campaign_authority",
+      "monster_stat_tuning_authority",
+      "learned_or_reranker_training"
+    ]
+  },
+  "read_order": [
+    "docs/qa/cardanalysis/source_followup_review_queue_index.md",
+    "docs/qa/cardanalysis/source_followup_reviewability_layer_index.md",
+    "docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.md",
+    "docs/qa/cardanalysis/source_followup_review_packet_02_scenarios.md",
+    "docs/qa/cardanalysis/source_followup_review_packet_03_scenarios.md",
+    "docs/qa/cardanalysis/source_followup_review_packet_04_scenarios.md",
+    "docs/qa/cardanalysis/source_followup_review_packet_05_scenarios.md",
+    "docs/qa/cardanalysis/source_followup_review_packet_06_scenarios.md",
+    "docs/qa/cardanalysis/source_followup_review_packet_07_scenarios.md"
+  ],
+  "decision_mapping": {
+    "A": "accept_seed",
+    "B": "needs_more_evidence",
+    "C": "reject_overclaim",
+    "D": "duplicate_or_merge",
+    "E": "unable_to_judge"
+  },
+  "recommended_human_flow": {
+    "first_slice_size": "10-15 items",
+    "start_with": "ready_to_review layer from source_followup_reviewability_layer_index",
+    "skip_until_later": "needs_more_examples layer unless reviewer has strong intuition",
+    "use_readability_scan_for": [
+      "possible_duplicate_or_merge",
+      "abstract_or_needs_example",
+      "missing_stopline"
+    ]
+  },
+  "post_review_codex_actions": [
+    "parse_filled_chinese_review_blocks",
+    "create_decision_shard_only_for_human_filled_packet",
+    "record_A_as_reviewed_seed_candidate_without_source_case_promotion",
+    "record_B_as_followup_queue",
+    "record_C_as_stopline",
+    "record_D_as_merge_line",
+    "record_E_as_rewrite_line",
+    "update_queue_indexes_daily_log_and_focused_tests"
+  ],
+  "hygiene": {
+    "human_markdown_hides_raw_source_case_ids": true,
+    "requires_human_review_before_decision_shard": true,
+    "requires_explicit_review_before_any_reviewed_claim": true,
+    "source_case_authority_boundary": "advisory_context_only"
+  },
+  "next_high_value_slice": {
+    "recommended_focus": "small packet 08 or rewrite-candidate queue over items flagged abstract, duplicate-prone, or missing stoplines",
+    "allowed_output": "pending Chinese scenario packet, rewrite-candidate queue, docs, and focused tests",
+    "forbidden_output": "decision shard without human-filled review results"
+  }
+}
