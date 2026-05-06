@@ -72,13 +72,16 @@ Required sections:
 - `duplicate_axis_risk_clusters`
 - `authority_boundary_audit`
 - `allowed_consumers_audit`
+- `allowed_consumer_scope_notes`
 - `foundation_axis_coverage`
 - `foundation_axis_weak_coverage`
 - `foundation_axis_review_packet_backlog`
 - `mechanism_family_coverage`
 - `mechanism_family_weak_coverage`
+- `mechanism_family_review_packet_backlog`
 - `review_packet_candidate_queue`
 - `planning_summary`
+- `risk_severity_summary`
 - `advisory_only_stopline`
 - `boundary_assertions`
 
@@ -201,6 +204,55 @@ Each item records:
 For the current fixture scan, the backlog focuses on `retain`, `filter`, and
 `scaling`. This list is a planning inventory, not a claim that those cases are
 correct or ready for reviewed promotion.
+
+## Mechanism Family Review-Packet Backlog
+
+`mechanism_family_review_packet_backlog` applies the same planning shape to weak
+mechanism-family coverage. It groups below-reviewed or thin-reviewed family
+targets into later packet-planning rows, with candidate case IDs drawn from the
+review-packet queue where possible.
+
+The current scan reports weak-family backlog rows for families such as
+`chain_fatigue`, `energy_instability`, `search_public_target`,
+`status_decay_transfer`, `draw_heat`, `pollution_market`, and
+`redirect_collision`.
+
+Every row keeps:
+
+```text
+authority_boundary = advisory_context_only
+promotion_action = no_reviewed_promotion
+human_review_request = not_requested_by_this_audit
+```
+
+## Allowed Consumer Scope Notes
+
+`allowed_consumer_scope_notes` summarizes broad consumer scope by consumer/head.
+It is meant to prevent accidental authority broadening when a case is allowed
+for many report-only consumers.
+
+The current scan reports `64` broad-scope cases and `9` consumer notes. Broad
+scope is not automatically wrong: heads such as
+`cardanalysis_feature_projection_v1` and
+`evaluation_autonomous_design_model_v1` are expected to read many cases. The
+audit records this as planning context so future agents do not mistake broad
+read access for promotion authority.
+
+## Severity Summary
+
+`risk_severity_summary` rolls the planning risks into a compact merge-readiness
+view. It is still report-only and explicitly not a gate.
+
+The current scan has:
+
+- high: `0`
+- medium: `5`
+- low: `1`
+- merge readiness:
+  `mergeable_report_only_no_high_severity_drift_detected`
+
+This means the audit lane is mergeable as report-only tooling, while the medium
+risks remain useful follow-up planning items.
 
 ## Advisory-Only Stopline
 
