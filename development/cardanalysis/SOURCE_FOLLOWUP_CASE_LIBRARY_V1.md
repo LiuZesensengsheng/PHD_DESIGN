@@ -690,6 +690,31 @@ No `source_followup_review_decision_02.json` exists yet because no human review
 result has been provided. All packet 02 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Review Packet 03 Pending Queue
+
+The third human review packet is another pending Chinese scenario-level review
+queue, also not a decision shard:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_03_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_03_queue.json
+```
+
+Packet 03 shifts from core card-mechanism boundaries into enemy pressure and
+campaign pacing evidence. It covers 15 advisory-only cases for:
+
+- early enemy frontload defense floors and skill-punish escape lines;
+- status pressure, energy tax, draw disruption, summon pressure, scaling clocks,
+  anti-infinite soft stops, boss thresholds, and enemy false-relief windows;
+- starter route lock-in and first-three-encounter variance;
+- build-phase pollution cleanup access;
+- pivot-phase role swaps;
+- campaign recovery-band width.
+
+No `source_followup_review_decision_03.json` exists yet because no human review
+result has been provided. All packet 03 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
 ## Validation
 
 ```bash
