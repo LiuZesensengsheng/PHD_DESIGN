@@ -840,6 +840,25 @@ promotion:
 The layer index remains `queue_hygiene_index_only`; it creates no decision
 shard, no reviewed evidence, and no source-case promotion.
 
+## Human Review Readability Hygiene Scan
+
+The readability hygiene scan lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.md
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.json
+```
+
+It scans pending packets 02-07 for queue-reading noise only:
+
+- 6 possible duplicate or merge clusters;
+- 18 abstract or needs-example items;
+- 14 items that should get clearer stopline phrasing in a future rewrite.
+
+The scan uses review keys only in the human-facing Markdown. It does not mark
+human D/E decisions, create a decision shard, promote source cases, or create
+reviewed evidence.
+
 ## Human Review Queue Index
 
 The current human review queue overview lives under:

@@ -71,6 +71,17 @@ docs/qa/cardanalysis/source_followup_reviewability_layer_index.json
 
 它把 02-07 的 90 条待审场景分成 60 条可先直接审、30 条先补例子。它只是队列卫生索引，不是人工审核结果，也不创建 reviewed 证据。
 
+## 可读性卫生扫描
+
+另有一份可读性卫生扫描：
+
+```text
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.md
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.json
+```
+
+它只标记可能重复、过抽象、缺少停止线的审核编号，帮助下一轮改写或交接。它不自动合并、不打回重写、不创建 decision shard。
+
 ## 最高价值下一步
 
-下一轮优先做 queue hygiene followup 或审核包 08。建议扫描 packet 02-07 的中文场景是否有明显重复标题、过抽象措辞或缺失停止线。这样能继续降低待审积压噪音，但仍然只进入待审队列。
+下一轮优先做 reviewer workflow/handoff。建议把“先看哪个文件、怎么填、什么不能当 reviewed”写成一页交接说明，继续降低人工审核进入成本。
