@@ -94,6 +94,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/generate_combat_analysis_reference_report.py --profile-id <profile-id>`
 - Run the cross-profile combat-analysis portfolio report:
   - `python scripts/generate_combat_analysis_portfolio_report.py`
+- Run the report-only cardanalysis evidence quality audit:
+  - `python scripts/run_cardanalysis_evidence_quality_audit.py --input tests/fixtures/combat_analysis/source_followup_case_library_v1 --input tests/fixtures/combat_analysis/mechanism_case_library_v1 --output-dir tmp/combat_analysis/evidence_quality_audit_current`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
 
