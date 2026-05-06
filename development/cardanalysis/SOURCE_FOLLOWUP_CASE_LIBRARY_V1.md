@@ -766,6 +766,31 @@ No `source_followup_review_decision_05.json` exists yet because no human review
 result has been provided. All packet 05 items remain `pending_human_review`;
 source cases remain `review_needed` and `advisory_context_only`.
 
+## Human Review Packet 06 Pending Queue
+
+The sixth human review packet is a pending Chinese scenario-level review queue
+for fine-grained followup around the first recorded human preference notes:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_06_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_06_queue.json
+```
+
+Packet 06 covers 15 advisory-only cases for:
+
+- chain-fatigue granularity, including nonrepeat negative controls, intended
+  payoff-chain boundaries, off-ramp recovery, and payoff dilution;
+- repeated draw/retrieval fatigue, including thin-deck self-loops, optional stop
+  signals, hand-limit preview, and card-quality tradeoffs;
+- energy debt expression, including visible debt floors, stabilizer hostage
+  patterns, overdraft forecasts, and dead-turn negative controls;
+- package enabler density, including glue timing gaps, package density cliffs,
+  and support-ratio swings.
+
+No `source_followup_review_decision_06.json` exists yet because no human review
+result has been provided. All packet 06 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
 ## Human Review Queue Index
 
 The current human review queue overview lives under:
@@ -782,8 +807,8 @@ the machine-readable hygiene anchor for tests and future unattended batches.
 The index currently records:
 
 - packet 01 as the only packet with a human decision shard;
-- packets 02-05 as pending human review queues;
-- 60 pending human-review items across the four pending packets;
+- packets 02-06 as pending human review queues;
+- 75 pending human-review items across the five pending packets;
 - no decision shards for pending packets;
 - no source-case promotion and no reviewed-evidence creation.
 

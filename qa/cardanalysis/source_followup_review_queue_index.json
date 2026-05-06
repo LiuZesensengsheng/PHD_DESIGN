@@ -29,16 +29,16 @@
     ]
   },
   "summary": {
-    "total_packets": 5,
+    "total_packets": 6,
     "decision_recorded_packets": 1,
-    "pending_queue_packets": 4,
-    "total_review_items": 75,
+    "pending_queue_packets": 5,
+    "total_review_items": 90,
     "decisions_recorded": 15,
-    "pending_human_review": 60,
+    "pending_human_review": 75,
     "source_cases_promoted": 0,
     "decision_shards_created_for_pending_packets": 0,
-    "codex_initial_accept_seed_suggestions_pending": 43,
-    "codex_initial_needs_more_evidence_suggestions_pending": 17
+    "codex_initial_accept_seed_suggestions_pending": 53,
+    "codex_initial_needs_more_evidence_suggestions_pending": 22
   },
   "packets": [
     {
@@ -124,6 +124,23 @@
       "source_cases_promoted": 0,
       "scope_label": "source-mined/reference evidence translation and authority quarantine",
       "human_next_action": "fill_packet"
+    },
+    {
+      "packet_number": 6,
+      "packet_id": "source_followup_review_packet_06",
+      "status": "pending_human_review",
+      "scenario_markdown_path": "docs/qa/cardanalysis/source_followup_review_packet_06_scenarios.md",
+      "queue_json_path": "docs/qa/cardanalysis/source_followup_review_packet_06_queue.json",
+      "decision_json_path": null,
+      "total_items": 15,
+      "decisions_recorded": 0,
+      "pending_human_review": 15,
+      "codex_initial_accept_seed_suggestions": 10,
+      "codex_initial_needs_more_evidence_suggestions": 5,
+      "decision_shard_created": false,
+      "source_cases_promoted": 0,
+      "scope_label": "fine-grained followup around existing human preferences: chain fatigue granularity, repeated draw fatigue, energy debt expression, and package enabler density",
+      "human_next_action": "fill_packet"
     }
   ],
   "hygiene": {
@@ -131,7 +148,8 @@
       "source_followup_review_packet_02",
       "source_followup_review_packet_03",
       "source_followup_review_packet_04",
-      "source_followup_review_packet_05"
+      "source_followup_review_packet_05",
+      "source_followup_review_packet_06"
     ],
     "pending_packet_markdown_hides_raw_source_case_ids": true,
     "pending_queues_keep_machine_mappings": true,
@@ -140,8 +158,8 @@
     "requires_explicit_review_before_any_reviewed_claim": true
   },
   "next_high_value_slice": {
-    "packet_id": "source_followup_review_packet_06",
-    "recommended_focus": "fine-grained followup around existing human preferences: chain fatigue granularity, repeated draw/retrieval fatigue, energy debt expression, and package enabler density",
+    "packet_id": "source_followup_review_packet_07",
+    "recommended_focus": "queue-noise reduction and stopline review: duplicate candidates, too-abstract scenarios, and items that should be rewritten before human review",
     "allowed_output": "pending Chinese scenario packet and queue only",
     "forbidden_output": "decision shard without human-filled review results"
   }
