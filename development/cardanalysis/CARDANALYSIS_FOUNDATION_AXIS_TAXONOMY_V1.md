@@ -182,3 +182,41 @@ Lightweight human-review packets for this taxonomy:
 
 These packets are review aids only. They are not reviewed evidence, do not promote case
 tiers, and do not change evaluator behavior.
+
+## V1 Close Criteria
+
+Foundation-axis taxonomy V1 is considered closed enough for the shared-language phase
+when all of the following are true:
+
+1. The canonical foundation-axis IDs are named and stable for review language.
+2. Each axis has a design role, common failure modes, advanced-mechanism relationship,
+   and review question.
+3. The support roles of fuel, access, safety, conversion, and constraint are defined.
+4. Identity-swallowing checks are documented for generic draw, energy, damage, defense,
+   scaling, compression, and other throughput axes.
+5. Human-review packets exist for every reviewed-evidence request ID listed above.
+6. Focused tests verify that the taxonomy and packets remain advisory and do not imply
+   hard gates, legality, default synthesis, learned defaults, reranker defaults, or
+   reviewed STS1 family expansion.
+
+After these criteria are met, do not keep expanding the taxonomy by default. The next
+useful work should move to one of these tracks:
+
+- human review of packet decisions;
+- reviewed seed candidate extraction from accepted packet items;
+- evidence queue creation for items marked "needs more evidence";
+- narrowly scoped advisory case additions only when a packet decision or review gap
+  calls for them.
+
+## Stop Lines For Further Automation
+
+Pause this lane and ask for human review when:
+
+- a proposed change would add or change runtime, formal card/enemy data, UI/save,
+  registry, hard gate, default synthesis, learned, reranker, or mechanism viability
+  behavior;
+- an item would need to promote evidence tier from human-curated/source-mined to
+  reviewed without an explicit reviewed-decision shard;
+- taxonomy wording starts duplicating the human-review packets instead of clarifying
+  shared vocabulary;
+- all V1 close criteria are met and no new human packet decisions are available.
