@@ -69,6 +69,7 @@ Required sections:
 - `source_tier_distribution`
 - `review_status_distribution`
 - `duplicate_and_near_duplicate_risks`
+- `duplicate_axis_risk_clusters`
 - `authority_boundary_audit`
 - `allowed_consumers_audit`
 - `foundation_axis_coverage`
@@ -155,6 +156,31 @@ plain planning actions such as:
 The summary is still advisory only. Its recommended slices may update audit
 output, documentation, or focused tests, but they carry the same forbidden-change
 list as the main audit stopline.
+
+## Duplicate And Axis Risk Clusters
+
+`duplicate_axis_risk_clusters` is a compact view over the duplicate and axis-reuse
+details. It exists so later agents can plan review-packet backlogs from groups
+instead of rereading every case row.
+
+Cluster types:
+
+- `exact_duplicate_case_id`: high-priority identifier collision; fix metadata
+  before packaging.
+- `near_duplicate_case_id_stem`: related followup or possible duplication that
+  should be clustered before review-packet planning.
+- `primary_axis_reuse`: repeated `primary_axis` values that may be intentional
+  coverage density or possible axis drift.
+
+Every cluster keeps:
+
+```text
+authority_boundary = advisory_context_only
+promotion_action = no_reviewed_promotion
+```
+
+Cluster membership is not a correctness claim and does not request immediate
+human review.
 
 ## Advisory-Only Stopline
 
