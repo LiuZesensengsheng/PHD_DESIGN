@@ -662,6 +662,34 @@ not as source-case promotion:
   synthesis, reviewed-evidence claims, runtime authority, and learned/reranker
   training.
 
+## Human Review Packet 02 Pending Queue
+
+The second human review packet is a pending Chinese scenario-level review queue,
+not a decision shard:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_02_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_02_queue.json
+```
+
+Packet 02 keeps raw source case ids out of the human-facing markdown and stores
+the machine mapping in the queue JSON. It covers 15 advisory-only cases across
+mechanism families that packet 01 did not review:
+
+- defense reflect attack-type and counterexample boundaries;
+- loop-safety reward preservation and counterexample boundaries;
+- recovery-window pre-spike signals and non-HP recovery pressure;
+- redirect ally/enemy target domains and prevented-value cases;
+- public-target search pool scope and decline options;
+- status transfer return paths;
+- summon expiry countdown visibility;
+- temporary-generation choice-load caps;
+- transform-pool exhaustion preview and no-transform negative controls.
+
+No `source_followup_review_decision_02.json` exists yet because no human review
+result has been provided. All packet 02 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
 ## Validation
 
 ```bash
