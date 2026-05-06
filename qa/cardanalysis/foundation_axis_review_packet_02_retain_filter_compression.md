@@ -189,4 +189,3 @@ design_note / human_curated / review_needed / advisory_context_only
 3. 把 C/D/E 作为停止线、合并线或重写线保存。
 4. 继续保持 `advisory_context_only`，直到明确生成 reviewed-decision shard。
 5. 跑 focused tests、case input validator、architecture、encoding、capability graph 和 `git diff --check`。
-
