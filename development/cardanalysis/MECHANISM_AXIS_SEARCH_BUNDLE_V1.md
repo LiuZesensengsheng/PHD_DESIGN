@@ -209,6 +209,12 @@ Write a report-only owner evidence queue from the readiness blockers:
 python scripts/run_mechanism_axis_owner_evidence_queue.py --input tmp/combat_analysis/mechanism_axis_generation_exam_readiness_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_generation_exam_readiness_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_evidence_queue_current
 ```
 
+Write empty owner evidence intake templates from the current owner evidence queue:
+
+```powershell
+python scripts/run_mechanism_axis_owner_evidence_intake_packet.py --input tmp/combat_analysis/mechanism_axis_owner_evidence_queue_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_evidence_queue_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_evidence_intake_packet_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -375,6 +381,28 @@ gates, change default synthesis, or enable learned/reranker behavior.
 
 For the first Silent package seed, the queue contains input/output gaps for mechanism
 discovery, fun health, package health, deck compression, and design iteration.
+
+## Owner Evidence Intake Packet
+
+`mechanism_axis_owner_evidence_intake_packet_v1` reads a
+`mechanism_axis_owner_evidence_queue_v1` snapshot and emits empty intake templates for
+human or owner-supplied evidence.
+
+It may:
+
+- carry queue item IDs, owner surfaces, required material, acceptable sources, and
+  blocker detail into intake items;
+- create empty fields for reviewer identity, source refs, evidence notes, source tier,
+  review status, and required material values;
+- attach an acceptance checklist that asks for traceable source material, tier-aware
+  wording, and no score or axis override.
+
+It must not fill evidence fields, write owner input files, run owner reports, score
+owner reports, claim reviewed evidence, create formal cards, create runtime data,
+create hard gates, change default synthesis, or enable learned/reranker behavior.
+
+For the first Silent package seed, the intake packet contains ten empty templates: one
+input-gap and one output-gap template for each canonical owner report section.
 
 ## V1 Scope
 
