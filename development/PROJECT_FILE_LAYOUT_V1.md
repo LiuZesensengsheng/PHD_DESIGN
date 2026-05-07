@@ -142,6 +142,18 @@ Git 仓库里只保留游戏运行时真正读取的资源，例如：
 
 不要把测试拆进 `contexts/*` 里做 colocated test。
 
+测试目录的推荐分区是：
+
+- `tests/campaign/`：战役上下文合同
+- `tests/combat/`：战斗上下文合同
+- `tests/shared/`：跨上下文合同、状态机最小闭环、共享配置/显示合同
+- `tests/helpers/`：测试基建
+- `tests/fixtures/`：测试数据
+- `tests/save/`：存档合同
+- `tests/scripts/`：脚本合同
+- `tests/toolkit/`：工具链合同
+- `tests/simulation/`：模拟合同
+
 ### 8. `skills/` 是可选层，不属于运行时架构
 
 如果项目保留 `skills/`，它的职责只能是：
@@ -242,6 +254,8 @@ PHD_SIMULATER/
 │  ├─ campaign/
 │  ├─ combat/
 │  ├─ shared/
+│  ├─ helpers/
+│  ├─ fixtures/
 │  ├─ save/
 │  ├─ scripts/
 │  ├─ toolkit/
