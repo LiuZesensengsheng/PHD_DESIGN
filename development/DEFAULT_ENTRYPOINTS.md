@@ -110,6 +110,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_mechanism_axis_evaluation_handoff.py --input tmp/combat_analysis/mechanism_axis_package_seed_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1.json --output-dir tmp/combat_analysis/mechanism_axis_evaluation_handoff_current`
 - Run the evaluation autonomous design model from that handoff:
   - `python scripts/run_evaluation_autonomous_design_model.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/evaluation_autonomous_design_from_axis_handoff_current`
+- Write a report-only owner-report request packet from the current evaluation handoff:
+  - `python scripts/run_mechanism_axis_owner_report_requests.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/mechanism_axis_owner_report_requests_current`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
 

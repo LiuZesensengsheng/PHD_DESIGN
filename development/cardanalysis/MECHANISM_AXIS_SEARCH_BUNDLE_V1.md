@@ -185,6 +185,12 @@ Run the existing evaluation autonomous design model from that handoff:
 python scripts/run_evaluation_autonomous_design_model.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/evaluation_autonomous_design_from_axis_handoff_current
 ```
 
+Write a report-only owner-report request packet from the handoff:
+
+```powershell
+python scripts/run_mechanism_axis_owner_report_requests.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/mechanism_axis_owner_report_requests_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -267,6 +273,28 @@ It must not generate or score owner reports, formal cards, runtime card data, ha
 gates, default synthesis, learned/reranker behavior, or reviewed-evidence claims.
 The existing `evaluation_autonomous_design_model_v1` remains the downstream
 orchestrator and still cannot promote beyond human-review wording.
+
+## Owner Report Request Packet
+
+`mechanism_axis_owner_report_requests_v1` reads an
+`evaluation_autonomous_design_model_v1` handoff input and emits a report-only request
+packet for missing canonical owner reports.
+
+It may list requests for:
+
+- `mechanism_axis_discovery_summary`
+- `mechanism_fun_health_summary`
+- `card_package_health_summary`
+- `deck_compression_summary`
+- `design_iteration_summary`
+
+Each request item names the canonical owner surface, CLI script, minimum inputs, input
+gap notes, source axes, role-level package skeleton roles, and forbidden actions.
+
+It must not generate owner reports, score owner reports, create formal cards, create
+runtime data, claim reviewed evidence, create hard gates, change default synthesis, or
+enable learned/reranker behavior. Its purpose is routing and missing-input clarity
+before the card-package-generation exam, not evaluation.
 
 ## V1 Scope
 
