@@ -191,6 +191,12 @@ Write a report-only owner-report request packet from the handoff:
 python scripts/run_mechanism_axis_owner_report_requests.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/mechanism_axis_owner_report_requests_current
 ```
 
+Write a report-only owner-report input readiness plan from the request packet:
+
+```powershell
+python scripts/run_mechanism_axis_owner_report_input_plan.py --input tmp/combat_analysis/mechanism_axis_owner_report_requests_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_report_requests_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_report_input_plan_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -295,6 +301,28 @@ It must not generate owner reports, score owner reports, create formal cards, cr
 runtime data, claim reviewed evidence, create hard gates, change default synthesis, or
 enable learned/reranker behavior. Its purpose is routing and missing-input clarity
 before the card-package-generation exam, not evaluation.
+
+## Owner Report Input Plan
+
+`mechanism_axis_owner_report_input_plan_v1` reads a
+`mechanism_axis_owner_report_requests_v1` snapshot and emits a report-only readiness
+plan for the requested owner-report inputs.
+
+It may:
+
+- name fields that can be safely prefilled from the handoff, such as source axes,
+  mechanism candidate refs, and role-level package skeleton roles;
+- name blocked inputs that still require owner or human-supplied review material;
+- mark whether the owner CLI can safely run now.
+
+It must not write owner input files, run owner reports, score owner reports, invent
+deck-case refs, invent card-like package slots, claim reviewed evidence, create formal
+cards, change runtime data, create hard gates, change default synthesis, or enable
+learned/reranker behavior.
+
+For the first Silent package seed, every canonical owner report remains blocked on
+missing owner-specific inputs. That is intentional: the plan is a readiness map, not an
+evidence generator.
 
 ## V1 Scope
 
