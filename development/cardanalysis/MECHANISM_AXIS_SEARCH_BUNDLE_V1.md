@@ -173,6 +173,18 @@ Run the report-only chain exam:
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q
 ```
 
+Write an evaluation-autonomous-design handoff input from the package seed:
+
+```powershell
+python scripts/run_mechanism_axis_evaluation_handoff.py --input tmp/combat_analysis/mechanism_axis_package_seed_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1.json --output-dir tmp/combat_analysis/mechanism_axis_evaluation_handoff_current
+```
+
+Run the existing evaluation autonomous design model from that handoff:
+
+```powershell
+python scripts/run_evaluation_autonomous_design_model.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/evaluation_autonomous_design_from_axis_handoff_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -234,6 +246,27 @@ The exam asserts that search remains the score and axis authority, the brief cop
 program output rather than inventing axes or scores, and the package seed remains a
 generated-hypothesis role skeleton with no formal card fields or hard-gate/default
 synthesis/learned authority.
+
+## Evaluation Handoff Consumer
+
+`mechanism_axis_evaluation_handoff_v1` reads a generated-hypothesis
+`card_package_proposal_v1` seed and writes an
+`evaluation_autonomous_design_model_v1` input seed.
+
+It is a bridge, not a new evaluator. It may:
+
+- map role-level package slots into the evaluator's package skeleton fields;
+- carry primary/secondary mechanism axes into `mechanism_candidate`;
+- request the canonical missing owner reports:
+  `mechanism_axis_discovery_summary`, `mechanism_fun_health_summary`,
+  `card_package_health_summary`, `deck_compression_summary`, and
+  `design_iteration_summary`;
+- preserve a `mechanism_axis_summary` optional context section.
+
+It must not generate or score owner reports, formal cards, runtime card data, hard
+gates, default synthesis, learned/reranker behavior, or reviewed-evidence claims.
+The existing `evaluation_autonomous_design_model_v1` remains the downstream
+orchestrator and still cannot promote beyond human-review wording.
 
 ## V1 Scope
 
