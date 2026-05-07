@@ -203,6 +203,12 @@ Check whether the current package seed may enter the card-package generation exa
 python scripts/run_mechanism_axis_generation_exam_readiness.py --input tmp/combat_analysis/mechanism_axis_owner_report_input_plan_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_report_requests_input_plan_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_generation_exam_readiness_current
 ```
 
+Write a report-only owner evidence queue from the readiness blockers:
+
+```powershell
+python scripts/run_mechanism_axis_owner_evidence_queue.py --input tmp/combat_analysis/mechanism_axis_generation_exam_readiness_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_generation_exam_readiness_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_evidence_queue_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -349,6 +355,26 @@ default synthesis, or enable learned/reranker behavior.
 For the first Silent package seed, readiness is
 `blocked_on_owner_report_inputs`: no owner report input is ready and no canonical owner
 report output is present.
+
+## Owner Evidence Queue
+
+`mechanism_axis_owner_evidence_queue_v1` reads a
+`mechanism_axis_generation_exam_readiness_v1` snapshot and turns readiness blockers
+into explicit owner evidence requests.
+
+It may:
+
+- list required evidence material for each blocked canonical owner report;
+- name acceptable source types, such as reviewed fixtures or human-reviewed design
+  notes;
+- distinguish owner input gaps from owner output gaps.
+
+It must not generate evidence, write owner input files, run owner reports, score owner
+reports, claim reviewed evidence, create formal cards, create runtime data, create hard
+gates, change default synthesis, or enable learned/reranker behavior.
+
+For the first Silent package seed, the queue contains input/output gaps for mechanism
+discovery, fun health, package health, deck compression, and design iteration.
 
 ## V1 Scope
 
