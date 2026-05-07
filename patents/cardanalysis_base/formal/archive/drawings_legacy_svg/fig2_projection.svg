@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+    </marker>
+    <style>
+      text { font-family: SimSun, Songti SC, serif; font-size: 24px; fill: #000; }
+      .small { font-size: 19px; }
+      .box { fill: #fff; stroke: #000; stroke-width: 2; }
+      .line { stroke: #000; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <text x="440" y="45">图2</text>
+  <rect class="box" x="80" y="90" width="250" height="90"/>
+  <text x="143" y="143">卡牌对象</text>
+  <line class="line" x1="330" y1="135" x2="430" y2="135"/>
+  <rect class="box" x="430" y="90" width="260" height="90"/>
+  <text x="475" y="143">110 字段归一化</text>
+  <line class="line" x1="560" y1="180" x2="560" y2="250"/>
+  <rect class="box" x="390" y="250" width="340" height="80"/>
+  <text x="442" y="298">120 压缩语义投影</text>
+  <line class="line" x1="560" y1="330" x2="560" y2="385"/>
+  <rect class="box" x="130" y="385" width="740" height="260"/>
+  <text x="388" y="425">压缩语义表示</text>
+  <rect class="box" x="170" y="455" width="210" height="50"/>
+  <text class="small" x="235" y="487">成本向量</text>
+  <rect class="box" x="395" y="455" width="210" height="50"/>
+  <text class="small" x="460" y="487">收益向量</text>
+  <rect class="box" x="620" y="455" width="210" height="50"/>
+  <text class="small" x="668" y="487">状态亲和</text>
+  <rect class="box" x="170" y="535" width="210" height="50"/>
+  <text class="small" x="235" y="567">角色标签</text>
+  <rect class="box" x="395" y="535" width="210" height="50"/>
+  <text class="small" x="452" y="567">关系边集合</text>
+  <rect class="box" x="620" y="535" width="210" height="50"/>
+  <text class="small" x="668" y="567">风险表示</text>
+</svg>

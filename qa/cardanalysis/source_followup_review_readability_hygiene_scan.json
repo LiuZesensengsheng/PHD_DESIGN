@@ -1,0 +1,132 @@
+{
+  "schema_version": "cardanalysis_source_followup_review_readability_hygiene_scan_v1",
+  "scan_id": "source_followup_review_readability_hygiene_scan",
+  "generated_date": "2026-05-06",
+  "status": "queue_hygiene_scan_only",
+  "source_library": "source_followup_case_library_v1",
+  "source_queue_index_path": "docs/qa/cardanalysis/source_followup_review_queue_index.json",
+  "source_reviewability_index_path": "docs/qa/cardanalysis/source_followup_reviewability_layer_index.json",
+  "human_markdown_path": "docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.md",
+  "authority": {
+    "scan_boundary": "queue_hygiene_scan_only",
+    "source_case_authority_boundary": "advisory_context_only",
+    "promotes_source_cases": false,
+    "creates_reviewed_evidence": false,
+    "creates_decision_shard": false,
+    "modifies_runtime": false,
+    "modifies_formal_card_data": false,
+    "modifies_formal_enemy_data": false,
+    "modifies_ui_or_save": false,
+    "modifies_capability_graph": false,
+    "modifies_report_only_registry": false,
+    "enables_default_synthesis": false,
+    "enables_learned_or_reranker_behavior": false,
+    "forbidden_uses": [
+      "hard_gate_promotion",
+      "legality_decision",
+      "default_synthesis_path",
+      "reviewed_evidence_claim",
+      "runtime_card_authority",
+      "runtime_campaign_authority",
+      "monster_stat_tuning_authority",
+      "learned_or_reranker_training"
+    ]
+  },
+  "summary": {
+    "packets_scanned": [2, 3, 4, 5, 6, 7],
+    "pending_items_scanned": 90,
+    "possible_duplicate_or_merge_clusters": 6,
+    "abstract_or_needs_example_items": 18,
+    "missing_stopline_items": 14,
+    "human_decisions_recorded": 0,
+    "decision_shards_created": 0,
+    "source_cases_promoted": 0
+  },
+  "possible_duplicate_or_merge_clusters": [
+    {
+      "cluster_id": "counterexample_boundary_overlap_v1",
+      "item_refs": ["02-02", "04-07", "07-02"],
+      "reason": "counterexample and boundary wording overlap at different review granularities",
+      "action": "keep_pending_until_human_merge_decision"
+    },
+    {
+      "cluster_id": "exit_value_or_failure_replay_overlap_v1",
+      "item_refs": ["02-03", "06-03", "07-09"],
+      "reason": "stop-after-loop value and failure replay can be confused without tighter examples",
+      "action": "keep_pending_until_rewrite_or_human_merge_decision"
+    },
+    {
+      "cluster_id": "public_search_scope_overlap_v1",
+      "item_refs": ["02-09", "02-10", "05-15"],
+      "reason": "public target search scope, decline option, and source reference boundary overlap",
+      "action": "keep_pending_until_human_merge_decision"
+    },
+    {
+      "cluster_id": "source_trace_overlap_v1",
+      "item_refs": ["04-01", "07-12"],
+      "reason": "source trace completeness and source trace gap are related but not identical",
+      "action": "keep_pending_as_pair"
+    },
+    {
+      "cluster_id": "review_scope_layering_overlap_v1",
+      "item_refs": ["04-03", "07-13"],
+      "reason": "consumer scope and review queue layering both ask how far evidence may travel",
+      "action": "keep_pending_as_pair"
+    },
+    {
+      "cluster_id": "package_role_overlap_v1",
+      "item_refs": ["06-13", "07-08", "07-11"],
+      "reason": "package glue, role evidence, and role-balance wording may duplicate if examples are thin",
+      "action": "keep_pending_until_rewrite_or_human_merge_decision"
+    }
+  ],
+  "abstract_or_needs_example_items": [
+    "02-07",
+    "02-11",
+    "02-12",
+    "02-14",
+    "02-15",
+    "03-03",
+    "03-06",
+    "03-09",
+    "03-14",
+    "03-15",
+    "04-03",
+    "04-06",
+    "04-08",
+    "07-04",
+    "07-08",
+    "07-09",
+    "07-10",
+    "07-13"
+  ],
+  "missing_stopline_items": [
+    "03-14",
+    "03-15",
+    "04-03",
+    "04-06",
+    "04-08",
+    "04-10",
+    "04-11",
+    "04-12",
+    "04-13",
+    "04-14",
+    "04-15",
+    "07-06",
+    "07-07",
+    "07-14"
+  ],
+  "hygiene": {
+    "uses_review_keys_only": true,
+    "raw_source_case_ids_omitted": true,
+    "human_markdown_hides_raw_source_case_ids": true,
+    "requires_human_review_before_decision_shard": true,
+    "requires_explicit_review_before_any_reviewed_claim": true,
+    "source_case_authority_boundary": "advisory_context_only"
+  },
+  "next_high_value_slice": {
+    "recommended_focus": "one-page reviewer workflow handoff for filling packets 02-07 without treating pending queues as reviewed",
+    "allowed_output": "handoff documentation and focused tests only",
+    "forbidden_output": "decision shard without human-filled review results"
+  }
+}

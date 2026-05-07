@@ -33,6 +33,7 @@ python -m pytest tests/scripts/test_show_project_memory_digest.py -q
 - active task-pool titles
 - latest daily log path, blockers, and next steps
 - latest weekly summary path, key decisions, and next direction
+- latest monthly summary path, capability changes, current state, and next direction
 - latest decision-log entries
 
 ## What It Does Not Do

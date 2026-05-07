@@ -81,129 +81,47 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 ### Combat Analysis
 
-- Generate the profile-aware combat-analysis reference report:
+- Read the combat-analysis subsystem entrypoint:
+  - `tools/combat_analysis/README.md`
+- Read the detailed combat-analysis command runbook:
+  - `tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md`
+- Read cardanalysis north star, case input contract, report-only registry, and validation matrix:
+  - `docs/development/cardanalysis/CARDANALYSIS_NORTH_STAR_V1.md`
+  - `docs/development/cardanalysis/CARDANALYSIS_CASE_INPUT_CONTRACT_V1.md`
+  - `docs/development/cardanalysis/CARDANALYSIS_REPORT_ONLY_SURFACE_REGISTRY_V1.md`
+  - `docs/development/cardanalysis/CARDANALYSIS_MECHANISM_VALIDATION_MATRIX_V1.md`
+- Run the profile-aware combat-analysis reference report:
   - `python scripts/generate_combat_analysis_reference_report.py --profile-id <profile-id>`
-- Generate the cross-profile combat-analysis portfolio understanding report:
+- Run the cross-profile combat-analysis portfolio report:
   - `python scripts/generate_combat_analysis_portfolio_report.py`
-- Write a reviewed Design Loop v1 input template:
-  - `python scripts/run_combat_analysis_design_loop.py --write-template <path>`
-- Run a local Design Loop v1 review from a reviewed JSON input:
-  - `python scripts/run_combat_analysis_design_loop.py --input <path> --output-dir <dir>`
-- Run a local Deck Skeleton Assist sidecar review from a reviewed JSON input:
-  - `python scripts/run_combat_analysis_deck_skeleton_sidecar.py --input <path> --output-dir <dir>`
-- Run the STS package similarity benchmark from reviewed shell fixtures:
-  - `python scripts/run_package_similarity_benchmark.py --input tests/fixtures/combat_analysis/s34_sts_package_similarity_benchmark_v0 --output-dir <dir>`
-- Run the STS catalog holdout benchmark from reviewed Ironclad fixtures:
-  - `python scripts/run_sts_catalog_holdout_benchmark.py --input tests/fixtures/combat_analysis/s35_sts_catalog_holdout_benchmark_v1 --output-dir <dir>`
-- Export deterministic ranking rows from reviewed STS holdout benchmark fixtures:
-  - `python scripts/run_sts_catalog_holdout_ranking_export.py --input tests/fixtures/combat_analysis/s35_sts_catalog_holdout_benchmark_v1 --output-dir <dir>`
-- Export one aggregate deterministic ranking dataset across the current reviewed `STS1` holdout surface:
-  - `python scripts/run_sts_catalog_holdout_ranking_export.py --input tests/fixtures/combat_analysis/sts_catalog_holdout_ranking_export_v1/sts1_external_holdout_reviewed_manifest_v1.json --output-dir <dir>`
-- Export deterministic ranking rows from reviewed retrieval fixtures:
-  - `python scripts/run_reviewed_retrieval_ranking_export.py --input tests/fixtures/combat_analysis/retrieval --output-dir <dir>`
-- Export deterministic ranking rows from the reviewed closed-set pick-ranking benchmark:
-  - `python scripts/run_pick_ranking_export.py --input tests/fixtures/combat_analysis/pick_ranking/pick_ranking_cases_v1.json --output-dir <dir>`
-- Train and evaluate the offline pick-ranking pairwise reranker from an export snapshot:
-  - `python scripts/run_pick_ranking_pairwise_reranker.py --input <pick-ranking-export-snapshot.json> --output-dir <dir>`
-- Train and evaluate the offline reviewed retrieval pairwise reranker from an export snapshot:
-  - `python scripts/run_reviewed_retrieval_pairwise_reranker.py --input <retrieval-ranking-export-snapshot.json> --output-dir <dir>`
-- Train and evaluate the offline STS holdout pairwise reranker from an export snapshot:
-  - `python scripts/run_sts_catalog_holdout_pairwise_reranker.py --input <ranking-export-snapshot.json> --output-dir <dir>`
-- Run the fun-proxy calibration sidecar from reviewed deck benchmark inputs:
-  - `python scripts/run_fun_proxy_calibration.py --input tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --output-dir <dir>`
-- Run the fun enemy-design probe sidecar from reviewed deck + forum inputs:
-  - `python scripts/run_fun_enemy_design_probe.py --reviewed-pack tests/fixtures/combat_analysis/deck_fun_benchmark_v1 --forum-input tests/fixtures/combat_analysis/forum_weak_labels_v1 --review-input tests/fixtures/combat_analysis/forum_deck_case_bridge_v1/review_annotations_v1.json --session-focus enemy_design --output-dir <dir>`
-- Write a fast card-design loop input template:
-  - `python scripts/run_fast_card_design_loop.py --write-template <path>`
-- Run a fast card-design loop review from a reviewed JSON input:
-  - `python scripts/run_fast_card_design_loop.py --input <path> --output-dir <dir>`
-- Write a fast card synthesis bridge input template:
-  - `python scripts/run_fast_card_synthesis_bridge.py --write-template <path>`
-- Run the constrained fast card synthesis bridge from a reviewed JSON input:
-  - `python scripts/run_fast_card_synthesis_bridge.py --input <path> --output-dir <dir>`
-- Write a fast card synthesis closure input template:
-  - `python scripts/run_fast_card_synthesis_closure.py --write-template <path>`
-- Run the fast card synthesis closure sidecar from a reviewed JSON input:
-  - `python scripts/run_fast_card_synthesis_closure.py --input <path> --output-dir <dir>`
-- Read the autonomy design-assist runbook:
-  - `tools/combat_analysis/docs/AUTONOMY_DESIGN_ASSIST_RUNBOOK_V1.md`
-- Write a Design Candidate Scout single-session input template:
-  - `python scripts/run_design_candidate_scout.py --write-template <path>`
-- Run a report-only Design Candidate Scout single-session review:
-  - `python scripts/run_design_candidate_scout.py --input <path> --output-dir <dir>`
-- Write a Design Candidate Scout batch manifest template:
-  - `python scripts/run_design_candidate_scout.py --write-batch-template <path>`
-- Run a report-only Design Candidate Scout batch review:
-  - `python scripts/run_design_candidate_scout.py --batch-input <path> --output-dir <dir>`
-- Write a bounded candidate shadow manifest template:
-  - `python scripts/run_bounded_candidate_shadow.py --write-template <path>`
-- Run a report-only bounded candidate shadow review:
-  - `python scripts/run_bounded_candidate_shadow.py --input <path> --output-dir <dir>`
-- Run the reviewed mechanism-axis viability benchmark:
-  - `python scripts/run_mechanism_axis_viability_benchmark.py --input tests/fixtures/combat_analysis/mechanism_axis_viability_v1 --output-dir <dir>`
-- Run a unified project design-assist session in one mode:
-  - `python scripts/run_project_design_assist_session.py --mode <card|enemy|synthesis> --input <path> --output-dir <dir>`
-- Run a unified project design-assist batch session:
-  - `python scripts/run_project_design_assist_session.py --batch-input <path>`
-- Write a fast draft-session input template (3-pick-1 with optional discard):
-  - `python scripts/run_fast_draft_session.py --write-template <path>`
-- Run a fast draft session from a reviewed JSON input:
-  - `python scripts/run_fast_draft_session.py --input <path> --output-dir <dir>`
-- Scaffold a new character profile file without registering it:
-  - `python scripts/scaffold_combat_analysis_profile.py --family sts1 --character-id <id> --display-name <婵炴垶鎼╅崢浠嬪几閸愵喖瑙?`
-- Validate the profile scaffold script:
-  - `python -m pytest tests/scripts/test_scaffold_combat_analysis_profile.py -q`
-- Validate Design Loop v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_design_loop.py tests/scripts/test_run_combat_analysis_design_loop.py -q`
-- Validate Deck Skeleton Sidecar v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/scripts/test_run_combat_analysis_deck_skeleton_sidecar.py -q`
-- Validate the STS package similarity benchmark v0:
-  - `python -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py -q`
-- Validate the STS catalog holdout benchmark v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_v1.py tests/scripts/test_run_sts_catalog_holdout_benchmark.py -q`
-- Validate the STS catalog holdout ranking export v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_ranking_export.py tests/scripts/test_run_sts_catalog_holdout_ranking_export.py -q`
-- Validate the reviewed retrieval ranking export v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_reviewed_retrieval_ranking_export.py tests/scripts/test_run_reviewed_retrieval_ranking_export.py -q`
-- Validate the pick-ranking export v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_pick_ranking_export.py tests/scripts/test_run_pick_ranking_export.py -q`
-- Validate the pick-ranking pairwise reranker v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_pick_ranking_pairwise_reranker.py tests/scripts/test_run_pick_ranking_pairwise_reranker.py -q`
-- Validate the reviewed retrieval pairwise reranker v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_reviewed_retrieval_pairwise_reranker.py tests/scripts/test_run_reviewed_retrieval_pairwise_reranker.py -q`
-- Validate the STS catalog holdout pairwise reranker v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_pairwise_reranker.py tests/scripts/test_run_sts_catalog_holdout_pairwise_reranker.py -q`
-- Validate fast card-design loop v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/scripts/test_run_fast_card_design_loop.py -q`
-- Validate fast card synthesis bridge v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/scripts/test_run_fast_card_synthesis_bridge.py -q`
-- Validate fast card synthesis closure v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_synthesis_closure.py tests/scripts/test_run_fast_card_synthesis_closure.py -q`
-- Validate Design Candidate Scout v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_design_candidate_scout.py tests/scripts/test_run_design_candidate_scout.py -q`
-- Validate bounded candidate shadow v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_bounded_candidate_shadow.py tests/scripts/test_run_bounded_candidate_shadow.py -q`
-- Validate the reviewed mechanism-axis viability benchmark:
-  - `python -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_viability_v1.py tests/scripts/test_run_mechanism_axis_viability_benchmark.py -q`
-- Validate retrieval persistent-miss lane-local probes:
-  - `python -m pytest tests/toolkit/combat_analysis/test_reviewed_retrieval_persistent_miss_probe_pack.py -q`
-- Validate fast draft-session v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_draft_session.py -q`
-- Validate enemy-design isolation guardrails:
-  - `python -m pytest tests/toolkit/combat_analysis/test_enemy_design_guardrails.py -q`
-- Validate project card-design assist reviewed cases v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py -q`
-- Validate project enemy-design assist reviewed cases v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_project_enemy_design_cases_v1.py -q`
-- Validate fun-proxy calibration sidecar v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_fun_proxy_calibration_v1.py tests/scripts/test_run_fun_proxy_calibration.py -q`
-- Validate fun enemy-design probe sidecar v1:
-  - `python -m pytest tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_fun_enemy_design_probe.py -q`
-- Validate project design-assist sidecar CLI contracts v1:
-  - `python -m pytest tests/scripts/test_project_design_assist_sidecar_contracts_v1.py -q`
-- Read cardanalysis report-only registry and validation matrix:
-  - `docs/development/CARDANALYSIS_REPORT_ONLY_SURFACE_REGISTRY_V1.md`
-  - `docs/development/CARDANALYSIS_MECHANISM_VALIDATION_MATRIX_V1.md`
+- Run the report-only cardanalysis evidence quality audit:
+  - `python scripts/run_cardanalysis_evidence_quality_audit.py --input tests/fixtures/combat_analysis/source_followup_case_library_v1 --input tests/fixtures/combat_analysis/mechanism_case_library_v1 --output-dir tmp/combat_analysis/evidence_quality_audit_current`
+- Run the report-only mechanism axis search bundle:
+  - `python scripts/run_mechanism_axis_search.py --input tests/fixtures/combat_analysis/mechanism_axis_search_v1/silent_high_agency_visible_clock_v1.json --output-dir tmp/combat_analysis/mechanism_axis_search_current`
+- Write the constrained design brief from the current mechanism axis search snapshot:
+  - `python scripts/run_mechanism_axis_design_brief.py --input tmp/combat_analysis/mechanism_axis_search_current/silent_sts1_reviewed_axes_328508221e_mechanism_axis_search_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_design_brief_current`
+- Write a role-level card package proposal seed from the current mechanism axis design brief:
+  - `python scripts/run_mechanism_axis_package_seed.py --input tmp/combat_analysis/mechanism_axis_design_brief_current/silent_sts1_reviewed_axes_328508221e_design_brief_mechanism_axis_design_brief_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_package_seed_current`
+- Validate the generated package seed against `card_package_proposal_v1`:
+  - `python scripts/validate_card_package_proposal.py --input tmp/combat_analysis/mechanism_axis_package_seed_current --json`
+- Run the mechanism axis report-only chain exam:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q`
+- Write an evaluation-autonomous-design handoff input from the current package seed:
+  - `python scripts/run_mechanism_axis_evaluation_handoff.py --input tmp/combat_analysis/mechanism_axis_package_seed_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1.json --output-dir tmp/combat_analysis/mechanism_axis_evaluation_handoff_current`
+- Run the evaluation autonomous design model from that handoff:
+  - `python scripts/run_evaluation_autonomous_design_model.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/evaluation_autonomous_design_from_axis_handoff_current`
+- Write a report-only owner-report request packet from the current evaluation handoff:
+  - `python scripts/run_mechanism_axis_owner_report_requests.py --input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --output-dir tmp/combat_analysis/mechanism_axis_owner_report_requests_current`
+- Write a report-only owner-report input readiness plan from the current request packet:
+  - `python scripts/run_mechanism_axis_owner_report_input_plan.py --input tmp/combat_analysis/mechanism_axis_owner_report_requests_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_report_requests_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_report_input_plan_current`
+- Check whether the current package seed may enter the card-package generation exam:
+  - `python scripts/run_mechanism_axis_generation_exam_readiness.py --input tmp/combat_analysis/mechanism_axis_owner_report_input_plan_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_report_requests_input_plan_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_generation_exam_readiness_current`
+- Write a report-only owner evidence queue from the generation-exam readiness blockers:
+  - `python scripts/run_mechanism_axis_owner_evidence_queue.py --input tmp/combat_analysis/mechanism_axis_generation_exam_readiness_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_generation_exam_readiness_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_evidence_queue_current`
+- Write empty owner evidence intake templates from the current owner evidence queue:
+  - `python scripts/run_mechanism_axis_owner_evidence_intake_packet.py --input tmp/combat_analysis/mechanism_axis_owner_evidence_queue_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_evidence_queue_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_evidence_intake_packet_current`
+- Validate and query the cardanalysis capability dependency/conflict graph:
+  - `python scripts/validate_capability_graph.py`
 
 ### Headless / Regression Checks
 

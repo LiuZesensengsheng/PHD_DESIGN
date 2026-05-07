@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+    </marker>
+    <style>
+      text { font-family: SimSun, Songti SC, serif; font-size: 23px; fill: #000; }
+      .small { font-size: 18px; }
+      .box { fill: #fff; stroke: #000; stroke-width: 2; }
+      .line { stroke: #000; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <text x="440" y="45">图3</text>
+  <rect class="box" x="80" y="85" width="380" height="90"/>
+  <text x="153" y="139">130 卡组结构分析</text>
+  <rect class="box" x="540" y="85" width="380" height="90"/>
+  <text x="613" y="139">140 敌人压力分析</text>
+  <line class="line" x1="270" y1="175" x2="270" y2="235"/>
+  <line class="line" x1="730" y1="175" x2="730" y2="235"/>
+  <rect class="box" x="80" y="235" width="380" height="170"/>
+  <text class="small" x="130" y="278">卡组结构表示</text>
+  <text class="small" x="130" y="318">机制包权重 / 能力轴权重</text>
+  <text class="small" x="130" y="358">状态覆盖 / 角色覆盖</text>
+  <text class="small" x="130" y="388">资源压力 / 死牌压力</text>
+  <rect class="box" x="540" y="235" width="380" height="170"/>
+  <text class="small" x="590" y="278">压力语义表示</text>
+  <text class="small" x="590" y="318">压力向量 / 干扰标签</text>
+  <text class="small" x="590" y="358">时机窗口 / 失败模式</text>
+  <text class="small" x="590" y="388">答案偏好</text>
+  <line class="line" x1="270" y1="405" x2="430" y2="500"/>
+  <line class="line" x1="730" y1="405" x2="570" y2="500"/>
+  <rect class="box" x="320" y="500" width="360" height="95"/>
+  <text x="386" y="556">150 匹配评估</text>
+  <line class="line" x1="500" y1="595" x2="500" y2="650"/>
+  <rect class="box" x="260" y="650" width="480" height="55"/>
+  <text class="small" x="316" y="685">缺失答案 / 薄弱答案 / 时机风险</text>
+</svg>
