@@ -197,6 +197,12 @@ Write a report-only owner-report input readiness plan from the request packet:
 python scripts/run_mechanism_axis_owner_report_input_plan.py --input tmp/combat_analysis/mechanism_axis_owner_report_requests_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_report_requests_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_report_input_plan_current
 ```
 
+Check whether the current package seed may enter the card-package generation exam:
+
+```powershell
+python scripts/run_mechanism_axis_generation_exam_readiness.py --input tmp/combat_analysis/mechanism_axis_owner_report_input_plan_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_report_requests_input_plan_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_generation_exam_readiness_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -323,6 +329,26 @@ learned/reranker behavior.
 For the first Silent package seed, every canonical owner report remains blocked on
 missing owner-specific inputs. That is intentional: the plan is a readiness map, not an
 evidence generator.
+
+## Generation Exam Readiness
+
+`mechanism_axis_generation_exam_readiness_v1` reads a
+`mechanism_axis_owner_report_input_plan_v1` snapshot and answers whether the current
+role-level package seed may proceed to a card-package generation exam.
+
+It may:
+
+- summarize each canonical owner report's input/report status;
+- produce blockers for missing owner inputs or missing owner report outputs;
+- name the next safe step before any generation exam starts.
+
+It must not start the generation exam, generate formal cards, write runtime data, run
+owner reports, score owner reports, claim reviewed evidence, create hard gates, change
+default synthesis, or enable learned/reranker behavior.
+
+For the first Silent package seed, readiness is
+`blocked_on_owner_report_inputs`: no owner report input is ready and no canonical owner
+report output is present.
 
 ## V1 Scope
 
