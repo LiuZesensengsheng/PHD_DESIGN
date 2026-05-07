@@ -155,6 +155,18 @@ Write a constrained design brief from a search snapshot:
 python scripts/run_mechanism_axis_design_brief.py --input tmp/combat_analysis/mechanism_axis_search_current/silent_sts1_reviewed_axes_328508221e_mechanism_axis_search_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_design_brief_current
 ```
 
+Write a role-level package proposal seed from the current design brief:
+
+```powershell
+python scripts/run_mechanism_axis_package_seed.py --input tmp/combat_analysis/mechanism_axis_design_brief_current/silent_sts1_reviewed_axes_328508221e_design_brief_mechanism_axis_design_brief_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_package_seed_current
+```
+
+Validate the generated seed as a `card_package_proposal_v1`:
+
+```powershell
+python scripts/validate_card_package_proposal.py --input tmp/combat_analysis/mechanism_axis_package_seed_current --json
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -179,6 +191,29 @@ The brief may summarize why the program-ranked axes are discussion candidates, b
 must copy axis IDs, scores, support axes, rejected-axis reasons, and evidence refs from
 the source bundle. It is not a package proposal and must not introduce card names,
 costs, numbers, or rules text.
+
+## Role-Level Package Seed Consumer
+
+`mechanism_axis_package_seed_v1` is the next downstream glue layer. It reads only a
+`mechanism_axis_design_brief_v1` snapshot and writes a speculative
+`card_package_proposal_v1` seed.
+
+The seed must stay role-level:
+
+- `source_type = generated_hypothesis`
+- `evidence_tier = speculative`
+- `review_status = hypothesis_draft`
+- `authority_boundary = advisory_context_only`
+- `forbidden_uses` includes `reviewed_evidence_claim`
+
+It may create anchor/enabler/glue/payoff/fail-state/defense slot descriptions. It must
+not create formal card names, costs, damage/block numbers, rules text, runtime card
+data, reviewed evidence, hard gates, default synthesis, learned/reranker behavior, or
+release authority.
+
+The package seed chooses its primary and secondary axes from the source design brief
+only. For the first Silent fixture, that produces `poison` as the primary axis and
+`retain`, `shiv` as secondary axes.
 
 ## V1 Scope
 
