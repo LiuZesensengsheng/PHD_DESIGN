@@ -167,6 +167,12 @@ Validate the generated seed as a `card_package_proposal_v1`:
 python scripts/validate_card_package_proposal.py --input tmp/combat_analysis/mechanism_axis_package_seed_current --json
 ```
 
+Run the report-only chain exam:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -214,6 +220,20 @@ release authority.
 The package seed chooses its primary and secondary axes from the source design brief
 only. For the first Silent fixture, that produces `poison` as the primary axis and
 `retain`, `shiv` as secondary axes.
+
+## Report-Only Chain Exam
+
+`test_mechanism_axis_report_only_chain_v1.py` exercises the full V1 chain in memory:
+
+1. Build `mechanism_axis_search_bundle_v1` from the Silent request fixture.
+2. Build `mechanism_axis_design_brief_v1` from the search payload.
+3. Build `mechanism_axis_package_seed_v1` from the brief payload.
+4. Normalize the seed as `card_package_proposal_v1`.
+
+The exam asserts that search remains the score and axis authority, the brief copies
+program output rather than inventing axes or scores, and the package seed remains a
+generated-hypothesis role skeleton with no formal card fields or hard-gate/default
+synthesis/learned authority.
 
 ## V1 Scope
 
