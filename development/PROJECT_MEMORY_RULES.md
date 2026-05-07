@@ -31,6 +31,22 @@ Keep project continuity in files so AI and human collaborators can resume work w
   - promotion suggestions
 - Prefer reading a recent weekly summary before opening many older daily logs
 
+### 1.75 Monthly Summaries Bridge Cross-Month Memory
+
+- One file per calendar month under `docs/logs/monthly/`
+- File name format: `YYYY-MM.md`
+- Monthly summaries compress weekly and daily history into:
+  - month focus
+  - major progress
+  - capability changes
+  - key decisions
+  - current state
+  - open gaps
+  - next default direction
+  - promotion suggestions
+- Prefer reading the latest monthly summary before opening many old weekly summaries or cold daily logs
+- Do not physically move old daily logs into monthly directories unless a later archive policy is explicitly accepted
+
 ### 2. Long-Term Memory Stays In Stable Docs
 
 - Architecture and process rules belong in `docs/development/`
@@ -65,13 +81,14 @@ Promotion targets should stay explicit:
 
 - long-term direction -> `docs/development/CURRENT_DIRECTION.md`
 - key tradeoffs -> `docs/pm/DECISION_LOG.md`
-- stable workflow or architecture rules -> relevant file in `docs/development/`
+- stable workflow or architecture rules -> relevant file in `docs/development/` subdirectories
 
 ### 5. Read Selectively
 
 - Read today's daily log first
 - Then read the most recent prior daily log with useful content
 - Then read the most recent weekly summary when older context is needed
+- Then read the latest monthly summary when crossing month boundaries or recovering older project context
 - Do not load all history unless the task truly requires it
 - Treat daily logs older than 7 days as cold memory by default
 
@@ -80,13 +97,15 @@ Promotion targets should stay explicit:
 - Hot memory:
   - `AGENTS.md`
   - `docs/development/CURRENT_DIRECTION.md`
-  - relevant `docs/development/*.md`
+  - relevant `docs/development/**/*.md`
   - `docs/pm/DECISION_LOG.md`
   - daily logs from the last 7 days
   - the most recent weekly summary
+  - the latest monthly summary when the task needs cross-month context
 - Cold memory:
   - daily logs older than 7 days
   - older weekly summaries not needed for the current task
+  - older monthly summaries not needed for the current task
 - Cold memory remains in the repo; it is not deleted, only deprioritized for default retrieval
 
 ### 6. Branch Naming Stays Predictable
@@ -115,6 +134,7 @@ Promotion targets should stay explicit:
 
 - Record the day's outcome in the current daily log
 - Generate or refresh the weekly summary when the week closes
+- Refresh the current monthly summary after major integration, evidence, architecture, or planning milestones
 - Promote any stable decisions into the right long-term document
 - Leave a concrete next-step note for the next session
 - Run the project memory health report when the session had heavy doc, task-pool, or

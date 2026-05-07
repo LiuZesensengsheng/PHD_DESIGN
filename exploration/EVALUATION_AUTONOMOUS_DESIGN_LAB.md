@@ -56,7 +56,7 @@ parameter-search example, and explicit rejection reasons.
 
 The stable parts of this exploration have been promoted into:
 
-- `docs/development/EVALUATION_AUTONOMOUS_DESIGN_MODEL_V1.md`
+- `docs/development/cardanalysis/EVALUATION_AUTONOMOUS_DESIGN_MODEL_V1.md`
 - `tools/combat_analysis/design_engine/evaluation_autonomous_design_model.py`
 - `scripts/run_evaluation_autonomous_design_model.py`
 - `tests/fixtures/combat_analysis/evaluation_autonomous_design_model_v1/`

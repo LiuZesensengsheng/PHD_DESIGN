@@ -1,0 +1,100 @@
+# Cardanalysis source-followup 审核队列总览
+
+* 索引 id: `source_followup_review_queue_index`
+* 日期: `2026-05-06`
+* 来源库: `source_followup_case_library_v1`
+* 状态: 1 个已记录人工决策包，7 个待人工审核包
+* 运行时影响: 无
+
+## 这份索引用来做什么
+
+这份索引只帮助你扫一眼当前有哪些中文审核包、哪些已经有人工决策、哪些还在等待人工填写。它不替代人工审核，也不把任何待审材料提升成 reviewed 证据。
+
+所有待审包仍然保持：
+
+```text
+review_needed / advisory_context_only
+```
+
+没有人工审核结果时，不会生成新的 decision shard，不会生成正式卡牌，不会改运行时、正式数据、UI、存档、capability graph、report-only registry、hard gates、默认生成、learned 或 reranker 行为。
+
+## 当前队列
+
+| 审核包 | 状态 | 条目数 | 主题 | 人类下一步 |
+| -- | -- | --: | -- | -- |
+| 01 | 已记录人工决策 | 15 | 第一轮机制可读性试审 | 已处理；可复查决策记录 |
+| 02 | 待人工审核 | 15 | 防御反伤、循环安全、恢复窗口、目标搜索等机制边界 | 填写审核包 |
+| 03 | 待人工审核 | 15 | 敌人压力与战役节奏 | 填写审核包 |
+| 04 | 待人工审核 | 15 | 证据晋升边界与应用交接 | 填写审核包 |
+| 05 | 待人工审核 | 15 | 外部参考翻译与 authority 隔离 | 填写审核包 |
+| 06 | 待人工审核 | 15 | 已有人工偏好附近的细分反例 | 填写审核包 |
+| 07 | 待人工审核 | 15 | 队列卫生、合并边界与停止线 | 填写审核包 |
+| 08 | 待人工审核 | 15 | 重写候选、具体例子缺口与停止线补强 | 填写审核包 |
+
+## 待审总量
+
+当前还有 105 条中文场景等待人工审核。它们已经被翻译成人可读的问题，但仍然只是待审队列：
+
+* 02: 15 条
+* 03: 15 条
+* 04: 15 条
+* 05: 15 条
+* 06: 15 条
+* 07: 15 条
+* 08: 15 条
+
+## 已记录决策
+
+01 已经有人工决策记录：
+
+* 15 条已填
+* 12 条记为 reviewed seed 候选
+* 3 条记为需要更多证据
+* 这些记录仍然不晋升原始 source case，只保存人工偏好和后续队列方向
+
+## 队列卫生规则
+
+后续无人值守批次应该继续遵守：
+
+1. 待审包只生成中文场景和机器队列。
+2. 没有人工填写结果时，不生成新的 decision shard。
+3. 待审包的人类 Markdown 不显示 raw source id。
+4. 机器队列可以保留映射，但必须写明不晋升、不创建 reviewed 证据、不改运行时。
+5. 每轮只做小批次，并更新文档、daily log 和 focused tests。
+
+## 可审性分层
+
+另有一份可审性分层索引：
+
+```text
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.md
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.json
+```
+
+它把 02-07 的 90 条待审场景分成 60 条可先直接审、30 条先补例子。packet 08 是从这层和可读性扫描里再切出来的重写/停止线候选队列。它们都只是队列卫生索引，不是人工审核结果，也不创建 reviewed 证据。
+
+## 可读性卫生扫描
+
+另有一份可读性卫生扫描：
+
+```text
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.md
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.json
+```
+
+它只标记可能重复、过抽象、缺少停止线的审核编号，帮助下一轮改写或交接。它不自动合并、不打回重写、不创建 decision shard。
+
+## 审核交接说明
+
+如果要真正开始人工填写，先看这份一页交接：
+
+```text
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.md
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.json
+```
+
+它说明先看哪些文件、怎么填 A/B/C/D/E、填完后 Codex 会怎么生成 decision shard，以及哪些待审材料绝对不能当 reviewed。
+
+## 最高价值下一步
+
+下一轮优先做 PR-ready 汇总或最终队列卫生复查。packet 08 已经补成待审队列；在没有人工填写结果前，继续不能生成新的 decision shard。

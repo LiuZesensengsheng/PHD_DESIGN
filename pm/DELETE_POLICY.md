@@ -57,7 +57,7 @@ rg --files | rg "<filename_or_folder>"
 
 ## 验证规则
 
-按触达区域选测试（参考 `docs/development/TEST_STRATEGY.md`）：
+按触达区域选测试（参考 `docs/development/platform/TEST_STRATEGY.md`）：
 
 - 战斗相关：`python -m pytest tests/combat -q`
 - 战役相关：`python -m pytest tests/campaign -q`

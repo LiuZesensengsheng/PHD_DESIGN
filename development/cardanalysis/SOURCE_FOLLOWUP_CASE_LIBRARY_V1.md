@@ -1,0 +1,935 @@
+# Source Followup Case Library V1
+
+- Library: `source_followup_case_library_v1`
+- Contract: `cardanalysis_case_input_v1`
+- Status: bootstrap case library for blocked source followups
+- Runtime impact: none
+
+## Purpose
+
+This library gives source-mined and generated followup items a safe review
+exit. It turns queue targets into human-curated review notes without promoting
+the source material to reviewed evidence.
+
+The library is intentionally narrow. It records what a reviewer should inspect
+next, which assumptions remain unresolved, and which consumers may use the case
+as advisory context. It does not decide whether the original hypothesis is true,
+balanced, viable, or ready for family promotion.
+
+## Source Targets
+
+The V1 bootstrap handles the current `source_followup` items emitted by
+`coverage_guided_case_queue_v1`:
+
+- `generated_chain_fatigue_hypothesis_case_v1`
+- `generated_hypothesis_private_leak_case_v1`
+- `generated_loop_safety_break_hypothesis_case_v1`
+- `generated_pollution_market_hypothesis_case_v1`
+
+The long-running case-library lane also adds followup review notes for:
+
+- `generated_defense_reflect_hypothesis_case_v1`
+- `generated_draw_heat_budget_hypothesis_case_v1`
+- `generated_energy_instability_hypothesis_case_v1`
+- `generated_recovery_window_validator_enemy_case_v1`
+- `generated_redirect_collision_hypothesis_case_v1`
+- `generated_search_public_target_hypothesis_case_v1`
+- `generated_summon_expiry_hypothesis_case_v1`
+- `generated_status_decay_transfer_hypothesis_case_v1`
+- `generated_temporary_generation_memory_budget_hypothesis_case_v1`
+- `generated_transform_pool_exhaust_hypothesis_case_v1`
+- `source_mined_anti_infinite_soft_pressure_enemy_case_v1`
+- `source_mined_chain_fatigue_reference_case_v1`
+- `source_mined_draw_disruption_enemy_case_v1`
+- `source_mined_charge_decay_reference_case_v1`
+- `source_mined_mode_cooldown_reference_case_v1`
+- `source_mined_draw_external_reset_reference_case_v1`
+- `source_mined_discard_reserve_reference_case_v1`
+- `source_mined_charge_decay_reference_v2_case_v1`
+- `source_mined_mode_lockout_reference_v2_case_v1`
+- `source_mined_gremlin_nob_skill_punish_frontload_reference_case_v1`
+- `source_mined_jaw_worm_frontload_defense_reference_case_v1`
+- `source_mined_position_zone_reference_case_v1`
+- `source_mined_position_zone_reference_v2_case_v1`
+- `source_mined_public_thread_reference_case_v1`
+- `source_mined_stress_cost_reference_case_v1`
+- `source_mined_social_texture_case_v1`
+- `source_mined_starter_agency_route_choice_reference_case_v1`
+- `source_mined_starter_cultist_scaling_clock_case_v1`
+- `source_mined_starter_first_three_encounter_mix_case_v1`
+- `source_mined_summon_slot_reference_case_v1`
+- `source_mined_threshold_overflow_reference_v2_case_v1`
+- `source_mined_reference_case_v1`
+- `late_round_15_texture_review`
+
+Each followup case stores the original target id and queue id under
+`contexts.campaign` and `contexts.experience.source_followup`.
+
+## Contract Use
+
+The fixture pack continues to use the shared normalized case contract:
+
+- `source.source_type = "design_note"`
+- `source.evidence_tier = "human_curated"`
+- `source.review_status = "review_needed"`
+- `authority.authority_boundary = "advisory_context_only"`
+
+The followup cases use existing fields only:
+
+| Followup meaning | Existing field convention |
+| --- | --- |
+| Original queue item | `contexts.campaign.queue_id` |
+| Original source case | `contexts.campaign.target_case_id` and `contexts.experience.source_followup.target_case_id` |
+| Review plan | `contexts.experience.source_followup.review_questions` |
+| Evidence still needed | `contexts.experience.source_followup.human_curated_evidence_needed` |
+| Review risk | `observed_behavior.failure_modes`, `labels.negative`, and `labels.uncertain` |
+| Candidate hints | `feature_hints` |
+| Authority limits | `known_limits` and `authority.forbidden_uses` |
+
+These are review-note conventions inside the shared contract, not a second
+schema.
+
+## Authority Boundary
+
+All V1 cases remain below reviewed authority.
+
+They must not be used for:
+
+- reviewed evidence claims;
+- hard-gate promotion;
+- reviewed mechanism-family promotion;
+- default synthesis or recommendation;
+- evaluator logic changes;
+- capability graph or report-only registry changes;
+- runtime, persistence, UI, or learned/reranker paths.
+
+The fixture pack therefore includes `reviewed_evidence_claim` in
+`authority.forbidden_uses` even though its immediate source type is
+`design_note`. This preserves the boundary that the underlying target cases are
+generated hypotheses.
+
+## Fixture Pack
+
+The V1 fixture pack lives at:
+
+```text
+tests/fixtures/combat_analysis/source_followup_case_library_v1/
+```
+
+Coverage:
+
+- chain fatigue followup review note;
+- private leak followup review note;
+- loop safety break followup review note;
+- pollution market followup review note.
+- defense reflect followup review note;
+- draw heat budget followup review note;
+- energy instability followup review note;
+- recovery window validator followup review note;
+- redirect collision followup review note;
+- search public target followup review note;
+- summon expiry followup review note;
+- status decay transfer followup review note;
+- temporary generation memory budget followup review note;
+- transform pool exhaust followup review note;
+- anti-infinite soft pressure followup review note;
+- chain fatigue reference followup review note;
+- draw disruption enemy followup review note;
+- charge decay reference followup review note.
+- mode cooldown reference followup review note;
+- draw external reset reference followup review note;
+- discard reserve reference followup review note;
+- charge decay v2 reference followup review note;
+- mode lockout v2 reference followup review note;
+- position zone reference followup review note;
+- public thread reference followup review note;
+- stress cost reference followup review note.
+- social texture followup review note;
+- campaign pressure reference followup review note;
+- late-round texture followup review note.
+- Gremlin Nob skill-punish frontload reference followup review note;
+- Jaw Worm frontload defense reference followup review note;
+- position zone v2 reference followup review note;
+- starter agency route-choice reference followup review note;
+- starter Cultist scaling-clock reference followup review note;
+- starter first-three encounter mix followup review note;
+- summon slot reference followup review note;
+- threshold overflow reference followup review note;
+- defense reflect counterplay deepening followup review note;
+- draw heat budget stop-point deepening followup review note;
+- energy instability stabilize deepening followup review note;
+- loop safety break breakpoint deepening followup review note;
+- pollution market washout deepening followup review note;
+- recovery window validator relief deepening followup review note;
+- redirect collision lane-pressure deepening followup review note.
+- chain fatigue branch-cap deepening followup review note;
+- chain fatigue offramp recovery deepening followup review note;
+- private leak redaction-boundary deepening followup review note;
+- private leak escalation-cap deepening followup review note;
+- search public target visibility deepening followup review note;
+- search public target consent-cost deepening followup review note;
+- summon expiry warning-window deepening followup review note;
+- status decay transfer destination deepening followup review note;
+- temporary generation cleanup-checkpoint deepening followup review note;
+- transform pool exhaust refresh-policy deepening followup review note;
+- defense reflect damage-ceiling deepening followup review note;
+- draw heat recovery-cooldown deepening followup review note;
+- energy instability debt-floor deepening followup review note;
+- loop safety break reset-audit deepening followup review note;
+- pollution market price-floor deepening followup review note.
+- recovery window validator rebuild-budget deepening followup review note;
+- recovery window validator pressure-reentry deepening followup review note;
+- redirect collision resolution-order deepening followup review note;
+- redirect collision partial-value deepening followup review note;
+- defense reflect enemy-signal deepening followup review note;
+- draw heat hand-clog deepening followup review note;
+- energy instability refund-loop deepening followup review note;
+- private leak source-reliability deepening followup review note;
+- chain fatigue counterplay-signal deepening followup review note;
+- loop safety break terminal-payoff deepening followup review note;
+- pollution market sink-capacity deepening followup review note;
+- search public target pool-staleness deepening followup review note;
+- status decay transfer counterplay deepening followup review note;
+- summon expiry support-density deepening followup review note;
+- temporary generation expire-value deepening followup review note.
+- anti-infinite soft-pressure visibility deepening followup review note;
+- chain fatigue reference meter-readability deepening followup review note;
+- charge decay reference spend-timing deepening followup review note;
+- charge decay v2 reference threshold-warning deepening followup review note;
+- discard reserve reference access-window deepening followup review note;
+- draw disruption enemy recovery-signal deepening followup review note;
+- draw external reset reference-boundary deepening followup review note;
+- Gremlin Nob skill-punish escape-line deepening followup review note;
+- Jaw Worm frontload defense recovery-line deepening followup review note;
+- mode cooldown reference reentry-signal deepening followup review note;
+- mode lockout v2 reference soft-lock escape deepening followup review note;
+- position zone reference entry-cost deepening followup review note;
+- position zone v2 reference overlap-rule deepening followup review note;
+- public thread reference moderation-window deepening followup review note;
+- campaign pressure reference review-lens deepening followup review note.
+- chain fatigue exit-value audit followup review note;
+- chain fatigue reset-visibility followup review note;
+- defense reflect block-source separation followup review note;
+- defense reflect overkill-waste followup review note;
+- draw heat priority-queue followup review note;
+- draw heat dead-draw recovery followup review note;
+- energy instability volatility-preview followup review note;
+- energy instability debt-recovery choice followup review note;
+- private leak consent-scope followup review note;
+- private leak delayed-reveal followup review note;
+- loop safety break fail-closed followup review note;
+- pollution market burden-entry visibility followup review note;
+- recovery window validator frequency-audit followup review note;
+- redirect collision fallback-preview followup review note;
+- search public target relevance-decay followup review note.
+- chain fatigue floor negative-control followup review note;
+- chain fatigue branching-trace followup review note;
+- defense reflect multihit-intent followup review note;
+- defense reflect carryover-leak followup review note;
+- draw heat reshuffle-pressure followup review note;
+- draw heat discard-mitigation followup review note;
+- energy instability floor-ceiling band followup review note;
+- energy instability payoff-timing split followup review note;
+- private leak audience-containment followup review note;
+- private leak repair-path followup review note;
+- loop safety break fallback-cashout followup review note;
+- pollution market sink-scarcity signal followup review note;
+- recovery window archetype-sensitivity followup review note;
+- redirect collision multitarget-conflict followup review note;
+- search public target refresh-cost followup review note.
+- chain fatigue resource-blend followup review note;
+- chain fatigue enemy-pressure interlock followup review note;
+- defense reflect no-attack-intent followup review note;
+- defense reflect delayed-cashout followup review note;
+- draw heat hand-size breakpoint followup review note;
+- draw heat skip-draw agency followup review note;
+- energy instability stabilizer-density followup review note;
+- energy instability temporary-energy expiry followup review note;
+- private leak contradictory-source followup review note;
+- private leak social-cooldown followup review note;
+- loop safety break visible-threshold followup review note;
+- pollution market cleanup-timing followup review note;
+- recovery window telegraph-honesty followup review note;
+- redirect collision enemy-intent mismatch followup review note;
+- search public target pool-ownership followup review note.
+- chain fatigue visible-token burden followup review note;
+- defense reflect damage-attribution followup review note;
+- draw heat voluntary-discard timing followup review note;
+- energy instability conservation-audit followup review note;
+- private leak recency-decay followup review note;
+- loop safety break nested-loop conflict followup review note;
+- loop safety break precommit-warning followup review note;
+- pollution market reward-contamination boundary followup review note;
+- pollution market delayed-payback followup review note;
+- recovery window partial-recovery value followup review note;
+- recovery window failed-recovery negative-control followup review note;
+- redirect collision no-target fallback followup review note;
+- redirect collision preview-token economy followup review note;
+- search public target false-positive boundary followup review note;
+- search public target repeat-search fatigue followup review note.
+- status decay transfer duration-visibility followup review note;
+- status decay transfer stack-compression followup review note;
+- status decay transfer return-path followup review note;
+- summon expiry countdown-visibility followup review note;
+- summon expiry replacement-collision followup review note;
+- summon expiry support-orphan followup review note;
+- temporary generation provenance-visibility followup review note;
+- temporary generation choice-load cap followup review note;
+- temporary generation expiry-zone followup review note;
+- transform pool exhaust preview followup review note;
+- transform pool exhaust refresh-cost followup review note;
+- transform pool exhaust no-transform negative-control followup review note;
+- social texture scope-quarantine followup review note;
+- stress cost reference threshold-visibility followup review note;
+- late-round texture authority-boundary followup review note.
+- starter agency route-choice lock-in warning followup review note;
+- starter agency route-choice recovery-option followup review note;
+- starter agency route-choice information-cost followup review note;
+- starter Cultist scaling-clock telegraph followup review note;
+- starter Cultist scaling-clock slow-deck negative-control followup review note;
+- starter Cultist scaling-clock reward-pressure followup review note;
+- starter first-three encounter role-clarity followup review note;
+- starter first-three encounter variance-guard followup review note;
+- starter first-three encounter reward-read followup review note;
+- summon slot ownership followup review note;
+- summon slot overflow-preview followup review note;
+- summon slot support-density boundary followup review note;
+- threshold overflow warning-band followup review note;
+- threshold overflow partial-overflow value followup review note;
+- threshold overflow floor negative-control followup review note.
+- chain fatigue action-ceiling followup review note;
+- chain fatigue failsoft-pause followup review note;
+- defense reflect cap-visibility followup review note;
+- defense reflect block-retention conflict followup review note;
+- draw heat overdraw-waste followup review note;
+- draw heat reorder-relief followup review note;
+- energy instability forecast-window followup review note;
+- energy instability payback-visibility followup review note;
+- private leak audit-trail quarantine followup review note;
+- private leak third-party amplification followup review note;
+- loop safety break exit-reward preview followup review note;
+- pollution market cost-signal followup review note;
+- recovery window relapse-signal followup review note;
+- redirect collision priority-preview followup review note;
+- public-target search pool-exhaust negative-control followup review note.
+- chain fatigue reset-abuse boundary followup review note;
+- defense reflect non-damage pressure boundary followup review note;
+- draw heat bottleneck-payoff timing followup review note;
+- energy instability banked-energy boundary followup review note;
+- private leak rebuttal-window followup review note;
+- loop safety break external-trigger collision followup review note;
+- loop safety break no-loop negative-control followup review note;
+- pollution market cleanup-offer visibility followup review note;
+- pollution market burden-sink negative-control followup review note;
+- recovery window resource-type split followup review note;
+- recovery window overheal-waste signal followup review note;
+- redirect collision self-target protection followup review note;
+- redirect collision simultaneous-swap negative-control followup review note;
+- public-target search permission-boundary followup review note;
+- public-target search stale-cache warning followup review note.
+- chain fatigue cross-turn carryover warning followup review note;
+- chain fatigue shared-counter collision followup review note;
+- defense reflect status-damage exclusion followup review note;
+- defense reflect pierce-damage boundary followup review note;
+- draw heat retain-conflict followup review note;
+- draw heat hand-limit preview followup review note;
+- energy instability refund-source attribution followup review note;
+- energy instability dead-turn negative-control followup review note;
+- private leak consent-disclosure contrast followup review note;
+- private leak overcorrection-penalty followup review note;
+- loop safety break manual-abort agency followup review note;
+- pollution market reward-tier scaling followup review note;
+- recovery window deck-speed sensitivity followup review note;
+- redirect collision target-disappears fallback followup review note;
+- public-target search ranking-transparency followup review note.
+- chain fatigue nonrepeat-sequence negative-control followup review note;
+- chain fatigue payoff-chain exception-boundary followup review note;
+- defense reflect overblock no-attack negative-control followup review note;
+- defense reflect retaliation-source boundary followup review note;
+- draw heat zero-cost cycle negative-control followup review note;
+- draw heat shuffle-boundary signal followup review note;
+- energy instability refund-chain abuse negative-control followup review note;
+- energy instability external-source boundary followup review note;
+- private leak public-record contrast followup review note;
+- private leak anonymous-source reliability followup review note;
+- loop safety break interrupt-timing boundary followup review note;
+- pollution market temporary-pollution boundary followup review note;
+- recovery window status-cleanup vs heal boundary followup review note;
+- redirect collision optional-redirect decline followup review note;
+- public-target search noisy-metadata boundary followup review note.
+- chain fatigue source-tag clarity followup review note;
+- chain fatigue payoff-window compression followup review note;
+- defense reflect block-loss tradeoff followup review note;
+- defense reflect enemy-scaling interaction followup review note;
+- draw heat optional-stop signal followup review note;
+- draw heat card-quality tradeoff followup review note;
+- energy instability overdraft-forecast followup review note;
+- energy instability stabilizer-tax followup review note;
+- private leak repair-timing followup review note;
+- private leak reward-exchange boundary followup review note;
+- loop safety break soft-cap visibility followup review note;
+- pollution market cleanup-price disclosure followup review note;
+- recovery window pressure-ramp after relief followup review note;
+- redirect collision queue-order disclosure followup review note;
+- public-target search failed-search value-floor followup review note.
+- chain fatigue interruptible-sequence followup review note;
+- chain fatigue reward-density pressure followup review note;
+- defense reflect counterattack-intent preview followup review note;
+- defense reflect block-floor requirement followup review note;
+- draw heat hand-filtering pressure followup review note;
+- draw heat delayed-heat tick followup review note;
+- energy instability multi-turn debt amortization followup review note;
+- energy instability minimum-output floor followup review note;
+- private leak audience-visibility followup review note;
+- private leak consequence-scaling followup review note;
+- loop safety break partial-refund followup review note;
+- pollution market reward-preview symmetry followup review note;
+- recovery window player-choice density followup review note;
+- redirect collision target-lock preview followup review note;
+- public-target search duplicate-result followup review note.
+- chain fatigue loop-vs-combo sample-pair followup review note;
+- chain fatigue external-pressure stopline followup review note;
+- defense reflect attack-type sample-pair followup review note;
+- defense reflect stall break-even followup review note;
+- draw heat shuffle-cycle sample-pair followup review note;
+- draw heat payload-vs-cantrip followup review note;
+- energy instability burst-recovery sample-pair followup review note;
+- energy instability support-dependency followup review note;
+- private leak opt-in consent sample-pair followup review note;
+- private leak visibility-delay sample-pair followup review note;
+- loop safety break repeat-source mixing followup review note;
+- loop safety break reward-preservation sample-pair followup review note;
+- pollution market short-term long-term cost-pair followup review note;
+- pollution market cleanup-access sample-pair followup review note;
+- recovery window pre-spike signal-pair followup review note;
+- recovery window status-pressure pair followup review note;
+- redirect collision ally-enemy target-pair followup review note;
+- redirect collision prevented-value sample-pair followup review note;
+- public-target search open-pool vs filtered-pair followup review note;
+- public-target search decline-option sample-pair followup review note.
+- chain fatigue witness-set sufficiency followup review note;
+- chain fatigue counterexample-coverage followup review note;
+- defense reflect witness-set sufficiency followup review note;
+- defense reflect counterexample-boundary followup review note;
+- draw heat witness-set sufficiency followup review note;
+- draw heat counterexample-scope followup review note;
+- energy instability witness-set sufficiency followup review note;
+- energy instability counterexample-boundary followup review note;
+- private leak witness-set sufficiency followup review note;
+- private leak counterexample-scope followup review note;
+- loop safety break witness-set sufficiency followup review note;
+- loop safety break counterexample-boundary followup review note;
+- pollution market witness-set sufficiency followup review note;
+- pollution market counterexample-scope followup review note;
+- recovery window witness-set sufficiency followup review note;
+- recovery window counterexample-boundary followup review note;
+- redirect collision witness-set sufficiency followup review note;
+- redirect collision counterexample-scope followup review note;
+- public-target search witness-set sufficiency followup review note;
+- public-target search counterexample-boundary followup review note.
+- chain fatigue review-packet readiness followup review note;
+- defense reflect review-packet readiness followup review note;
+- draw heat review-packet readiness followup review note;
+- energy instability review-packet readiness followup review note;
+- private leak review-packet readiness followup review note;
+- loop safety break review-packet readiness followup review note;
+- pollution market review-packet readiness followup review note;
+- recovery window review-packet readiness followup review note;
+- redirect collision review-packet readiness followup review note;
+- public-target search review-packet readiness followup review note;
+- status decay transfer review-packet readiness followup review note;
+- summon expiry review-packet readiness followup review note;
+- temporary generation review-packet readiness followup review note;
+- transform pool exhaust review-packet readiness followup review note;
+- late-round texture review-packet readiness followup review note.
+- mechanism failure mode followup review notes for loop collapse, draw heat,
+  energy instability, status pollution, temporary generation, hidden tracking,
+  over-tutor, redirect priority opacity, false recovery, and no-value fail
+  states.
+- mechanism failure mode followup review notes for reset ambiguity, reward
+  mismatch, forced discard, deck-thin draw loops, support hostage dependencies,
+  refund timing races, cleanup no-sink traps, source stacking opacity, temporary
+  choice paralysis, delayed expiry, status stack-split and cleanse-order risks,
+  transform identity/value-floor collapse, recovery reward bait, public-search
+  private leaks, redirect value feedback opacity, and reflect counterplay tax.
+- mechanism failure mode followup review notes for cross-source chain leaks,
+  delayed-payoff starvation, nested loop interrupts, invisible soft caps,
+  non-attack reflect lockout, self-damage reflect attribution, shuffle
+  blindness, energy debt memory, burst overcap waste, pollution reward
+  contamination and cleanup timing traps, temporary zone overflow and duplicate
+  token flood, status duration and ownership edge cases, transform scarcity and
+  locked-archetype breaks, recovery relapse, search pool exhaustion, and
+  redirect priority inversion.
+- mechanism failure mode followup review notes for abort-penalty opacity,
+  manual-abort loss aversion, overblock deadlocks, mulligan-pressure collapse,
+  minimum-output false floors, cleanup choice tax, expiry-order conflicts,
+  counterplay-delay mismatch, transform reroll-chase traps, and slow-deck
+  recovery-window punish cases.
+- mechanism failure mode followup review notes for hidden exit cost,
+  stall thresholds, redraw exhaustion, rollback safety, source-auth drift,
+  safe-stop reward gaps, batching penalties, narrow relief bands, multi-hop
+  priority drift, lookup-confidence traps, latency gaps, expiry forecast gaps,
+  stop-loss timing, support orphan chains, and chain reentry dropoff.
+- mechanism failure mode followup review notes for exit-momentum rebound,
+  stall ceilings, redraw fatigue, rollback lockouts, provenance conflicts,
+  rebound-gap safe stops, cleanup batch limits, relief-band wobble, multi-hop
+  echo drift, and stale-confidence search.
+- plateau closure followup review notes for card-package collapse, enemy
+  pressure, campaign phase coverage, review-readiness safeguards, and
+  report-only application handoff boundaries.
+
+The cases may help report-only scanners, feature projection, and advisory
+discovery surfaces ask better next-review questions. They do not create
+reviewed evidence.
+
+## Round 25 Mechanism Failure Coverage
+
+Round 25 adds a compact mechanism-failure slice over existing generated
+followup targets. It is meant to accumulate review questions around failure
+modes, not to decide mechanism legality or promote any hypothesis:
+
+- loop collapse and stall loops;
+- draw heat overflow, choice-load, and no-value draw;
+- energy volatility with dead float and debt whiplash;
+- pollution sink failure and source opacity;
+- temporary generation expiry and provenance loss;
+- status duration drift and transform dead offers;
+- false recovery, over-tutor search, and hidden redirect priority.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 26 Mechanism Failure Coverage
+
+Round 26 continues the mechanism-failure slice over generated followup targets
+with another compact advisory-only batch. It focuses on failure-mode review
+questions for:
+
+- chain reset ambiguity and loop-break reward mismatch;
+- draw heat forced-discard agency loss and deck-thin self-loops;
+- energy support-hostage and refund-timing races;
+- pollution cleanup no-sink traps and source stacking opacity;
+- temporary generation choice paralysis and delayed expiry surprises;
+- status stack-split exploits and cleanse-order conflicts;
+- transform identity loss and low-rarity value-floor collapse;
+- recovery-window reward bait;
+- public-target search private-info leakage;
+- redirect prevented-value feedback opacity;
+- defense reflect counterplay tax.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 27 Mechanism Failure Coverage
+
+Round 27 continues the mechanism-failure lane with a 20-case advisory-only
+batch. It focuses on review questions for:
+
+- chain cross-source discount leaks and delayed-payoff starvation;
+- loop nested-interrupt leaks and invisible soft caps;
+- defense reflect non-attack lockout and self-damage attribution confusion;
+- draw heat delayed-shuffle blindness;
+- energy debt memory burden and burst-overcap waste;
+- pollution reward-contamination misreads and cleanup-timing traps;
+- temporary generation zone overflow and duplicate-token flood;
+- status negative-duration and owner-swap confusion;
+- transform scarcity spirals and locked-archetype breaks;
+- recovery-window frontloaded relapse;
+- public-target search pool-exhaustion blindness;
+- redirect priority inversion.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 28 Mechanism Failure Coverage
+
+Round 28 continues the mechanism-failure lane with a 10-case advisory-only
+batch. It focuses on review questions for:
+
+- chain fatigue abort-penalty opacity;
+- loop safety manual-abort loss aversion;
+- defense reflect overblock deadlocks;
+- draw heat mulligan-pressure collapse;
+- energy instability false minimum-output floors;
+- pollution market cleanup-choice tax;
+- temporary generation expiry-order conflicts;
+- status decay transfer counterplay-delay mismatch;
+- transform pool reroll-chase traps;
+- recovery-window slow-deck punish cases.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 29 Mechanism Failure Coverage
+
+Round 29 continues the mechanism-failure lane with a 15-case advisory-only
+batch. It focuses on review questions for:
+
+- chain fatigue hidden exit cost and reentry dropoff;
+- defense reflect stall thresholds;
+- draw heat redraw exhaustion;
+- energy instability rollback safety;
+- private leak source-auth drift;
+- loop safety safe-stop reward gaps;
+- pollution market cleanup batching penalties;
+- recovery-window relief that is too narrow;
+- redirect multi-hop priority drift;
+- public-target search lookup-confidence traps;
+- status decay transfer counterplay latency gaps;
+- temporary generation expiry forecast gaps;
+- transform pool exhaust stop-loss timing;
+- summon expiry support orphan chains.
+
+All cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Round 30 Mechanism Failure Coverage
+
+Round 30 continues the mechanism-failure lane with a 10-case advisory-only
+batch. It focuses on review questions for:
+
+- chain fatigue exit-momentum rebound;
+- defense reflect stall ceilings;
+- draw heat redraw fatigue;
+- energy instability rollback lockouts;
+- private leak provenance conflicts;
+- loop safety safe-stop rebound gaps;
+- pollution market cleanup batch limits;
+- recovery-window relief-band wobble;
+- redirect collision multi-hop echo drift;
+- public-target search stale confidence.
+
+This completes the requested `mechanism failure modes +90` lane. All cases
+remain `design_note / human_curated / review_needed` and
+`advisory_context_only`.
+
+## Rounds 31-35 Evidence Plateau Closure
+
+Rounds 31-35 add 86 advisory-only cases and bring the fixture pack to the
+first 500-case plateau.
+
+The closure batches intentionally shift from the completed mechanism-failure
+lane into the remaining evidence-priority lanes:
+
+- Round 31 adds 18 card-package collapse review notes for enabler, payoff,
+  glue, fail-state, counterplay, density, support-ratio, bridge-role, anchor,
+  capstone, safety-valve, low-rarity, status-support, summon-support,
+  campaign-dead-draw, source-mix, reward-density, and role-balance risks.
+- Round 32 adds 17 enemy-pressure review notes for frontload, skill-punish,
+  status pressure, energy tax, draw disruption, summon pressure, scaling
+  clocks, anti-infinite pressure, boss thresholds, mode lockout, charge decay,
+  position zones, recovery windows, redirect loss, over-tutor pressure,
+  reflect stall breakers, and pollution cleanup windows.
+- Round 33 adds 17 campaign-phase review notes for starter, build, pivot,
+  mature, late, recovery, enemy-scaling, event-pressure, source-trace, and
+  review-queue coverage.
+- Round 34 adds 17 review-readiness safeguards for sample pairing,
+  counterexample stoplines, source traces, near duplicates, authority wording,
+  consumer scope, shard drift, source-mined quarantine, generated-hypothesis
+  quarantine, review packets, feature-hint overread, context overclaims,
+  overfit, role evidence, replay evidence, missing negative controls, and
+  plateau exit summaries.
+- Round 35 adds 17 application-readiness handoff notes for feature projection,
+  discovery, fun/health, card package health, campaign power curve, evidence
+  bundle conflicts, autonomous review, iteration briefs, proposal boundaries,
+  synthesis-forbidden boundaries, learned/reranker quarantine, report-only
+  handoff, plateau count, promotion-queue gaps, human triage, and the next
+  coverage seed.
+
+All 86 cases remain `design_note / human_curated / review_needed` and
+`advisory_context_only`. They add review questions and evidence-shape notes
+only; they do not create reviewed evidence, official cards, runtime behavior,
+graph changes, report-only registry changes, hard gates, default synthesis,
+learned behavior, or reranker behavior.
+
+## Human Review Trial 01
+
+The first human review packet trial lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_01_scenarios.md
+docs/qa/cardanalysis/source_followup_review_decision_01.json
+```
+
+The JSON decision shard records the filled packet as a review-decision layer,
+not as source-case promotion:
+
+- 15 packet items reviewed;
+- 12 `accept_seed` entries recorded as reviewed seed candidates;
+- 3 `needs_more_evidence` entries recorded as followup queue items;
+- source followup cases remain `review_needed` and `advisory_context_only`;
+- human preference notes are advisory and forbidden from hard gates, default
+  synthesis, reviewed-evidence claims, runtime authority, and learned/reranker
+  training.
+
+## Human Review Packet 02 Pending Queue
+
+The second human review packet is a pending Chinese scenario-level review queue,
+not a decision shard:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_02_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_02_queue.json
+```
+
+Packet 02 keeps raw source case ids out of the human-facing markdown and stores
+the machine mapping in the queue JSON. It covers 15 advisory-only cases across
+mechanism families that packet 01 did not review:
+
+- defense reflect attack-type and counterexample boundaries;
+- loop-safety reward preservation and counterexample boundaries;
+- recovery-window pre-spike signals and non-HP recovery pressure;
+- redirect ally/enemy target domains and prevented-value cases;
+- public-target search pool scope and decline options;
+- status transfer return paths;
+- summon expiry countdown visibility;
+- temporary-generation choice-load caps;
+- transform-pool exhaustion preview and no-transform negative controls.
+
+No `source_followup_review_decision_02.json` exists yet because no human review
+result has been provided. All packet 02 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
+## Human Review Packet 03 Pending Queue
+
+The third human review packet is another pending Chinese scenario-level review
+queue, also not a decision shard:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_03_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_03_queue.json
+```
+
+Packet 03 shifts from core card-mechanism boundaries into enemy pressure and
+campaign pacing evidence. It covers 15 advisory-only cases for:
+
+- early enemy frontload defense floors and skill-punish escape lines;
+- status pressure, energy tax, draw disruption, summon pressure, scaling clocks,
+  anti-infinite soft stops, boss thresholds, and enemy false-relief windows;
+- starter route lock-in and first-three-encounter variance;
+- build-phase pollution cleanup access;
+- pivot-phase role swaps;
+- campaign recovery-band width.
+
+No `source_followup_review_decision_03.json` exists yet because no human review
+result has been provided. All packet 03 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
+## Human Review Packet 04 Pending Queue
+
+The fourth human review packet is a pending Chinese scenario-level review queue
+for evidence promotion readiness and application handoff boundaries:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_04_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_04_queue.json
+```
+
+Packet 04 covers 15 advisory-only cases for:
+
+- source trace completeness, authority wording, and consumer scope;
+- source-mined and generated-hypothesis quarantine;
+- feature-hint overread and missing negative controls;
+- feature-projection bucket balance and evidence bundle conflict prechecks;
+- autonomous design review-queue boundaries;
+- proposal-contract and synthesis-forbidden boundaries;
+- learned-path quarantine, reranker default-off boundaries, and report-only
+  handoff wording.
+
+No `source_followup_review_decision_04.json` exists yet because no human review
+result has been provided. All packet 04 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
+## Human Review Packet 05 Pending Queue
+
+The fifth human review packet is a pending Chinese scenario-level review queue
+for source-mined/reference evidence translation and authority quarantine:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_05_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_05_queue.json
+```
+
+Packet 05 covers 15 advisory-only cases for:
+
+- readable repeat soft caps and draw-reset costs;
+- discard reserve meaning, charge-decay visibility, mode-lockout partial value,
+  position-zone readability, summon-slot visibility, and threshold-overflow
+  warnings;
+- anti-infinite soft pressure and draw-disruption preview;
+- starter route agency, starter scaling-clock readability, and first-three
+  encounter teaching rhythm;
+- social texture and campaign pressure references as questions rather than
+  reviewed facts.
+
+No `source_followup_review_decision_05.json` exists yet because no human review
+result has been provided. All packet 05 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
+## Human Review Packet 06 Pending Queue
+
+The sixth human review packet is a pending Chinese scenario-level review queue
+for fine-grained followup around the first recorded human preference notes:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_06_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_06_queue.json
+```
+
+Packet 06 covers 15 advisory-only cases for:
+
+- chain-fatigue granularity, including nonrepeat negative controls, intended
+  payoff-chain boundaries, off-ramp recovery, and payoff dilution;
+- repeated draw/retrieval fatigue, including thin-deck self-loops, optional stop
+  signals, hand-limit preview, and card-quality tradeoffs;
+- energy debt expression, including visible debt floors, stabilizer hostage
+  patterns, overdraft forecasts, and dead-turn negative controls;
+- package enabler density, including glue timing gaps, package density cliffs,
+  and support-ratio swings.
+
+No `source_followup_review_decision_06.json` exists yet because no human review
+result has been provided. All packet 06 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
+## Human Review Packet 07 Pending Queue
+
+The seventh human review packet is a pending Chinese scenario-level review queue
+for queue hygiene and stopline review before more human time is spent:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_07_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_07_queue.json
+```
+
+Packet 07 covers 15 advisory-only cases for:
+
+- positive/negative sample pairing and counterexample stoplines;
+- near-duplicate risk, fixture-shard wording drift, and human-readable packet
+  readiness;
+- campaign-context overclaim and enemy-reference overfit stoplines;
+- package-role evidence, failure-mode replay, plateau-exit summary, and
+  review-packet role-balance hygiene;
+- source-trace gaps, review-queue layering, fun/health review-request
+  boundaries, and human-review triage bands.
+
+No `source_followup_review_decision_07.json` exists yet because no human review
+result has been provided. All packet 07 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
+## Human Review Packet 08 Pending Queue
+
+The eighth human review packet is a pending Chinese scenario-level review queue
+for rewrite candidates, concrete-example gaps, and stopline gaps selected from
+the packet 02-07 readability hygiene scan:
+
+```text
+docs/qa/cardanalysis/source_followup_review_packet_08_scenarios.md
+docs/qa/cardanalysis/source_followup_review_packet_08_queue.json
+```
+
+Packet 08 re-queues 15 advisory-only items by human-readable review key. It
+does not add new source cases; it asks a human reviewer whether the existing
+packet wording should be kept, supplemented with examples, given a sharper
+stopline, merged, or rewritten before any evidence-promotion discussion.
+
+No `source_followup_review_decision_08.json` exists yet because no human review
+result has been provided. All packet 08 items remain `pending_human_review`;
+source cases remain `review_needed` and `advisory_context_only`.
+
+## Human Reviewability Layer Index
+
+The queue hygiene layer index lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.md
+docs/qa/cardanalysis/source_followup_reviewability_layer_index.json
+```
+
+It summarizes pending packets 02-07 by reviewability, not by evidence
+promotion. Packet 08 is a followup queue cut from that layer plus the
+readability hygiene scan, so it remains a pending queue rather than a new
+reviewability index:
+
+- 90 pending human-review items remain across packets 02-07;
+- 60 items have Codex initial `A` suggestions and are good candidates to fill
+  first;
+- 30 items have Codex initial `B` suggestions and should get more concrete
+  examples, contrast pairs, or counterexamples before promotion discussion;
+- no pending item has a human duplicate/merge or rewrite decision yet;
+- the layer index corrected a packet 03 summary-count drift so queue-level
+  suggestion counts now match item-level suggestions.
+
+The layer index remains `queue_hygiene_index_only`; it creates no decision
+shard, no reviewed evidence, and no source-case promotion.
+
+## Human Review Readability Hygiene Scan
+
+The readability hygiene scan lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.md
+docs/qa/cardanalysis/source_followup_review_readability_hygiene_scan.json
+```
+
+It scans pending packets 02-07 for queue-reading noise only:
+
+- 6 possible duplicate or merge clusters;
+- 18 abstract or needs-example items;
+- 14 items that should get clearer stopline phrasing in a future rewrite.
+
+The scan uses review keys only in the human-facing Markdown. It does not mark
+human D/E decisions, create a decision shard, promote source cases, or create
+reviewed evidence.
+
+## Human Review Workflow Handoff
+
+The reviewer handoff lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.md
+docs/qa/cardanalysis/source_followup_review_workflow_handoff.json
+```
+
+It is the one-page entrypoint for a human reviewer who wants to fill pending
+packets 02-08. It explains:
+
+- which queue files to read first;
+- how to fill A/B/C/D/E decisions;
+- how Codex should convert a filled packet into a decision shard;
+- why pending queues remain below reviewed authority until explicitly filled
+  and recorded.
+
+The handoff is documentation only. It does not create a decision shard, reviewed
+evidence, or source-case promotion.
+
+## Human Review Queue Index
+
+The current human review queue overview lives under:
+
+```text
+docs/qa/cardanalysis/source_followup_review_queue_index.md
+docs/qa/cardanalysis/source_followup_review_queue_index.json
+```
+
+The Markdown index is the human-facing queue map. It lists packet-level status
+only and keeps raw source case ids out of the review surface. The JSON index is
+the machine-readable hygiene anchor for tests and future unattended batches.
+
+The index currently records:
+
+- packet 01 as the only packet with a human decision shard;
+- packets 02-08 as pending human review queues;
+- 105 pending human-review items across the seven pending packets;
+- no decision shards for pending packets;
+- no source-case promotion and no reviewed-evidence creation.
+
+The index remains `queue_status_index_only`; it is not an evidence promotion
+artifact.
+
+## Validation
+
+```bash
+python scripts/validate_cardanalysis_case_input.py --input tests/fixtures/combat_analysis/source_followup_case_library_v1
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_source_followup_case_library_v1.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_source_followup_review_decision_v1.py -q
+```
