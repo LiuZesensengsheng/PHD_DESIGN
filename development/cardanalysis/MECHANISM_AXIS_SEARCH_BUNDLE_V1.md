@@ -149,6 +149,37 @@ Write a request template:
 python scripts/run_mechanism_axis_search.py --write-template tmp/combat_analysis/mechanism_axis_search_request_template.json
 ```
 
+Write a constrained design brief from a search snapshot:
+
+```powershell
+python scripts/run_mechanism_axis_design_brief.py --input tmp/combat_analysis/mechanism_axis_search_current/silent_sts1_reviewed_axes_328508221e_mechanism_axis_search_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_design_brief_current
+```
+
+Focused validation for the brief consumer:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_design_brief_v1.py tests/scripts/test_run_mechanism_axis_design_brief.py -q
+```
+
+## Constrained Design Brief Consumer
+
+`mechanism_axis_design_brief_v1` is the first downstream glue layer. It reads only a
+`mechanism_axis_search_bundle_v1` snapshot and writes a short advisory brief.
+
+It must preserve these assertions:
+
+- `axis_ids_source = mechanism_axis_search_bundle_v1`
+- `axis_ids_invented = false`
+- `scores_modified = false`
+- `formal_card_generated = false`
+- `card_package_proposal_generated = false`
+- `reviewed_evidence_claim_created = false`
+
+The brief may summarize why the program-ranked axes are discussion candidates, but it
+must copy axis IDs, scores, support axes, rejected-axis reasons, and evidence refs from
+the source bundle. It is not a package proposal and must not introduce card names,
+costs, numbers, or rules text.
+
 ## V1 Scope
 
 V1 prioritizes STS1 reviewed axes. The first consumer fixture is Silent-oriented, but
