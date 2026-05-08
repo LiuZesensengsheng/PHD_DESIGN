@@ -222,6 +222,13 @@ seed and intake packet:
 python scripts/run_mechanism_axis_card_package_health_scaffold.py --package-seed tmp/combat_analysis/mechanism_axis_package_seed_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1.json --intake-packet tmp/combat_analysis/mechanism_axis_owner_evidence_intake_packet_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_evidence_intake_packet_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current
 ```
 
+Check whether that scaffold has enough owner-filled material for a later input-writing
+step:
+
+```powershell
+python scripts/run_mechanism_axis_card_package_health_readiness.py --input tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_card_package_health_owner_input_scaffold_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_readiness_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -456,6 +463,28 @@ learned/reranker behavior.
 For the first Silent package seed, the scaffold contains five role-level slot
 templates copied from the package seed, but every owner fill field remains empty and
 `ready_to_run_card_package_health_cli` remains false.
+
+## Card Package Health Scaffold Readiness
+
+`mechanism_axis_card_package_health_readiness_v1` reads a
+`mechanism_axis_card_package_health_scaffold_v1` snapshot and reports whether owner or
+human-filled fields are complete enough for a later input-writing step.
+
+It may:
+
+- list missing owner fill fields per role-level slot template;
+- list missing owner evidence material such as `card_like_candidate_slots`,
+  `role_tags`, `package_tags`, `setup_tax_notes`, expected label, and review notes;
+- mark `ready_to_write_card_package_health_input` true only after all slot fields and
+  owner material values are present.
+
+It must not write a runnable `card_package_health_v1` input, run the card package
+health CLI, generate formal cards, create runtime card data, claim reviewed evidence,
+create hard gates, change default synthesis, or enable learned/reranker behavior.
+
+For the first Silent package seed, the empty scaffold is
+`blocked_on_card_like_slot_fields`; it has five slot templates, zero ready slots, and
+six missing owner material groups.
 
 ## V1 Scope
 

@@ -125,6 +125,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_mechanism_axis_owner_evidence_intake_packet.py --input tmp/combat_analysis/mechanism_axis_owner_evidence_queue_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_evidence_queue_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_owner_evidence_intake_packet_current`
 - Write a report-only card package health owner input scaffold from the current package seed and intake packet:
   - `python scripts/run_mechanism_axis_card_package_health_scaffold.py --package-seed tmp/combat_analysis/mechanism_axis_package_seed_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1.json --intake-packet tmp/combat_analysis/mechanism_axis_owner_evidence_intake_packet_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff_owner_evidence_intake_packet_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current`
+- Check whether the card package health scaffold has enough owner-filled material for a later input-writing step:
+  - `python scripts/run_mechanism_axis_card_package_health_readiness.py --input tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_card_package_health_owner_input_scaffold_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_readiness_current`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
 
