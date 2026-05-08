@@ -96,6 +96,9 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/generate_combat_analysis_portfolio_report.py`
 - Run the report-only cardanalysis evidence quality audit:
   - `python scripts/run_cardanalysis_evidence_quality_audit.py --input tests/fixtures/combat_analysis/source_followup_case_library_v1 --input tests/fixtures/combat_analysis/mechanism_case_library_v1 --output-dir tmp/combat_analysis/evidence_quality_audit_current`
+- Write the report-only cardanalysis case progress dashboard:
+  - `python scripts/run_cardanalysis_case_progress_report.py --write-template tmp/combat_analysis/case_progress_current_template.json`
+  - `python scripts/run_cardanalysis_case_progress_report.py --input tmp/combat_analysis/case_progress_current_template.json --output-dir tmp/combat_analysis/case_progress_current`
 - Run the report-only mechanism axis search bundle:
   - `python scripts/run_mechanism_axis_search.py --input tests/fixtures/combat_analysis/mechanism_axis_search_v1/silent_high_agency_visible_clock_v1.json --output-dir tmp/combat_analysis/mechanism_axis_search_current`
 - Write the constrained design brief from the current mechanism axis search snapshot:

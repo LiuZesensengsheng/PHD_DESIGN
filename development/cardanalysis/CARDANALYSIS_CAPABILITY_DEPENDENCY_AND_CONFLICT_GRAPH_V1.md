@@ -266,6 +266,7 @@ Capabilities:
 - `stress_resolve_model_v1`
 - `campaign_experience_curve_v1`
 - `campaign_advisory_bundle_v1`
+- `cardanalysis_case_progress_report_v1`
 
 Artifacts:
 
@@ -277,6 +278,7 @@ Artifacts:
 - `stress_resolve_summary`
 - `campaign_experience_curve_summary`
 - `campaign_advisory_bundle`
+- `cardanalysis_case_progress_snapshot`
 - `mechanism_axis_summary`
 - `deck_compression_summary`
 - `mechanism_fun_health_summary`
