@@ -407,6 +407,9 @@ It may:
 
 - carry queue item IDs, owner surfaces, required material, acceptable sources, and
   blocker detail into intake items;
+- preserve the owner evidence queue's design-unlock ranks and parallel-agent lanes so
+  reviewers know which intake templates most directly unblock the card-package
+  generation exam;
 - create empty fields for reviewer identity, source refs, evidence notes, source tier,
   review status, and required material values;
 - attach an acceptance checklist that asks for traceable source material, tier-aware
@@ -418,6 +421,11 @@ create hard gates, change default synthesis, or enable learned/reranker behavior
 
 For the first Silent package seed, the intake packet contains ten empty templates: one
 input-gap and one output-gap template for each canonical owner report section.
+
+The V1 `intake_filling_plan` keeps `card_package_health_summary` first, followed by
+mechanism discovery, fun health, deck compression, and then design iteration. It is
+still a blank intake packet: all evidence fields remain empty until an owner or human
+reviewer supplies real traceable material.
 
 ## V1 Scope
 
