@@ -229,6 +229,12 @@ step:
 python scripts/run_mechanism_axis_card_package_health_readiness.py --input tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_card_package_health_owner_input_scaffold_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_readiness_current
 ```
 
+Write a temporary `card_package_health_v1` input from a fully owner-filled scaffold:
+
+```powershell
+python scripts/run_mechanism_axis_card_package_health_input_writer.py --input tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current/<filled_scaffold_snapshot>.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -485,6 +491,30 @@ create hard gates, change default synthesis, or enable learned/reranker behavior
 For the first Silent package seed, the empty scaffold is
 `blocked_on_card_like_slot_fields`; it has five slot templates, zero ready slots, and
 six missing owner material groups.
+
+## Card Package Health Input Writer
+
+`mechanism_axis_card_package_health_input_writer_v1` reads a fully owner-filled
+`mechanism_axis_card_package_health_scaffold_v1` snapshot and writes a temporary
+`card_package_health_v1` input JSON.
+
+It may:
+
+- require the same readiness calculation used by
+  `mechanism_axis_card_package_health_readiness_v1`;
+- map owner-filled card-like slot labels, role tags, package tags, slot tags, setup
+  tax, and exactness dependency into the existing `card_package_health_v1` case
+  contract;
+- write a temporary input under `tmp/` for a later explicit owner-report run.
+
+It must not write an official reviewed fixture, run the card package health CLI,
+generate formal cards, create runtime card data, claim reviewed evidence, create hard
+gates, change default synthesis, or enable learned/reranker behavior.
+
+The empty Silent scaffold is rejected with `blocked_on_card_like_slot_fields`. A filled
+scaffold can write a valid `card_package_health_v1` input, but that input remains
+owner-supplied draft material until human review promotes it through the normal
+evidence process.
 
 ## V1 Scope
 
