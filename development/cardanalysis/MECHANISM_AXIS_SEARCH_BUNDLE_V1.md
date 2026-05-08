@@ -374,6 +374,8 @@ It may:
 - name acceptable source types, such as reviewed fixtures or human-reviewed design
   notes;
 - distinguish owner input gaps from owner output gaps.
+- rank owner input gaps by how directly they unblock a reviewable card-package
+  generation exam.
 
 It must not generate evidence, write owner input files, run owner reports, score owner
 reports, claim reviewed evidence, create formal cards, create runtime data, create hard
@@ -381,6 +383,19 @@ gates, change default synthesis, or enable learned/reranker behavior.
 
 For the first Silent package seed, the queue contains input/output gaps for mechanism
 discovery, fun health, package health, deck compression, and design iteration.
+
+The V1 `design_unlock_plan` treats the highest-value parallel evidence lanes as:
+
+1. `card_package_health_summary`: card-like slots and package coherence.
+2. `mechanism_axis_discovery_summary`: grounded mechanism loop and foundation-axis
+   dependencies.
+3. `mechanism_fun_health_summary`: fun-health and fatigue signals.
+4. `deck_compression_summary`: deck context and setup-tax pressure.
+5. `design_iteration_summary`: post-owner synthesis review after upstream owner
+   summaries exist.
+
+These ranks are planning metadata only. They do not generate evidence, write owner
+inputs, promote reviewed evidence, or start the generation exam.
 
 ## Owner Evidence Intake Packet
 
