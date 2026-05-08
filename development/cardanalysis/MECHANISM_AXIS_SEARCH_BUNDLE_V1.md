@@ -235,6 +235,13 @@ Write a temporary `card_package_health_v1` input from a fully owner-filled scaff
 python scripts/run_mechanism_axis_card_package_health_input_writer.py --input tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current/<filled_scaffold_snapshot>.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current
 ```
 
+Explicitly run the canonical `card_package_health_v1` evaluator on that temporary
+input:
+
+```powershell
+python scripts/run_mechanism_axis_card_package_health_owner_run.py --input tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input.json --input-writer-manifest tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input_writer_manifest.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -515,6 +522,27 @@ The empty Silent scaffold is rejected with `blocked_on_card_like_slot_fields`. A
 scaffold can write a valid `card_package_health_v1` input, but that input remains
 owner-supplied draft material until human review promotes it through the normal
 evidence process.
+
+## Card Package Health Owner Run
+
+`mechanism_axis_card_package_health_owner_run_v1` reads a temporary input written by
+`mechanism_axis_card_package_health_input_writer_v1` and explicitly runs the existing
+canonical `card_package_health_v1` evaluator.
+
+It may:
+
+- validate that the input writer manifest allows running the owner CLI;
+- call the existing `card_package_health_v1` evaluator without changing its scoring;
+- emit the canonical `card_package_health_summary` plus an owner-run envelope that says
+  the evidence tier is `owner_supplied_draft`.
+
+It must not write an official reviewed fixture, generate formal cards, create runtime
+card data, claim reviewed evidence, create hard gates, change default synthesis, or
+enable learned/reranker behavior.
+
+The resulting summary can be supplied to a report-only evidence bundle as
+`card_package_health_summary`, but it still requires human review before any reviewed
+evidence promotion.
 
 ## V1 Scope
 
