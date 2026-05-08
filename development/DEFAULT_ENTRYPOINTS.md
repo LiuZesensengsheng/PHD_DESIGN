@@ -133,6 +133,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_mechanism_axis_card_package_health_owner_run.py --input tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input.json --input-writer-manifest tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input_writer_manifest.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current`
 - Adapt that owner-run snapshot into a report-only `cardanalysis_evidence_bundle_v1`:
   - `python scripts/run_mechanism_axis_card_package_health_evidence_bundle.py --input tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current/card_package_health_owner_run_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_evidence_bundle_current`
+- Merge the report-only evidence bundle back into the evaluation handoff input:
+  - `python scripts/run_mechanism_axis_evaluation_evidence_merge.py --handoff-input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --evidence-bundle tmp/combat_analysis/mechanism_axis_card_package_health_evidence_bundle_current/cardanalysis_evidence_bundle.json --output-dir tmp/combat_analysis/mechanism_axis_evaluation_evidence_merge_current`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
 

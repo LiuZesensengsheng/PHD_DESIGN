@@ -248,6 +248,12 @@ Adapt that owner-run snapshot into a report-only `cardanalysis_evidence_bundle_v
 python scripts/run_mechanism_axis_card_package_health_evidence_bundle.py --input tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current/card_package_health_owner_run_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_evidence_bundle_current
 ```
 
+Merge that evidence bundle back into the evaluation handoff input:
+
+```powershell
+python scripts/run_mechanism_axis_evaluation_evidence_merge.py --handoff-input tmp/combat_analysis/mechanism_axis_evaluation_handoff_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1_evaluation_handoff.json --evidence-bundle tmp/combat_analysis/mechanism_axis_card_package_health_evidence_bundle_current/cardanalysis_evidence_bundle.json --output-dir tmp/combat_analysis/mechanism_axis_evaluation_evidence_merge_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -571,6 +577,31 @@ synthesis, or enable learned/reranker behavior.
 The resulting evidence bundle is ready for report-only
 `evaluation_autonomous_design_model_v1` input, but it remains draft owner material
 until human review promotes the underlying evidence through the normal path.
+
+## Evaluation Evidence Merge
+
+`mechanism_axis_evaluation_evidence_merge_v1` reads the existing
+`mechanism_axis_evaluation_handoff_v1` input plus a report-only
+`cardanalysis_evidence_bundle_v1` and writes a merged
+`evaluation_autonomous_design_model_v1` input.
+
+It may:
+
+- preserve the original mechanism candidate, parameter target, role-level skeleton,
+  and optional mechanism-axis context from the handoff;
+- rebuild the evidence bundle with the existing `cardanalysis_evidence_bundle_v1`
+  builder;
+- carry `card_package_health_summary` into the evaluation input so the downstream
+  model can distinguish present package-health evidence from remaining missing owner
+  reports.
+
+It must not generate owner reports, modify scores, promote owner-supplied draft
+material to reviewed evidence, generate formal cards, create runtime card data, create
+hard gates, change default synthesis, or enable learned/reranker behavior.
+
+For the first Silent owner-filled draft, the merged input makes
+`card_package_health_summary` present while leaving mechanism discovery, fun-health,
+deck compression, and design iteration missing.
 
 ## V1 Scope
 
