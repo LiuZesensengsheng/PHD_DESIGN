@@ -99,6 +99,13 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Write the report-only cardanalysis case progress dashboard:
   - `python scripts/run_cardanalysis_case_progress_report.py --write-template tmp/combat_analysis/case_progress_current_template.json`
   - `python scripts/run_cardanalysis_case_progress_report.py --input tmp/combat_analysis/case_progress_current_template.json --output-dir tmp/combat_analysis/case_progress_current`
+- Write and validate complete card draft packages:
+  - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
+  - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`
+- Export a complete card draft as temporary `card_package_health_v1` owner input:
+  - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --export-card-package-health-input tmp/combat_analysis/complete_card_draft_card_package_health_input.json`
+- Run a report-only card package exam from axis search, package seed, and complete drafts:
+  - `python scripts/run_card_package_exam.py --axis-search tests/fixtures/combat_analysis/mechanism_axis_design_brief_v1/silent_axis_search_bundle_snapshot_v1.json --package-seed <generated-card-package-proposal-v1.json> --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/card_package_exam_current`
 - Run the report-only mechanism axis search bundle:
   - `python scripts/run_mechanism_axis_search.py --input tests/fixtures/combat_analysis/mechanism_axis_search_v1/silent_high_agency_visible_clock_v1.json --output-dir tmp/combat_analysis/mechanism_axis_search_current`
 - Write the constrained design brief from the current mechanism axis search snapshot:
