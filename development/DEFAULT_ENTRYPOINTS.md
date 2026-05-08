@@ -131,6 +131,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_mechanism_axis_card_package_health_input_writer.py --input tmp/combat_analysis/mechanism_axis_card_package_health_scaffold_current/<filled_scaffold_snapshot>.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current`
 - Explicitly run the canonical `card_package_health_v1` evaluator on that temporary input:
   - `python scripts/run_mechanism_axis_card_package_health_owner_run.py --input tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input.json --input-writer-manifest tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input_writer_manifest.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current`
+- Adapt that owner-run snapshot into a report-only `cardanalysis_evidence_bundle_v1`:
+  - `python scripts/run_mechanism_axis_card_package_health_evidence_bundle.py --input tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current/card_package_health_owner_run_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_evidence_bundle_current`
 - Validate and query the cardanalysis capability dependency/conflict graph:
   - `python scripts/validate_capability_graph.py`
 

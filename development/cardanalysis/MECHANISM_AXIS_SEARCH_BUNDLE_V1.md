@@ -242,6 +242,12 @@ input:
 python scripts/run_mechanism_axis_card_package_health_owner_run.py --input tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input.json --input-writer-manifest tmp/combat_analysis/mechanism_axis_card_package_health_input_writer_current/card_package_health_input_writer_manifest.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current
 ```
 
+Adapt that owner-run snapshot into a report-only `cardanalysis_evidence_bundle_v1`:
+
+```powershell
+python scripts/run_mechanism_axis_card_package_health_evidence_bundle.py --input tmp/combat_analysis/mechanism_axis_card_package_health_owner_run_current/card_package_health_owner_run_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_card_package_health_evidence_bundle_current
+```
+
 Focused validation for the brief consumer:
 
 ```powershell
@@ -543,6 +549,28 @@ enable learned/reranker behavior.
 The resulting summary can be supplied to a report-only evidence bundle as
 `card_package_health_summary`, but it still requires human review before any reviewed
 evidence promotion.
+
+## Card Package Health Evidence Bundle Adapter
+
+`mechanism_axis_card_package_health_evidence_bundle_v1` reads a
+`mechanism_axis_card_package_health_owner_run_v1` snapshot and adapts its canonical
+`card_package_health_summary` into `cardanalysis_evidence_bundle_v1`.
+
+It may:
+
+- validate that the owner-run snapshot is still `owner_supplied_draft` and
+  `human_review_required`;
+- call the existing `cardanalysis_evidence_bundle_v1` builder;
+- carry trace refs in `designer_intent` so the source owner-run, scaffold, readiness
+  check, and source axes remain inspectable.
+
+It must not modify owner-run scores, write reviewed fixtures, generate formal cards,
+create runtime card data, claim reviewed evidence, create hard gates, change default
+synthesis, or enable learned/reranker behavior.
+
+The resulting evidence bundle is ready for report-only
+`evaluation_autonomous_design_model_v1` input, but it remains draft owner material
+until human review promotes the underlying evidence through the normal path.
 
 ## V1 Scope
 
