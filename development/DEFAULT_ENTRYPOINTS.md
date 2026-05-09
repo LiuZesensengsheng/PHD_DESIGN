@@ -114,6 +114,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_llm_complete_card_draft_attempt_v1.py tests/toolkit/combat_analysis/test_exam_iteration_run_v1.py -q`
 - Record one report-only attempt-to-exam iteration run:
   - `python scripts/run_exam_iteration_run.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --axis-search <mechanism_axis_search_bundle_v1.json> --package-seed <card_package_proposal_v1.json> --output-dir tmp/combat_analysis/exam_iteration_run_current`
+- Summarize iteration runs into report-only prompt and handoff patch advice:
+  - `python scripts/run_exam_iteration_prompt_patch_proposal.py --input tmp/combat_analysis/exam_iteration_run_current/exam_iteration_run_v1_snapshot.json --output-dir tmp/combat_analysis/exam_iteration_prompt_patch_proposal_current`
 - Write and validate complete card draft packages:
   - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
   - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`

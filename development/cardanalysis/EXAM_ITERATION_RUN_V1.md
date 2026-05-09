@@ -19,6 +19,7 @@ card_package_draft_handoff_v1
   -> card_draft_failure_taxonomy_v1
   -> card_package_exam_v1
   -> exam_iteration_run_v1
+  -> exam_iteration_prompt_patch_proposal_v1
 ```
 
 ## What It Contains
@@ -63,5 +64,7 @@ attempt. These records remain advisory feedback only.
 ## Interpretation
 
 An iteration run is the unit of learning for the autonomous draft loop. The next
-step is to run repeated generated attempts and compare whether recurring failure
-types decline.
+consumer is `exam_iteration_prompt_patch_proposal_v1`, which compares one or
+more runs and recommends prompt or handoff patches for the next generated
+attempt. The improvement claim still requires repeated generated attempts and
+evidence that recurring failure types decline.
