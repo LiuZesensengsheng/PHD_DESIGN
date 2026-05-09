@@ -136,6 +136,10 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_sts1_four_character_generated_attempt_intake_batch.py --output-dir tmp/combat_analysis/sts1_four_character_generated_attempt_intake_batch_current`
 - Run the report-only four-character external draft intake rehearsal:
   - `python scripts/run_sts1_four_character_external_draft_intake_rehearsal.py --output-dir tmp/combat_analysis/sts1_four_character_external_draft_intake_rehearsal_current`
+- Write an owner-approved external draft batch manifest template:
+  - `python scripts/run_sts1_owner_approved_external_draft_batch_manifest.py --write-template tmp/combat_analysis/sts1_owner_approved_external_draft_batch_manifest_template.json`
+- Run the report-only four-character owner-approved external draft batch manifest:
+  - `python scripts/run_sts1_owner_approved_external_draft_batch_manifest.py --manifest <owner_approved_batch_manifest.json> --output-dir tmp/combat_analysis/sts1_owner_approved_external_draft_batch_manifest_current`
 - Write and validate complete card draft packages:
   - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
   - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`
