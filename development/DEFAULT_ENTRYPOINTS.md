@@ -126,6 +126,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_exam_iteration_generated_attempt_batch.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --prompt-application <attempt_001_llm_draft_prompt_application_v1_snapshot.json> --prompt-application <attempt_002_llm_draft_prompt_application_v1_snapshot.json> --axis-search <mechanism_axis_search_bundle_v1.json> --package-seed <card_package_proposal_v1.json> --output-dir tmp/combat_analysis/exam_iteration_generated_attempt_batch_from_intake_current`
 - Summarize generated-attempt batches across multiple STS1 character targets:
   - `python scripts/run_exam_iteration_multi_character_batch_summary.py --input <silent_exam_iteration_generated_attempt_batch_run_v1_snapshot.json> --input <ironclad_exam_iteration_generated_attempt_batch_run_v1_snapshot.json> --output-dir tmp/combat_analysis/exam_iteration_multi_character_batch_summary_current`
+- Run the report-only four-character generated-attempt batch from simulated prompt-application intake records:
+  - `python scripts/run_sts1_four_character_generated_attempt_intake_batch.py --output-dir tmp/combat_analysis/sts1_four_character_generated_attempt_intake_batch_current`
 - Write and validate complete card draft packages:
   - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
   - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`
