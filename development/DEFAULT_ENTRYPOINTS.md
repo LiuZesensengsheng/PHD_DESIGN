@@ -134,6 +134,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_exam_iteration_multi_character_batch_summary.py --input <silent_exam_iteration_generated_attempt_batch_run_v1_snapshot.json> --input <ironclad_exam_iteration_generated_attempt_batch_run_v1_snapshot.json> --output-dir tmp/combat_analysis/exam_iteration_multi_character_batch_summary_current`
 - Run the report-only four-character generated-attempt batch from simulated prompt-application intake records:
   - `python scripts/run_sts1_four_character_generated_attempt_intake_batch.py --output-dir tmp/combat_analysis/sts1_four_character_generated_attempt_intake_batch_current`
+- Run the report-only four-character external draft intake rehearsal:
+  - `python scripts/run_sts1_four_character_external_draft_intake_rehearsal.py --output-dir tmp/combat_analysis/sts1_four_character_external_draft_intake_rehearsal_current`
 - Write and validate complete card draft packages:
   - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
   - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`
