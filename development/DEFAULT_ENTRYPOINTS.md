@@ -99,6 +99,13 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Write the report-only cardanalysis case progress dashboard:
   - `python scripts/run_cardanalysis_case_progress_report.py --write-template tmp/combat_analysis/case_progress_current_template.json`
   - `python scripts/run_cardanalysis_case_progress_report.py --input tmp/combat_analysis/case_progress_current_template.json --output-dir tmp/combat_analysis/case_progress_current`
+- Write and validate STS1 exam targets:
+  - `python scripts/validate_sts1_exam_target.py --write-template tmp/combat_analysis/sts1_exam_target_template.json`
+  - `python scripts/validate_sts1_exam_target.py --input tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json`
+- Write and validate report-only card package variant sets:
+  - `python scripts/validate_card_package_variant_set.py --write-template tmp/combat_analysis/card_package_variant_set_template.json`
+  - `python scripts/validate_card_package_variant_set.py --input tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json`
+  - `python scripts/validate_card_package_variant_set.py --input tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --write-report tmp/combat_analysis/card_package_variant_set_report.md`
 - Write and validate complete card draft packages:
   - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
   - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`
