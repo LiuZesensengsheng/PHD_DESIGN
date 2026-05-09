@@ -21,6 +21,7 @@ card_package_draft_handoff_v1
   -> card_package_exam_v1
   -> exam_iteration_run_v1
   -> exam_iteration_prompt_patch_proposal_v1
+  -> exam_iteration_batch_comparison_v1
 ```
 
 ## What It Contains
@@ -69,4 +70,5 @@ lanes. It should be used to tighten the next `card_package_draft_handoff_v1` or
 LLM prompt before another generated attempt is recorded.
 
 It is not evidence that design quality improved. Improvement still requires new
-attempts, validation, package exam feedback, and human review before promotion.
+attempts, validation, package exam feedback, batch comparison, and human review
+before promotion.
