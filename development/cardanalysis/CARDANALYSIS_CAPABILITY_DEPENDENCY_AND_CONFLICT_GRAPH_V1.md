@@ -276,6 +276,7 @@ Capabilities:
 - `exam_iteration_run_v1`
 - `exam_iteration_prompt_patch_proposal_v1`
 - `exam_iteration_batch_comparison_v1`
+- `exam_iteration_generated_attempt_batch_run_v1`
 - `card_package_exam_v1`
 - `sts1_four_character_exam_v1`
 
@@ -310,6 +311,7 @@ Artifacts:
 - `exam_iteration_run_snapshot`
 - `exam_iteration_prompt_patch_proposal`
 - `exam_iteration_batch_comparison`
+- `exam_iteration_generated_attempt_batch_run`
 - `card_package_exam_snapshot`
 - `sts1_four_character_exam_snapshot`
 

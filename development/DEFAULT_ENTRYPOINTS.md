@@ -118,6 +118,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_exam_iteration_prompt_patch_proposal.py --input tmp/combat_analysis/exam_iteration_run_current/exam_iteration_run_v1_snapshot.json --output-dir tmp/combat_analysis/exam_iteration_prompt_patch_proposal_current`
 - Compare an ordered batch of generated-attempt iteration runs:
   - `python scripts/run_exam_iteration_batch_comparison.py --input <attempt_001_exam_iteration_run_snapshot.json> --input <attempt_002_exam_iteration_run_snapshot.json> --prompt-patch <exam_iteration_prompt_patch_proposal_v1_snapshot.json> --output-dir tmp/combat_analysis/exam_iteration_batch_comparison_current`
+- Run a report-only generated-attempt batch from handoff through iteration, prompt patch, and comparison:
+  - `python scripts/run_exam_iteration_generated_attempt_batch.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft <attempt_001_complete_card_draft_v1.json> --draft <attempt_002_complete_card_draft_v1.json> --axis-search <mechanism_axis_search_bundle_v1.json> --package-seed <card_package_proposal_v1.json> --output-dir tmp/combat_analysis/exam_iteration_generated_attempt_batch_current`
 - Write and validate complete card draft packages:
   - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
   - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`
