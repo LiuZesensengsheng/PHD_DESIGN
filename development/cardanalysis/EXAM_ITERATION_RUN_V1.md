@@ -52,6 +52,14 @@ python scripts/run_exam_iteration_run.py --target tests/fixtures/combat_analysis
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_exam_iteration_run_v1.py tests/scripts/test_run_exam_iteration_run.py -q
 ```
 
+## Negative Controls
+
+The iteration-run tests read
+`tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_negative_attempt_drafts_v1.json`
+to prove that invalid attempts stop before package exam while warning-only
+attempts may still run package exam with patch lanes recorded for the next
+attempt. These records remain advisory feedback only.
+
 ## Interpretation
 
 An iteration run is the unit of learning for the autonomous draft loop. The next

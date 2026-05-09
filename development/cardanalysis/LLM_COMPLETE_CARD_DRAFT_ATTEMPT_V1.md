@@ -53,6 +53,14 @@ python scripts/run_llm_complete_card_draft_attempt.py --target tests/fixtures/co
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_llm_complete_card_draft_attempt_v1.py tests/scripts/test_run_llm_complete_card_draft_attempt.py -q
 ```
 
+## Negative Controls
+
+`tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_negative_attempt_drafts_v1.json`
+contains four generated-attempt negative controls, one per STS1 character. The
+attempt test suite uses them to verify schema/slot, axis drift, combo-risk,
+generic-goodstuff, exactness, weak fail-state, and STS1-like texture feedback
+without promoting any draft.
+
 ## Interpretation
 
 Passing this attempt check means a generated draft can enter package exam. It

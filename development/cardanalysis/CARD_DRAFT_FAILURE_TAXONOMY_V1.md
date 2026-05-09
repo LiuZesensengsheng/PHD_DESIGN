@@ -54,3 +54,12 @@ Focused validation:
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_draft_failure_taxonomy_v1.py -q
 ```
+
+## Negative Controls
+
+The generated-attempt fixture
+`tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_negative_attempt_drafts_v1.json`
+keeps one intentionally flawed draft per STS1 character. It is used by the
+attempt and iteration tests to check that schema/slot, axis identity,
+package-structure, STS1-like, strength, combo, and fun-texture failures are
+visible before future prompt patches are trusted.
