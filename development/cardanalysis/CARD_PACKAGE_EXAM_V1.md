@@ -103,5 +103,11 @@ The first manifest covers:
 - a high setup-tax negative control that should surface `too_slow`,
   `recovery_window_collapse`, and `act2_transition_shock`.
 
+Validate the example manifest with:
+
+```powershell
+python scripts/validate_card_package_exam_curve_fit_fixture.py --input tests/fixtures/combat_analysis/card_package_exam_curve_fit_v1/card_package_exam_curve_fit_cases_v1.json
+```
+
 These fixtures are for exam interpretation only. They remain report-only and do not
 define new cards, runtime campaign behavior, hard gates, or reviewed STS1 evidence.
