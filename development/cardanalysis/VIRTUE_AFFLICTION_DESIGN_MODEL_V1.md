@@ -597,6 +597,28 @@ This aggregate summary is still report-only. It is a fixture coverage and
 diagnostic readout, not a quality score, pass/fail gate, runtime tuning table,
 or learned-model metric.
 
+## Ablation Pair Fixture
+
+`virtue_affliction_ablation_pairs_v1.json` is a separate 12-case fixture for
+single-variable comparisons. It does not replace the 37-case coverage matrix.
+Its job is to make later metric design easier to inspect: each pair keeps most
+of the loop stable while changing one design variable.
+
+Current pairs:
+
+| Pair | Control | Variant | Expected Movement |
+| --- | --- | --- | --- |
+| `visibility_meter` | Visible stress meter. | Hidden stress meter. | Stress buildup drops from strong to weak; threshold drama score decreases. |
+| `positive_branch_presence` | Virtue-like branch present. | Positive branch absent. | Positive break drops from strong to weak; crisis reversal is no longer transferable. |
+| `positive_probability_skew` | Rare positive branch. | Farmable high positive odds. | Positive break becomes unsafe; branch entropy drops. |
+| `recovery_window` | Active recovery source present. | Active recovery removed. | Stress buildup drops from strong to mixed; recovery offset drops. |
+| `team_contagion` | No team contagion. | Party-wide contagion. | Team contagion moves from weak to strong; cascade reproduction rises. |
+| `agency_controls` | Prevention, triage, and retreat controls. | No player controls or safety valves. | Agency preservation moves from strong to unsafe. |
+
+These pairs are deliberately small. They are not new design proposals. They are
+diagnostic probes for later advisory indices such as threshold drama, contagion
+risk, overfarm risk, and agency preservation.
+
 ## Positive Pattern Labels
 
 - `visible_pressure_clock`
