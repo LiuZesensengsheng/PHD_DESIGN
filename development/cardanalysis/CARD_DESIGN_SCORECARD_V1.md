@@ -21,6 +21,7 @@ card_package_exam_v1
   or sts1_four_character_exam_v1
   -> card_design_scorecard_v1
   -> card_design_scorecard_calibration_v1
+  -> card_design_scorecard_delta_report_v1
 ```
 
 `scripts/run_sts1_four_character_exam.py` also writes scorecard artifacts in
@@ -86,3 +87,8 @@ readiness.
 
 Use `card_design_scorecard_calibration_v1` when checking whether the scorecard
 is separating healthy controls from known failure-family controls.
+
+Use `card_design_scorecard_delta_report_v1` when comparing two or more
+scorecard snapshots to identify real progress, regressions, persistent weak
+dimensions, and next iteration focus. Delta reports are advisory comparison
+outputs only and do not recalibrate scoring weights.
