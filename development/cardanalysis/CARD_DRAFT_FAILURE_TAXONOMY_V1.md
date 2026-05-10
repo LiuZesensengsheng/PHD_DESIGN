@@ -63,3 +63,10 @@ keeps one intentionally flawed draft per STS1 character. It is used by the
 attempt and iteration tests to check that schema/slot, axis identity,
 package-structure, STS1-like, strength, combo, and fun-texture failures are
 visible before future prompt patches are trusted.
+
+The companion boundary fixture
+`tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_boundary_attempt_drafts_v1.json`
+keeps one schema-valid but suspicious draft per STS1 character. It is used to
+check that the existing taxonomy and iteration readout still expose warning
+families for secondary-axis swallowing, generic goodstuff, numeric fantasy,
+weak fail states, and STS1-like texture drift without adding a hard gate.
