@@ -47,6 +47,11 @@ This draft does not register a new capability graph node. A future integration
 may either fold it into `stress_resolve_model_v1` or register it as a separate
 report-only capability after review.
 
+The implementation architecture lives in
+`VIRTUE_AFFLICTION_ARCHITECTURE_BLUEPRINT_V1.md`. This model document defines
+what the evaluator means; the architecture blueprint defines how it should be
+layered, validated, and eventually registered if implementation is approved.
+
 ## Architecture Decision
 
 ### Problem
