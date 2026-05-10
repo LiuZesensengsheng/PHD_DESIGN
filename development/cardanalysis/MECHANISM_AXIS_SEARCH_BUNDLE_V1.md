@@ -173,6 +173,19 @@ Run the report-only chain exam:
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q
 ```
 
+Run an axis-first card package design record from search through package exam and
+scorecard:
+
+```powershell
+python scripts/run_autonomous_card_package_design_run.py --axis-search tests/fixtures/combat_analysis/mechanism_axis_design_brief_v1/silent_axis_search_bundle_snapshot_v1.json --design-brief tests/fixtures/combat_analysis/mechanism_axis_package_seed_v1/silent_axis_design_brief_snapshot_v1.json --package-seed <card_package_proposal_v1.json> --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/autonomous_card_package_design_run_current
+```
+
+Focused validation for the axis-first design run:
+
+```powershell
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_autonomous_card_package_design_run_v1.py tests/scripts/test_run_autonomous_card_package_design_run.py -q
+```
+
 Write an evaluation-autonomous-design handoff input from the package seed:
 
 ```powershell

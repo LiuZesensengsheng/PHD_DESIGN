@@ -92,3 +92,9 @@ Use `card_design_scorecard_delta_report_v1` when comparing two or more
 scorecard snapshots to identify real progress, regressions, persistent weak
 dimensions, and next iteration focus. Delta reports are advisory comparison
 outputs only and do not recalibrate scoring weights.
+
+Use `autonomous_card_package_design_run_v1` when the scorecard belongs to a
+supplied complete-card draft that should be audited as axis-first. That run
+records the chain from mechanism-axis search through package seed, variant
+handoff, exam iteration, package exam, and scorecard without generating card
+text or promoting cards.

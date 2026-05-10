@@ -285,6 +285,10 @@ Capabilities:
 - `sts1_four_character_generated_attempt_intake_batch_v1`
 - `sts1_four_character_external_draft_intake_rehearsal_v1`
 - `sts1_owner_approved_external_draft_batch_manifest_v1`
+- `mechanism_axis_search_v1`
+- `mechanism_axis_design_brief_v1`
+- `mechanism_axis_package_seed_v1`
+- `autonomous_card_package_design_run_v1`
 - `card_package_exam_v1`
 - `sts1_four_character_exam_v1`
 - `card_design_scorecard_v1`
@@ -331,6 +335,10 @@ Artifacts:
 - `sts1_four_character_generated_attempt_intake_batch`
 - `sts1_four_character_external_draft_intake_rehearsal`
 - `sts1_owner_approved_external_draft_batch_manifest`
+- `mechanism_axis_search_bundle`
+- `mechanism_axis_design_brief`
+- `card_package_proposal_seed`
+- `autonomous_card_package_design_run_snapshot`
 - `card_package_exam_snapshot`
 - `sts1_four_character_exam_snapshot`
 - `card_design_scorecard_summary`

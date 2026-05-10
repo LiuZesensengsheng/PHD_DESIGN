@@ -62,6 +62,10 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_exam_v1.py te
 Use `scripts/run_mechanism_axis_package_seed.py` to generate the package seed from the
 current mechanism-axis design brief fixture before running the exam.
 
+Use `scripts/run_autonomous_card_package_design_run.py` when the exam should also
+record the upstream axis search, design brief, selected variant, iteration feedback,
+and scorecard in one axis-first report-only run.
+
 ## Interpretation
 
 An outcome like `draft_package_ready_for_human_review` means:
@@ -70,4 +74,3 @@ An outcome like `draft_package_ready_for_human_review` means:
 - package-health evaluation did not classify it as payoff-only, generic-goodstuff,
   overstuffed, or brittle exactness;
 - human review is still required before any promotion.
-
