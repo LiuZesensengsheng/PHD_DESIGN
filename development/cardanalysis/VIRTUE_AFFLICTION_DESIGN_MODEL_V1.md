@@ -691,6 +691,32 @@ These pairs are deliberately small. They are not new design proposals. They are
 diagnostic probes for later advisory indices such as threshold drama, contagion
 risk, overfarm risk, and agency preservation.
 
+When the CLI runs over this fixture, `coverage_summary.ablation_summary`
+compares each `control -> variant` pair and reports:
+
+- the changed `ablated_variable`;
+- dimension label movements;
+- every advisory index delta;
+- the largest index movement;
+- verdict movement;
+- new bad patterns and removed good patterns;
+- a short interpretation of what that variable contributes.
+
+The current ablation summary is most useful for explaining variable importance:
+
+| Pair | Primary Readout |
+| --- | --- |
+| `visibility_meter` | Hiding the meter lowers `pressure_readability_index` and weakens visible pressure confidence. |
+| `positive_branch_presence` | Removing positive break lowers `reversal_integrity_index` and removes virtue-like reversal value. |
+| `positive_probability_skew` | Farmable positive odds create `bad_reward_farming_loop` and add `overfarmable_positive_break`. |
+| `recovery_window` | Removing recovery lowers `buildup_answerability_index`, making stress less answerable. |
+| `team_contagion` | Party-wide contagion raises `contagion_runaway_risk_index`; this is useful only while recoverable. |
+| `agency_controls` | Removing controls drops `agency_floor_index` and creates `bad_agency_erasing_loop`. |
+
+This ablation summary is also report-only. It is not a sensitivity model for
+runtime tuning, not a balance table, and not a learned feature-importance
+source.
+
 ## Positive Pattern Labels
 
 - `visible_pressure_clock`
