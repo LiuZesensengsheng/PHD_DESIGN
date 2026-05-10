@@ -89,3 +89,19 @@ against the selected profile:
 This section is advisory only. It does not change `advisory_outcome`, create hard
 gates, modify runtime campaign, or claim reviewed STS1 evidence.
 
+## Campaign Curve Fit Example Fixtures
+
+Reusable examples live in:
+
+```text
+tests/fixtures/combat_analysis/card_package_exam_curve_fit_v1/
+```
+
+The first manifest covers:
+
+- a healthy/golden Silent draft against the advanced campaign curve profile;
+- a high setup-tax negative control that should surface `too_slow`,
+  `recovery_window_collapse`, and `act2_transition_shock`.
+
+These fixtures are for exam interpretation only. They remain report-only and do not
+define new cards, runtime campaign behavior, hard gates, or reviewed STS1 evidence.
