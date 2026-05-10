@@ -55,6 +55,11 @@ The first four-character exam uses these target lanes:
 | Defect | `orb_control` | `frost_control`, `power_focus_scaling` |
 | Watcher | `stance_mantra` | `scry_control`, `retain` |
 
+The report-only enrichment inventory for current papers, blind spots, and proposed
+negative/boundary samples lives in
+`docs/development/cardanalysis/STS1_CARD_EXAM_ENRICHMENT_V1.md` and
+`tests/fixtures/combat_analysis/sts1_card_exam_enrichment_v1/sts1_card_exam_enrichment_proposals_v1.json`.
+
 ## Interpretation
 
 Passing this exam means the report-only loop can carry all four STS1 characters

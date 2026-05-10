@@ -159,6 +159,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/validate_card_package_proposal.py --input tmp/combat_analysis/mechanism_axis_package_seed_current --json`
 - Run the mechanism axis report-only chain exam:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q`
+- Validate the report-only STS1 card exam enrichment proposals:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_card_exam_enrichment_v1.py -q`
 - Write an evaluation-autonomous-design handoff input from the current package seed:
   - `python scripts/run_mechanism_axis_evaluation_handoff.py --input tmp/combat_analysis/mechanism_axis_package_seed_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1.json --output-dir tmp/combat_analysis/mechanism_axis_evaluation_handoff_current`
 - Run the evaluation autonomous design model from that handoff:
