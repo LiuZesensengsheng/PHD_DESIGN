@@ -580,6 +580,23 @@ Current matrix tests assert that the fixture set covers:
 - `long_term_consequence`: `strong`, `mixed`, `weak`
 - `agency_preservation`: `strong`, `mixed`, `unsafe`
 
+The CLI report, snapshot, and manifest also include a `coverage_summary` block.
+This block is an aggregate readout over the current matrix:
+
+- `dimension_label_counts` summarizes how many cases land in each label per
+  dimension.
+- `coverage_complete` says whether the current matrix hits the expected label
+  targets above.
+- `representative_cases` points to a few high-signal cases for unsafe positive
+  break, unsafe negative break, unsafe agency preservation, strong contagion,
+  and weak threshold drama.
+- `boundary_summary` repeats that the run made no runtime, formal-card,
+  hard-gate, default-generation, learned/reranker, or reviewed-evidence change.
+
+This aggregate summary is still report-only. It is a fixture coverage and
+diagnostic readout, not a quality score, pass/fail gate, runtime tuning table,
+or learned-model metric.
+
 ## Positive Pattern Labels
 
 - `visible_pressure_clock`
