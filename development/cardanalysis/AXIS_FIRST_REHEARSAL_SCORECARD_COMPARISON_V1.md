@@ -31,8 +31,11 @@ mechanism_axis_search_bundle_v1
 ```
 
 The surface is deliberately narrow. It rebuilds both rehearsals from supplied
-files, compares their existing scorecards, and reports audit warnings when the
-scorecard delta lacks a matched case pair.
+files, compares their existing scorecards, and records both raw scorecard case
+matching and an advisory attempt lane. The lane is derived from shared
+axis-search, design-brief, package-seed, target, variant-set, and selected
+variant identity, so distinct draft package case ids can still be compared as
+the same exam lane without pretending they are the same case.
 
 ## Current Silent Result
 
@@ -49,14 +52,17 @@ baseline:
 
 - baseline score: `92.78 strong`
 - latest score: `92.78 strong`
-- aggregate delta: `0.0`
-- delta status: `stable_no_material_delta`
+- scorecard aggregate delta: `0.0`
+- scorecard delta status: `stable_no_material_delta`
+- attempt lane: `axis_first_attempt_lane_2119350afcc4`
+- attempt lane status: `matched_attempt_lane`
+- attempt lane claim status: `same_lane_no_material_delta`
 
-The important finding is not that the content improved. The comparison exposes
-an exam-visibility gap: the two draft packages are different case ids, while the
-underlying package-exam scorecard id is still seed-derived. The comparison now
-reports `scorecard_delta_has_no_matched_case_pair` and recommends adding matched
-attempt identity before claiming content improvement.
+The important finding is not that the content improved. The comparison now
+recognizes both drafts as the same Silent axis-first attempt lane, while still
+recording that the raw scorecard case ids differ. The next gap is therefore
+`attempt_lane_sensitivity`: we need a harder or more meaningfully different
+same-lane attempt before claiming content improvement.
 
 ## Boundary
 
@@ -92,6 +98,7 @@ axis-first exam loop and compared against the fixture baseline. It does not prov
 autonomous card-design quality, balance, reviewed evidence status, or promotion
 readiness.
 
-The next capability gap is better comparison identity: scorecard/delta should be
-able to compare repeated attempts as matched attempt pairs, not only as distinct
-draft package case ids.
+The next capability gap is stronger same-lane signal. Repeated attempts can now
+be grouped into one axis-first exam lane, but this first pair has no material
+score difference, so the loop needs a more meaningfully different next draft or
+more sensitive lane-level review before claiming design-quality movement.
