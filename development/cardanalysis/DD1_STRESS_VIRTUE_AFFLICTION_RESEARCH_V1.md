@@ -308,6 +308,18 @@ This report sits next to `stress_resolve_model_v1` as research input. It does
 not replace that model, register a new capability graph node, or change any
 default entrypoint.
 
+The follow-up design surface is `virtue_affliction_design_model_v1`. That
+contract keeps this DD1 research in the same document family while adding:
+
+- a report-only mathematical state model,
+- advisory metric definitions,
+- player decision EV sketches,
+- a cardanalysis-style partial-order view,
+- proposed future graph nodes and edges.
+
+The model is still DD1-only. It does not use DD2 relationship/affinity systems
+as evidence or design input.
+
 If future work promotes `virtue_affliction_design_model_v1` beyond a draft, it
 should remain report-only first and declare whether it consumes:
 
@@ -318,4 +330,3 @@ should remain report-only first and declare whether it consumes:
 
 Any such future promotion should preserve `advisory_context_only` until a
 separate reviewed process explicitly changes authority.
-
