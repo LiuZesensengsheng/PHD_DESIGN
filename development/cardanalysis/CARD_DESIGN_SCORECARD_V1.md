@@ -45,6 +45,12 @@ V1 scores each case on a 0-100 advisory scale across:
 The scorecard uses direct signals when available and named proxy notes when a
 dimension is not yet backed by a dedicated model head.
 
+Axis-first same-lane comparisons may now provide advisory
+`scorecard_dimension_visibility_notes` from
+`axis_first_rehearsal_scorecard_comparison_v1`. These notes are dimension-level
+explanation overlays for future scorecard note work. They do not change
+`card_design_scorecard_v1` scores, weights, hard-gate behavior, or authority.
+
 ## Future Extension Points
 
 The V1 payload reserves explicit extension points for:

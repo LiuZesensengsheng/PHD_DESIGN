@@ -68,6 +68,8 @@ baseline:
 - scorecard visibility patch status:
   `patch_recommended_for_scorecard_visibility`
 - top patch lane: `axis_alignment_content_delta_visibility`
+- scorecard dimension visibility notes:
+  `scorecard_dimension_notes_available`
 - largest next gap: `lane_review_sensitivity`
 
 The important finding is not that the content improved. The comparison now
@@ -98,6 +100,14 @@ lanes without changing current scores or weights. The current top lanes are:
 - `failure_state_low_roll_visibility`
 - `strength_numeric_profile_visibility`
 - `sts1_like_trigger_word_visibility`
+
+Those lanes are also projected into `scorecard_dimension_visibility_notes`.
+These notes are grouped by existing scorecard dimensions and can be copied into
+future `card_design_scorecard_v1` metric explanations. They preserve the current
+score and dimension averages while making static-score blind spots visible. For
+the current Silent pair the first note says `axis_alignment` should surface the
+`axis_enabler_signal` change from `venom_mark` to `toxic_cue` even though the
+axis-alignment score stayed static.
 
 ## Boundary
 
