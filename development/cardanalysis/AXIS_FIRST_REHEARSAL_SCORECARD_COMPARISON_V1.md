@@ -57,12 +57,18 @@ baseline:
 - attempt lane: `axis_first_attempt_lane_2119350afcc4`
 - attempt lane status: `matched_attempt_lane`
 - attempt lane claim status: `same_lane_no_material_delta`
+- lane sensitivity status: `content_changed_score_static`
+- lane text similarity: `0.704`
+- lane sensitivity warning: `lane_content_changed_without_score_movement`
+- largest next gap: `lane_review_sensitivity`
 
 The important finding is not that the content improved. The comparison now
 recognizes both drafts as the same Silent axis-first attempt lane, while still
-recording that the raw scorecard case ids differ. The next gap is therefore
-`attempt_lane_sensitivity`: we need a harder or more meaningfully different
-same-lane attempt before claiming content improvement.
+recording that the raw scorecard case ids differ. The lane-level review also
+detects that card ids, card names, and rules text changed while aggregate score,
+dimension averages, and issue movement stayed static. The next gap is therefore
+`lane_review_sensitivity`: before writing another harder attempt, inspect the
+scorecard or exam blind spots that let same-lane content changes disappear.
 
 ## Boundary
 
@@ -98,7 +104,8 @@ axis-first exam loop and compared against the fixture baseline. It does not prov
 autonomous card-design quality, balance, reviewed evidence status, or promotion
 readiness.
 
-The next capability gap is stronger same-lane signal. Repeated attempts can now
-be grouped into one axis-first exam lane, but this first pair has no material
-score difference, so the loop needs a more meaningfully different next draft or
-more sensitive lane-level review before claiming design-quality movement.
+The next capability gap is lane-level review sensitivity. Repeated attempts can
+now be grouped into one axis-first exam lane, and this first pair shows changed
+card content without score movement. The loop should make the exam more
+informative about same-lane rules-text, fun/failure-state texture, and package
+role differences before claiming design-quality movement.
