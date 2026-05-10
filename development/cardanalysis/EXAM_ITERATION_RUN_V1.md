@@ -68,3 +68,8 @@ consumer is `exam_iteration_prompt_patch_proposal_v1`, which compares one or
 more runs and recommends prompt or handoff patches for the next generated
 attempt. The improvement claim still requires repeated generated attempts and
 evidence that recurring failure types decline.
+
+When an iteration run is part of an axis-first package-design rehearsal, wrap it
+with `autonomous_card_package_design_run_v1` so the attempt remains tied to the
+mechanism-axis search, constrained design brief, package seed, selected variant,
+package exam, and scorecard context.
