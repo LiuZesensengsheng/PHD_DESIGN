@@ -58,6 +58,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/generate_delivery_report.py`
 - Generate the current delivery report for a specific focus horizon:
   - `python scripts/generate_delivery_report.py --focus-horizon <internal_playtest|closed_test|ea_launch|v1_0|future>`
+- Generate delivery planning metrics from slice inventory plus recent git activity:
+  - `python scripts/generate_planning_metrics.py --focus-horizon <internal_playtest|closed_test|ea_launch|v1_0|future> --since <git-date>`
 
 ### Card Data Pipeline
 
