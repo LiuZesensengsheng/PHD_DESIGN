@@ -288,6 +288,7 @@ Capabilities:
 - `card_package_exam_v1`
 - `sts1_four_character_exam_v1`
 - `card_design_scorecard_v1`
+- `card_design_scorecard_calibration_v1`
 
 Artifacts:
 
@@ -332,6 +333,7 @@ Artifacts:
 - `card_package_exam_snapshot`
 - `sts1_four_character_exam_snapshot`
 - `card_design_scorecard_summary`
+- `card_design_scorecard_calibration_summary`
 
 Decision:
 

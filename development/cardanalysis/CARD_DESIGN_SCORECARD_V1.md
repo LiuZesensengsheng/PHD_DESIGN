@@ -20,6 +20,7 @@ card_package_exam_v1
   or exam_iteration_run_v1
   or sts1_four_character_exam_v1
   -> card_design_scorecard_v1
+  -> card_design_scorecard_calibration_v1
 ```
 
 `scripts/run_sts1_four_character_exam.py` also writes scorecard artifacts in
@@ -82,3 +83,6 @@ A clean scorecard run means a supported report-only source can be transformed
 into comparable scores and dimension averages. It does not prove autonomous LLM
 card-design quality, card balance, reviewed evidence status, or promotion
 readiness.
+
+Use `card_design_scorecard_calibration_v1` when checking whether the scorecard
+is separating healthy controls from known failure-family controls.
