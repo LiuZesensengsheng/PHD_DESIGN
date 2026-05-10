@@ -18,12 +18,15 @@ V1 consumes:
 - a `mechanism_axis_search_bundle_v1` snapshot;
 - a generated-hypothesis `card_package_proposal_v1` package seed;
 - one or more `complete_card_draft_v1` packages.
+- optionally, exactly one `campaign_curve_profile_v1` profile for advisory
+  campaign curve fit notes.
 
 V1 outputs:
 
 - axis alignment status;
 - per-draft package-health label;
 - embedded `card_package_health_v1` summary;
+- optional `campaign_curve_fit` risk tags and human review questions;
 - an advisory outcome.
 
 ## What V1 Does Not Do
@@ -70,4 +73,19 @@ An outcome like `draft_package_ready_for_human_review` means:
 - package-health evaluation did not classify it as payoff-only, generic-goodstuff,
   overstuffed, or brittle exactness;
 - human review is still required before any promotion.
+
+## Optional Campaign Curve Fit
+
+`--campaign-curve-profile` adds a report-only `campaign_curve_fit` section. It
+translates package-health and draft-structure signals into campaign timing questions
+against the selected profile:
+
+- online timing label;
+- curve risk tags such as `too_slow`, `too_narrow`,
+  `recovery_window_collapse`, `elite_check_failure`, and
+  `act2_transition_shock`;
+- recommended human review questions.
+
+This section is advisory only. It does not change `advisory_outcome`, create hard
+gates, modify runtime campaign, or claim reviewed STS1 evidence.
 
