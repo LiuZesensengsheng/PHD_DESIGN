@@ -536,6 +536,22 @@ Recommended optional dimensions:
 - `presentation_readability`
 - `authority_safety`
 
+## Fixture Contrast Set
+
+The current analyzer fixture set intentionally mixes positive, mixed, and
+counterexample patterns so the evaluator does not merely recognize a single
+DD1-shaped success case.
+
+| Case | Purpose | Expected Signal |
+| --- | --- | --- |
+| `dd1_visible_threshold_cascade_reference` | DD1-style visible pressure, threshold branch, reversal, contagion, and long-tail cost. | Strong psychological state loop. |
+| `hidden_random_debuff_counterexample` | Hidden spike, no recovery, no positive branch. | Unsafe agency and weak buildup. |
+| `recovery_window_agency_probe` | Visible pressure with triage, push, and retreat options. | Strong agency with mixed contagion/long-tail depth. |
+| `overfarmable_positive_break_counterexample` | Positive branch is too likely and too valuable. | Unsafe positive break; do not copy reward-engine loop. |
+| `stat_only_break_counterexample` | Threshold creates only a stat penalty. | Weak psychological loop; do not copy stat-only break. |
+| `no_recovery_cascade_spiral_counterexample` | Affliction-like contagion has no recovery window. | Strong cascade risk but unsafe agency. |
+| `unknown_probability_threshold_probe` | Structural ingredients exist but branch odds are unknown. | Mixed threshold drama, not strong confidence. |
+
 ## Positive Pattern Labels
 
 - `visible_pressure_clock`
