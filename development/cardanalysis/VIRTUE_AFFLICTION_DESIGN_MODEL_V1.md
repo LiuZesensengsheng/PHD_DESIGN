@@ -538,9 +538,15 @@ Recommended optional dimensions:
 
 ## Fixture Contrast Set
 
-The current analyzer fixture set intentionally mixes positive, mixed, and
-counterexample patterns so the evaluator does not merely recognize a single
-DD1-shaped success case.
+The current analyzer fixture set contains 37 report-only cases: the original
+DD1-shaped reference/probe/counterexample pack plus 30 matrix expansion cases.
+The matrix intentionally mixes positive, mixed, and counterexample patterns so
+the evaluator does not merely recognize a single DD1-shaped success case.
+
+The expansion is coverage-oriented, not a runtime performance claim. It uses
+`design_reference` source status, not reviewed evidence, and it does not change
+card generation, runtime data, learning, reranker, campaign curve, or hard-gate
+behavior.
 
 | Case | Purpose | Expected Signal |
 | --- | --- | --- |
@@ -551,6 +557,28 @@ DD1-shaped success case.
 | `stat_only_break_counterexample` | Threshold creates only a stat penalty. | Weak psychological loop; do not copy stat-only break. |
 | `no_recovery_cascade_spiral_counterexample` | Affliction-like contagion has no recovery window. | Strong cascade risk but unsafe agency. |
 | `unknown_probability_threshold_probe` | Structural ingredients exist but branch odds are unknown. | Mixed threshold drama, not strong confidence. |
+
+The 30-case matrix covers these families:
+
+| Family | Added Coverage |
+| --- | --- |
+| Stress buildup | Single visible source, multi-source/no recovery, hidden multi-source, delayed environment pressure, ally-contagion-first pressure. |
+| Threshold drama | No threshold presentation, deterministic negative, deterministic positive, low outcome contrast. |
+| Positive break | No positive branch, minor relief, party stabilization, identity-only positive marker. |
+| Negative break | Command refusal, forced bad action, healing refusal, position disruption, self-damage, endpoint-risk escalation. |
+| Team contagion | Isolated break, single-ally contagion, party-wide contagion, resource contagion, recoverable contagion. |
+| Long-term consequence | No carryover, downtime, future-start stress. |
+| Agency preservation | Multiple prevention/triage controls, prevention-only/no triage, false controls with no safety valve. |
+
+Current matrix tests assert that the fixture set covers:
+
+- `stress_buildup`: `strong`, `mixed`, `weak`
+- `threshold_drama`: `strong`, `mixed`, `weak`
+- `positive_break`: `strong`, `mixed`, `weak`, `unsafe`
+- `negative_break`: `strong`, `mixed`, `weak`, `unsafe`
+- `team_contagion`: `strong`, `mixed`, `weak`
+- `long_term_consequence`: `strong`, `mixed`, `weak`
+- `agency_preservation`: `strong`, `mixed`, `unsafe`
 
 ## Positive Pattern Labels
 
