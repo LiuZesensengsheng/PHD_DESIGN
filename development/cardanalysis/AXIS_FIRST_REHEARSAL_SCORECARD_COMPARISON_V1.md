@@ -65,6 +65,9 @@ baseline:
   `axis_alignment`, `failure_state_quality`, `fun_tension`,
   `strength_risk_control`, `sts1_like_fit`
 - highest-change slot: `axis_enabler_signal` (`venom_mark` -> `toxic_cue`)
+- scorecard visibility patch status:
+  `patch_recommended_for_scorecard_visibility`
+- top patch lane: `axis_alignment_content_delta_visibility`
 - largest next gap: `lane_review_sensitivity`
 
 The important finding is not that the content improved. The comparison now
@@ -85,6 +88,16 @@ exam visibility patches such as:
 - `add_low_roll_recovery_contrast_to_failure_state_review`
 - `add_numeric_profile_delta_to_strength_risk_review`
 - `add_trigger_word_contrast_to_sts1_like_review`
+
+The comparison also emits an advisory `scorecard_visibility_patch_plan`. This
+turns the raw content-change signals into prioritized future scorecard patch
+lanes without changing current scores or weights. The current top lanes are:
+
+- `axis_alignment_content_delta_visibility`
+- `fun_tension_rules_texture_visibility`
+- `failure_state_low_roll_visibility`
+- `strength_numeric_profile_visibility`
+- `sts1_like_trigger_word_visibility`
 
 ## Boundary
 
