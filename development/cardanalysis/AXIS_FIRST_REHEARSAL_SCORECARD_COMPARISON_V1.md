@@ -46,6 +46,13 @@ tests/fixtures/combat_analysis/complete_card_draft_v1/
   silent_axis_first_codex_poison_retain_shiv_attempt_v1.json
 ```
 
+The harder same-lane Silent sensitivity attempt is:
+
+```text
+tests/fixtures/combat_analysis/complete_card_draft_v1/
+  silent_axis_first_codex_poison_retain_shiv_harder_attempt_v1.json
+```
+
 It validates as `complete_card_draft_v1`, remains `owner_supplied_draft` /
 `review_needed`, and receives the same advisory score as the Silent fixture
 baseline:
@@ -108,6 +115,11 @@ score and dimension averages while making static-score blind spots visible. For
 the current Silent pair the first note says `axis_alignment` should surface the
 `axis_enabler_signal` change from `venom_mark` to `toxic_cue` even though the
 axis-alignment score stayed static.
+
+The harder attempt keeps the same axis-first lane but stresses exactness, setup
+tax, fail-state quality, and strength-risk visibility. In that comparison the
+lane review reports `content_changed_score_changed`, so the notes can explain
+which dimensions moved rather than only naming a static-score blind spot.
 
 ## Boundary
 

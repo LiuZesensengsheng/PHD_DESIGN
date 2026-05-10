@@ -47,9 +47,10 @@ dimension is not yet backed by a dedicated model head.
 
 Axis-first same-lane comparisons may now provide advisory
 `scorecard_dimension_visibility_notes` from
-`axis_first_rehearsal_scorecard_comparison_v1`. These notes are dimension-level
-explanation overlays for future scorecard note work. They do not change
-`card_design_scorecard_v1` scores, weights, hard-gate behavior, or authority.
+`axis_first_rehearsal_scorecard_comparison_v1`. The scorecard CLI can show
+those notes in the Markdown report with `--visibility-notes`, but the overlay
+does not change `card_design_scorecard_v1` scores, weights, snapshot payloads,
+hard-gate behavior, or authority.
 
 ## Future Extension Points
 
@@ -80,6 +81,7 @@ any design promotion.
 
 ```powershell
 python scripts/run_card_design_scorecard.py --input tmp/combat_analysis/sts1_four_character_exam_current/sts1_four_character_exam_v1_snapshot.json --output-dir tmp/combat_analysis/card_design_scorecard_current
+python scripts/run_card_design_scorecard.py --input <supported_exam_or_iteration_snapshot.json> --visibility-notes <axis_first_rehearsal_scorecard_comparison_v1_snapshot.json> --output-dir tmp/combat_analysis/card_design_scorecard_with_visibility_notes_current
 python scripts/run_sts1_four_character_exam.py --output-dir tmp/combat_analysis/sts1_four_character_exam_current
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_design_scorecard_v1.py tests/scripts/test_run_card_design_scorecard.py -q
 ```
