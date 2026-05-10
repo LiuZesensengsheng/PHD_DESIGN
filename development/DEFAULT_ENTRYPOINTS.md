@@ -149,6 +149,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_card_package_exam.py --axis-search tests/fixtures/combat_analysis/mechanism_axis_design_brief_v1/silent_axis_search_bundle_snapshot_v1.json --package-seed <generated-card-package-proposal-v1.json> --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/card_package_exam_current`
 - Run the report-only STS1 four-character card package exam loop:
   - `python scripts/run_sts1_four_character_exam.py`
+- Build a report-only card design scorecard from a supported exam snapshot:
+  - `python scripts/run_card_design_scorecard.py --input tmp/combat_analysis/sts1_four_character_exam_current/sts1_four_character_exam_v1_snapshot.json --output-dir tmp/combat_analysis/card_design_scorecard_current`
 - Run the report-only mechanism axis search bundle:
   - `python scripts/run_mechanism_axis_search.py --input tests/fixtures/combat_analysis/mechanism_axis_search_v1/silent_high_agency_visible_clock_v1.json --output-dir tmp/combat_analysis/mechanism_axis_search_current`
 - Write the constrained design brief from the current mechanism axis search snapshot:

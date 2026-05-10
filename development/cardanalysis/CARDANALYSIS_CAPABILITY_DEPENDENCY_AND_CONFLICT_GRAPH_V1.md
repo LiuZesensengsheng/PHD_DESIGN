@@ -287,6 +287,7 @@ Capabilities:
 - `sts1_owner_approved_external_draft_batch_manifest_v1`
 - `card_package_exam_v1`
 - `sts1_four_character_exam_v1`
+- `card_design_scorecard_v1`
 
 Artifacts:
 
@@ -330,6 +331,7 @@ Artifacts:
 - `sts1_owner_approved_external_draft_batch_manifest`
 - `card_package_exam_snapshot`
 - `sts1_four_character_exam_snapshot`
+- `card_design_scorecard_summary`
 
 Decision:
 
