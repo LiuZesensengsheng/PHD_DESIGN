@@ -300,6 +300,68 @@ The most important anti-spike metric is `agency_preservation`. A stressful
 system can be punishing, but it should not make the player feel the optimal
 choice disappeared before the threshold.
 
+## Advisory Index Layer
+
+The implementation now emits `math_index_findings` in addition to raw metrics.
+These indices normalize selected signals to a `0.0` to `1.0` advisory range and
+attach a formula string plus an interpretation. They are explanatory indices,
+not score gates, tuning constants, learned weights, or runtime thresholds.
+
+| Index | Formula Sketch | Good Means | Bad Means |
+| --- | --- | --- | --- |
+| `pressure_readability_index` | `0.55*visibility + 0.25*lead_time + 0.20*presentation` | Players can see pressure building before the threshold. | Stress arrives as hidden surprise damage. |
+| `buildup_answerability_index` | `0.35*source_diversity + 0.35*recovery_offset + 0.30*agency_score` | Stress has readable causes and partial answers. | Buildup is just a tax, spike, or stalled inevitability. |
+| `threshold_suspense_index` | `0.30*readability + 0.35*branch_entropy + 0.35*outcome_contrast` | The threshold is visible, uncertain, and consequential. | The threshold is deterministic, hidden, or low contrast. |
+| `reversal_integrity_index` | `0.35*positive_value + 0.35*(1-overfarm_pressure) + 0.15*negative_teeth + 0.15*agency_score` | Positive break is a rare crisis reversal. | Positive break becomes a farmable reward engine. |
+| `affliction_integrity_index` | `0.35*negative_cost + 0.25*contagion + 0.20*long_term_cost + 0.20*agency_score` | Negative break changes reliability, team pressure, and future planning while leaving responses. | The state is cosmetic or pure helplessness. |
+| `contagion_runaway_risk_index` | `0.45*cascade_reproduction + 0.35*contagion_rate + 0.20*(1-recovery_offset)` | A controlled danger signal worth reviewing. | One break reproduces more breaks without enough recovery window. |
+| `agency_floor_index` | `0.50*agency_score + 0.25*has_controls + 0.25*has_safety_valves` | Prevention, triage, retreat, or partial value remain available. | The system deletes meaningful decisions. |
+| `carryover_weight_index` | long-term consequence signals normalized across roster, memory, and future pressure | Consequences create planning memory. | Consequence is absent or only a grind tax. |
+| `psychological_loop_health_index` | weighted readability, answerability, suspense, branch integrity, agency, and carryover minus unsafe/runaway penalty | The design behaves like a psychological state loop. | It collapses toward random debuff, reward farming, or agency erasure. |
+
+The labels `high`, `medium`, and `low` are intentionally softer than
+`strong`/`mixed`/`weak`/`unsafe` dimension labels. A medium or high numeric
+index can still receive a bad verdict if a known failure mode is present. For
+example, a farmable positive branch may retain readable pressure and agency,
+but the explanatory verdict should still mark it as
+`bad_reward_farming_loop`.
+
+## Interpretive Conclusions
+
+The report also emits `interpretive_conclusions`, a human-facing summary that
+answers "what is good?" and "what is bad?" without creating an `overall_pass`.
+
+Current verdicts:
+
+| Verdict | Meaning |
+| --- | --- |
+| `healthy_psychological_state_loop` | Good structure: readable buildup, uncertain high-contrast threshold, meaningful positive and negative branches, and preserved counterplay. |
+| `promising_but_needs_caution` | Mixed structure: several DD1-like ingredients exist, but at least one failure mode needs review. |
+| `bad_agency_erasing_loop` | Bad structure: pressure removes too many meaningful decisions and becomes helplessness. |
+| `bad_reward_farming_loop` | Bad structure: the positive branch is too reliable or profitable, so threshold pressure becomes something to farm. |
+| `weak_or_non_psychological_loop` | Weak or bad structure: the design lacks enough branch contrast, state identity, consequence, or agency to act like a psychological loop. |
+
+Good explanatory patterns include:
+
+- `visible_pressure_clock`
+- `meaningful_threshold_suspense`
+- `rare_positive_reversal`
+- `negative_break_has_behavioral_teeth`
+- `team_level_state_pressure`
+- `state_has_memory_beyond_one_turn`
+- `player_agency_survives_crisis`
+
+Bad explanatory patterns include:
+
+- `hidden_or_unreadable_pressure`
+- `flat_or_deterministic_threshold`
+- `overfarmable_positive_break`
+- `unrecoverable_negative_break`
+- `runaway_contagion_without_enough_offset`
+- `agency_erasure`
+- `stat_only_debuff_not_psychological_state`
+- `no_long_tail_cost_or_identity`
+
 ## Decision EV Layer
 
 The model can compare high-level player options without designing final cards.
@@ -499,7 +561,14 @@ documentation draft, not runtime data.
   "authority_boundary": "advisory_context_only",
   "case_id": "short_unique_id",
   "metric_findings": [],
+  "math_index_findings": [],
   "dimension_findings": [],
+  "interpretive_conclusions": {
+    "verdict": "healthy_psychological_state_loop",
+    "good_patterns": [],
+    "bad_patterns": [],
+    "explanation": []
+  },
   "transferability": {
     "transferable": [],
     "adapt_with_caution": [],
@@ -592,6 +661,9 @@ This block is an aggregate readout over the current matrix:
   and weak threshold drama.
 - `boundary_summary` repeats that the run made no runtime, formal-card,
   hard-gate, default-generation, learned/reranker, or reviewed-evidence change.
+- `interpretive_summary` summarizes verdict counts, representative verdict
+  cases, good-pattern counts, and bad-pattern counts so the matrix can explain
+  what is structurally good or bad instead of only listing labels.
 
 This aggregate summary is still report-only. It is a fixture coverage and
 diagnostic readout, not a quality score, pass/fail gate, runtime tuning table,

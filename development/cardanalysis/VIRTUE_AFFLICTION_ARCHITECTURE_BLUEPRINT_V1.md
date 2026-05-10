@@ -428,6 +428,25 @@ Should estimate:
 Metrics may be qualitative when numeric inputs are absent. Use `unknown` rather
 than inventing false precision.
 
+The current implementation also emits an advisory index layer:
+
+- `pressure_readability_index`
+- `buildup_answerability_index`
+- `threshold_suspense_index`
+- `reversal_integrity_index`
+- `affliction_integrity_index`
+- `contagion_runaway_risk_index`
+- `agency_floor_index`
+- `carryover_weight_index`
+- `psychological_loop_health_index`
+
+These indices are explanatory math, not gates. They support
+`interpretive_conclusions` such as `healthy_psychological_state_loop`,
+`bad_agency_erasing_loop`, `bad_reward_farming_loop`, and
+`weak_or_non_psychological_loop`. A later integration must not treat these
+labels or numeric values as runtime tuning, default synthesis input, learned
+targets, or pass/fail authority.
+
 ### Dimension Classifier
 
 Required dimensions:
