@@ -109,3 +109,8 @@ promotion readiness.
 
 The next capability gap is repeating this rehearsal across additional characters
 or comparing multiple rehearsals with scorecard delta and failure movement.
+
+`axis_first_rehearsal_scorecard_comparison_v1` is the first comparison surface.
+It rebuilds a baseline and latest rehearsal from supplied draft files, compares
+their advisory scorecards, and reports when the current scorecard delta lacks a
+matched case pair for content-improvement claims.
