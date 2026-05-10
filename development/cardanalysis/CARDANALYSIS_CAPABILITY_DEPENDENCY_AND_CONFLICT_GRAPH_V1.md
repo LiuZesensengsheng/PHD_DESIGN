@@ -267,6 +267,26 @@ Capabilities:
 - `campaign_experience_curve_v1`
 - `campaign_advisory_bundle_v1`
 - `cardanalysis_case_progress_report_v1`
+- `sts1_exam_target_v1`
+- `card_package_variant_set_v1`
+- `card_package_draft_handoff_v1`
+- `complete_card_draft_v1`
+- `card_draft_failure_taxonomy_v1`
+- `llm_complete_card_draft_attempt_v1`
+- `llm_draft_prompt_application_v1`
+- `external_draft_intake_packet_v1`
+- `external_draft_submission_readiness_v1`
+- `external_draft_intake_rehearsal_v1`
+- `exam_iteration_run_v1`
+- `exam_iteration_prompt_patch_proposal_v1`
+- `exam_iteration_batch_comparison_v1`
+- `exam_iteration_generated_attempt_batch_run_v1`
+- `exam_iteration_multi_character_batch_summary_v1`
+- `sts1_four_character_generated_attempt_intake_batch_v1`
+- `sts1_four_character_external_draft_intake_rehearsal_v1`
+- `sts1_owner_approved_external_draft_batch_manifest_v1`
+- `card_package_exam_v1`
+- `sts1_four_character_exam_v1`
 
 Artifacts:
 
@@ -290,6 +310,26 @@ Artifacts:
 - `cardanalysis_evidence_bundle`
 - `evaluation_autonomous_design_review`
 - `authority_boundary_contract`
+- `sts1_exam_target`
+- `card_package_variant_set`
+- `card_package_draft_handoff`
+- `complete_card_draft_package`
+- `card_draft_failure_taxonomy`
+- `llm_complete_card_draft_attempt_snapshot`
+- `llm_draft_prompt_application_snapshot`
+- `external_draft_intake_packet`
+- `external_draft_submission_readiness`
+- `external_draft_intake_rehearsal`
+- `exam_iteration_run_snapshot`
+- `exam_iteration_prompt_patch_proposal`
+- `exam_iteration_batch_comparison`
+- `exam_iteration_generated_attempt_batch_run`
+- `exam_iteration_multi_character_batch_summary`
+- `sts1_four_character_generated_attempt_intake_batch`
+- `sts1_four_character_external_draft_intake_rehearsal`
+- `sts1_owner_approved_external_draft_batch_manifest`
+- `card_package_exam_snapshot`
+- `sts1_four_character_exam_snapshot`
 
 Decision:
 

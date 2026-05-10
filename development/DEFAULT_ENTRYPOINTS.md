@@ -99,6 +99,56 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Write the report-only cardanalysis case progress dashboard:
   - `python scripts/run_cardanalysis_case_progress_report.py --write-template tmp/combat_analysis/case_progress_current_template.json`
   - `python scripts/run_cardanalysis_case_progress_report.py --input tmp/combat_analysis/case_progress_current_template.json --output-dir tmp/combat_analysis/case_progress_current`
+- Write and validate STS1 exam targets:
+  - `python scripts/validate_sts1_exam_target.py --write-template tmp/combat_analysis/sts1_exam_target_template.json`
+  - `python scripts/validate_sts1_exam_target.py --input tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json`
+- Write and validate report-only card package variant sets:
+  - `python scripts/validate_card_package_variant_set.py --write-template tmp/combat_analysis/card_package_variant_set_template.json`
+  - `python scripts/validate_card_package_variant_set.py --input tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json`
+  - `python scripts/validate_card_package_variant_set.py --input tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --write-report tmp/combat_analysis/card_package_variant_set_report.md`
+- Write a report-only complete-card draft handoff from the recommended package variant:
+  - `python scripts/run_card_package_draft_handoff.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --output-dir tmp/combat_analysis/card_package_draft_handoff_current`
+- Record one generated or owner-supplied `complete_card_draft_v1` attempt against a draft handoff:
+  - `python scripts/run_llm_complete_card_draft_attempt.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/llm_complete_card_draft_attempt_current`
+- Validate four-character generated-attempt negative controls:
+  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_llm_complete_card_draft_attempt_v1.py tests/toolkit/combat_analysis/test_exam_iteration_run_v1.py -q`
+- Record one report-only attempt-to-exam iteration run:
+  - `python scripts/run_exam_iteration_run.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --axis-search <mechanism_axis_search_bundle_v1.json> --package-seed <card_package_proposal_v1.json> --output-dir tmp/combat_analysis/exam_iteration_run_current`
+- Summarize iteration runs into report-only prompt and handoff patch advice:
+  - `python scripts/run_exam_iteration_prompt_patch_proposal.py --input tmp/combat_analysis/exam_iteration_run_current/exam_iteration_run_v1_snapshot.json --output-dir tmp/combat_analysis/exam_iteration_prompt_patch_proposal_current`
+- Record prompt-patch application and external complete-card draft intake without calling an LLM:
+  - `python scripts/run_llm_draft_prompt_application.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --prompt-patch <exam_iteration_prompt_patch_proposal_v1_snapshot.json> --generation-metadata <external_generation_metadata.json> --output-dir tmp/combat_analysis/llm_draft_prompt_application_current`
+- Prepare a report-only external/owner-approved complete-card draft intake packet without calling an LLM:
+  - `python scripts/run_external_draft_intake_packet.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --prompt-patch <exam_iteration_prompt_patch_proposal_v1_snapshot.json> --output-dir tmp/combat_analysis/external_draft_intake_packet_current`
+- Check whether a supplied external complete-card draft is ready for prompt-application intake:
+  - `python scripts/run_external_draft_submission_readiness.py --intake-packet tmp/combat_analysis/external_draft_intake_packet_current/external_draft_intake_packet_v1_snapshot.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --generation-metadata tmp/combat_analysis/external_draft_intake_packet_current/external_generation_metadata_template.json --output-dir tmp/combat_analysis/external_draft_submission_readiness_current`
+- Run a report-only external draft intake rehearsal from approved draft files:
+  - `python scripts/run_external_draft_intake_rehearsal.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --generation-metadata <external_generation_metadata.json> --output-dir tmp/combat_analysis/external_draft_intake_rehearsal_current`
+- Compare an ordered batch of generated-attempt iteration runs:
+  - `python scripts/run_exam_iteration_batch_comparison.py --input <attempt_001_exam_iteration_run_snapshot.json> --input <attempt_002_exam_iteration_run_snapshot.json> --prompt-patch <exam_iteration_prompt_patch_proposal_v1_snapshot.json> --output-dir tmp/combat_analysis/exam_iteration_batch_comparison_current`
+- Run a report-only generated-attempt batch from handoff through iteration, prompt patch, and comparison:
+  - `python scripts/run_exam_iteration_generated_attempt_batch.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft <attempt_001_complete_card_draft_v1.json> --draft <attempt_002_complete_card_draft_v1.json> --axis-search <mechanism_axis_search_bundle_v1.json> --package-seed <card_package_proposal_v1.json> --output-dir tmp/combat_analysis/exam_iteration_generated_attempt_batch_current`
+- Run a report-only generated-attempt batch from prompt-application intake snapshots:
+  - `python scripts/run_exam_iteration_generated_attempt_batch.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --prompt-application <attempt_001_llm_draft_prompt_application_v1_snapshot.json> --prompt-application <attempt_002_llm_draft_prompt_application_v1_snapshot.json> --axis-search <mechanism_axis_search_bundle_v1.json> --package-seed <card_package_proposal_v1.json> --output-dir tmp/combat_analysis/exam_iteration_generated_attempt_batch_from_intake_current`
+- Summarize generated-attempt batches across multiple STS1 character targets:
+  - `python scripts/run_exam_iteration_multi_character_batch_summary.py --input <silent_exam_iteration_generated_attempt_batch_run_v1_snapshot.json> --input <ironclad_exam_iteration_generated_attempt_batch_run_v1_snapshot.json> --output-dir tmp/combat_analysis/exam_iteration_multi_character_batch_summary_current`
+- Run the report-only four-character generated-attempt batch from simulated prompt-application intake records:
+  - `python scripts/run_sts1_four_character_generated_attempt_intake_batch.py --output-dir tmp/combat_analysis/sts1_four_character_generated_attempt_intake_batch_current`
+- Run the report-only four-character external draft intake rehearsal:
+  - `python scripts/run_sts1_four_character_external_draft_intake_rehearsal.py --output-dir tmp/combat_analysis/sts1_four_character_external_draft_intake_rehearsal_current`
+- Write an owner-approved external draft batch manifest template:
+  - `python scripts/run_sts1_owner_approved_external_draft_batch_manifest.py --write-template tmp/combat_analysis/sts1_owner_approved_external_draft_batch_manifest_template.json`
+- Run the report-only four-character owner-approved external draft batch manifest:
+  - `python scripts/run_sts1_owner_approved_external_draft_batch_manifest.py --manifest <owner_approved_batch_manifest.json> --output-dir tmp/combat_analysis/sts1_owner_approved_external_draft_batch_manifest_current`
+- Write and validate complete card draft packages:
+  - `python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json`
+  - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json`
+- Export a complete card draft as temporary `card_package_health_v1` owner input:
+  - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --export-card-package-health-input tmp/combat_analysis/complete_card_draft_card_package_health_input.json`
+- Run a report-only card package exam from axis search, package seed, and complete drafts:
+  - `python scripts/run_card_package_exam.py --axis-search tests/fixtures/combat_analysis/mechanism_axis_design_brief_v1/silent_axis_search_bundle_snapshot_v1.json --package-seed <generated-card-package-proposal-v1.json> --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/card_package_exam_current`
+- Run the report-only STS1 four-character card package exam loop:
+  - `python scripts/run_sts1_four_character_exam.py`
 - Run the report-only mechanism axis search bundle:
   - `python scripts/run_mechanism_axis_search.py --input tests/fixtures/combat_analysis/mechanism_axis_search_v1/silent_high_agency_visible_clock_v1.json --output-dir tmp/combat_analysis/mechanism_axis_search_current`
 - Write the constrained design brief from the current mechanism axis search snapshot:
