@@ -22,6 +22,7 @@ contracts.
 | --- | --- | --- |
 | Four-character happy path | `tests/fixtures/combat_analysis/sts1_four_character_exam_v1/four_character_exam_sources_v1.json` | Runs Silent, Ironclad, Defect, and Watcher through the report-only package exam loop. |
 | Four-character generated-attempt negatives | `tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_negative_attempt_drafts_v1.json` | Provides one intentionally flawed generated-attempt draft per character. |
+| Four-character boundary generated attempts | `tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_boundary_attempt_drafts_v1.json` | Provides one schema-valid but suspicious generated-attempt draft per character for report-only attempt and iteration feedback. |
 | Enrichment proposal pack | `tests/fixtures/combat_analysis/sts1_card_exam_enrichment_v1/sts1_card_exam_enrichment_proposals_v1.json` | Lists proposed negative and boundary cases, blind spots, and scorecard dimensions. |
 
 ## Current Coverage
@@ -36,6 +37,11 @@ contracts.
 The current set is useful, but each character mostly tests a different failure
 family. The next exam-content batch should rotate failure families across characters
 so the exam can catch plausible bad drafts, not only obvious broken drafts.
+
+The first concrete boundary batch now does this without changing the core exam
+contracts: it uses valid `complete_card_draft_v1` payloads that can enter
+`llm_complete_card_draft_attempt_v1` and `exam_iteration_run_v1`, then checks that
+existing report-only feedback names the expected revision risks.
 
 ## Blind Spots
 
@@ -65,6 +71,22 @@ These are proposals, not runtime cards. They should become concrete fixtures onl
 after the main exam owner decides which cases should be blocking failures and which
 should remain warning-only.
 
+## Concrete Boundary Attempt Batch
+
+The first promoted report-only batch keeps one new generated-attempt boundary case
+per character:
+
+| Character | Case | Main pressure |
+| --- | --- | --- |
+| Silent | `silent_shiv_tempo_goodstuff_boundary_attempt_v1` | Shiv tempo and refunds explain the package better than poison. |
+| Ironclad | `ironclad_block_engine_swallows_strength_boundary_attempt_v1` | A block engine swallows the intended strength-scaling identity. |
+| Defect | `defect_free_focus_numeric_fantasy_boundary_attempt_v1` | Free focus and refund language create numeric-fantasy combo pressure. |
+| Watcher | `watcher_early_blank_late_divinity_explosion_boundary_attempt_v1` | Early turns are too blank while late Divinity payoff spikes too hard. |
+
+This batch is deliberately warning-oriented: the drafts remain schema-valid and
+can enter package-exam feedback so reviewers can inspect the failure readout
+instead of only proving that invalid JSON is rejected.
+
 ## Scorecard Suggestions
 
 Suggested `card_design_scorecard_v1` dimensions:
@@ -84,7 +106,8 @@ without per-character reviewed bands.
 ## Waiting For Mainline
 
 - Turn selected proposals into a second concrete negative-control fixture batch.
-- Decide warning versus blocking expectations for boundary samples.
+- Decide which boundary samples should stay warning-only and which should become
+  blocking expectations in a future mainline exam pass.
 - Add scorecard implementation only after the scorecard owner accepts the dimension
   definitions and evidence sources.
 - Keep `exam_iteration_run_v1` and `exam_iteration_generated_attempt_batch_run_v1`
@@ -96,4 +119,5 @@ Focused validation:
 
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_card_exam_enrichment_v1.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_card_exam_boundary_attempts_v1.py -q
 ```

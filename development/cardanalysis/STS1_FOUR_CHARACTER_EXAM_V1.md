@@ -59,6 +59,9 @@ The report-only enrichment inventory for current papers, blind spots, and propos
 negative/boundary samples lives in
 `docs/development/cardanalysis/STS1_CARD_EXAM_ENRICHMENT_V1.md` and
 `tests/fixtures/combat_analysis/sts1_card_exam_enrichment_v1/sts1_card_exam_enrichment_proposals_v1.json`.
+The first concrete boundary-attempt batch lives in
+`tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_boundary_attempt_drafts_v1.json`
+and is validated without changing this four-character exam contract.
 
 ## Interpretation
 

@@ -61,6 +61,12 @@ attempt test suite uses them to verify schema/slot, axis drift, combo-risk,
 generic-goodstuff, exactness, weak fail-state, and STS1-like texture feedback
 without promoting any draft.
 
+`tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_boundary_attempt_drafts_v1.json`
+adds four schema-valid boundary attempts, one per STS1 character. These drafts are
+intended to enter report-only iteration feedback and surface plausible design
+risks such as secondary-axis swallowing, character-texture mismatch,
+numeric-fantasy pressure, and early-weak/late-explosion shape.
+
 ## Interpretation
 
 Passing this attempt check means a generated draft can enter package exam. It
