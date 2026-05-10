@@ -32,6 +32,7 @@ mechanism_axis_search_bundle_v1
   -> card_package_exam_v1
   -> card_design_scorecard_v1
   -> autonomous_card_package_design_run_v1
+  -> optional axis_first_draft_writing_rehearsal_v1
 ```
 
 The source `complete_card_draft_v1` may be written by a human or by Codex in the
@@ -85,3 +86,7 @@ card-design quality, balance, reviewed evidence status, or promotion readiness.
 The next capability gap is a bounded owner-approved draft-writing session that uses
 the axis search and handoff artifacts as its prompt context, then submits the resulting
 draft file back through this run.
+
+`axis_first_draft_writing_rehearsal_v1` is that first bounded bridge. It records the
+owner/Codex-supplied draft-writing context and requires the supplied draft to flow back
+through this autonomous run, while still avoiding runtime synthesis or promotion.

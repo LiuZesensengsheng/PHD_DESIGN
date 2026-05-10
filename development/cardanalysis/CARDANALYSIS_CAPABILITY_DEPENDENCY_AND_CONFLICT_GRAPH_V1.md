@@ -289,6 +289,7 @@ Capabilities:
 - `mechanism_axis_design_brief_v1`
 - `mechanism_axis_package_seed_v1`
 - `autonomous_card_package_design_run_v1`
+- `axis_first_draft_writing_rehearsal_v1`
 - `card_package_exam_v1`
 - `sts1_four_character_exam_v1`
 - `card_design_scorecard_v1`
@@ -339,6 +340,7 @@ Artifacts:
 - `mechanism_axis_design_brief`
 - `card_package_proposal_seed`
 - `autonomous_card_package_design_run_snapshot`
+- `axis_first_draft_writing_rehearsal_snapshot`
 - `card_package_exam_snapshot`
 - `sts1_four_character_exam_snapshot`
 - `card_design_scorecard_summary`
