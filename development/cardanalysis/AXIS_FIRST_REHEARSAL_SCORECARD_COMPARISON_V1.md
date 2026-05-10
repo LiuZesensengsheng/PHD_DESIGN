@@ -4,14 +4,14 @@
 
 `axis_first_rehearsal_scorecard_comparison_v1` is a report-only comparison for
 two supplied `complete_card_draft_v1` files that both start from the same
-axis-first Silent context.
+axis-first STS1 character context.
 
 It answers:
 
 ```text
 When a fresh owner/Codex-supplied draft enters the axis-first rehearsal path,
 does the existing scorecard delta show improvement, regression, or an exam
-visibility gap relative to the Silent fixture baseline?
+visibility gap relative to the fixture baseline for that character lane?
 ```
 
 ## Workflow Position
@@ -121,6 +121,32 @@ tax, fail-state quality, and strength-risk visibility. In that comparison the
 lane review reports `content_changed_score_changed`, so the notes can explain
 which dimensions moved rather than only naming a static-score blind spot.
 
+## Current Ironclad Result
+
+The second role now uses the axis search result directly instead of the older
+four-character fixture's strength-first target. The searched Ironclad axes are:
+
+- `exhaust`
+- `block_engine`
+- `strength_scaling`
+
+The baseline and fresh supplied drafts are:
+
+```text
+tests/fixtures/combat_analysis/complete_card_draft_v1/
+  ironclad_exhaust_block_strength_exam_draft_v1.json
+  ironclad_axis_first_codex_exhaust_block_strength_attempt_v1.json
+```
+
+Both drafts validate as `complete_card_draft_v1`, remain
+`owner_supplied_draft` / `review_needed`, and replay through the same
+axis-first comparison lane. The current comparison again reports a static
+aggregate score while content changed, so the next gap remains
+`lane_review_sensitivity`. The important new coverage is that scorecard
+visibility notes now recognize axis-relevant same-slot changes for non-Silent
+lanes, including exhaust, block, and strength language, without changing scores
+or weights.
+
 ## Boundary
 
 This surface does not:
@@ -156,6 +182,7 @@ autonomous card-design quality, balance, reviewed evidence status, or promotion
 readiness.
 
 The next capability gap is lane-level review sensitivity. Repeated attempts can
-now be grouped into one axis-first exam lane, and this first pair shows changed
-card content without score movement. The loop can now name which scorecard
-dimensions should become more observant before claiming design-quality movement.
+now be grouped into one axis-first exam lane, and the Silent and Ironclad pairs
+both show changed card content without score movement. The loop can now name
+which scorecard dimensions should become more observant before claiming
+design-quality movement.
