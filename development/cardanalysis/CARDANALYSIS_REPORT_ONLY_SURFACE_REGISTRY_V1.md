@@ -21,6 +21,7 @@ parallel V1 modules with overlapping meaning.
 | `position_redirect_code_preflight_v1` | `tools/combat_analysis/design_engine/position_redirect_code_preflight.py` | `scripts/run_position_redirect_code_preflight.py` | `position_redirect_code_preflight_summary` |
 | `cardanalysis_evidence_bundle_v1` | `tools/combat_analysis/design_engine/cardanalysis_evidence_bundle.py` | none | evidence bundle root |
 | `campaign_power_curve_report_v1` | `tools/combat_analysis/design_engine/campaign_power_curve_model.py` | `scripts/run_campaign_power_curve_report.py` | `campaign_power_curve_summary` |
+| `virtue_affliction_design_model_v1` | `tools/combat_analysis/design_engine/virtue_affliction_design_model.py` | `scripts/run_virtue_affliction_design_model.py` | `virtue_affliction_design_report` |
 
 The machine-readable mirror lives in
 `tools/combat_analysis/report_only_surface_registry.py`.
@@ -40,6 +41,11 @@ The machine-readable mirror lives in
 - `campaign_power_curve_report_v1` may provide campaign pacing and encounter
   validation context, but it must not define monster stats, hard counters, or runtime
   encounter implementation.
+- `virtue_affliction_design_model_v1` may provide DD1-inspired stress-threshold,
+  virtue-like, affliction-like, contagion, agency, and long-term-cost advisory
+  context, but it must not create formal cards, runtime stress rules, campaign
+  curve defaults, hard gates, default generation, learned behavior, or reranker
+  behavior.
 - `position_redirect_code_preflight_v1` is a report-only code-handoff surface. It may
   define bounded prototype constraints, but it must not become gameplay runtime,
   family promotion, or hard-gate authority by itself.

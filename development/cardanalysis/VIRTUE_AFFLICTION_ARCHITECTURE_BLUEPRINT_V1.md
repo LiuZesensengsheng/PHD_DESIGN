@@ -7,7 +7,7 @@ model before any implementation work starts.
 
 This blueprint turns the research and math model into an architecture plan:
 which layers exist, which artifacts move between them, how the cardanalysis
-capability graph should see the model later, and what must stay out of scope.
+capability graph should see the model, and what must stay out of scope.
 
 This is not runtime gameplay architecture. It does not design formal cards,
 write runtime data, add hard gates, or change default generation, learning,
@@ -40,8 +40,8 @@ shapes:
 - Reuse the existing capability dependency/conflict graph vocabulary.
 - Prefer report-only contracts before code.
 - Preserve `advisory_context_only`.
-- Do not modify `tools/combat_analysis/capability_graph_registry.py` in this
-  blueprint.
+- Keep capability graph changes minimal and limited to report-only coverage
+  unless a later consumer integration is approved.
 - Do not edit default entrypoints.
 - Do not enter campaign runtime, combat runtime, or card package generation.
 
@@ -63,7 +63,8 @@ Accidental complexity to avoid:
 - source-specific DD1 naming and exact values;
 - DD2 relationship/affinity modeling;
 - runtime implementation;
-- a graph node before the owner module and report artifact exist;
+- consumer or authority graph edges before the owner module and report artifact
+  exist;
 - score-like outputs that look like hard gates.
 
 ## Options
@@ -94,7 +95,7 @@ The model should become a standalone report-only head only after it has:
 2. a CLI that emits report/snapshot/manifest,
 3. fixtures that prove DD1-derived inputs cannot claim reviewed status,
 4. report output that avoids `overall_pass` and `hard_gates`,
-5. graph registration that is review-gated with `stress_resolve_model_v1`.
+5. minimal graph coverage that does not imply consumer integration.
 
 Until then, keep this work as architecture docs plus a model contract.
 
@@ -112,9 +113,9 @@ capability.
 ## Decision Summary
 
 Adopt a phased, report-only architecture. Keep DD1 virtue/affliction as a
-separate architecture and model draft now. Later implementation may promote it
-as a narrow report-only head, but only with graph review and explicit
-non-authority boundaries.
+separate architecture and model head with only minimal report-only graph
+coverage. Later implementation may add explicit consumers, but only with graph
+review and explicit non-authority boundaries.
 
 ## Layered Architecture
 
@@ -263,11 +264,32 @@ Role:
 - Prevents the model from silently overlapping with existing stress/resolve or
   campaign pacing work.
 
-This blueprint only proposes graph entries. It does not register them.
+The live graph has only the registry-derived report-only surface node and report
+artifact. The richer edges below remain a future registration plan.
+
+## Current Minimal Graph Coverage
+
+Registered now:
+
+- `virtue_affliction_design_model_v1` as a canonical report-only surface
+  capability.
+- `virtue_affliction_design_report` as its advisory report artifact.
+- authority dependencies shared by all report-only registry surfaces.
+
+Not registered now:
+
+- `virtue_affliction_feature_projection`.
+- consumer edges from normalized cases or feature projection.
+- review-gated edges with `stress_resolve_model_v1`.
+- conflicts with default synthesis, runtime data, or hard-gate promotion as
+  concrete graph nodes.
+- any default entrypoint, generation, learned, reranker, runtime, campaign
+  curve, or core-exam integration.
 
 ## Future Graph Registration Plan
 
-Register only after a code owner and report artifact exist.
+Register richer edges only after a later integration review decides this model
+has live consumers or overlap with `stress_resolve_model_v1`.
 
 ### Proposed Capability Node
 
@@ -445,7 +467,7 @@ Must not write:
 
 ### Phase 0: Docs Architecture
 
-Status: current branch.
+Status: complete on the current branch.
 
 Scope:
 
@@ -478,6 +500,8 @@ Add fixture-specific tests only when code exists.
 
 ### Phase 2: Report-Only Model Head
 
+Status: complete on the current branch.
+
 Scope:
 
 - add owner module,
@@ -490,18 +514,20 @@ Validation:
 
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_virtue_affliction_design_model_v1.py tests/scripts/test_run_virtue_affliction_design_model.py -q
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/shared/test_text_encoding_guards.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_report_only_surface_registry_v1.py tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/shared/test_text_encoding_guards.py -q
 git diff --check
 ```
 
-### Phase 3: Graph Registration
+### Phase 3: Minimal Graph Coverage
+
+Status: complete on the current branch.
 
 Scope:
 
-- register capability and artifacts in
-  `tools/combat_analysis/capability_graph_registry.py`;
+- register the report-only capability and report artifact required by registry
+  coverage in `tools/combat_analysis/capability_graph_registry.py`;
 - add graph tests;
-- add review-gated edge with `stress_resolve_model_v1`.
+- do not add consumers, default paths, runtime paths, or hard gates.
 
 Validation:
 
@@ -516,6 +542,8 @@ Scope:
 
 - decide whether the report feeds `evaluation_autonomous_design_model_v1`,
   `cardanalysis_evidence_bundle_v1`, or stays standalone.
+- if it gains stress-threshold ownership overlap, add a review-gated edge with
+  `stress_resolve_model_v1`.
 
 Validation:
 
@@ -532,7 +560,8 @@ Validation:
 - No default synthesis, learned, or reranker behavior.
 - No DD2 relationship/affinity scope creep.
 - DD1 values are not project tuning.
-- Any graph registration must be review-gated with `stress_resolve_model_v1`.
+- Any future consumer or ownership-overlap graph registration must be
+  review-gated with `stress_resolve_model_v1`.
 
 ## Open Questions
 
@@ -544,4 +573,3 @@ Validation:
   cases before this model informs design decisions?
 - Should metrics remain qualitative forever, or should numeric calibration wait
   for playtest data?
-

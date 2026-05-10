@@ -43,9 +43,12 @@ stress buildup -> threshold drama -> positive break or negative break ->
 team contagion/recovery -> long-term consequence
 ```
 
-This draft does not register a new capability graph node. A future integration
-may either fold it into `stress_resolve_model_v1` or register it as a separate
-report-only capability after review.
+This model is implemented as a report-only surface. The live capability graph
+contains only the minimal registry-derived capability and report artifact needed
+to keep canonical surface coverage valid. It does not register consumers,
+feature-projection inputs, default generation, runtime integration, or hard-gate
+authority. A future integration may either fold it into `stress_resolve_model_v1`
+or add explicit review-gated consumers after review.
 
 The implementation architecture lives in
 `VIRTUE_AFFLICTION_ARCHITECTURE_BLUEPRINT_V1.md`. This model document defines
@@ -117,8 +120,9 @@ Accidental complexity to avoid:
 
 Use the second option. Keep the system design and math inside this
 `virtue_affliction_design_model_v1` contract, and express future integration in
-the cardanalysis graph vocabulary. Do not register code, fixtures, or default
-entrypoints yet.
+the cardanalysis graph vocabulary. Keep code, fixtures, and graph coverage
+report-only; do not add default entrypoints, consumers, runtime wiring, or
+hard-gate authority yet.
 
 The model should become useful before it becomes authoritative: first it should
 produce advisory metrics and graph placement, then later it can be folded into
@@ -136,9 +140,10 @@ separate capability.
 ### Decision Summary
 
 `virtue_affliction_design_model_v1` should be a DD1-only, report-only,
-math-backed threshold-branch evaluator draft. It should use cardanalysis
-multi-relation graph semantics for planning, but it should not modify the live
-capability graph until a later integration task.
+math-backed threshold-branch evaluator. It uses the live cardanalysis graph only
+for canonical report-only surface coverage. It should not add consumer edges,
+default paths, runtime paths, or hard-gate authority without a later integration
+task.
 
 ## DD1-Derived System Model
 
@@ -351,31 +356,32 @@ can become advisory review context while preserving provenance.
 | Node Id | Kind | Status | Trust Tier | Notes |
 | --- | --- | --- | --- | --- |
 | `dd1_stress_virtue_affliction_research_v1` | artifact | draft | source_mined | The DD1-only research report. |
-| `virtue_affliction_design_model_v1` | capability | draft | report_only | This model if later implemented. |
-| `virtue_affliction_feature_projection` | artifact | draft | report_only | Optional projection from normalized cases into metrics. |
-| `virtue_affliction_design_report` | artifact | draft | report_only | Human-readable advisory output. |
+| `virtue_affliction_design_model_v1` | capability | draft | report_only | Live only as canonical report-only surface coverage. |
+| `virtue_affliction_feature_projection` | artifact | draft | report_only | Optional future projection from normalized cases into metrics. |
+| `virtue_affliction_design_report` | artifact | draft | report_only | Live human-readable advisory output artifact. |
 | `decision_dd1_values_not_project_tuning` | decision | draft | decision_frozen after review | Prevents copying DD1 numbers or labels as defaults. |
 
 ### Proposed Future Edges
 
 | Source | Relation | Target | Reason |
 | --- | --- | --- | --- |
-| `virtue_affliction_design_model_v1` | `depends_on` | `decision_report_only_surfaces_not_authoritative` | Keeps report-only output advisory. |
+| `virtue_affliction_design_model_v1` | `depends_on` | `decision_report_only_surfaces_not_authoritative` | Live edge that keeps report-only output advisory. |
 | `virtue_affliction_design_model_v1` | `depends_on` | `dd1_stress_virtue_affliction_research_v1` | Uses DD1-only structure as source-mined/design-reference input. |
 | `virtue_affliction_design_model_v1` | `depends_on` | `decision_dd1_values_not_project_tuning` | Prevents copying DD1 thresholds, probabilities, and labels. |
 | `virtue_affliction_design_model_v1` | `optional_depends_on` | `stress_resolve_summary` | Useful context if the model is folded into stress/resolve. |
 | `virtue_affliction_design_model_v1` | `consumes` | `normalized_design_case` | Future only, if normalized cases are wired. |
 | `virtue_affliction_design_model_v1` | `consumes` | `virtue_affliction_feature_projection` | Future only, if metric projection is wired. |
-| `virtue_affliction_design_model_v1` | `provides` | `virtue_affliction_design_report` | Advisory report output. |
-| `virtue_affliction_design_model_v1` | `review_gated_with` | `stress_resolve_model_v1` | Prevents duplicate ownership of stress-threshold semantics. |
+| `virtue_affliction_design_model_v1` | `provides` | `virtue_affliction_design_report` | Live advisory report output. |
+| `virtue_affliction_design_model_v1` | `review_gated_with` | `stress_resolve_model_v1` | Future edge if consumer or ownership overlap is added. |
 | `virtue_affliction_design_model_v1` | `review_gated_with` | `campaign_power_curve_report_v1` | Required only if future reports discuss campaign pacing. |
 | `virtue_affliction_design_model_v1` | `conflicts_with` | `default_synthesis_path` | Hard conflict if anyone uses the report to drive default generation. |
 | `virtue_affliction_design_model_v1` | `conflicts_with` | `runtime_data_generation` | Hard conflict if anyone turns the report into runtime payloads. |
 | `virtue_affliction_design_model_v1` | `conflicts_with` | `hard_gate_promotion` | Hard conflict if anyone treats the report as pass/fail authority. |
 
-The conflict targets above are conceptual guardrail targets unless later
-registered as graph nodes. They are included here to make merge-review intent
-explicit without modifying the live graph.
+The future consumer, review-gated, and conflict targets above are conceptual
+guardrail targets unless later registered as graph edges or nodes. The current
+live graph only records canonical report-only surface coverage and advisory
+authority dependencies.
 
 ## Minimal Evaluator Algorithm
 
@@ -566,13 +572,14 @@ Before using this model in any future report, verify:
 
 ## Validation Policy
 
-For this docs-only draft:
+Current focused validation:
 
 ```powershell
 git diff --check
-py -3.11 -m pytest tests/shared/test_text_encoding_guards.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_virtue_affliction_design_model_v1.py tests/scripts/test_run_virtue_affliction_design_model.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_report_only_surface_registry_v1.py tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/shared/test_text_encoding_guards.py -q
 ```
 
-If future work adds scripts, fixtures, capability graph entries, or default
-entrypoints, run the corresponding owning tests and graph/entrypoint validation
-from `CARDANALYSIS_MECHANISM_VALIDATION_MATRIX_V1.md`.
+If future work adds capability graph entries or default entrypoints, run the
+corresponding graph/entrypoint validation from
+`CARDANALYSIS_MECHANISM_VALIDATION_MATRIX_V1.md`.
