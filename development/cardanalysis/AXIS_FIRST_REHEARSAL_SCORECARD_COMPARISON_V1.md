@@ -60,6 +60,11 @@ baseline:
 - lane sensitivity status: `content_changed_score_static`
 - lane text similarity: `0.704`
 - lane sensitivity warning: `lane_content_changed_without_score_movement`
+- content visibility status: `content_change_not_reflected_in_scorecard`
+- affected scorecard dimensions:
+  `axis_alignment`, `failure_state_quality`, `fun_tension`,
+  `strength_risk_control`, `sts1_like_fit`
+- highest-change slot: `axis_enabler_signal` (`venom_mark` -> `toxic_cue`)
 - largest next gap: `lane_review_sensitivity`
 
 The important finding is not that the content improved. The comparison now
@@ -69,6 +74,17 @@ detects that card ids, card names, and rules text changed while aggregate score,
 dimension averages, and issue movement stayed static. The next gap is therefore
 `lane_review_sensitivity`: before writing another harder attempt, inspect the
 scorecard or exam blind spots that let same-lane content changes disappear.
+
+The content-change signal is intentionally advisory. It decomposes same-lane
+changes by package slot, numeric profile, trigger keywords, setup tax, role
+tags, and rules-text token similarity. For the current Silent pair it recommends
+exam visibility patches such as:
+
+- `surface_same_lane_content_delta_in_scorecard_notes`
+- `add_rules_texture_contrast_to_fun_tension_review`
+- `add_low_roll_recovery_contrast_to_failure_state_review`
+- `add_numeric_profile_delta_to_strength_risk_review`
+- `add_trigger_word_contrast_to_sts1_like_review`
 
 ## Boundary
 
@@ -106,6 +122,5 @@ readiness.
 
 The next capability gap is lane-level review sensitivity. Repeated attempts can
 now be grouped into one axis-first exam lane, and this first pair shows changed
-card content without score movement. The loop should make the exam more
-informative about same-lane rules-text, fun/failure-state texture, and package
-role differences before claiming design-quality movement.
+card content without score movement. The loop can now name which scorecard
+dimensions should become more observant before claiming design-quality movement.
