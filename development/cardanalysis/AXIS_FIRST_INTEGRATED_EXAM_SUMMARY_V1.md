@@ -40,6 +40,7 @@ The summary reports:
 - axis-first role coverage and ready-role count;
 - per-character baseline/latest score, same-lane status, and sensitivity status;
 - scorecard visibility patch lane counts and affected dimensions;
+- lane quality reason counts across same-score/same-lane comparisons;
 - case-projection source status and exam-sensitivity projection samples;
 - campaign curve risk tags, online timing labels, and phase failure reasons;
 - one advisory next capability gap.
@@ -47,7 +48,10 @@ The summary reports:
 In the current four-character fixture run, all four roles can produce a
 same-lane axis-first comparison with dimension visibility notes. The recurring
 gap remains `lane_review_sensitivity`: same-lane card content changes are visible
-in notes, but aggregate scores remain static.
+in notes, aggregate scores remain static, and the summary now shows which
+advisory quality reasons recur most often. The current quality reason families
+are `axis_precision_loss`, `generic_goodstuff_drift`, `fail_state_floor_drop`,
+`setup_tax_increase`, and `sts1_wording_drift`.
 
 ## Boundary
 

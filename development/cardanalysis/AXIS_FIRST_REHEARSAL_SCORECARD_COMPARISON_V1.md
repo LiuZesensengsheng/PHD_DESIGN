@@ -210,6 +210,35 @@ The resulting dimension visibility notes include axis alignment, character
 texture, STS1-like fit, strength risk, combo risk, fun tension, and failure-state
 lanes without changing score weights or authority.
 
+## Lane Quality Contrast
+
+The comparison now adds advisory `lane_quality_contrast` reasons to the same
+content movement that already drives dimension visibility notes. These reasons
+answer a narrower question than score movement:
+
+```text
+When the same axis-first lane changes content but keeps the same score, why
+might a reviewer still care about the quality of that change?
+```
+
+The current structured reasons are:
+
+- `axis_precision_loss`: axis-specific hooks, tags, or numeric proof became less
+  direct;
+- `generic_goodstuff_drift`: latest content moved toward generic value or
+  goodstuff texture;
+- `fail_state_floor_drop`: low-roll recovery, block, draw, or safety floor became
+  thinner;
+- `setup_tax_increase`: the latest slot asks for more setup, exactness, or
+  sequencing tax;
+- `sts1_wording_drift`: timing, condition, target, or threshold wording changed
+  enough to affect STS1-like readability.
+
+These reasons are attached to the lane sensitivity review, copied into
+`scorecard_dimension_visibility_notes`, and included in the comparison manifest
+and Markdown report. They do not modify aggregate scores, score weights, pass/fail
+status, reviewed evidence status, or card-promotion authority.
+
 ## Boundary
 
 This surface does not:
@@ -254,5 +283,5 @@ readiness.
 The next capability gap is lane-level review sensitivity. Repeated attempts can
 now be grouped into one axis-first exam lane, and the Silent, Ironclad, Defect,
 and Watcher pairs show changed card content without score movement. The loop can
-now name which scorecard dimensions should become more observant before claiming
-design-quality movement.
+now name both which scorecard dimensions should become more observant and which
+quality-reason families are recurring before claiming design-quality movement.
