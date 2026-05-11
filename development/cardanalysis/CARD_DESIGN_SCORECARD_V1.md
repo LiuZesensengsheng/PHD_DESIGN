@@ -21,6 +21,7 @@ card_package_exam_v1
   or sts1_four_character_exam_v1
   -> card_design_scorecard_v1
   -> card_design_scorecard_calibration_v1
+  -> card_design_scorecard_delta_report_v1
 ```
 
 `scripts/run_sts1_four_character_exam.py` also writes scorecard artifacts in
@@ -43,6 +44,13 @@ V1 scores each case on a 0-100 advisory scale across:
 
 The scorecard uses direct signals when available and named proxy notes when a
 dimension is not yet backed by a dedicated model head.
+
+Axis-first same-lane comparisons may now provide advisory
+`scorecard_dimension_visibility_notes` from
+`axis_first_rehearsal_scorecard_comparison_v1`. The scorecard CLI can show
+those notes in the Markdown report with `--visibility-notes`, but the overlay
+does not change `card_design_scorecard_v1` scores, weights, snapshot payloads,
+hard-gate behavior, or authority.
 
 ## Future Extension Points
 
@@ -73,6 +81,7 @@ any design promotion.
 
 ```powershell
 python scripts/run_card_design_scorecard.py --input tmp/combat_analysis/sts1_four_character_exam_current/sts1_four_character_exam_v1_snapshot.json --output-dir tmp/combat_analysis/card_design_scorecard_current
+python scripts/run_card_design_scorecard.py --input <supported_exam_or_iteration_snapshot.json> --visibility-notes <axis_first_rehearsal_scorecard_comparison_v1_snapshot.json> --output-dir tmp/combat_analysis/card_design_scorecard_with_visibility_notes_current
 python scripts/run_sts1_four_character_exam.py --output-dir tmp/combat_analysis/sts1_four_character_exam_current
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_design_scorecard_v1.py tests/scripts/test_run_card_design_scorecard.py -q
 ```
@@ -86,3 +95,14 @@ readiness.
 
 Use `card_design_scorecard_calibration_v1` when checking whether the scorecard
 is separating healthy controls from known failure-family controls.
+
+Use `card_design_scorecard_delta_report_v1` when comparing two or more
+scorecard snapshots to identify real progress, regressions, persistent weak
+dimensions, and next iteration focus. Delta reports are advisory comparison
+outputs only and do not recalibrate scoring weights.
+
+Use `autonomous_card_package_design_run_v1` when the scorecard belongs to a
+supplied complete-card draft that should be audited as axis-first. That run
+records the chain from mechanism-axis search through package seed, variant
+handoff, exam iteration, package exam, and scorecard without generating card
+text or promoting cards.

@@ -18,12 +18,15 @@ V1 consumes:
 - a `mechanism_axis_search_bundle_v1` snapshot;
 - a generated-hypothesis `card_package_proposal_v1` package seed;
 - one or more `complete_card_draft_v1` packages.
+- optionally, exactly one `campaign_curve_profile_v1` profile for advisory
+  campaign curve fit notes.
 
 V1 outputs:
 
 - axis alignment status;
 - per-draft package-health label;
 - embedded `card_package_health_v1` summary;
+- optional `campaign_curve_fit` risk tags and human review questions;
 - an advisory outcome.
 
 ## What V1 Does Not Do
@@ -62,6 +65,10 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_exam_v1.py te
 Use `scripts/run_mechanism_axis_package_seed.py` to generate the package seed from the
 current mechanism-axis design brief fixture before running the exam.
 
+Use `scripts/run_autonomous_card_package_design_run.py` when the exam should also
+record the upstream axis search, design brief, selected variant, iteration feedback,
+and scorecard in one axis-first report-only run.
+
 ## Interpretation
 
 An outcome like `draft_package_ready_for_human_review` means:
@@ -71,3 +78,40 @@ An outcome like `draft_package_ready_for_human_review` means:
   overstuffed, or brittle exactness;
 - human review is still required before any promotion.
 
+## Optional Campaign Curve Fit
+
+`--campaign-curve-profile` adds a report-only `campaign_curve_fit` section. It
+translates package-health and draft-structure signals into campaign timing questions
+against the selected profile:
+
+- online timing label;
+- curve risk tags such as `too_slow`, `too_narrow`,
+  `recovery_window_collapse`, `elite_check_failure`, and
+  `act2_transition_shock`;
+- recommended human review questions.
+
+This section is advisory only. It does not change `advisory_outcome`, create hard
+gates, modify runtime campaign, or claim reviewed STS1 evidence.
+
+## Campaign Curve Fit Example Fixtures
+
+Reusable examples live in:
+
+```text
+tests/fixtures/combat_analysis/card_package_exam_curve_fit_v1/
+```
+
+The first manifest covers:
+
+- a healthy/golden Silent draft against the advanced campaign curve profile;
+- a high setup-tax negative control that should surface `too_slow`,
+  `recovery_window_collapse`, and `act2_transition_shock`.
+
+Validate the example manifest with:
+
+```powershell
+python scripts/validate_card_package_exam_curve_fit_fixture.py --input tests/fixtures/combat_analysis/card_package_exam_curve_fit_v1/card_package_exam_curve_fit_cases_v1.json
+```
+
+These fixtures are for exam interpretation only. They remain report-only and do not
+define new cards, runtime campaign behavior, hard gates, or reviewed STS1 evidence.
