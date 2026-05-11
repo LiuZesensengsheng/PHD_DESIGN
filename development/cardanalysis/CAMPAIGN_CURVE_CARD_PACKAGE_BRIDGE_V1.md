@@ -336,7 +336,10 @@ Current report-only curve-fit output may also include a phase matrix for each
 draft package. That matrix names the package's first advisory fit phase, phases
 that remain risky before the package is online, phase-specific risk tags such as
 `hallway_tax`, `act2_transition_shock`, and `recovery_window_collapse`, and
-supplement recommendations. The matrix is context for human review only; it does
+supplement recommendations. It may also include phase-specific failure reasons
+such as `build:early_output_does_not_convert_into_growth_or_defense` so the card
+package exam can explain why a package that looks locally coherent still needs a
+campaign-position warning. The matrix is context for human review only; it does
 not change `card_package_exam_v1` weights, outcomes, hard gates, runtime
 campaign behavior, or card data.
 
