@@ -70,3 +70,8 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_design_scorecard_delt
 A clean delta report means the system can compare existing scorecards and name
 likely next-focus dimensions. It does not prove autonomous card-design quality,
 card balance, reviewed evidence status, or promotion readiness.
+
+When comparing fresh axis-first draft rehearsals, use
+`axis_first_rehearsal_scorecard_comparison_v1` as the wrapper. It preserves this
+delta report's non-authoritative boundary while adding attempt-level audit
+warnings for distinct draft packages that do not form a matched case pair.
