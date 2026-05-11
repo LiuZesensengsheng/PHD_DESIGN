@@ -176,6 +176,40 @@ visibility notes include axis alignment, character texture, STS1-like fit,
 strength risk, combo risk, fun tension, and failure-state lanes without changing
 score weights or authority.
 
+## Current Watcher Result
+
+The fourth role uses a Watcher axis-search request tuned for medium-high
+decision density, wrath/calm commitment, retained exits, scry selection, and
+wrong-stance recovery. The searched Watcher axes are:
+
+- `stance_mantra`
+- `retain`
+- `scry_control`
+
+The baseline and fresh supplied drafts are:
+
+```text
+tests/fixtures/combat_analysis/complete_card_draft_v1/
+  watcher_stance_retain_scry_exam_draft_v1.json
+  watcher_axis_first_codex_stance_retain_scry_attempt_v1.json
+```
+
+Both drafts validate as `complete_card_draft_v1`, remain
+`owner_supplied_draft` / `review_needed`, and replay through the same
+axis-first comparison lane. The comparison preserves a static score while
+surfacing Watcher-specific content movement:
+
+- `measured_entry` to `vigil_step` changes the wrath/calm commitment texture;
+- `held_forethought` to `held_exit_line` changes the retain/scry support lane;
+- `balanced_release` to `late_mantra_release` moves payoff texture toward late
+  mantra timing;
+- `quiet_exit` to `wrong_footing` makes wrong-stance failure-state quality
+  visible.
+
+The resulting dimension visibility notes include axis alignment, character
+texture, STS1-like fit, strength risk, combo risk, fun tension, and failure-state
+lanes without changing score weights or authority.
+
 ## Boundary
 
 This surface does not:
@@ -218,7 +252,7 @@ autonomous card-design quality, balance, reviewed evidence status, or promotion
 readiness.
 
 The next capability gap is lane-level review sensitivity. Repeated attempts can
-now be grouped into one axis-first exam lane, and the Silent, Ironclad, and
-Defect pairs show changed card content without score movement. The loop can now
-name which scorecard dimensions should become more observant before claiming
+now be grouped into one axis-first exam lane, and the Silent, Ironclad, Defect,
+and Watcher pairs show changed card content without score movement. The loop can
+now name which scorecard dimensions should become more observant before claiming
 design-quality movement.
