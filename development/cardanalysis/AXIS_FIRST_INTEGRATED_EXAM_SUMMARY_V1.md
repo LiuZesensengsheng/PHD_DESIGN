@@ -47,7 +47,9 @@ The summary reports:
 - scorecard visibility patch lane counts and affected dimensions;
 - lane quality reason counts across same-score/same-lane comparisons;
 - case-projection source status and exam-sensitivity projection samples;
-- campaign curve risk tags, online timing labels, and phase failure reasons;
+- campaign curve risk tags, online timing labels, phase failure reasons, and
+  repair-context counts for missing support categories, repair actions,
+  support-card roles, and auxiliary axes;
 - one advisory next capability gap.
 
 In the current four-character fixture run, all four roles can produce a
