@@ -59,10 +59,11 @@ tests/fixtures/combat_analysis/mechanism_case_library_v1/
 ```
 
 Initial coverage plus the first four increments, the targeted round-2 gap
-patch, and the foundation-axis boundary shard is 186 normalized cases:
+patch, package completion/conflict shards, the foundation-axis boundary shard,
+and the exam-sensitivity shard is 214 normalized cases:
 
 - 68 reviewed mechanism cases;
-- 94 human-curated mechanism, package, or route-shape cases;
+- 122 human-curated mechanism, package, or route-shape cases;
 - 12 source-mined reference cases;
 - 12 generated hypotheses.
 
@@ -117,6 +118,14 @@ status, search/tutor, retain, filter, compression/removal, temporary generation,
 and scaling can support or swallow higher-level mechanism identity. These cases
 are shared-language examples, not reviewed evidence or hard-gate inputs.
 
+The exam-sensitivity shard adds eight human-curated advisory card-package cases
+for current report-only exam blind spots: axis drift, same-lane content changes,
+secondary-axis swallowing, character texture mismatch, early-weak/late-explosive
+shape, package synergy collapse, and failure-state quality. These cases provide
+future mechanism-axis, package-health, and feature-projection inputs only; they
+do not change scorecard weights, exam implementation, runtime card data, or
+promotion authority.
+
 ## Pack Layout
 
 The fixture directory is intentionally sharded:
@@ -137,6 +146,9 @@ The fixture directory is intentionally sharded:
 - `mechanism_frontier_reference_cases_v1.json`
 - `mechanism_frontier_hypothesis_cases_v1.json`
 - `mechanism_axis_gap_round_2_cases_v1.json`
+- `mechanism_package_completion_cases_v1.json`
+- `mechanism_package_conflict_cases_v1.json`
+- `mechanism_exam_sensitivity_cases_v1.json`
 - `mechanism_foundation_axis_boundary_cases_v1.json`
 
 The goal is not many tiny files for their own sake. The goal is to keep each
