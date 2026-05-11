@@ -105,7 +105,9 @@ The first manifest covers:
 
 - a healthy/golden Silent draft against the advanced campaign curve profile;
 - a high setup-tax negative control that should surface `too_slow`,
-  `recovery_window_collapse`, and `act2_transition_shock`.
+  `recovery_window_collapse`, and `act2_transition_shock`;
+- four-role axis-first curve-fit context, including Ironclad frontload/resource
+  risk, Defect slow focus timing risk, and Watcher late mantra timing risk.
 
 Validate the example manifest with:
 

@@ -33,6 +33,11 @@ It then attaches advisory case-projection samples and the campaign curve-fit
 fixture manifest/validation report so one report can show card-lane visibility,
 case visibility, and campaign phase warnings together.
 
+The default campaign curve-fit manifest now includes Silent plus Ironclad,
+Defect, and Watcher axis-first package examples, so the integrated summary can
+see four-role advisory phase risks without changing scorecard weights or package
+exam outcomes.
+
 ## Readouts
 
 The summary reports:
