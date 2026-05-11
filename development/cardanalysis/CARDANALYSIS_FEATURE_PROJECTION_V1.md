@@ -125,6 +125,19 @@ consumers by itself. MasterAgent should still review registration with:
 - review-gated with: `evaluation_autonomous_design_model_v1`
 - review-gated with: `mechanism_axis_discovery_v1`
 
+## Fixture Notes
+
+`tests/fixtures/combat_analysis/feature_projection_v1/` includes direct
+normalized projection samples for exam-sensitivity blind spots that are already
+represented in the mechanism case library. These samples make Defect
+orb/focus/power same-lane drift, Defect package synergy collapse, Watcher
+wrong-stance failure states, Watcher retain/scry same-lane role swaps, and
+Watcher wrath/calm character texture readable as feature buckets.
+
+They are not additional reviewed evidence. They keep `evidence_tier =
+human_curated`, `review_status = review_needed`, and
+`authority_boundary = advisory_context_only`.
+
 ## Validation
 
 Focused validation:
