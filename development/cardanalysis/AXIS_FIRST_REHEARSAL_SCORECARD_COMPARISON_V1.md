@@ -149,6 +149,33 @@ visibility notes now recognize axis-relevant same-slot changes for non-Silent
 lanes, including exhaust, block, and strength language, without changing scores
 or weights.
 
+## Current Defect Result
+
+The third role uses a Defect axis-search request tuned for high decision density
+and readable orb state. The searched Defect axes are:
+
+- `orb_control`
+- `frost_control`
+- `power_focus_scaling`
+
+The baseline and fresh supplied drafts are:
+
+```text
+tests/fixtures/combat_analysis/complete_card_draft_v1/
+  defect_orb_focus_frost_exam_draft_v1.json
+  defect_axis_first_codex_orb_focus_frost_attempt_v1.json
+```
+
+Both drafts validate as `complete_card_draft_v1`, remain
+`owner_supplied_draft` / `review_needed`, and replay through the same
+axis-first comparison lane. The comparison intentionally preserves a static
+score while surfacing Defect-specific content movement: `calibrated_channel` to
+`cold_start_signal` changes the enabler's orb/frost/focus texture, first-play
+trigger wording, block/draw profile, and setup tax. The resulting dimension
+visibility notes include axis alignment, character texture, STS1-like fit,
+strength risk, combo risk, fun tension, and failure-state lanes without changing
+score weights or authority.
+
 ## Boundary
 
 This surface does not:
@@ -191,7 +218,7 @@ autonomous card-design quality, balance, reviewed evidence status, or promotion
 readiness.
 
 The next capability gap is lane-level review sensitivity. Repeated attempts can
-now be grouped into one axis-first exam lane, and the Silent and Ironclad pairs
-both show changed card content without score movement. The loop can now name
-which scorecard dimensions should become more observant before claiming
+now be grouped into one axis-first exam lane, and the Silent, Ironclad, and
+Defect pairs show changed card content without score movement. The loop can now
+name which scorecard dimensions should become more observant before claiming
 design-quality movement.
