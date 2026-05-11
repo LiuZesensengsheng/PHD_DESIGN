@@ -150,6 +150,8 @@ The fixture suite now includes report-only campaign-planning cases for:
 - the same slow package becoming more credible in a mature payoff window;
 - recovery-window collapse from upgrade, shop, route, or heal assumptions;
 - late payoff timing and texture review.
+- a frontload-overfit case where Act 1 hallway and elite performance can look good
+  while Act 2 growth, defense, and recovery planning remains dangerous.
 
 These are advisory contexts for future package interpretation. They do not make
 campaign power curve reports a card-package hard gate, route simulator, runtime

@@ -55,6 +55,8 @@ V1 specifically highlights:
 - missing sections as missing context, not silent zero-fill.
 - coherent package/power context that still carries Act 2 transition shock or
   recovery-window collapse risk.
+- frontloaded package context that looks coherent in Act 1 but carries growth,
+  recovery, or Act 2 transition risk before being treated as campaign-safe.
 
 The bundle may consume partial inputs, but partial inputs must remain partial in
 the output.
