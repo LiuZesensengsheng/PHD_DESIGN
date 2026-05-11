@@ -332,3 +332,11 @@ When a future package exam includes this bridge, the report should include:
 
 The bridge should prefer concise, inspectable risk language over a numeric score.
 
+Current report-only curve-fit output may also include a phase matrix for each
+draft package. That matrix names the package's first advisory fit phase, phases
+that remain risky before the package is online, phase-specific risk tags such as
+`hallway_tax`, `act2_transition_shock`, and `recovery_window_collapse`, and
+supplement recommendations. The matrix is context for human review only; it does
+not change `card_package_exam_v1` weights, outcomes, hard gates, runtime
+campaign behavior, or card data.
+

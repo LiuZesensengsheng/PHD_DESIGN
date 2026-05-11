@@ -117,6 +117,19 @@ The advanced profile is tighter but still not a stat spike:
 Use it when testing whether a package that passes base pacing can survive tighter
 route and recovery discipline.
 
+## Transition-Shock Curve
+
+The transition-shock profile is a focused report-only fixture. It keeps the same
+contract and authority boundary as the base and advanced profiles, but emphasizes:
+
+- Act 1 elite exposure and hallway HP tax;
+- Act 2 transition pressure while packages are still forming;
+- narrow recovery windows and rest/smith/shop tradeoff pressure;
+- late payoff and anti-runaway texture review.
+
+Use it when a package looks coherent in isolation but may be too slow, too
+resource-hungry, or too dependent on a late payoff window.
+
 ## Current Fixtures
 
 Current fixtures live in:
@@ -129,6 +142,7 @@ They include:
 
 - `project_base_campaign_curve_v1.json`
 - `project_advanced_campaign_curve_v1.json`
+- `project_transition_shock_campaign_curve_v1.json`
 
 ## Entrypoints
 

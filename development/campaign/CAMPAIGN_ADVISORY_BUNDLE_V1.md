@@ -53,6 +53,8 @@ V1 specifically highlights:
 - high stress carryover with weak or missing recovery,
 - contradictory advisory mixes where surfaces disagree on recovery,
 - missing sections as missing context, not silent zero-fill.
+- coherent package/power context that still carries Act 2 transition shock or
+  recovery-window collapse risk.
 
 The bundle may consume partial inputs, but partial inputs must remain partial in
 the output.

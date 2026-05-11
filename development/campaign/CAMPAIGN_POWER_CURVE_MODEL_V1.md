@@ -139,6 +139,22 @@ The payload must not expose:
 - `blocking_verdict`
 - monster stat targets
 
+## Planning Case Coverage
+
+The fixture suite now includes report-only campaign-planning cases for:
+
+- Act 1 frontload survival and early elite exposure;
+- hallway HP tax before rewards and recovery can compound;
+- Act 2 transition shock under multi-enemy, defense, and status pressure;
+- slow-scaling package risk before the package is online;
+- the same slow package becoming more credible in a mature payoff window;
+- recovery-window collapse from upgrade, shop, route, or heal assumptions;
+- late payoff timing and texture review.
+
+These are advisory contexts for future package interpretation. They do not make
+campaign power curve reports a card-package hard gate, route simulator, runtime
+campaign authority, or reviewed STS1 evidence claim.
+
 ## Encounter Archetype Profiles
 
 Archetype profiles are report-only descriptions of what an encounter should reveal.
