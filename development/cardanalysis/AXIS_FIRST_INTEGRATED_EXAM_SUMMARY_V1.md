@@ -46,6 +46,8 @@ The summary reports:
 - per-character baseline/latest score, same-lane status, and sensitivity status;
 - scorecard visibility patch lane counts and affected dimensions;
 - lane quality reason counts across same-score/same-lane comparisons;
+- repair advice that maps recurring lane quality reasons to next-iteration
+  handoff guidance;
 - case-projection source status and exam-sensitivity projection samples;
 - campaign curve risk tags, online timing labels, phase failure reasons, and
   repair-context counts for missing support categories, repair actions,
@@ -60,6 +62,22 @@ advisory quality reasons recur most often. The current quality reason families
 are `axis_precision_loss`, `generic_goodstuff_drift`, `fail_state_floor_drop`,
 `setup_tax_increase`, and `sts1_wording_drift`.
 
+The summary also derives advisory `repair_advice` from those existing reasons.
+It names the largest visible defect family, the scorecard dimension most worth
+repairing next, per-role repair focus, and 1-3 handoff prompt suggestions for
+the next supplied draft attempt. This advice currently maps:
+
+- `axis_precision_loss` to axis drift / axis alignment repair;
+- `generic_goodstuff_drift` to character texture repair;
+- `fail_state_floor_drop` to failure-state quality repair;
+- `setup_tax_increase` to combo risk repair;
+- `sts1_wording_drift` to STS1-like fit repair.
+
+Campaign curve context can add a lower-priority `campaign_timing` repair lane
+when phase-risk fixtures are supplied. These repair lanes remain report-only
+planning guidance and do not change aggregate scores, scorecard weights, package
+exam outcomes, or any runtime behavior.
+
 ## Boundary
 
 This surface does not:
@@ -73,6 +91,7 @@ This surface does not:
 - change scorecard weights;
 - change `card_package_exam_v1` outcomes;
 - change campaign runtime behavior;
+- turn repair advice into pass/fail authority;
 - enable default synthesis, learned behavior, or reranker behavior.
 
 The integrated summary is a planning/audit surface only. It aggregates existing
