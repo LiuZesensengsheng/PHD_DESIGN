@@ -40,6 +40,13 @@ It reports:
 - next iteration focus hints for prompt, handoff, axis-search, or exam-coverage
   follow-up.
 
+The CLI can also display optional same-score visibility overlays with
+`--visibility-notes`. These notes come from
+`axis_first_rehearsal_scorecard_comparison_v1` or a
+`scorecard_dimension_visibility_notes` fixture and explain content movement that
+aggregate and dimension deltas may not show. They remain report-only and do not
+change delta status, scores, weights, or authority.
+
 ## Boundary
 
 This surface does not:
@@ -62,6 +69,7 @@ authority for cards, card packages, generation, or promotion.
 
 ```powershell
 python scripts/run_card_design_scorecard_delta_report.py --input <baseline_card_design_scorecard_v1_snapshot.json> --input <latest_card_design_scorecard_v1_snapshot.json> --output-dir tmp/combat_analysis/card_design_scorecard_delta_report_current
+python scripts/run_card_design_scorecard_delta_report.py --input <baseline_card_design_scorecard_v1_snapshot.json> --input <latest_card_design_scorecard_v1_snapshot.json> --visibility-notes <axis_first_rehearsal_scorecard_comparison_v1_snapshot.json> --output-dir tmp/combat_analysis/card_design_scorecard_delta_report_with_visibility_notes_current
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_design_scorecard_delta_report_v1.py tests/scripts/test_run_card_design_scorecard_delta_report.py -q
 ```
 

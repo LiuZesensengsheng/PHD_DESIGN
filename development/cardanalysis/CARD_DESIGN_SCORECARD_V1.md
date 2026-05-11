@@ -45,12 +45,32 @@ V1 scores each case on a 0-100 advisory scale across:
 The scorecard uses direct signals when available and named proxy notes when a
 dimension is not yet backed by a dedicated model head.
 
+The snapshot now also includes report-only `dimension_explanations`. These name
+the current proxy inputs for each dimension and the visibility lane reviewers
+should inspect before treating a stable score as equivalent content:
+
+- `axis_alignment` -> axis alignment
+- `character_identity` -> character texture
+- `sts1_like_fit` -> STS1-like fit
+- `strength_risk_control` -> strength risk
+- `combo_risk_control` -> combo risk
+- `fun_tension` -> fun tension
+- `package_synergy` -> package synergy
+- `failure_state_quality` -> failure-state quality
+
 Axis-first same-lane comparisons may now provide advisory
 `scorecard_dimension_visibility_notes` from
 `axis_first_rehearsal_scorecard_comparison_v1`. The scorecard CLI can show
-those notes in the Markdown report with `--visibility-notes`, but the overlay
-does not change `card_design_scorecard_v1` scores, weights, snapshot payloads,
-hard-gate behavior, or authority.
+those notes in the Markdown report with `--visibility-notes`. The overlay can
+surface same-score content movement, such as a Silent payoff slot changing from
+`poison_payoff` texture to `generic_goodstuff`, but it does not change
+`card_design_scorecard_v1` scores, weights, hard-gate behavior, or authority.
+
+Reusable same-score visibility-note fixtures live under:
+
+```text
+tests/fixtures/combat_analysis/card_design_scorecard_visibility_notes_v1/
+```
 
 ## Future Extension Points
 

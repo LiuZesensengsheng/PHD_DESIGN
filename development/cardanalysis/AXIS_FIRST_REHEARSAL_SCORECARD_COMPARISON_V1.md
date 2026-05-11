@@ -109,12 +109,14 @@ lanes without changing current scores or weights. The current top lanes are:
 - `sts1_like_trigger_word_visibility`
 
 Those lanes are also projected into `scorecard_dimension_visibility_notes`.
-These notes are grouped by existing scorecard dimensions and can be copied into
-future `card_design_scorecard_v1` metric explanations. They preserve the current
-score and dimension averages while making static-score blind spots visible. For
-the current Silent pair the first note says `axis_alignment` should surface the
-`axis_enabler_signal` change from `venom_mark` to `toxic_cue` even though the
-axis-alignment score stayed static.
+These notes are grouped by existing scorecard dimensions, include a
+`visibility_lane`, and carry a structured `content_delta_summary`. They preserve
+the current score and dimension averages while making static-score blind spots
+visible. For the current Silent pair the first note says `axis_alignment` should
+surface the `axis_enabler_signal` change from `venom_mark` to `toxic_cue` even
+though the axis-alignment score stayed static. The notes also cover the
+`character_identity` / character-texture lane when rules texture, package tags,
+or role tags move without score movement.
 
 The harder attempt keeps the same axis-first lane but stresses exactness, setup
 tax, fail-state quality, and strength-risk visibility. In that comparison the
@@ -173,6 +175,13 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_axis_first_rehearsal_score
 
 Use `scripts/run_mechanism_axis_package_seed.py` to create the package seed from
 the current design brief before running the comparison command.
+
+The emitted `scorecard_dimension_visibility_notes` can be passed to:
+
+```powershell
+python scripts/run_card_design_scorecard.py --input <supported_exam_or_iteration_snapshot.json> --visibility-notes <axis_first_rehearsal_scorecard_comparison_v1_snapshot.json> --output-dir tmp/combat_analysis/card_design_scorecard_with_visibility_notes_current
+python scripts/run_card_design_scorecard_delta_report.py --input <baseline_card_design_scorecard_v1_snapshot.json> --input <latest_card_design_scorecard_v1_snapshot.json> --visibility-notes <axis_first_rehearsal_scorecard_comparison_v1_snapshot.json> --output-dir tmp/combat_analysis/card_design_scorecard_delta_report_with_visibility_notes_current
+```
 
 ## Interpretation
 
