@@ -134,6 +134,13 @@ orb/focus/power same-lane drift, Defect package synergy collapse, Watcher
 wrong-stance failure states, Watcher retain/scry same-lane role swaps, and
 Watcher wrath/calm character texture readable as feature buckets.
 
+The same fixture family also includes four axis-first lane-review sensitivity
+samples for Silent, Ironclad, Defect, and Watcher. These r4 samples keep the
+same STS1 mechanism lanes visible while surfacing content-quality deltas such
+as axis drift, character texture mismatch, STS1-like wording drift,
+failure-state floor, combo/setup tax, package synergy collapse, and fun-tension
+drift.
+
 They are not additional reviewed evidence. They keep `evidence_tier =
 human_curated`, `review_status = review_needed`, and
 `authority_boundary = advisory_context_only`.
