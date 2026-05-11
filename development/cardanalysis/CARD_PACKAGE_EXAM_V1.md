@@ -88,10 +88,20 @@ against the selected profile:
 - curve risk tags such as `too_slow`, `too_narrow`,
   `recovery_window_collapse`, `elite_check_failure`, and
   `act2_transition_shock`;
+- required campaign position, including first advisory fit phase/act window and
+  risk-before phases;
+- repair context for missing support categories such as `frontload`, `defense`,
+  `scaling`, `recovery_window`, and `pivot_support`, with report-only support
+  card role and auxiliary-axis suggestions;
 - recommended human review questions.
 
 This section is advisory only. It does not change `advisory_outcome`, create hard
 gates, modify runtime campaign, or claim reviewed STS1 evidence.
+
+The repair context also reserves a `scorecard_explanation_bridge` block for a
+future explanation surface. It is default-disabled, has `score_weight_impact:
+none`, and must not become a hard score or gate without a separate reviewed
+decision.
 
 ## Campaign Curve Fit Example Fixtures
 
@@ -108,6 +118,9 @@ The first manifest covers:
   `recovery_window_collapse`, and `act2_transition_shock`;
 - four-role axis-first curve-fit context, including Ironclad frontload/resource
   risk, Defect slow focus timing risk, and Watcher late mantra timing risk.
+- repair-context expectations showing why internally healthy packages can still
+  need scaling, defense, recovery-window, or pivot-support supplements before
+  their campaign phase fit is safe to interpret.
 
 Validate the example manifest with:
 
