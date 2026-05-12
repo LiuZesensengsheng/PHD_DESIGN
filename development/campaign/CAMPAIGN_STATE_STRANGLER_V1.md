@@ -159,6 +159,8 @@ not at theoretical purity.
    - prefer an explicit state/service method over a broad host protocol
    - validation: mouse event, interaction sequence, and service-bundle guardrail
      tests
+   - status: completed on `2026-05-12`; callers now use
+     `find_clicked_campaign_block(...)`
 
 3. **Thesis write checkpoint owner**
    - move capture/restore logic for thesis write rollback out of raw
@@ -224,8 +226,8 @@ Why is this worth doing before content-pack work?
    rewrite.
 2. `CampaignState` remains the shell host and keeps stable request seams.
 3. Each slice moves one write path or review-next seam.
-4. `hit_test_service`, thesis checkpoints, and trigger snapshot/read hosting are
-   the first review targets.
+4. `hit_test_service` direct alias removal is complete; thesis checkpoints and
+   trigger snapshot/read hosting are the next review targets.
 5. UI/runtime rendering stays queued for human visual review.
 6. After 3-5 implementation slices, pause and review before continuing toward
    content-pack work.

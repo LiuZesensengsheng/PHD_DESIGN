@@ -221,15 +221,14 @@ Rule:
 
 ### 3. Keep A Narrow "Review Next" Bucket
 
-These aliases should not be treated as permanent retained seams yet:
+No direct `CampaignState` service aliases remain in the review-next bucket.
 
-- `hit_test_service`
+Historical note:
 
-Current stance:
-
-- they are still direct today
-- they are plausible next cleanup candidates
-- they should be evaluated individually, not deleted as a batch for symmetry
+- `hit_test_service` was the final review-next direct alias
+- it now stays grouped under `state.shell_services.hit_test_service`
+- event-ingress callers use the explicit state host seam
+  `find_clicked_campaign_block(...)`
 
 Update on `2026-04-22`:
 
@@ -246,8 +245,7 @@ Update on `2026-04-22`:
   - `advance_campaign_turn()`
   - `request_end_turn(...)`
 - the review-next bucket is therefore smaller than when this document was first
-  written and is now effectively narrowed to:
-  - `hit_test_service`
+  written and is now empty
 
 Update on `2026-04-24`:
 
@@ -256,6 +254,15 @@ Update on `2026-04-24`:
   - the stable whitelist above
   - grouped-only reward/thesis/social ownership
   - the optional review-next `hit_test_service` survivor only
+
+Update on `2026-05-12`:
+
+- the `hit_test_service` survivor was removed from direct `CampaignState`
+  aliases
+- the service remains grouped under `state.shell_services.hit_test_service`
+- `CampaignMouseClickIntentResolver` now calls
+  `CampaignState.find_clicked_campaign_block(...)` instead of reading the
+  service alias and task-area internals directly
 
 ### 4. Use State-Level Intent Seams Instead Of Re-Exporting Leaf Services
 
