@@ -252,10 +252,10 @@ Condition interpretation contract (V1):
 
 Quest runtime evaluation sources:
 
-- flags: `persistent["quest_flags"]`
-- quest vars: `persistent["quest_vars"]`
-- player stats: `persistent["quest_player_stats"]` (fallback: `persistent["player_stats"]`)
-- pack tags: `persistent["quest_pack_tags"]` (fallback: `persistent["pack_tags"]`)
+- flags: narrative instance-local `flags`
+- quest vars: narrative instance-local `vars`
+- player stats: narrative instance-local `stats`
+- pack tags: narrative instance-local `pack_tags`
 
 ### `locales_zh_CN.csv`
 
