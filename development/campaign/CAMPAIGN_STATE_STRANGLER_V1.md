@@ -175,6 +175,8 @@ not at theoretical purity.
    - keep submission flow behavior unchanged
    - validation: thesis submission, thesis write-path, and campaign guardrail
      tests
+   - status: completed on `2026-05-12`; `CampaignState` now delegates
+     submission checkpoint capture/restore to `ThesisSubmissionCheckpointService`
 
 5. **Trigger snapshot/read seam review**
    - consolidate trigger snapshot/restore host behavior only if it can reduce
