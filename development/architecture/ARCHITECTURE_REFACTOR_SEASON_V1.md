@@ -150,6 +150,10 @@ Stop conditions:
 
 ### Line 3. CampaignState Strangler V1
 
+Source of truth:
+
+- `docs/development/campaign/CAMPAIGN_STATE_STRANGLER_V1.md`
+
 Purpose:
 
 - continue shrinking `CampaignState` by moving explicit write paths and
@@ -163,7 +167,7 @@ Current baseline:
 
 Allowed work:
 
-- write a new strangler plan before implementation
+- follow the new strangler plan before implementation
 - pick one write path or host seam per slice
 - keep `CampaignState` as the shell while moving responsibilities out
 - add guardrails only for stable rules, not file size or touch counts

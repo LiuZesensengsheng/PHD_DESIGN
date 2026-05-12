@@ -1303,3 +1303,91 @@ show a real rollback regression.
 1. Migrate test/helper setup toward explicit pool assertions.
 2. Review save mapper energy fields after one pool-authority slice lands.
 3. Leave visual HUD changes for a UI review window.
+
+### [DL-20260512-05] CampaignState Strangler V1 adopts narrow 80-point pass
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/campaign/CAMPAIGN_STATE_STRANGLER_V1.md`
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+  - `docs/development/campaign/CAMPAIGN_BOUNDARY_HARDENING_V1.md`
+
+#### Background
+
+The campaign boundary-hardening line is closed through Phase 3, but
+`CampaignState` still hosts several migration-phase seams: the review-next
+`hit_test_service` alias, thesis checkpoint write paths, and trigger
+snapshot/read hosting. The user wants an 80-point architecture baseline before
+another planning review, with UI runtime work held for human visual review.
+
+#### Decision
+
+Adopt `CampaignState Strangler V1` as a narrow execution line:
+
+1. Keep `CampaignState` as the shell host and preserve stable request seams.
+2. Move one explicit write path or review-next seam per slice.
+3. Start with `hit_test_service`, then thesis write/submission checkpoints,
+   then trigger snapshot/read hosting if it remains low risk.
+4. Do not touch `CampaignView`, rendering, or `ui_runtime` in this line.
+5. Pause after 3-5 implementation slices for an 80-point baseline review.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  future agents get a concrete campaign strangler order instead of re-reading
+  old cleanup plans to infer what remains active.
+- Increased human work:
+  the user still needs to review any UI/runtime visual changes later.
+- Critical path effect:
+  campaign architecture can improve during the content-free window without
+  blocking on UI review.
+
+#### AI Workload Assumption
+
+AI can execute the listed non-UI slices with focused campaign tests, quick and
+contract smoke, and full pytest before commits. Human review remains required
+before broad thesis/task-area redesign or UI/runtime refactors.
+
+#### Alternatives
+
+1. Stop campaign work after the completed boundary-hardening line.
+2. Reopen broad campaign purification across state, services, UI, and task-area
+   taxonomy.
+
+#### Risks And Triggers
+
+- Risk:
+  the strangler pass turns into a broad thesis/task-area rewrite.
+- Trigger:
+  a slice changes product rules, task-area geometry, or thesis identity
+  behavior instead of moving a bounded seam.
+
+- Risk:
+  over-abstraction returns through broad host protocols.
+- Trigger:
+  a new protocol exposes nearly the whole `CampaignState` shape instead of a
+  smaller replacement surface.
+
+#### Validation Plan
+
+- Success indicators:
+  - each slice keeps stable state request seams intact
+  - campaign focused tests pass for the touched seam
+  - quick smoke, contract smoke when boundaries are touched, and full pytest
+    pass before commits
+  - `py -3.11 -m pytest tests/campaign -q` passes at the 80-point campaign
+    stop review
+
+#### Rollback Plan
+
+Revert the specific seam slice that regresses behavior. Keep the plan document
+as the accepted execution order unless the rollback shows the line itself is
+too broad.
+
+#### Follow-Up
+
+1. Review and remove or narrow the `hit_test_service` direct alias if contained.
+2. Move thesis write checkpoint capture/restore behind a smaller owner.
+3. Move thesis submission checkpoint extras behind a smaller owner.

@@ -61,6 +61,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
   - `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
   - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+  - `docs/development/campaign/CAMPAIGN_STATE_STRANGLER_V1.md`
   - `docs/development/testing/TEST_STRATEGY_V1.md`
   - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
 - Current status:
@@ -86,6 +87,13 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - the first test-helper migration slice now makes `HeadlessTestBase`
     colorless-energy setup and X-cost defaults prefer the pool authority while
     keeping scalar projection compatibility
+  - `CampaignState Strangler V1` now has a dedicated execution plan for the
+    80-point refactor baseline:
+    - keep `CampaignState` as the shell host
+    - first review `hit_test_service`, thesis checkpoint write paths, and
+      trigger snapshot/read hosting
+    - keep `CampaignView`, rendering, and `ui_runtime` queued for human visual
+      review
 - Current rules:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened
