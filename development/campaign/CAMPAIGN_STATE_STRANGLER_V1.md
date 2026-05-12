@@ -192,6 +192,8 @@ not at theoretical purity.
    - run `py -3.11 -m pytest tests/campaign -q`
    - update docs with what remains intentionally deferred
    - stop before content-pack work unless the pass is clean and committed
+   - status: completed on `2026-05-12`; `py -3.11 -m pytest tests/campaign -q`
+     passed after the hit-test, checkpoint, and trigger checkpoint owner slices
 
 ### Explicit Non-Targets
 
@@ -233,8 +235,8 @@ Why is this worth doing before content-pack work?
    rewrite.
 2. `CampaignState` remains the shell host and keeps stable request seams.
 3. Each slice moves one write path or review-next seam.
-4. `hit_test_service` direct alias removal is complete; thesis checkpoints and
-   trigger snapshot/read hosting are the next review targets.
+4. `hit_test_service`, thesis write/submission checkpoints, and trigger
+   snapshot/read hosting have completed their narrow owner/seam pass.
 5. UI/runtime rendering stays queued for human visual review.
-6. After 3-5 implementation slices, pause and review before continuing toward
-   content-pack work.
+6. The 80-point campaign pass is complete; remaining campaign work is
+   intentionally deferred until a product/UI trigger appears.

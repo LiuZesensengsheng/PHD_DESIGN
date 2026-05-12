@@ -90,8 +90,10 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - `CampaignState Strangler V1` now has a dedicated execution plan for the
     80-point refactor baseline:
     - keep `CampaignState` as the shell host
-    - first review `hit_test_service`, thesis checkpoint write paths, and
-      trigger snapshot/read hosting
+    - `hit_test_service`, thesis write/submission checkpoints, and trigger
+      checkpoint shape now have narrow owners/seams
+    - `py -3.11 -m pytest tests/campaign -q` passed for the campaign
+      80-point stop review
     - keep `CampaignView`, rendering, and `ui_runtime` queued for human visual
       review
 - Current rules:
