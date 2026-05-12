@@ -167,6 +167,8 @@ not at theoretical purity.
      `CampaignState` method bodies
    - keep the state-level seam if current callers need it
    - validation: thesis write-path and self-refactor guardrail tests
+   - status: completed on `2026-05-12`; `CampaignState` now delegates write
+     checkpoint capture/restore to `ThesisWriteCheckpointService`
 
 4. **Thesis submission checkpoint owner**
    - move submission rollback extras out of raw `CampaignState` method bodies
