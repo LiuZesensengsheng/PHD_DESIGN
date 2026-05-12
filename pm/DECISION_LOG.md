@@ -1391,3 +1391,37 @@ too broad.
 1. Review and remove or narrow the `hit_test_service` direct alias if contained.
 2. Move thesis write checkpoint capture/restore behind a smaller owner.
 3. Move thesis submission checkpoint extras behind a smaller owner.
+
+### [DL-20260512-06] Content Pack Minimal V1 starts with manifest identity only
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/content/CONTENT_PACK_MINIMAL_V1.md`
+  - `scripts/content_pack_manifest.py`
+
+#### Background
+
+Future content/DLC work needs stable pack identity before more content is
+created. Existing source packs already existed, but pack manifest conventions
+were not shared across narrative and event-source directories.
+
+#### Decision
+
+Adopt a minimal shared manifest contract for active source packs:
+`manifest_version`, `pack_id`, `display_name`, `version`, `content_kind`,
+`status`, `dependencies`, and `deprecated`. V1 validates shape and id stability
+only; it does not add a plugin platform, hot reload, dependency solver, runtime
+activation, or save pinning.
+
+#### Validation Plan
+
+- Active source pack manifests validate.
+- Existing narrative and event-source import/build tests stay green.
+- Full repository pytest remains the commit gate.
+
+#### Follow-Up
+
+1. Add save pack pinning only after manifest identity proves stable.
+2. Audit removable compatibility/adapters after content pack basics land.

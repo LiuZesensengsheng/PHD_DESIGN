@@ -96,6 +96,13 @@ Do not treat a task as a long-running Codex lane when it is mainly:
       80-point stop review
     - keep `CampaignView`, rendering, and `ui_runtime` queued for human visual
       review
+  - `Content Pack Minimal V1` has started with a minimal shared manifest
+    contract for active source packs:
+    - `manifest.json` now owns pack identity/version/dependencies/deprecation
+      shape only
+    - domain-specific schemas remain in their local validators
+    - no plugin platform, hot reload, dependency solver, or save pinning has
+      been added
 - Current rules:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened

@@ -82,6 +82,23 @@ Required guardrails:
 These pipelines are not the direct runtime source, but are still active content
 entry paths. They need structure validation in pytest.
 
+#### Content Pack Identity
+
+- Active source-pack manifests:
+  - `data/narrative_src/packs/tutorial/manifest.json`
+  - `data/events_src/packs/slack/manifest.json`
+- Shared validator:
+  - `scripts/content_pack_manifest.py`
+
+Required guardrails:
+
+- each active source pack must have a `manifest.json`
+- pack ids must match their directory names
+- versions, dependency lists, and deprecation flags must satisfy the minimal V1
+  manifest contract
+- dependency validation is shape-only in V1; no runtime dependency solver is
+  implied
+
 #### Slack Event Draft Pipeline
 
 - Editable source:

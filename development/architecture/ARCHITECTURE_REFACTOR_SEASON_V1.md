@@ -195,6 +195,10 @@ Stop conditions:
 
 ### Line 4. Content Pack Minimal V1
 
+Source of truth:
+
+- `docs/development/content/CONTENT_PACK_MINIMAL_V1.md`
+
 Purpose:
 
 - prepare future content/DLC work without building a heavy plugin platform

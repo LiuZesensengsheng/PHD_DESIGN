@@ -78,6 +78,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 ### Narrative Pipeline
 
+- Validate active content pack manifests:
+  - `python -m pytest tests/scripts/test_content_pack_manifest.py tests/scripts/test_data_pipeline_contracts.py -q`
 - Validate tutorial narrative draft input:
   - `python scripts/validate_narrative_draft.py --draft data/narrative_drafts/tutorial/questline_tutorial.draft.json`
 - Import tutorial draft into normalized source:
