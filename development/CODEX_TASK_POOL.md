@@ -50,6 +50,41 @@ Do not treat a task as a long-running Codex lane when it is mainly:
 
 ## Active Tasks
 
+### A-1. Architecture Refactor Season V1
+
+- Goal:
+  - coordinate the short content-free refactor window across save, combat,
+    campaign, content-pack, UI, and testing lines
+  - prevent broad rewrites by giving each execution line a clear scope,
+    no-touch list, validation rhythm, and stop condition
+- Source of truth:
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+  - `docs/development/testing/TEST_STRATEGY_V1.md`
+  - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
+- Current status:
+  - planning line active on `2026-05-12`
+  - recommended execution order:
+    1. `Save Reset Policy V1`
+    2. `Combat Contract Convergence V1`
+    3. `CampaignState Strangler V1`
+    4. `Content Pack Minimal V1`
+    5. `UI Runtime Refactor Window`
+  - UI refactor remains gated on human visual review availability
+  - full pytest remains the commit gate until a separate policy update changes
+    it
+- Current rules:
+  - do not combine execution lines in one PR
+  - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened
+  - do not do broad directory-purity moves
+  - use quick smoke during implementation and contract smoke for boundary work
+- Validation rhythm:
+  - quick:
+    - `py -3.11 scripts/run_test_smoke.py --profile quick`
+  - boundary:
+    - `py -3.11 scripts/run_test_smoke.py --profile contract`
+  - commit:
+    - `py -3.11 -m pytest -q`
+
 ### A0. Test Strategy V1
 
 - Goal:

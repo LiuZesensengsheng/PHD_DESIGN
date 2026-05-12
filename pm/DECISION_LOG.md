@@ -1025,3 +1025,106 @@ remains the rollback safety net.
 1. Add marker coverage only to tests owned by the smoke profiles.
 2. Profile repeated campaign/combat fixture setup before changing helpers.
 3. Evaluate xdist only after global state and filesystem assumptions are known.
+
+### [DL-20260512-02] Architecture Refactor Season V1 adopts scoped execution lines
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+  - `docs/development/testing/TEST_STRATEGY_V1.md`
+  - `docs/development/CODEX_TASK_POOL.md`
+
+#### Background
+
+The project has a short window with no immediate content-development pressure.
+The user is willing to accept a period of AI-heavy refactor work, but UI work
+still needs human visual review. Old saves can be treated aggressively because
+there is no external save-compatibility obligation yet.
+
+The previous `Test Strategy V1` work added fast quick/contract smoke profiles,
+so refactor slices can get useful feedback before waiting for the full suite.
+
+#### Decision
+
+Adopt `Architecture Refactor Season V1` as the top-level coordination plan for
+the next architecture work. Execution lines are:
+
+1. `Save Reset Policy V1`
+2. `Combat Contract Convergence V1`
+3. `CampaignState Strangler V1`
+4. `Content Pack Minimal V1`
+5. `UI Runtime Refactor Window`
+6. `Test Strategy Follow-Up`
+
+Each line must land as a separate branch/PR with its own scope, validation
+pack, and stop conditions. The default first implementation line is
+`Save Reset Policy V1`, followed by combat contract convergence.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  agents can choose the next refactor slice from a shared map instead of
+  re-litigating the project direction every time.
+- Increased human work:
+  humans still need to review save-policy, UI behavior, and any product-facing
+  content-pack identity decisions.
+- Critical path effect:
+  the next refactor window shifts from opportunistic cleanup to staged,
+  independently reviewable architecture lines.
+
+#### AI Workload Assumption
+
+AI can safely carry the planning, save reset, combat contract, and campaign
+strangler work when each slice has focused tests and smoke validation. UI
+runtime refactors require human review before broad execution.
+
+#### Alternatives
+
+1. Continue choosing refactor tasks opportunistically after each PR.
+2. Run one large architecture cleanup branch touching save, combat, campaign,
+   content, and UI together.
+
+#### Risks And Triggers
+
+- Risk:
+  the season plan becomes permission for broad rewrites.
+- Trigger:
+  one PR starts changing multiple execution lines or broad UI behavior.
+
+- Risk:
+  save reset decisions leak into combat/content work without an explicit policy.
+- Trigger:
+  combat or content-pack PRs delete save compatibility code before
+  `Save Reset Policy V1` lands.
+
+- Risk:
+  UI refactor proceeds without human visual review.
+- Trigger:
+  changes touch `contexts/campaign/view.py`, `rendering/**`, or `ui_runtime/**`
+  while no review window is available.
+
+#### Validation Plan
+
+- Success indicators:
+  - top-level season doc exists and is referenced from task pool
+  - each execution line has scope, no-touch list, validation, and stop
+    conditions
+  - quick smoke, contract smoke, and full pytest pass before committing the
+    planning line
+- Review cadence:
+  after each execution line lands, before starting the next line.
+
+#### Rollback Plan
+
+If the season plan proves too broad, demote it to a reference doc and run only
+the explicitly accepted execution line. Do not delete the history; supersede it
+with a narrower decision-log entry.
+
+#### Follow-Up
+
+1. Open `Save Reset Policy V1` as the first implementation branch.
+2. Draft `Combat Contract Convergence V1` with energy convergence as the first
+   likely topic.
+3. Keep UI runtime work queued until human visual review is available.
