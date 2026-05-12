@@ -1220,3 +1220,86 @@ for unsupported versions.
 
 1. Evaluate combat snapshot v0 migration separately.
 2. Record content-pack identity only after the save reset stance is stable.
+
+### [DL-20260512-04] Combat energy convergence uses pool authority with scalar projection
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+  - `contexts/combat/domain/player.py`
+  - `contexts/combat/domain/services/energy_policy.py`
+
+#### Background
+
+Combat save compatibility has been reset, leaving player energy as the next
+explicit combat contract convergence target. The runtime already spends through
+`archetype.energy_pool`, but HUD/tests/save mapper surfaces still read
+`player.energy`. The old rollback snapshot key `legacy_energy` made that
+temporary projection look like dead compatibility rather than an active read
+surface.
+
+#### Decision
+
+Adopt the first `Combat Contract Convergence V1` stance:
+
+1. `archetype.energy_pool` is the payment/write authority for player energy.
+2. Scalar `player.energy` remains a temporary projection and setup/read surface.
+3. Remove `legacy_energy` naming from player rollback snapshots; use
+   `scalar_energy` while behavior stays stable.
+4. Migrate later read families one at a time instead of deleting scalar energy
+   immediately.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  future agents know which energy surface owns payment behavior.
+- Increased human work:
+  scalar projection removal still needs staged review across tests, save mapper,
+  and HUD reads.
+- Critical path effect:
+  combat contract cleanup can proceed without reopening save reset or UI work.
+
+#### AI Workload Assumption
+
+AI can remove misleading compatibility names and migrate one read family per
+slice. Human review is still needed before broad HUD/UI behavior changes.
+
+#### Alternatives
+
+1. Delete scalar `player.energy` immediately.
+2. Keep both scalar and pool energy without an ownership policy.
+
+#### Risks And Triggers
+
+- Risk:
+  new payment logic reads scalar energy again.
+- Trigger:
+  `EnergyPolicy` or card play payment starts depending on `player.energy`.
+
+- Risk:
+  the scalar projection persists too long.
+- Trigger:
+  new code adds more direct scalar reads outside existing HUD/test/save setup
+  surfaces.
+
+#### Validation Plan
+
+- Success indicators:
+  - card play rollback still restores energy
+  - colored energy payment tests still pass
+  - combat save restore still preserves current energy projection
+  - quick/contract smoke and full pytest pass before commit
+
+#### Rollback Plan
+
+Reintroduce the previous rollback snapshot key only inside
+`Player._snapshot_energy_state()` / `_restore_energy_state()` if current tests
+show a real rollback regression.
+
+#### Follow-Up
+
+1. Migrate test/helper setup toward explicit pool assertions.
+2. Review save mapper energy fields after one pool-authority slice lands.
+3. Leave visual HUD changes for a UI review window.

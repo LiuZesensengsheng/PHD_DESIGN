@@ -60,6 +60,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
 - Source of truth:
   - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
   - `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
+  - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
   - `docs/development/testing/TEST_STRATEGY_V1.md`
   - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
 - Current status:
@@ -79,6 +80,9 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - combat save v0/raw/full-machine fallback loading is also rejected after the
     second save reset slice; player energy scalar/pool compatibility remains
     queued for `Combat Contract Convergence V1`
+  - `Combat Contract Convergence V1` starts with energy ownership:
+    `archetype.energy_pool` is payment authority while scalar `player.energy`
+    remains a temporary projection/read surface
 - Current rules:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened

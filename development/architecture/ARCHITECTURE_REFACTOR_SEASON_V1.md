@@ -104,6 +104,10 @@ Stop conditions:
 
 ### Line 2. Combat Contract Convergence V1
 
+Source of truth:
+
+- `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+
 Purpose:
 
 - reduce long-lived combat dual tracks and implicit contracts after compat-zero

@@ -135,11 +135,13 @@ As of `2026-04-23`, after `G4` completion and the `G5` retained-adapter review:
   - `scripts/check_combat_compat_zero.py` now guards the removed enemy legacy
     method definitions and call sites against re-entry
 - `G5` retained-adapter review is accepted:
-  - save backward-compat remains an intentional retained boundary:
-    - `combat_save_service.py`
+  - save backward-compat was an intentional retained boundary at the time of
+    this review, but `Save Reset Policy V1` later superseded that stance for
+    current pre-content saves.
+  - current retained combat save/read surfaces are:
     - `save_snapshot_mapper.py`
     - session save/apply host entrypoints
-    - player-side `legacy_energy` snapshot/restore paths tied to save/rollback
+    - player-side scalar energy projection snapshot/restore for rollback
   - `ModelEnvironmentArenaEffect` and
     `DefaultTurnStartEnvironmentInjector` are retained as intentional runtime
     adapters
@@ -255,16 +257,14 @@ Primary files:
 
 Current examples:
 
-- legacy payload migration
-- legacy machine snapshot extraction
-- `legacy_energy` snapshot handling
+- player-side scalar energy projection snapshot handling for rollback
 - fallback RNG restoration path
 
 Default classification:
 
-- retained backward-compat boundary as of `2026-04-23`
-- not part of compat-zero delete work unless a separate save-lifecycle
-  decision reopens it
+- superseded by `Save Reset Policy V1` and `Combat Contract Convergence V1`
+- not part of the original compat-zero delete work; future edits should follow
+  the newer save and energy-contract documents
 
 ### C6. Potential long-lived adapters that look like compat
 
