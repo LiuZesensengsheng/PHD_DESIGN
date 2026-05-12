@@ -1156,7 +1156,13 @@ Adopt `Save Reset Policy V1` for the current pre-content stage:
    `machine_snapshot`.
 3. Legacy machine snapshots, missing machine snapshot versions, and unwrapped
    slot payloads fail closed instead of being migrated by guesswork.
-4. Combat snapshot migration is left for a later explicit save/combat slice.
+4. Combat save slot payloads must wrap the current combat snapshot under
+   `combat_snapshot`.
+5. Legacy combat v0 raw payloads, raw current combat snapshots without the slot
+   wrapper, and full machine snapshot `COMBAT` fallback payloads fail closed
+   instead of being migrated by guesswork.
+6. Player energy scalar/pool compatibility remains outside this save policy and
+   belongs to `Combat Contract Convergence V1`.
 
 #### Human Workload Impact
 
@@ -1199,6 +1205,7 @@ compatibility or content-pack identity pinning.
   - current machine snapshot round trips still pass
   - legacy machine snapshots are rejected explicitly
   - legacy unwrapped slot payloads are rejected explicitly
+  - legacy combat v0/raw/full-machine fallback payloads are rejected explicitly
   - full pytest passes before commit
 - Review cadence:
   after the next combat save or content-pack identity slice.

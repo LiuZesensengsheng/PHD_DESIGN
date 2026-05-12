@@ -76,6 +76,9 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - `Save Reset Policy V1` is now the first implementation line:
     old machine snapshot shapes and unwrapped save-slot payloads may be rejected
     during the current pre-content stage
+  - combat save v0/raw/full-machine fallback loading is also rejected after the
+    second save reset slice; player energy scalar/pool compatibility remains
+    queued for `Combat Contract Convergence V1`
 - Current rules:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened

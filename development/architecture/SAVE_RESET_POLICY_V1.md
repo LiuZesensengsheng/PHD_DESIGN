@@ -49,8 +49,16 @@ The project still has separate version layers:
 - Combat snapshot: `schema_version`
 
 This policy only tightens the whole-game machine snapshot and save-slot wrapper
-behavior in the first slice. Combat snapshot migration is intentionally left to
-a later save/combat slice.
+behavior in the first slice.
+
+Combat save loading is also current-schema only after the second slice:
+
+- combat save slot payloads must wrap the snapshot under `combat_snapshot`
+- wrapped combat snapshots must include `schema_version`
+- v0 raw combat payloads are not migrated
+- full machine snapshot `COMBAT` fallback loading is not supported
+- player energy scalar/pool compatibility remains outside this policy and belongs
+  to `Combat Contract Convergence V1`
 
 ## Change Rules
 
