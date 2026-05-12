@@ -83,6 +83,9 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - `Combat Contract Convergence V1` starts with energy ownership:
     `archetype.energy_pool` is payment authority while scalar `player.energy`
     remains a temporary projection/read surface
+  - the first test-helper migration slice now makes `HeadlessTestBase`
+    colorless-energy setup and X-cost defaults prefer the pool authority while
+    keeping scalar projection compatibility
 - Current rules:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened

@@ -67,8 +67,12 @@ For V1, `archetype.energy_pool` is the write/payment authority. Scalar
 `player.energy` remains a read-side projection and setup convenience until
 tests, save mapper, and HUD reads can migrate deliberately.
 
-The first implementation slice should only remove the `legacy_energy` rollback
-field name and replace it with `scalar_energy`, while keeping behavior stable.
+Completed slices:
+
+- removed the `legacy_energy` rollback field name and replaced it with
+  `scalar_energy`, while keeping behavior stable
+- moved the shared headless test energy setup/read helper toward the colorless
+  pool as authority, while keeping the scalar projection synchronized
 
 ## Counter-Review
 
@@ -76,9 +80,9 @@ This is not the final destination. It deliberately leaves dual reads alive. That
 is acceptable because the current highest-value move is to make ownership
 explicit, not to rewrite every energy consumer in one branch.
 
-The next slice should migrate one read family at a time. Good candidates are:
+Next slices should migrate one read family at a time. Good candidates are:
 
-- helper/test setup APIs that can assert through `energy_pool`
+- direct combat test assertions that can assert through `energy_pool`
 - save snapshot mapper fields that can treat scalar energy as derived
 - render-state assembly that can prefer `energy_pool`
 
@@ -87,6 +91,7 @@ The next slice should migrate one read family at a time. Good candidates are:
 - Payment authority: `archetype.energy_pool`.
 - Temporary projection: `player.energy`.
 - Removed wording: `legacy_energy` in rollback snapshots.
-- Not in this slice: UI behavior, content balance, save compatibility, or a full
-  scalar-energy deletion.
+- Headless test energy setup now reads/writes the colorless pool first.
+- Not in this line yet: UI behavior, content balance, save compatibility, or a
+  full scalar-energy deletion.
 
