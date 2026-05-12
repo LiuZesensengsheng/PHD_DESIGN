@@ -73,6 +73,8 @@ Completed slices:
   `scalar_energy`, while keeping behavior stable
 - moved the shared headless test energy setup/read helper toward the colorless
   pool as authority, while keeping the scalar projection synchronized
+- made combat save mapper scalar energy fields derive from the colorless pool
+  and resync scalar projection after pool restore
 
 ## Counter-Review
 
@@ -83,7 +85,6 @@ explicit, not to rewrite every energy consumer in one branch.
 Next slices should migrate one read family at a time. Good candidates are:
 
 - direct combat test assertions that can assert through `energy_pool`
-- save snapshot mapper fields that can treat scalar energy as derived
 - render-state assembly that can prefer `energy_pool`
 
 ## Decision Summary
@@ -92,6 +93,7 @@ Next slices should migrate one read family at a time. Good candidates are:
 - Temporary projection: `player.energy`.
 - Removed wording: `legacy_energy` in rollback snapshots.
 - Headless test energy setup now reads/writes the colorless pool first.
+- Combat save scalar energy fields now derive from the colorless pool.
 - Not in this line yet: UI behavior, content balance, save compatibility, or a
   full scalar-energy deletion.
 
