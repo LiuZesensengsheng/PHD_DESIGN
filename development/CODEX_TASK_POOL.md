@@ -59,6 +59,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
     no-touch list, validation rhythm, and stop condition
 - Source of truth:
   - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+  - `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
   - `docs/development/testing/TEST_STRATEGY_V1.md`
   - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
 - Current status:
@@ -72,6 +73,9 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - UI refactor remains gated on human visual review availability
   - full pytest remains the commit gate until a separate policy update changes
     it
+  - `Save Reset Policy V1` is now the first implementation line:
+    old machine snapshot shapes and unwrapped save-slot payloads may be rejected
+    during the current pre-content stage
 - Current rules:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened

@@ -65,6 +65,10 @@ Default validation:
 
 ### Line 1. Save Reset Policy V1
 
+Source of truth:
+
+- `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
+
 Purpose:
 
 - remove old-save ambiguity while the project has no meaningful external save
@@ -289,4 +293,3 @@ and the test feedback loop is now fast enough to support smaller AI slices.
 The most valuable first move is not broad cleanup. It is to remove save-policy
 ambiguity, then converge combat contracts, then continue campaign strangling
 under established boundaries.
-

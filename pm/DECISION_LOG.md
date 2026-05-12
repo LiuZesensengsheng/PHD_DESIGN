@@ -1128,3 +1128,88 @@ with a narrower decision-log entry.
 2. Draft `Combat Contract Convergence V1` with energy convergence as the first
    likely topic.
 3. Keep UI runtime work queued until human visual review is available.
+
+### [DL-20260512-03] Save Reset Policy V1 rejects pre-alpha legacy saves
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
+  - `contexts/shared/save/machine_snapshot_service.py`
+  - `contexts/shared/save/game_save_slot_service.py`
+
+#### Background
+
+The project has no shipped external save corpus, and the user accepted that old
+pre-alpha saves may be invalidated during the current refactor window. The old
+save schema spec still described reliable old-save loading as the default goal,
+which conflicted with the active architecture refactor season.
+
+#### Decision
+
+Adopt `Save Reset Policy V1` for the current pre-content stage:
+
+1. Current whole-game saves must use `meta.snapshot_schema_version`,
+   `persistent`, and `state_snapshots`.
+2. Save slot payloads must wrap the current machine snapshot under
+   `machine_snapshot`.
+3. Legacy machine snapshots, missing machine snapshot versions, and unwrapped
+   slot payloads fail closed instead of being migrated by guesswork.
+4. Combat snapshot migration is left for a later explicit save/combat slice.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  less time spent preserving local historical saves that are not product
+  commitments.
+- Increased human work:
+  any later compatibility promise must be documented before migrations are
+  reintroduced.
+- Critical path effect:
+  future combat and content-pack save decisions can build on a smaller current
+  contract.
+
+#### AI Workload Assumption
+
+AI can remove low-value compatibility layers and keep current round-trip tests
+green. Human decision remains required before promising external save
+compatibility or content-pack identity pinning.
+
+#### Alternatives
+
+1. Keep reliable old-save loading as the default.
+2. Delete all save version metadata and rely only on current shapes.
+
+#### Risks And Triggers
+
+- Risk:
+  a developer expects an old local save to load during testing.
+- Trigger:
+  support or playtest feedback identifies a save corpus worth preserving.
+
+- Risk:
+  future agents add ad hoc migrations without updating policy.
+- Trigger:
+  migration code appears without fixture-backed tests and a policy update.
+
+#### Validation Plan
+
+- Success indicators:
+  - current machine snapshot round trips still pass
+  - legacy machine snapshots are rejected explicitly
+  - legacy unwrapped slot payloads are rejected explicitly
+  - full pytest passes before commit
+- Review cadence:
+  after the next combat save or content-pack identity slice.
+
+#### Rollback Plan
+
+Supersede this decision with a compatibility policy, restore fixture-backed
+migrations for the required historical schemas, and keep rejection tests only
+for unsupported versions.
+
+#### Follow-Up
+
+1. Evaluate combat snapshot v0 migration separately.
+2. Record content-pack identity only after the save reset stance is stable.
