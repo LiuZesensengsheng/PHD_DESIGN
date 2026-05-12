@@ -184,6 +184,9 @@ not at theoretical purity.
    - do not let lifecycle steps import trigger services directly
    - validation: trigger surface/reaction, turn orchestrator, lifecycle
      guardrail, and contract smoke tests
+   - status: completed on `2026-05-12`; `CampaignState` now delegates combined
+     trigger/reaction/forced-event clear and checkpoint shape to
+     `CampaignTriggerCheckpointService`
 
 6. **80-point stop review**
    - run `py -3.11 -m pytest tests/campaign -q`
