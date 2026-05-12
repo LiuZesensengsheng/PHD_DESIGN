@@ -24,6 +24,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 ### Repository Smoke Baseline
 
+- Run the quick local test smoke profile:
+  - `py -3.11 scripts/run_test_smoke.py --profile quick`
+- Run the contract-oriented test smoke profile:
+  - `py -3.11 scripts/run_test_smoke.py --profile contract`
+- List test smoke profiles:
+  - `py -3.11 scripts/run_test_smoke.py --list`
 - Run the default repo-wide smoke baseline:
   - `python scripts/run_repo_smoke_baseline.py`
 - List the included smoke groups:

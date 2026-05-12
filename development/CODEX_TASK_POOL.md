@@ -50,6 +50,37 @@ Do not treat a task as a long-running Codex lane when it is mainly:
 
 ## Active Tasks
 
+### A0. Test Strategy V1
+
+- Goal:
+  - make architecture-refactor test feedback faster and easier to choose
+    without reducing regression confidence
+  - add stable quick/contract smoke entrypoints before changing any commit gate
+- Source of truth:
+  - `docs/development/testing/TEST_STRATEGY_V1.md`
+  - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
+  - `scripts/run_test_smoke.py`
+- Current status:
+  - `Phase 0` baseline captured on `2026-05-12`
+  - `Phase 1-2` strategy docs and pytest marker vocabulary established
+  - `Phase 3` quick and contract smoke profiles added
+  - quick profile target is ordinary refactor feedback
+  - contract profile target is boundary/refactor closure feedback
+  - full-suite commit gate remains unchanged until a separate decision updates it
+- Current rules:
+  - do not delete tests only to reduce runtime
+  - keep cardanalysis / combat_analysis test optimization out of this line
+    unless explicitly reopened
+  - prefer quick smoke during implementation, contract smoke before refactor
+    closure, and full suite before commits under the current gate
+- Validation rhythm:
+  - fast feedback:
+    - `py -3.11 scripts/run_test_smoke.py --profile quick`
+  - boundary closure:
+    - `py -3.11 scripts/run_test_smoke.py --profile contract`
+  - current commit gate:
+    - `py -3.11 -m pytest -q`
+
 ### A1. Campaign Boundary Hardening V1
 
 - Goal:

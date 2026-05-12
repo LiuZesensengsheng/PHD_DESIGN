@@ -934,3 +934,94 @@ default input requirement.
    case-library normalization work.
 2. Use `scripts/validate_capability_graph.py --batch ...` before assigning the
    next parallel agent set.
+
+### [DL-20260512-01] Test Strategy V1 adopts layered smoke feedback
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/testing/TEST_STRATEGY_V1.md`
+  - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
+  - `scripts/run_test_smoke.py`
+  - `docs/development/DEFAULT_ENTRYPOINTS.md`
+
+#### Background
+
+Full `py -3.11 -m pytest -q` currently takes about four minutes on the active
+workstation. That is acceptable as a final gate, but it is slow feedback for
+AI-assisted architecture refactor slices that need many small checks.
+
+The project already has a broader `run_repo_smoke_baseline.py`, but it is not
+the fastest ordinary-refactor loop. The current test suite also needs a shared
+vocabulary for focused, smoke, contract, integration, slow, and full-suite
+validation.
+
+#### Decision
+
+Adopt `Test Strategy V1`:
+
+1. Keep the existing full-suite commit gate unchanged for now.
+2. Add a fast `quick` smoke profile for non-cardanalysis refactor feedback.
+3. Add a `contract` smoke profile for boundary and source-scanning closure
+   checks.
+4. Register pytest marker vocabulary before mass-tagging tests.
+5. Treat cardanalysis / combat_analysis test optimization as out of scope for
+   this line unless explicitly reopened.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  routine architecture refactors can get useful feedback in seconds or tens of
+  seconds before waiting for the full suite.
+- Increased human work:
+  the team needs to choose the right validation tier and avoid treating smoke
+  as a replacement for full regression without a later gate decision.
+- Critical path effect:
+  later combat/campaign/save/content refactor work can iterate faster while the
+  final safety net stays intact.
+
+#### AI Workload Assumption
+
+AI can maintain smoke profiles, update marker coverage, and split repeated slow
+tests after profiling. Human review remains required before changing the commit
+gate or deleting coverage.
+
+#### Alternatives
+
+1. Keep only full pytest for all feedback.
+2. Enable pytest-xdist immediately.
+
+#### Risks And Triggers
+
+- Risk:
+  smoke profiles are mistaken for full commit readiness.
+- Trigger:
+  a PR claims full validation while only smoke profiles ran.
+
+- Risk:
+  test speed work turns into coverage deletion.
+- Trigger:
+  slow tests are removed without equivalent or stronger contract coverage.
+
+#### Validation Plan
+
+- Success indicators:
+  - quick smoke passes locally
+  - contract smoke passes locally
+  - test strategy docs and default entrypoints agree
+  - full suite remains green before committing
+- Review cadence:
+  after the first deeper fixture-deduplication slice.
+
+#### Rollback Plan
+
+If the smoke profiles become noisy or misleading, remove the new smoke script
+and keep the documentation as a report-only testing note. The full pytest gate
+remains the rollback safety net.
+
+#### Follow-Up
+
+1. Add marker coverage only to tests owned by the smoke profiles.
+2. Profile repeated campaign/combat fixture setup before changing helpers.
+3. Evaluate xdist only after global state and filesystem assumptions are known.
