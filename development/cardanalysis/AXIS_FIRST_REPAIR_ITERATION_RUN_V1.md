@@ -53,6 +53,12 @@ The run reports:
 - campaign timing draft-signal proxy deltas;
 - remaining failure families.
 
+Selected repair priorities are read through the shared
+`axis_first_repair_advice_read_model` helper. The helper preserves the existing
+payload shape: role-specific advice is selected first, same-lane repair lanes
+are matched against the previous comparison's lane-quality reasons, and campaign
+timing context is appended only as report-only planning guidance when available.
+
 For the current Silent fixture, aggregate score remains static while the revised
 attempt reduces the selected visibility reasons for `axis_precision_loss`,
 `sts1_wording_drift`, and `fail_state_floor_drop`. The remaining gaps are still
