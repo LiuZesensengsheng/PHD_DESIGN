@@ -159,6 +159,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_sts1_four_character_exam.py`
 - Run the integrated report-only axis-first STS1 exam summary:
   - `python scripts/run_axis_first_integrated_exam_summary.py --use-current-fixtures --output-dir tmp/combat_analysis/axis_first_integrated_exam_summary_current`
+- Run the report-only Silent axis-first repair iteration closure:
+  - `python scripts/run_axis_first_repair_iteration_run.py --use-current-silent-fixtures --output-dir tmp/combat_analysis/axis_first_repair_iteration_run_current`
 - For campaign-curve fit, scorecard, axis-first, and other detailed
   cardanalysis commands, use:
   - `tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md`

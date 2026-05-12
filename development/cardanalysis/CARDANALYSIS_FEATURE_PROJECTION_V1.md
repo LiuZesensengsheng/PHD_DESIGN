@@ -141,6 +141,14 @@ as axis drift, character texture mismatch, STS1-like wording drift,
 failure-state floor, combo/setup tax, package synergy collapse, and fun-tension
 drift.
 
+The r5 exam-sensitivity samples add 11 same-score quality contrast probes for
+Silent, Ironclad, Defect, and Watcher. They preserve the existing report-only
+case input contract while making these blind spots readable as feature hints:
+text-small/play-big fun tension flips, generic-goodstuff character texture
+drift, failure-state floor drops, Act 2 transition collapse, same mechanism
+names with different play patterns, and secondary axes swallowing poison,
+exhaust, orb/focus, or mantra lanes.
+
 They are not additional reviewed evidence. They keep `evidence_tier =
 human_curated`, `review_status = review_needed`, and
 `authority_boundary = advisory_context_only`.

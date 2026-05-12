@@ -78,6 +78,11 @@ when phase-risk fixtures are supplied. These repair lanes remain report-only
 planning guidance and do not change aggregate scores, scorecard weights, package
 exam outcomes, or any runtime behavior.
 
+`axis_first_repair_iteration_run_v1` is the first downstream closure surface for
+this advice. It consumes the integrated summary, records one unreviewed Silent
+revised draft attempt, replays the existing axis-first comparison chain, and
+summarizes score/visibility deltas without changing authority.
+
 ## Boundary
 
 This surface does not:
