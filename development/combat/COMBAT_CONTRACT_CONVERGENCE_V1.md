@@ -75,6 +75,8 @@ Completed slices:
   pool as authority, while keeping the scalar projection synchronized
 - made combat save mapper scalar energy fields derive from the colorless pool
   and resync scalar projection after pool restore
+- made combat render-state scalar energy fields derive from the colorless pool
+  while preserving the existing UI DTO fields
 
 ## Counter-Review
 
@@ -85,7 +87,8 @@ explicit, not to rewrite every energy consumer in one branch.
 Next slices should migrate one read family at a time. Good candidates are:
 
 - direct combat test assertions that can assert through `energy_pool`
-- render-state assembly that can prefer `energy_pool`
+- small event/protocol/alias compatibility layers where replacement paths are
+  already established
 
 ## Decision Summary
 
@@ -94,6 +97,7 @@ Next slices should migrate one read family at a time. Good candidates are:
 - Removed wording: `legacy_energy` in rollback snapshots.
 - Headless test energy setup now reads/writes the colorless pool first.
 - Combat save scalar energy fields now derive from the colorless pool.
+- Combat render-state scalar energy fields now derive from the colorless pool.
 - Not in this line yet: UI behavior, content balance, save compatibility, or a
   full scalar-energy deletion.
 
