@@ -30,6 +30,9 @@ targets for this line.
 - After the 2026-05-13 follow-up replay/reference caching pass, full suite
   runtime on this workstation is about `2m31s`
   (`py -3.11 -m pytest -q --durations=80 --durations-min=0.05`).
+- After the latest-master low-risk cache and fixture-path pass, full suite
+  runtime on this workstation is about `2m22s`
+  (`py -3.11 -m pytest -q --durations=100 --durations-min=0.05`).
 - The default full gate remains `py -3.11 -m pytest -q`.
 - Full suite passed during baseline capture.
 
@@ -85,6 +88,21 @@ Completed low-risk speedups:
   can share identical replay work without weakening coverage.
 - STS reference catalog loading now uses a bounded process-local cache for
   immutable reference packs used repeatedly by cardanalysis tests.
+- The complete-card draft request fixture now uses shorter artifact filenames so
+  Windows path handling can validate the same payload without hitting long-path
+  fixture failures.
+- `evidence_quality_audit` now has a bounded process-local cache keyed by input
+  path fingerprints and returns deep copies so repeated report/script tests do
+  not share mutable payload state.
+- `test_evidence_quality_audit_v1` shares the same audit payload within the
+  module when every assertion inspects the identical report.
+- `modelization_shadow_report` now caches full summaries by input fingerprints,
+  blend weights, and report id, allowing toolkit and CLI assertions to reuse the
+  same expensive summary construction.
+- `StsReferencePack.build_card_index()` memoizes the immutable card index on the
+  cached reference pack.
+- The reviewed fast-card synthesis closure adapter caches the deck-fun
+  calibration summary per benchmark input fingerprint.
 
 Observed impact:
 
@@ -99,6 +117,9 @@ Observed impact:
   further to about `3m00s`.
 - The follow-up replay/reference caching pass dropped the full suite further to
   about `2m31s` from a latest-master pre-change measurement of about `3m02s`.
+- The latest-master low-risk pass repaired a Windows long-path fixture blocker
+  and reduced the measured full-suite runtime from about `2m32s` during the
+  blocked profiling run to a passing `2m22s`.
 
 Representative cardanalysis observations:
 
@@ -110,10 +131,10 @@ Representative cardanalysis observations:
   `2.1s` to about `1.0s`.
 
 Remaining slowest tests are now concentrated in modelization shadow CLI output,
-headless campaign/shared flows, and repeated design-assist/evidence-audit report
-generation. Further reductions should focus on benchmark/runtime design,
-snapshot reuse, or representative integration split points, not deleting
-coverage.
+headless campaign/shared flows, repeated design-assist report generation, and
+repository-wide text/contract scans. Further reductions should focus on
+benchmark/runtime design, snapshot reuse, or representative integration split
+points, not deleting coverage.
 
 ## Existing Useful Entry Points
 
