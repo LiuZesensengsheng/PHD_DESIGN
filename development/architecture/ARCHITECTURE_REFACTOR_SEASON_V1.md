@@ -22,6 +22,9 @@ own focused scope, validation pack, and rollback story.
 - UI refactor needs human visual review and should wait for a review window.
 - `cardanalysis` / `combat_analysis` remains out of scope for this refactor
   season unless explicitly reopened.
+- On `2026-05-13`, the user confirmed combat energy is unified scalar energy,
+  not colored energy. `Combat Energy Unification V2` supersedes the earlier
+  energy-pool authority direction.
 
 ## Non-Goals
 
@@ -107,6 +110,7 @@ Stop conditions:
 Source of truth:
 
 - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+- `docs/development/combat/COMBAT_ENERGY_UNIFICATION_V2.md`
 
 Purpose:
 
@@ -115,7 +119,7 @@ Purpose:
 
 Primary targets:
 
-- player energy scalar vs colored energy pool convergence
+- unified scalar energy authority and deletion of `energy_pool` scaffolding
 - event bus priority semantics and protocol alignment
 - effect/card contract clarity where convenience aliases are retained
 - combat save payload fields only after `Save Reset Policy V1` freezes its
@@ -126,6 +130,8 @@ Allowed work:
 - write a decision doc before implementation
 - converge one contract at a time
 - prefer typed/current runtime ownership over compatibility fallbacks
+- do not add new `energy_pool` payment, preview, save, render, or test
+  dependencies
 - keep combat session as the runtime host
 
 Do not do:
@@ -268,8 +274,8 @@ Stop conditions:
 
 1. Close this planning line.
 2. Run `Save Reset Policy V1`.
-3. Start `Combat Contract Convergence V1`, with energy convergence as the first
-   likely decision.
+3. Start `Combat Energy Unification V2`, with scalar energy authority as the
+   first combat contract decision.
 4. Start `CampaignState Strangler V1` after the first combat/save slice lands or
    when campaign work becomes the critical path.
 5. Start `Content Pack Minimal V1` after save identity policy is clear.

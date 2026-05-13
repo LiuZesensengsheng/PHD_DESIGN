@@ -1425,3 +1425,84 @@ activation, or save pinning.
 
 1. Add save pack pinning only after manifest identity proves stable.
 2. Audit removable compatibility/adapters after content pack basics land.
+
+### [DL-20260513-01] Combat energy adopts unified scalar model
+
+- Date: `2026-05-13`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/combat/COMBAT_ENERGY_UNIFICATION_V2.md`
+  - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+
+#### Background
+
+The 80-point architecture baseline moved combat energy reads toward
+`energy_pool` authority because colored energy still looked like a possible
+future rule. The user then confirmed that combat should use one unified energy
+resource, not colored energy.
+
+#### Decision
+
+Adopt scalar `Energy(current, max_value)` as the target combat energy authority.
+Treat `energy_pool` and `Color.COLORLESS` energy handling as migration-phase
+scaffolding to delete in staged V2 slices. `COMBAT_CONTRACT_CONVERGENCE_V1`
+remains historical context but is superseded for energy authority.
+
+#### Human Workload Impact
+
+- Reduced human review load:
+  fewer future discussions about colored-resource semantics that are no longer
+  product goals.
+- Added human review load:
+  one explicit direction reset and review of the staged deletion plan.
+- Critical path change:
+  the 90-point refactor should start by flipping payment/save/render/test
+  surfaces back to scalar energy before broader protocol cleanup.
+
+#### AI Workload Assumption
+
+AI can perform the staged scalar-energy migration with focused combat tests,
+quick smoke, contract smoke, and full pytest per commit. Human review should
+only be needed if a slice starts changing card balance, visual HUD behavior, or
+future resource-design rules.
+
+#### Alternatives
+
+1. Keep `EnergyPool` as a one-color model.
+2. Delete every pool surface in one broad PR.
+
+#### Risks And Triggers
+
+- Risk:
+  deleting pool fields before payment and preview paths are scalar-owned
+  regresses X-cost or refund behavior.
+- Trigger:
+  focused payment or preview tests fail for behavior rather than schema names.
+
+- Risk:
+  future automation reintroduces `energy_pool` dependencies.
+- Trigger:
+  new payment, preview, save, render, or test code starts reading
+  `energy_pool` outside an explicit temporary cleanup allowlist.
+
+#### Validation Plan
+
+- Focused combat payment, save, render, X-cost, and start-turn tests pass for
+  each slice.
+- Quick smoke and contract smoke pass for boundary-touching slices.
+- Full `py -3.11 -m pytest -q` remains the commit gate.
+
+#### Rollback Plan
+
+Revert the specific scalar-migration slice that regresses behavior. Keep the
+direction document unless the scalar model itself is reversed by a new product
+decision.
+
+#### Follow-Up
+
+1. Flip payment authority to scalar `Energy`.
+2. Move save/render contracts back to scalar energy.
+3. Migrate test helpers and assertions away from `energy_pool`.
+4. Delete runtime `EnergyPool` surfaces after focused coverage is green.

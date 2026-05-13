@@ -61,6 +61,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
   - `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
   - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+  - `docs/development/combat/COMBAT_ENERGY_UNIFICATION_V2.md`
   - `docs/development/campaign/CAMPAIGN_STATE_STRANGLER_V1.md`
   - `docs/development/testing/TEST_STRATEGY_V1.md`
   - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
@@ -68,7 +69,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - planning line active on `2026-05-12`
   - recommended execution order:
     1. `Save Reset Policy V1`
-    2. `Combat Contract Convergence V1`
+    2. `Combat Energy Unification V2`
     3. `CampaignState Strangler V1`
     4. `Content Pack Minimal V1`
     5. `UI Runtime Refactor Window`
@@ -79,14 +80,16 @@ Do not treat a task as a long-running Codex lane when it is mainly:
     old machine snapshot shapes and unwrapped save-slot payloads may be rejected
     during the current pre-content stage
   - combat save v0/raw/full-machine fallback loading is also rejected after the
-    second save reset slice; player energy scalar/pool compatibility remains
-    queued for `Combat Contract Convergence V1`
-  - `Combat Contract Convergence V1` starts with energy ownership:
-    `archetype.energy_pool` is payment authority while scalar `player.energy`
-    remains a temporary projection/read surface
-  - the first test-helper migration slice now makes `HeadlessTestBase`
-    colorless-energy setup and X-cost defaults prefer the pool authority while
-    keeping scalar projection compatibility
+    second save reset slice; energy authority now belongs to
+    `Combat Energy Unification V2`
+  - `Combat Energy Unification V2` supersedes the previous energy-pool
+    authority direction:
+    - combat uses one unified scalar energy resource
+    - scalar `Energy` is the target payment/read/write authority
+    - `energy_pool` and `Color.COLORLESS` energy handling are now
+      migration-phase scaffolding to delete in staged slices
+    - future combat automation should start with scalar payment authority, then
+      clean up save/render/test/helper pool surfaces
   - `CampaignState Strangler V1` now has a dedicated execution plan for the
     80-point refactor baseline:
     - keep `CampaignState` as the shell host
@@ -107,6 +110,8 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened
   - do not do broad directory-purity moves
+  - do not add new combat `energy_pool` dependencies; treat them as V2 cleanup
+    targets
   - use quick smoke during implementation and contract smoke for boundary work
 - Validation rhythm:
   - quick:

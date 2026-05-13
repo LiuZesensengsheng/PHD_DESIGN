@@ -1,5 +1,15 @@
 # Combat Contract Convergence V1
 
+## Supersession Notice
+
+The energy-authority direction in this document was superseded on `2026-05-13`
+by `docs/development/combat/COMBAT_ENERGY_UNIFICATION_V2.md`.
+
+V1 remains useful historical context for the 80-point refactor baseline. Do not
+continue migrating combat energy toward `archetype.energy_pool` authority.
+The product rule is now unified scalar energy, and `energy_pool` is
+migration-phase scaffolding to delete in small V2 slices.
+
 ## Problem
 
 Combat compat-zero removed the old runtime shell, but a few domain contracts are
