@@ -169,13 +169,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_mechanism_axis_package_seed.py --input tmp/combat_analysis/mechanism_axis_design_brief_current/silent_sts1_reviewed_axes_328508221e_design_brief_mechanism_axis_design_brief_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_package_seed_current`
 - Validate the generated package seed against `card_package_proposal_v1`:
   - `python scripts/validate_card_package_proposal.py --input tmp/combat_analysis/mechanism_axis_package_seed_current --json`
-- Write/validate the report-only control discipline plus ideal temperament pilot contract and run its candidate batch:
-  - `python scripts/validate_control_discipline_ideal_pilot.py --write-template tmp/combat_analysis/control_discipline_ideal_pilot_template.json`
-  - `python scripts/validate_control_discipline_ideal_pilot.py --input tests/fixtures/combat_analysis/control_discipline_ideal_pilot_v1 --json`
-  - `python scripts/run_control_discipline_ideal_candidate_batch.py --input tests/fixtures/combat_analysis/control_discipline_ideal_pilot_v1/control_discipline_ideal_pilot_sample_v1.json --output-dir tmp/combat_analysis/control_discipline_ideal_candidate_batch_current`
-- Run the report-only control discipline plus ideal candidate batch exam/ranking:
-  - `python scripts/run_control_discipline_ideal_candidate_batch_exam.py --input tests/fixtures/combat_analysis/control_discipline_ideal_candidate_batch_v1/control_discipline_ideal_pilot_sample_v1_candidate_batch_v1_snapshot.json --output-dir tmp/combat_analysis/control_discipline_ideal_candidate_batch_exam_current`
-- Generate or validate the report-only control discipline plus ideal human-review feedback scaffold: `python scripts/validate_control_discipline_ideal_human_review_feedback.py --exam tests/fixtures/combat_analysis/control_discipline_ideal_candidate_batch_exam_v1/control_discipline_ideal_pilot_sample_v1_candidate_batch_v1_exam_v1_snapshot.json --output-dir tmp/combat_analysis/control_discipline_ideal_human_review_feedback_current` or `python scripts/validate_control_discipline_ideal_human_review_feedback.py --input tests/fixtures/combat_analysis/control_discipline_ideal_human_review_feedback_v1 --json`
+- Run the control-discipline plus ideal report-only chain from pilot through repair-plan:
+  - `tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md`
 - Run the mechanism axis report-only chain exam:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q`
 - Write an evaluation-autonomous-design handoff input from the current package seed:
