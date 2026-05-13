@@ -169,7 +169,7 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_mechanism_axis_package_seed.py --input tmp/combat_analysis/mechanism_axis_design_brief_current/silent_sts1_reviewed_axes_328508221e_design_brief_mechanism_axis_design_brief_snapshot.json --output-dir tmp/combat_analysis/mechanism_axis_package_seed_current`
 - Validate the generated package seed against `card_package_proposal_v1`:
   - `python scripts/validate_card_package_proposal.py --input tmp/combat_analysis/mechanism_axis_package_seed_current --json`
-- Run the control-discipline plus ideal report-only chain from pilot through repair-plan:
+- Run the control-discipline plus ideal report-only chain from pilot through complete-card draft request:
   - `tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md`
 - Run the mechanism axis report-only chain exam:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q`
