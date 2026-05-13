@@ -86,10 +86,10 @@ Do not treat a task as a long-running Codex lane when it is mainly:
     authority direction:
     - combat uses one unified scalar energy resource
     - scalar `Energy` is the target payment/read/write authority
-    - `energy_pool` and `Color.COLORLESS` energy handling are now
-      migration-phase scaffolding to delete in staged slices
-    - future combat automation should start with scalar payment authority, then
-      clean up save/render/test/helper pool surfaces
+    - `energy_pool`, `EnergyPool`, and `Color.COLORLESS` energy handling are no
+      longer retained as a compatibility layer
+    - future combat automation should preserve the scalar model and the
+      guardrail that keeps colored-pool energy out of active combat code
   - `CampaignState Strangler V1` now has a dedicated execution plan for the
     80-point refactor baseline:
     - keep `CampaignState` as the shell host
@@ -110,8 +110,8 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - do not combine execution lines in one PR
   - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened
   - do not do broad directory-purity moves
-  - do not add new combat `energy_pool` dependencies; treat them as V2 cleanup
-    targets
+  - do not add new combat `energy_pool` dependencies; the V2 line removed the
+    compatibility layer
   - use quick smoke during implementation and contract smoke for boundary work
 - Validation rhythm:
   - quick:

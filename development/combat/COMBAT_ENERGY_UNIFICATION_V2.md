@@ -12,16 +12,23 @@ is no colored-energy design target for this game.
 That changes the architecture direction:
 
 - scalar `Energy(current, max_value)` should be the combat energy authority
-- `energy_pool` and `Color.COLORLESS` energy handling are migration-phase
-  over-abstraction, not future-facing contracts
-- save, render, payment, tests, and helpers should converge back to the scalar
-  energy model in small slices
+- `energy_pool` and `Color.COLORLESS` energy handling are removed
+  over-abstraction, not future-facing or compatibility contracts
+- save, render, payment, tests, and helpers should use scalar energy directly
 
 Level: `L3 Architecture`
 
 Date: `2026-05-13`
 
 Status: accepted planning direction
+
+Update `2026-05-13`:
+
+- The user confirmed the target should match Slay the Spire's scalar energy
+  model without a colored-pool compatibility layer.
+- Active combat runtime, current combat save payloads, render DTOs, helpers,
+  and tests should not retain `EnergyPool` or `energy_pool` surfaces.
+- `Color.COLORLESS` remains valid only as card/content identity data.
 
 Supersedes:
 
@@ -67,8 +74,7 @@ The following surfaces no longer describe the target architecture:
   pool
 - payment code that branches through a pool map before spending unified energy
 
-These surfaces may remain temporarily during migration, but new code should not
-depend on them.
+These surfaces are not part of the active combat contract.
 
 ## Options
 
@@ -136,14 +142,17 @@ Cons:
 
 ## Recommendation
 
-Choose **Option C**.
+Choose **Option C** for the first authority flip, then collapse the remaining
+compatibility layer once the user explicitly removed the transition
+requirement.
 
 For V2:
 
 - scalar `Energy` is the combat energy authority
 - `player.energy` / `archetype.energy` are the canonical read/write surfaces
   until a narrower final owner is chosen
-- `energy_pool` is deprecated migration scaffolding
+- `energy_pool` is not retained as runtime, save, render, helper, or test
+  scaffolding
 - new combat payment, preview, save, render, and test code should not add
   `energy_pool` dependencies
 
@@ -164,6 +173,32 @@ For V2:
      - `tests/combat/test_x_cost_energy_basic.py`
      - `tests/combat/test_start_turn_energy.py`
      - nearby payment/action tests touched by the slice
+
+3. **Remove colored-pool compatibility layer**
+   - remove `EnergyPool` from active combat runtime
+   - remove `energy_pool_current` / `energy_pool_max` from current combat save
+     payloads and fixtures
+   - remove render DTO `energy_pool`
+   - move helpers and assertions to scalar energy
+   - delete tests whose only value was proving pool behavior
+   - add a narrow guardrail preventing active combat code, tests, and combat
+     save fixtures from reintroducing the removed pool model
+   - focused validation:
+     - payment/start-turn/X-cost tests
+     - `tests/combat/test_combat_save_snapshot_mapper.py`
+     - `tests/combat/test_combat_render_state_contracts.py`
+     - `tests/helpers/test_headless_test_base_energy_helpers.py`
+     - `tests/shared/test_naming_and_contract_guards.py`
+
+4. **Closure review**
+   - run focused combat packs, quick smoke, contract smoke, and full pytest
+   - update docs with retained energy surfaces and any explicitly deferred
+     cleanup
+
+### Superseded Earlier Slice Plan
+
+The original staged plan separated these into later slices. That slower
+transition was superseded by the no-compatibility-layer direction above.
 
 3. **Scalar save and render contract**
    - make combat save payloads serialize scalar energy as the current schema
@@ -220,7 +255,7 @@ Why not make this part of save reset or content-pack work?
 2. Colored-energy and colorless-pool authority are no longer product targets.
 3. `COMBAT_CONTRACT_CONVERGENCE_V1` remains historical context but is
    superseded for energy authority by this V2 plan.
-4. The next 90-point architecture pass should start with scalar energy
-   authority, then delete `energy_pool` surfaces in small validated slices.
+4. The 90-point architecture pass should use scalar energy directly and keep a
+   guardrail against reintroducing colored-pool energy surfaces.
 5. This line intentionally does not touch content balance, visual combat UI, or
    `cardanalysis` / `combat_analysis`.

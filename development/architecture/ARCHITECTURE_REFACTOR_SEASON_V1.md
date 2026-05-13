@@ -24,7 +24,9 @@ own focused scope, validation pack, and rollback story.
   season unless explicitly reopened.
 - On `2026-05-13`, the user confirmed combat energy is unified scalar energy,
   not colored energy. `Combat Energy Unification V2` supersedes the earlier
-  energy-pool authority direction.
+  energy-pool authority direction. The later no-compatibility-layer update
+  removes colored-pool combat energy surfaces from active runtime, save/render
+  DTOs, helpers, and tests.
 
 ## Non-Goals
 
@@ -120,6 +122,7 @@ Purpose:
 Primary targets:
 
 - unified scalar energy authority and deletion of `energy_pool` scaffolding
+- no colored-pool compatibility layer for combat energy
 - event bus priority semantics and protocol alignment
 - effect/card contract clarity where convenience aliases are retained
 - combat save payload fields only after `Save Reset Policy V1` freezes its
