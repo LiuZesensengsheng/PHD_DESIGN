@@ -77,7 +77,7 @@ Use this index to decide where to read and where to write project knowledge.
 
 ## Development Directory Map
 
-- `docs/development/architecture/`: cross-cutting architecture, UI, DDD, EEE, and boundary docs
+- `docs/development/architecture/`: cross-cutting architecture, save policy, UI, DDD, EEE, and boundary docs
 - `docs/development/campaign/`: campaign runtime, UI, lifecycle, task-area, and campaign-analysis docs
 - `docs/development/cardanalysis/`: case-backed design-analysis contracts, evidence libraries, mechanism axes, and advisory model docs
 - `docs/development/combat/`: combat runtime contracts, gates, compatibility plans, and automation backlogs

@@ -50,6 +50,77 @@ Do not treat a task as a long-running Codex lane when it is mainly:
 
 ## Active Tasks
 
+### A-1. Architecture Refactor Season V1
+
+- Goal:
+  - coordinate the short content-free refactor window across save, combat,
+    campaign, content-pack, UI, and testing lines
+  - prevent broad rewrites by giving each execution line a clear scope,
+    no-touch list, validation rhythm, and stop condition
+- Source of truth:
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+  - `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
+  - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+  - `docs/development/combat/COMBAT_ENERGY_UNIFICATION_V2.md`
+  - `docs/development/campaign/CAMPAIGN_STATE_STRANGLER_V1.md`
+  - `docs/development/testing/TEST_STRATEGY_V1.md`
+  - `docs/development/testing/TEST_BASELINE_2026-05-12.md`
+- Current status:
+  - planning line active on `2026-05-12`
+  - recommended execution order:
+    1. `Save Reset Policy V1`
+    2. `Combat Energy Unification V2`
+    3. `CampaignState Strangler V1`
+    4. `Content Pack Minimal V1`
+    5. `UI Runtime Refactor Window`
+  - UI refactor remains gated on human visual review availability
+  - full pytest remains the commit gate until a separate policy update changes
+    it
+  - `Save Reset Policy V1` is now the first implementation line:
+    old machine snapshot shapes and unwrapped save-slot payloads may be rejected
+    during the current pre-content stage
+  - combat save v0/raw/full-machine fallback loading is also rejected after the
+    second save reset slice; energy authority now belongs to
+    `Combat Energy Unification V2`
+  - `Combat Energy Unification V2` supersedes the previous energy-pool
+    authority direction:
+    - combat uses one unified scalar energy resource
+    - scalar `Energy` is the target payment/read/write authority
+    - `energy_pool`, `EnergyPool`, and `Color.COLORLESS` energy handling are no
+      longer retained as a compatibility layer
+    - future combat automation should preserve the scalar model and the
+      guardrail that keeps colored-pool energy out of active combat code
+  - `CampaignState Strangler V1` now has a dedicated execution plan for the
+    80-point refactor baseline:
+    - keep `CampaignState` as the shell host
+    - `hit_test_service`, thesis write/submission checkpoints, and trigger
+      checkpoint shape now have narrow owners/seams
+    - `py -3.11 -m pytest tests/campaign -q` passed for the campaign
+      80-point stop review
+    - keep `CampaignView`, rendering, and `ui_runtime` queued for human visual
+      review
+  - `Content Pack Minimal V1` has started with a minimal shared manifest
+    contract for active source packs:
+    - `manifest.json` now owns pack identity/version/dependencies/deprecation
+      shape only
+    - domain-specific schemas remain in their local validators
+    - no plugin platform, hot reload, dependency solver, or save pinning has
+      been added
+- Current rules:
+  - do not combine execution lines in one PR
+  - do not touch `cardanalysis` / `combat_analysis` unless explicitly reopened
+  - do not do broad directory-purity moves
+  - do not add new combat `energy_pool` dependencies; the V2 line removed the
+    compatibility layer
+  - use quick smoke during implementation and contract smoke for boundary work
+- Validation rhythm:
+  - quick:
+    - `py -3.11 scripts/run_test_smoke.py --profile quick`
+  - boundary:
+    - `py -3.11 scripts/run_test_smoke.py --profile contract`
+  - commit:
+    - `py -3.11 -m pytest -q`
+
 ### A0. Test Strategy V1
 
 - Goal:

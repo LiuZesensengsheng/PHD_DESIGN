@@ -14,7 +14,7 @@ This directory stores long-term project memory: architecture boundaries, stable 
 
 ## Subdirectories
 
-- `architecture/`: cross-cutting architecture, UI, DDD, EEE, and boundary docs.
+- `architecture/`: cross-cutting architecture, save policy, UI, DDD, EEE, and boundary docs.
 - `campaign/`: campaign runtime, UI, lifecycle, task-area, and campaign-analysis docs.
 - `cardanalysis/`: case-backed design-analysis contracts, evidence libraries, mechanism axes, and advisory model docs.
 - `combat/`: combat runtime contracts, gates, compatibility plans, and automation backlogs.

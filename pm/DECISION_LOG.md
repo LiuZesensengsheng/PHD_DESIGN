@@ -1025,3 +1025,484 @@ remains the rollback safety net.
 1. Add marker coverage only to tests owned by the smoke profiles.
 2. Profile repeated campaign/combat fixture setup before changing helpers.
 3. Evaluate xdist only after global state and filesystem assumptions are known.
+
+### [DL-20260512-02] Architecture Refactor Season V1 adopts scoped execution lines
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+  - `docs/development/testing/TEST_STRATEGY_V1.md`
+  - `docs/development/CODEX_TASK_POOL.md`
+
+#### Background
+
+The project has a short window with no immediate content-development pressure.
+The user is willing to accept a period of AI-heavy refactor work, but UI work
+still needs human visual review. Old saves can be treated aggressively because
+there is no external save-compatibility obligation yet.
+
+The previous `Test Strategy V1` work added fast quick/contract smoke profiles,
+so refactor slices can get useful feedback before waiting for the full suite.
+
+#### Decision
+
+Adopt `Architecture Refactor Season V1` as the top-level coordination plan for
+the next architecture work. Execution lines are:
+
+1. `Save Reset Policy V1`
+2. `Combat Contract Convergence V1`
+3. `CampaignState Strangler V1`
+4. `Content Pack Minimal V1`
+5. `UI Runtime Refactor Window`
+6. `Test Strategy Follow-Up`
+
+Each line must land as a separate branch/PR with its own scope, validation
+pack, and stop conditions. The default first implementation line is
+`Save Reset Policy V1`, followed by combat contract convergence.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  agents can choose the next refactor slice from a shared map instead of
+  re-litigating the project direction every time.
+- Increased human work:
+  humans still need to review save-policy, UI behavior, and any product-facing
+  content-pack identity decisions.
+- Critical path effect:
+  the next refactor window shifts from opportunistic cleanup to staged,
+  independently reviewable architecture lines.
+
+#### AI Workload Assumption
+
+AI can safely carry the planning, save reset, combat contract, and campaign
+strangler work when each slice has focused tests and smoke validation. UI
+runtime refactors require human review before broad execution.
+
+#### Alternatives
+
+1. Continue choosing refactor tasks opportunistically after each PR.
+2. Run one large architecture cleanup branch touching save, combat, campaign,
+   content, and UI together.
+
+#### Risks And Triggers
+
+- Risk:
+  the season plan becomes permission for broad rewrites.
+- Trigger:
+  one PR starts changing multiple execution lines or broad UI behavior.
+
+- Risk:
+  save reset decisions leak into combat/content work without an explicit policy.
+- Trigger:
+  combat or content-pack PRs delete save compatibility code before
+  `Save Reset Policy V1` lands.
+
+- Risk:
+  UI refactor proceeds without human visual review.
+- Trigger:
+  changes touch `contexts/campaign/view.py`, `rendering/**`, or `ui_runtime/**`
+  while no review window is available.
+
+#### Validation Plan
+
+- Success indicators:
+  - top-level season doc exists and is referenced from task pool
+  - each execution line has scope, no-touch list, validation, and stop
+    conditions
+  - quick smoke, contract smoke, and full pytest pass before committing the
+    planning line
+- Review cadence:
+  after each execution line lands, before starting the next line.
+
+#### Rollback Plan
+
+If the season plan proves too broad, demote it to a reference doc and run only
+the explicitly accepted execution line. Do not delete the history; supersede it
+with a narrower decision-log entry.
+
+#### Follow-Up
+
+1. Open `Save Reset Policy V1` as the first implementation branch.
+2. Draft `Combat Contract Convergence V1` with energy convergence as the first
+   likely topic.
+3. Keep UI runtime work queued until human visual review is available.
+
+### [DL-20260512-03] Save Reset Policy V1 rejects pre-alpha legacy saves
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/architecture/SAVE_RESET_POLICY_V1.md`
+  - `contexts/shared/save/machine_snapshot_service.py`
+  - `contexts/shared/save/game_save_slot_service.py`
+
+#### Background
+
+The project has no shipped external save corpus, and the user accepted that old
+pre-alpha saves may be invalidated during the current refactor window. The old
+save schema spec still described reliable old-save loading as the default goal,
+which conflicted with the active architecture refactor season.
+
+#### Decision
+
+Adopt `Save Reset Policy V1` for the current pre-content stage:
+
+1. Current whole-game saves must use `meta.snapshot_schema_version`,
+   `persistent`, and `state_snapshots`.
+2. Save slot payloads must wrap the current machine snapshot under
+   `machine_snapshot`.
+3. Legacy machine snapshots, missing machine snapshot versions, and unwrapped
+   slot payloads fail closed instead of being migrated by guesswork.
+4. Combat save slot payloads must wrap the current combat snapshot under
+   `combat_snapshot`.
+5. Legacy combat v0 raw payloads, raw current combat snapshots without the slot
+   wrapper, and full machine snapshot `COMBAT` fallback payloads fail closed
+   instead of being migrated by guesswork.
+6. Player energy scalar/pool compatibility remains outside this save policy and
+   belongs to `Combat Contract Convergence V1`.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  less time spent preserving local historical saves that are not product
+  commitments.
+- Increased human work:
+  any later compatibility promise must be documented before migrations are
+  reintroduced.
+- Critical path effect:
+  future combat and content-pack save decisions can build on a smaller current
+  contract.
+
+#### AI Workload Assumption
+
+AI can remove low-value compatibility layers and keep current round-trip tests
+green. Human decision remains required before promising external save
+compatibility or content-pack identity pinning.
+
+#### Alternatives
+
+1. Keep reliable old-save loading as the default.
+2. Delete all save version metadata and rely only on current shapes.
+
+#### Risks And Triggers
+
+- Risk:
+  a developer expects an old local save to load during testing.
+- Trigger:
+  support or playtest feedback identifies a save corpus worth preserving.
+
+- Risk:
+  future agents add ad hoc migrations without updating policy.
+- Trigger:
+  migration code appears without fixture-backed tests and a policy update.
+
+#### Validation Plan
+
+- Success indicators:
+  - current machine snapshot round trips still pass
+  - legacy machine snapshots are rejected explicitly
+  - legacy unwrapped slot payloads are rejected explicitly
+  - legacy combat v0/raw/full-machine fallback payloads are rejected explicitly
+  - full pytest passes before commit
+- Review cadence:
+  after the next combat save or content-pack identity slice.
+
+#### Rollback Plan
+
+Supersede this decision with a compatibility policy, restore fixture-backed
+migrations for the required historical schemas, and keep rejection tests only
+for unsupported versions.
+
+#### Follow-Up
+
+1. Evaluate combat snapshot v0 migration separately.
+2. Record content-pack identity only after the save reset stance is stable.
+
+### [DL-20260512-04] Combat energy convergence uses pool authority with scalar projection
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+  - `contexts/combat/domain/player.py`
+  - `contexts/combat/domain/services/energy_policy.py`
+
+#### Background
+
+Combat save compatibility has been reset, leaving player energy as the next
+explicit combat contract convergence target. The runtime already spends through
+`archetype.energy_pool`, but HUD/tests/save mapper surfaces still read
+`player.energy`. The old rollback snapshot key `legacy_energy` made that
+temporary projection look like dead compatibility rather than an active read
+surface.
+
+#### Decision
+
+Adopt the first `Combat Contract Convergence V1` stance:
+
+1. `archetype.energy_pool` is the payment/write authority for player energy.
+2. Scalar `player.energy` remains a temporary projection and setup/read surface.
+3. Remove `legacy_energy` naming from player rollback snapshots; use
+   `scalar_energy` while behavior stays stable.
+4. Migrate later read families one at a time instead of deleting scalar energy
+   immediately.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  future agents know which energy surface owns payment behavior.
+- Increased human work:
+  scalar projection removal still needs staged review across tests, save mapper,
+  and HUD reads.
+- Critical path effect:
+  combat contract cleanup can proceed without reopening save reset or UI work.
+
+#### AI Workload Assumption
+
+AI can remove misleading compatibility names and migrate one read family per
+slice. Human review is still needed before broad HUD/UI behavior changes.
+
+#### Alternatives
+
+1. Delete scalar `player.energy` immediately.
+2. Keep both scalar and pool energy without an ownership policy.
+
+#### Risks And Triggers
+
+- Risk:
+  new payment logic reads scalar energy again.
+- Trigger:
+  `EnergyPolicy` or card play payment starts depending on `player.energy`.
+
+- Risk:
+  the scalar projection persists too long.
+- Trigger:
+  new code adds more direct scalar reads outside existing HUD/test/save setup
+  surfaces.
+
+#### Validation Plan
+
+- Success indicators:
+  - card play rollback still restores energy
+  - colored energy payment tests still pass
+  - combat save restore still preserves current energy projection
+  - quick/contract smoke and full pytest pass before commit
+
+#### Rollback Plan
+
+Reintroduce the previous rollback snapshot key only inside
+`Player._snapshot_energy_state()` / `_restore_energy_state()` if current tests
+show a real rollback regression.
+
+#### Follow-Up
+
+1. Migrate test/helper setup toward explicit pool assertions.
+2. Review save mapper energy fields after one pool-authority slice lands.
+3. Leave visual HUD changes for a UI review window.
+
+### [DL-20260512-05] CampaignState Strangler V1 adopts narrow 80-point pass
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/campaign/CAMPAIGN_STATE_STRANGLER_V1.md`
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+  - `docs/development/campaign/CAMPAIGN_BOUNDARY_HARDENING_V1.md`
+
+#### Background
+
+The campaign boundary-hardening line is closed through Phase 3, but
+`CampaignState` still hosts several migration-phase seams: the review-next
+`hit_test_service` alias, thesis checkpoint write paths, and trigger
+snapshot/read hosting. The user wants an 80-point architecture baseline before
+another planning review, with UI runtime work held for human visual review.
+
+#### Decision
+
+Adopt `CampaignState Strangler V1` as a narrow execution line:
+
+1. Keep `CampaignState` as the shell host and preserve stable request seams.
+2. Move one explicit write path or review-next seam per slice.
+3. Start with `hit_test_service`, then thesis write/submission checkpoints,
+   then trigger snapshot/read hosting if it remains low risk.
+4. Do not touch `CampaignView`, rendering, or `ui_runtime` in this line.
+5. Pause after 3-5 implementation slices for an 80-point baseline review.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  future agents get a concrete campaign strangler order instead of re-reading
+  old cleanup plans to infer what remains active.
+- Increased human work:
+  the user still needs to review any UI/runtime visual changes later.
+- Critical path effect:
+  campaign architecture can improve during the content-free window without
+  blocking on UI review.
+
+#### AI Workload Assumption
+
+AI can execute the listed non-UI slices with focused campaign tests, quick and
+contract smoke, and full pytest before commits. Human review remains required
+before broad thesis/task-area redesign or UI/runtime refactors.
+
+#### Alternatives
+
+1. Stop campaign work after the completed boundary-hardening line.
+2. Reopen broad campaign purification across state, services, UI, and task-area
+   taxonomy.
+
+#### Risks And Triggers
+
+- Risk:
+  the strangler pass turns into a broad thesis/task-area rewrite.
+- Trigger:
+  a slice changes product rules, task-area geometry, or thesis identity
+  behavior instead of moving a bounded seam.
+
+- Risk:
+  over-abstraction returns through broad host protocols.
+- Trigger:
+  a new protocol exposes nearly the whole `CampaignState` shape instead of a
+  smaller replacement surface.
+
+#### Validation Plan
+
+- Success indicators:
+  - each slice keeps stable state request seams intact
+  - campaign focused tests pass for the touched seam
+  - quick smoke, contract smoke when boundaries are touched, and full pytest
+    pass before commits
+  - `py -3.11 -m pytest tests/campaign -q` passes at the 80-point campaign
+    stop review
+
+#### Rollback Plan
+
+Revert the specific seam slice that regresses behavior. Keep the plan document
+as the accepted execution order unless the rollback shows the line itself is
+too broad.
+
+#### Follow-Up
+
+1. Review and remove or narrow the `hit_test_service` direct alias if contained.
+2. Move thesis write checkpoint capture/restore behind a smaller owner.
+3. Move thesis submission checkpoint extras behind a smaller owner.
+
+### [DL-20260512-06] Content Pack Minimal V1 starts with manifest identity only
+
+- Date: `2026-05-12`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/content/CONTENT_PACK_MINIMAL_V1.md`
+  - `scripts/content_pack_manifest.py`
+
+#### Background
+
+Future content/DLC work needs stable pack identity before more content is
+created. Existing source packs already existed, but pack manifest conventions
+were not shared across narrative and event-source directories.
+
+#### Decision
+
+Adopt a minimal shared manifest contract for active source packs:
+`manifest_version`, `pack_id`, `display_name`, `version`, `content_kind`,
+`status`, `dependencies`, and `deprecated`. V1 validates shape and id stability
+only; it does not add a plugin platform, hot reload, dependency solver, runtime
+activation, or save pinning.
+
+#### Validation Plan
+
+- Active source pack manifests validate.
+- Existing narrative and event-source import/build tests stay green.
+- Full repository pytest remains the commit gate.
+
+#### Follow-Up
+
+1. Add save pack pinning only after manifest identity proves stable.
+2. Audit removable compatibility/adapters after content pack basics land.
+
+### [DL-20260513-01] Combat energy adopts unified scalar model
+
+- Date: `2026-05-13`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/combat/COMBAT_ENERGY_UNIFICATION_V2.md`
+  - `docs/development/combat/COMBAT_CONTRACT_CONVERGENCE_V1.md`
+  - `docs/development/architecture/ARCHITECTURE_REFACTOR_SEASON_V1.md`
+
+#### Background
+
+The 80-point architecture baseline moved combat energy reads toward
+`energy_pool` authority because colored energy still looked like a possible
+future rule. The user then confirmed that combat should use one unified energy
+resource, not colored energy.
+
+#### Decision
+
+Adopt scalar `Energy(current, max_value)` as the target combat energy authority.
+Treat `energy_pool` and `Color.COLORLESS` energy handling as migration-phase
+scaffolding to delete in staged V2 slices. `COMBAT_CONTRACT_CONVERGENCE_V1`
+remains historical context but is superseded for energy authority.
+
+#### Human Workload Impact
+
+- Reduced human review load:
+  fewer future discussions about colored-resource semantics that are no longer
+  product goals.
+- Added human review load:
+  one explicit direction reset and review of the staged deletion plan.
+- Critical path change:
+  the 90-point refactor should start by flipping payment/save/render/test
+  surfaces back to scalar energy before broader protocol cleanup.
+
+#### AI Workload Assumption
+
+AI can perform the staged scalar-energy migration with focused combat tests,
+quick smoke, contract smoke, and full pytest per commit. Human review should
+only be needed if a slice starts changing card balance, visual HUD behavior, or
+future resource-design rules.
+
+#### Alternatives
+
+1. Keep `EnergyPool` as a one-color model.
+2. Delete every pool surface in one broad PR.
+
+#### Risks And Triggers
+
+- Risk:
+  deleting pool fields before payment and preview paths are scalar-owned
+  regresses X-cost or refund behavior.
+- Trigger:
+  focused payment or preview tests fail for behavior rather than schema names.
+
+- Risk:
+  future automation reintroduces `energy_pool` dependencies.
+- Trigger:
+  new payment, preview, save, render, or test code starts reading
+  `energy_pool` outside an explicit temporary cleanup allowlist.
+
+#### Validation Plan
+
+- Focused combat payment, save, render, X-cost, and start-turn tests pass for
+  each slice.
+- Quick smoke and contract smoke pass for boundary-touching slices.
+- Full `py -3.11 -m pytest -q` remains the commit gate.
+
+#### Rollback Plan
+
+Revert the specific scalar-migration slice that regresses behavior. Keep the
+direction document unless the scalar model itself is reversed by a new product
+decision.
+
+#### Follow-Up
+
+1. Flip payment authority to scalar `Energy`.
+2. Move save/render contracts back to scalar energy.
+3. Migrate test helpers and assertions away from `energy_pool`.
+4. Delete runtime `EnergyPool` surfaces after focused coverage is green.
