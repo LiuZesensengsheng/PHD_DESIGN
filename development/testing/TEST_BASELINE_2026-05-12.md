@@ -27,6 +27,9 @@ targets for this line.
 - After the focused cardanalysis reranker/shadow reuse pass, full suite runtime
   on this workstation is about `3m00s`
   (`py -3.11 -m pytest -q --durations=60 --durations-min=0.05`).
+- After the 2026-05-13 follow-up replay/reference caching pass, full suite
+  runtime on this workstation is about `2m31s`
+  (`py -3.11 -m pytest -q --durations=80 --durations-min=0.05`).
 - The default full gate remains `py -3.11 -m pytest -q`.
 - Full suite passed during baseline capture.
 
@@ -77,6 +80,11 @@ Completed low-risk speedups:
 - `run_sts_catalog_holdout_benchmark.py` passes its shadow evaluation dataset
   into the shadow summary builder and reuses the training summary when the input
   also serves as the shadow training input.
+- STS catalog holdout case replay now has a bounded process-local cache keyed by
+  the case content, so benchmark, ranking export, and shadow comparison paths
+  can share identical replay work without weakening coverage.
+- STS reference catalog loading now uses a bounded process-local cache for
+  immutable reference packs used repeatedly by cardanalysis tests.
 
 Observed impact:
 
@@ -89,6 +97,8 @@ Observed impact:
   `3m10s`.
 - The focused cardanalysis reranker/shadow reuse pass dropped the full suite
   further to about `3m00s`.
+- The follow-up replay/reference caching pass dropped the full suite further to
+  about `2m31s` from a latest-master pre-change measurement of about `3m02s`.
 
 Representative cardanalysis observations:
 
@@ -99,10 +109,11 @@ Representative cardanalysis observations:
 - The reviewed retrieval pairwise reranker training profile dropped from about
   `2.1s` to about `1.0s`.
 
-Remaining slowest tests are still concentrated in cardanalysis/combat-analysis
-holdout benchmark scripts, holdout pairwise reranker integration paths, and
-headless campaign/shared flows. Further cardanalysis reductions should focus on
-benchmark/runtime design or snapshot reuse, not deleting coverage.
+Remaining slowest tests are now concentrated in modelization shadow CLI output,
+headless campaign/shared flows, and repeated design-assist/evidence-audit report
+generation. Further reductions should focus on benchmark/runtime design,
+snapshot reuse, or representative integration split points, not deleting
+coverage.
 
 ## Existing Useful Entry Points
 
