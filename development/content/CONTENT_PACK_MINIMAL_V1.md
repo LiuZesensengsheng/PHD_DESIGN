@@ -134,3 +134,17 @@ Why add this before content production?
 3. Domain-specific schemas stay in their own validators.
 4. V1 is not a plugin platform, hot-reload system, dependency solver, or save
    pinning implementation.
+
+## Implementation Notes
+
+- `contexts/shared/infrastructure/content_pack_manifest.py` owns the shared
+  manifest contract and read model.
+- `scripts/content_pack_manifest.py` remains the CLI wrapper for validating
+  source-pack manifests.
+- `contexts/shared/infrastructure/content_pack_registry.py` provides a
+  read-only registry over active source-pack directories. It discovers and
+  groups manifests, detects duplicate pack ids, and reports missing dependency
+  ids without solving load order or enabling runtime pack activation.
+- The registry may be asked to fail closed on missing dependencies for
+  validation/CI, but this is still not a dependency solver or runtime pack
+  enablement system.
