@@ -174,6 +174,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Generate or validate the report-only control discipline plus ideal candidate batch exam diagnostic:
   - `python scripts/run_control_discipline_ideal_candidate_batch_exam_diagnostic.py --exam tests/fixtures/combat_analysis/control_discipline_ideal_candidate_batch_exam_v1/control_discipline_ideal_pilot_sample_v1_candidate_batch_v1_exam_v1_snapshot.json --output-dir tmp/combat_analysis/control_discipline_ideal_candidate_batch_exam_diagnostic_current`
   - `python scripts/run_control_discipline_ideal_candidate_batch_exam_diagnostic.py --input tests/fixtures/combat_analysis/control_discipline_ideal_candidate_batch_exam_diagnostic_v1 --json`
+- Generate or validate the report-only control discipline plus ideal candidate batch exam evidence index:
+  - `python scripts/run_control_discipline_ideal_candidate_batch_exam_evidence.py --batch tests/fixtures/combat_analysis/control_discipline_ideal_candidate_batch_v1/control_discipline_ideal_pilot_sample_v1_candidate_batch_v1_snapshot.json --exam tests/fixtures/combat_analysis/control_discipline_ideal_candidate_batch_exam_v1/control_discipline_ideal_pilot_sample_v1_candidate_batch_v1_exam_v1_snapshot.json --output-dir tmp/combat_analysis/control_discipline_ideal_candidate_batch_exam_evidence_current`
 - Run the mechanism axis report-only chain exam:
   - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q`
 - Write an evaluation-autonomous-design handoff input from the current package seed:
