@@ -152,6 +152,13 @@ Why add this before content production?
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
   activation.
+- Active data-pipeline guards should consume `ContentPackRegistry` and
+  `ContentPackInventory` when validating source-pack identity and declared
+  runtime outputs. Narrative source packs should continue to prove runtime
+  parity with `build_narrative_runtime.py --all --check`.
+- Event source packs may be registry/inventory visible before they declare
+  runtime outputs. In V1 this is an explicit report-only state, not a missing
+  runtime loader implementation.
 
 ## Command Runbook
 
