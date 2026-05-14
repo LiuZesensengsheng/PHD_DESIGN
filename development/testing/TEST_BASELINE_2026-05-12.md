@@ -33,6 +33,14 @@ targets for this line.
 - After the latest-master low-risk cache and fixture-path pass, full suite
   runtime on this workstation is about `2m22s`
   (`py -3.11 -m pytest -q --durations=100 --durations-min=0.05`).
+- After the 2026-05-14 latest-master risk review, the passing full-suite
+  baseline is about `2m01s`
+  (`py -3.11 -m pytest -q --durations=120 --durations-min=0.05` after the
+  Windows draft-submission fixture path repair). The only test-shape speedup
+  kept from the risk pass is the local headless repro runner duplicate
+  assertion merge; cross-file headless result caching was rejected after a
+  full-suite run exposed deterministic snapshot drift from shared runtime
+  state.
 - The default full gate remains `py -3.11 -m pytest -q`.
 - Full suite passed during baseline capture.
 
@@ -120,6 +128,15 @@ Observed impact:
 - The latest-master low-risk pass repaired a Windows long-path fixture blocker
   and reduced the measured full-suite runtime from about `2m32s` during the
   blocked profiling run to a passing `2m22s`.
+- The latest-master risk review repaired the remaining
+  draft-submission-readiness fixture path length blocker and kept one bounded
+  headless repro runner consolidation. The measured passing full-suite runtime
+  is about `2m01s` on this workstation.
+- A proposed cross-file session cache for headless repro results was tested and
+  rejected: in full-suite order it changed the deterministic comparison
+  snapshots for `combat_reward_loop` and `thesis_judgment_to_combat`, so
+  headless flows should not share cached runtime results across files without a
+  deeper isolation design.
 
 Representative cardanalysis observations:
 
