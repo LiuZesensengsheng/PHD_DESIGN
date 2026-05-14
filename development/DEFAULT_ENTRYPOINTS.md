@@ -155,12 +155,12 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --export-card-package-health-input tmp/combat_analysis/complete_card_draft_card_package_health_input.json`
 - Run a report-only card package exam from axis search, package seed, and complete drafts:
   - `python scripts/run_card_package_exam.py --axis-search tests/fixtures/combat_analysis/mechanism_axis_design_brief_v1/silent_axis_search_bundle_snapshot_v1.json --package-seed <generated-card-package-proposal-v1.json> --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/card_package_exam_current`
-- Run the report-only STS1 four-character card package exam loop:
-  - `python scripts/run_sts1_four_character_exam.py`
+- Run the report-only STS1 four-character card package exam loop: `python scripts/run_sts1_four_character_exam.py`
 - Run the report-only STS1 exam capability calibration readout: `python scripts/run_sts1_exam_capability_calibration.py`
 - Generate or validate the report-only control card production packet:
   - `python scripts/run_control_card_production_packet.py --output-dir tmp/combat_analysis/control_card_production_packet_current`
   - `python scripts/run_control_card_production_packet.py --input tests/fixtures/combat_analysis/control_card_production_packet_v1 --json`
+- Run the report-only STS1 negative case pack readout: `python scripts/run_sts1_negative_case_pack.py`
 - Run the integrated report-only axis-first STS1 exam summary:
   - `python scripts/run_axis_first_integrated_exam_summary.py --use-current-fixtures --output-dir tmp/combat_analysis/axis_first_integrated_exam_summary_current`
 - Run the report-only Silent axis-first repair iteration closure:
