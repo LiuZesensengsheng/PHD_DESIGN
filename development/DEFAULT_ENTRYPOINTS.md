@@ -160,6 +160,7 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 - Generate or validate report-only control card production packets:
   - `python scripts/run_control_card_production_packet.py --output-dir tmp/combat_analysis/control_card_production_packet_current`
   - `python scripts/run_control_card_production_comparison_repair.py --output-dir tmp/combat_analysis/control_card_production_comparison_repair_current`
+  - `python scripts/run_control_card_production_owner_decision_packet.py --output-dir tmp/combat_analysis/control_card_production_owner_decision_packet_current`
 - Run the report-only STS1 negative case pack readout: `python scripts/run_sts1_negative_case_pack.py`
 - Run the report-only STS1 negative case projection readout: `python scripts/run_sts1_negative_case_projection.py`
 - Run the integrated report-only axis-first STS1 exam summary:
