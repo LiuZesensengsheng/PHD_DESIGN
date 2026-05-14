@@ -30,6 +30,11 @@ Update `2026-05-13`:
   and tests should not retain `EnergyPool` or `energy_pool` surfaces.
 - `Color.COLORLESS` remains valid only as card/content identity data.
 
+Update `2026-05-14`:
+
+- Active ideal colors are card/content identity and judgment state only. They
+  must not automatically add start-turn energy.
+
 Supersedes:
 
 - the energy-authority recommendation in
@@ -259,3 +264,4 @@ Why not make this part of save reset or content-pack work?
    guardrail against reintroducing colored-pool energy surfaces.
 5. This line intentionally does not touch content balance, visual combat UI, or
    `cardanalysis` / `combat_analysis`.
+6. Active ideal color selection does not grant automatic start-turn energy.
