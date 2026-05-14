@@ -148,3 +148,18 @@ Why add this before content production?
 - The registry may be asked to fail closed on missing dependencies for
   validation/CI, but this is still not a dependency solver or runtime pack
   enablement system.
+- `contexts/shared/infrastructure/content_pack_inventory.py` provides a
+  report-only inventory over discovered source packs, their source files, and
+  declared runtime outputs. It is a resolver input/audit surface, not runtime
+  activation.
+
+## Command Runbook
+
+- Validate current source-pack manifests and dependency completeness:
+  - `python scripts/content_pack_manifest.py --discover-source-packs --require-complete-dependencies`
+- Report current source-pack files and declared runtime outputs:
+  - `python scripts/content_pack_inventory.py`
+- Export the content-pack inventory as JSON:
+  - `python scripts/content_pack_inventory.py --json`
+- Validate content-pack registry/inventory contracts:
+  - `python -m pytest tests/shared/test_content_pack_registry.py tests/shared/test_content_pack_inventory.py tests/scripts/test_content_pack_manifest.py -q`
