@@ -156,6 +156,12 @@ Why add this before content production?
   pack-to-runtime-output claims, missing output files, output collisions, and
   source packs with no declared runtime outputs. It is report-only resolver
   input, not runtime loading authority.
+- `contexts/shared/infrastructure/content_pack_runtime_outputs.py` provides
+  narrow report-only query helpers over the runtime-output index. The current
+  helper covers narrative runtime outputs under `data/questlines/*.json` and
+  can fail closed on missing outputs, collisions, or disallowed empty packs.
+  It is still not a runtime resolver, loader, activation layer, or dependency
+  solver.
 - Active data-pipeline guards should consume `ContentPackRegistry` and
   `ContentPackInventory` when validating source-pack identity and declared
   runtime outputs. Narrative source packs should continue to prove runtime
@@ -176,5 +182,9 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
   - `python scripts/content_pack_inventory.py --runtime-output-index --json`
+- Report narrative runtime-output query inputs:
+  - `python scripts/content_pack_inventory.py --narrative-runtime-outputs`
+- Export narrative runtime-output query inputs as JSON:
+  - `python scripts/content_pack_inventory.py --narrative-runtime-outputs --json`
 - Validate content-pack registry/inventory contracts:
   - `python -m pytest tests/shared/test_content_pack_registry.py tests/shared/test_content_pack_inventory.py tests/scripts/test_content_pack_manifest.py -q`
