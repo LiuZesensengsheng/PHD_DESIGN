@@ -161,6 +161,7 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_control_card_production_packet.py --output-dir tmp/combat_analysis/control_card_production_packet_current`
   - `python scripts/run_control_card_production_packet.py --input tests/fixtures/combat_analysis/control_card_production_packet_v1 --json`
 - Run the report-only STS1 negative case pack readout: `python scripts/run_sts1_negative_case_pack.py`
+- Run the report-only STS1 negative case projection readout: `python scripts/run_sts1_negative_case_projection.py`
 - Run the integrated report-only axis-first STS1 exam summary:
   - `python scripts/run_axis_first_integrated_exam_summary.py --use-current-fixtures --output-dir tmp/combat_analysis/axis_first_integrated_exam_summary_current`
 - Run the report-only Silent axis-first repair iteration closure:

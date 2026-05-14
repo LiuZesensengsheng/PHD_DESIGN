@@ -25,6 +25,7 @@ contracts.
 | Four-character boundary generated attempts | `tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_boundary_attempt_drafts_v1.json` | Provides one schema-valid but suspicious generated-attempt draft per character for report-only attempt and iteration feedback. |
 | Enrichment proposal pack | `tests/fixtures/combat_analysis/sts1_card_exam_enrichment_v1/sts1_card_exam_enrichment_proposals_v1.json` | Lists proposed negative and boundary cases, blind spots, and scorecard dimensions. |
 | Deep negative case pack | `tests/fixtures/combat_analysis/sts1_negative_case_pack_v1/sts1_negative_case_pack_v1_cases.json` | Stores 16 normalized unreviewed `cardanalysis_case_input_v1` cases for STS1 negative/boundary coverage. |
+| Negative case projection | `tests/fixtures/combat_analysis/sts1_negative_case_projection_v1/sts1_negative_case_projection_v1_snapshot.json` | Projects the first-round negative cases into report-only feature-family, calibration-support, label-only blind spot, and review-queue readouts. |
 
 ## Current Coverage
 
@@ -51,6 +52,11 @@ generic-goodstuff drift, early weak / late explosive curve risk, numeric
 fantasy, weak fail states, character-texture mismatch, and anti-combo role
 collision. These cases are generated hypotheses for exam preparation and remain
 unreviewed.
+
+The first projection pass keeps that same case round deep instead of broadening
+into a second pack. It reuses `cardanalysis_feature_projection_v1` and reports
+which cases support the two current calibration readouts, which adjacent labels
+remain label-only, and which cases are worth human review next.
 
 ## Blind Spots
 
@@ -130,4 +136,5 @@ Focused validation:
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_card_exam_enrichment_v1.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_card_exam_boundary_attempts_v1.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_negative_case_pack_v1.py tests/scripts/test_run_sts1_negative_case_pack.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_negative_case_projection_v1.py tests/scripts/test_run_sts1_negative_case_projection.py -q
 ```
