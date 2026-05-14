@@ -148,6 +148,10 @@ Why add this before content production?
 - The registry may be asked to fail closed on missing dependencies for
   validation/CI, but this is still not a dependency solver or runtime pack
   enablement system.
+- `contexts/shared/infrastructure/content_pack_identity.py` provides a
+  report-only active pack identity preview over the registry. It is a future
+  resolver/save-pinning input surface only; it does not write save fields or
+  choose active runtime content.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -178,6 +182,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py`
 - Export the content-pack inventory as JSON:
   - `python scripts/content_pack_inventory.py --json`
+- Report active pack identity preview:
+  - `python scripts/content_pack_inventory.py --pack-identity-preview`
+- Export active pack identity preview as JSON:
+  - `python scripts/content_pack_inventory.py --pack-identity-preview --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
