@@ -296,6 +296,7 @@ Capabilities:
 - `card_package_exam_v1`
 - `sts1_four_character_exam_v1`
 - `sts1_exam_capability_calibration_v1`
+- `control_card_production_packet_v1`
 - `card_design_scorecard_v1`
 - `card_design_scorecard_calibration_v1`
 - `card_design_scorecard_delta_report_v1`
@@ -351,6 +352,7 @@ Artifacts:
 - `card_package_exam_snapshot`
 - `sts1_four_character_exam_snapshot`
 - `sts1_exam_capability_calibration`
+- `control_card_production_packet`
 - `card_design_scorecard_summary`
 - `card_design_scorecard_calibration_summary`
 - `card_design_scorecard_delta_summary`
