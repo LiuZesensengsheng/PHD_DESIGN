@@ -152,13 +152,17 @@ Why add this before content production?
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
   activation.
+- `ContentPackRuntimeOutputIndex` is derived from the inventory and reports
+  pack-to-runtime-output claims, missing output files, output collisions, and
+  source packs with no declared runtime outputs. It is report-only resolver
+  input, not runtime loading authority.
 - Active data-pipeline guards should consume `ContentPackRegistry` and
   `ContentPackInventory` when validating source-pack identity and declared
   runtime outputs. Narrative source packs should continue to prove runtime
   parity with `build_narrative_runtime.py --all --check`.
-- Event source packs may be registry/inventory visible before they declare
-  runtime outputs. In V1 this is an explicit report-only state, not a missing
-  runtime loader implementation.
+- Event source packs may be registry/inventory/runtime-output-index visible
+  before they declare runtime outputs. In V1 this is an explicit allowed
+  report-only state, not a missing runtime loader implementation.
 
 ## Command Runbook
 
@@ -168,5 +172,9 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py`
 - Export the content-pack inventory as JSON:
   - `python scripts/content_pack_inventory.py --json`
+- Report the runtime-output resolver input index:
+  - `python scripts/content_pack_inventory.py --runtime-output-index`
+- Export the runtime-output resolver input index as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-output-index --json`
 - Validate content-pack registry/inventory contracts:
   - `python -m pytest tests/shared/test_content_pack_registry.py tests/shared/test_content_pack_inventory.py tests/scripts/test_content_pack_manifest.py -q`
