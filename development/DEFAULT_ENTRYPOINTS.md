@@ -217,6 +217,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 ### Architecture / Encoding Guardrails
 
+- Run the report-only Radon code complexity audit:
+  - `python scripts/run_code_complexity_report.py`
 - Validate architecture boundaries:
   - `python scripts/validate_architecture.py`
 - Validate resource contract boundaries:
@@ -252,9 +254,5 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/repro_headless_flow.py <case> --seed <seed> --output-dir <dir>`
 
 ## Project Recovery
-When you need to resume project context before running commands, read:
 
-1. `AGENTS.md`
-2. `docs/development/CURRENT_DIRECTION.md`
-3. today's daily log
-4. the latest weekly summary when recent history matters
+For resume context, read `AGENTS.md`, `docs/development/CURRENT_DIRECTION.md`, today's daily log, then the latest weekly summary when recent history matters.
