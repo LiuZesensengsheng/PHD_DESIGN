@@ -1,0 +1,117 @@
+# Content Pack Runtime Resolver Contract V1
+
+## Purpose
+
+Define the future content-pack runtime resolver contract before it becomes
+runtime authority.
+
+This document freezes the input and output shape that a later implementation
+must satisfy. It does not implement runtime loading, activate packs, write save
+data, solve dependencies, or change current runtime paths.
+
+## Current Inputs
+
+The future resolver may only promote from the existing report-only chain after
+the chain is clean:
+
+- `ContentPackRuntimeResolverReadinessReport`
+  - confirms active pack identity and runtime-output index consistency
+  - fails closed on missing dependencies, missing outputs, collisions,
+    disallowed empty packs, identity/index drift, or content-kind mismatch
+- `ContentPackRuntimeResolverSelectionPreview`
+  - previews the runtime-output rows that a future resolver could consider
+  - emits no selected rows while readiness is blocked
+  - keeps allowed empty-runtime-output packs visible without treating them as
+    runtime content
+
+The current CLI surfaces are:
+
+- `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
+- `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
+- `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
+- `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+
+## Resolver Output Shape
+
+When a later slice promotes this contract into runtime authority, the resolver
+output should expose resolved runtime-output references. Each reference should
+carry enough identity to explain where the runtime file came from:
+
+- `output_path`
+- `pack_id`
+- `pack_version`
+- `content_kind`
+- `manifest_path`
+
+The first implementation should preserve the selected-row identity already
+emitted by `ContentPackRuntimeResolverSelectionPreview`. The contract does not
+require JSON payload loading, parsed domain objects, or gameplay activation in
+the same slice.
+
+## Fail-Closed Rules
+
+A resolver implementation must fail closed before returning authoritative
+runtime references when any of these input issues exist:
+
+- a declared dependency id is missing
+- a declared runtime output file is missing
+- multiple packs claim the same runtime output path
+- a pack has no runtime outputs and its `content_kind` is not allowed-empty
+- active pack identity and runtime-output index disagree about pack ids
+- active pack identity and runtime-output index disagree about a pack's
+  `content_kind`
+- selected runtime-output rows contain a `content_kind` that the resolver slice
+  does not explicitly handle
+
+The current allowed-empty content kind is:
+
+- `event_source`
+
+That allowed-empty status is report-only visibility. It is not a hidden loader
+and not a promise that event source packs have runtime activation.
+
+## Current Pack State
+
+- `tutorial` is a `narrative_source` pack. It must continue to declare and own
+  the three current narrative runtime outputs:
+  - `data/questlines/encounters_tutorial.json`
+  - `data/questlines/questline_tutorial.json`
+  - `data/questlines/rewards_tutorial.json`
+- `slack` is an `event_source` pack with no runtime outputs. That remains an
+  allowed empty-runtime-output report-only state in V1, not an error.
+
+## Promotion Criteria
+
+Before this contract becomes runtime authority, a later PR must prove:
+
+- runtime resolver readiness is clean
+- runtime resolver selection preview is clean
+- selected tutorial narrative runtime outputs match the current active
+  `data/questlines/*.json` paths
+- slack remains visible as an allowed empty `event_source` pack
+- shadow comparison against current runtime paths passes before ownership
+  changes
+- focused tests name the explicit resolver family being promoted
+- the PR description states which runtime paths become resolver-owned
+
+## Non-Goals
+
+- no runtime JSON loading in this contract slice
+- no runtime activation
+- no save schema changes or pack pinning
+- no dependency solver
+- no plugin or mod platform
+- no hot reload
+- no UI changes
+- no combat balance changes
+- no `cardanalysis` or `combat_analysis` changes
+- no content directory migration
+
+## Relationship To Existing Docs
+
+- `CONTENT_PACK_MINIMAL_V1.md` owns the overall minimal content-pack direction.
+- `CONTENT_PACK_RUNTIME_RESOLVER_READINESS_V1.md` owns resolver input readiness.
+- `CONTENT_PACK_RUNTIME_RESOLVER_SELECTION_PREVIEW_V1.md` owns report-only
+  selected-row preview.
+- This document owns the future promotion contract from report-only selected
+  rows to resolver-owned runtime references.

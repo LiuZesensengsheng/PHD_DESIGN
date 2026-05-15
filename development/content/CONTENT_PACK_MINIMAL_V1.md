@@ -180,6 +180,12 @@ Why add this before content production?
   readiness is blocked, it emits no selected rows. It is still not runtime
   loading, runtime activation, save pinning, hot reload, or a dependency
   solver.
+- `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
+  freezes the future resolver promotion contract over readiness and selection
+  preview inputs. It defines the expected resolved runtime-output reference
+  shape, fail-closed rules, current tutorial/slack pack state, and promotion
+  criteria before any later slice turns the report-only chain into runtime
+  authority.
 - Active data-pipeline guards should consume `ContentPackRegistry` and
   `ContentPackInventory` when validating source-pack identity and declared
   runtime outputs. Narrative source packs should continue to prove runtime
@@ -216,5 +222,7 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
 - Export runtime resolver selection preview as JSON:
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+- Review the future runtime resolver promotion contract:
+  - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:
   - `python -m pytest tests/shared/test_content_pack_registry.py tests/shared/test_content_pack_inventory.py tests/scripts/test_content_pack_manifest.py -q`
