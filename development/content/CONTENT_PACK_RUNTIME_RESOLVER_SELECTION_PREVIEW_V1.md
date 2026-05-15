@@ -16,6 +16,11 @@ dependencies, or support hot reload.
 The selection preview only produces selected rows when the readiness report has
 no readiness issues.
 
+The next report-only layer is the narrative resolver shadow compare. It may use
+selected `narrative_source` rows to compare future resolver input against the
+current tutorial-owned `data/questlines/*.json` runtime paths, but it still does
+not load or activate runtime content.
+
 ## Output
 
 `ContentPackRuntimeResolverSelectionPreview` reports:
@@ -68,5 +73,9 @@ blocked and emits no selected runtime-output rows.
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
 - Export runtime resolver selection preview as JSON:
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+- Report narrative runtime resolver shadow compare:
+  - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare`
+- Export narrative runtime resolver shadow compare as JSON:
+  - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare --json`
 - Validate the focused preview:
   - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_resolver_readiness.py tests/scripts/test_data_pipeline_contracts.py -q`

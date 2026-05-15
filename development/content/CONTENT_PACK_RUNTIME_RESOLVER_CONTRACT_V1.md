@@ -88,6 +88,8 @@ Before this contract becomes runtime authority, a later PR must prove:
 - runtime resolver selection preview is clean
 - selected tutorial narrative runtime outputs match the current active
   `data/questlines/*.json` paths
+- the narrative runtime resolver shadow compare is clean for tutorial-owned
+  runtime outputs
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -115,3 +117,6 @@ Before this contract becomes runtime authority, a later PR must prove:
   selected-row preview.
 - This document owns the future promotion contract from report-only selected
   rows to resolver-owned runtime references.
+- `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
+  owns the narrative-only shadow compare that checks selected tutorial rows
+  against current tutorial-owned runtime paths without taking loading authority.
