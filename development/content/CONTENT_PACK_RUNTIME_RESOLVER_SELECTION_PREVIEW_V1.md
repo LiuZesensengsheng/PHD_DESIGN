@@ -1,0 +1,72 @@
+# Content Pack Runtime Resolver Selection Preview V1
+
+## Purpose
+
+Create a report-only dry run for the future content-pack runtime resolver.
+
+This layer previews which active source pack currently declares each runtime
+output after the resolver input readiness report is clean. It does not load
+runtime JSON, choose game runtime content, activate packs, write saves, solve
+dependencies, or support hot reload.
+
+## Input
+
+- `ContentPackRuntimeResolverReadinessReport`
+
+The selection preview only produces selected rows when the readiness report has
+no readiness issues.
+
+## Output
+
+`ContentPackRuntimeResolverSelectionPreview` reports:
+
+- active source pack ids
+- selected runtime-output rows
+- allowed empty-runtime-output pack ids
+- blocked pack ids when readiness is not clean
+- readiness label and readiness blockers
+
+Each selected row contains:
+
+- runtime output path
+- pack id
+- pack version
+- content kind
+- manifest path
+- `selected_report_only` status
+
+## Current Pack State
+
+- `tutorial` is selected for the three current narrative runtime outputs:
+  - `data/questlines/encounters_tutorial.json`
+  - `data/questlines/questline_tutorial.json`
+  - `data/questlines/rewards_tutorial.json`
+- `slack` remains an allowed empty-runtime-output `event_source` pack and has
+  no selected runtime outputs.
+
+## Blocked Behavior
+
+If readiness has missing dependencies, missing outputs, collisions, disallowed
+empty packs, identity/index drift, or content-kind mismatches, the preview is
+blocked and emits no selected runtime-output rows.
+
+## Non-Goals
+
+- no runtime loading
+- no runtime activation
+- no save schema or pack pinning
+- no dependency solver
+- no plugin or mod platform
+- no hot reload
+- no UI changes
+- no combat balance changes
+- no `cardanalysis` or `combat_analysis` changes
+
+## Commands
+
+- Report runtime resolver selection preview:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
+- Export runtime resolver selection preview as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+- Validate the focused preview:
+  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_resolver_readiness.py tests/scripts/test_data_pipeline_contracts.py -q`

@@ -49,6 +49,11 @@ The current blocked label is:
 
 - `blocked_on_resolver_input_issues`
 
+The next report-only layer is
+`ContentPackRuntimeResolverSelectionPreview`. It may consume a clean readiness
+report to preview selected runtime-output rows, but it still does not load or
+activate runtime content.
+
 ## Fail-Closed Conditions
 
 `require_content_pack_runtime_resolver_readiness_report()` fails closed when any

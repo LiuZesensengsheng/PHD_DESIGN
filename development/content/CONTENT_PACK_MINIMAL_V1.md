@@ -173,6 +173,13 @@ Why add this before content production?
   packs, identity/index drift, or content-kind mismatches. It is still not
   runtime loading, runtime activation, save pinning, hot reload, or a
   dependency solver.
+- `contexts/shared/infrastructure/content_pack_resolver_selection.py` consumes
+  a clean runtime resolver readiness report and produces a report-only runtime
+  resolver selection preview. It lists the runtime-output rows that a future
+  resolver would be able to consider from current source-pack declarations. If
+  readiness is blocked, it emits no selected rows. It is still not runtime
+  loading, runtime activation, save pinning, hot reload, or a dependency
+  solver.
 - Active data-pipeline guards should consume `ContentPackRegistry` and
   `ContentPackInventory` when validating source-pack identity and declared
   runtime outputs. Narrative source packs should continue to prove runtime
@@ -205,5 +212,9 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - Export runtime resolver input readiness as JSON:
   - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
+- Report runtime resolver selection preview:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
+- Export runtime resolver selection preview as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
 - Validate content-pack registry/inventory contracts:
   - `python -m pytest tests/shared/test_content_pack_registry.py tests/shared/test_content_pack_inventory.py tests/scripts/test_content_pack_manifest.py -q`
