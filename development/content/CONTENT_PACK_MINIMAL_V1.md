@@ -186,6 +186,11 @@ Why add this before content production?
   It reports unmanaged current runtime paths, such as `encounters_ta.json`,
   without treating them as selection drift. It is still not runtime loading,
   runtime activation, save pinning, hot reload, or a dependency solver.
+- `contexts/shared/infrastructure/content_pack_narrative_path_provider.py`
+  provides a report-only narrative runtime path provider preview over the clean
+  shadow compare. It groups selected tutorial runtime paths into questline,
+  encounter, and reward path families for a future loader handoff, while leaving
+  `QuestLoader` and active runtime loading unchanged.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -232,6 +237,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare`
 - Export narrative runtime resolver shadow compare as JSON:
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare --json`
+- Report narrative runtime path provider preview:
+  - `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
+- Export narrative runtime path provider preview as JSON:
+  - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:

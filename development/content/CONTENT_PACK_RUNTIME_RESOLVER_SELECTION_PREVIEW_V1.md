@@ -21,6 +21,11 @@ selected `narrative_source` rows to compare future resolver input against the
 current tutorial-owned `data/questlines/*.json` runtime paths, but it still does
 not load or activate runtime content.
 
+After the shadow compare is clean, the narrative path provider preview may group
+selected paths into questline, encounter, and reward families for a future
+loader handoff. That preview is still report-only and does not change
+`QuestLoader`.
+
 ## Output
 
 `ContentPackRuntimeResolverSelectionPreview` reports:
@@ -77,5 +82,9 @@ blocked and emits no selected runtime-output rows.
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare`
 - Export narrative runtime resolver shadow compare as JSON:
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare --json`
+- Report narrative runtime path provider preview:
+  - `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
+- Export narrative runtime path provider preview as JSON:
+  - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
 - Validate the focused preview:
   - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_resolver_readiness.py tests/scripts/test_data_pipeline_contracts.py -q`

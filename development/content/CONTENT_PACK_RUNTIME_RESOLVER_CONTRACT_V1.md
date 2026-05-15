@@ -90,6 +90,8 @@ Before this contract becomes runtime authority, a later PR must prove:
   `data/questlines/*.json` paths
 - the narrative runtime resolver shadow compare is clean for tutorial-owned
   runtime outputs
+- the narrative runtime path provider preview can group selected paths into
+  questline, encounter, and reward families
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -120,3 +122,6 @@ Before this contract becomes runtime authority, a later PR must prove:
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks selected tutorial rows
   against current tutorial-owned runtime paths without taking loading authority.
+- `contexts/shared/infrastructure/content_pack_narrative_path_provider.py`
+  currently owns the report-only narrative path provider preview for the future
+  loader handoff. It does not change `QuestLoader`.
