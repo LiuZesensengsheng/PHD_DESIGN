@@ -166,6 +166,13 @@ Why add this before content production?
   can fail closed on missing outputs, collisions, or disallowed empty packs.
   It is still not a runtime resolver, loader, activation layer, or dependency
   solver.
+- `contexts/shared/infrastructure/content_pack_resolver_readiness.py` combines
+  the active pack identity preview with the runtime-output index into a
+  report-only runtime resolver input readiness report. It can fail closed on
+  missing dependencies, missing outputs, output collisions, disallowed empty
+  packs, identity/index drift, or content-kind mismatches. It is still not
+  runtime loading, runtime activation, save pinning, hot reload, or a
+  dependency solver.
 - Active data-pipeline guards should consume `ContentPackRegistry` and
   `ContentPackInventory` when validating source-pack identity and declared
   runtime outputs. Narrative source packs should continue to prove runtime
@@ -194,5 +201,9 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --narrative-runtime-outputs`
 - Export narrative runtime-output query inputs as JSON:
   - `python scripts/content_pack_inventory.py --narrative-runtime-outputs --json`
+- Report runtime resolver input readiness:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
+- Export runtime resolver input readiness as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - Validate content-pack registry/inventory contracts:
   - `python -m pytest tests/shared/test_content_pack_registry.py tests/shared/test_content_pack_inventory.py tests/scripts/test_content_pack_manifest.py -q`
