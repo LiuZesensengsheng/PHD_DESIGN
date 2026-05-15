@@ -1,50 +1,56 @@
-# Control Card Production Owner Decision Packet V1
+# 控制卡牌生产人类决策包 V1
 
-## Purpose
+## 目的
 
-`control_card_production_owner_decision_packet_v1` is the report-only owner
-decision layer after `control_card_production_comparison_repair_v1`.
+`control_card_production_owner_decision_packet_v1` 是 `control_card_production_comparison_repair_v1` 之后的 report-only 人类决策层。
 
-It consumes the current owner-blocked comparison/repair snapshot and turns it
-into a low-effort review packet: if the owner only has ten minutes, answer the
-small set of keep, revise, reject, merge, and next-round instruction fields.
+它消费当前被人类审查阻塞的对比/修正快照，把内容整理成低负担审查包：如果人类只有十分钟，只需要回答保留、修正、拒绝、合并、口味、强度、复杂度、禁用玩法和下一轮指令这些核心字段。
 
-The packet does not select a package, draft cards, promote or reject any package
-version, or create a repair plan.
+这个包不会选择包、不会草拟卡牌、不会提升或拒绝包版本，也不会生成修正计划。
 
-## Scope
+## 人类阅读形式
 
-V1 outputs:
+人类主要阅读 `*_report.md`。报告正文使用中文：
 
-- suggested owner review order;
-- a ten-minute review question panel;
-- one package decision card per package version;
-- one-line play promise, mechanism axis, ideal id, advisory tier, top risks,
-  and top repair notes per package;
-- empty owner decision slots for `keep`, `revise`, `reject`, or `merge`;
-- empty owner-selected, rejected, merge-pair, taste, strength, complexity,
-  forbidden-pattern, and next-round instruction fields;
-- decision readiness summary;
-- allowed preparation and cannot-advance lists;
-- explicit report-only boundary assertions.
+- 中文十分钟审查问题；
+- 中文包名；
+- 中文玩法承诺；
+- 中文主要风险；
+- 中文主要修正建议；
+- 中文等待人类输入说明；
+- 中文边界说明。
 
-## Current Readout
+`*_snapshot.json` 仍使用英文 id 和机器字段名，作为稳定的自动化契约。
 
-The default fixture preserves this suggested review order:
+## 输出范围
 
-1. `white_order_fail_state_packet_v1`
-2. `blue_truth_forecast_packet_v1`
-3. `green_depth_compound_stability_packet_v1`
-4. `hand_future_planning_probe_v1`
-5. `resource_tempo_denial_probe_v1`
+V1 输出：
 
-The first two remain the fastest owner-review candidates. Green-depth and
-hand-future remain repair candidates. Resource-tempo denial remains a held risk
-probe. These are advisory review-order hints, not authoritative selections.
+- 建议人类审查顺序；
+- 十分钟审查问题面板；
+- 每个包版本一张决策卡；
+- 每个包的一句话玩法承诺、机制轴、ideal id、建议层级、主要风险和主要修正建议；
+- `keep`、`revise`、`reject`、`merge` 的空决策槽；
+- 空的人类选择、拒绝、合并目标、口味、强度、复杂度、禁用玩法和下一轮指令字段；
+- 决策就绪摘要；
+- 可先准备事项和不能推进清单；
+- 明确的 report-only 边界断言。
 
-## Owner-Unavailable Behavior
+## 当前读数
 
-The V1 fixture remains blocked:
+默认 fixture 保留以下建议审查顺序：
+
+1. `white_order_fail_state_packet_v1`：白序，失败可恢复控制包
+2. `blue_truth_forecast_packet_v1`：蓝真，预判窗口控制包
+3. `green_depth_compound_stability_packet_v1`：绿深，复合稳定控制包
+4. `hand_future_planning_probe_v1`：未来手牌规划探针
+5. `resource_tempo_denial_probe_v1`：资源/节奏压制风险探针
+
+前两个仍是最快的人审候选。绿深和未来手牌规划是修正候选。资源/节奏压制仍然只是保留的风险探针。这些是审查顺序提示，不是权威选择。
+
+## 人类暂时没空时
+
+V1 fixture 保持阻塞：
 
 - `review_status = awaiting_owner_review`
 - `blocked_by_owner_review = true`
@@ -54,18 +60,15 @@ The V1 fixture remains blocked:
 - `owner_selection_recorded = false`
 - `next_repair_plan_ready = false`
 - `next_repair_plan_status = blocked_awaiting_owner_package_selection`
-- owner decision slots stay empty;
-- no package version is selected, promoted, rejected, or merged;
-- no reviewed or accepted evidence claim is created.
+- 人类决策槽保持空；
+- 不选择、提升、拒绝或合并任何包版本；
+- 不声称证据已审查或已接受。
 
-Automation may format this packet, preserve comparison/repair notes, prepare
-empty owner decision templates, and prepare later repair-plan inputs after owner
-selection. Automation may not record owner decisions, select packages, generate a
-repair plan, draft formal cards, or write runtime card data.
+自动化可以格式化这份中文决策包、保留对比/修正建议、准备空的人类决策模板，并在人类选择后准备后续修正计划输入。自动化不能代替人类记录决策、选择包、生成修正计划、草拟正式卡牌或写运行时卡牌数据。
 
-## Boundary
+## 边界
 
-V1 keeps:
+V1 保持：
 
 - `evaluation_mode = report_only`
 - `authority_boundary = advisory_context_only`
@@ -90,21 +93,21 @@ V1 keeps:
 - `boundary_assertions.default_synthesis_enabled = false`
 - `boundary_assertions.learned_or_reranker_enabled = false`
 
-## Entrypoint
+## 入口命令
 
-Generate the current owner decision packet:
+生成当前中文人类决策包：
 
 ```powershell
 python scripts/run_control_card_production_owner_decision_packet.py --output-dir tmp/combat_analysis/control_card_production_owner_decision_packet_current
 ```
 
-Validate the fixture:
+验证 fixture：
 
 ```powershell
 python scripts/run_control_card_production_owner_decision_packet.py --input tests/fixtures/combat_analysis/control_card_production_owner_decision_packet_v1 --json
 ```
 
-Focused validation:
+Focused validation：
 
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_control_card_production_owner_decision_packet_v1.py tests/scripts/test_run_control_card_production_owner_decision_packet.py -q
@@ -112,19 +115,18 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_control_card_production_ow
 
 ## V1 Fixture
 
-The current fixture output lives under:
+当前 fixture 输出位于：
 
 `tests/fixtures/combat_analysis/control_card_production_owner_decision_packet_v1/`
 
-It consumes:
+它消费：
 
 `tests/fixtures/combat_analysis/control_card_production_comparison_repair_v1/control_card_production_comparison_repair_v1_snapshot.json`
 
-## Intended Follow-Up
+其中 `control_card_production_owner_decision_packet_v1_report.md` 是给人看的中文报告；`control_card_production_owner_decision_packet_v1_snapshot.json` 是给工具读的机器契约。
 
-If the owner fills the packet, the next useful slice is a repair-plan generator
-for the selected one or two packages.
+## 后续方向
 
-If the owner is still unavailable, keep improving evidence, comparison, and
-review-question quality. Do not proceed to complete-card draft requests or
-playable prototype work without owner selection.
+如果人类填写这份包，下一步是针对被选中的一到两个包做 repair-plan generator。
+
+如果人类仍然没空，继续改善证据、对比、审查问题和中文可读性。没有人类选择前，不进入完整卡牌草拟请求或可玩原型。
