@@ -171,3 +171,8 @@ Before this contract becomes runtime authority, a later PR must prove:
   currently owns the report-only QuestLoader promotion readiness guard. It is a
   final promotion-input check before runtime loading changes, not runtime
   authority.
+- `QuestLoader.load_from_runtime_paths()` is the inactive explicit-path loader
+  entry for the future handoff. It can load caller-provided questline,
+  encounter, and reward JSON paths without directory prefix scanning, but
+  current runtime call sites still use `QuestLoader.load_all()` until a later
+  promotion PR explicitly changes loading authority.

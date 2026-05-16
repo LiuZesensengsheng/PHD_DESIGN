@@ -219,6 +219,11 @@ Why add this before content production?
   loading authority. It still does not change `QuestLoader.load_all()`, load
   runtime JSON, activate packs, write saves, solve dependencies, or support hot
   reload.
+- `QuestLoader.load_from_runtime_paths()` is the inactive explicit-path loader
+  entry for a later handoff. It can load questline, encounter, and reward JSON
+  from caller-provided paths and avoids directory prefix scanning, but no active
+  runtime call site uses it yet. `QuestLoader.load_all()` remains the current
+  active runtime loading path until a separate promotion PR changes authority.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
