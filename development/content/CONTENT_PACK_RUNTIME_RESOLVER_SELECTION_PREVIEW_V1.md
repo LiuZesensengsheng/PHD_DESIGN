@@ -40,6 +40,11 @@ After the shadow adapter preview is clean, the QuestLoader handoff contract
 preview may expose the future loader handoff shape. That handoff preview is
 still report-only and does not make the paths authoritative runtime input.
 
+After the handoff contract preview is clean, the QuestLoader promotion readiness
+guard may check the final promotion inputs before a later loader change. That
+readiness guard is still report-only and does not call or change
+`QuestLoader.load_all()`.
+
 ## Output
 
 `ContentPackRuntimeResolverSelectionPreview` reports:
@@ -112,5 +117,9 @@ blocked and emits no selected runtime-output rows.
   - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract`
 - Export QuestLoader handoff contract preview as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract --json`
+- Report QuestLoader promotion readiness:
+  - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
+- Export QuestLoader promotion readiness as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
 - Validate the focused preview:
-  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_runtime_references.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/shared/test_content_pack_quest_loader_handoff.py tests/scripts/test_data_pipeline_contracts.py -q`
+  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_runtime_references.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/shared/test_content_pack_quest_loader_handoff.py tests/shared/test_content_pack_quest_loader_promotion_readiness.py tests/scripts/test_data_pipeline_contracts.py -q`

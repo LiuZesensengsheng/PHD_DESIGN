@@ -211,6 +211,14 @@ Why add this before content production?
   questline paths, encounter paths, reward paths, selected pack ids, and
   allowed empty pack ids. It emits no handoff paths when the shadow adapter is
   blocked and still does not change `QuestLoader` or runtime loading.
+- `contexts/shared/infrastructure/content_pack_quest_loader_promotion_readiness.py`
+  provides a report-only QuestLoader promotion readiness guard over the handoff
+  contract preview. It confirms the current tutorial handoff paths, required
+  selected pack ids, required allowed-empty pack ids, and unmanaged
+  loader-visible observations before any later slice changes `QuestLoader`
+  loading authority. It still does not change `QuestLoader.load_all()`, load
+  runtime JSON, activate packs, write saves, solve dependencies, or support hot
+  reload.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -273,6 +281,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract`
 - Export QuestLoader handoff contract preview as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract --json`
+- Report QuestLoader promotion readiness:
+  - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
+- Export QuestLoader promotion readiness as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:

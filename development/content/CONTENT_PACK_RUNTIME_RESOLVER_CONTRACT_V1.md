@@ -41,6 +41,10 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
 - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
 - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter --json`
+- `python scripts/content_pack_inventory.py --quest-loader-handoff-contract`
+- `python scripts/content_pack_inventory.py --quest-loader-handoff-contract --json`
+- `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
+- `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
 
 ## Resolver Output Shape
 
@@ -113,6 +117,10 @@ Before this contract becomes runtime authority, a later PR must prove:
   visible to the current `QuestLoader` base directory and filename-prefix scan
 - the QuestLoader handoff contract preview is clean and exposes the future
   loader handoff shape without taking loading authority
+- the QuestLoader promotion readiness guard is clean, preserves the tutorial
+  three-path handoff, keeps `slack` visible as required allowed-empty input,
+  and reports unmanaged loader-visible paths without treating them as
+  pack-owned runtime outputs
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -159,3 +167,7 @@ Before this contract becomes runtime authority, a later PR must prove:
   currently owns the report-only QuestLoader handoff contract preview. It
   defines the future loader handoff input shape without changing
   `QuestLoader.load_all()`.
+- `contexts/shared/infrastructure/content_pack_quest_loader_promotion_readiness.py`
+  currently owns the report-only QuestLoader promotion readiness guard. It is a
+  final promotion-input check before runtime loading changes, not runtime
+  authority.
