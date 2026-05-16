@@ -49,6 +49,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
 - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow`
 - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow --json`
+- `python scripts/content_pack_inventory.py --campaign-reward-loader-shadow`
+- `python scripts/content_pack_inventory.py --campaign-reward-loader-shadow --json`
 
 ## Resolver Output Shape
 
@@ -136,6 +138,9 @@ Before this contract becomes runtime authority, a later PR must prove:
 - the combat encounter loader shadow is clean for current loader-visible
   `encounters_*.json` runtime outputs, including tutorial and TA encounter
   files, before a separate combat-specific handoff changes authority
+- the campaign reward loader shadow is clean for current loader-visible
+  `rewards_*.json` runtime outputs, including the tutorial reward file, before
+  a separate reward-specific handoff changes authority
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -223,3 +228,9 @@ Before this contract becomes runtime authority, a later PR must prove:
   and visible through the current combat encounter helper. It preserves
   `slack` as an allowed empty-runtime-output pack and is not runtime loading
   authority.
+- `contexts/shared/infrastructure/content_pack_campaign_reward_loader_shadow.py`
+  currently owns the report-only campaign reward helper shadow. It verifies
+  that `data/questlines/rewards_tutorial.json` is declared, present,
+  collision-free, and visible through the current campaign reward helper. It
+  preserves `slack` as an allowed empty-runtime-output pack and is not runtime
+  loading authority.

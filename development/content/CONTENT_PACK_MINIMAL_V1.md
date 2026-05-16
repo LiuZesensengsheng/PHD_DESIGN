@@ -272,6 +272,13 @@ Why add this before content production?
   through `combat_encounter_loader.py`. It preserves `slack` as allowed-empty
   and is still not runtime loading authority, resolver activation, save
   pinning, dependency solving, hot reload, or combat balance work.
+- `contexts/shared/infrastructure/content_pack_campaign_reward_loader_shadow.py`
+  provides a report-only shadow over the campaign reward helper. It checks that
+  current loader-visible reward runtime files are pack-owned, declared outputs
+  exist without collisions, and declared reward ids remain visible through
+  `campaign_reward_loader.py`. It preserves `slack` as allowed-empty and is
+  still not runtime loading authority, resolver activation, save pinning,
+  dependency solving, hot reload, or reward economy/balance work.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -357,6 +364,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow`
 - Export combat encounter loader shadow as JSON:
   - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow --json`
+- Report campaign reward loader shadow:
+  - `python scripts/content_pack_inventory.py --campaign-reward-loader-shadow`
+- Export campaign reward loader shadow as JSON:
+  - `python scripts/content_pack_inventory.py --campaign-reward-loader-shadow --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:
