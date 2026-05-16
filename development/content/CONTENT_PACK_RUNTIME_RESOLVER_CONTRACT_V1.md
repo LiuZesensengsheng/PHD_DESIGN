@@ -187,6 +187,12 @@ Before this contract becomes runtime authority, a later PR must prove:
   current runtime call sites still use `QuestLoader.load_all()` until a later
   promotion PR explicitly changes loading authority.
 - `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
-  currently owns the inactive QuestLoader handoff factory. It can build a
-  loaded `QuestLoader` from clean handoff/promotion inputs, but it is not wired
-  into active runtime call sites yet.
+  currently owns the QuestLoader handoff factory. It can build a loaded
+  `QuestLoader` from clean handoff/promotion inputs.
+- `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
+  owns the first runtime loader promotion boundary for narrative startup. It
+  uses the verified handoff factory to load tutorial narrative runtime paths
+  without directory prefix scanning. Combat startup still uses
+  `QuestLoader.load_all()` and continues to see TA encounter sidecar content
+  through the existing path until a separate combat/loader promotion slice
+  changes that authority.
