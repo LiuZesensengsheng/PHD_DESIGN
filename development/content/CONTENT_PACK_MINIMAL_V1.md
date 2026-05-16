@@ -198,9 +198,12 @@ Why add this before content production?
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` provides a
   narrative-only report-only shadow compare between runtime reference preview
   rows and the current tutorial-owned `data/questlines/*.json` runtime paths.
-  It reports unmanaged current runtime paths, such as `encounters_ta.json`,
-  without treating them as selection drift. It is still not runtime loading,
-  runtime activation, save pinning, hot reload, or a dependency solver.
+  It reports current runtime paths outside the tutorial narrative selection,
+  such as `encounters_ta.json`, without treating them as selection drift. This
+  narrative-only observation is separate from global runtime-output ownership;
+  TA is globally pack-owned by the `ta` combat source pack. It is still not
+  runtime loading, runtime activation, save pinning, hot reload, or a
+  dependency solver.
 - `contexts/shared/infrastructure/content_pack_narrative_path_provider.py`
   provides a report-only narrative runtime path provider preview over the clean
   shadow compare. It groups selected tutorial runtime paths into questline,
@@ -211,9 +214,11 @@ Why add this before content production?
   provider preview. It checks that provider-selected questline, encounter, and
   reward paths remain visible to the current `QuestLoader` base directory and
   filename-prefix scan before any later handoff changes loading authority. It
-  also reports current loader-visible paths that are not selected by the
-  content-pack chain, such as `data/questlines/encounters_ta.json`, without
-  treating them as runtime-output failures.
+  also separates current loader-visible paths that are not selected by the
+  tutorial handoff into pack-owned non-handoff sidecars and truly unmanaged
+  paths. `data/questlines/encounters_ta.json` is currently a pack-owned
+  non-handoff sidecar because the `ta` pack declares it, but the tutorial
+  QuestLoader handoff still does not consume it.
 - `contexts/shared/infrastructure/content_pack_quest_loader_handoff.py`
   provides a report-only QuestLoader handoff contract preview over the clean
   shadow adapter. It exposes the future loader handoff shape: `base_dir`,
@@ -223,11 +228,11 @@ Why add this before content production?
 - `contexts/shared/infrastructure/content_pack_quest_loader_promotion_readiness.py`
   provides a report-only QuestLoader promotion readiness guard over the handoff
   contract preview. It confirms the current tutorial handoff paths, required
-  selected pack ids, required allowed-empty pack ids, and unmanaged
-  loader-visible observations before any later slice changes `QuestLoader`
-  loading authority. It still does not change `QuestLoader.load_all()`, load
-  runtime JSON, activate packs, write saves, solve dependencies, or support hot
-  reload.
+  selected pack ids, required allowed-empty pack ids, pack-owned non-handoff
+  sidecar observations, and truly unmanaged loader-visible observations before
+  any later slice changes `QuestLoader` loading authority. It still does not
+  change `QuestLoader.load_all()`, load runtime JSON, activate packs, write
+  saves, solve dependencies, or support hot reload.
 - `QuestLoader.load_from_runtime_paths()` is the inactive explicit-path loader
   entry for a later handoff. It can load questline, encounter, and reward JSON
   from caller-provided paths and avoids directory prefix scanning, but no active
