@@ -47,6 +47,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
 - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory`
 - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
+- `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow`
+- `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow --json`
 
 ## Resolver Output Shape
 
@@ -131,6 +133,9 @@ Before this contract becomes runtime authority, a later PR must prove:
   and preserves TA encounter ownership as global resolver-input state without
   adding `data/questlines/encounters_ta.json` to the tutorial QuestLoader
   handoff
+- the combat encounter loader shadow is clean for current loader-visible
+  `encounters_*.json` runtime outputs, including tutorial and TA encounter
+  files, before a separate combat-specific handoff changes authority
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -211,3 +216,10 @@ Before this contract becomes runtime authority, a later PR must prove:
   combat encounter-definition lookup as a narrow legacy QuestLoader boundary.
   It preserves current TA encounter visibility and is a future replacement
   point only, not content-pack runtime resolver authority.
+- `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
+  currently owns the report-only combat encounter helper shadow. It verifies
+  that `data/questlines/encounters_tutorial.json` and
+  `data/questlines/encounters_ta.json` are declared, present, collision-free,
+  and visible through the current combat encounter helper. It preserves
+  `slack` as an allowed empty-runtime-output pack and is not runtime loading
+  authority.

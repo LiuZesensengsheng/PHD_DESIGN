@@ -265,6 +265,13 @@ Why add this before content production?
   `QuestLoader.load_all()` so TA encounters remain visible, and is not a
   content-pack runtime resolver, activation layer, save-pinning source, or
   hot-reload surface.
+- `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
+  provides a report-only shadow over that combat encounter helper. It checks
+  that current loader-visible encounter runtime files are pack-owned, declared
+  outputs exist without collisions, and declared encounter ids remain visible
+  through `combat_encounter_loader.py`. It preserves `slack` as allowed-empty
+  and is still not runtime loading authority, resolver activation, save
+  pinning, dependency solving, hot reload, or combat balance work.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -346,6 +353,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard`
 - Export remaining production QuestLoader.load_all usage guard as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard --json`
+- Report combat encounter loader shadow:
+  - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow`
+- Export combat encounter loader shadow as JSON:
+  - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:
