@@ -252,10 +252,15 @@ Why add this before content production?
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over remaining production
   `QuestLoader.load_all()` call sites. The allowed set is the current
-  legacy combat/campaign surface: combat startup encounter assembly, combat
-  blueprint reporting, and campaign reward lookups. It prevents narrative or
-  new runtime paths from silently returning to directory prefix scanning while
-  keeping the current combat TA sidecar behavior unchanged.
+  legacy surface: combat startup encounter assembly, combat blueprint
+  reporting, and `campaign_reward_loader.py`. It prevents narrative or new
+  runtime paths from silently returning to directory prefix scanning while
+  keeping the current combat TA sidecar and campaign reward lookup behavior
+  unchanged.
+- `contexts/shared/infrastructure/campaign_reward_loader.py` owns the current
+  campaign reward-definition lookup boundary. It still delegates to
+  `QuestLoader.load_all()` and is not a content-pack runtime resolver,
+  runtime activation layer, save-pinning source, or hot-reload surface.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
