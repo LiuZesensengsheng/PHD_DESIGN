@@ -195,6 +195,12 @@ Why add this before content production?
   (`output_path`, `pack_id`, `pack_version`, `content_kind`, `manifest_path`)
   without loading JSON payloads or becoming runtime authority. If selection
   preview is blocked, it emits no references.
+- `contexts/shared/infrastructure/content_pack_runtime_resolver.py` promotes a
+  clean runtime reference preview into the authoritative resolved runtime
+  reference set. It owns resolver authority over output-path identity, while
+  leaving JSON payload loading to the promoted loader/helper boundaries. It does
+  not activate packs, write save schema, solve dependencies, or support hot
+  reload.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` provides a
   narrative-only report-only shadow compare between runtime reference preview
   rows and the current tutorial-owned `data/questlines/*.json` runtime paths.
@@ -233,11 +239,9 @@ Why add this before content production?
   any later slice changes `QuestLoader` loading authority. It still does not
   change `QuestLoader.load_all()`, load runtime JSON, activate packs, write
   saves, solve dependencies, or support hot reload.
-- `QuestLoader.load_from_runtime_paths()` is the inactive explicit-path loader
-  entry for a later handoff. It can load questline, encounter, and reward JSON
-  from caller-provided paths and avoids directory prefix scanning, but no active
-  runtime call site uses it yet. `QuestLoader.load_all()` remains the current
-  active runtime loading path until a separate promotion PR changes authority.
+- `QuestLoader.load_from_runtime_paths()` is the explicit-path loader entry for
+  promoted handoffs. It can load questline, encounter, and reward JSON from
+  caller-provided paths and avoids directory prefix scanning.
 - `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
   provides an inactive handoff factory that builds a loaded `QuestLoader` from
   a clean handoff contract and promotion readiness report. It is a factory
@@ -250,21 +254,21 @@ Why add this before content production?
   non-handoff sidecar and is still loaded by existing combat paths through
   `QuestLoader.load_all()`.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
-  provides a report-only static guard over remaining production
-  `QuestLoader.load_all()` call sites. The allowed set is now only the two
-  legacy helper boundaries: `campaign_reward_loader.py` and
-  `combat_encounter_loader.py`. It prevents narrative or new runtime paths from
-  silently returning to directory prefix scanning while keeping the current
-  combat TA sidecar and campaign reward lookup behavior unchanged.
+  provides a report-only static guard over production `QuestLoader.load_all()`
+  call sites. The default allowed set is empty. It prevents narrative, combat,
+  reward, or new runtime paths from silently returning to directory prefix
+  scanning.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` owns the current
-  campaign reward-definition lookup boundary. It still delegates to
-  `QuestLoader.load_all()` and is not a content-pack runtime resolver,
-  runtime activation layer, save-pinning source, or hot-reload surface.
+  campaign reward-definition lookup boundary. It now consumes the authoritative
+  content-pack runtime resolver for `rewards_*.json` paths and loads those paths
+  through `QuestLoader.load_from_runtime_paths()`. It is not runtime activation,
+  save pinning, dependency solving, or hot reload.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` owns the current
-  combat encounter-definition lookup boundary. It still delegates to
-  `QuestLoader.load_all()` so TA encounters remain visible, and is not a
-  content-pack runtime resolver, activation layer, save-pinning source, or
-  hot-reload surface.
+  combat encounter-definition lookup boundary. It now consumes the
+  authoritative content-pack runtime resolver for `encounters_*.json` paths and
+  loads those paths through `QuestLoader.load_from_runtime_paths()` so TA and
+  tutorial encounters remain visible. It is not runtime activation, save
+  pinning, dependency solving, or hot reload.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   provides a report-only shadow over that combat encounter helper. It checks
   that current loader-visible encounter runtime files are pack-owned, declared
@@ -328,6 +332,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-reference-preview`
 - Export runtime reference preview as JSON:
   - `python scripts/content_pack_inventory.py --runtime-reference-preview --json`
+- Report authoritative runtime resolver result:
+  - `python scripts/content_pack_inventory.py --runtime-resolver`
+- Export authoritative runtime resolver result as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-resolver --json`
 - Report narrative runtime resolver shadow compare:
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare`
 - Export narrative runtime resolver shadow compare as JSON:

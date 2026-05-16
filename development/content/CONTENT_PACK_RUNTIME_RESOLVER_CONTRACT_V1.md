@@ -2,12 +2,14 @@
 
 ## Purpose
 
-Define the future content-pack runtime resolver contract before it becomes
-runtime authority.
+Define the content-pack runtime resolver contract now that resolved runtime
+references have become runtime authority for promoted helper boundaries.
 
-This document freezes the input and output shape that a later implementation
-must satisfy. It does not implement runtime loading, activate packs, write save
-data, solve dependencies, or change current runtime paths.
+This document freezes the input and output shape that promoted runtime loaders
+must satisfy. It activates resolved runtime references as the authority for
+promoted helper boundaries, but it does not activate packs, write save data,
+solve dependencies, support hot reload, or change current runtime artifact
+paths.
 
 ## Current Inputs
 
@@ -37,6 +39,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
 - `python scripts/content_pack_inventory.py --runtime-reference-preview`
 - `python scripts/content_pack_inventory.py --runtime-reference-preview --json`
+- `python scripts/content_pack_inventory.py --runtime-resolver`
+- `python scripts/content_pack_inventory.py --runtime-resolver --json`
 - `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
 - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
 - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
@@ -54,9 +58,8 @@ The current CLI surfaces are:
 
 ## Resolver Output Shape
 
-When a later slice promotes this contract into runtime authority, the resolver
-output should expose resolved runtime-output references. Each reference should
-carry enough identity to explain where the runtime file came from:
+The runtime resolver exposes resolved runtime-output references. Each reference
+carries enough identity to explain where the runtime file came from:
 
 - `output_path`
 - `pack_id`
@@ -64,20 +67,20 @@ carry enough identity to explain where the runtime file came from:
 - `content_kind`
 - `manifest_path`
 
-The first implementation should preserve the selected-row identity already
-emitted by `ContentPackRuntimeResolverSelectionPreview`. The contract does not
-require JSON payload loading, parsed domain objects, or gameplay activation in
-the same slice.
+The first implementation preserves the selected-row identity already emitted by
+`ContentPackRuntimeResolverSelectionPreview`. The resolver does not load JSON
+payloads or parse domain objects itself; promoted loader boundaries consume its
+resolved paths and perform their own current loading work.
 
-The current `ContentPackRuntimeReferencePreview` is the report-only rehearsal of
-this output shape. It is not a runtime resolver and must not be used as
-authoritative game loading input until a later promotion PR changes that
-boundary explicitly.
+The current `ContentPackRuntimeReferencePreview` remains the report-only
+rehearsal of this output shape. `content_pack_runtime_resolver.py` is the
+runtime authority over the clean resolved reference set. Its authority boundary
+is `runtime_authority_over_resolved_pack_runtime_references`.
 
 ## Fail-Closed Rules
 
-A resolver implementation must fail closed before returning authoritative
-runtime references when any of these input issues exist:
+A resolver implementation fails closed before returning authoritative runtime
+references when any of these input issues exist:
 
 - a declared dependency id is missing
 - a declared runtime output file is missing
@@ -115,7 +118,7 @@ and not a promise that event source packs have runtime activation.
 
 ## Promotion Criteria
 
-Before this contract becomes runtime authority, a later PR must prove:
+The runtime authority promotion is valid only while these checks stay true:
 
 - runtime resolver readiness is clean
 - runtime resolver selection preview is clean
@@ -147,10 +150,15 @@ Before this contract becomes runtime authority, a later PR must prove:
 - focused tests name the explicit resolver family being promoted
 - the PR description states which runtime paths become resolver-owned
 
+Current resolver-owned runtime paths are:
+
+- `data/questlines/encounters_ta.json`
+- `data/questlines/encounters_tutorial.json`
+- `data/questlines/questline_tutorial.json`
+- `data/questlines/rewards_tutorial.json`
+
 ## Non-Goals
 
-- no runtime JSON loading in this contract slice
-- no `QuestLoader.load_all()` changes in this contract slice
 - no runtime activation
 - no save schema changes or pack pinning
 - no dependency solver
@@ -172,6 +180,10 @@ Before this contract becomes runtime authority, a later PR must prove:
 - `contexts/shared/infrastructure/content_pack_runtime_references.py` currently
   owns the report-only runtime reference preview for the future resolver output
   shape. It does not load runtime JSON or change loading authority.
+- `contexts/shared/infrastructure/content_pack_runtime_resolver.py` owns the
+  authoritative resolved runtime-reference set. It promotes clean preview rows
+  into resolver-owned references, fails closed when preview inputs are blocked,
+  and still does not parse runtime JSON payloads.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
@@ -191,36 +203,31 @@ Before this contract becomes runtime authority, a later PR must prove:
   currently owns the report-only QuestLoader promotion readiness guard. It is a
   final promotion-input check before runtime loading changes, not runtime
   authority.
-- `QuestLoader.load_from_runtime_paths()` is the inactive explicit-path loader
-  entry for the future handoff. It can load caller-provided questline,
-  encounter, and reward JSON paths without directory prefix scanning, but
-  current runtime call sites still use `QuestLoader.load_all()` until a later
-  promotion PR explicitly changes loading authority.
+- `QuestLoader.load_from_runtime_paths()` is the explicit-path loader entry for
+  promoted content-pack handoffs. It can load caller-provided questline,
+  encounter, and reward JSON paths without directory prefix scanning.
 - `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
   currently owns the QuestLoader handoff factory. It can build a loaded
   `QuestLoader` from clean handoff/promotion inputs.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
   owns the first runtime loader promotion boundary for narrative startup. It
   uses the verified handoff factory to load tutorial narrative runtime paths
-  without directory prefix scanning. Combat startup still uses
-  `QuestLoader.load_all()` and continues to see TA encounter sidecar content
-  through the existing path until a separate combat/loader promotion slice
-  changes that authority.
+  without directory prefix scanning.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
-  currently owns the report-only guard for remaining production
-  `QuestLoader.load_all()` call sites. It allows only
-  `campaign_reward_loader.py` and `combat_encounter_loader.py`, and is not
-  runtime authority. New narrative or resolver-owned paths should use promoted
-  content-pack handoff boundaries instead of returning to directory prefix
-  scanning.
+  currently owns the report-only guard for production `QuestLoader.load_all()`
+  call sites. The default allowed set is empty; new narrative, combat, reward,
+  or resolver-owned paths should use promoted content-pack handoff boundaries
+  instead of returning to directory prefix scanning.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` currently owns
-  campaign reward-definition lookup as a narrow legacy QuestLoader boundary.
-  It is a future replacement point only, not a content-pack runtime resolver or
-  reward runtime authority.
+  campaign reward-definition lookup as a narrow content-pack resolver consumer.
+  It loads resolver-owned `rewards_*.json` paths through
+  `QuestLoader.load_from_runtime_paths()` and no longer calls
+  `QuestLoader.load_all()`.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` currently owns
-  combat encounter-definition lookup as a narrow legacy QuestLoader boundary.
-  It preserves current TA encounter visibility and is a future replacement
-  point only, not content-pack runtime resolver authority.
+  combat encounter-definition lookup as a narrow content-pack resolver
+  consumer. It loads resolver-owned `encounters_*.json` paths, including TA and
+  tutorial encounter files, through `QuestLoader.load_from_runtime_paths()` and
+  no longer calls `QuestLoader.load_all()`.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   currently owns the report-only combat encounter helper shadow. It verifies
   that `data/questlines/encounters_tutorial.json` and
