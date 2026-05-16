@@ -23,6 +23,11 @@ the chain is clean:
   - emits no selected rows while readiness is blocked
   - keeps allowed empty-runtime-output packs visible without treating them as
     runtime content
+- `ContentPackRuntimeReferencePreview`
+  - previews the resolved runtime-output reference shape that a future resolver
+    should return
+  - emits no references while selection preview is blocked
+  - remains report-only and explicitly not runtime authority
 
 The current CLI surfaces are:
 
@@ -30,6 +35,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+- `python scripts/content_pack_inventory.py --runtime-reference-preview`
+- `python scripts/content_pack_inventory.py --runtime-reference-preview --json`
 - `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
 - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
 - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
@@ -51,6 +58,11 @@ The first implementation should preserve the selected-row identity already
 emitted by `ContentPackRuntimeResolverSelectionPreview`. The contract does not
 require JSON payload loading, parsed domain objects, or gameplay activation in
 the same slice.
+
+The current `ContentPackRuntimeReferencePreview` is the report-only rehearsal of
+this output shape. It is not a runtime resolver and must not be used as
+authoritative game loading input until a later promotion PR changes that
+boundary explicitly.
 
 ## Fail-Closed Rules
 
@@ -90,6 +102,7 @@ Before this contract becomes runtime authority, a later PR must prove:
 
 - runtime resolver readiness is clean
 - runtime resolver selection preview is clean
+- runtime reference preview is clean and preserves the resolved reference shape
 - selected tutorial narrative runtime outputs match the current active
   `data/questlines/*.json` paths
 - the narrative runtime resolver shadow compare is clean for tutorial-owned
@@ -126,6 +139,9 @@ Before this contract becomes runtime authority, a later PR must prove:
   selected-row preview.
 - This document owns the future promotion contract from report-only selected
   rows to resolver-owned runtime references.
+- `contexts/shared/infrastructure/content_pack_runtime_references.py` currently
+  owns the report-only runtime reference preview for the future resolver output
+  shape. It does not load runtime JSON or change loading authority.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks selected tutorial rows
   against current tutorial-owned runtime paths without taking loading authority.

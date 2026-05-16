@@ -21,6 +21,11 @@ selected `narrative_source` rows to compare future resolver input against the
 current tutorial-owned `data/questlines/*.json` runtime paths, but it still does
 not load or activate runtime content.
 
+The selection preview can also feed the runtime reference preview, which maps
+clean selected rows into the future resolver output shape. That reference
+preview is still report-only, emits no references when selection is blocked, and
+does not make the selected rows authoritative runtime input.
+
 After the shadow compare is clean, the narrative path provider preview may group
 selected paths into questline, encounter, and reward families for a future
 loader handoff. That preview is still report-only and does not change
@@ -83,6 +88,10 @@ blocked and emits no selected runtime-output rows.
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
 - Export runtime resolver selection preview as JSON:
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+- Report runtime reference preview:
+  - `python scripts/content_pack_inventory.py --runtime-reference-preview`
+- Export runtime reference preview as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-reference-preview --json`
 - Report narrative runtime resolver shadow compare:
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare`
 - Export narrative runtime resolver shadow compare as JSON:
@@ -96,4 +105,4 @@ blocked and emits no selected runtime-output rows.
 - Export QuestLoader shadow adapter preview as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter --json`
 - Validate the focused preview:
-  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/scripts/test_data_pipeline_contracts.py -q`
+  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_runtime_references.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/scripts/test_data_pipeline_contracts.py -q`

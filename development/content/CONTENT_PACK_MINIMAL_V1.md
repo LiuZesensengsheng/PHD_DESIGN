@@ -180,6 +180,12 @@ Why add this before content production?
   readiness is blocked, it emits no selected rows. It is still not runtime
   loading, runtime activation, save pinning, hot reload, or a dependency
   solver.
+- `contexts/shared/infrastructure/content_pack_runtime_references.py` consumes
+  a clean runtime resolver selection preview and produces a report-only runtime
+  reference preview. It preserves the future resolver output shape
+  (`output_path`, `pack_id`, `pack_version`, `content_kind`, `manifest_path`)
+  without loading JSON payloads or becoming runtime authority. If selection
+  preview is blocked, it emits no references.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` provides a
   narrative-only report-only shadow compare between resolver selection preview
   rows and the current tutorial-owned `data/questlines/*.json` runtime paths.
@@ -241,6 +247,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
 - Export runtime resolver selection preview as JSON:
   - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+- Report runtime reference preview:
+  - `python scripts/content_pack_inventory.py --runtime-reference-preview`
+- Export runtime reference preview as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-reference-preview --json`
 - Report narrative runtime resolver shadow compare:
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare`
 - Export narrative runtime resolver shadow compare as JSON:
