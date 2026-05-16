@@ -45,6 +45,11 @@ guard may check the final promotion inputs before a later loader change. That
 readiness guard is still report-only and does not call or change
 `QuestLoader.load_all()`.
 
+After the promotion readiness guard is clean, the inactive QuestLoader handoff
+factory may build a loaded `QuestLoader` from those explicit paths. That
+factory is still not active runtime authority until a later promotion PR wires
+it into a startup call site.
+
 ## Output
 
 `ContentPackRuntimeResolverSelectionPreview` reports:
@@ -121,5 +126,9 @@ blocked and emits no selected runtime-output rows.
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
 - Export QuestLoader promotion readiness as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
+- Report inactive QuestLoader handoff factory:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory`
+- Export inactive QuestLoader handoff factory as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
 - Validate the focused preview:
-  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_runtime_references.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/shared/test_content_pack_quest_loader_handoff.py tests/shared/test_content_pack_quest_loader_promotion_readiness.py tests/scripts/test_data_pipeline_contracts.py -q`
+  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_runtime_references.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/shared/test_content_pack_quest_loader_handoff.py tests/shared/test_content_pack_quest_loader_promotion_readiness.py tests/shared/test_content_pack_quest_loader_factory.py tests/scripts/test_data_pipeline_contracts.py -q`

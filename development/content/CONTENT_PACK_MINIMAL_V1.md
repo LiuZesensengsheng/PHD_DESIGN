@@ -224,6 +224,11 @@ Why add this before content production?
   from caller-provided paths and avoids directory prefix scanning, but no active
   runtime call site uses it yet. `QuestLoader.load_all()` remains the current
   active runtime loading path until a separate promotion PR changes authority.
+- `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
+  provides an inactive handoff factory that builds a loaded `QuestLoader` from
+  a clean handoff contract and promotion readiness report. It is a factory
+  rehearsal for a later runtime promotion and is not called by active
+  combat/campaign/narrative startup paths yet.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -290,6 +295,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
 - Export QuestLoader promotion readiness as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
+- Report inactive QuestLoader handoff factory:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory`
+- Export inactive QuestLoader handoff factory as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:

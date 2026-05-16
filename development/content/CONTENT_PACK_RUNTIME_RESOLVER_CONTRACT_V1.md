@@ -45,6 +45,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract --json`
 - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
 - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
+- `python scripts/content_pack_inventory.py --quest-loader-handoff-factory`
+- `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
 
 ## Resolver Output Shape
 
@@ -176,3 +178,7 @@ Before this contract becomes runtime authority, a later PR must prove:
   encounter, and reward JSON paths without directory prefix scanning, but
   current runtime call sites still use `QuestLoader.load_all()` until a later
   promotion PR explicitly changes loading authority.
+- `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
+  currently owns the inactive QuestLoader handoff factory. It can build a
+  loaded `QuestLoader` from clean handoff/promotion inputs, but it is not wired
+  into active runtime call sites yet.
