@@ -366,7 +366,7 @@ contexts/campaign/infrastructure/
 如果按照这份文档继续往前走，最值得做的顺序仍然是：
 
 1. 先把现有 `frame_stage / content_stage / frame_compositor` 继续朝显式 pipeline 骨架收口
-2. 引入 `VisualIntent`，让业务到视觉的触发 seam 显式化
+2. 先以窄版 `CampaignVisualEffectsCommands` 引入业务到视觉的触发 seam；暂不升级成通用 `VisualIntent`
 3. 把散落在 `CampaignView` 上的视觉状态逐步收进 `VisualRuntimeState`
 4. 让编辑器从 override-first 继续升级成更稳定的 `Editor Spec`
 5. 在那之后，再逐步引入 `EffectSpec / OverlaySpec / PostProcessSpec`
@@ -399,6 +399,7 @@ This document still describes a campaign visual architecture direction, not an e
 - `surface_transform.py`: pure pseudo-3D surface transforms used by renderers without calling back into `CampaignView` private methods.
 - `CampaignRenderFrameContext`: one-frame render input bundle used by campaign frame-stage orchestration.
 - `CampaignRenderPipeline`: campaign-only frame pass-order owner for background, content, short-lived FX, composition, and status bar rendering.
+- `CampaignVisualEffectsCommands`: campaign-only command seam for business services that trigger click ripple and fusion visual effects without calling `CampaignView` effect methods directly.
 
 `CampaignView` should remain the presentation shell that wires these campaign owners together. The next slices should stay concrete: first layout state, then concrete runtime widgets when a real widget needs ownership. Do not introduce a shared cache/runtime/node engine just to make this look generic; no engine-wide visual runtime exists yet.
 
