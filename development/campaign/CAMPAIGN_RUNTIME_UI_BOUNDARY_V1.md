@@ -46,9 +46,12 @@ compat hook layer.
 Current examples:
 
 - `ui_node.py`
-- `runtime_ui.py`
-- `phone_widget.py`
 - `phone_widget_store.py`
+
+`ui_node.py` is the current concrete retained-node primitive. Older runtime
+widget experiments such as `runtime_ui.py` and `phone_widget.py` are no longer
+present in the active tree; do not recreate them unless a concrete local widget
+slice needs that owner.
 
 ## What Runtime UI Must Not Own
 
@@ -78,9 +81,10 @@ When a UI collaborator touches `ui_runtime`, the safe default is:
 
 The current ownership split is:
 
-- `runtime_ui.py`: retained runtime widget tree assembly and local dispatch
-- `phone_widget.py`: local widget state, hover, animation, and local click behavior
+- `ui_node.py`: retained node primitive used by local UI/editor surfaces
+- `phone_widget_store.py`: compatibility export for UI editor override storage
 - `CampaignView`: presentation host only, without generic runtime-ui compat hooks
+- `CampaignRenderFrameContext`: campaign-only one-frame render input bundle, not a widget tree or runtime UI owner
 - `CampaignState`: lifecycle host and dispatch ordering
 - `contexts/campaign/services/*`: business/orchestration ownership
 
@@ -91,7 +95,6 @@ V1 is protected by focused contract tests covering:
 - campaign event routing now reaches business adapters directly after modal/input-lock checks
 - shared UI override polling stays on the state/view host path without a runtime-ui shim layer
 - removed `CampaignView` runtime-ui compat hooks do not reappear
-- `PhoneWidget` local notification interaction stays widget-local
 - runtime debug toggle remains local and non-consuming
 
 ## Non-Goals
