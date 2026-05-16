@@ -170,6 +170,14 @@ Why add this before content production?
   narrative, combat encounter, and campaign reward resolver consumers. It is
   still not runtime activation, save pack pinning, UI DLC selection, dependency
   solving, or hot reload.
+- `contexts/shared/infrastructure/content_pack_run_composition.py` provides the
+  transient run/session composition surface that owns one shared
+  `ContentPackRunSelection` for narrative, combat encounter, and campaign
+  reward runtime consumers in the current process. It builds narrative
+  `QuestLoader` instances and delegates combat/reward definition lookup through
+  promoted resolver-backed helper boundaries. It is still not runtime
+  activation, save pack pinning, UI DLC selection, dependency solving, hot
+  reload, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -346,6 +354,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --run-selection`
 - Export an explicit run/session resolver selection input as JSON:
   - `python scripts/content_pack_inventory.py --run-selection --active-pack-id tutorial --active-pack-id slack --json`
+- Report the transient run/session runtime consumer composition:
+  - `python scripts/content_pack_inventory.py --run-composition`
+- Export an explicit run/session runtime consumer composition as JSON:
+  - `python scripts/content_pack_inventory.py --run-composition --active-pack-id tutorial --active-pack-id slack --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:

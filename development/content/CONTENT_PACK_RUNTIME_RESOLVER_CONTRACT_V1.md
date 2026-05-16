@@ -34,6 +34,15 @@ the chain is clean:
     explicit pack id set is supplied
   - is not runtime activation, save pack pinning, UI DLC selection, dependency
     solving, or hot reload
+- `ContentPackRunComposition`
+  - owns one shared `ContentPackRunSelection` for transient run/session
+    narrative, combat encounter, and campaign reward runtime consumers
+  - delegates JSON payload work to the promoted loader/helper boundaries rather
+    than becoming a new resolver or parser
+  - preserves the default all-discovered active source pack behavior unless an
+    explicit pack id set is supplied
+  - is not shipped DLC authority, runtime activation, save pack pinning, UI DLC
+    selection, dependency solving, or hot reload
 - `ContentPackRuntimeResolverReadinessReport`
   - confirms active pack identity and runtime-output index consistency
   - consumes the active pack set before comparing identity and runtime-output
@@ -59,6 +68,9 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --run-selection`
 - `python scripts/content_pack_inventory.py --run-selection --json`
 - `python scripts/content_pack_inventory.py --run-selection --active-pack-id tutorial --active-pack-id slack --json`
+- `python scripts/content_pack_inventory.py --run-composition`
+- `python scripts/content_pack_inventory.py --run-composition --json`
+- `python scripts/content_pack_inventory.py --run-composition --active-pack-id tutorial --active-pack-id slack --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -228,6 +240,13 @@ Current resolver-owned runtime paths are:
   pack id argument, but this remains resolver input selection only, not save
   pinning, runtime DLC activation, UI DLC state, dependency solving, or hot
   reload.
+- `contexts/shared/infrastructure/content_pack_run_composition.py` owns the
+  transient run/session runtime consumer composition surface. It creates or
+  reuses one shared `ContentPackRunSelection` and feeds the current narrative
+  application service, combat scene builder/state, and campaign reward service
+  group through promoted resolver-backed helper boundaries. It is not a save
+  schema owner, UI DLC selector, dependency solver, hot-reload layer, or shipped
+  DLC authority.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
