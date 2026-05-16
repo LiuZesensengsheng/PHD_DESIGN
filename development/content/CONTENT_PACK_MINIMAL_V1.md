@@ -187,7 +187,7 @@ Why add this before content production?
   without loading JSON payloads or becoming runtime authority. If selection
   preview is blocked, it emits no references.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` provides a
-  narrative-only report-only shadow compare between resolver selection preview
+  narrative-only report-only shadow compare between runtime reference preview
   rows and the current tutorial-owned `data/questlines/*.json` runtime paths.
   It reports unmanaged current runtime paths, such as `encounters_ta.json`,
   without treating them as selection drift. It is still not runtime loading,

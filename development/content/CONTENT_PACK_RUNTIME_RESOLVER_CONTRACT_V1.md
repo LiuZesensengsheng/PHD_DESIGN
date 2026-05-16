@@ -106,7 +106,7 @@ Before this contract becomes runtime authority, a later PR must prove:
 - selected tutorial narrative runtime outputs match the current active
   `data/questlines/*.json` paths
 - the narrative runtime resolver shadow compare is clean for tutorial-owned
-  runtime outputs
+  runtime outputs after consuming runtime reference preview rows
 - the narrative runtime path provider preview can group selected paths into
   questline, encounter, and reward families
 - the QuestLoader shadow adapter preview confirms those provider paths are
@@ -143,8 +143,9 @@ Before this contract becomes runtime authority, a later PR must prove:
   owns the report-only runtime reference preview for the future resolver output
   shape. It does not load runtime JSON or change loading authority.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
-  owns the narrative-only shadow compare that checks selected tutorial rows
-  against current tutorial-owned runtime paths without taking loading authority.
+  owns the narrative-only shadow compare that checks runtime reference preview
+  rows against current tutorial-owned runtime paths without taking loading
+  authority.
 - `contexts/shared/infrastructure/content_pack_narrative_path_provider.py`
   currently owns the report-only narrative path provider preview for the future
   loader handoff. It does not change `QuestLoader`.

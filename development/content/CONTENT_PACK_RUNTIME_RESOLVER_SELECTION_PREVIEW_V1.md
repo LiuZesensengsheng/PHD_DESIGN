@@ -16,15 +16,15 @@ dependencies, or support hot reload.
 The selection preview only produces selected rows when the readiness report has
 no readiness issues.
 
-The next report-only layer is the narrative resolver shadow compare. It may use
-selected `narrative_source` rows to compare future resolver input against the
-current tutorial-owned `data/questlines/*.json` runtime paths, but it still does
-not load or activate runtime content.
+The selection preview feeds the runtime reference preview, which maps clean
+selected rows into the future resolver output shape. That reference preview is
+still report-only, emits no references when selection is blocked, and does not
+make the selected rows authoritative runtime input.
 
-The selection preview can also feed the runtime reference preview, which maps
-clean selected rows into the future resolver output shape. That reference
-preview is still report-only, emits no references when selection is blocked, and
-does not make the selected rows authoritative runtime input.
+The next report-only narrative layer is the narrative resolver shadow compare.
+It consumes `narrative_source` runtime reference preview rows to compare future
+resolver output shape against the current tutorial-owned `data/questlines/*.json`
+runtime paths, but it still does not load or activate runtime content.
 
 After the shadow compare is clean, the narrative path provider preview may group
 selected paths into questline, encounter, and reward families for a future
