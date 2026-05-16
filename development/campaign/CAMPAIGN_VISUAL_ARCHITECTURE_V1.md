@@ -400,6 +400,7 @@ This document still describes a campaign visual architecture direction, not an e
 - `CampaignRenderFrameContext`: one-frame render input bundle used by campaign frame-stage orchestration.
 - `CampaignRenderPipeline`: campaign-only frame pass-order owner for background, content, short-lived FX, composition, and status bar rendering.
 - `CampaignVisualEffectsCommands`: campaign-only command seam for business services that trigger click ripple and fusion visual effects without calling `CampaignView` effect methods directly.
+- `CampaignBoardProjectionCommands`: campaign-only command seam for temporary board projection visuals such as three-click stage shifts without calling `CampaignView` projection methods directly.
 
 `CampaignView` should remain the presentation shell that wires these campaign owners together. The next slices should stay concrete: first layout state, then concrete runtime widgets when a real widget needs ownership. Do not introduce a shared cache/runtime/node engine just to make this look generic; no engine-wide visual runtime exists yet.
 
