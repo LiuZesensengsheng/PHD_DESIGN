@@ -30,6 +30,10 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview --json`
+- `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
+- `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
+- `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
+- `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter --json`
 
 ## Resolver Output Shape
 
@@ -92,6 +96,8 @@ Before this contract becomes runtime authority, a later PR must prove:
   runtime outputs
 - the narrative runtime path provider preview can group selected paths into
   questline, encounter, and reward families
+- the QuestLoader shadow adapter preview confirms those provider paths are
+  visible to the current `QuestLoader` base directory and filename-prefix scan
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -101,6 +107,7 @@ Before this contract becomes runtime authority, a later PR must prove:
 ## Non-Goals
 
 - no runtime JSON loading in this contract slice
+- no `QuestLoader.load_all()` changes in this contract slice
 - no runtime activation
 - no save schema changes or pack pinning
 - no dependency solver
@@ -125,3 +132,7 @@ Before this contract becomes runtime authority, a later PR must prove:
 - `contexts/shared/infrastructure/content_pack_narrative_path_provider.py`
   currently owns the report-only narrative path provider preview for the future
   loader handoff. It does not change `QuestLoader`.
+- `contexts/shared/infrastructure/content_pack_quest_loader_shadow.py`
+  currently owns the report-only QuestLoader shadow adapter preview. It checks
+  provider paths against the current loader prefix contract before any later
+  slice changes loading authority.

@@ -26,6 +26,11 @@ selected paths into questline, encounter, and reward families for a future
 loader handoff. That preview is still report-only and does not change
 `QuestLoader`.
 
+After the path provider preview is clean, the QuestLoader shadow adapter preview
+may compare those grouped paths with the current `QuestLoader` base directory
+and filename-prefix scan. That adapter preview is still report-only and does not
+call or change `QuestLoader.load_all()`.
+
 ## Output
 
 `ContentPackRuntimeResolverSelectionPreview` reports:
@@ -86,5 +91,9 @@ blocked and emits no selected runtime-output rows.
   - `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
 - Export narrative runtime path provider preview as JSON:
   - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
+- Report QuestLoader shadow adapter preview:
+  - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
+- Export QuestLoader shadow adapter preview as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter --json`
 - Validate the focused preview:
-  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_resolver_readiness.py tests/scripts/test_data_pipeline_contracts.py -q`
+  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/scripts/test_data_pipeline_contracts.py -q`

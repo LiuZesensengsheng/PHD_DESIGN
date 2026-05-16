@@ -191,6 +191,14 @@ Why add this before content production?
   shadow compare. It groups selected tutorial runtime paths into questline,
   encounter, and reward path families for a future loader handoff, while leaving
   `QuestLoader` and active runtime loading unchanged.
+- `contexts/shared/infrastructure/content_pack_quest_loader_shadow.py` provides
+  a report-only QuestLoader shadow adapter preview over the narrative path
+  provider preview. It checks that provider-selected questline, encounter, and
+  reward paths remain visible to the current `QuestLoader` base directory and
+  filename-prefix scan before any later handoff changes loading authority. It
+  also reports current loader-visible paths that are not selected by the
+  content-pack chain, such as `data/questlines/encounters_ta.json`, without
+  treating them as runtime-output failures.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -241,6 +249,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
 - Export narrative runtime path provider preview as JSON:
   - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
+- Report QuestLoader shadow adapter preview:
+  - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
+- Export QuestLoader shadow adapter preview as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:
