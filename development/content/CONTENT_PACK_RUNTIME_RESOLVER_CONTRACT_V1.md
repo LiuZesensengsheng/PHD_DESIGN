@@ -248,12 +248,16 @@ Current resolver-owned runtime paths are:
   campaign reward-definition lookup as a narrow content-pack resolver consumer.
   It loads resolver-owned `rewards_*.json` paths through
   `QuestLoader.load_from_runtime_paths()` and no longer calls
-  `QuestLoader.load_all()`.
+  `QuestLoader.load_all()`. It may receive explicit active pack ids and pass
+  them to the resolver, but this is resolver input selection only, not save
+  pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` currently owns
   combat encounter-definition lookup as a narrow content-pack resolver
   consumer. It loads resolver-owned `encounters_*.json` paths, including TA and
   tutorial encounter files, through `QuestLoader.load_from_runtime_paths()` and
-  no longer calls `QuestLoader.load_all()`.
+  no longer calls `QuestLoader.load_all()`. It may receive explicit active pack
+  ids and pass them to the resolver, but this is resolver input selection only,
+  not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   currently owns the report-only combat encounter helper shadow. It verifies
   that `data/questlines/encounters_tutorial.json` and

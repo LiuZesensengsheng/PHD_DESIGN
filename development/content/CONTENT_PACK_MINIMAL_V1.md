@@ -268,13 +268,17 @@ Why add this before content production?
 - `contexts/shared/infrastructure/campaign_reward_loader.py` owns the current
   campaign reward-definition lookup boundary. It now consumes the authoritative
   content-pack runtime resolver for `rewards_*.json` paths and loads those paths
-  through `QuestLoader.load_from_runtime_paths()`. It is not runtime activation,
-  save pinning, dependency solving, or hot reload.
+  through `QuestLoader.load_from_runtime_paths()`. It accepts explicit active
+  pack ids as resolver input for future activation/save-pinning callers, while
+  defaulting to all discovered active source packs. It is not runtime
+  activation, save pinning, dependency solving, or hot reload.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` owns the current
   combat encounter-definition lookup boundary. It now consumes the
   authoritative content-pack runtime resolver for `encounters_*.json` paths and
   loads those paths through `QuestLoader.load_from_runtime_paths()` so TA and
-  tutorial encounters remain visible. It is not runtime activation, save
+  tutorial encounters remain visible. It accepts explicit active pack ids as
+  resolver input for future activation/save-pinning callers, while defaulting
+  to all discovered active source packs. It is not runtime activation, save
   pinning, dependency solving, or hot reload.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   provides a report-only shadow over that combat encounter helper. It checks
