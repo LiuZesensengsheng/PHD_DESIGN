@@ -43,6 +43,17 @@ the chain is clean:
     explicit pack id set is supplied
   - is not shipped DLC authority, runtime activation, save pack pinning, UI DLC
     selection, dependency solving, or hot reload
+- `ContentPackRuntimeContext`
+  - owns one transient process/run `ContentPackRunComposition` for the current
+    state-machine runtime
+  - is the shared transient runtime context for normal state-machine content
+    consumers in the current process
+  - passes the same composition into content-pack-aware campaign, combat,
+    event, and dialogue states instead of letting each path lazily create its
+    own default composition
+  - is not serialized in machine snapshots or save slots
+  - is not shipped DLC authority, runtime activation, save pack pinning, UI DLC
+    selection, dependency solving, or hot reload
 - `ContentPackRuntimeResolverReadinessReport`
   - confirms active pack identity and runtime-output index consistency
   - consumes the active pack set before comparing identity and runtime-output
@@ -71,6 +82,9 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --run-composition`
 - `python scripts/content_pack_inventory.py --run-composition --json`
 - `python scripts/content_pack_inventory.py --run-composition --active-pack-id tutorial --active-pack-id slack --json`
+- `python scripts/content_pack_inventory.py --runtime-context`
+- `python scripts/content_pack_inventory.py --runtime-context --json`
+- `python scripts/content_pack_inventory.py --runtime-context --active-pack-id tutorial --active-pack-id slack --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -247,6 +261,14 @@ Current resolver-owned runtime paths are:
   group through promoted resolver-backed helper boundaries. It is not a save
   schema owner, UI DLC selector, dependency solver, hot-reload layer, or shipped
   DLC authority.
+- `contexts/shared/infrastructure/content_pack_runtime_context.py` owns the
+  transient process/run context that holds one shared
+  `ContentPackRunComposition` for the active `GameStateMachine`. The state
+  machine passes this context into content-pack-aware campaign, combat, event,
+  and dialogue states so they share the same composition during the current
+  process. It is not serialized into saves and is not a save schema owner,
+  runtime activation layer, UI DLC selector, dependency solver, hot-reload
+  layer, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
