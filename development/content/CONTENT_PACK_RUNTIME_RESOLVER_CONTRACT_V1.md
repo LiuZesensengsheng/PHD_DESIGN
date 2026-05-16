@@ -234,11 +234,15 @@ Current resolver-owned runtime paths are:
   encounter, and reward JSON paths without directory prefix scanning.
 - `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
   currently owns the QuestLoader handoff factory. It can build a loaded
-  `QuestLoader` from clean handoff/promotion inputs.
+  `QuestLoader` from clean handoff/promotion inputs. It may receive explicit
+  active pack ids and pass them down the handoff chain, but this is resolver
+  input selection only, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
   owns the first runtime loader promotion boundary for narrative startup. It
   uses the verified handoff factory to load tutorial narrative runtime paths
-  without directory prefix scanning.
+  without directory prefix scanning. It may receive explicit active pack ids
+  and pass them down the handoff chain, but this is resolver input selection
+  only, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   currently owns the report-only guard for production `QuestLoader.load_all()`
   call sites. The default allowed set is empty; new narrative, combat, reward,

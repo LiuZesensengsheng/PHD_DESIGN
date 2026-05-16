@@ -251,15 +251,19 @@ Why add this before content production?
   caller-provided paths and avoids directory prefix scanning.
 - `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
   provides an inactive handoff factory that builds a loaded `QuestLoader` from
-  a clean handoff contract and promotion readiness report. It is a factory
+  a clean handoff contract and promotion readiness report. It accepts explicit
+  active pack ids as resolver input for future activation/save-pinning callers,
+  while defaulting to all discovered active source packs. It is a factory
   rehearsal for runtime promotion and is not called by combat startup paths.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` provides
   the first runtime promotion boundary over that handoff factory for narrative
   startup. Narrative sessions now receive a content-pack handoff-backed
   `QuestLoader` containing the tutorial questline, tutorial encounters, and
   tutorial rewards only. The TA encounter file remains a pack-owned
-  non-handoff sidecar and is still loaded by existing combat paths through
-  `QuestLoader.load_all()`.
+  non-handoff sidecar and is still loaded by existing combat paths. The loader
+  accepts explicit active pack ids as resolver input for future
+  activation/save-pinning callers, while defaulting to all discovered active
+  source packs.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over production `QuestLoader.load_all()`
   call sites. The default allowed set is empty. It prevents narrative, combat,
@@ -383,6 +387,8 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --content-pack-narrative-loader`
 - Export content-pack-backed narrative loader as JSON:
   - `python scripts/content_pack_inventory.py --content-pack-narrative-loader --json`
+- Export content-pack-backed narrative loader for an explicit active pack set:
+  - `python scripts/content_pack_inventory.py --content-pack-narrative-loader --active-pack-id tutorial --active-pack-id slack --json`
 - Report remaining production QuestLoader.load_all usage guard:
   - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard`
 - Export remaining production QuestLoader.load_all usage guard as JSON:
