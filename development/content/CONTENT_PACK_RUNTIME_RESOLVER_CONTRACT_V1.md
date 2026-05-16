@@ -26,6 +26,14 @@ the chain is clean:
     packs whose declared dependencies are not also selected
   - is not a dependency solver, runtime activation layer, save pack pinning
     source, hot-reload mechanism, or UI DLC selector
+- `ContentPackRunSelection`
+  - wraps the active pack set as the run/session composition input surface
+  - gives upstream callers one `run_selection` object to pass into promoted
+    narrative, combat encounter, and campaign reward resolver consumers
+  - preserves the default all-discovered active source pack behavior unless an
+    explicit pack id set is supplied
+  - is not runtime activation, save pack pinning, UI DLC selection, dependency
+    solving, or hot reload
 - `ContentPackRuntimeResolverReadinessReport`
   - confirms active pack identity and runtime-output index consistency
   - consumes the active pack set before comparing identity and runtime-output
@@ -48,6 +56,9 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --active-pack-set`
 - `python scripts/content_pack_inventory.py --active-pack-set --json`
 - `python scripts/content_pack_inventory.py --active-pack-set --active-pack-id tutorial`
+- `python scripts/content_pack_inventory.py --run-selection`
+- `python scripts/content_pack_inventory.py --run-selection --json`
+- `python scripts/content_pack_inventory.py --run-selection --active-pack-id tutorial --active-pack-id slack --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -210,6 +221,13 @@ Current resolver-owned runtime paths are:
   authoritative resolved runtime-reference set. It promotes clean preview rows
   into resolver-owned references, fails closed when preview inputs are blocked,
   and still does not parse runtime JSON payloads.
+- `contexts/shared/infrastructure/content_pack_run_selection.py` owns the
+  shared run/session composition input for resolver selection. Promoted
+  narrative, combat encounter, and campaign reward resolver consumers may
+  accept its `run_selection` object instead of each inventing their own active
+  pack id argument, but this remains resolver input selection only, not save
+  pinning, runtime DLC activation, UI DLC state, dependency solving, or hot
+  reload.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
@@ -240,9 +258,10 @@ Current resolver-owned runtime paths are:
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
   owns the first runtime loader promotion boundary for narrative startup. It
   uses the verified handoff factory to load tutorial narrative runtime paths
-  without directory prefix scanning. It may receive explicit active pack ids
-  and pass them down the handoff chain, but this is resolver input selection
-  only, not save pinning or runtime DLC activation.
+  without directory prefix scanning. It may receive a shared
+  `ContentPackRunSelection` object or explicit active pack ids and pass that
+  selection down the handoff chain, but this is resolver input selection only,
+  not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   currently owns the report-only guard for production `QuestLoader.load_all()`
   call sites. The default allowed set is empty; new narrative, combat, reward,
@@ -252,16 +271,18 @@ Current resolver-owned runtime paths are:
   campaign reward-definition lookup as a narrow content-pack resolver consumer.
   It loads resolver-owned `rewards_*.json` paths through
   `QuestLoader.load_from_runtime_paths()` and no longer calls
-  `QuestLoader.load_all()`. It may receive explicit active pack ids and pass
-  them to the resolver, but this is resolver input selection only, not save
-  pinning or runtime DLC activation.
+  `QuestLoader.load_all()`. It may receive a shared `ContentPackRunSelection`
+  object or explicit active pack ids and pass that selection to the resolver,
+  but this is resolver input selection only, not save pinning or runtime DLC
+  activation.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` currently owns
   combat encounter-definition lookup as a narrow content-pack resolver
   consumer. It loads resolver-owned `encounters_*.json` paths, including TA and
   tutorial encounter files, through `QuestLoader.load_from_runtime_paths()` and
-  no longer calls `QuestLoader.load_all()`. It may receive explicit active pack
-  ids and pass them to the resolver, but this is resolver input selection only,
-  not save pinning or runtime DLC activation.
+  no longer calls `QuestLoader.load_all()`. It may receive a shared
+  `ContentPackRunSelection` object or explicit active pack ids and pass that
+  selection to the resolver, but this is resolver input selection only, not
+  save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   currently owns the report-only combat encounter helper shadow. It verifies
   that `data/questlines/encounters_tutorial.json` and

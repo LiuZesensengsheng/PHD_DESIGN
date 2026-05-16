@@ -163,6 +163,13 @@ Why add this before content production?
   dependencies that are not selected, but it does not solve dependency order,
   activate runtime packs, write save pack pins, support hot reload, or choose
   UI-visible DLC state.
+- `contexts/shared/infrastructure/content_pack_run_selection.py` provides the
+  run/session composition input surface for content-pack resolver selection. It
+  wraps a clean `ContentPackActiveSet`, preserves the default all-discovered
+  mode, and lets upstream callers pass one `run_selection` object into
+  narrative, combat encounter, and campaign reward resolver consumers. It is
+  still not runtime activation, save pack pinning, UI DLC selection, dependency
+  solving, or hot reload.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -261,9 +268,9 @@ Why add this before content production?
   `QuestLoader` containing the tutorial questline, tutorial encounters, and
   tutorial rewards only. The TA encounter file remains a pack-owned
   non-handoff sidecar and is still loaded by existing combat paths. The loader
-  accepts explicit active pack ids as resolver input for future
-  activation/save-pinning callers, while defaulting to all discovered active
-  source packs.
+  accepts a shared `ContentPackRunSelection` object or legacy explicit active
+  pack ids as resolver input for future activation/save-pinning callers, while
+  defaulting to all discovered active source packs.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over production `QuestLoader.load_all()`
   call sites. The default allowed set is empty. It prevents narrative, combat,
@@ -272,15 +279,17 @@ Why add this before content production?
 - `contexts/shared/infrastructure/campaign_reward_loader.py` owns the current
   campaign reward-definition lookup boundary. It now consumes the authoritative
   content-pack runtime resolver for `rewards_*.json` paths and loads those paths
-  through `QuestLoader.load_from_runtime_paths()`. It accepts explicit active
-  pack ids as resolver input for future activation/save-pinning callers, while
-  defaulting to all discovered active source packs. It is not runtime
-  activation, save pinning, dependency solving, or hot reload.
+  through `QuestLoader.load_from_runtime_paths()`. It accepts a shared
+  `ContentPackRunSelection` object or legacy explicit active pack ids as
+  resolver input for future activation/save-pinning callers, while defaulting
+  to all discovered active source packs. It is not runtime activation, save
+  pinning, dependency solving, or hot reload.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` owns the current
   combat encounter-definition lookup boundary. It now consumes the
   authoritative content-pack runtime resolver for `encounters_*.json` paths and
   loads those paths through `QuestLoader.load_from_runtime_paths()` so TA and
-  tutorial encounters remain visible. It accepts explicit active pack ids as
+  tutorial encounters remain visible. It accepts a shared
+  `ContentPackRunSelection` object or legacy explicit active pack ids as
   resolver input for future activation/save-pinning callers, while defaulting
   to all discovered active source packs. It is not runtime activation, save
   pinning, dependency solving, or hot reload.
@@ -333,6 +342,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --active-pack-set --json`
 - Report an explicit active pack set:
   - `python scripts/content_pack_inventory.py --active-pack-set --active-pack-id tutorial --active-pack-id slack`
+- Report the run/session content-pack resolver selection input:
+  - `python scripts/content_pack_inventory.py --run-selection`
+- Export an explicit run/session resolver selection input as JSON:
+  - `python scripts/content_pack_inventory.py --run-selection --active-pack-id tutorial --active-pack-id slack --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
