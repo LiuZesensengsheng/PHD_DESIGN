@@ -1506,3 +1506,78 @@ decision.
 2. Move save/render contracts back to scalar energy.
 3. Migrate test helpers and assertions away from `energy_pool`.
 4. Delete runtime `EnergyPool` surfaces after focused coverage is green.
+
+### [DL-20260516-01] Daily logs move to dedicated summary branches
+
+- Date: `2026-05-16`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `AGENTS.md`
+  - `docs/development/PROJECT_MEMORY_RULES.md`
+  - `scripts/check_daily_log_branch_policy.py`
+
+#### Background
+
+Fast implementation PRs were repeatedly updating `docs/logs/daily/YYYY-MM-DD.md`.
+Because daily logs are shared hot-memory files, rebases and PR merges produced
+low-value conflicts even when the implementation work itself was clean.
+
+#### Decision
+
+Normal implementation and refactor branches should not edit dated daily logs.
+They should put summary, boundaries, validation, and handoff notes in the PR
+body. Daily logs should be updated from a dedicated daily-summary or
+project-memory-summary branch at the end of a session or phase. Intentional
+daily-log writes must run the branch guard with an explicit allow flag.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  fewer daily-log merge conflicts during implementation PRs.
+- Increased human work:
+  one explicit summary pass is needed at the end of a session or phase.
+- Critical path effect:
+  implementation branches stay focused on product or architecture changes while
+  memory compression happens in a separate, reviewable pass.
+
+#### AI Workload Assumption
+
+AI can preserve PR-local handoff detail in PR bodies and later summarize merged
+work into daily/weekly/monthly memory. Human review remains useful for deciding
+which facts deserve promotion into long-term docs.
+
+#### Alternatives
+
+1. Keep writing the daily log in every PR.
+2. Split daily notes into many per-branch fragments.
+
+#### Risks And Triggers
+
+- Risk:
+  the final daily summary pass is skipped.
+- Trigger:
+  the latest daily log no longer reflects merged work after a long session.
+
+- Risk:
+  PR bodies become too thin to recover branch context.
+- Trigger:
+  a branch merges without summary, boundary notes, or validation evidence.
+
+#### Validation Plan
+
+- `python scripts/check_daily_log_branch_policy.py --base-ref origin/master`
+  fails when a branch changes `docs/logs/daily/YYYY-MM-DD.md`.
+- `--allow-daily-log` makes intentional memory-summary branches explicit.
+- The guard has focused pytest coverage.
+
+#### Rollback Plan
+
+If the dedicated summary branch flow loses too much context, either restore
+per-PR daily-log writes or introduce a lightweight fragment directory. Keep the
+branch guard disabled or allowlisted until the replacement policy is accepted.
+
+#### Follow-Up
+
+1. Use PR bodies as the implementation-branch handoff surface.
+2. Run a dedicated daily-summary branch after high-velocity PR batches.

@@ -53,6 +53,8 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/check_project_memory_health.py --json`
 - Validate the current project memory health contract:
   - `python -m pytest tests/scripts/test_check_project_memory_health.py -q`
+- Check implementation-branch daily-log policy:
+  - `python scripts/check_daily_log_branch_policy.py --base-ref origin/master`
 - Validate the weekly summary generator:
   - `python -m pytest tests/scripts/test_generate_weekly_summary.py -q`
 - Generate a specific weekly summary draft directly:

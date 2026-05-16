@@ -112,10 +112,30 @@ The health check is **report-first** by default.
 Run this check:
 
 - before ending a high-velocity session
-- before starting a memory-system maintenance branch
+- before starting or closing a dedicated memory-summary or memory-system
+  maintenance branch
 - after changing `AGENTS.md`, `PROJECT_MEMORY_INDEX.md`, `PROJECT_MEMORY_RULES.md`,
   `DEFAULT_ENTRYPOINTS.md`, `CODEX_TASK_POOL.md`, or monthly/weekly/daily log rules
 - before deciding whether a memory warning should be promoted into a hard guardrail
+
+## Daily Log Branch Guard
+
+Use the separate daily-log branch policy guard to keep normal implementation PRs
+from touching high-conflict daily logs:
+
+```bash
+python scripts/check_daily_log_branch_policy.py --base-ref origin/master
+```
+
+Dedicated memory-summary branches should make their exception explicit:
+
+```bash
+python scripts/check_daily_log_branch_policy.py --base-ref origin/master --allow-daily-log
+```
+
+This guard is intentionally separate from the health check. Health checks answer
+whether the memory scaffold is recoverable; the branch policy guard answers
+whether the current PR is changing the right class of files.
 
 ## Oversized Daily Log Response
 

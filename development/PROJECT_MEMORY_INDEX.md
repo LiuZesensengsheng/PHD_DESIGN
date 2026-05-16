@@ -13,6 +13,8 @@ Use this index to decide where to read and where to write project knowledge.
 - `docs/logs/daily/YYYY-MM-DD.md`
 - Use for current progress, handoff notes, blockers, and next steps
 - Keep default retrieval focused on the most recent 7 days
+- Write daily logs from dedicated memory-summary branches, not normal
+  implementation/refactor branches
 
 ### Long-Term Memory
 
@@ -88,7 +90,10 @@ Use this index to decide where to read and where to write project knowledge.
 
 ## Recommended Write Rules
 
-- Write daily progress into the dated daily log
+- For normal implementation/refactor PRs, write per-branch summary, boundaries,
+  and validation into the PR body instead of the daily log
+- Write daily progress into the dated daily log from a dedicated
+  `codex/MM-DD-daily-summary` or `codex/MM-DD-project-memory-summary` branch
 - Write compressed weekly context into `docs/logs/weekly/`
 - Write cross-month progress and capability-state context into `docs/logs/monthly/`
 - Write stable conclusions into the relevant `docs/development/` subdirectory
@@ -105,4 +110,6 @@ Use this index to decide where to read and where to write project knowledge.
   snapshot after branch switches or merges.
 - Use `python scripts/check_project_memory_health.py` when memory scaffolding may have
   drifted after high-velocity work.
+- Use `python scripts/check_daily_log_branch_policy.py --base-ref origin/master`
+  before opening implementation PRs when daily-log conflicts are a risk.
 - Use the hot-memory read order above for project context recovery.

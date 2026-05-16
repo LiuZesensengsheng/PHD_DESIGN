@@ -17,6 +17,44 @@ Keep project continuity in files so AI and human collaborators can resume work w
   - next steps
   - promotion candidates for long-term memory
 - Daily logs should stay short and operational; do not let them grow into design documents
+- Normal implementation and refactor branches should not edit daily logs.
+- Use the PR body for per-branch summary, boundaries, validation, and handoff notes.
+- Update daily logs from a dedicated memory-summary branch at the end of a session or phase.
+
+### 1.25 Daily Log Write Policy
+
+Daily logs are shared short-term memory, so they are high-conflict files during
+fast PR loops. Treat them as summary artifacts, not as per-branch scratchpads.
+
+- Implementation/refactor PRs:
+  - must not modify `docs/logs/daily/YYYY-MM-DD.md`
+  - should put branch-local progress, boundary notes, and validation in the PR
+    body
+  - may update long-term docs or the decision log only when the branch scope is
+    actually architecture, workflow, or policy
+- Dedicated memory-summary branches:
+  - use a name such as `codex/MM-DD-daily-summary` or
+    `codex/MM-DD-project-memory-summary`
+  - summarize merged PRs, outcomes, blockers, and next steps into the dated
+    daily log
+  - may also refresh weekly or monthly summaries when a phase closes
+- Policy/docs branches:
+  - may touch daily-log rules, long-term memory docs, and decision log entries
+  - should avoid rewriting the current daily log unless the branch is explicitly
+    the daily summary branch
+
+Run the daily-log branch guard before opening implementation PRs:
+
+```bash
+python scripts/check_daily_log_branch_policy.py --base-ref origin/master
+```
+
+When intentionally updating daily logs on a dedicated memory branch, make the
+exception explicit:
+
+```bash
+python scripts/check_daily_log_branch_policy.py --base-ref origin/master --allow-daily-log
+```
 
 ### 1.5 Weekly Summaries Compress Short-Term Memory
 
@@ -132,7 +170,8 @@ Promotion targets should stay explicit:
 
 ### Night Planning
 
-- Record the day's outcome in the current daily log
+- On a dedicated memory-summary branch, record the day's outcome in the current
+  daily log
 - Generate or refresh the weekly summary when the week closes
 - Refresh the current monthly summary after major integration, evidence, architecture, or planning milestones
 - Promote any stable decisions into the right long-term document
