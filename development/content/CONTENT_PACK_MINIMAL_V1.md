@@ -145,6 +145,10 @@ Why add this before content production?
   read-only registry over active source-pack directories. It discovers and
   groups manifests, detects duplicate pack ids, and reports missing dependency
   ids without solving load order or enabling runtime pack activation.
+- The default active source-pack roots are `data/combat`,
+  `data/narrative_src/packs`, and `data/events_src/packs`. Under `data/combat`,
+  only directories with a manifest, currently `data/combat/ta`, are treated as
+  source packs; root-level combat runtime JSON files are not source packs.
 - The registry may be asked to fail closed on missing dependencies for
   validation/CI, but this is still not a dependency solver or runtime pack
   enablement system.
@@ -160,6 +164,11 @@ Why add this before content production?
   pack-to-runtime-output claims, missing output files, output collisions, and
   source packs with no declared runtime outputs. It is report-only resolver
   input, not runtime loading authority.
+- The `ta` combat source pack declares
+  `data/questlines/encounters_ta.json` as its runtime output so the global
+  inventory/runtime-output index has a clear owner for that file. This does not
+  make TA part of the tutorial narrative path provider or QuestLoader handoff
+  chain.
 - `contexts/shared/infrastructure/content_pack_runtime_outputs.py` provides
   narrow report-only query helpers over the runtime-output index. The current
   helper covers narrative runtime outputs under `data/questlines/*.json` and
@@ -232,7 +241,7 @@ Why add this before content production?
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
-  shape, fail-closed rules, current tutorial/slack pack state, and promotion
+  shape, fail-closed rules, current tutorial/TA/slack pack state, and promotion
   criteria before any later slice turns the report-only chain into runtime
   authority.
 - Active data-pipeline guards should consume `ContentPackRegistry` and
@@ -242,6 +251,9 @@ Why add this before content production?
 - Event source packs may be registry/inventory/runtime-output-index visible
   before they declare runtime outputs. In V1 this is an explicit allowed
   report-only state, not a missing runtime loader implementation.
+- Combat source packs may declare runtime outputs that are visible to the
+  global resolver-input read model before any runtime loader handoff consumes
+  them. `ta` currently uses this state for `encounters_ta.json`.
 
 ## Command Runbook
 
