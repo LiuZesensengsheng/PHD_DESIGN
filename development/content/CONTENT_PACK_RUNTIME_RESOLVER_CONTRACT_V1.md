@@ -103,7 +103,9 @@ and not a promise that event source packs have runtime activation.
   - `data/questlines/encounters_ta.json`
   This ownership is visible in the global resolver-input read model only; it
   does not make TA part of the tutorial narrative path provider or QuestLoader
-  handoff chain.
+  handoff chain. QuestLoader shadow/promotion reports classify it as a
+  pack-owned non-handoff loader-visible sidecar rather than a truly unmanaged
+  path.
 - `slack` is an `event_source` pack with no runtime outputs. That remains an
   allowed empty-runtime-output report-only state in V1, not an error.
 
@@ -126,7 +128,7 @@ Before this contract becomes runtime authority, a later PR must prove:
   loader handoff shape without taking loading authority
 - the QuestLoader promotion readiness guard is clean, preserves the tutorial
   three-path handoff, keeps `slack` visible as required allowed-empty input,
-- and preserves TA encounter ownership as global resolver-input state without
+  and preserves TA encounter ownership as global resolver-input state without
   adding `data/questlines/encounters_ta.json` to the tutorial QuestLoader
   handoff
 - slack remains visible as an allowed empty `event_source` pack
