@@ -156,6 +156,13 @@ Why add this before content production?
   report-only active pack identity preview over the registry. It is a future
   resolver/save-pinning input surface only; it does not write save fields or
   choose active runtime content.
+- `contexts/shared/infrastructure/content_pack_active_set.py` provides the
+  explicit resolver-input active pack set. By default it mirrors all discovered
+  active source packs, currently `ta`, `slack`, and `tutorial`. It can also
+  fail closed on unknown pack ids, inactive requested packs, or declared
+  dependencies that are not selected, but it does not solve dependency order,
+  activate runtime packs, write save pack pins, support hot reload, or choose
+  UI-visible DLC state.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -312,6 +319,12 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --pack-identity-preview`
 - Export active pack identity preview as JSON:
   - `python scripts/content_pack_inventory.py --pack-identity-preview --json`
+- Report the resolver-input active pack set:
+  - `python scripts/content_pack_inventory.py --active-pack-set`
+- Export the resolver-input active pack set as JSON:
+  - `python scripts/content_pack_inventory.py --active-pack-set --json`
+- Report an explicit active pack set:
+  - `python scripts/content_pack_inventory.py --active-pack-set --active-pack-id tutorial --active-pack-id slack`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
@@ -336,6 +349,8 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-resolver`
 - Export authoritative runtime resolver result as JSON:
   - `python scripts/content_pack_inventory.py --runtime-resolver --json`
+- Export authoritative runtime resolver result for an explicit active pack set:
+  - `python scripts/content_pack_inventory.py --runtime-resolver --active-pack-id tutorial --json`
 - Report narrative runtime resolver shadow compare:
   - `python scripts/content_pack_inventory.py --narrative-resolver-shadow-compare`
 - Export narrative runtime resolver shadow compare as JSON:

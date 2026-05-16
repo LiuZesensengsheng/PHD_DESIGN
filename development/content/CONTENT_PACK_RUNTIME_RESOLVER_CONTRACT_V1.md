@@ -16,8 +16,20 @@ paths.
 The future resolver may only promote from the existing report-only chain after
 the chain is clean:
 
+- `ContentPackActiveSet`
+  - names the pack ids enabled for the current resolver build
+  - defaults to all discovered active source packs, currently `ta`, `slack`,
+    and `tutorial`
+  - can accept explicit pack ids for tests, CLI reports, and future activation
+    inputs
+  - fails closed on unknown pack ids, inactive requested packs, or selected
+    packs whose declared dependencies are not also selected
+  - is not a dependency solver, runtime activation layer, save pack pinning
+    source, hot-reload mechanism, or UI DLC selector
 - `ContentPackRuntimeResolverReadinessReport`
   - confirms active pack identity and runtime-output index consistency
+  - consumes the active pack set before comparing identity and runtime-output
+    index inputs
   - fails closed on missing dependencies, missing outputs, collisions,
     disallowed empty packs, identity/index drift, or content-kind mismatch
 - `ContentPackRuntimeResolverSelectionPreview`
@@ -33,6 +45,9 @@ the chain is clean:
 
 The current CLI surfaces are:
 
+- `python scripts/content_pack_inventory.py --active-pack-set`
+- `python scripts/content_pack_inventory.py --active-pack-set --json`
+- `python scripts/content_pack_inventory.py --active-pack-set --active-pack-id tutorial`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -41,6 +56,7 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-reference-preview --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver`
 - `python scripts/content_pack_inventory.py --runtime-resolver --json`
+- `python scripts/content_pack_inventory.py --runtime-resolver --active-pack-id tutorial --json`
 - `python scripts/content_pack_inventory.py --narrative-path-provider-preview`
 - `python scripts/content_pack_inventory.py --narrative-path-provider-preview --json`
 - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
@@ -72,6 +88,13 @@ The first implementation preserves the selected-row identity already emitted by
 payloads or parse domain objects itself; promoted loader boundaries consume its
 resolved paths and perform their own current loading work.
 
+The resolver result also reports `activation_mode`, `requested_pack_ids`,
+`active_pack_ids`, and `discovered_active_pack_ids`. These fields are the
+current resolver input selection, not shipped DLC activation state and not save
+pinning. When explicit pack ids are supplied, only selected active packs
+contribute resolved runtime references; allowed empty packs such as `slack`
+remain visible as allowed empty inputs when selected.
+
 The current `ContentPackRuntimeReferencePreview` remains the report-only
 rehearsal of this output shape. `content_pack_runtime_resolver.py` is the
 runtime authority over the clean resolved reference set. Its authority boundary
@@ -82,6 +105,9 @@ is `runtime_authority_over_resolved_pack_runtime_references`.
 A resolver implementation fails closed before returning authoritative runtime
 references when any of these input issues exist:
 
+- an explicit active pack id is unknown
+- an explicit active pack id exists but is not an active source pack
+- a selected pack declares a dependency that is missing or not also selected
 - a declared dependency id is missing
 - a declared runtime output file is missing
 - multiple packs claim the same runtime output path
