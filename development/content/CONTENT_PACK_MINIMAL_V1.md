@@ -205,6 +205,12 @@ Why add this before content production?
   also reports current loader-visible paths that are not selected by the
   content-pack chain, such as `data/questlines/encounters_ta.json`, without
   treating them as runtime-output failures.
+- `contexts/shared/infrastructure/content_pack_quest_loader_handoff.py`
+  provides a report-only QuestLoader handoff contract preview over the clean
+  shadow adapter. It exposes the future loader handoff shape: `base_dir`,
+  questline paths, encounter paths, reward paths, selected pack ids, and
+  allowed empty pack ids. It emits no handoff paths when the shadow adapter is
+  blocked and still does not change `QuestLoader` or runtime loading.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -263,6 +269,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
 - Export QuestLoader shadow adapter preview as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter --json`
+- Report QuestLoader handoff contract preview:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract`
+- Export QuestLoader handoff contract preview as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:

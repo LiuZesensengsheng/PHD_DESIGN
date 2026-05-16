@@ -36,6 +36,10 @@ may compare those grouped paths with the current `QuestLoader` base directory
 and filename-prefix scan. That adapter preview is still report-only and does not
 call or change `QuestLoader.load_all()`.
 
+After the shadow adapter preview is clean, the QuestLoader handoff contract
+preview may expose the future loader handoff shape. That handoff preview is
+still report-only and does not make the paths authoritative runtime input.
+
 ## Output
 
 `ContentPackRuntimeResolverSelectionPreview` reports:
@@ -104,5 +108,9 @@ blocked and emits no selected runtime-output rows.
   - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter`
 - Export QuestLoader shadow adapter preview as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-shadow-adapter --json`
+- Report QuestLoader handoff contract preview:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract`
+- Export QuestLoader handoff contract preview as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract --json`
 - Validate the focused preview:
-  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_runtime_references.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/scripts/test_data_pipeline_contracts.py -q`
+  - `py -3.11 -m pytest tests/shared/test_content_pack_resolver_selection.py tests/shared/test_content_pack_runtime_references.py tests/shared/test_content_pack_resolver_readiness.py tests/shared/test_content_pack_narrative_path_provider.py tests/shared/test_content_pack_quest_loader_shadow.py tests/shared/test_content_pack_quest_loader_handoff.py tests/scripts/test_data_pipeline_contracts.py -q`

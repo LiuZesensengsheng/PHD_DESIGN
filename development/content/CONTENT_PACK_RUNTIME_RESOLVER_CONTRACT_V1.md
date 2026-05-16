@@ -111,6 +111,8 @@ Before this contract becomes runtime authority, a later PR must prove:
   questline, encounter, and reward families
 - the QuestLoader shadow adapter preview confirms those provider paths are
   visible to the current `QuestLoader` base directory and filename-prefix scan
+- the QuestLoader handoff contract preview is clean and exposes the future
+  loader handoff shape without taking loading authority
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -153,3 +155,7 @@ Before this contract becomes runtime authority, a later PR must prove:
   currently owns the report-only QuestLoader shadow adapter preview. It checks
   provider paths against the current loader prefix contract before any later
   slice changes loading authority.
+- `contexts/shared/infrastructure/content_pack_quest_loader_handoff.py`
+  currently owns the report-only QuestLoader handoff contract preview. It
+  defines the future loader handoff input shape without changing
+  `QuestLoader.load_all()`.
