@@ -198,12 +198,16 @@ Before this contract becomes runtime authority, a later PR must prove:
   changes that authority.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   currently owns the report-only guard for remaining production
-  `QuestLoader.load_all()` call sites. It allows only the current combat
-  startup surfaces plus `campaign_reward_loader.py` and is not runtime
-  authority. New narrative or resolver-owned paths should use promoted
+  `QuestLoader.load_all()` call sites. It allows only
+  `campaign_reward_loader.py` and `combat_encounter_loader.py`, and is not
+  runtime authority. New narrative or resolver-owned paths should use promoted
   content-pack handoff boundaries instead of returning to directory prefix
   scanning.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` currently owns
   campaign reward-definition lookup as a narrow legacy QuestLoader boundary.
   It is a future replacement point only, not a content-pack runtime resolver or
   reward runtime authority.
+- `contexts/shared/infrastructure/combat_encounter_loader.py` currently owns
+  combat encounter-definition lookup as a narrow legacy QuestLoader boundary.
+  It preserves current TA encounter visibility and is a future replacement
+  point only, not content-pack runtime resolver authority.
