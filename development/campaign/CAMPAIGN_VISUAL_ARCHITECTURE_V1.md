@@ -398,8 +398,10 @@ This document still describes a campaign visual architecture direction, not an e
 - `CampaignGuiControls`: pygame_gui control construction and small public control updates that used to live directly on `CampaignView`.
 - `surface_transform.py`: pure pseudo-3D surface transforms used by renderers without calling back into `CampaignView` private methods.
 - `CampaignRenderFrameContext`: one-frame render input bundle used by campaign frame-stage orchestration.
+- `CampaignRenderPipeline`: campaign-only frame pass-order owner for background, content, short-lived FX, composition, and status bar rendering.
 
 `CampaignView` should remain the presentation shell that wires these campaign owners together. The next slices should stay concrete: first layout state, then concrete runtime widgets when a real widget needs ownership. Do not introduce a shared cache/runtime/node engine just to make this look generic; no engine-wide visual runtime exists yet.
+
 ## Last Updated
 
-- `2026-04-02`
+- `2026-05-16`
