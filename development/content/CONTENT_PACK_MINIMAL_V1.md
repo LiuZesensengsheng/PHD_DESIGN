@@ -249,6 +249,13 @@ Why add this before content production?
   tutorial rewards only. The TA encounter file remains a pack-owned
   non-handoff sidecar and is still loaded by existing combat paths through
   `QuestLoader.load_all()`.
+- `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
+  provides a report-only static guard over remaining production
+  `QuestLoader.load_all()` call sites. The allowed set is the current
+  legacy combat/campaign surface: combat startup encounter assembly, combat
+  blueprint reporting, and campaign reward lookups. It prevents narrative or
+  new runtime paths from silently returning to directory prefix scanning while
+  keeping the current combat TA sidecar behavior unchanged.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -326,6 +333,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --content-pack-narrative-loader`
 - Export content-pack-backed narrative loader as JSON:
   - `python scripts/content_pack_inventory.py --content-pack-narrative-loader --json`
+- Report remaining production QuestLoader.load_all usage guard:
+  - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard`
+- Export remaining production QuestLoader.load_all usage guard as JSON:
+  - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard --json`
 - Review the future runtime resolver promotion contract:
   - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
 - Validate content-pack registry/inventory contracts:

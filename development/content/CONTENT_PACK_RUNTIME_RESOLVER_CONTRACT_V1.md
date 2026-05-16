@@ -196,3 +196,9 @@ Before this contract becomes runtime authority, a later PR must prove:
   `QuestLoader.load_all()` and continues to see TA encounter sidecar content
   through the existing path until a separate combat/loader promotion slice
   changes that authority.
+- `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
+  currently owns the report-only guard for remaining production
+  `QuestLoader.load_all()` call sites. It allows only the current legacy
+  combat/campaign surfaces and is not runtime authority. New narrative or
+  resolver-owned paths should use promoted content-pack handoff boundaries
+  instead of returning to directory prefix scanning.
