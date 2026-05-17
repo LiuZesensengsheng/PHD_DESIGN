@@ -85,6 +85,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-context`
 - `python scripts/content_pack_inventory.py --runtime-context --json`
 - `python scripts/content_pack_inventory.py --runtime-context --active-pack-id tutorial --active-pack-id slack --json`
+- `python scripts/content_pack_inventory.py --runtime-context-guard`
+- `python scripts/content_pack_inventory.py --runtime-context-guard --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -269,6 +271,14 @@ Current resolver-owned runtime paths are:
   process. It is not serialized into saves and is not a save schema owner,
   runtime activation layer, UI DLC selector, dependency solver, hot-reload
   layer, or shipped DLC authority.
+- `contexts/shared/infrastructure/content_pack_runtime_context_guard.py`
+  currently owns the report-only guard for direct
+  `ContentPackRunComposition` construction/require calls under production
+  `contexts`. The default allowed set is limited to
+  `content_pack_runtime_context.py`, so new runtime consumers should receive a
+  `ContentPackRuntimeContext` or go through
+  `resolve_content_pack_run_composition_for_runtime_context()` instead of
+  lazily creating a separate run composition.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading

@@ -185,6 +185,14 @@ Why add this before content production?
   shared `ContentPackRunComposition` for the current process. It is not written
   to saves and is still not runtime activation, save pack pinning, UI DLC
   selection, dependency solving, hot reload, or shipped DLC authority.
+- `contexts/shared/infrastructure/content_pack_runtime_context_guard.py`
+  provides a report-only static guard that keeps production runtime consumers
+  from directly creating their own `ContentPackRunComposition`. The only
+  default allowed direct calls live inside `content_pack_runtime_context.py`,
+  where the runtime context owns the shared transient composition and preserves
+  the non-state-machine fallback path. It is not runtime activation, save
+  pinning, UI DLC selection, dependency solving, hot reload, or runtime
+  loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -369,6 +377,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-context`
 - Export an explicit transient process content-pack runtime context as JSON:
   - `python scripts/content_pack_inventory.py --runtime-context --active-pack-id tutorial --active-pack-id slack --json`
+- Report production runtime-context consumer guard:
+  - `python scripts/content_pack_inventory.py --runtime-context-guard`
+- Export production runtime-context consumer guard as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-context-guard --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
