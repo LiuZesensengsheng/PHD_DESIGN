@@ -216,14 +216,14 @@ Why add this before content production?
 - `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
   provides a report-only static guard over production runtime resolver
   consumers. It keeps direct runtime resolver construction limited to
-  `ContentPackRunComposition.build_runtime_resolver_result()` plus the current
-  helper fallback seams in `campaign_reward_loader.py` and
-  `combat_encounter_loader.py`, and keeps direct calls to those helper seams
-  limited to `ContentPackRunComposition`. This preserves the shared
-  composition-owned resolver authority input path while the helper fallback
-  parameters are still being retired. It is not runtime activation, save
-  pinning, dependency solving, hot reload, UI DLC selection, or runtime loading
-  authority.
+  `ContentPackRunComposition.build_runtime_resolver_result()` and keeps direct
+  calls to the promoted campaign reward / combat encounter helper seams limited
+  to `ContentPackRunComposition`. The helpers now require the composition-owned
+  `ContentPackRuntimeResolverResult` instead of accepting legacy
+  `requested_pack_ids` or `run_selection` fallback inputs. This preserves the
+  shared composition-owned resolver authority input path. It is not runtime
+  activation, save pinning, dependency solving, hot reload, UI DLC selection,
+  or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -334,21 +334,19 @@ Why add this before content production?
   campaign reward-definition lookup boundary. It now consumes the authoritative
   content-pack runtime resolver for `rewards_*.json` paths and loads those paths
   through `QuestLoader.load_from_runtime_paths()`. It accepts a shared
-  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition`, a
-  `ContentPackRunSelection` object, or legacy explicit active pack ids as
-  resolver input for future activation/save-pinning callers, while defaulting
-  to all discovered active source packs. It is not runtime activation, save
-  pinning, dependency solving, or hot reload.
+  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition` and no
+  longer accepts legacy `ContentPackRunSelection` or explicit active pack ids
+  directly. It is not runtime activation, save pinning, dependency solving, or
+  hot reload.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` owns the current
   combat encounter-definition lookup boundary. It now consumes the
   authoritative content-pack runtime resolver for `encounters_*.json` paths and
   loads those paths through `QuestLoader.load_from_runtime_paths()` so TA and
   tutorial encounters remain visible. It accepts a shared
-  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition`, a
-  `ContentPackRunSelection` object, or legacy explicit active pack ids as
-  resolver input for future activation/save-pinning callers, while defaulting
-  to all discovered active source packs. It is not runtime activation, save
-  pinning, dependency solving, or hot reload.
+  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition` and no
+  longer accepts legacy `ContentPackRunSelection` or explicit active pack ids
+  directly. It is not runtime activation, save pinning, dependency solving, or
+  hot reload.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   provides a report-only shadow over that combat encounter helper. It checks
   that current loader-visible encounter runtime files are pack-owned, declared

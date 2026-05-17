@@ -312,15 +312,15 @@ Current resolver-owned runtime paths are:
   and resolver-helper usage. It keeps
   `build_content_pack_runtime_resolver_result()` scoped to
   `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
-  runtime-consumer authority input path, while explicitly tracking the two
-  current helper fallback seams that still call
-  `require_content_pack_runtime_resolver_result()`. It also keeps direct
-  production calls to `load_campaign_reward_definition()` and
+  runtime-consumer authority input path. It also keeps direct production calls
+  to `load_campaign_reward_definition()` and
   `load_combat_encounter_definition()` scoped to `ContentPackRunComposition`,
   so campaign/combat runtime consumers use the composition-owned resolver
-  result instead of bypassing it. This guard is report-only visibility; it does
-  not change runtime activation, save pinning, dependency solving, hot reload,
-  UI DLC selection, or JSON payload loading.
+  result instead of bypassing it. The helper fallback seams no longer build
+  their own resolver from `ContentPackRunSelection` or explicit pack ids. This
+  guard is report-only visibility; it does not change runtime activation, save
+  pinning, dependency solving, hot reload, UI DLC selection, or JSON payload
+  loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
@@ -365,19 +365,19 @@ Current resolver-owned runtime paths are:
   It loads resolver-owned `rewards_*.json` paths through
   `QuestLoader.load_from_runtime_paths()` and no longer calls
   `QuestLoader.load_all()`. It may receive the shared
-  `ContentPackRuntimeResolverResult` cached by `ContentPackRunComposition`, a
-  `ContentPackRunSelection` object, or explicit active pack ids and pass that
-  selection to the resolver, but this is resolver input selection only, not
-  save pinning or runtime DLC activation.
+  `ContentPackRuntimeResolverResult` cached by `ContentPackRunComposition`; it
+  no longer accepts `ContentPackRunSelection` or explicit active pack ids
+  directly. Resolver input selection remains owned upstream by run selection
+  and composition, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` currently owns
   combat encounter-definition lookup as a narrow content-pack resolver
   consumer. It loads resolver-owned `encounters_*.json` paths, including TA and
   tutorial encounter files, through `QuestLoader.load_from_runtime_paths()` and
   no longer calls `QuestLoader.load_all()`. It may receive the shared
-  `ContentPackRuntimeResolverResult` cached by `ContentPackRunComposition`, a
-  `ContentPackRunSelection` object, or explicit active pack ids and pass that
-  selection to the resolver, but this is resolver input selection only, not
-  save pinning or runtime DLC activation.
+  `ContentPackRuntimeResolverResult` cached by `ContentPackRunComposition`; it
+  no longer accepts `ContentPackRunSelection` or explicit active pack ids
+  directly. Resolver input selection remains owned upstream by run selection
+  and composition, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   currently owns the report-only combat encounter helper shadow. It verifies
   that `data/questlines/encounters_tutorial.json` and
