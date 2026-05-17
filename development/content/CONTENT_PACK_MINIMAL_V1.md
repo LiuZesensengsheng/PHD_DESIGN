@@ -194,9 +194,9 @@ Why add this before content production?
   `ContentPackRuntimeContext` creation explicit: `GameStateMachine` is the
   only default production owner. Combat, event, and dialogue states now require
   an injected runtime context instead of creating a private fallback. It also
-  tracks the remaining production consumer parameters that still accept
-  `content_pack_run_composition` as a migration bridge, currently combat scene
-  startup. It is not runtime activation, save pinning, UI DLC selection,
+  tracks production consumer parameters that accept
+  `content_pack_run_composition` as a migration bridge; the current allowed
+  set is empty. It is not runtime activation, save pinning, UI DLC selection,
   dependency solving, hot reload, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
