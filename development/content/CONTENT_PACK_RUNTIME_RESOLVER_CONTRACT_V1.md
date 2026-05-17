@@ -268,11 +268,13 @@ Current resolver-owned runtime paths are:
   reuses one shared `ContentPackRunSelection`, caches one authoritative
   `ContentPackRuntimeResolverResult`, and feeds the current narrative
   application service, combat scene builder/state, and campaign reward service
-  group through promoted resolver-backed helper boundaries. The composition is
-  the shared runtime-consumer entrypoint for that resolver authority result,
-  while `content_pack_runtime_resolver.py` remains the authority over resolved
-  runtime references. It is not a save schema owner, UI DLC selector,
-  dependency solver, hot-reload layer, or shipped DLC authority.
+  group through promoted resolver-backed helper boundaries. Narrative
+  `QuestLoader` construction, combat encounter lookup, and campaign reward
+  lookup all consume the composition-owned resolver result on production paths.
+  The composition is the shared runtime-consumer entrypoint for that resolver
+  authority result, while `content_pack_runtime_resolver.py` remains the
+  authority over resolved runtime references. It is not a save schema owner, UI
+  DLC selector, dependency solver, hot-reload layer, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context.py` owns the
   transient process/run context that holds one shared
   `ContentPackRunComposition` for the active `GameStateMachine`. The state
@@ -350,11 +352,15 @@ Current resolver-owned runtime paths are:
   input selection only, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
   owns the first runtime loader promotion boundary for narrative startup. It
-  uses the verified handoff factory to load tutorial narrative runtime paths
-  without directory prefix scanning. It may receive a shared
-  `ContentPackRunSelection` object or explicit active pack ids and pass that
-  selection down the handoff chain, but this is resolver input selection only,
-  not save pinning or runtime DLC activation.
+  can load tutorial narrative runtime paths without directory prefix scanning
+  from a shared `ContentPackRuntimeResolverResult` cached by
+  `ContentPackRunComposition`. On that production composition path, it derives
+  questline, encounter, and reward paths from resolver-owned
+  `narrative_source` references and preserves `slack` as the required
+  allowed-empty input. It still keeps explicit active pack id /
+  `ContentPackRunSelection` inputs for CLI and report-style handoff rehearsal,
+  but those inputs are resolver selection only, not save pinning or runtime DLC
+  activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   currently owns the report-only guard for production `QuestLoader.load_all()`
   call sites. The default allowed set is empty; new narrative, combat, reward,

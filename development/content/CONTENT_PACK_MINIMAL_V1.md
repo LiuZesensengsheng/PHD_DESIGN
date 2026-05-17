@@ -173,14 +173,13 @@ Why add this before content production?
 - `contexts/shared/infrastructure/content_pack_run_composition.py` provides the
   transient run/session composition surface that owns one shared
   `ContentPackRunSelection` for narrative, combat encounter, and campaign
-  reward runtime consumers in the current process. It builds narrative
-  `QuestLoader` instances, caches one authoritative
-  `ContentPackRuntimeResolverResult`, and passes that same resolver-owned
-  reference set into combat/reward definition lookup through promoted helper
-  boundaries. This makes the composition the shared resolver authority input
-  for current runtime consumers without making it runtime activation, save pack
-  pinning, UI DLC selection, dependency solving, hot reload, or shipped DLC
-  authority.
+  reward runtime consumers in the current process. It caches one authoritative
+  `ContentPackRuntimeResolverResult` and passes that same resolver-owned
+  reference set into narrative `QuestLoader` construction and combat/reward
+  definition lookup through promoted helper boundaries. This makes the
+  composition the shared resolver authority input for current runtime consumers
+  without making it runtime activation, save pack pinning, UI DLC selection,
+  dependency solving, hot reload, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context.py` provides the
   transient process/run context owner for that run composition. The
   `GameStateMachine` owns one context and passes it into content-pack-aware
@@ -322,9 +321,12 @@ Why add this before content production?
   `QuestLoader` containing the tutorial questline, tutorial encounters, and
   tutorial rewards only. The TA encounter file remains a pack-owned
   non-handoff sidecar and is still loaded by existing combat paths. The loader
-  accepts a shared `ContentPackRunSelection` object or legacy explicit active
-  pack ids as resolver input for future activation/save-pinning callers, while
-  defaulting to all discovered active source packs.
+  accepts the shared `ContentPackRuntimeResolverResult` from
+  `ContentPackRunComposition` on the production runtime path, and derives the
+  tutorial narrative handoff paths from resolver-owned `narrative_source`
+  references. Its explicit active pack id / `ContentPackRunSelection` inputs
+  remain for CLI and report-style selection rehearsal; they are not save
+  pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over production `QuestLoader.load_all()`
   call sites. The default allowed set is empty. It prevents narrative, combat,
