@@ -340,7 +340,10 @@ Current resolver-owned runtime paths are:
   `run_selection` parameters cannot quietly return. This guard is report-only
   visibility. It also checks that those promoted helpers keep fail-closed
   resolver validation through `runtime_resolver_errors(...)` before loading JSON
-  payloads. It does not change runtime activation, save pinning, dependency
+  payloads. The same guard checks that `ContentPackRunComposition` helper
+  methods pass `runtime_resolver_result=self.require_runtime_resolver_result()`
+  into the promoted helpers, preserving the fail-closed cached resolver
+  entrypoint. It does not change runtime activation, save pinning, dependency
   solving, hot reload, UI DLC selection, or JSON payload loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview

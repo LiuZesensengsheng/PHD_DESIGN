@@ -236,9 +236,11 @@ Why add this before content production?
   `runtime_resolver_result` remains a required input. This preserves the shared
   composition-owned resolver authority input path. The guard also checks those
   promoted helpers keep fail-closed resolver validation through
-  `runtime_resolver_errors(...)` before loading JSON payloads. It is not
-  runtime activation, save pinning, dependency solving, hot reload, UI DLC
-  selection, or runtime loading authority.
+  `runtime_resolver_errors(...)` before loading JSON payloads, and checks that
+  `ContentPackRunComposition` helper methods pass
+  `runtime_resolver_result=self.require_runtime_resolver_result()` into those
+  promoted helpers. It is not runtime activation, save pinning, dependency
+  solving, hot reload, UI DLC selection, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
