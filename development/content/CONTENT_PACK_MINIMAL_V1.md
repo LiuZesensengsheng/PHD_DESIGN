@@ -189,8 +189,9 @@ Why add this before content production?
   provides a report-only static guard that keeps production runtime consumers
   from directly creating their own `ContentPackRunComposition`. The only
   default allowed direct calls live inside `content_pack_runtime_context.py`,
-  where the runtime context owns the shared transient composition and preserves
-  the non-state-machine fallback path. The same guard also makes direct
+  where the runtime context owns the shared transient composition and the
+  resolver helper may still build one from explicit selection/default inputs
+  when no runtime context is supplied. The same guard also makes direct
   `ContentPackRuntimeContext` creation explicit: `GameStateMachine` is the
   only default production owner. Combat, event, and dialogue states now require
   an injected runtime context instead of creating a private fallback. It also

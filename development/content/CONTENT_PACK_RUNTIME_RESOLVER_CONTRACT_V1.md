@@ -278,14 +278,14 @@ Current resolver-owned runtime paths are:
   `content_pack_runtime_context.py`, so new runtime consumers should receive a
   `ContentPackRuntimeContext` or go through
   `resolve_content_pack_run_composition_for_runtime_context()` instead of
-  lazily creating a separate run composition. The guard also makes direct
-  `ContentPackRuntimeContext` creation explicit: `GameStateMachine` is the
-  only default production owner. Combat, event, and dialogue states require an
-  injected runtime context instead of creating a private fallback. The same
-  guard now tracks the remaining production consumer parameters that still
-  accept `content_pack_run_composition` as an explicit migration bridge, so
-  later handoff PRs can shrink that list without changing runtime loading
-  semantics.
+  accepting a caller-provided run composition. The helper may still build a
+  composition from explicit selection/default inputs when no runtime context is
+  supplied. The guard also makes direct `ContentPackRuntimeContext` creation
+  explicit: `GameStateMachine` is the only default production owner. Combat,
+  event, and dialogue states require an injected runtime context instead of
+  creating a private fallback. The same guard tracks production consumer
+  parameters that accept `content_pack_run_composition`; the current allowed
+  set is empty.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
