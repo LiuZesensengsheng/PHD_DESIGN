@@ -213,6 +213,17 @@ Why add this before content production?
   repro entrypoint remain the explicit owners that create shared transient
   runtime contexts. This is not runtime activation, save pinning, UI DLC
   selection, dependency solving, hot reload, or runtime loading authority.
+- `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
+  provides a report-only static guard over production runtime resolver
+  consumers. It keeps direct runtime resolver construction limited to
+  `ContentPackRunComposition.build_runtime_resolver_result()` plus the current
+  helper fallback seams in `campaign_reward_loader.py` and
+  `combat_encounter_loader.py`, and keeps direct calls to those helper seams
+  limited to `ContentPackRunComposition`. This preserves the shared
+  composition-owned resolver authority input path while the helper fallback
+  parameters are still being retired. It is not runtime activation, save
+  pinning, dependency solving, hot reload, UI DLC selection, or runtime loading
+  authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -403,6 +414,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-context-guard`
 - Export production runtime-context consumer guard as JSON:
   - `python scripts/content_pack_inventory.py --runtime-context-guard --json`
+- Report production runtime resolver consumer guard:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard`
+- Export production runtime resolver consumer guard as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:

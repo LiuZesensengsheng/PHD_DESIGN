@@ -92,6 +92,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-context --active-pack-id tutorial --active-pack-id slack --json`
 - `python scripts/content_pack_inventory.py --runtime-context-guard`
 - `python scripts/content_pack_inventory.py --runtime-context-guard --json`
+- `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard`
+- `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -305,6 +307,20 @@ Current resolver-owned runtime paths are:
   transient runtime contexts. This is report-only visibility; it does not
   change runtime loading, resolver activation, save pinning, hot reload, or UI
   DLC selection.
+- `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
+  currently owns the report-only guard for production direct runtime resolver
+  and resolver-helper usage. It keeps
+  `build_content_pack_runtime_resolver_result()` scoped to
+  `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
+  runtime-consumer authority input path, while explicitly tracking the two
+  current helper fallback seams that still call
+  `require_content_pack_runtime_resolver_result()`. It also keeps direct
+  production calls to `load_campaign_reward_definition()` and
+  `load_combat_encounter_definition()` scoped to `ContentPackRunComposition`,
+  so campaign/combat runtime consumers use the composition-owned resolver
+  result instead of bypassing it. This guard is report-only visibility; it does
+  not change runtime activation, save pinning, dependency solving, hot reload,
+  UI DLC selection, or JSON payload loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
