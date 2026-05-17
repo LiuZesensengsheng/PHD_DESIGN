@@ -312,7 +312,8 @@ Current resolver-owned runtime paths are:
   loading, resolver activation, save pinning, hot reload, or UI DLC selection.
 - `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
   currently owns the report-only guard for production direct runtime resolver
-  and resolver-helper usage. It keeps
+  and resolver-helper usage, and also scans inventory/report scripts so CLI
+  examples keep using the same composition-owned path. It keeps
   `build_content_pack_runtime_resolver_result()` scoped to
   `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
   runtime-consumer authority input path. It also keeps direct production calls
@@ -321,7 +322,9 @@ Current resolver-owned runtime paths are:
   `load_combat_encounter_definition()` scoped to `ContentPackRunComposition`,
   so narrative/campaign/combat runtime consumers use the composition-owned
   resolver result instead of bypassing it. The helper fallback seams no longer
-  build their own resolver from `ContentPackRunSelection` or explicit pack ids.
+  build their own resolver from `ContentPackRunSelection` or explicit pack ids,
+  and inventory/report CLI surfaces build resolver and narrative-loader reports
+  through `ContentPackRunComposition` before rendering them.
   The guard also checks promoted helper signatures so `runtime_resolver_result`
   remains required and legacy `registry`, `requested_pack_ids`, or
   `run_selection` parameters cannot quietly return. This guard is report-only
@@ -360,8 +363,9 @@ Current resolver-owned runtime paths are:
   `narrative_source` references and preserves `slack` as the required
   allowed-empty input. It no longer accepts explicit active pack id or
   `ContentPackRunSelection` fallback inputs directly; CLI/report-style
-  selection first builds a `ContentPackRuntimeResolverResult`, then passes that
-  resolver result into the loader. Those upstream selection inputs remain
+  selection first builds a `ContentPackRuntimeResolverResult` through
+  `ContentPackRunComposition`, then passes that resolver result into the
+  loader. Those upstream selection inputs remain
   resolver selection only, not save pinning or runtime DLC activation.
 - The old inactive QuestLoader handoff factory and
   `--quest-loader-handoff-factory` inventory report have been retired. Promoted

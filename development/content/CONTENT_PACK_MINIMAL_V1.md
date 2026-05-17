@@ -218,11 +218,12 @@ Why add this before content production?
   selection, dependency solving, hot reload, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
   provides a report-only static guard over production runtime resolver
-  consumers. It keeps direct runtime resolver construction limited to
+  consumers and inventory/report scripts. It keeps direct runtime resolver
+  construction limited to
   `ContentPackRunComposition.build_runtime_resolver_result()` and keeps direct
   calls to the promoted narrative loader, campaign reward, and combat
   encounter helper seams limited to `ContentPackRunComposition`. Those
-  production helper paths now require the composition-owned
+  production and script/report helper paths now require the composition-owned
   `ContentPackRuntimeResolverResult` instead of accepting legacy
   `requested_pack_ids` or `run_selection` fallback inputs. It also checks the
   promoted helper signatures so `registry`, `requested_pack_ids`, or
@@ -330,8 +331,8 @@ Why add this before content production?
   the tutorial narrative handoff paths from resolver-owned `narrative_source`
   references. Explicit active pack ids and `ContentPackRunSelection` stay
   upstream as resolver-selection inputs; CLI/report surfaces build the resolver
-  result first, then pass that result into the loader. They are not save pinning
-  or runtime DLC activation.
+  result through `ContentPackRunComposition`, then pass that result into the
+  loader. They are not save pinning or runtime DLC activation.
 - The old inactive QuestLoader handoff factory and its inventory CLI report are
   retired. The promoted narrative loader and helper boundaries consume the
   shared resolver-owned runtime references directly instead of routing through
