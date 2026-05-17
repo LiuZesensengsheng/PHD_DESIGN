@@ -288,12 +288,13 @@ Current resolver-owned runtime paths are:
   set is empty. It also reports the remaining production
   `content_pack_runtime_context=None` default parameters as the current
   promotion backlog for making runtime context inputs required. That backlog is
-  now two entries after `NarrativeApplicationService`, `RewardService`,
+  now one entry after `NarrativeApplicationService`, `RewardService`,
   `PostCombatRewardFlowService`, `build_campaign_state_service_bundle`,
-  `CampaignState`, `DialogueState`, `EventState`, and `CombatState` moved to
-  explicit required `ContentPackRuntimeContext` inputs. This is report-only
-  visibility; it does not change runtime loading, resolver activation, save
-  pinning, hot reload, or UI DLC selection.
+  `CampaignState`, `DialogueState`, `EventState`, `CombatState`, and
+  `build_combat_scene_runtime` moved to explicit required
+  `ContentPackRuntimeContext` inputs. This is report-only visibility; it does
+  not change runtime loading, resolver activation, save pinning, hot reload, or
+  UI DLC selection.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
