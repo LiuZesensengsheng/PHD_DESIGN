@@ -216,8 +216,9 @@ Why add this before content production?
   provides a report-only static guard over production runtime resolver
   consumers. It keeps direct runtime resolver construction limited to
   `ContentPackRunComposition.build_runtime_resolver_result()` and keeps direct
-  calls to the promoted campaign reward / combat encounter helper seams limited
-  to `ContentPackRunComposition`. The helpers now require the composition-owned
+  calls to the promoted narrative loader, campaign reward, and combat
+  encounter helper seams limited to `ContentPackRunComposition`. Those
+  production helper paths now require the composition-owned
   `ContentPackRuntimeResolverResult` instead of accepting legacy
   `requested_pack_ids` or `run_selection` fallback inputs. This preserves the
   shared composition-owned resolver authority input path. It is not runtime
