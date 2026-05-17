@@ -319,14 +319,8 @@ Why add this before content production?
 - `QuestLoader.load_from_runtime_paths()` is the explicit-path loader entry for
   promoted handoffs. It can load questline, encounter, and reward JSON from
   caller-provided paths and avoids directory prefix scanning.
-- `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
-  provides an inactive handoff factory that builds a loaded `QuestLoader` from
-  a clean handoff contract and promotion readiness report. It accepts explicit
-  active pack ids as resolver input for future activation/save-pinning callers,
-  while defaulting to all discovered active source packs. It is a factory
-  rehearsal for runtime promotion and is not called by combat startup paths.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` provides
-  the first runtime promotion boundary over that handoff factory for narrative
+  the first runtime promotion boundary over the resolver-backed handoff for narrative
   startup. Narrative sessions now receive a content-pack handoff-backed
   `QuestLoader` containing the tutorial questline, tutorial encounters, and
   tutorial rewards only. The TA encounter file remains a pack-owned
@@ -338,6 +332,10 @@ Why add this before content production?
   upstream as resolver-selection inputs; CLI/report surfaces build the resolver
   result first, then pass that result into the loader. They are not save pinning
   or runtime DLC activation.
+- The old inactive QuestLoader handoff factory and its inventory CLI report are
+  retired. The promoted narrative loader and helper boundaries consume the
+  shared resolver-owned runtime references directly instead of routing through
+  that rehearsal bridge.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over production `QuestLoader.load_all()`
   call sites and direct calls to the old QuestLoader handoff factory. The
@@ -476,10 +474,6 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
 - Export QuestLoader promotion readiness as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
-- Report inactive QuestLoader handoff factory:
-  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory`
-- Export inactive QuestLoader handoff factory as JSON:
-  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
 - Report content-pack-backed narrative loader:
   - `python scripts/content_pack_inventory.py --content-pack-narrative-loader`
 - Export content-pack-backed narrative loader as JSON:

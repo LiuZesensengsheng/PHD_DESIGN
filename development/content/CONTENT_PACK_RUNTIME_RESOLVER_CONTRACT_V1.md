@@ -111,8 +111,6 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --quest-loader-handoff-contract --json`
 - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
 - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
-- `python scripts/content_pack_inventory.py --quest-loader-handoff-factory`
-- `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
 - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow`
 - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow --json`
 - `python scripts/content_pack_inventory.py --campaign-reward-loader-shadow`
@@ -353,11 +351,6 @@ Current resolver-owned runtime paths are:
 - `QuestLoader.load_from_runtime_paths()` is the explicit-path loader entry for
   promoted content-pack handoffs. It can load caller-provided questline,
   encounter, and reward JSON paths without directory prefix scanning.
-- `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
-  currently owns the QuestLoader handoff factory. It can build a loaded
-  `QuestLoader` from clean handoff/promotion inputs. It may receive explicit
-  active pack ids and pass them down the handoff chain, but this is resolver
-  input selection only, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
   owns the first runtime loader promotion boundary for narrative startup. It
   can load tutorial narrative runtime paths without directory prefix scanning
@@ -370,6 +363,10 @@ Current resolver-owned runtime paths are:
   selection first builds a `ContentPackRuntimeResolverResult`, then passes that
   resolver result into the loader. Those upstream selection inputs remain
   resolver selection only, not save pinning or runtime DLC activation.
+- The old inactive QuestLoader handoff factory and
+  `--quest-loader-handoff-factory` inventory report have been retired. Promoted
+  runtime consumers should use the shared `ContentPackRunComposition` and its
+  resolver-owned references instead of the rehearsal factory bridge.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   currently owns the report-only guard for production `QuestLoader.load_all()`
   call sites and direct calls to the old QuestLoader handoff factory.
