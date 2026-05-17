@@ -174,10 +174,13 @@ Why add this before content production?
   transient run/session composition surface that owns one shared
   `ContentPackRunSelection` for narrative, combat encounter, and campaign
   reward runtime consumers in the current process. It builds narrative
-  `QuestLoader` instances and delegates combat/reward definition lookup through
-  promoted resolver-backed helper boundaries. It is still not runtime
-  activation, save pack pinning, UI DLC selection, dependency solving, hot
-  reload, or shipped DLC authority.
+  `QuestLoader` instances, caches one authoritative
+  `ContentPackRuntimeResolverResult`, and passes that same resolver-owned
+  reference set into combat/reward definition lookup through promoted helper
+  boundaries. This makes the composition the shared resolver authority input
+  for current runtime consumers without making it runtime activation, save pack
+  pinning, UI DLC selection, dependency solving, hot reload, or shipped DLC
+  authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context.py` provides the
   transient process/run context owner for that run composition. The
   `GameStateMachine` owns one context and passes it into content-pack-aware
@@ -320,7 +323,8 @@ Why add this before content production?
   campaign reward-definition lookup boundary. It now consumes the authoritative
   content-pack runtime resolver for `rewards_*.json` paths and loads those paths
   through `QuestLoader.load_from_runtime_paths()`. It accepts a shared
-  `ContentPackRunSelection` object or legacy explicit active pack ids as
+  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition`, a
+  `ContentPackRunSelection` object, or legacy explicit active pack ids as
   resolver input for future activation/save-pinning callers, while defaulting
   to all discovered active source packs. It is not runtime activation, save
   pinning, dependency solving, or hot reload.
@@ -329,7 +333,8 @@ Why add this before content production?
   authoritative content-pack runtime resolver for `encounters_*.json` paths and
   loads those paths through `QuestLoader.load_from_runtime_paths()` so TA and
   tutorial encounters remain visible. It accepts a shared
-  `ContentPackRunSelection` object or legacy explicit active pack ids as
+  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition`, a
+  `ContentPackRunSelection` object, or legacy explicit active pack ids as
   resolver input for future activation/save-pinning callers, while defaulting
   to all discovered active source packs. It is not runtime activation, save
   pinning, dependency solving, or hot reload.

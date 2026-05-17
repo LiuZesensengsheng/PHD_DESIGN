@@ -37,6 +37,11 @@ the chain is clean:
 - `ContentPackRunComposition`
   - owns one shared `ContentPackRunSelection` for transient run/session
     narrative, combat encounter, and campaign reward runtime consumers
+  - builds and caches one authoritative `ContentPackRuntimeResolverResult` for
+    its selected active pack set
+  - passes that shared resolver authority result into promoted combat
+    encounter and campaign reward helper boundaries instead of letting those
+    consumers independently rebuild resolver state
   - delegates JSON payload work to the promoted loader/helper boundaries rather
     than becoming a new resolver or parser
   - preserves the default all-discovered active source pack behavior unless an
@@ -258,11 +263,14 @@ Current resolver-owned runtime paths are:
   reload.
 - `contexts/shared/infrastructure/content_pack_run_composition.py` owns the
   transient run/session runtime consumer composition surface. It creates or
-  reuses one shared `ContentPackRunSelection` and feeds the current narrative
+  reuses one shared `ContentPackRunSelection`, caches one authoritative
+  `ContentPackRuntimeResolverResult`, and feeds the current narrative
   application service, combat scene builder/state, and campaign reward service
-  group through promoted resolver-backed helper boundaries. It is not a save
-  schema owner, UI DLC selector, dependency solver, hot-reload layer, or shipped
-  DLC authority.
+  group through promoted resolver-backed helper boundaries. The composition is
+  the shared runtime-consumer entrypoint for that resolver authority result,
+  while `content_pack_runtime_resolver.py` remains the authority over resolved
+  runtime references. It is not a save schema owner, UI DLC selector,
+  dependency solver, hot-reload layer, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context.py` owns the
   transient process/run context that holds one shared
   `ContentPackRunComposition` for the active `GameStateMachine`. The state
@@ -340,16 +348,18 @@ Current resolver-owned runtime paths are:
   campaign reward-definition lookup as a narrow content-pack resolver consumer.
   It loads resolver-owned `rewards_*.json` paths through
   `QuestLoader.load_from_runtime_paths()` and no longer calls
-  `QuestLoader.load_all()`. It may receive a shared `ContentPackRunSelection`
-  object or explicit active pack ids and pass that selection to the resolver,
-  but this is resolver input selection only, not save pinning or runtime DLC
-  activation.
+  `QuestLoader.load_all()`. It may receive the shared
+  `ContentPackRuntimeResolverResult` cached by `ContentPackRunComposition`, a
+  `ContentPackRunSelection` object, or explicit active pack ids and pass that
+  selection to the resolver, but this is resolver input selection only, not
+  save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` currently owns
   combat encounter-definition lookup as a narrow content-pack resolver
   consumer. It loads resolver-owned `encounters_*.json` paths, including TA and
   tutorial encounter files, through `QuestLoader.load_from_runtime_paths()` and
-  no longer calls `QuestLoader.load_all()`. It may receive a shared
-  `ContentPackRunSelection` object or explicit active pack ids and pass that
+  no longer calls `QuestLoader.load_all()`. It may receive the shared
+  `ContentPackRuntimeResolverResult` cached by `ContentPackRunComposition`, a
+  `ContentPackRunSelection` object, or explicit active pack ids and pass that
   selection to the resolver, but this is resolver input selection only, not
   save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
