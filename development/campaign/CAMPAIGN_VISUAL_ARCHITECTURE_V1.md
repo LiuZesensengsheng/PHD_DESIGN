@@ -403,6 +403,7 @@ This document still describes a campaign visual architecture direction, not an e
 - `CampaignBoardProjectionCommands`: campaign-only command seam for temporary board projection visuals such as three-click stage shifts without calling `CampaignView` projection methods directly.
 - `CampaignStatusBarCommands`: campaign-only command seam for status-bar chrome updates such as inspiration/status payload refreshes and elapsed-turn labels without calling `CampaignView` status helpers directly.
 - `CampaignChoiceToggleCommands`: campaign-only command seam for the persistent choice-toggle control without calling `CampaignView` control helpers directly.
+- `CampaignUiHitTargets`: campaign-only owner for retained UI control hit targets so orchestration services do not read `CampaignView.ui_elements` directly.
 
 `CampaignView` should remain the presentation shell that wires these campaign owners together. The next slices should stay concrete: first layout state, then concrete runtime widgets when a real widget needs ownership. Do not introduce a shared cache/runtime/node engine just to make this look generic; no engine-wide visual runtime exists yet.
 
