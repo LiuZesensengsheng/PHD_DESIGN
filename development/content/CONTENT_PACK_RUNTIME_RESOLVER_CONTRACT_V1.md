@@ -367,9 +367,12 @@ Current resolver-owned runtime paths are:
   resolver selection only, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   currently owns the report-only guard for production `QuestLoader.load_all()`
-  call sites. The default allowed set is empty; new narrative, combat, reward,
-  or resolver-owned paths should use promoted content-pack handoff boundaries
-  instead of returning to directory prefix scanning.
+  call sites and direct calls to the old QuestLoader handoff factory.
+  The default allowed set is empty for `QuestLoader.load_all()`, and the
+  default allowed handoff-factory set is also empty; new narrative, combat,
+  reward, or resolver-owned paths should use promoted content-pack handoff
+  boundaries instead of returning to directory prefix scanning or the old
+  factory handoff path.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` currently owns
   campaign reward-definition lookup as a narrow content-pack resolver consumer.
   It loads resolver-owned `rewards_*.json` paths through

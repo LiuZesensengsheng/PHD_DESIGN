@@ -334,9 +334,10 @@ Why add this before content production?
   or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over production `QuestLoader.load_all()`
-  call sites. The default allowed set is empty. It prevents narrative, combat,
-  reward, or new runtime paths from silently returning to directory prefix
-  scanning.
+  call sites and direct calls to the old QuestLoader handoff factory. The
+  default allowed sets are empty. It prevents narrative, combat, reward, or new
+  runtime paths from silently returning to directory prefix scanning or the old
+  factory handoff path.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` owns the current
   campaign reward-definition lookup boundary. It now consumes the authoritative
   content-pack runtime resolver for `rewards_*.json` paths and loads those paths
