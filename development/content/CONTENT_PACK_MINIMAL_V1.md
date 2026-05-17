@@ -196,9 +196,8 @@ Why add this before content production?
   an injected runtime context instead of creating a private fallback. It also
   tracks the remaining production consumer parameters that still accept
   `content_pack_run_composition` as a migration bridge, currently combat scene
-  startup and campaign service-bundle composition. It is not runtime
-  activation, save pinning, UI DLC selection, dependency solving, hot reload,
-  or runtime loading authority.
+  startup. It is not runtime activation, save pinning, UI DLC selection,
+  dependency solving, hot reload, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
