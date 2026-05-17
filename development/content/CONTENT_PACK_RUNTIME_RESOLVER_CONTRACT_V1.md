@@ -288,9 +288,9 @@ Current resolver-owned runtime paths are:
   set is empty. It also reports the remaining production
   `content_pack_runtime_context=None` default parameters as the current
   promotion backlog for making runtime context inputs required. That backlog is
-  now four entries after `NarrativeApplicationService`, `RewardService`,
+  now three entries after `NarrativeApplicationService`, `RewardService`,
   `PostCombatRewardFlowService`, `build_campaign_state_service_bundle`,
-  `CampaignState`, and `DialogueState` moved to explicit required
+  `CampaignState`, `DialogueState`, and `EventState` moved to explicit required
   `ContentPackRuntimeContext` inputs. This is report-only visibility; it does
   not change runtime loading, resolver activation, save pinning, hot reload, or
   UI DLC selection.
