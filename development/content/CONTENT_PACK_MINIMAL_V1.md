@@ -202,11 +202,11 @@ Why add this before content production?
   default-fallback promotion backlog. These are visibility only and do not make
   report-only guard output a runtime loading authority.
   `NarrativeApplicationService`, `RewardService`,
-  `PostCombatRewardFlowService`, `build_campaign_state_service_bundle`, and
-  `CampaignState` now require an explicit `ContentPackRuntimeContext`,
-  reducing that backlog to five current production defaults. It is not runtime
-  activation, save pinning, UI DLC selection, dependency solving, hot reload,
-  or runtime loading authority.
+  `PostCombatRewardFlowService`, `build_campaign_state_service_bundle`,
+  `CampaignState`, and `DialogueState` now require an explicit
+  `ContentPackRuntimeContext`, reducing that backlog to four current
+  production defaults. It is not runtime activation, save pinning, UI DLC
+  selection, dependency solving, hot reload, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
