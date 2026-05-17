@@ -201,8 +201,12 @@ Why add this before content production?
   `content_pack_run_composition` as a migration bridge; the current allowed
   set is empty. The guard now also reports the remaining production
   `content_pack_runtime_context=None` default parameters as the current
-  default-fallback promotion backlog. These are visibility only and do not make
-  report-only guard output a runtime loading authority.
+  default-fallback promotion backlog. It also reports production calls to
+  `resolve_content_pack_run_composition_for_runtime_context()` that omit the
+  explicit `content_pack_runtime_context=` keyword, so promoted consumers keep
+  using the shared transient context instead of quietly returning to selection
+  fallback inputs. These are visibility only and do not make report-only guard
+  output a runtime loading authority.
   `NarrativeApplicationService`, `RewardService`,
   `PostCombatRewardFlowService`, `build_campaign_state_service_bundle`,
   `CampaignState`, `DialogueState`, `EventState`, `CombatState`, and

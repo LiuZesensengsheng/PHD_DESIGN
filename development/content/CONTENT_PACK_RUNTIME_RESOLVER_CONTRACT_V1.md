@@ -306,9 +306,12 @@ Current resolver-owned runtime paths are:
   `build_combat_scene_runtime`, and `GameStateMachine` moved to explicit
   required `ContentPackRuntimeContext` inputs. `build_game_state_machine` and
   the headless repro entrypoint remain the explicit owners that create shared
-  transient runtime contexts. This is report-only visibility; it does not
-  change runtime loading, resolver activation, save pinning, hot reload, or UI
-  DLC selection.
+  transient runtime contexts. The guard also reports production calls to
+  `resolve_content_pack_run_composition_for_runtime_context()` that omit the
+  explicit `content_pack_runtime_context=` keyword, keeping promoted consumers
+  on the shared transient context path instead of returning to selection
+  fallback inputs. This is report-only visibility; it does not change runtime
+  loading, resolver activation, save pinning, hot reload, or UI DLC selection.
 - `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
   currently owns the report-only guard for production direct runtime resolver
   and resolver-helper usage. It keeps
