@@ -190,8 +190,11 @@ Why add this before content production?
   from directly creating their own `ContentPackRunComposition`. The only
   default allowed direct calls live inside `content_pack_runtime_context.py`,
   where the runtime context owns the shared transient composition and preserves
-  the non-state-machine fallback path. It is not runtime activation, save
-  pinning, UI DLC selection, dependency solving, hot reload, or runtime
+  the non-state-machine fallback path. The same guard also makes direct
+  `ContentPackRuntimeContext` creation explicit: `GameStateMachine` is the
+  owner, while combat, event, and dialogue state fallbacks remain visible
+  migration debt for non-state-machine tests. It is not runtime activation,
+  save pinning, UI DLC selection, dependency solving, hot reload, or runtime
   loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
