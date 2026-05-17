@@ -322,12 +322,13 @@ Why add this before content production?
   `QuestLoader` containing the tutorial questline, tutorial encounters, and
   tutorial rewards only. The TA encounter file remains a pack-owned
   non-handoff sidecar and is still loaded by existing combat paths. The loader
-  accepts the shared `ContentPackRuntimeResolverResult` from
-  `ContentPackRunComposition` on the production runtime path, and derives the
-  tutorial narrative handoff paths from resolver-owned `narrative_source`
-  references. Its explicit active pack id / `ContentPackRunSelection` inputs
-  remain for CLI and report-style selection rehearsal; they are not save
-  pinning or runtime DLC activation.
+  now requires a shared `ContentPackRuntimeResolverResult` from
+  `ContentPackRunComposition` or an equivalent CLI/report wrapper, and derives
+  the tutorial narrative handoff paths from resolver-owned `narrative_source`
+  references. Explicit active pack ids and `ContentPackRunSelection` stay
+  upstream as resolver-selection inputs; CLI/report surfaces build the resolver
+  result first, then pass that result into the loader. They are not save pinning
+  or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over production `QuestLoader.load_all()`
   call sites. The default allowed set is empty. It prevents narrative, combat,

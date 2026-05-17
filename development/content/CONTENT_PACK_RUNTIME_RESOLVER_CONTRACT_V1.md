@@ -258,11 +258,11 @@ Current resolver-owned runtime paths are:
   and still does not parse runtime JSON payloads.
 - `contexts/shared/infrastructure/content_pack_run_selection.py` owns the
   shared run/session composition input for resolver selection. Promoted
-  narrative, combat encounter, and campaign reward resolver consumers may
-  accept its `run_selection` object instead of each inventing their own active
-  pack id argument, but this remains resolver input selection only, not save
-  pinning, runtime DLC activation, UI DLC state, dependency solving, or hot
-  reload.
+  narrative, combat encounter, and campaign reward runtime consumers should
+  receive the composition-owned resolver result instead of each inventing their
+  own active pack id or `run_selection` fallback argument. `run_selection`
+  remains an upstream resolver input selection surface only, not save pinning,
+  runtime DLC activation, UI DLC state, dependency solving, or hot reload.
 - `contexts/shared/infrastructure/content_pack_run_composition.py` owns the
   transient run/session runtime consumer composition surface. It creates or
   reuses one shared `ContentPackRunSelection`, caches one authoritative
@@ -358,10 +358,11 @@ Current resolver-owned runtime paths are:
   `ContentPackRunComposition`. On that production composition path, it derives
   questline, encounter, and reward paths from resolver-owned
   `narrative_source` references and preserves `slack` as the required
-  allowed-empty input. It still keeps explicit active pack id /
-  `ContentPackRunSelection` inputs for CLI and report-style handoff rehearsal,
-  but those inputs are resolver selection only, not save pinning or runtime DLC
-  activation.
+  allowed-empty input. It no longer accepts explicit active pack id or
+  `ContentPackRunSelection` fallback inputs directly; CLI/report-style
+  selection first builds a `ContentPackRuntimeResolverResult`, then passes that
+  resolver result into the loader. Those upstream selection inputs remain
+  resolver selection only, not save pinning or runtime DLC activation.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   currently owns the report-only guard for production `QuestLoader.load_all()`
   call sites. The default allowed set is empty; new narrative, combat, reward,
