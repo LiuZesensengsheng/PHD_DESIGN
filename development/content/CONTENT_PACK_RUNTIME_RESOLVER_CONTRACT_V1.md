@@ -39,6 +39,10 @@ the chain is clean:
     narrative, combat encounter, and campaign reward runtime consumers
   - builds and caches one authoritative `ContentPackRuntimeResolverResult` for
     its selected active pack set
+  - exposes an explicit entrypoint contract: normal runtime consumers enter
+    through `ContentPackRuntimeContext.require_run_composition()`, while
+    inventory/report surfaces may build `ContentPackRunComposition` directly
+    with `build_content_pack_run_composition()`
   - passes that shared resolver authority result into promoted combat
     encounter and campaign reward helper boundaries instead of letting those
     consumers independently rebuild resolver state
@@ -269,6 +273,12 @@ Current resolver-owned runtime paths are:
   group through promoted resolver-backed helper boundaries. Narrative
   `QuestLoader` construction, combat encounter lookup, and campaign reward
   lookup all consume the composition-owned resolver result on production paths.
+  Its `entrypoint_contract` report names
+  `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
+  consumer entrypoint, `build_content_pack_run_composition()` as the
+  CLI/report builder entrypoint, and
+  `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
+  resolver result source.
   The composition is the shared runtime-consumer entrypoint for that resolver
   authority result, while `content_pack_runtime_resolver.py` remains the
   authority over resolved runtime references. It is not a save schema owner, UI

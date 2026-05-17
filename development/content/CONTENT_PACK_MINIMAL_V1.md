@@ -178,6 +178,11 @@ Why add this before content production?
   reference set into narrative `QuestLoader` construction and combat/reward
   definition lookup through promoted helper boundaries. This makes the
   composition the shared resolver authority input for current runtime consumers
+  and exposes a reportable entrypoint contract naming
+  `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
+  consumer path, `build_content_pack_run_composition()` as the CLI/report path,
+  and `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
+  resolver result source
   without making it runtime activation, save pack pinning, UI DLC selection,
   dependency solving, hot reload, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context.py` provides the
