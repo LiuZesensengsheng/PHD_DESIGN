@@ -220,8 +220,11 @@ Why add this before content production?
   encounter helper seams limited to `ContentPackRunComposition`. Those
   production helper paths now require the composition-owned
   `ContentPackRuntimeResolverResult` instead of accepting legacy
-  `requested_pack_ids` or `run_selection` fallback inputs. This preserves the
-  shared composition-owned resolver authority input path. It is not runtime
+  `requested_pack_ids` or `run_selection` fallback inputs. It also checks the
+  promoted helper signatures so `registry`, `requested_pack_ids`, or
+  `run_selection` cannot quietly return there, and
+  `runtime_resolver_result` remains a required input. This preserves the shared
+  composition-owned resolver authority input path. It is not runtime
   activation, save pinning, dependency solving, hot reload, UI DLC selection,
   or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a

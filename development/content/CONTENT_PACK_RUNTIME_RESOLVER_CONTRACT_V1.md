@@ -321,9 +321,11 @@ Current resolver-owned runtime paths are:
   so narrative/campaign/combat runtime consumers use the composition-owned
   resolver result instead of bypassing it. The helper fallback seams no longer
   build their own resolver from `ContentPackRunSelection` or explicit pack ids.
-  This guard is report-only visibility; it does not change runtime activation,
-  save pinning, dependency solving, hot reload, UI DLC selection, or JSON
-  payload loading.
+  The guard also checks promoted helper signatures so `runtime_resolver_result`
+  remains required and legacy `registry`, `requested_pack_ids`, or
+  `run_selection` parameters cannot quietly return. This guard is report-only
+  visibility; it does not change runtime activation, save pinning, dependency
+  solving, hot reload, UI DLC selection, or JSON payload loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
