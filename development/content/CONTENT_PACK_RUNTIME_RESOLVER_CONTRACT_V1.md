@@ -362,10 +362,10 @@ Current resolver-owned runtime paths are:
   questline, encounter, and reward paths from resolver-owned
   `narrative_source` references and preserves `slack` as the required
   allowed-empty input. It no longer accepts explicit active pack id or
-  `ContentPackRunSelection` fallback inputs directly; CLI/report-style
-  selection first builds a `ContentPackRuntimeResolverResult` through
-  `ContentPackRunComposition`, then passes that resolver result into the
-  loader. Those upstream selection inputs remain
+  `ContentPackRunSelection` fallback inputs directly; composition-owned
+  CLI/report surfaces first build a `ContentPackRuntimeResolverResult` through
+  `ContentPackRunComposition`, then pass that resolver result into the loader.
+  Those upstream selection inputs remain
   resolver selection only, not save pinning or runtime DLC activation.
 - The old inactive QuestLoader handoff factory and
   `--quest-loader-handoff-factory` inventory report have been retired. Promoted

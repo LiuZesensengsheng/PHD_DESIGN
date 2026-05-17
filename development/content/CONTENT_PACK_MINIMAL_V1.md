@@ -327,12 +327,12 @@ Why add this before content production?
   tutorial rewards only. The TA encounter file remains a pack-owned
   non-handoff sidecar and is still loaded by existing combat paths. The loader
   now requires a shared `ContentPackRuntimeResolverResult` from
-  `ContentPackRunComposition` or an equivalent CLI/report wrapper, and derives
-  the tutorial narrative handoff paths from resolver-owned `narrative_source`
-  references. Explicit active pack ids and `ContentPackRunSelection` stay
-  upstream as resolver-selection inputs; CLI/report surfaces build the resolver
-  result through `ContentPackRunComposition`, then pass that result into the
-  loader. They are not save pinning or runtime DLC activation.
+  `ContentPackRunComposition`, and derives the tutorial narrative handoff paths
+  from resolver-owned `narrative_source` references. Explicit active pack ids
+  and `ContentPackRunSelection` stay upstream as resolver-selection inputs;
+  CLI/report surfaces also build the resolver result through
+  `ContentPackRunComposition`, then pass that result into the loader. They are
+  not save pinning or runtime DLC activation.
 - The old inactive QuestLoader handoff factory and its inventory CLI report are
   retired. The promoted narrative loader and helper boundaries consume the
   shared resolver-owned runtime references directly instead of routing through
