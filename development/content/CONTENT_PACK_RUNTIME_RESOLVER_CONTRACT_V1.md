@@ -285,7 +285,11 @@ Current resolver-owned runtime paths are:
   event, and dialogue states require an injected runtime context instead of
   creating a private fallback. The same guard tracks production consumer
   parameters that accept `content_pack_run_composition`; the current allowed
-  set is empty.
+  set is empty. It also reports the remaining production
+  `content_pack_runtime_context=None` default parameters as the current
+  promotion backlog for making runtime context inputs required. That backlog is
+  report-only visibility; it does not change runtime loading, resolver
+  activation, save pinning, hot reload, or UI DLC selection.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading

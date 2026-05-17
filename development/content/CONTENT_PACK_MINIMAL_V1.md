@@ -197,8 +197,12 @@ Why add this before content production?
   an injected runtime context instead of creating a private fallback. It also
   tracks production consumer parameters that accept
   `content_pack_run_composition` as a migration bridge; the current allowed
-  set is empty. It is not runtime activation, save pinning, UI DLC selection,
-  dependency solving, hot reload, or runtime loading authority.
+  set is empty. The guard now also reports the remaining production
+  `content_pack_runtime_context=None` default parameters as the current
+  default-fallback promotion backlog. These are visibility only and do not make
+  report-only guard output a runtime loading authority. It is not runtime
+  activation, save pinning, UI DLC selection, dependency solving, hot reload,
+  or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
