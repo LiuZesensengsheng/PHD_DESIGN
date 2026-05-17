@@ -182,7 +182,9 @@ Why add this before content production?
   `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
   consumer path, `build_content_pack_run_composition()` as the CLI/report path,
   and `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
-  resolver result source
+  resolver result source. Narrative runtime consumers use
+  `ContentPackRunComposition.require_narrative_quest_loader()` to keep that
+  path named as a fail-closed runtime consumer surface
   without making it runtime activation, save pack pinning, UI DLC selection,
   dependency solving, hot reload, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context.py` provides the
@@ -237,7 +239,8 @@ Why add this before content production?
   composition-owned resolver authority input path. The guard also checks those
   promoted helpers keep fail-closed resolver validation through
   `runtime_resolver_errors(...)` before loading JSON payloads, and checks that
-  `ContentPackRunComposition` helper methods pass
+  `ContentPackRunComposition` runtime consumer methods, including
+  `require_narrative_quest_loader()`, pass
   `runtime_resolver_result=self.require_runtime_resolver_result()` into those
   promoted helpers. It is not runtime activation, save pinning, dependency
   solving, hot reload, UI DLC selection, or runtime loading authority.

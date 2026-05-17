@@ -43,6 +43,9 @@ the chain is clean:
     through `ContentPackRuntimeContext.require_run_composition()`, while
     inventory/report surfaces may build `ContentPackRunComposition` directly
     with `build_content_pack_run_composition()`
+  - exposes runtime consumer methods with fail-closed naming, including
+    `require_narrative_quest_loader()`, so production callers do not treat
+    narrative loader construction as a report-only builder surface
   - passes that shared resolver authority result into promoted combat
     encounter and campaign reward helper boundaries instead of letting those
     consumers independently rebuild resolver state
@@ -340,10 +343,11 @@ Current resolver-owned runtime paths are:
   `run_selection` parameters cannot quietly return. This guard is report-only
   visibility. It also checks that those promoted helpers keep fail-closed
   resolver validation through `runtime_resolver_errors(...)` before loading JSON
-  payloads. The same guard checks that `ContentPackRunComposition` helper
-  methods pass `runtime_resolver_result=self.require_runtime_resolver_result()`
-  into the promoted helpers, preserving the fail-closed cached resolver
-  entrypoint. It does not change runtime activation, save pinning, dependency
+  payloads. The same guard checks that `ContentPackRunComposition` runtime
+  consumer methods, including `require_narrative_quest_loader()`, pass
+  `runtime_resolver_result=self.require_runtime_resolver_result()` into the
+  promoted helpers, preserving the fail-closed cached resolver entrypoint.
+  It does not change runtime activation, save pinning, dependency
   solving, hot reload, UI DLC selection, or JSON payload loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
