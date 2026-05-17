@@ -228,9 +228,11 @@ Why add this before content production?
   promoted helper signatures so `registry`, `requested_pack_ids`, or
   `run_selection` cannot quietly return there, and
   `runtime_resolver_result` remains a required input. This preserves the shared
-  composition-owned resolver authority input path. It is not runtime
-  activation, save pinning, dependency solving, hot reload, UI DLC selection,
-  or runtime loading authority.
+  composition-owned resolver authority input path. The guard also checks those
+  promoted helpers keep fail-closed resolver validation through
+  `runtime_resolver_errors(...)` before loading JSON payloads. It is not
+  runtime activation, save pinning, dependency solving, hot reload, UI DLC
+  selection, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime

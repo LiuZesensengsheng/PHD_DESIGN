@@ -327,7 +327,9 @@ Current resolver-owned runtime paths are:
   The guard also checks promoted helper signatures so `runtime_resolver_result`
   remains required and legacy `registry`, `requested_pack_ids`, or
   `run_selection` parameters cannot quietly return. This guard is report-only
-  visibility; it does not change runtime activation, save pinning, dependency
+  visibility. It also checks that those promoted helpers keep fail-closed
+  resolver validation through `runtime_resolver_errors(...)` before loading JSON
+  payloads. It does not change runtime activation, save pinning, dependency
   solving, hot reload, UI DLC selection, or JSON payload loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
