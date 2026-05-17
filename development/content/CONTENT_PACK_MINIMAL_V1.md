@@ -201,11 +201,12 @@ Why add this before content production?
   `content_pack_runtime_context=None` default parameters as the current
   default-fallback promotion backlog. These are visibility only and do not make
   report-only guard output a runtime loading authority.
-  `NarrativeApplicationService`, `RewardService`, and
-  `PostCombatRewardFlowService` now require an explicit
-  `ContentPackRuntimeContext`, reducing that backlog to seven current
-  production defaults. It is not runtime activation, save pinning, UI DLC
-  selection, dependency solving, hot reload, or runtime loading authority.
+  `NarrativeApplicationService`, `RewardService`,
+  `PostCombatRewardFlowService`, and `build_campaign_state_service_bundle`
+  now require an explicit `ContentPackRuntimeContext`, reducing that backlog
+  to six current production defaults. It is not runtime activation, save
+  pinning, UI DLC selection, dependency solving, hot reload, or runtime
+  loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
