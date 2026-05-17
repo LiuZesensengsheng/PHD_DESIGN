@@ -204,10 +204,12 @@ Why add this before content production?
   `NarrativeApplicationService`, `RewardService`,
   `PostCombatRewardFlowService`, `build_campaign_state_service_bundle`,
   `CampaignState`, `DialogueState`, `EventState`, `CombatState`, and
-  `build_combat_scene_runtime` now require an explicit
-  `ContentPackRuntimeContext`, reducing that backlog to one current production
-  default. It is not runtime activation, save pinning, UI DLC selection,
-  dependency solving, hot reload, or runtime loading authority.
+  `build_combat_scene_runtime`, and `GameStateMachine` now require an explicit
+  `ContentPackRuntimeContext`, reducing that default-fallback backlog to zero.
+  `contexts/shared/game_runtime.py::build_game_state_machine` and the headless
+  repro entrypoint remain the explicit owners that create shared transient
+  runtime contexts. This is not runtime activation, save pinning, UI DLC
+  selection, dependency solving, hot reload, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
