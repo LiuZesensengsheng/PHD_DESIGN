@@ -240,7 +240,9 @@ Why add this before content production?
   promoted helpers keep fail-closed resolver validation through
   `runtime_resolver_errors(...)` before loading JSON payloads, and checks that
   `ContentPackRunComposition` runtime consumer methods, including
-  `require_narrative_quest_loader()`, pass
+  `require_narrative_quest_loader()`,
+  `require_campaign_reward_definition()`, and
+  `require_combat_encounter_definition()`, pass
   `runtime_resolver_result=self.require_runtime_resolver_result()` into those
   promoted helpers. It is not runtime activation, save pinning, dependency
   solving, hot reload, UI DLC selection, or runtime loading authority.

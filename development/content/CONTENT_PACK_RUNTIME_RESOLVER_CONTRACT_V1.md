@@ -332,7 +332,10 @@ Current resolver-owned runtime paths are:
   runtime-consumer authority input path. It also keeps direct production calls
   to `build_content_pack_narrative_quest_loader()`,
   `load_campaign_reward_definition()`, and
-  `load_combat_encounter_definition()` scoped to `ContentPackRunComposition`,
+  `load_combat_encounter_definition()` scoped behind
+  `ContentPackRunComposition` runtime consumer methods
+  `require_campaign_reward_definition()` and
+  `require_combat_encounter_definition()`,
   so narrative/campaign/combat runtime consumers use the composition-owned
   resolver result instead of bypassing it. The helper fallback seams no longer
   build their own resolver from `ContentPackRunSelection` or explicit pack ids,
@@ -344,7 +347,9 @@ Current resolver-owned runtime paths are:
   visibility. It also checks that those promoted helpers keep fail-closed
   resolver validation through `runtime_resolver_errors(...)` before loading JSON
   payloads. The same guard checks that `ContentPackRunComposition` runtime
-  consumer methods, including `require_narrative_quest_loader()`, pass
+  consumer methods, including `require_narrative_quest_loader()`,
+  `require_campaign_reward_definition()`, and
+  `require_combat_encounter_definition()`, pass
   `runtime_resolver_result=self.require_runtime_resolver_result()` into the
   promoted helpers, preserving the fail-closed cached resolver entrypoint.
   It does not change runtime activation, save pinning, dependency
