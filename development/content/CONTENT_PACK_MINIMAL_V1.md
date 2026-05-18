@@ -253,10 +253,13 @@ Why add this before content production?
   `require_*` composition API instead of bypassing it with
   `build_runtime_resolver_result()`, `require_runtime_resolver_result()`, or
   old `load_*`/`build_*` composition-style names. The guard also checks that
-  its JSON/markdown report lists those forbidden production runtime consumer
-  composition method names explicitly, including
-  `require_runtime_resolver_result()`, so future consumers do not treat the
-  raw resolver result as their public entrypoint. The guard also checks that
+  the guarded contract scope is the
+  `promoted_runtime_resolver_consumer_composition_contract`, while the guard
+  itself remains a report-only scanner. Its JSON/markdown report lists those
+  forbidden production runtime consumer composition method names explicitly,
+  including `require_runtime_resolver_result()`, so future consumers do not
+  treat the raw resolver result as their public entrypoint. The guard also
+  checks that
   `ContentPackRunComposition.require_runtime_resolver_result()` still reads
   the composition-owned builder result and validates it with
   `runtime_resolver_errors(...)` before any helper receives it. It is not
