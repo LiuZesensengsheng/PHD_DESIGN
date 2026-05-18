@@ -181,8 +181,11 @@ Why add this before content production?
   and exposes a reportable entrypoint contract naming
   `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
   consumer path, `build_content_pack_run_composition()` as the CLI/report path,
-  and `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
-  resolver result source. Narrative runtime consumers use
+  `ContentPackRunComposition.build_runtime_resolver_result()` as the internal
+  shared resolver result source, and
+  `ContentPackRunComposition.require_runtime_resolver_result()` as the
+  fail-closed consumer-facing method for reading that result. Narrative
+  runtime consumers use
   `ContentPackRunComposition.require_narrative_quest_loader()` to keep that
   path named as a fail-closed runtime consumer surface
   without making it runtime activation, save pack pinning, UI DLC selection,

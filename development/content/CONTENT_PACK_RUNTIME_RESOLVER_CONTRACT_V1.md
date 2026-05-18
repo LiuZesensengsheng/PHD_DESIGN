@@ -280,8 +280,11 @@ Current resolver-owned runtime paths are:
   `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
   consumer entrypoint, `build_content_pack_run_composition()` as the
   CLI/report builder entrypoint, and
-  `ContentPackRunComposition.build_runtime_resolver_result()` as the shared
-  resolver result source.
+  `ContentPackRunComposition.build_runtime_resolver_result()` as the internal
+  shared resolver result source. Runtime consumers and report surfaces should
+  read that result through
+  `ContentPackRunComposition.require_runtime_resolver_result()` unless they
+  are inside the composition-owned builder source itself.
   The composition is the shared runtime-consumer entrypoint for that resolver
   authority result, while `content_pack_runtime_resolver.py` remains the
   authority over resolved runtime references. It is not a save schema owner, UI
