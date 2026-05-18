@@ -244,8 +244,14 @@ Why add this before content production?
   `require_campaign_reward_definition()`, and
   `require_combat_encounter_definition()`, pass
   `runtime_resolver_result=self.require_runtime_resolver_result()` into those
-  promoted helpers. It is not runtime activation, save pinning, dependency
-  solving, hot reload, UI DLC selection, or runtime loading authority.
+  promoted helpers. It also scans promoted production runtime consumer
+  contexts for direct calls to composition resolver-source or legacy helper
+  method names, so campaign/combat/narrative consumers keep using the
+  `require_*` composition API instead of bypassing it with
+  `build_runtime_resolver_result()`, `require_runtime_resolver_result()`, or
+  old `load_*`/`build_*` composition-style names. It is not runtime
+  activation, save pinning, dependency solving, hot reload, UI DLC selection,
+  or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
