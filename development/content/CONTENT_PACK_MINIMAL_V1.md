@@ -252,9 +252,12 @@ Why add this before content production?
   method names, so campaign/combat/narrative consumers keep using the
   `require_*` composition API instead of bypassing it with
   `build_runtime_resolver_result()`, `require_runtime_resolver_result()`, or
-  old `load_*`/`build_*` composition-style names. It is not runtime
-  activation, save pinning, dependency solving, hot reload, UI DLC selection,
-  or runtime loading authority.
+  old `load_*`/`build_*` composition-style names. The guard also checks that
+  `ContentPackRunComposition.require_runtime_resolver_result()` still reads
+  the composition-owned builder result and validates it with
+  `runtime_resolver_errors(...)` before any helper receives it. It is not
+  runtime activation, save pinning, dependency solving, hot reload, UI DLC
+  selection, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime

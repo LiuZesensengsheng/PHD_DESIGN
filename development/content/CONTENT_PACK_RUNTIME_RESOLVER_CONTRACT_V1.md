@@ -360,9 +360,12 @@ Current resolver-owned runtime paths are:
   keeping runtime consumers on the `require_*` composition API instead of
   reaching for `build_runtime_resolver_result()`,
   `require_runtime_resolver_result()`, or old `load_*`/`build_*`
-  composition-style names. It does not change runtime activation, save
-  pinning, dependency solving, hot reload, UI DLC selection, or JSON payload
-  loading.
+  composition-style names. The same guard now verifies that
+  `ContentPackRunComposition.require_runtime_resolver_result()` reads the
+  composition-owned builder source and validates that result with
+  `runtime_resolver_errors(...)` before passing it to promoted helpers. It does
+  not change runtime activation, save pinning, dependency solving, hot reload,
+  UI DLC selection, or JSON payload loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
