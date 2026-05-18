@@ -361,6 +361,10 @@ Current resolver-owned runtime paths are:
   reaching for `build_runtime_resolver_result()`,
   `require_runtime_resolver_result()`, or old `load_*`/`build_*`
   composition-style names. The same guard now verifies that
+  its JSON/markdown report lists those forbidden production runtime consumer
+  composition method names explicitly, including
+  `require_runtime_resolver_result()`, so runtime consumers do not treat the
+  raw resolver result as their public entrypoint. The same guard verifies that
   `ContentPackRunComposition.require_runtime_resolver_result()` reads the
   composition-owned builder source and validates that result with
   `runtime_resolver_errors(...)` before passing it to promoted helpers. It does
