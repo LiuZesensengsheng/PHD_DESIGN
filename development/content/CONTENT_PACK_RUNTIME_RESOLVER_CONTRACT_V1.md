@@ -364,6 +364,8 @@ Current resolver-owned runtime paths are:
   the guarded contract scope is the
   `promoted_runtime_resolver_consumer_composition_contract`, while the guard
   itself remains a report-only scanner. Its JSON/markdown report lists those
+  composition-owned runtime consumer methods explicitly, including
+  `ContentPackRunComposition.require_campaign_reward_definition()`, and lists
   forbidden production runtime consumer composition method names explicitly,
   including `require_runtime_resolver_result()`, so runtime consumers do not
   treat the raw resolver result as their public entrypoint. The same guard
