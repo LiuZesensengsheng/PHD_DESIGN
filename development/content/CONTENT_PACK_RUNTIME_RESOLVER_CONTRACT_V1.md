@@ -110,6 +110,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit --json`
 - `python scripts/content_pack_inventory.py --runtime-loading-authority`
 - `python scripts/content_pack_inventory.py --runtime-loading-authority --json`
+- `python scripts/content_pack_inventory.py --runtime-loading-migration-review`
+- `python scripts/content_pack_inventory.py --runtime-loading-migration-review --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -239,6 +241,10 @@ The runtime authority promotion is valid only while these checks stay true:
   narrative loader covers tutorial narrative outputs,
   combat encounter lookup covers tutorial and TA encounter outputs, and
   campaign reward lookup covers tutorial reward outputs
+- the runtime loading migration review report is clean, meaning the resolver
+  consumer guard, helper content-kind audit, runtime loading authority
+  coverage, QuestLoader load-all guard, combat encounter loader shadow, and
+  campaign reward loader shadow all agree before the next runtime loading slice
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -435,6 +441,16 @@ Current resolver-owned runtime paths are:
   This report does not change runtime loading, runtime activation, save
   pinning, dependency solving, hot reload, UI DLC selection, or JSON payload
   parsing.
+- `contexts/shared/infrastructure/content_pack_runtime_loading_migration_review.py`
+  currently owns the report-only aggregate review before the next small runtime
+  loading migration slice. It joins the runtime resolver consumer guard,
+  runtime helper content-kind audit, runtime loading authority coverage,
+  QuestLoader load-all guard, combat encounter loader shadow, and campaign
+  reward loader shadow into one `ready_for_next_runtime_loading_slice` signal
+  with component issue lists. It is not a new runtime authority and does not
+  change loading behavior, runtime activation, save pinning, dependency
+  solving, hot reload, UI, combat balance, `cardanalysis`, or
+  `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading

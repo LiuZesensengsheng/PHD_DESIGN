@@ -301,6 +301,15 @@ Why add this before content production?
   migration checkpoint over the current loading authority surface, not runtime
   activation, save pinning, dependency solving, hot reload, UI DLC selection,
   or JSON payload parsing.
+- `contexts/shared/infrastructure/content_pack_runtime_loading_migration_review.py`
+  provides a report-only preflight review that aggregates the current runtime
+  resolver consumer guard, runtime helper content-kind audit, runtime loading
+  authority coverage, QuestLoader load-all guard, combat encounter loader
+  shadow, and campaign reward loader shadow into one go/no-go surface for the
+  next small runtime loading slice. It is a review checkpoint only and does not
+  change runtime loading behavior, activate packs, write saves, solve
+  dependencies, support hot reload, change UI, change combat balance, or touch
+  `cardanalysis` / `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -518,6 +527,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-loading-authority`
 - Export resolver-backed runtime loading authority coverage as JSON:
   - `python scripts/content_pack_inventory.py --runtime-loading-authority --json`
+- Report the aggregate runtime loading migration review:
+  - `python scripts/content_pack_inventory.py --runtime-loading-migration-review`
+- Export the aggregate runtime loading migration review as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-loading-migration-review --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
