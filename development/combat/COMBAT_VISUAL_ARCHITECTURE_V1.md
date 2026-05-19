@@ -23,7 +23,7 @@ The active direction is:
 - owns the headed pygame screen and asset/font resources
 - wires subviews, visual state, the FX controller, and the render pipeline
 - retains compatibility wrappers for older view-facing calls
-- still contains some state-delta detection that should be narrowed later
+- keeps compatibility properties for older render-feedback comparison values
 
 ### Render Pipeline
 
@@ -31,8 +31,24 @@ The active direction is:
 
 - owns the frame pass order for headed combat
 - updates animation lifetimes before drawing
-- calls existing `CombatView` and subview rendering methods in a fixed order
+- calls visual owners, `CombatView`, and subview rendering methods in a fixed order
 - remains combat-only and does not introduce a shared renderer runtime
+
+### Render Feedback State
+
+`contexts/combat/mvc/views/render_feedback_state.py`
+
+- owns render-facing last-value comparison state:
+  - player stress
+  - legacy single enemy health
+  - player and enemy confidence
+  - per-enemy health map
+  - paper tag count
+- detects stress, enemy-health, confidence, and paper-tag deltas before the FX
+  update pass
+- syncs comparison values after `display.flip()`
+- remains a headed combat presentation state owner, not combat runtime
+  authority
 
 ### Visual Effects Runtime State
 
@@ -90,7 +106,7 @@ calling concrete view/private FX methods directly.
 
 - maps render-facing combat deltas to headed visual feedback commands
 - keeps floating-number, particle, shake, and wobble shaping out of
-  `CombatView._check_health_changes`
+  `CombatRenderFeedbackState`
 - remains a temporary headed mapper until those facts are promoted to runtime
   presentation events
 
@@ -138,7 +154,7 @@ implementation.
 | --- | --- | --- | --- | --- |
 | Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` | `played_cards` | played-card flyout pass after HUD |
 | Played-card 2.5D pose | card flyout rendering | `_FxController.render_played_cards` + `draw_card(..., pose=...)` | `played_cards` | played-card flyout pass after HUD |
-| Floating number | render-facing stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | short-lived FX pass after banners |
+| Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` | `hit_particles` | pre-hand and post-banner particle passes |
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | short-lived FX pass after banners |
 | Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | actor rendering |
@@ -160,8 +176,9 @@ CombatSession presentation event
 ```
 
 Only `card_played` fully uses this route today. Damage, healing, confidence,
-stress, and paper-tag feedback now use `CombatVisualFeedbackMapper` after
-render-facing state-delta detection.
+stress, and paper-tag feedback now use `CombatRenderFeedbackState` for
+render-facing state-delta detection, then `CombatVisualFeedbackMapper` for
+headed visual command shaping.
 
 That mixed state is acceptable for this baseline, but new combat visual effects
 should choose one of these paths explicitly:
