@@ -88,6 +88,8 @@ the chain is clean:
 
 The current CLI surfaces are:
 
+- `python scripts/content_pack_inventory.py --content-kind-policy`
+- `python scripts/content_pack_inventory.py --content-kind-policy --json`
 - `python scripts/content_pack_inventory.py --active-pack-set`
 - `python scripts/content_pack_inventory.py --active-pack-set --json`
 - `python scripts/content_pack_inventory.py --active-pack-set --active-pack-id tutorial`

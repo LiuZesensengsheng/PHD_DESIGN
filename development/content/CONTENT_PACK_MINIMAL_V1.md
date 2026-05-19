@@ -448,6 +448,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py`
 - Export the content-pack inventory as JSON:
   - `python scripts/content_pack_inventory.py --json`
+- Report the content-kind policy and allowed empty-runtime-output kinds:
+  - `python scripts/content_pack_inventory.py --content-kind-policy`
+- Export the content-kind policy as JSON:
+  - `python scripts/content_pack_inventory.py --content-kind-policy --json`
 - Report active pack identity preview:
   - `python scripts/content_pack_inventory.py --pack-identity-preview`
 - Export active pack identity preview as JSON:
