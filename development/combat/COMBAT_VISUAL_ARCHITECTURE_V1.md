@@ -21,7 +21,8 @@ The active direction is:
 `contexts/combat/mvc/views/combat_view.py`
 
 - owns the headed pygame screen and asset/font resources
-- wires subviews, visual state, the FX controller, and the render pipeline
+- wires subviews, visual state, the FX controller, visual passes, and the
+  render pipeline
 - retains compatibility wrappers for older view-facing calls
 - keeps compatibility properties for older render-feedback comparison values
 
@@ -61,6 +62,15 @@ The active direction is:
   - game-over overlay
 - owns game-over overlay timing state
 - remains a render-pass owner, not runtime phase or combat-end authority
+
+### Targeting Pass
+
+`contexts/combat/mvc/views/targeting_pass.py`
+
+- owns headed rendering for the drag targeting arrow
+- reads `CombatTargetingInteractionState` as input
+- keeps targeting arrow curve and arrowhead drawing out of `CombatView`
+- remains a local render-pass owner, not combat targeting authority
 
 ### Visual Effects Runtime State
 
@@ -171,7 +181,7 @@ implementation.
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | short-lived FX pass after banners |
 | Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | actor rendering |
 | Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `CombatActorFeedbackState` wobble state | actor rendering |
-| Targeting arrow | drag / targeting interaction state | `CombatTargetingInteractionState` + `CombatRenderPipeline` targeting pass | `CombatTargetingInteractionState` drag/targeting state | targeting pass after FX |
+| Targeting arrow | drag / targeting interaction state | `CombatTargetingInteractionState` + `CombatTargetingPass` | `CombatTargetingInteractionState` drag/targeting state | targeting pass after FX |
 | Turn and enemy banners | renderable state banners | `CombatRenderPipeline` -> `CombatOverlayPass.render_banners` | renderable state payloads | banner pass after HUD |
 | Game-over overlay | renderable game-over state | `CombatRenderPipeline` -> `CombatOverlayPass.render_game_over` | `CombatOverlayPass.game_over_start_time` | final overlay pass |
 
