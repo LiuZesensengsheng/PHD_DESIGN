@@ -9,7 +9,7 @@ This is a testing-governance line, not a delete-test line.
 
 ## Scope
 
-In scope:
+Original V1 scope:
 
 - define test tiers and stable entry points
 - add pytest markers for future tagging
@@ -17,12 +17,27 @@ In scope:
 - record current runtime baseline and slow-test observations
 - keep the existing full-suite gate intact until a later explicit decision
 
-Out of scope for this line:
+Original V1 out of scope:
 
 - deleting coverage just to reduce runtime
 - changing cardanalysis / combat_analysis tests
 - enabling pytest-xdist by default
 - changing the commit gate before a separate decision-log update
+
+## 2026-05-19 Update
+
+`DL-20260519-01` promotes `pytest-xdist` to the default full-suite commit gate.
+The full suite remains required before commits; only the execution strategy
+changes from serial pytest to parallel pytest.
+
+Default full-suite entry point:
+
+- `py -3.11 -m pytest -q -n auto --dist=loadscope`
+
+Use serial pytest only as a diagnosis fallback when a failure appears
+order-dependent or worker-specific:
+
+- `py -3.11 -m pytest -q`
 
 ## Test Tiers
 
@@ -85,17 +100,18 @@ Current purpose:
 
 ### Full Suite
 
-Use for commit readiness unless the commit gate is explicitly changed.
+Use for commit readiness.
 
 Default entry point:
 
-- `py -3.11 -m pytest -q`
+- `py -3.11 -m pytest -q -n auto --dist=loadscope`
 
 Current status:
 
 - required before every commit by `AGENTS.md`
-- do not replace it with smoke-only validation without a later decision-log
-  update
+- remains a full-suite gate, not a smoke-only replacement
+- if parallel execution fails in a way that looks order-dependent, reproduce
+  with serial `py -3.11 -m pytest -q` before changing product code
 
 ## Marker Policy
 
@@ -133,6 +149,6 @@ Recommended next slices:
 1. add marker coverage to the tests used by `run_test_smoke.py`
 2. split duplicated campaign/combat fixtures after measuring setup hotspots
 3. review source-scanning tests that duplicate the same full-repo traversal
-4. evaluate `pytest-xdist` only after global-state and filesystem assumptions
-   are audited
+4. keep auditing global-state and filesystem assumptions as parallel-only
+   failures appear
 

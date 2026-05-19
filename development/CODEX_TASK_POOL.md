@@ -74,8 +74,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
     4. `Content Pack Minimal V1`
     5. `UI Runtime Refactor Window`
   - UI refactor remains gated on human visual review availability
-  - full pytest remains the commit gate until a separate policy update changes
-    it
+  - parallel full pytest is now the commit gate after `DL-20260519-01`
   - `Save Reset Policy V1` is now the first implementation line:
     old machine snapshot shapes and unwrapped save-slot payloads may be rejected
     during the current pre-content stage
@@ -119,7 +118,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - boundary:
     - `py -3.11 scripts/run_test_smoke.py --profile contract`
   - commit:
-    - `py -3.11 -m pytest -q`
+    - `py -3.11 -m pytest -q -n auto --dist=loadscope`
 
 ### A0. Test Strategy V1
 
@@ -137,7 +136,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - `Phase 3` quick and contract smoke profiles added
   - quick profile target is ordinary refactor feedback
   - contract profile target is boundary/refactor closure feedback
-  - full-suite commit gate remains unchanged until a separate decision updates it
+  - full-suite commit gate now uses `pytest-xdist` after `DL-20260519-01`
 - Current rules:
   - do not delete tests only to reduce runtime
   - keep cardanalysis / combat_analysis test optimization out of this line
@@ -150,7 +149,7 @@ Do not treat a task as a long-running Codex lane when it is mainly:
   - boundary closure:
     - `py -3.11 scripts/run_test_smoke.py --profile contract`
   - current commit gate:
-    - `py -3.11 -m pytest -q`
+    - `py -3.11 -m pytest -q -n auto --dist=loadscope`
 
 ### A1. Campaign Boundary Hardening V1
 
