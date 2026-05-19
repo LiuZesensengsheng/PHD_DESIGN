@@ -50,6 +50,18 @@ The active direction is:
 - remains a headed combat presentation state owner, not combat runtime
   authority
 
+### Overlay Pass
+
+`contexts/combat/mvc/views/overlay_pass.py`
+
+- owns headed overlay rendering for:
+  - phase banner
+  - enemy-action banner
+  - queue-lock banner
+  - game-over overlay
+- owns game-over overlay timing state
+- remains a render-pass owner, not runtime phase or combat-end authority
+
 ### Visual Effects Runtime State
 
 `contexts/combat/mvc/views/visual_effects_state.py`
@@ -160,8 +172,8 @@ implementation.
 | Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | actor rendering |
 | Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `CombatActorFeedbackState` wobble state | actor rendering |
 | Targeting arrow | drag / targeting interaction state | `CombatTargetingInteractionState` + `CombatRenderPipeline` targeting pass | `CombatTargetingInteractionState` drag/targeting state | targeting pass after FX |
-| Turn and enemy banners | renderable state banners | `CombatRenderPipeline` -> `CombatView` banner renderers | renderable state payloads | banner pass after HUD |
-| Game-over overlay | renderable game-over state | `CombatRenderPipeline` -> `CombatView._render_game_over` | `game_over_start_time` | final overlay pass |
+| Turn and enemy banners | renderable state banners | `CombatRenderPipeline` -> `CombatOverlayPass.render_banners` | renderable state payloads | banner pass after HUD |
+| Game-over overlay | renderable game-over state | `CombatRenderPipeline` -> `CombatOverlayPass.render_game_over` | `CombatOverlayPass.game_over_start_time` | final overlay pass |
 
 ## Event Mapping Baseline
 
