@@ -97,6 +97,22 @@ This is the current runtime-state anchor for combat FX. New short-lived effects
 should either fit here explicitly or introduce a similarly narrow combat-only
 state owner.
 
+### Effect Recipes V0
+
+`contexts/combat/mvc/views/effect_recipes.py`
+
+- owns combat-only authored parameters for existing feedback effects:
+  - feedback colors
+  - critical-damage threshold
+  - mapper particle counts
+  - per-enemy feedback delay
+  - actor wobble shaping values
+  - floating-number duration, rise, and jitter presentation values
+- is consumed by `CombatVisualFeedbackMapper` and `_FxController`
+- keeps visual tuning data out of render-delta detection and draw code
+- remains a narrow parameter layer, not a shared effect engine, not JSON/CSV
+  loading, and not a cross-context `EffectSpec`
+
 ### Actor Feedback State
 
 `contexts/combat/mvc/views/actor_feedback_state.py`
@@ -140,6 +156,7 @@ calling concrete view/private FX methods directly.
 - maps render-facing combat deltas to headed visual feedback commands
 - keeps floating-number, particle, shake, and wobble shaping out of
   `CombatRenderFeedbackState`
+- reads `CombatVisualFeedbackRecipe` for current authored feedback parameters
 - remains a temporary headed mapper until those facts are promoted to runtime
   presentation events
 
@@ -150,6 +167,8 @@ calling concrete view/private FX methods directly.
 - mutates `CombatVisualEffectsState`
 - updates short-lived FX lifetimes
 - renders particles, floating numbers, and played-card flyouts
+- reads `FloatingNumberRecipe` for floating-number duration, rise, and jitter
+  parameters
 - remains a presentation component, not gameplay authority
 
 ### Presentation Event Consumer
@@ -225,14 +244,19 @@ should choose one of these paths explicitly:
 
 ## Next Migration Slices
 
-1. Route more actor-local feedback through `CombatActorFeedbackState` only when
+1. Keep `Effect Recipes V0` narrow while feedback tuning is still local to
+   mapper and floating-number rendering. Do not promote this to shared
+   `EffectSpec` or external data loading until at least two concrete effect
+   families need authored data beyond the current parameters.
+2. Route more actor-local feedback through `CombatActorFeedbackState` only when
    a concrete actor feedback family needs it.
-2. Keep card hover/drag/targeting behavior inside `CombatTargetingInteractionState`
+3. Keep card hover/drag/targeting behavior inside `CombatTargetingInteractionState`
    unless it becomes a retained widget owner later.
-3. Split short-lived FX pass details further only when another effect family
+4. Split short-lived FX pass details further only when another effect family
    makes the current pass too broad.
-4. Add a data-backed effect catalog only after at least two effect families need
-   authoring data. Do not introduce `EffectSpec` first.
+5. Keep card flyout multi-phase animation out of `Effect Recipes V0`; it needs
+   a separate recipe or animation-clip decision because its lifecycle shape is
+   different from mapper feedback.
 
 ## Guardrails
 
