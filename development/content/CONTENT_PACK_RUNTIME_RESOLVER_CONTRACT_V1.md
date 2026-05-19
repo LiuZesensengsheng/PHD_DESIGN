@@ -230,7 +230,8 @@ The runtime authority promotion is valid only while these checks stay true:
   claim/reference drift before a separate combat-specific handoff changes
   authority
 - the campaign reward loader shadow is clean for current loader-visible
-  `rewards_*.json` runtime outputs, including the tutorial reward file, before
+  `rewards_*.json` runtime outputs, including the tutorial reward file, and its
+  composition-owned resolver comparison reports no claim/reference drift before
   a separate reward-specific handoff changes authority
 - the runtime loading authority coverage report is clean, meaning every
   resolver-owned runtime path is covered by at least one promoted
@@ -512,6 +513,9 @@ Current resolver-owned runtime paths are:
 - `contexts/shared/infrastructure/content_pack_campaign_reward_loader_shadow.py`
   currently owns the report-only campaign reward helper shadow. It verifies
   that `data/questlines/rewards_tutorial.json` is declared, present,
-  collision-free, and visible through the current campaign reward helper. It
-  preserves `slack` as an allowed empty-runtime-output pack and is not runtime
-  loading authority.
+  collision-free, and visible through the current campaign reward helper. When
+  supplied by CLI/report or data-pipeline contract paths, it also compares that
+  declared reward output claim with the composition-owned resolver's
+  `rewards_*.json` references and reports drift without becoming runtime
+  loading authority. It preserves `slack` as an allowed empty-runtime-output
+  pack and is not runtime loading authority.
