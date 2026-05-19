@@ -58,6 +58,18 @@ state owner.
 - owns shake/wobble offset calculations used by actor rendering
 - remains a headed combat presentation state owner, not gameplay authority
 
+### Targeting Interaction State
+
+`contexts/combat/mvc/views/targeting_interaction_state.py`
+
+- owns local headed card interaction state:
+  - hovered and dragged card index
+  - drag start/current positions
+  - card and enemy hit rects
+  - targeting arrow start and hovered target id
+- owns hover, drag-threshold, target-hit, and drag-end play-info shaping
+- remains local UI interaction state, not combat runtime targeting authority
+
 ### Visual Effects Commands
 
 `contexts/combat/mvc/views/visual_effects_commands.py`
@@ -131,7 +143,7 @@ implementation.
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | short-lived FX pass after banners |
 | Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | actor rendering |
 | Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `CombatActorFeedbackState` wobble state | actor rendering |
-| Targeting arrow | drag / targeting interaction state | `CombatView` input state | drag/targeting fields | targeting pass after FX |
+| Targeting arrow | drag / targeting interaction state | `CombatTargetingInteractionState` + `CombatRenderPipeline` targeting pass | `CombatTargetingInteractionState` drag/targeting state | targeting pass after FX |
 | Turn and enemy banners | renderable state banners | `CombatRenderPipeline` -> `CombatView` banner renderers | renderable state payloads | banner pass after HUD |
 | Game-over overlay | renderable game-over state | `CombatRenderPipeline` -> `CombatView._render_game_over` | `game_over_start_time` | final overlay pass |
 
@@ -165,9 +177,11 @@ should choose one of these paths explicitly:
 
 1. Route more actor-local feedback through `CombatActorFeedbackState` only when
    a concrete actor feedback family needs it.
-2. Split short-lived FX pass details further only when another effect family
+2. Keep card hover/drag/targeting behavior inside `CombatTargetingInteractionState`
+   unless it becomes a retained widget owner later.
+3. Split short-lived FX pass details further only when another effect family
    makes the current pass too broad.
-3. Add a data-backed effect catalog only after at least two effect families need
+4. Add a data-backed effect catalog only after at least two effect families need
    authoring data. Do not introduce `EffectSpec` first.
 
 ## Guardrails
