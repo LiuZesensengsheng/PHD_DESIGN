@@ -100,11 +100,12 @@ The headed combat frame currently uses this practical pass order:
 5. pre-hand particles
 6. hand and HUD
 7. phase, enemy-action, and queue-lock banners
-8. floating numbers, particles, heal particles, and played-card flyouts
-9. targeting arrow
-10. game-over overlay
-11. display flip
-12. sync last render-facing comparison values
+8. short-lived FX: floating numbers, particles, and heal particles
+9. played-card flyout
+10. targeting arrow
+11. game-over overlay
+12. display flip
+13. sync last render-facing comparison values
 
 Pass order matters. New effects should state which pass they belong to before
 implementation.
@@ -115,9 +116,9 @@ implementation.
 | --- | --- | --- | --- | --- |
 | Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` | `played_cards` | played-card flyout pass after HUD |
 | Played-card 2.5D pose | card flyout rendering | `_FxController.render_played_cards` + `draw_card(..., pose=...)` | `played_cards` | played-card flyout pass after HUD |
-| Floating number | render-facing stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | floating-number pass after banners |
+| Floating number | render-facing stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` | `hit_particles` | pre-hand and post-banner particle passes |
-| Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | post-banner heal-particle pass |
+| Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | short-lived FX pass after banners |
 | Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `player_shake`, `enemy_shake` | actor rendering |
 | Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `player_wobble`, `enemy_wobble` | actor rendering |
 | Targeting arrow | drag / targeting interaction state | `CombatView` input state | drag/targeting fields | targeting pass after FX |
@@ -137,9 +138,8 @@ CombatSession presentation event
 ```
 
 Only `card_played` fully uses this route today. Damage, healing, confidence,
-and stress feedback now use `CombatVisualFeedbackMapper` after render-facing
-state-delta detection. Paper-tag feedback still comes directly from
-`CombatView`.
+stress, and paper-tag feedback now use `CombatVisualFeedbackMapper` after
+render-facing state-delta detection.
 
 That mixed state is acceptable for this baseline, but new combat visual effects
 should choose one of these paths explicitly:
@@ -153,13 +153,11 @@ should choose one of these paths explicitly:
 
 ## Next Migration Slices
 
-1. Move paper-tag feedback behind `CombatVisualFeedbackMapper` or a neighboring
-   mapper if it grows beyond one floating number.
-2. Split actor shake/wobble state into a narrow combat visual state owner if
+1. Split actor shake/wobble state into a narrow combat visual state owner if
    more actor feedback is added.
-3. Give render passes small named methods when another effect family is added
-   to the `numbers_fx_played` section.
-4. Add a data-backed effect catalog only after at least two effect families need
+2. Split short-lived FX pass details further only when another effect family
+   makes the current pass too broad.
+3. Add a data-backed effect catalog only after at least two effect families need
    authoring data. Do not introduce `EffectSpec` first.
 
 ## Guardrails
