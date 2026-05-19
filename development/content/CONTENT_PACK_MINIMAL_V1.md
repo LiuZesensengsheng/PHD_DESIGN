@@ -291,6 +291,16 @@ Why add this before content production?
   composition API. It is visibility only and does not change runtime loading,
   runtime activation, save pinning, dependency solving, hot reload, UI DLC
   selection, or JSON payload parsing.
+- `contexts/shared/infrastructure/content_pack_runtime_loading_authority.py`
+  provides report-only coverage over the existing resolver-backed promoted
+  runtime loading helpers. It compares the authoritative
+  `ContentPackRuntimeResolverResult` paths from `ContentPackRunComposition`
+  with the promoted narrative, combat encounter, and campaign reward helper
+  patterns from the helper content-kind audit, then reports which
+  resolver-owned runtime paths are covered and which are uncovered. It is a
+  migration checkpoint over the current loading authority surface, not runtime
+  activation, save pinning, dependency solving, hot reload, UI DLC selection,
+  or JSON payload parsing.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -494,6 +504,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit`
 - Export runtime helper content-kind audit as JSON:
   - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit --json`
+- Report resolver-backed runtime loading authority coverage:
+  - `python scripts/content_pack_inventory.py --runtime-loading-authority`
+- Export resolver-backed runtime loading authority coverage as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-loading-authority --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
