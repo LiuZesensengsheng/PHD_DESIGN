@@ -283,6 +283,14 @@ Why add this before content production?
   post-combat reward flow use `require_campaign_reward_definition()`. It is
   not runtime activation, save pinning, dependency solving, hot reload, UI DLC
   selection, or runtime loading authority.
+- `contexts/shared/infrastructure/content_pack_runtime_helper_content_kind_audit.py`
+  provides a report-only audit table over the promoted runtime helper surface.
+  It names each composition-owned helper, the public helper it delegates to,
+  the content kinds that helper consumes, the current runtime-output filename
+  pattern, and the production consumers that enter through the `require_*`
+  composition API. It is visibility only and does not change runtime loading,
+  runtime activation, save pinning, dependency solving, hot reload, UI DLC
+  selection, or JSON payload parsing.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -482,6 +490,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard`
 - Export production runtime resolver consumer guard as JSON:
   - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard --json`
+- Report runtime helper content-kind audit:
+  - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit`
+- Export runtime helper content-kind audit as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:

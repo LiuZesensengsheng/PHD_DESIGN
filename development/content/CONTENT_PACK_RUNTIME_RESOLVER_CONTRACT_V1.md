@@ -106,6 +106,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-context-guard --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard`
 - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard --json`
+- `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit`
+- `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -397,6 +399,18 @@ Current resolver-owned runtime paths are:
   `require_campaign_reward_definition()`. It does not change runtime
   activation, save pinning, dependency solving, hot reload, UI DLC selection,
   or JSON payload loading.
+- `contexts/shared/infrastructure/content_pack_runtime_helper_content_kind_audit.py`
+  currently owns the report-only audit table for promoted runtime helper
+  content-kind usage. It records the three composition-owned helper surfaces:
+  narrative startup consumes `narrative_source` runtime outputs under
+  `data/questlines/*.json`, combat encounter lookup consumes `combat_source`
+  and `narrative_source` outputs under `data/questlines/encounters_*.json`,
+  and campaign reward lookup consumes `narrative_source` outputs under
+  `data/questlines/rewards_*.json`. It also records the production consumers
+  that enter through the composition `require_*` API. This is report-only
+  visibility and does not change runtime loading, runtime activation, save
+  pinning, dependency solving, hot reload, UI DLC selection, or JSON payload
+  parsing.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
