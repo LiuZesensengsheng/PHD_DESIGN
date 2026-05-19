@@ -431,9 +431,14 @@ Why add this before content production?
   provides a report-only shadow over that combat encounter helper. It checks
   that current loader-visible encounter runtime files are pack-owned, declared
   outputs exist without collisions, and declared encounter ids remain visible
-  through `combat_encounter_loader.py`. It preserves `slack` as allowed-empty
-  and is still not runtime loading authority, resolver activation, save
-  pinning, dependency solving, hot reload, or combat balance work.
+  through `combat_encounter_loader.py`. Inventory/report and data-pipeline
+  contract paths may also pass the composition-owned
+  `ContentPackRuntimeResolverResult` into this shadow so it can compare
+  declared encounter output claims with resolver-owned `encounters_*.json`
+  references and report claim/reference drift before any future combat handoff.
+  It preserves `slack` as allowed-empty and is still not runtime loading
+  authority, resolver activation, save pinning, dependency solving, hot reload,
+  or combat balance work.
 - `contexts/shared/infrastructure/content_pack_campaign_reward_loader_shadow.py`
   provides a report-only shadow over the campaign reward helper. It checks that
   current loader-visible reward runtime files are pack-owned, declared outputs
