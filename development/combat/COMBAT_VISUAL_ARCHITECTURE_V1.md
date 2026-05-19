@@ -88,7 +88,7 @@ The active direction is:
 `contexts/combat/mvc/views/visual_effects_state.py`
 
 - owns short-lived combat visual lifetimes:
-  - `damage_numbers`
+  - `damage_numbers` as `FloatingNumberState` payloads
   - `hit_particles`
   - `heal_particles`
   - `played_cards`
@@ -96,6 +96,10 @@ The active direction is:
 This is the current runtime-state anchor for combat FX. New short-lived effects
 should either fit here explicitly or introduce a similarly narrow combat-only
 state owner.
+
+`FloatingNumberState` is the first typed short-lived FX payload. It keeps a
+temporary mapping-compatible surface for existing render code, while making the
+floating-number fields explicit for later recipe and animation-clip work.
 
 ### Effect Recipes V0
 
