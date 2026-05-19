@@ -497,7 +497,13 @@ Current resolver-owned runtime paths are:
   default allowed handoff-factory set is also empty; new narrative, combat,
   reward, or resolver-owned paths should use promoted content-pack handoff
   boundaries instead of returning to directory prefix scanning or the old
-  factory handoff path.
+  factory handoff path. The guard also audits direct
+  `QuestLoader.load_from_runtime_paths()` call sites. The current allowed
+  explicit-path loader usages are the promoted narrative, combat encounter, and
+  campaign reward helper boundaries plus the report-only combat/reward shadow
+  lookup helpers. Production runtime consumers should keep using
+  `ContentPackRunComposition.require_*` instead of calling the explicit-path
+  loader directly.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` currently owns
   campaign reward-definition lookup as a narrow content-pack resolver consumer.
   It loads resolver-owned `rewards_*.json` paths through
