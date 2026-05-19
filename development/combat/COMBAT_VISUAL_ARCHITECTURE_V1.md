@@ -62,6 +62,16 @@ state owner.
 Business or runtime presentation paths should prefer this command seam over
 calling concrete view/private FX methods directly.
 
+### Visual Feedback Mapper
+
+`contexts/combat/mvc/views/visual_feedback_mapper.py`
+
+- maps render-facing combat deltas to headed visual feedback commands
+- keeps floating-number, particle, shake, and wobble shaping out of
+  `CombatView._check_health_changes`
+- remains a temporary headed mapper until those facts are promoted to runtime
+  presentation events
+
 ### FX Controller
 
 `contexts/combat/mvc/views/fx_controller.py`
@@ -105,11 +115,11 @@ implementation.
 | --- | --- | --- | --- | --- |
 | Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` | `played_cards` | played-card flyout pass after HUD |
 | Played-card 2.5D pose | card flyout rendering | `_FxController.render_played_cards` + `draw_card(..., pose=...)` | `played_cards` | played-card flyout pass after HUD |
-| Floating number | render-facing stress, health, confidence, or tag delta detection | `CombatVisualEffectsCommands.start_floating_number` or current compatibility wrappers | `damage_numbers` | floating-number pass after banners |
-| Hit particles | damage or critical feedback | `CombatVisualEffectsCommands.spawn_hit_particles` or current compatibility wrappers | `hit_particles` | pre-hand and post-banner particle passes |
-| Heal particles | healing or positive feedback | `CombatVisualEffectsCommands.spawn_heal_particles` or current compatibility wrappers | `heal_particles` | post-banner heal-particle pass |
-| Actor shake | render-facing damage/stress feedback | current `CombatView` local state | `player_shake`, `enemy_shake` | actor rendering |
-| Actor wobble | render-facing stress/confidence feedback | current `CombatView` local state | `player_wobble`, `enemy_wobble` | actor rendering |
+| Floating number | render-facing stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | floating-number pass after banners |
+| Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` | `hit_particles` | pre-hand and post-banner particle passes |
+| Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | post-banner heal-particle pass |
+| Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `player_shake`, `enemy_shake` | actor rendering |
+| Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `player_wobble`, `enemy_wobble` | actor rendering |
 | Targeting arrow | drag / targeting interaction state | `CombatView` input state | drag/targeting fields | targeting pass after FX |
 | Turn and enemy banners | renderable state banners | `CombatRenderPipeline` -> `CombatView` banner renderers | renderable state payloads | banner pass after HUD |
 | Game-over overlay | renderable game-over state | `CombatRenderPipeline` -> `CombatView._render_game_over` | `game_over_start_time` | final overlay pass |
@@ -127,8 +137,9 @@ CombatSession presentation event
 ```
 
 Only `card_played` fully uses this route today. Damage, healing, confidence,
-stress, and paper-tag feedback still come from render-facing state-delta
-detection in `CombatView`.
+and stress feedback now use `CombatVisualFeedbackMapper` after render-facing
+state-delta detection. Paper-tag feedback still comes directly from
+`CombatView`.
 
 That mixed state is acceptable for this baseline, but new combat visual effects
 should choose one of these paths explicitly:
@@ -142,9 +153,8 @@ should choose one of these paths explicitly:
 
 ## Next Migration Slices
 
-1. Move damage/heal/confidence delta feedback behind a small combat-only
-   command mapper so `CombatView._check_health_changes` stops directly shaping
-   all FX details.
+1. Move paper-tag feedback behind `CombatVisualFeedbackMapper` or a neighboring
+   mapper if it grows beyond one floating number.
 2. Split actor shake/wobble state into a narrow combat visual state owner if
    more actor feedback is added.
 3. Give render passes small named methods when another effect family is added
