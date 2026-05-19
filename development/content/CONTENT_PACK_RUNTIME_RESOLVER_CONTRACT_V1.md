@@ -483,7 +483,12 @@ Current resolver-owned runtime paths are:
   files are named explicitly while preserving the same `data/combat/*.json`
   payloads. The default allowed production `CombatContentLoader.load_all()`
   set is empty. This does not make those support files resolver-owned runtime
-  outputs, does not change combat balance, and does not activate packs.
+  outputs, does not change combat balance, and does not activate packs. The
+  guard reports the five active support inputs, `data/combat/species.json`,
+  `data/combat/traits.json`, `data/combat/skills.json`,
+  `data/combat/arenas.json`, and `data/combat/arena_traits.json`, as
+  `combat_support_json_inputs_not_resolver_outputs`; it is clean only while
+  those files exist and have no content-pack runtime-output claims.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
   owns the first runtime loader promotion boundary for narrative startup. It
   can load tutorial narrative runtime paths without directory prefix scanning

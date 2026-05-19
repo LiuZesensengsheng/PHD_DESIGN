@@ -403,7 +403,12 @@ Why add this before content production?
   `data/combat/*.json` support files are loaded through a named explicit file
   set instead of production `CombatContentLoader.load_all()`. This does not
   make combat support JSON resolver-owned runtime output, does not change
-  combat balance, and does not activate packs.
+  combat balance, and does not activate packs. The guard also reports the five
+  current combat support inputs, `data/combat/species.json`,
+  `data/combat/traits.json`, `data/combat/skills.json`,
+  `data/combat/arenas.json`, and `data/combat/arena_traits.json`, and keeps
+  them clean only while they are present and not claimed by the content-pack
+  runtime-output index.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` provides
   the first runtime promotion boundary over the resolver-backed handoff for narrative
   startup. Narrative sessions now receive a content-pack handoff-backed
