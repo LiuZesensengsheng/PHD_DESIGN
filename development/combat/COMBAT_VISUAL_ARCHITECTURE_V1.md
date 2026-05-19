@@ -36,6 +36,16 @@ The active direction is:
   methods in a fixed order
 - remains combat-only and does not introduce a shared renderer runtime
 
+### Scene Actor Pass
+
+`contexts/combat/mvc/views/scene_actor_pass.py`
+
+- owns headed scene-layer rendering and actor-row pass orchestration
+- draws background, status bar, and foreground layers
+- delegates actor row drawing to ally and enemy row views using the combat
+  horizon
+- remains a render-pass owner, not layout authority for individual actors
+
 ### Render Feedback State
 
 `contexts/combat/mvc/views/render_feedback_state.py`
@@ -180,8 +190,8 @@ implementation.
 | Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` | `hit_particles` | pre-hand and post-banner particle passes |
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | short-lived FX pass after banners |
-| Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | actor rendering |
-| Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `CombatActorFeedbackState` wobble state | actor rendering |
+| Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | scene actor pass |
+| Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `CombatActorFeedbackState` wobble state | scene actor pass |
 | Targeting arrow | drag / targeting interaction state | `CombatTargetingInteractionState` + `CombatTargetingPass` | `CombatTargetingInteractionState` drag/targeting state | targeting pass after FX |
 | Turn and enemy banners | renderable state banners | `CombatRenderPipeline` -> `CombatOverlayPass.render_banners` | renderable state payloads | banner pass after HUD |
 | Game-over overlay | renderable game-over state | `CombatRenderPipeline` -> `CombatOverlayPass.render_game_over` | `CombatOverlayPass.game_over_start_time` | final overlay pass |
