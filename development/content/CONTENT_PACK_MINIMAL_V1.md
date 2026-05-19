@@ -194,9 +194,12 @@ Why add this before content production?
   transient process/run context owner for that run composition. The
   `GameStateMachine` owns one context and passes it into content-pack-aware
   campaign, combat, event, and dialogue states so those runtime paths reuse one
-  shared `ContentPackRunComposition` for the current process. It is not written
-  to saves and is still not runtime activation, save pack pinning, UI DLC
-  selection, dependency solving, hot reload, or shipped DLC authority.
+  shared `ContentPackRunComposition` for the current process.
+  `build_game_state_machine()` may receive explicit requested pack ids for a
+  transient local run selection; the default remains all discovered active
+  source packs. It is not written to saves and is still not runtime activation,
+  save pack pinning, UI DLC selection, dependency solving, hot reload, or
+  shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context_guard.py`
   provides a report-only static guard that keeps production runtime consumers
   from directly creating their own `ContentPackRunComposition`. The only
@@ -224,7 +227,9 @@ Why add this before content production?
   `ContentPackRuntimeContext`, reducing that default-fallback backlog to zero.
   `contexts/shared/game_runtime.py::build_game_state_machine` and the headless
   repro entrypoint remain the explicit owners that create shared transient
-  runtime contexts. This is not runtime activation, save pinning, UI DLC
+  runtime contexts. The game runtime owner may pass explicit requested pack ids
+  into that transient context, but those ids are process-local resolver
+  selection input only. This is not runtime activation, save pinning, UI DLC
   selection, dependency solving, hot reload, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
   provides a report-only static guard over production runtime resolver

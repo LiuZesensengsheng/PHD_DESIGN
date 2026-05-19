@@ -60,6 +60,9 @@ the chain is clean:
     state-machine runtime
   - is the shared transient runtime context for normal state-machine content
     consumers in the current process
+  - may be created by `build_game_state_machine()` with explicit requested pack
+    ids for a transient local run selection, while the default stays all
+    discovered active source packs
   - passes the same composition into content-pack-aware campaign, combat,
     event, and dialogue states instead of letting each path lazily create its
     own default composition
@@ -294,7 +297,9 @@ Current resolver-owned runtime paths are:
   `ContentPackRunComposition` for the active `GameStateMachine`. The state
   machine passes this context into content-pack-aware campaign, combat, event,
   and dialogue states so they share the same composition during the current
-  process. It is not serialized into saves and is not a save schema owner,
+  process. `build_game_state_machine()` can pass explicit requested pack ids
+  into that process-local context without changing save data or UI-visible DLC
+  state. It is not serialized into saves and is not a save schema owner,
   runtime activation layer, UI DLC selector, dependency solver, hot-reload
   layer, or shipped DLC authority.
 - `contexts/shared/infrastructure/content_pack_runtime_context_guard.py`
@@ -320,7 +325,9 @@ Current resolver-owned runtime paths are:
   `build_combat_scene_runtime`, and `GameStateMachine` moved to explicit
   required `ContentPackRuntimeContext` inputs. `build_game_state_machine` and
   the headless repro entrypoint remain the explicit owners that create shared
-  transient runtime contexts. The guard also reports production calls to
+  transient runtime contexts; `build_game_state_machine` may pass explicit
+  requested pack ids as transient resolver selection input. The guard also
+  reports production calls to
   `resolve_content_pack_run_composition_for_runtime_context()` that omit the
   explicit `content_pack_runtime_context=` keyword, keeping promoted consumers
   on the shared transient context path instead of returning to selection
