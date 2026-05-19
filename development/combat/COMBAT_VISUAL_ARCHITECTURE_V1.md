@@ -48,6 +48,16 @@ This is the current runtime-state anchor for combat FX. New short-lived effects
 should either fit here explicitly or introduce a similarly narrow combat-only
 state owner.
 
+### Actor Feedback State
+
+`contexts/combat/mvc/views/actor_feedback_state.py`
+
+- owns actor-local visual lifetimes:
+  - player and enemy shake
+  - player and enemy wobble
+- owns shake/wobble offset calculations used by actor rendering
+- remains a headed combat presentation state owner, not gameplay authority
+
 ### Visual Effects Commands
 
 `contexts/combat/mvc/views/visual_effects_commands.py`
@@ -119,8 +129,8 @@ implementation.
 | Floating number | render-facing stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` | `hit_particles` | pre-hand and post-banner particle passes |
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | short-lived FX pass after banners |
-| Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `player_shake`, `enemy_shake` | actor rendering |
-| Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `player_wobble`, `enemy_wobble` | actor rendering |
+| Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | actor rendering |
+| Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `CombatActorFeedbackState` wobble state | actor rendering |
 | Targeting arrow | drag / targeting interaction state | `CombatView` input state | drag/targeting fields | targeting pass after FX |
 | Turn and enemy banners | renderable state banners | `CombatRenderPipeline` -> `CombatView` banner renderers | renderable state payloads | banner pass after HUD |
 | Game-over overlay | renderable game-over state | `CombatRenderPipeline` -> `CombatView._render_game_over` | `game_over_start_time` | final overlay pass |
@@ -153,8 +163,8 @@ should choose one of these paths explicitly:
 
 ## Next Migration Slices
 
-1. Split actor shake/wobble state into a narrow combat visual state owner if
-   more actor feedback is added.
+1. Route more actor-local feedback through `CombatActorFeedbackState` only when
+   a concrete actor feedback family needs it.
 2. Split short-lived FX pass details further only when another effect family
    makes the current pass too broad.
 3. Add a data-backed effect catalog only after at least two effect families need
