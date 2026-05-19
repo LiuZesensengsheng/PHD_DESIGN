@@ -264,8 +264,13 @@ Why add this before content production?
   checks that
   `ContentPackRunComposition.require_runtime_resolver_result()` still reads
   the composition-owned builder result and validates it with
-  `runtime_resolver_errors(...)` before any helper receives it. It is not
-  runtime activation, save pinning, dependency solving, hot reload, UI DLC
+  `runtime_resolver_errors(...)` before any helper receives it. Its report also
+  names the current promoted production runtime consumer helper usages:
+  narrative startup uses `require_narrative_quest_loader()`, combat encounter
+  assembly and combat blueprint reporting use
+  `require_combat_encounter_definition()`, and campaign reward menus plus
+  post-combat reward flow use `require_campaign_reward_definition()`. It is
+  not runtime activation, save pinning, dependency solving, hot reload, UI DLC
   selection, or runtime loading authority.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and

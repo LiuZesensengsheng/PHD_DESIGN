@@ -373,8 +373,14 @@ Current resolver-owned runtime paths are:
   `ContentPackRunComposition.require_runtime_resolver_result()` reads the
   composition-owned builder source and validates that result with
   `runtime_resolver_errors(...)` before passing it to promoted helpers. It does
-  not change runtime activation, save pinning, dependency solving, hot reload,
-  UI DLC selection, or JSON payload loading.
+  also reports the promoted production helper usages in campaign, combat, and
+  narrative paths: narrative startup goes through
+  `require_narrative_quest_loader()`, combat encounter assembly and combat
+  blueprint reporting go through `require_combat_encounter_definition()`, and
+  campaign reward menus plus post-combat reward flow go through
+  `require_campaign_reward_definition()`. It does not change runtime
+  activation, save pinning, dependency solving, hot reload, UI DLC selection,
+  or JSON payload loading.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
