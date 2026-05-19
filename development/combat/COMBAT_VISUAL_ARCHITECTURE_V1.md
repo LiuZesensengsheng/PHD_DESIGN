@@ -32,7 +32,8 @@ The active direction is:
 
 - owns the frame pass order for headed combat
 - updates animation lifetimes before drawing
-- calls visual owners, `CombatView`, and subview rendering methods in a fixed order
+- calls visual owners, the FX controller, `CombatView`, and subview rendering
+  methods in a fixed order
 - remains combat-only and does not introduce a shared renderer runtime
 
 ### Render Feedback State
