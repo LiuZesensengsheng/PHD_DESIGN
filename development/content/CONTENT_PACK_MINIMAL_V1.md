@@ -418,7 +418,11 @@ Why add this before content production?
   call sites and direct calls to the old QuestLoader handoff factory. The
   default allowed sets are empty. It prevents narrative, combat, reward, or new
   runtime paths from silently returning to directory prefix scanning or the old
-  factory handoff path.
+  factory handoff path. The same guard also reports direct
+  `QuestLoader.load_from_runtime_paths()` usage so only the three promoted
+  resolver-backed helper boundaries and the report-only combat/reward shadow
+  lookups may call the explicit-path loader directly; new production consumers
+  should enter through `ContentPackRunComposition.require_*`.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` owns the current
   campaign reward-definition lookup boundary. It now consumes the authoritative
   content-pack runtime resolver for `rewards_*.json` paths and loads those paths
