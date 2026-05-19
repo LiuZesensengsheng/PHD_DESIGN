@@ -156,6 +156,12 @@ Why add this before content production?
   report-only active pack identity preview over the registry. It is a future
   resolver/save-pinning input surface only; it does not write save fields or
   choose active runtime content.
+- `contexts/shared/infrastructure/content_pack_content_kinds.py` owns the
+  current shared content-kind catalog (`combat_source`, `event_source`, and
+  `narrative_source`) plus the allowed empty-runtime-output content kind set
+  (`event_source`). It is a policy/read-model helper for manifest, inventory,
+  resolver, and shadow reports; it does not add runtime activation, save
+  pinning, UI DLC state, dependency solving, hot reload, or content loading.
 - `contexts/shared/infrastructure/content_pack_active_set.py` provides the
   explicit resolver-input active pack set. By default it mirrors all discovered
   active source packs, currently `ta`, `slack`, and `tutorial`. It can also

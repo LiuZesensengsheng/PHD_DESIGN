@@ -264,6 +264,13 @@ Current resolver-owned runtime paths are:
   authoritative resolved runtime-reference set. It promotes clean preview rows
   into resolver-owned references, fails closed when preview inputs are blocked,
   and still does not parse runtime JSON payloads.
+- `contexts/shared/infrastructure/content_pack_content_kinds.py` owns the
+  shared content-kind names and allowed empty-runtime-output content-kind set
+  consumed by inventory, resolver-readiness, runtime-output, and helper-shadow
+  reports. The current known content kinds are `combat_source`, `event_source`,
+  and `narrative_source`; only `event_source` may be empty. This is not runtime
+  activation, save pack pinning, UI DLC selection, dependency solving, hot
+  reload, or a content loader.
 - `contexts/shared/infrastructure/content_pack_run_selection.py` owns the
   shared run/session composition input for resolver selection. Promoted
   narrative, combat encounter, and campaign reward runtime consumers should
