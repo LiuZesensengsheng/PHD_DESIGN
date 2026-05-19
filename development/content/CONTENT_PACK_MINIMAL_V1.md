@@ -305,11 +305,11 @@ Why add this before content production?
   provides a report-only preflight review that aggregates the current runtime
   resolver consumer guard, runtime helper content-kind audit, runtime loading
   authority coverage, QuestLoader load-all guard, combat encounter loader
-  shadow, and campaign reward loader shadow into one go/no-go surface for the
+  shadow, campaign reward loader shadow, and combat support JSON loader guard
+  into one go/no-go surface for the
   next small runtime loading slice. It is a review checkpoint only and does not
-  change runtime loading behavior, activate packs, write saves, solve
-  dependencies, support hot reload, change UI, change combat balance, or touch
-  `cardanalysis` / `combat_analysis`.
+  activate packs, write saves, solve dependencies, support hot reload, change
+  UI, change combat balance, or touch `cardanalysis` / `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -396,6 +396,14 @@ Why add this before content production?
 - `QuestLoader.load_from_runtime_paths()` is the explicit-path loader entry for
   promoted handoffs. It can load questline, encounter, and reward JSON from
   caller-provided paths and avoids directory prefix scanning.
+- `contexts/shared/infrastructure/content_pack_combat_content_loader_guard.py`
+  provides a report-only guard over production `CombatContentLoader` runtime
+  support JSON usage. Combat startup and enemy transform effects now use
+  `CombatContentLoader.load_default_runtime_paths()` so the current
+  `data/combat/*.json` support files are loaded through a named explicit file
+  set instead of production `CombatContentLoader.load_all()`. This does not
+  make combat support JSON resolver-owned runtime output, does not change
+  combat balance, and does not activate packs.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` provides
   the first runtime promotion boundary over the resolver-backed handoff for narrative
   startup. Narrative sessions now receive a content-pack handoff-backed
@@ -591,6 +599,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard`
 - Export remaining production QuestLoader.load_all usage guard as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard --json`
+- Report combat support JSON loader guard:
+  - `python scripts/content_pack_inventory.py --combat-content-loader-guard`
+- Export combat support JSON loader guard as JSON:
+  - `python scripts/content_pack_inventory.py --combat-content-loader-guard --json`
 - Report combat encounter loader shadow:
   - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow`
 - Export combat encounter loader shadow as JSON:
