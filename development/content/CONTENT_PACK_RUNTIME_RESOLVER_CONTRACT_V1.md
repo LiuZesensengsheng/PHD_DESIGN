@@ -108,6 +108,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard --json`
 - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit`
 - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit --json`
+- `python scripts/content_pack_inventory.py --runtime-loading-authority`
+- `python scripts/content_pack_inventory.py --runtime-loading-authority --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -228,6 +230,12 @@ The runtime authority promotion is valid only while these checks stay true:
 - the campaign reward loader shadow is clean for current loader-visible
   `rewards_*.json` runtime outputs, including the tutorial reward file, before
   a separate reward-specific handoff changes authority
+- the runtime loading authority coverage report is clean, meaning every
+  resolver-owned runtime path is covered by at least one promoted
+  composition-owned helper surface:
+  narrative loader covers tutorial narrative outputs,
+  combat encounter lookup covers tutorial and TA encounter outputs, and
+  campaign reward lookup covers tutorial reward outputs
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -409,6 +417,19 @@ Current resolver-owned runtime paths are:
   `data/questlines/rewards_*.json`. It also records the production consumers
   that enter through the composition `require_*` API. This is report-only
   visibility and does not change runtime loading, runtime activation, save
+  pinning, dependency solving, hot reload, UI DLC selection, or JSON payload
+  parsing.
+- `contexts/shared/infrastructure/content_pack_runtime_loading_authority.py`
+  currently owns the report-only coverage checkpoint for promoted runtime
+  loading authority. It consumes the composition-owned
+  `ContentPackRuntimeResolverResult` plus the runtime helper content-kind audit
+  and reports resolver-owned runtime paths covered by
+  `ContentPackRunComposition.require_narrative_quest_loader()`,
+  `ContentPackRunComposition.require_combat_encounter_definition()`, and
+  `ContentPackRunComposition.require_campaign_reward_definition()`. Current
+  resolver-owned paths are all covered by at least one promoted helper surface;
+  overlapping coverage is expected for tutorial encounter and reward files.
+  This report does not change runtime loading, runtime activation, save
   pinning, dependency solving, hot reload, UI DLC selection, or JSON payload
   parsing.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
