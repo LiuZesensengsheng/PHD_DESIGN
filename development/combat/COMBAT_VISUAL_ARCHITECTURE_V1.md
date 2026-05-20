@@ -168,7 +168,8 @@ anonymous dictionaries.
 - starts newly visible hand cards from the draw-pile visual source and lets
   existing cards reflow toward their new hand positions
 - keeps removed non-played hand cards alive briefly so turn-end cleanup and
-  discard effects can animate toward the discard-pile visual source
+  discard effects can animate as a staggered curved packet toward the
+  discard-pile visual source
 - remains local headed UI behavior, not draw-rule or pile-routing authority
 
 ### Visual Effects Commands
@@ -280,7 +281,7 @@ implementation.
 | Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` -> `CardFlyoutAnimationClip` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
 | Played-card 2.5D pose | card flyout rendering | `CombatPlayedCardFx.render` + `draw_card(..., pose=...)` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
 | Drawn-card fly-in and hand reflow | render-facing hand identity/order diff | `_HandView.update_animations` keyed by card `instance_id` | `CombatView.card_animations` / `_card_animation_by_instance_id` | hand and HUD pass |
-| Turn-end/discard hand-card exit | render-facing hand identity removal, excluding played-card hidden ids | `_HandView.update_animations` -> `_discarding_card_animations` | `CombatView._discarding_card_animations` | hand and HUD pass |
+| Turn-end/discard hand-card exit | render-facing hand identity removal, excluding played-card hidden ids | `_HandView.update_animations` -> staggered curved `_discarding_card_animations` | `CombatView._discarding_card_animations` | hand and HUD pass |
 | Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` -> `CombatFloatingNumberFx` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` -> `CombatParticleFx` | `hit_particles` | pre-hand and post-banner particle passes |
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` -> `CombatParticleFx` | `heal_particles` | short-lived FX pass after banners |
