@@ -49,6 +49,11 @@ the chain is clean:
   - passes that shared resolver authority result into promoted combat
     encounter and campaign reward helper boundaries instead of letting those
     consumers independently rebuild resolver state
+  - owns combat startup support JSON loading through
+    `require_combat_support_content_loader()`, which caches a
+    `CombatContentLoader` loaded from the named default `data/combat/*.json`
+    support input set through explicit support paths without making those
+    support inputs resolver-owned runtime outputs
   - delegates JSON payload work to the promoted loader/helper boundaries rather
     than becoming a new resolver or parser
   - preserves the default all-discovered active source pack behavior unless an
@@ -310,6 +315,11 @@ Current resolver-owned runtime paths are:
   group through promoted resolver-backed helper boundaries. Narrative
   `QuestLoader` construction, combat encounter lookup, and campaign reward
   lookup all consume the composition-owned resolver result on production paths.
+  Combat startup support JSON loading also enters through
+  `ContentPackRunComposition.require_combat_support_content_loader()`, which
+  loads the named default support set through explicit support paths and caches
+  the loader on the composition; those `data/combat/*.json` files remain
+  support inputs rather than resolver-owned runtime outputs.
   Its `entrypoint_contract` report names
   `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
   consumer entrypoint, `build_content_pack_run_composition()` as the
@@ -447,13 +457,17 @@ Current resolver-owned runtime paths are:
 - `contexts/shared/infrastructure/content_pack_runtime_loading_migration_review.py`
   currently owns the report-only aggregate review before the next small runtime
   loading migration slice. It joins the runtime resolver consumer guard,
-  runtime helper content-kind audit, runtime loading authority coverage,
-  QuestLoader load-all guard, combat support JSON loader guard, combat
-  encounter loader shadow, and campaign reward loader shadow into one
-  `ready_for_next_runtime_loading_slice` signal with component issue lists. It
-  is not a new runtime authority and does not change runtime activation, save
-  pinning, dependency solving, hot reload, UI, combat balance,
-  `cardanalysis`, or `combat_analysis`.
+  runtime context guard, runtime helper content-kind audit, runtime loading
+  authority coverage, QuestLoader load-all guard, combat support JSON loader
+  guard, combat encounter loader shadow, and campaign reward loader shadow into
+  one `ready_for_next_runtime_loading_slice` signal with component issue lists.
+  It also reports known deferred runtime loading surfaces without making them
+  blockers; enemy transform effects still call
+  `CombatContentLoader.load_default_runtime_paths()` directly and are listed as
+  `deferred_for_combat_effects_pipeline` until the combat effects pipeline owns
+  that injection path. It is not a new runtime authority and does not change
+  runtime activation, save pinning, dependency solving, hot reload, UI, combat
+  balance, `cardanalysis`, or `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
@@ -478,13 +492,20 @@ Current resolver-owned runtime paths are:
   encounter, and reward JSON paths without directory prefix scanning.
 - `contexts/shared/infrastructure/content_pack_combat_content_loader_guard.py`
   currently owns the report-only guard for production `CombatContentLoader`
-  runtime support JSON usage. Combat startup and enemy transform effects use
-  `CombatContentLoader.load_default_runtime_paths()` so the active support
-  files are named explicitly while preserving the same `data/combat/*.json`
-  payloads. The default allowed production `CombatContentLoader.load_all()`
-  set is empty. This does not make those support files resolver-owned runtime
-  outputs, does not change combat balance, and does not activate packs. The
-  guard reports the five active support inputs, `data/combat/species.json`,
+  runtime support JSON usage. Combat startup enters that support set through
+  `ContentPackRunComposition.require_combat_support_content_loader()`, which
+  creates and caches a `CombatContentLoader` loaded by
+  `CombatContentLoader.load_from_runtime_paths(...)` with the named default
+  support path set. Enemy transform effects still call
+  `CombatContentLoader.load_default_runtime_paths()` directly and remain a
+  later isolated migration slice. The active support files are named
+  explicitly while preserving the same `data/combat/*.json` payloads. The
+  default allowed production `CombatContentLoader.load_all()` set is empty.
+  This does not make those support files resolver-owned runtime outputs, does
+  not change combat balance, and does not activate packs. The guard reports
+  one composition-owned explicit support path handoff, one remaining direct
+  default support path handoff deferred for the combat effects pipeline, and
+  the five active support inputs, `data/combat/species.json`,
   `data/combat/traits.json`, `data/combat/skills.json`,
   `data/combat/arenas.json`, and `data/combat/arena_traits.json`, as
   `combat_support_json_inputs_not_resolver_outputs`; it is clean only while
