@@ -89,8 +89,8 @@ The active direction is:
 
 - owns short-lived combat visual lifetimes:
   - `damage_numbers` as `FloatingNumberState` payloads
-  - `hit_particles`
-  - `heal_particles`
+  - `hit_particles` as `HitParticleState` payloads
+  - `heal_particles` as `HealParticleState` payloads
   - `played_cards`
 
 This is the current runtime-state anchor for combat FX. New short-lived effects
@@ -100,6 +100,8 @@ state owner.
 `FloatingNumberState` is the first typed short-lived FX payload. It keeps a
 temporary mapping-compatible surface for existing render code, while making the
 floating-number fields explicit for later recipe and animation-clip work.
+`HitParticleState` and `HealParticleState` follow the same temporary
+mapping-compatible pattern for particle update/render loops.
 
 ### Effect Recipes V0
 
@@ -112,6 +114,7 @@ floating-number fields explicit for later recipe and animation-clip work.
   - per-enemy feedback delay
   - actor wobble shaping values
   - floating-number duration, rise, and jitter presentation values
+  - played-card flyout phase timing and scale presentation values
 - is consumed by `CombatVisualFeedbackMapper` and `_FxController`
 - keeps visual tuning data out of render-delta detection and draw code
 - remains a narrow parameter layer, not a shared effect engine, not JSON/CSV
@@ -168,12 +171,44 @@ calling concrete view/private FX methods directly.
 
 `contexts/combat/mvc/views/fx_controller.py`
 
-- mutates `CombatVisualEffectsState`
-- updates short-lived FX lifetimes
-- renders particles, floating numbers, and played-card flyouts
-- reads `FloatingNumberRecipe` for floating-number duration, rise, and jitter
-  parameters
+- remains the compatibility facade used by `CombatView`, the render pipeline,
+  and headed visual command seams
+- wires the named short-lived FX owners:
+  - `CombatFloatingNumberFx`
+  - `CombatParticleFx`
+  - `CombatPlayedCardFx`
+- delegates creation, update, and render work to those owners
 - remains a presentation component, not gameplay authority
+
+### Floating Number FX
+
+`contexts/combat/mvc/views/floating_number_fx.py`
+
+- owns floating-number creation, lifetime update, and rendering
+- mutates `FloatingNumberState` payloads through `CombatVisualEffectsState`
+- reads `FloatingNumberRecipe` for duration, rise, and jitter parameters
+- remains a short-lived FX owner, not render-delta detection authority
+
+### Particle FX
+
+`contexts/combat/mvc/views/particle_fx.py`
+
+- owns hit/heal particle creation, lifetime update, and rendering
+- mutates `HitParticleState` and `HealParticleState` payloads through
+  `CombatVisualEffectsState`
+- keeps particle spawn/update math out of `_FxController`
+- remains a short-lived FX owner, not a shared particle engine
+
+### Played Card FX
+
+`contexts/combat/mvc/views/played_card_fx.py`
+
+- owns played-card flyout queueing, lifecycle update, and rendering
+- keeps the existing three-phase card flyout behavior while reading
+  `CardFlyoutRecipe` for phase timing, scale, trail, and orb presentation
+  parameters
+- remains the owner for card flyout visuals only, not general card interaction
+  or targeting behavior
 
 ### Presentation Event Consumer
 
@@ -209,10 +244,10 @@ implementation.
 | Effect | Trigger Source | Command / Owner | Runtime State | Render Pass |
 | --- | --- | --- | --- | --- |
 | Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` | `played_cards` | played-card flyout pass after HUD |
-| Played-card 2.5D pose | card flyout rendering | `_FxController.render_played_cards` + `draw_card(..., pose=...)` | `played_cards` | played-card flyout pass after HUD |
-| Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` | `damage_numbers` | short-lived FX pass after banners |
-| Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` | `hit_particles` | pre-hand and post-banner particle passes |
-| Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` | `heal_particles` | short-lived FX pass after banners |
+| Played-card 2.5D pose | card flyout rendering | `CombatPlayedCardFx.render` + `draw_card(..., pose=...)` | `played_cards` | played-card flyout pass after HUD |
+| Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` -> `CombatFloatingNumberFx` | `damage_numbers` | short-lived FX pass after banners |
+| Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` -> `CombatParticleFx` | `hit_particles` | pre-hand and post-banner particle passes |
+| Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` -> `CombatParticleFx` | `heal_particles` | short-lived FX pass after banners |
 | Actor shake | render-facing damage/stress feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_shake` | `CombatActorFeedbackState` shake state | scene actor pass |
 | Actor wobble | render-facing stress/confidence feedback | `CombatVisualFeedbackMapper` -> `CombatActorFeedbackCommands.start_actor_wobble` | `CombatActorFeedbackState` wobble state | scene actor pass |
 | Targeting arrow | drag / targeting interaction state | `CombatTargetingInteractionState` + `CombatTargetingPass` | `CombatTargetingInteractionState` drag/targeting state | targeting pass after FX |
@@ -258,9 +293,8 @@ should choose one of these paths explicitly:
    unless it becomes a retained widget owner later.
 4. Split short-lived FX pass details further only when another effect family
    makes the current pass too broad.
-5. Keep card flyout multi-phase animation out of `Effect Recipes V0`; it needs
-   a separate recipe or animation-clip decision because its lifecycle shape is
-   different from mapper feedback.
+5. Promote card flyout from `CardFlyoutRecipe` to a fuller animation-clip shape
+   only when multiple flyout variants or authored transition curves need it.
 
 ## Guardrails
 
