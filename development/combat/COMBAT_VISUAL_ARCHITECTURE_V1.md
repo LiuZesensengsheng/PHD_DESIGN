@@ -158,6 +158,17 @@ anonymous dictionaries.
 - owns hover, drag-threshold, target-hit, and drag-end play-info shaping
 - remains local UI interaction state, not combat runtime targeting authority
 
+### Hand View
+
+`contexts/combat/mvc/views/hand_view.py`
+
+- owns headed hand layout, hand-card rendering, and hand motion interpolation
+- keys hand-card animation state by card `instance_id` so draw, removal, and
+  reordering do not reuse the wrong positional animation slot
+- starts newly visible hand cards from the draw-pile visual source and lets
+  existing cards reflow toward their new hand positions
+- remains local headed UI behavior, not draw-rule or pile-routing authority
+
 ### Visual Effects Commands
 
 `contexts/combat/mvc/views/visual_effects_commands.py`
@@ -266,6 +277,7 @@ implementation.
 | --- | --- | --- | --- | --- |
 | Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` -> `CardFlyoutAnimationClip` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
 | Played-card 2.5D pose | card flyout rendering | `CombatPlayedCardFx.render` + `draw_card(..., pose=...)` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
+| Drawn-card fly-in and hand reflow | render-facing hand identity/order diff | `_HandView.update_animations` keyed by card `instance_id` | `CombatView.card_animations` / `_card_animation_by_instance_id` | hand and HUD pass |
 | Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` -> `CombatFloatingNumberFx` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` -> `CombatParticleFx` | `hit_particles` | pre-hand and post-banner particle passes |
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` -> `CombatParticleFx` | `heal_particles` | short-lived FX pass after banners |
@@ -332,4 +344,4 @@ should choose one of these paths explicitly:
 
 ## Last Updated
 
-- `2026-05-19`
+- `2026-05-20`
