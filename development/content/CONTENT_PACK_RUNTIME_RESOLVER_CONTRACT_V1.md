@@ -52,8 +52,8 @@ the chain is clean:
   - owns combat startup support JSON loading through
     `require_combat_support_content_loader()`, which caches a
     `CombatContentLoader` loaded from the named default `data/combat/*.json`
-    support input set without making those support inputs resolver-owned
-    runtime outputs
+    support input set through explicit support paths without making those
+    support inputs resolver-owned runtime outputs
   - delegates JSON payload work to the promoted loader/helper boundaries rather
     than becoming a new resolver or parser
   - preserves the default all-discovered active source pack behavior unless an
@@ -317,9 +317,9 @@ Current resolver-owned runtime paths are:
   lookup all consume the composition-owned resolver result on production paths.
   Combat startup support JSON loading also enters through
   `ContentPackRunComposition.require_combat_support_content_loader()`, which
-  loads the named default support set and caches the loader on the composition;
-  those `data/combat/*.json` files remain support inputs rather than
-  resolver-owned runtime outputs.
+  loads the named default support set through explicit support paths and caches
+  the loader on the composition; those `data/combat/*.json` files remain
+  support inputs rather than resolver-owned runtime outputs.
   Its `entrypoint_contract` report names
   `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
   consumer entrypoint, `build_content_pack_run_composition()` as the
@@ -495,13 +495,16 @@ Current resolver-owned runtime paths are:
   runtime support JSON usage. Combat startup enters that support set through
   `ContentPackRunComposition.require_combat_support_content_loader()`, which
   creates and caches a `CombatContentLoader` loaded by
-  `CombatContentLoader.load_default_runtime_paths()`. Enemy transform effects
-  still call `CombatContentLoader.load_default_runtime_paths()` directly and
-  remain a later isolated migration slice. The active support files are named
+  `CombatContentLoader.load_from_runtime_paths(...)` with the named default
+  support path set. Enemy transform effects still call
+  `CombatContentLoader.load_default_runtime_paths()` directly and remain a
+  later isolated migration slice. The active support files are named
   explicitly while preserving the same `data/combat/*.json` payloads. The
   default allowed production `CombatContentLoader.load_all()` set is empty.
   This does not make those support files resolver-owned runtime outputs, does
   not change combat balance, and does not activate packs. The guard reports
+  one composition-owned explicit support path handoff, one remaining direct
+  default support path handoff deferred for the combat effects pipeline, and
   the five active support inputs, `data/combat/species.json`,
   `data/combat/traits.json`, `data/combat/skills.json`,
   `data/combat/arenas.json`, and `data/combat/arena_traits.json`, as
