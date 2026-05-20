@@ -310,13 +310,17 @@ Why add this before content production?
   or JSON payload parsing.
 - `contexts/shared/infrastructure/content_pack_runtime_loading_migration_review.py`
   provides a report-only preflight review that aggregates the current runtime
-  resolver consumer guard, runtime helper content-kind audit, runtime loading
-  authority coverage, QuestLoader load-all guard, combat encounter loader
-  shadow, campaign reward loader shadow, and combat support JSON loader guard
-  into one go/no-go surface for the
-  next small runtime loading slice. It is a review checkpoint only and does not
-  activate packs, write saves, solve dependencies, support hot reload, change
-  UI, change combat balance, or touch `cardanalysis` / `combat_analysis`.
+  resolver consumer guard, runtime context guard, runtime helper content-kind
+  audit, runtime loading authority coverage, QuestLoader load-all guard, combat
+  encounter loader shadow, campaign reward loader shadow, and combat support
+  JSON loader guard into one go/no-go surface for the next small runtime
+  loading slice. The same review also lists deferred runtime loading surfaces
+  that are known but non-blocking; enemy transform effects still call
+  `CombatContentLoader.load_default_runtime_paths()` directly and are reported
+  as `deferred_for_combat_effects_pipeline` until the combat effects pipeline
+  owns that injection path. It is a review checkpoint only and does not activate
+  packs, write saves, solve dependencies, support hot reload, change UI, change
+  combat balance, or touch `cardanalysis` / `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime

@@ -457,13 +457,17 @@ Current resolver-owned runtime paths are:
 - `contexts/shared/infrastructure/content_pack_runtime_loading_migration_review.py`
   currently owns the report-only aggregate review before the next small runtime
   loading migration slice. It joins the runtime resolver consumer guard,
-  runtime helper content-kind audit, runtime loading authority coverage,
-  QuestLoader load-all guard, combat support JSON loader guard, combat
-  encounter loader shadow, and campaign reward loader shadow into one
-  `ready_for_next_runtime_loading_slice` signal with component issue lists. It
-  is not a new runtime authority and does not change runtime activation, save
-  pinning, dependency solving, hot reload, UI, combat balance,
-  `cardanalysis`, or `combat_analysis`.
+  runtime context guard, runtime helper content-kind audit, runtime loading
+  authority coverage, QuestLoader load-all guard, combat support JSON loader
+  guard, combat encounter loader shadow, and campaign reward loader shadow into
+  one `ready_for_next_runtime_loading_slice` signal with component issue lists.
+  It also reports known deferred runtime loading surfaces without making them
+  blockers; enemy transform effects still call
+  `CombatContentLoader.load_default_runtime_paths()` directly and are listed as
+  `deferred_for_combat_effects_pipeline` until the combat effects pipeline owns
+  that injection path. It is not a new runtime authority and does not change
+  runtime activation, save pinning, dependency solving, hot reload, UI, combat
+  balance, `cardanalysis`, or `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
