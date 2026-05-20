@@ -112,6 +112,8 @@ The current CLI surfaces are:
 - `python scripts/content_pack_inventory.py --runtime-loading-authority --json`
 - `python scripts/content_pack_inventory.py --runtime-loading-migration-review`
 - `python scripts/content_pack_inventory.py --runtime-loading-migration-review --json`
+- `python scripts/content_pack_inventory.py --combat-content-loader-guard`
+- `python scripts/content_pack_inventory.py --combat-content-loader-guard --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness`
 - `python scripts/content_pack_inventory.py --runtime-resolver-readiness --json`
 - `python scripts/content_pack_inventory.py --runtime-resolver-selection-preview`
@@ -243,8 +245,9 @@ The runtime authority promotion is valid only while these checks stay true:
   campaign reward lookup covers tutorial reward outputs
 - the runtime loading migration review report is clean, meaning the resolver
   consumer guard, helper content-kind audit, runtime loading authority
-  coverage, QuestLoader load-all guard, combat encounter loader shadow, and
-  campaign reward loader shadow all agree before the next runtime loading slice
+  coverage, QuestLoader load-all guard, combat support JSON loader guard,
+  combat encounter loader shadow, and campaign reward loader shadow all agree
+  before the next runtime loading slice
 - slack remains visible as an allowed empty `event_source` pack
 - shadow comparison against current runtime paths passes before ownership
   changes
@@ -445,12 +448,12 @@ Current resolver-owned runtime paths are:
   currently owns the report-only aggregate review before the next small runtime
   loading migration slice. It joins the runtime resolver consumer guard,
   runtime helper content-kind audit, runtime loading authority coverage,
-  QuestLoader load-all guard, combat encounter loader shadow, and campaign
-  reward loader shadow into one `ready_for_next_runtime_loading_slice` signal
-  with component issue lists. It is not a new runtime authority and does not
-  change loading behavior, runtime activation, save pinning, dependency
-  solving, hot reload, UI, combat balance, `cardanalysis`, or
-  `combat_analysis`.
+  QuestLoader load-all guard, combat support JSON loader guard, combat
+  encounter loader shadow, and campaign reward loader shadow into one
+  `ready_for_next_runtime_loading_slice` signal with component issue lists. It
+  is not a new runtime authority and does not change runtime activation, save
+  pinning, dependency solving, hot reload, UI, combat balance,
+  `cardanalysis`, or `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_resolver_shadow.py` currently
   owns the narrative-only shadow compare that checks runtime reference preview
   rows against current tutorial-owned runtime paths without taking loading
@@ -473,6 +476,19 @@ Current resolver-owned runtime paths are:
 - `QuestLoader.load_from_runtime_paths()` is the explicit-path loader entry for
   promoted content-pack handoffs. It can load caller-provided questline,
   encounter, and reward JSON paths without directory prefix scanning.
+- `contexts/shared/infrastructure/content_pack_combat_content_loader_guard.py`
+  currently owns the report-only guard for production `CombatContentLoader`
+  runtime support JSON usage. Combat startup and enemy transform effects use
+  `CombatContentLoader.load_default_runtime_paths()` so the active support
+  files are named explicitly while preserving the same `data/combat/*.json`
+  payloads. The default allowed production `CombatContentLoader.load_all()`
+  set is empty. This does not make those support files resolver-owned runtime
+  outputs, does not change combat balance, and does not activate packs. The
+  guard reports the five active support inputs, `data/combat/species.json`,
+  `data/combat/traits.json`, `data/combat/skills.json`,
+  `data/combat/arenas.json`, and `data/combat/arena_traits.json`, as
+  `combat_support_json_inputs_not_resolver_outputs`; it is clean only while
+  those files exist and have no content-pack runtime-output claims.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` currently
   owns the first runtime loader promotion boundary for narrative startup. It
   can load tutorial narrative runtime paths without directory prefix scanning
