@@ -123,6 +123,19 @@ anonymous dictionaries.
 - remains a narrow parameter layer, not a shared effect engine, not JSON/CSV
   loading, and not a cross-context `EffectSpec`
 
+### Card Flyout Animation Clip V0
+
+`contexts/combat/mvc/views/card_flyout_clip.py`
+
+- owns the combat-only animation-clip shape for played-card flyout V0
+- converts `CardFlyoutRecipe`, start position, screen size, and requested
+  duration into the existing three-phase flyout shape
+- emits typed phase payloads for `PlayedCardFlyoutState`
+- keeps current card flyout visual behavior stable while separating authored
+  timing data from state construction
+- remains local to played-card flyout; it is not a shared animation system,
+  external data format, curve library, or engine-wide timeline
+
 ### Actor Feedback State
 
 `contexts/combat/mvc/views/actor_feedback_state.py`
@@ -209,6 +222,7 @@ calling concrete view/private FX methods directly.
 `contexts/combat/mvc/views/played_card_fx.py`
 
 - owns played-card flyout queueing, lifecycle update, and rendering
+- builds new flyout state through `CardFlyoutAnimationClip`
 - mutates `PlayedCardFlyoutState` and its typed phase payloads through
   `CombatVisualEffectsState`
 - keeps the existing three-phase card flyout behavior while reading
@@ -250,7 +264,7 @@ implementation.
 
 | Effect | Trigger Source | Command / Owner | Runtime State | Render Pass |
 | --- | --- | --- | --- | --- |
-| Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
+| Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` -> `CardFlyoutAnimationClip` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
 | Played-card 2.5D pose | card flyout rendering | `CombatPlayedCardFx.render` + `draw_card(..., pose=...)` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
 | Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` -> `CombatFloatingNumberFx` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` -> `CombatParticleFx` | `hit_particles` | pre-hand and post-banner particle passes |
@@ -300,8 +314,9 @@ should choose one of these paths explicitly:
    unless it becomes a retained widget owner later.
 4. Split short-lived FX pass details further only when another effect family
    makes the current pass too broad.
-5. Promote card flyout from `CardFlyoutRecipe` to a fuller animation-clip shape
-   only when multiple flyout variants or authored transition curves need it.
+5. Extend `CardFlyoutAnimationClip` beyond V0 only when multiple flyout
+   variants, authored transition curves, or human-reviewed timing variants
+   need it.
 
 ## Guardrails
 
