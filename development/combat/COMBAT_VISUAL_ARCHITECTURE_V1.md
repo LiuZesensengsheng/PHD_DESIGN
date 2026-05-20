@@ -91,17 +91,20 @@ The active direction is:
   - `damage_numbers` as `FloatingNumberState` payloads
   - `hit_particles` as `HitParticleState` payloads
   - `heal_particles` as `HealParticleState` payloads
-  - `played_cards`
+  - `played_cards` as `PlayedCardFlyoutState` payloads
 
 This is the current runtime-state anchor for combat FX. New short-lived effects
 should either fit here explicitly or introduce a similarly narrow combat-only
 state owner.
 
-`FloatingNumberState` is the first typed short-lived FX payload. It keeps a
-temporary mapping-compatible surface for existing render code, while making the
-floating-number fields explicit for later recipe and animation-clip work.
-`HitParticleState` and `HealParticleState` follow the same temporary
-mapping-compatible pattern for particle update/render loops.
+The short-lived FX payloads are typed and still keep a temporary
+mapping-compatible surface for existing render code. `FloatingNumberState`,
+`HitParticleState`, `HealParticleState`, and `PlayedCardFlyoutState` make their
+runtime fields explicit while allowing older render helpers to keep their
+dictionary-style reads until those helpers are migrated in smaller slices.
+`PlayedCardFlyoutState` contains typed move/scale phase payloads so later
+recipe and animation-clip work can build on named phase data instead of
+anonymous dictionaries.
 
 ### Effect Recipes V0
 
@@ -196,6 +199,8 @@ calling concrete view/private FX methods directly.
 - owns hit/heal particle creation, lifetime update, and rendering
 - mutates `HitParticleState` and `HealParticleState` payloads through
   `CombatVisualEffectsState`
+- uses typed particle fields internally; the temporary mapping surface remains
+  for render helpers only
 - keeps particle spawn/update math out of `_FxController`
 - remains a short-lived FX owner, not a shared particle engine
 
@@ -204,6 +209,8 @@ calling concrete view/private FX methods directly.
 `contexts/combat/mvc/views/played_card_fx.py`
 
 - owns played-card flyout queueing, lifecycle update, and rendering
+- mutates `PlayedCardFlyoutState` and its typed phase payloads through
+  `CombatVisualEffectsState`
 - keeps the existing three-phase card flyout behavior while reading
   `CardFlyoutRecipe` for phase timing, scale, trail, and orb presentation
   parameters
@@ -243,8 +250,8 @@ implementation.
 
 | Effect | Trigger Source | Command / Owner | Runtime State | Render Pass |
 | --- | --- | --- | --- | --- |
-| Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` | `played_cards` | played-card flyout pass after HUD |
-| Played-card 2.5D pose | card flyout rendering | `CombatPlayedCardFx.render` + `draw_card(..., pose=...)` | `played_cards` | played-card flyout pass after HUD |
+| Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
+| Played-card 2.5D pose | card flyout rendering | `CombatPlayedCardFx.render` + `draw_card(..., pose=...)` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
 | Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` -> `CombatFloatingNumberFx` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` -> `CombatParticleFx` | `hit_particles` | pre-hand and post-banner particle passes |
 | Heal particles | healing or positive feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_heal_particles` -> `CombatParticleFx` | `heal_particles` | short-lived FX pass after banners |
