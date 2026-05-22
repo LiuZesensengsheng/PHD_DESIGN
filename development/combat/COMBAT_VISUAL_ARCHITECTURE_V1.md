@@ -92,6 +92,7 @@ The active direction is:
   - `hit_particles` as `HitParticleState` payloads
   - `heal_particles` as `HealParticleState` payloads
   - `played_cards` as `PlayedCardFlyoutState` payloads
+  - `pile_motion_cards` as `PileMotionCardState` payloads
 
 This is the current runtime-state anchor for combat FX. New short-lived effects
 should either fit here explicitly or introduce a similarly narrow combat-only
@@ -99,9 +100,10 @@ state owner.
 
 The short-lived FX payloads are typed and still keep a temporary
 mapping-compatible surface for existing render code. `FloatingNumberState`,
-`HitParticleState`, `HealParticleState`, and `PlayedCardFlyoutState` make their
-runtime fields explicit while allowing older render helpers to keep their
-dictionary-style reads until those helpers are migrated in smaller slices.
+`HitParticleState`, `HealParticleState`, `PlayedCardFlyoutState`, and
+`PileMotionCardState` make their runtime fields explicit while allowing older
+render helpers to keep their dictionary-style reads until those helpers are
+migrated in smaller slices.
 `PlayedCardFlyoutState` contains typed move/scale phase payloads so later
 recipe and animation-clip work can build on named phase data instead of
 anonymous dictionaries.
@@ -118,6 +120,7 @@ anonymous dictionaries.
   - actor wobble shaping values
   - floating-number duration, rise, and jitter presentation values
   - played-card flyout phase timing and scale presentation values
+  - pile-motion packet timing, card count, arc, scale, and draw-delay values
 - is consumed by `CombatVisualFeedbackMapper` and `_FxController`
 - keeps visual tuning data out of render-delta detection and draw code
 - remains a narrow parameter layer, not a shared effect engine, not JSON/CSV
@@ -167,6 +170,8 @@ anonymous dictionaries.
   reordering do not reuse the wrong positional animation slot
 - starts newly visible hand cards from the draw-pile visual source and lets
   existing cards reflow toward their new hand positions
+- delays newly visible hand-card fly-in while a discard-to-draw refill packet is
+  active so shuffle refresh reads before the drawn card enters the hand
 - keeps removed non-played hand cards alive briefly so turn-end cleanup and
   discard effects can animate as a staggered curved packet toward the
   discard-pile visual source
@@ -182,6 +187,7 @@ anonymous dictionaries.
   - floating numbers
   - hit particles
   - heal particles
+  - discard-to-draw pile refill packets
 
 Business or runtime presentation paths should prefer this command seam over
 calling concrete view/private FX methods directly.
@@ -207,6 +213,7 @@ calling concrete view/private FX methods directly.
   - `CombatFloatingNumberFx`
   - `CombatParticleFx`
   - `CombatPlayedCardFx`
+  - `CombatPileMotionFx`
 - delegates creation, update, and render work to those owners
 - remains a presentation component, not gameplay authority
 
@@ -245,12 +252,27 @@ calling concrete view/private FX methods directly.
 - remains the owner for card flyout visuals only, not general card interaction
   or targeting behavior
 
+### Pile Motion FX
+
+`contexts/combat/mvc/views/pile_motion_fx.py`
+
+- owns short-lived card-pile transfer presentation:
+  - discard-pile-to-draw-pile refill packets triggered by shuffle presentation
+    events
+- mutates `PileMotionCardState` payloads through `CombatVisualEffectsState`
+- reads `PileMotionRecipe` for visible packet count, duration, stagger, arc,
+  card-back size, scale, and hand draw-delay parameters
+- remains a headed combat visual owner, not draw-rule, pile-routing, or deck
+  shuffle authority
+
 ### Presentation Event Consumer
 
 `contexts/combat/mvc/views/presentation_consumer.py`
 
 - maps `CombatPresentationEvent` payloads to headed visual commands
-- currently maps `card_played` into `queue_card_flyout`
+- currently maps:
+  - `card_played` into `queue_card_flyout`
+  - `pile_refilled_from_discard` into `queue_discard_to_draw_refill`
 - keeps pending card render data outside the combat runtime model
 
 ## Current Render Pass Order
@@ -262,7 +284,7 @@ The headed combat frame currently uses this practical pass order:
 3. scene layers
 4. actors
 5. pre-hand particles
-6. hand and HUD
+6. hand and HUD, including pile-motion packets after pile labels/anchors
 7. phase, enemy-action, and queue-lock banners
 8. short-lived FX: floating numbers, particles, and heal particles
 9. played-card flyout
@@ -280,7 +302,8 @@ implementation.
 | --- | --- | --- | --- | --- |
 | Card flyout | `card_played` presentation event, with pending headed card data | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_card_flyout` -> `CardFlyoutAnimationClip` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
 | Played-card 2.5D pose | card flyout rendering | `CombatPlayedCardFx.render` + `draw_card(..., pose=...)` | `PlayedCardFlyoutState` in `played_cards` | played-card flyout pass after HUD |
-| Drawn-card fly-in and hand reflow | render-facing hand identity/order diff | `_HandView.update_animations` keyed by card `instance_id` | `CombatView.card_animations` / `_card_animation_by_instance_id` | hand and HUD pass |
+| Draw-pile refill / shuffle packet | `Shuffled` domain fact mapped to `pile_refilled_from_discard` presentation event | `HeadedCombatPresentationConsumer` -> `CombatVisualEffectsCommands.queue_discard_to_draw_refill` -> `CombatPileMotionFx` | `PileMotionCardState` in `pile_motion_cards` | hand and HUD pass after pile labels |
+| Drawn-card fly-in and hand reflow | render-facing hand identity/order diff, delayed while pile refill is active | `_HandView.update_animations` keyed by card `instance_id` | `CombatView.card_animations` / `_card_animation_by_instance_id` | hand and HUD pass |
 | Turn-end/discard hand-card exit | render-facing hand identity removal, excluding played-card hidden ids | `_HandView.update_animations` -> staggered curved `_discarding_card_animations` | `CombatView._discarding_card_animations` | hand and HUD pass |
 | Floating number | `CombatRenderFeedbackState` stress, health, confidence, or tag delta detection | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.start_floating_number` -> `CombatFloatingNumberFx` | `damage_numbers` | short-lived FX pass after banners |
 | Hit particles | damage or critical feedback | `CombatVisualFeedbackMapper` -> `CombatVisualEffectsCommands.spawn_hit_particles` -> `CombatParticleFx` | `hit_particles` | pre-hand and post-banner particle passes |
@@ -303,10 +326,10 @@ CombatSession presentation event
   -> CombatRenderPipeline pass
 ```
 
-Only `card_played` fully uses this route today. Damage, healing, confidence,
-stress, and paper-tag feedback now use `CombatRenderFeedbackState` for
-render-facing state-delta detection, then `CombatVisualFeedbackMapper` for
-headed visual command shaping.
+`card_played` and `pile_refilled_from_discard` use this route today. Damage,
+healing, confidence, stress, and paper-tag feedback now use
+`CombatRenderFeedbackState` for render-facing state-delta detection, then
+`CombatVisualFeedbackMapper` for headed visual command shaping.
 
 That mixed state is acceptable for this baseline, but new combat visual effects
 should choose one of these paths explicitly:
