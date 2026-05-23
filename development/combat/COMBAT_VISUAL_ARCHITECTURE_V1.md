@@ -260,8 +260,9 @@ calling concrete view/private FX methods directly.
   - discard-pile-to-draw-pile refill packets triggered by shuffle presentation
     events
 - mutates `PileMotionCardState` payloads through `CombatVisualEffectsState`
-- reads `PileMotionRecipe` for visible packet count, duration, stagger, arc,
-  card-back size, scale, and hand draw-delay parameters
+- reads `PileMotionRecipe` for visible packet count, duration, stagger, curve
+  height, per-card path variety, light trail, card-back size, scale, and hand
+  draw-delay parameters
 - remains a headed combat visual owner, not draw-rule, pile-routing, or deck
   shuffle authority
 
