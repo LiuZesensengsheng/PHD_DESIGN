@@ -1,110 +1,97 @@
-# Cloudflare Pages And Access Runbook
+# Cloudflare 私有 Wiki 发布说明
 
-- Status: Draft
-- Owner: Team
-- Scope: private-wiki-deployment
-- Canonical: No
-- Last Reviewed: 2026-05-26
+- 状态: Draft
+- 负责人: Team
+- 范围: 私有 Wiki 部署
+- 权威性: No
+- 最后复核: 2026-05-27
 
-## Purpose
+## 目标
 
-Deploy the project wiki as a private website without moving the source of truth
-out of GitHub.
-
-The intended shape is:
+把 `docs/wiki/*.md` 发布成一个带访问门禁的私有网站，同时让 GitHub 继续作为 Markdown、提交记录、PR 和讨论的源头。
 
 ```text
 docs/wiki/*.md
   -> tools/wiki_site/build.py
   -> Cloudflare Workers static assets
-  -> Cloudflare Access login
+  -> Cloudflare Access 登录
 ```
 
-GitHub remains the source of truth for Markdown, commits, PRs, and Discussions.
+## 仓库构建设置
 
-## Repository Build Settings
+Cloudflare 可能把入口显示成 `Create a Worker`，这没有问题。仓库里的 `wrangler.jsonc` 会告诉 Cloudflare 上传 `site/wiki` 里的静态文件。
 
-Cloudflare may show this flow as `Create a Worker` instead of `Create Pages`.
-That is okay. This repository includes `wrangler.jsonc`, which tells Cloudflare
-to publish the generated static assets from `site/wiki`.
-
-Use these settings when creating the Cloudflare project:
-
-| Setting | Value |
+| 设置项 | 推荐值 |
 | --- | --- |
 | Project name | `phd-wiki` |
 | Production branch | `master` |
 | Build command | `python tools/wiki_site/build.py --source docs/wiki --output site/wiki --repo-url https://github.com/LiuZesensengsheng/PHDGAME --repo-ref master --discussion-category general` |
-| Root directory | repository root |
+| Root directory | 仓库根目录 |
 | Python version | `3.11` |
 
-If Cloudflare does not auto-detect Python 3.11, set an environment variable:
+如果 Cloudflare 没有自动识别 Python 3.11，可以增加环境变量：
 
-| Variable | Value |
+| 变量 | 值 |
 | --- | --- |
 | `PYTHON_VERSION` | `3.11` |
 
-Do not leave the build command empty. The repository does not contain prebuilt
-HTML; Cloudflare needs to run the build command before it can upload
-`site/wiki`.
+不要把 build command 留空。仓库不提交预构建 HTML，Cloudflare 需要先运行构建命令，再上传 `site/wiki`。
 
-## Access Policy
+## Access 门禁
 
-Create a Cloudflare Access application for the Pages domain.
+为 Workers 域名创建一个 Cloudflare Access application。
 
-Recommended first policy:
+推荐第一版策略：
 
-| Field | Value |
+| 字段 | 值 |
 | --- | --- |
 | Action | `Allow` |
-| Include | approved email list or approved email domain |
-| Login method | One-time PIN or GitHub identity provider |
-| Session duration | 1 week |
+| Include | 指定邮箱列表或指定邮箱域名 |
+| Login method | One-time PIN 或 GitHub identity provider |
+| Session duration | 1 周到 3 个月，按团队体验调整 |
 
-Do not rely on an unlisted URL as privacy. The site should require Access login
-before any HTML, images, or search index can be loaded.
+不要把“不公开网址”当作隐私方案。私有 Wiki 应该在加载任何 HTML、图片或搜索索引前先经过 Access 登录。
 
 ## GitHub Discussions
 
-GitHub Discussions should stay enabled on the private repository.
+GitHub Discussions 保持开启。每个生成页面底部都有“讨论此页”链接，会打开对应的 GitHub Discussion 草稿。
 
-Each generated page includes a `Discuss this page` link that opens a GitHub
-Discussion draft. The discussion is still governed by private-repo permissions.
+私有仓库中，讨论内容仍受仓库成员权限控制。也就是说，有仓库访问权限的人可以互相看到讨论。
 
-## Images
+## 图片
 
-Put wiki images under:
+Wiki 图片放在：
 
 ```text
 docs/wiki/assets/
 docs/wiki/<section>/assets/
 ```
 
-Use ordinary Markdown:
+Markdown 写法：
 
 ```md
-![Alt text](assets/example.png)
+![图片说明](assets/example.png)
 ```
 
-The builder copies any `assets/` directory under `docs/wiki` into the generated
-site.
+构建器会复制 `docs/wiki` 下任意 `assets/` 目录到生成站点。
 
-## Local Verification
+## 本地验证
 
 ```bash
 py -3.11 tools/wiki_site/build.py --source docs/wiki --output site/wiki --repo-url https://github.com/LiuZesensengsheng/PHDGAME --repo-ref master --discussion-category general
 py -3.11 -m pytest tests/tools/test_wiki_site_build.py -q
 ```
 
-Open:
+构建后打开：
 
 ```text
 site/wiki/index.html
 ```
 
-## Current Limitations
+## 当前限制
 
-- Page comments are linked to GitHub Discussions, not embedded in the page.
-- Discussion syncing back into `docs/wiki/_discussion_cache/` is a later step.
-- Cloudflare Access setup is account-side configuration and is not fully stored
-  in this repository.
+| 限制 | 当前状态 | 后续方向 |
+| --- | --- | --- |
+| 评论展示 | 现在是跳转到 GitHub Discussions | 后续可把讨论摘要同步回仓库并展示在页面 |
+| AI 感知 | AI 目前通过仓库文件和手动拉取讨论感知 | 后续可做定期同步脚本 |
+| Cloudflare Access 配置 | 账号侧配置，不完整存进仓库 | 保留 runbook，必要时截图或补充步骤 |
