@@ -22,6 +22,7 @@
 | --- | --- | --- |
 | 2026-05-27 | Wiki 项目管理 V1 | [2026-05-27-wiki-project-management-v1.md](2026-05-27-wiki-project-management-v1.md) |
 | 2026-05-27 | GitHub 项目同步 V1 | [2026-05-27-github-project-sync-v1.md](2026-05-27-github-project-sync-v1.md) |
+| 2026-05-27 | Wiki 讨论页脚 V1 | [2026-05-27-wiki-discussion-footer-v1.md](2026-05-27-wiki-discussion-footer-v1.md) |
 
 ## 文件命名
 

@@ -27,12 +27,12 @@ TODO 第一版先手工维护。后续接入 GitHub Issues 后，本页可以变
 | PM-001 | 建立 `docs/project/` 项目管理骨架 | Done | Codex | M1 | 本次迭代创建入口、会议、TODO、里程碑。 |
 | PM-002 | 增加 Wiki 项目管理页面 | Done | Codex | M1 | 在 Wiki 中展示项目管理入口。 |
 | PM-003 | 设计 GitHub Issues/Milestones 同步脚本 | Done | Codex | M2 | 已新增 `tools/project_sync/` 和 `scripts/sync_project_management.py`。 |
-| PM-004 | 设计 GitHub Discussions 评论同步脚本 | In Progress | Team | M3 | 当前只同步讨论列表和评论数；评论正文待补。 |
-| PM-005 | 页面底部显示讨论摘要 | Planned | Team | M3 | 先只读展示，不站内发评论。 |
+| PM-004 | 设计 GitHub Discussions 评论同步脚本 | Done | Codex | M3 | 已同步讨论列表、评论数和最近评论正文。 |
+| PM-005 | 页面底部显示讨论摘要 | Done | Codex | M3 | Wiki 页脚已显示最近讨论和评论预览。 |
 | PM-006 | 评估 OAuth 或 GitHub App 站内写入 | Later | Team | M4 | 等只读同步和展示稳定后再判断。 |
-| PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Planned | Team | M3 | 为页面评论摘要和 AI 感知准备。 |
+| PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Done | Codex | M3 | 已写入 `docs/wiki/_discussion_cache/discussions.json`。 |
 | PM-008 | 决定 GitHub milestones 是否作为阶段进度源 | Planned | Team | M2/M3 | 当前 GitHub milestones 为空。 |
 
 ## 当前焦点
 
-当前焦点转向 M3：把 GitHub Discussions 的评论正文和页面摘要同步进仓库，让评论能被 AI 更及时地感知。
+当前 M3 的只读讨论链路已经建立：GitHub Discussions 评论会同步进仓库缓存，并在 Wiki 页脚展示最近讨论。下一步是评估是否需要自动同步 PR 或单独的 Wiki 讨论分类。

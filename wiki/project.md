@@ -30,7 +30,7 @@
 | --- | --- |
 | Open issues | 11 |
 | GitHub milestones | 0 |
-| Discussions | 1 |
+| Discussions | 3 |
 | 最新报告 | [GitHub 项目同步报告](../project/status/github.md) |
 
 ## 会议纪要
@@ -39,6 +39,7 @@
 | --- | --- | --- |
 | 2026-05-27 | Wiki 项目管理 V1 | [Wiki 项目管理 V1 会议纪要](../project/meetings/2026-05-27-wiki-project-management-v1.md) |
 | 2026-05-27 | GitHub 项目同步 V1 | [GitHub 项目同步 V1 会议纪要](../project/meetings/2026-05-27-github-project-sync-v1.md) |
+| 2026-05-27 | Wiki 讨论页脚 V1 | [Wiki 讨论页脚 V1 会议纪要](../project/meetings/2026-05-27-wiki-discussion-footer-v1.md) |
 
 ## 当前 TODO
 
@@ -47,10 +48,10 @@
 | PM-001 | 建立 `docs/project/` 项目管理骨架 | Done | M1 |
 | PM-002 | 增加 Wiki 项目管理页面 | Done | M1 |
 | PM-003 | 设计 GitHub Issues/Milestones 同步脚本 | Done | M2 |
-| PM-004 | 设计 GitHub Discussions 评论同步脚本 | In Progress | M3 |
-| PM-005 | 页面底部显示讨论摘要 | Planned | M3 |
+| PM-004 | 设计 GitHub Discussions 评论同步脚本 | Done | M3 |
+| PM-005 | 页面底部显示讨论摘要 | Done | M3 |
 | PM-006 | 评估 OAuth 或 GitHub App 站内写入 | Later | M4 |
-| PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Planned | M3 |
+| PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Done | M3 |
 | PM-008 | 决定 GitHub milestones 是否作为阶段进度源 | Planned | M2/M3 |
 
 ## 里程碑
@@ -79,5 +80,5 @@
 1. 自动从 GitHub Issues 拉取 TODO。
 2. 自动从 GitHub Milestones 拉取阶段进度。
 3. 自动从 GitHub Discussions 拉取页面评论。
-4. 在 Wiki 页面底部展示最近讨论摘要。
+4. 评估是否需要自动同步 PR 或单独的 Wiki 讨论分类。
 5. 由 AI 定期生成项目状态更新 PR。
