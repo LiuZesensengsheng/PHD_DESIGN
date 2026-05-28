@@ -1,0 +1,97 @@
+{
+  "registry_id": "project_asset_registry_v1",
+  "last_reviewed": "2026-05-28",
+  "items": [
+    {
+      "id": "ASSET-WIKI-001",
+      "name": "中文 Wiki 阅读入口",
+      "type": "documentation",
+      "status": "Prototype",
+      "owner": "Team",
+      "authoritative_page": "docs/wiki/README.md",
+      "related_files": [
+        "docs/wiki/README.md",
+        "tools/wiki_site/build.py"
+      ],
+      "evidence": [
+        "tests/tools/test_wiki_site_build.py",
+        "tools/wiki_site/README.md"
+      ],
+      "milestone": "M0",
+      "risks": [
+        "线上 Cloudflare 生产部署链路仍需复核",
+        "Wiki 内容仍在从旧设计文档中逐步沉淀"
+      ],
+      "next_step": "补齐进度与资产管理页面，并稳定发布链路。"
+    },
+    {
+      "id": "ASSET-PROJECT-001",
+      "name": "Repo-first 项目管理目录",
+      "type": "project_management",
+      "status": "Tested",
+      "owner": "Team",
+      "authoritative_page": "docs/project/README.md",
+      "related_files": [
+        "docs/project/README.md",
+        "docs/project/status/current.md",
+        "docs/project/todos/current.md",
+        "docs/project/milestones/README.md"
+      ],
+      "evidence": [
+        "docs/project/meetings/2026-05-27-wiki-project-management-v1.md",
+        "docs/wiki/project.md"
+      ],
+      "milestone": "M1",
+      "risks": [
+        "手工维护时 TODO、会议纪要和 Wiki 页面可能漂移"
+      ],
+      "next_step": "由 project_control 工具检查核心台账关系。"
+    },
+    {
+      "id": "ASSET-SYNC-001",
+      "name": "GitHub 项目信号同步快照",
+      "type": "tooling",
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/project_sync/README.md",
+      "related_files": [
+        "tools/project_sync/sync.py",
+        "scripts/sync_project_management.py",
+        "docs/project/snapshots/project_sync_snapshot.json"
+      ],
+      "evidence": [
+        "tests/tools/test_project_sync.py",
+        "docs/project/status/github.md"
+      ],
+      "milestone": "M2",
+      "risks": [
+        "同步仍需手动触发",
+        "GitHub milestones 当前为空"
+      ],
+      "next_step": "评估是否用 GitHub Action 自动同步并开 PR。"
+    },
+    {
+      "id": "ASSET-CONTENT-001",
+      "name": "核心内容设计文档集合",
+      "type": "content_design",
+      "status": "Draft",
+      "owner": "Team",
+      "authoritative_page": "docs/wiki/design.md",
+      "related_files": [
+        "docs/design/README.md",
+        "docs/wiki/design.md",
+        "docs/wiki/cards.md",
+        "docs/wiki/enemies.md"
+      ],
+      "evidence": [
+        "docs/wiki/project.md"
+      ],
+      "milestone": "M0",
+      "risks": [
+        "旧设计文档和 Wiki 摘要之间仍可能存在重复或冲突",
+        "删除或归档必须继续经过人工确认"
+      ],
+      "next_step": "逐页把稳定结论沉淀到 Wiki，旧文档只做候选归档清单。"
+    }
+  ]
+}

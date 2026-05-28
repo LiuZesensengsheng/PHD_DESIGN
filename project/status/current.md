@@ -19,6 +19,7 @@
 | Repo-first 项目管理 | 已建立 | 已建立 `docs/project/`、会议纪要、TODO、里程碑入口和 Wiki 项目管理页。 |
 | GitHub 讨论同步 | 已建立 | 已能拉取 Discussions 列表、评论数、最近评论正文，并在 Wiki 页脚展示。 |
 | GitHub TODO 同步 | 已建立 | 已能拉取 Issues/Milestones 并生成 `docs/project/status/github.md` 和 JSON 快照。 |
+| 资产与能力台账 | 已建立 | 已新增资产台账、能力台账、Wiki 阅读页和 Project Control 检查工具。 |
 | 站内写入/OAuth | 暂缓 | 等 V1/V2 稳定后再评估。 |
 
 ## 当前阻塞
@@ -28,10 +29,11 @@
 | 评论展示仍需手动同步 | GitHub 新评论不会自动立刻出现在 Wiki | 先手动运行同步脚本；稳定后评估 GitHub Action 自动同步 PR。 |
 | GitHub milestones 为空 | 当前 issue 无法按阶段自动统计 | 先决定是否在 GitHub 建 milestones，或继续由 `docs/project/milestones/` 管阶段。 |
 | 线上发布需要 PR 合并 | 本地能看，线上要等部署 | 只提交本次 Wiki/Project 相关文件。 |
+| 台账摘要仍需手工同步到 Wiki | JSON 台账和 `docs/wiki/assets.md` 可能漂移 | 先用检查器维护结构，后续评估自动生成 Wiki 表格。 |
 
 ## 下一步
 
-1. 核对当前项目管理 Wiki 页面是否好读。
-2. 核对 Wiki 页脚讨论摘要是否符合阅读习惯。
+1. 核对资产与能力 Wiki 页面是否好读。
+2. 用 `python scripts/check_project_control.py` 持续检查台账健康。
 3. 决定是否在 GitHub 建 milestones，或继续用仓库内里程碑文档。
-4. 再评估是否需要自动同步 PR 或单独的 Wiki 讨论分类。
+4. 评估是否从 JSON 台账自动生成 Wiki 表格。

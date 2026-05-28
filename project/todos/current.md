@@ -32,7 +32,10 @@ TODO 第一版先手工维护。后续接入 GitHub Issues 后，本页可以变
 | PM-006 | 评估 OAuth 或 GitHub App 站内写入 | Later | Team | M4 | 等只读同步和展示稳定后再判断。 |
 | PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Done | Codex | M3 | 已写入 `docs/wiki/_discussion_cache/discussions.json`。 |
 | PM-008 | 决定 GitHub milestones 是否作为阶段进度源 | Planned | Team | M2/M3 | 当前 GitHub milestones 为空。 |
+| PM-009 | 建立资产台账和能力台账 V1 | Done | Codex | M5 | 已新增 `docs/project/assets/` 和 `docs/project/capabilities/`。 |
+| PM-010 | 建立 Project Control 检查工具 | Done | Codex | M5 | 已新增 `tools/project_control/` 和 `scripts/check_project_control.py`。 |
+| PM-011 | 评估台账自动生成 Wiki 表格 | Planned | Team | M5 | 当前 `docs/wiki/assets.md` 先手工展示摘要。 |
 
 ## 当前焦点
 
-当前 M3 的只读讨论链路已经建立：GitHub Discussions 评论会同步进仓库缓存，并在 Wiki 页脚展示最近讨论。下一步是评估是否需要自动同步 PR 或单独的 Wiki 讨论分类。
+当前焦点转向 M5：把资产、能力和项目进展放进可检查台账，让 Wiki 逐步成为统一阅读入口，同时保留工具核查能力。

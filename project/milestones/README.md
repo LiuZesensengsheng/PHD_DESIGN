@@ -18,6 +18,7 @@
 | M2 | GitHub TODO 同步 | Done | 能从 GitHub Issues/Milestones 拉取快照并生成 AI 可读摘要。 |
 | M3 | GitHub 讨论同步 | In Progress | 能从 Discussions 拉取页面评论和会议讨论摘要，并展示在 Wiki。 |
 | M4 | 站内写入评估 | Later | 根据使用体验决定是否引入 OAuth 或 GitHub App。 |
+| M5 | Project Control 台账 | In Progress | 资产台账、能力台账和检查工具可用于核查项目治理结构。 |
 
 ## 当前阶段说明
 

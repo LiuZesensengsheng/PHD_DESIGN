@@ -29,6 +29,8 @@ GitHub 讨论 / TODO / 里程碑
 | 会议纪要 | [meetings/README.md](meetings/README.md) | 每次会议的索引和记录模板。 |
 | TODO | [todos/current.md](todos/current.md) | 当前手工维护的 TODO 清单。 |
 | 里程碑 | [milestones/README.md](milestones/README.md) | 阶段目标、完成标准和当前进度。 |
+| 资产台账 | [assets/README.md](assets/README.md) | 文档、内容、工具和工程资产的状态与下一步。 |
+| 能力台账 | [capabilities/README.md](capabilities/README.md) | 项目已经具备或正在建设的可依赖能力。 |
 | 同步快照 | [snapshots/README.md](snapshots/README.md) | AI 可读 JSON 快照。 |
 
 ## 规则
@@ -39,6 +41,7 @@ GitHub 讨论 / TODO / 里程碑
 4. 里程碑只记录阶段目标，不塞日常碎任务。
 5. GitHub Issues/Discussions 同步上线前，本目录可以手工维护。
 6. 后续脚本同步时，保留人工摘要，不把原始 API 快照当成唯一可读入口。
+7. 资产和能力进入台账后，必须能被 `python scripts/check_project_control.py` 检查。
 
 ## 与其他目录的边界
 
@@ -59,6 +62,14 @@ GitHub 讨论 / TODO / 里程碑
 | V3 | 从 GitHub Discussions 拉取页面评论和会议讨论摘要。 |
 | V4 | AI 定期生成项目状态更新 PR。 |
 | V5 | 评估是否需要 OAuth 或 GitHub App 站内写入。 |
+
+## 治理检查命令
+
+```bash
+python scripts/check_project_control.py
+```
+
+该命令检查资产台账、能力台账、TODO、会议纪要和里程碑的基础结构，帮助 Wiki 逐步成为可靠入口。
 
 ## 同步命令
 

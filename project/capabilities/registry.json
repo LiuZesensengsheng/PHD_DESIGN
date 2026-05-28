@@ -1,0 +1,96 @@
+{
+  "registry_id": "project_capability_registry_v1",
+  "last_reviewed": "2026-05-28",
+  "items": [
+    {
+      "id": "CAP-WIKI-001",
+      "name": "静态 Wiki 构建与本地预览",
+      "domain": "wiki",
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/wiki_site/README.md",
+      "related_files": [
+        "tools/wiki_site/build.py",
+        "docs/wiki/README.md"
+      ],
+      "evidence": [
+        "tests/tools/test_wiki_site_build.py"
+      ],
+      "milestone": "M0",
+      "risks": [
+        "生产发布配置和本地构建配置可能脱节"
+      ],
+      "next_step": "把生产发布链路纳入项目控制检查。"
+    },
+    {
+      "id": "CAP-PROJECT-001",
+      "name": "会议纪要、TODO、里程碑的 repo-first 管理",
+      "domain": "project_management",
+      "status": "Prototype",
+      "owner": "Team",
+      "authoritative_page": "docs/project/README.md",
+      "related_files": [
+        "docs/project/meetings/README.md",
+        "docs/project/todos/current.md",
+        "docs/project/milestones/README.md"
+      ],
+      "evidence": [
+        "docs/project/status/current.md",
+        "docs/wiki/project.md"
+      ],
+      "milestone": "M1",
+      "risks": [
+        "缺少自动检查时，会议行动项可能没有进入 TODO"
+      ],
+      "next_step": "用 project_control 工具检查 ID、状态和引用关系。"
+    },
+    {
+      "id": "CAP-DISCUSS-001",
+      "name": "GitHub Discussions 评论同步与 Wiki 页脚展示",
+      "domain": "collaboration",
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/project_sync/README.md",
+      "related_files": [
+        "tools/project_sync/sync.py",
+        "docs/wiki/_discussion_cache/discussions.json",
+        "tools/wiki_site/build.py"
+      ],
+      "evidence": [
+        "tests/tools/test_project_sync.py",
+        "tests/tools/test_wiki_site_build.py",
+        "docs/project/meetings/2026-05-27-wiki-discussion-footer-v1.md"
+      ],
+      "milestone": "M3",
+      "risks": [
+        "评论同步仍需手动运行",
+        "评论正文展示为预览，不替代 GitHub Discussion 原帖"
+      ],
+      "next_step": "评估自动同步 PR 和独立 Wiki discussion 分类。"
+    },
+    {
+      "id": "CAP-CONTENT-001",
+      "name": "内容包身份和运行时输出可见性",
+      "domain": "content_pipeline",
+      "status": "Tested",
+      "owner": "Team",
+      "authoritative_page": "docs/development/content/CONTENT_PACK_MINIMAL_V1.md",
+      "related_files": [
+        "scripts/content_pack_manifest.py",
+        "scripts/content_pack_inventory.py",
+        "data/narrative_src/packs",
+        "data/events_src/packs"
+      ],
+      "evidence": [
+        "tests/shared/test_content_pack_identity.py",
+        "tests/scripts/test_content_pack_manifest.py",
+        "tests/scripts/test_data_pipeline_contracts.py"
+      ],
+      "milestone": "Architecture Refactor Season V1",
+      "risks": [
+        "内容包能力是工程侧能力，仍需在 Wiki 中形成面向人的解释"
+      ],
+      "next_step": "把内容包能力摘要纳入资产与能力 Wiki。"
+    }
+  ]
+}
