@@ -1,5 +1,14 @@
 # 主线/支线任务链设计：学以致用 (修订版)
 
+- Status: Active
+- Owner: Team
+- Scope: tutorial-questline-design
+- Canonical: Yes
+- Supersedes: none
+- Superseded By: none
+- Implemented In: `data/narrative_src/packs/tutorial/`, `data/questlines/questline_tutorial.json`
+- Last Reviewed: 2026-05-17
+
 本文档详细设计了游戏开局的第一个长线任务链，其核心基调为"无奈与痛苦"，旨在让玩家体验作为学术"打工人"的身不由己。
 
 *   **核心体验**：感受作为学术"打工人"的身不由己。项目的唯一意义就是给老板赚钱，而你在这个过程中，只能用自己的时间、精力和学术理想去填坑。每一个选项都不是最优解，而是"两害相权取其轻"。

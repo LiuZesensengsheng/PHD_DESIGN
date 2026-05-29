@@ -13,6 +13,19 @@
 4. 不默认读取 `Draft`
 5. `Future` 与 `Archive` 只在任务明确需要时读取
 
+## 当前权威地图
+
+这张表只标出默认恢复和实现前最该读的入口。没有列入这里的文档不等于无价值，只表示它们默认不是当前实现依据。
+
+| 区域 | 当前入口 | 默认角色 | 说明 |
+| --- | --- | --- | --- |
+| 跨系统设计原则 | [DESIGN_NORTH_STAR_V1.md](DESIGN_NORTH_STAR_V1.md) | North Star / Active | 敌人、遭遇、事件、卡牌设计的体验验收原则。 |
+| 理想/卡牌设计 | [ideal/README.md](ideal/README.md) | Pilot Index | 红色、白色、绿色理想卡牌文档的状态入口；运行时数据仍以 `data/cards/` 为准。 |
+| 战役/教程设计 | [campaign/README.md](campaign/README.md) | Pilot Index | 教程任务链和战役系统草案入口；当前教程运行时来源见 `data/narrative_src/packs/tutorial/`。 |
+| 敌人/遭遇设计 | [enemydesigon/README.md](enemydesigon/README.md) | Pilot Index | TA 遭遇线和敌人设计入口；当前 TA 运行时数据见 `data/combat/ta/` 与 `data/questlines/encounters_ta.json`。 |
+| 未来设想 | [希望未来能实现的设计/](希望未来能实现的设计/) | Future | 默认不作为当前实现依据。 |
+| 归档资料 | [archive/README.md](archive/README.md) 与 [旧版设计/](旧版设计/) | Archive | 默认只保留历史价值，不参与实现判断。 |
+
 ## 文档角色
 
 ### North Star

@@ -1,5 +1,14 @@
 # TA DDL 精英前置机制评估 v1
 
+- Status: Active
+- Owner: Team
+- Scope: ta-ddl-elite-preconditions
+- Canonical: Yes
+- Supersedes: none
+- Superseded By: none
+- Implemented In: `data/combat/ta/encounters_ta.csv`, `data/questlines/encounters_ta.json`
+- Last Reviewed: 2026-05-17
+
 ## 目标
 
 这份文档只回答一个问题：

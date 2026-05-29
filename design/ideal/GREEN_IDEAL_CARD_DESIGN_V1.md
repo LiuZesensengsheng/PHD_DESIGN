@@ -1,5 +1,14 @@
 # 绿色 · 厚积学派卡牌设计 V1
 
+- Status: Draft
+- Owner: Team
+- Scope: green-ideal-card-design
+- Canonical: No
+- Supersedes: none
+- Superseded By: none
+- Implemented In: none
+- Last Reviewed: 2026-05-17
+
 ## 核心战斗哲学：【耐心致远的价值投资者】
 
 绿色学派的战斗方式，是时间和复利的艺术。他们不追求瞬间的爆发，而是通过精准的资源管理、耐心的手牌“蕴养”和持续的自我强化，将战局的胜利天平一点点地、不可逆转地拉向自己。玩绿色，就是一场关于长期价值投资的博弈，最终以健康、饱满且持续的高产出形态，从容地获得胜利。

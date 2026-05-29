@@ -1,5 +1,14 @@
 # 白色 · 秩序学派设计 v2（去除反伤，聚焦范式+排序）
 
+- Status: Archived
+- Owner: Team
+- Scope: white-ideal-card-design-history
+- Canonical: No
+- Supersedes: `WHITE_IDEAL_CARD_DESIGN_V1.md`
+- Superseded By: `../../ideal/WHITE_IDEAL_CARD_DESIGN_V3.md`
+- Implemented In: none
+- Last Reviewed: 2026-05-17
+
 ## 目标与范围
 - 删除“护甲反伤”类设计与引用（如：通过格挡造成等额伤害的被动/力量）。
 - 将白色的核心玩法收敛到：

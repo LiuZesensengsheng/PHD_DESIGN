@@ -1,5 +1,14 @@
 ## 红色 · 影响轴 v2（设计空间与评分框架）
 
+- Status: Active
+- Owner: Team
+- Scope: red-ideal-card-design
+- Canonical: Yes
+- Supersedes: `../archive/ideal/RED_IDEAL_CARD_DESIGN_V1.md`
+- Superseded By: none
+- Implemented In: `data/cards/red/red_frontier_basic.json`, `data/cards/red/`
+- Last Reviewed: 2026-05-17
+
 > 本文档在 v1 的基础上，收敛为**可计数、可评分、可生成卡牌的设计蓝图**。  
 > 不直接落单卡，而是用「机制轴 × 功能轴 × 强度/权重」的模式来描述红色卡牌空间，方便后续按权重打分与挑选。
 

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "name": "General",
+    "slug": "general",
+    "visibility": "private",
+    "default_role": "writer",
+    "status": "active",
+    "created_at": "2026-05-28 13:40:50.597241+00",
+    "updated_at": "2026-05-28 13:40:50.597241+00",
+    "deleted_at": ""
+  }
+]

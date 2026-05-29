@@ -1,5 +1,14 @@
 # 白色 · 秩序学派卡牌设计 V1
 
+- Status: Archived
+- Owner: Team
+- Scope: white-ideal-card-design-history
+- Canonical: No
+- Supersedes: none
+- Superseded By: `WHITE_IDEAL_CARD_DESIGN_V2.md`, `../../ideal/WHITE_IDEAL_CARD_DESIGN_V3.md`
+- Implemented In: none
+- Last Reviewed: 2026-05-17
+
 ## 核心战斗哲学：【确定性的构筑师】
 
 白色学派的战斗方式，是将混乱的战局改造为遵循其规则的、导向必然胜利的仪式。它不追求单次爆发的伤害，而是追求建立一个不可动摇的、对自己有利的“范式”。

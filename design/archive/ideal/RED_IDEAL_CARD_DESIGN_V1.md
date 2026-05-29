@@ -1,5 +1,14 @@
 ## 红色 · 影响轴 v1（核心：拿来主义连打，短期透支爆发）
 
+- Status: Archived
+- Owner: Team
+- Scope: red-ideal-card-design-history
+- Canonical: No
+- Supersedes: none
+- Superseded By: `../../ideal/RED_IDEAL_CARD_DESIGN_V2.md`
+- Implemented In: none
+- Last Reviewed: 2026-05-17
+
 ### 目标与范围
 - 明确红色在本游戏中的核心表达：**积极搜索、拿来就用、回合内爆发、事后短期透支**。
 - 围绕【本回合出牌量】与【本回合新抽的牌】定义红色的系统引擎，为后续红色卡牌、敌人和事件设计提供统一口径。
