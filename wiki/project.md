@@ -34,7 +34,7 @@
 | --- | --- |
 | Open issues | 11 |
 | GitHub milestones | 0 |
-| Discussions | 1 |
+| Discussions | 3 |
 | 最新报告 | [GitHub 项目同步报告](../project/status/github.md) |
 
 ## 会议纪要
@@ -43,6 +43,8 @@
 | --- | --- | --- |
 | 2026-05-27 | Wiki 项目管理 V1 | [Wiki 项目管理 V1 会议纪要](../project/meetings/2026-05-27-wiki-project-management-v1.md) |
 | 2026-05-27 | GitHub 项目同步 V1 | [GitHub 项目同步 V1 会议纪要](../project/meetings/2026-05-27-github-project-sync-v1.md) |
+| 2026-05-27 | Wiki 讨论页脚 V1 | [Wiki 讨论页脚 V1 会议纪要](../project/meetings/2026-05-27-wiki-discussion-footer-v1.md) |
+| 2026-05-28 | Project Control 台账 V1 | [Project Control 台账 V1 会议纪要](../project/meetings/2026-05-28-project-control-ledgers-v1.md) |
 
 ## 当前 TODO
 
@@ -51,17 +53,18 @@
 | PM-001 | 建立 `docs/project/` 项目管理骨架 | Done | M1 |
 | PM-002 | 增加 Wiki 项目管理页面 | Done | M1 |
 | PM-003 | 设计 GitHub Issues/Milestones 同步脚本 | Done | M2 |
-| PM-004 | 设计 GitHub Discussions 评论同步脚本 | In Progress | M3 |
-| PM-005 | 页面底部显示讨论摘要 | Planned | M3 |
+| PM-004 | 设计 GitHub Discussions 评论同步脚本 | Done | M3 |
+| PM-005 | 页面底部显示讨论摘要 | Done | M3 |
 | PM-006 | 评估 OAuth 或 GitHub App 站内写入 | Later | M4 |
-| PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Planned | M3 |
+| PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Done | M3 |
 | PM-008 | 决定 GitHub milestones 是否作为阶段进度源 | Planned | M2/M3 |
 | PM-009 | 建立资产台账和能力台账 V1 | Done | M5 |
 | PM-010 | 建立项目进展总览 | Done | M5 |
-| PM-011 | 建立 Project Control 检查工具 | In Progress | M5 |
+| PM-011 | 建立 Project Control 检查工具 | Done | M5 |
 | PM-012 | 本地试运行 Docmost 协作层 | Planned | M6 |
 | PM-013 | 建立目标-需求-任务计划结构 | Done | M5 |
 | PM-014 | 用 Docmost 讨论补充真实目标和需求 | Planned | M6 |
+| PM-015 | 评估台账自动生成 Wiki 表格 | Planned | M5 |
 
 ## 里程碑
 

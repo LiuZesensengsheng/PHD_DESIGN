@@ -43,6 +43,7 @@ GitHub 讨论 / TODO / 里程碑
 4. 里程碑只记录阶段目标，不塞日常碎任务。
 5. GitHub Issues/Discussions 同步上线前，本目录可以手工维护。
 6. 后续脚本同步时，保留人工摘要，不把原始 API 快照当成唯一可读入口。
+7. 资产和能力进入台账后，必须能被 `python scripts/check_project_control.py` 检查。
 
 ## 与其他目录的边界
 
@@ -79,7 +80,7 @@ python scripts/sync_project_management.py --fetch-github --repo LiuZesensengshen
 python scripts/check_project_control.py
 ```
 
-该命令检查资产台账、能力台账、进展页和核心项目管理入口是否存在且基本一致。
+该命令检查资产台账、能力台账、TODO、会议纪要、里程碑、进展页和核心项目管理入口是否存在且基本一致。
 
 ## 项目计划生成
 

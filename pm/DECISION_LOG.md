@@ -1581,3 +1581,86 @@ branch guard disabled or allowlisted until the replacement policy is accepted.
 
 1. Use PR bodies as the implementation-branch handoff surface.
 2. Run a dedicated daily-summary branch after high-velocity PR batches.
+
+### [DL-20260519-01] Full pytest commit gate uses pytest-xdist
+
+- Date: `2026-05-19`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `docs/development/testing/TEST_STRATEGY_V1.md`
+  - `docs/development/DEFAULT_ENTRYPOINTS.md`
+  - `requirements-dev.txt`
+
+#### Background
+
+The previous test strategy kept serial full pytest as the commit gate while
+quick and contract smoke profiles were introduced. A local trial on the active
+workstation showed the same full-suite failures under serial and parallel
+execution, while `pytest-xdist` reduced elapsed time from about `153s` to about
+`25s`.
+
+#### Decision
+
+Promote `pytest-xdist` to the default full-suite commit gate:
+
+- `py -3.11 -m pytest -q -n auto --dist=loadscope`
+
+The full suite remains required before commits. This changes only execution
+strategy, not coverage scope. Serial pytest remains the diagnosis fallback for
+order-dependent or worker-specific failures.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  less waiting during commit readiness checks.
+- Increased human work:
+  occasional parallel-only failures may need serial reproduction before a fix.
+- Critical path effect:
+  implementation branches can keep the full pytest gate without paying the
+  previous serial runtime on every commit.
+
+#### AI Workload Assumption
+
+AI can run the parallel full gate by default and should preserve focused,
+quick-smoke, and contract-smoke validation where those are already required.
+AI should use serial pytest only to diagnose suspected global-state,
+filesystem, ordering, or worker-isolation problems.
+
+#### Alternatives
+
+1. Keep serial `py -3.11 -m pytest -q` as the default commit gate.
+2. Use smoke profiles as the commit gate and reserve full pytest for CI.
+
+#### Risks And Triggers
+
+- Risk:
+  a test has hidden order, filesystem, or global-state coupling.
+- Trigger:
+  a failure appears only under `-n auto` or changes with worker count.
+
+- Risk:
+  agents mistake faster execution for reduced validation requirements.
+- Trigger:
+  PRs omit the full parallel gate and cite only quick or contract smoke.
+
+#### Validation Plan
+
+- `pytest-xdist` is included in development dependencies.
+- `TEST_STRATEGY_V1.md` and `CODEX_TASK_POOL.md` list the parallel full gate.
+- Focused validator coverage protects local hidden-directory JSON files from
+  polluting case-library full-suite runs.
+- The parallel full gate passes before this policy lands.
+
+#### Rollback Plan
+
+If parallel-only failures become frequent and cannot be isolated quickly,
+restore serial `py -3.11 -m pytest -q` as the default commit gate and keep
+`pytest-xdist` as an optional local acceleration tool.
+
+#### Follow-Up
+
+1. Continue auditing global-state and filesystem assumptions when
+   parallel-only failures appear.
+2. Keep quick and contract smoke profiles as early feedback, not commit-gate
+   replacements.

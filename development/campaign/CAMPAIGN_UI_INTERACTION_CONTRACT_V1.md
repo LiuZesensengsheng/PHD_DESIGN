@@ -124,7 +124,6 @@ Meaning:
 Presentation-facing helpers currently exposed by `CampaignView`:
 
 - `draw_layers(...)`
-- `show_choice_toggle(visible)`
 - `screen_to_canvas(screen_pos)`
 - `get_content_transform_params()`
 - `get_block_rect(block, current_turn=...)`
@@ -134,6 +133,8 @@ Meaning:
 - these are presentation/runtime helpers, not business APIs
 - UI collaborators may extend them for rendering and runtime widget behavior
 - business branching must not be added here
+- persistent choice-toggle visibility is now routed through
+  `CampaignChoiceToggleCommands`, not a `CampaignView` forwarding method
 
 ## UI-Owned Areas
 

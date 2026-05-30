@@ -1,171 +1,240 @@
 {
-  "schema_version": 1,
-  "last_reviewed": "2026-05-29",
-  "status_values": [
-    "idea",
-    "draft",
-    "prototype",
-    "validated",
-    "stable",
-    "retired"
-  ],
-  "capabilities": [
+  "registry_id": "project_capability_registry_v1",
+  "last_reviewed": "2026-05-30",
+  "items": [
     {
       "id": "CAP-WIKI-001",
       "name": "静态 Wiki 构建与本地预览",
       "domain": "wiki",
-      "status": "validated",
-      "authority_path": "tools/wiki_site/README.md",
-      "verification": [
-        "py -3.11 tools/wiki_site/build.py --source docs/wiki --output site/wiki --repo-url https://github.com/LiuZesensengsheng/PHDGAME --repo-ref master --discussion-category general",
-        "py -3.11 -m pytest tests/tools/test_wiki_site_build.py -q"
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/wiki_site/README.md",
+      "related_files": [
+        "tools/wiki_site/build.py",
+        "docs/wiki/README.md",
+        "docs/wiki/development.md"
       ],
-      "related_assets": [
-        "ASSET-WIKI-001"
+      "evidence": [
+        "tests/tools/test_wiki_site_build.py",
+        "site/wiki"
       ],
-      "risk": "静态页面的评论和富文本能力有限，需要 Docmost 或同步脚本补齐协作体验。",
-      "next_step": "把资产、进展和项目管理页面纳入 Wiki 导航。"
+      "milestone": "M0",
+      "risks": [
+        "生产发布配置和本地构建配置可能脱节",
+        "静态页面的评论和富文本能力有限，需要 Docmost 或同步脚本补齐协作体验"
+      ],
+      "next_step": "把资产、进展和项目管理页面纳入 Wiki 导航并稳定生产发布链路。"
     },
     {
       "id": "CAP-DOCMOST-001",
       "name": "Docmost 页面导出到 Git 快照",
       "domain": "collaboration",
-      "status": "prototype",
-      "authority_path": "tools/docmost_mirror/README.md",
-      "verification": [
-        "python scripts/export_docmost_snapshot.py --compose-dir <docmost-compose-dir>"
+      "status": "Prototype",
+      "owner": "Codex",
+      "authoritative_page": "tools/docmost_mirror/README.md",
+      "related_files": [
+        "tools/docmost_mirror/README.md",
+        "scripts/export_docmost_snapshot.py",
+        "docs/project/snapshots/docmost/index.md"
       ],
-      "related_assets": [
-        "ASSET-DOCMOST-001",
-        "ASSET-DOCMOST-SNAPSHOT-001"
+      "evidence": [
+        "docs/project/snapshots/docmost/docmost_snapshot.json",
+        "docs/project/snapshots/docmost/comments.json"
       ],
-      "risk": "本地 Docker/数据库状态需要持续可用；云端前需要先确认备份和迁移流程。",
+      "milestone": "M6",
+      "risks": [
+        "本地 Docker/数据库状态需要持续可用",
+        "云端前需要先确认备份和迁移流程"
+      ],
       "next_step": "本地试运行一到两周，定期把评论和会议纪要整理回 Git。"
     },
     {
       "id": "CAP-PROJECT-001",
       "name": "会议纪要、TODO、里程碑的 repo-first 管理",
       "domain": "project_management",
-      "status": "prototype",
-      "authority_path": "docs/project/README.md",
-      "verification": [
-        "python scripts/check_project_control.py"
+      "status": "Prototype",
+      "owner": "Team",
+      "authoritative_page": "docs/project/README.md",
+      "related_files": [
+        "docs/project/meetings/README.md",
+        "docs/project/todos/current.md",
+        "docs/project/milestones/README.md",
+        "docs/project/planning/README.md",
+        "docs/project/progress/overview.md"
       ],
-      "related_assets": [
-        "ASSET-PROJECT-001"
+      "evidence": [
+        "docs/project/status/current.md",
+        "docs/wiki/project.md",
+        "tests/tools/test_project_control.py"
       ],
-      "risk": "手工维护容易漂移，需要 AI 定期整理和检查脚本兜底。",
-      "next_step": "每次项目管理整理后更新 current、TODO、里程碑和会议纪要。"
+      "milestone": "M1/M5",
+      "risks": [
+        "手工维护容易漂移，需要 AI 定期整理和检查脚本兜底"
+      ],
+      "next_step": "每次项目管理整理后更新 current、TODO、里程碑、会议纪要和计划台账。"
     },
     {
       "id": "CAP-DISCUSS-001",
-      "name": "GitHub 项目信号同步",
+      "name": "GitHub Discussions 评论同步与 Wiki 页脚展示",
       "domain": "collaboration",
-      "status": "validated",
-      "authority_path": "tools/project_sync/README.md",
-      "verification": [
-        "python scripts/sync_project_management.py --fetch-github --repo LiuZesensengsheng/PHDGAME",
-        "py -3.11 -m pytest tests/tools/test_project_sync.py -q"
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/project_sync/README.md",
+      "related_files": [
+        "tools/project_sync/sync.py",
+        "docs/wiki/_discussion_cache/discussions.json",
+        "tools/wiki_site/build.py",
+        "docs/project/status/github.md"
       ],
-      "related_assets": [
-        "ASSET-SYNC-001"
+      "evidence": [
+        "tests/tools/test_project_sync.py",
+        "tests/tools/test_wiki_site_build.py",
+        "docs/project/meetings/2026-05-27-wiki-discussion-footer-v1.md"
       ],
-      "risk": "GitHub milestone 为空时阶段统计仍需要仓库内文档维护。",
-      "next_step": "决定 GitHub milestones 是否作为阶段进度源。"
+      "milestone": "M3",
+      "risks": [
+        "评论同步仍需手动运行",
+        "评论正文展示为预览，不替代 GitHub Discussion 原帖",
+        "GitHub milestone 为空时阶段统计仍需要仓库内文档维护"
+      ],
+      "next_step": "评估自动同步 PR 和独立 Wiki discussion 分类。"
     },
     {
       "id": "CAP-ASSET-001",
       "name": "资产与能力台账维护",
       "domain": "governance",
-      "status": "prototype",
-      "authority_path": "docs/project/assets/README.md",
-      "verification": [
-        "python scripts/check_project_control.py"
+      "status": "Prototype",
+      "owner": "Team",
+      "authoritative_page": "docs/project/assets/README.md",
+      "related_files": [
+        "docs/project/assets/registry.json",
+        "docs/project/capabilities/registry.json",
+        "docs/wiki/assets.md"
       ],
-      "related_assets": [
-        "ASSET-PROJECT-001",
-        "ASSET-GOVERNANCE-001"
+      "evidence": [
+        "scripts/check_project_control.py",
+        "tests/tools/test_project_control.py"
       ],
-      "risk": "台账过细会增加维护负担；V1 只记录影响项目理解和 AI 执行的核心对象。",
+      "milestone": "M5",
+      "risks": [
+        "台账过细会增加维护负担",
+        "V1 只记录影响项目理解和 AI 执行的核心对象"
+      ],
       "next_step": "先维护十来个核心资产和能力，试运行后再扩展。"
     },
     {
       "id": "CAP-CONTENT-001",
       "name": "内容包身份和运行时输出可见性",
       "domain": "content_pipeline",
-      "status": "validated",
-      "authority_path": "docs/development/content/CONTENT_PACK_MINIMAL_V1.md",
-      "verification": [
-        "python scripts/cards_csv_to_json.py --generate-all-colors",
-        "python -m pytest tests/scripts/test_data_pipeline_contracts.py -q"
+      "status": "Tested",
+      "owner": "Team",
+      "authoritative_page": "docs/development/content/CONTENT_PACK_MINIMAL_V1.md",
+      "related_files": [
+        "scripts/content_pack_manifest.py",
+        "scripts/content_pack_inventory.py",
+        "data/narrative_src/packs",
+        "data/events_src/packs"
       ],
-      "related_assets": [
-        "ASSET-TA-001",
-        "ASSET-CONTENT-001"
+      "evidence": [
+        "tests/shared/test_content_pack_identity.py",
+        "tests/scripts/test_content_pack_manifest.py",
+        "tests/scripts/test_data_pipeline_contracts.py"
       ],
-      "risk": "内容包身份已经有基础，但 Wiki 展示和资产台账摘要仍需继续补齐。",
-      "next_step": "把 TA 内容包和教程叙事包纳入更完整的资产关系图。"
+      "milestone": "Architecture Refactor Season V1",
+      "risks": [
+        "内容包能力是工程侧能力，仍需在 Wiki 中形成面向人的解释",
+        "内容包身份已经有基础，但 Wiki 展示和资产台账摘要仍需继续补齐"
+      ],
+      "next_step": "把内容包能力摘要纳入资产与能力 Wiki。"
     },
     {
       "id": "CAP-CARDANALYSIS-001",
       "name": "卡牌与战斗设计分析",
       "domain": "design_assist",
-      "status": "validated",
-      "authority_path": "tools/combat_analysis/README.md",
-      "verification": [
-        "python scripts/generate_combat_analysis_portfolio_report.py",
-        "python scripts/validate_capability_graph.py"
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/combat_analysis/README.md",
+      "related_files": [
+        "tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md",
+        "docs/development/cardanalysis/CARDANALYSIS_NORTH_STAR_V1.md",
+        "docs/development/cardanalysis/ENGINEERING_IDEAL_ENCHANTMENT_CARDPOOL_CONSENSUS_V1.md"
       ],
-      "related_assets": [
-        "ASSET-CARDANALYSIS-001"
+      "evidence": [
+        "scripts/validate_capability_graph.py",
+        "tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py"
       ],
-      "risk": "工具链能力很强但文档体量大，需要通过台账和入口页降低检索噪音。",
+      "milestone": "Cardanalysis",
+      "risks": [
+        "工具链能力很强但文档体量大，需要通过台账和入口页降低检索噪音"
+      ],
       "next_step": "把最常用分析入口提升到项目进展页和能力台账摘要。"
     },
     {
       "id": "CAP-LONGTERM-001",
       "name": "长期系统设计资料治理",
       "domain": "content_governance",
-      "status": "draft",
-      "authority_path": "docs/wiki/rewards.md",
-      "verification": [
-        "人工确认：acknowledgements 相关资料需要保留"
+      "status": "Draft",
+      "owner": "Team",
+      "authoritative_page": "docs/wiki/rewards.md",
+      "related_files": [
+        "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md",
+        "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM.md",
+        "docs/wiki/rewards.md"
       ],
-      "related_assets": [
-        "ASSET-ACK-001",
-        "ASSET-CONTENT-001"
+      "evidence": [
+        "docs/project/assets/README.md",
+        "docs/wiki/assets.md"
       ],
-      "risk": "长期系统文档容易被误判为废弃；需要先标注状态和入口，再讨论归档或重写。",
+      "milestone": "Long-term Systems",
+      "risks": [
+        "长期系统文档容易被误判为废弃",
+        "需要先标注状态和入口，再讨论归档或重写"
+      ],
       "next_step": "把致谢、声望、期刊、会议等长期系统分批标注可信度。"
     },
     {
       "id": "CAP-GOVERNANCE-001",
       "name": "文档治理和删除确认流程",
       "domain": "governance",
-      "status": "validated",
-      "authority_path": "docs/development/architecture/DESIGN_DOC_GOVERNANCE_V1.md",
-      "verification": [
+      "status": "Tested",
+      "owner": "Team",
+      "authoritative_page": "docs/development/architecture/DESIGN_DOC_GOVERNANCE_V1.md",
+      "related_files": [
         "docs/pm/DELETE_POLICY.md",
-        "docs/pm/DECISION_LOG.md"
+        "docs/pm/DECISION_LOG.md",
+        "docs/project/README.md"
       ],
-      "related_assets": [
-        "ASSET-GOVERNANCE-001"
+      "evidence": [
+        "docs/wiki/development.md",
+        "docs/project/assets/README.md"
       ],
-      "risk": "如果跳过确认直接归档或删除，会破坏用户对文档治理的信任。",
+      "milestone": "Documentation Governance",
+      "risks": [
+        "如果跳过确认直接归档或删除，会破坏用户对文档治理的信任"
+      ],
       "next_step": "后续只给候选清单，执行前等待 owner 明确确认。"
     },
     {
       "id": "CAP-VALIDATION-001",
       "name": "仓库验证与测试入口",
       "domain": "validation",
-      "status": "validated",
-      "authority_path": "docs/development/DEFAULT_ENTRYPOINTS.md",
-      "verification": [
-        "python scripts/run_repo_smoke_baseline.py",
-        "python -m pytest -q"
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "docs/development/DEFAULT_ENTRYPOINTS.md",
+      "related_files": [
+        "docs/development/DEFAULT_ENTRYPOINTS.md",
+        "requirements-dev.txt",
+        "scripts/run_repo_smoke_baseline.py"
       ],
-      "related_assets": [],
-      "risk": "完整测试耗时较高；小步整理可先跑聚焦测试，提交前再跑完整 gate。",
+      "evidence": [
+        "tests/tools/test_project_control.py",
+        "tests/tools/test_wiki_site_build.py"
+      ],
+      "milestone": "Validation",
+      "risks": [
+        "完整测试耗时较高",
+        "小步整理可先跑聚焦测试，提交前再跑完整 gate"
+      ],
       "next_step": "把 project control 检查加入默认项目管理维护流程。"
     }
   ]

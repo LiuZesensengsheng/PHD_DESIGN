@@ -1,7 +1,7 @@
 # GitHub 项目同步报告
 
 - Snapshot id: `project_sync_snapshot_v1`
-- Generated at: `2026-05-27T07:01:34Z`
+- Generated at: `2026-05-27T15:16:39Z`
 - Repo: `LiuZesensengsheng/PHDGAME`
 - Scope: GitHub Issues, Milestones, Discussions read-only snapshot.
 
@@ -15,7 +15,7 @@
 | Blocked issues | 0 |
 | Milestones | 0 |
 | Open milestones | 0 |
-| Discussions | 1 |
+| Discussions | 3 |
 
 ## 里程碑
 
@@ -45,6 +45,8 @@ No blocked open issues synced.
 
 | Discussion | 分类 | 评论数 | 更新时间 |
 | --- | --- | --- | --- |
+| [#319 bbs系统](https://github.com/LiuZesensengsheng/PHDGAME/discussions/319) | General | 1 | 2026-05-27T14:46:24Z |
+| [#316 Wiki: 设计总览](https://github.com/LiuZesensengsheng/PHDGAME/discussions/316) | General | 0 | 2026-05-27T14:33:34Z |
 | [#314 Wiki: Project Wiki](https://github.com/LiuZesensengsheng/PHDGAME/discussions/314) | General | 0 | 2026-05-27T01:37:46Z |
 
 ## AI 使用方式

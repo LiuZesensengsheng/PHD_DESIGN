@@ -156,6 +156,12 @@ Why add this before content production?
   report-only active pack identity preview over the registry. It is a future
   resolver/save-pinning input surface only; it does not write save fields or
   choose active runtime content.
+- `contexts/shared/infrastructure/content_pack_content_kinds.py` owns the
+  current shared content-kind catalog (`combat_source`, `event_source`, and
+  `narrative_source`) plus the allowed empty-runtime-output content kind set
+  (`event_source`). It is a policy/read-model helper for manifest, inventory,
+  resolver, and shadow reports; it does not add runtime activation, save
+  pinning, UI DLC state, dependency solving, hot reload, or content loading.
 - `contexts/shared/infrastructure/content_pack_active_set.py` provides the
   explicit resolver-input active pack set. By default it mirrors all discovered
   active source packs, currently `ta`, `slack`, and `tutorial`. It can also
@@ -173,11 +179,148 @@ Why add this before content production?
 - `contexts/shared/infrastructure/content_pack_run_composition.py` provides the
   transient run/session composition surface that owns one shared
   `ContentPackRunSelection` for narrative, combat encounter, and campaign
-  reward runtime consumers in the current process. It builds narrative
-  `QuestLoader` instances and delegates combat/reward definition lookup through
-  promoted resolver-backed helper boundaries. It is still not runtime
-  activation, save pack pinning, UI DLC selection, dependency solving, hot
-  reload, or shipped DLC authority.
+  reward runtime consumers in the current process. It caches one authoritative
+  `ContentPackRuntimeResolverResult` and passes that same resolver-owned
+  reference set into narrative `QuestLoader` construction and combat/reward
+  definition lookup through promoted helper boundaries. This makes the
+  composition the shared resolver authority input for current runtime consumers
+  and exposes a reportable entrypoint contract naming
+  `ContentPackRuntimeContext.require_run_composition()` as the normal runtime
+  consumer path, `build_content_pack_run_composition()` as the CLI/report path,
+  `ContentPackRunComposition.build_runtime_resolver_result()` as the internal
+  shared resolver result source, and
+  `ContentPackRunComposition.require_runtime_resolver_result()` as the
+  fail-closed consumer-facing method for reading that result. Narrative
+  runtime consumers use
+  `ContentPackRunComposition.require_narrative_quest_loader()` to keep that
+  path named as a fail-closed runtime consumer surface
+  without making it runtime activation, save pack pinning, UI DLC selection,
+  dependency solving, hot reload, or shipped DLC authority. Combat startup
+  uses
+  `ContentPackRunComposition.require_combat_support_content_loader()` to load
+  the named default combat support JSON set through explicit support paths on
+  the shared composition instead of directly constructing
+  `CombatContentLoader`. That support helper is not resolver-owned runtime
+  output authority and does not change combat balance; the support files remain
+  `combat_support_json_inputs_not_resolver_outputs`.
+- `contexts/shared/infrastructure/content_pack_runtime_context.py` provides the
+  transient process/run context owner for that run composition. The
+  `GameStateMachine` owns one context and passes it into content-pack-aware
+  campaign, combat, event, and dialogue states so those runtime paths reuse one
+  shared `ContentPackRunComposition` for the current process.
+  `build_game_state_machine()` may receive explicit requested pack ids for a
+  transient local run selection; the default remains all discovered active
+  source packs. It is not written to saves and is still not runtime activation,
+  save pack pinning, UI DLC selection, dependency solving, hot reload, or
+  shipped DLC authority.
+- `contexts/shared/infrastructure/content_pack_runtime_context_guard.py`
+  provides a report-only static guard that keeps production runtime consumers
+  from directly creating their own `ContentPackRunComposition`. The only
+  default allowed direct calls live inside `content_pack_runtime_context.py`,
+  where the runtime context owns the shared transient composition and the
+  resolver helper may still build one from explicit selection/default inputs
+  when no runtime context is supplied. The same guard also makes direct
+  `ContentPackRuntimeContext` creation explicit: `GameStateMachine` is the
+  only default production owner. Combat, event, and dialogue states now require
+  an injected runtime context instead of creating a private fallback. It also
+  tracks production consumer parameters that accept
+  `content_pack_run_composition` as a migration bridge; the current allowed
+  set is empty. The guard now also reports the remaining production
+  `content_pack_runtime_context=None` default parameters as the current
+  default-fallback promotion backlog. It also reports production calls to
+  `resolve_content_pack_run_composition_for_runtime_context()` that omit the
+  explicit `content_pack_runtime_context=` keyword, so promoted consumers keep
+  using the shared transient context instead of quietly returning to selection
+  fallback inputs. These are visibility only and do not make report-only guard
+  output a runtime loading authority.
+  `NarrativeApplicationService`, `RewardService`,
+  `PostCombatRewardFlowService`, `build_campaign_state_service_bundle`,
+  `CampaignState`, `DialogueState`, `EventState`, `CombatState`, and
+  `build_combat_scene_runtime`, and `GameStateMachine` now require an explicit
+  `ContentPackRuntimeContext`, reducing that default-fallback backlog to zero.
+  `contexts/shared/game_runtime.py::build_game_state_machine` and the headless
+  repro entrypoint remain the explicit owners that create shared transient
+  runtime contexts. The game runtime owner may pass explicit requested pack ids
+  into that transient context, but those ids are process-local resolver
+  selection input only. This is not runtime activation, save pinning, UI DLC
+  selection, dependency solving, hot reload, or runtime loading authority.
+- `contexts/shared/infrastructure/content_pack_runtime_resolver_consumer_guard.py`
+  provides a report-only static guard over production runtime resolver
+  consumers and inventory/report scripts. It keeps direct runtime resolver
+  construction limited to
+  `ContentPackRunComposition.build_runtime_resolver_result()` and keeps direct
+  calls to the promoted narrative loader, campaign reward, and combat
+  encounter helper seams limited to `ContentPackRunComposition`. Those
+  production and script/report helper paths now require the composition-owned
+  `ContentPackRuntimeResolverResult` instead of accepting legacy
+  `requested_pack_ids` or `run_selection` fallback inputs. It also checks the
+  promoted helper signatures so `registry`, `requested_pack_ids`, or
+  `run_selection` cannot quietly return there, and
+  `runtime_resolver_result` remains a required input. This preserves the shared
+  composition-owned resolver authority input path. The guard also checks those
+  promoted helpers keep fail-closed resolver validation through
+  `runtime_resolver_errors(...)` before loading JSON payloads, and checks that
+  `ContentPackRunComposition` runtime consumer methods, including
+  `require_narrative_quest_loader()`,
+  `require_campaign_reward_definition()`, and
+  `require_combat_encounter_definition()`, pass
+  `runtime_resolver_result=self.require_runtime_resolver_result()` into those
+  promoted helpers. It also scans promoted production runtime consumer
+  contexts for direct calls to composition resolver-source or legacy helper
+  method names, so campaign/combat/narrative consumers keep using the
+  `require_*` composition API instead of bypassing it with
+  `build_runtime_resolver_result()`, `require_runtime_resolver_result()`, or
+  old `load_*`/`build_*` composition-style names. The guard also checks that
+  the guarded contract scope is the
+  `promoted_runtime_resolver_consumer_composition_contract`, while the guard
+  itself remains a report-only scanner. Its JSON/markdown report lists those
+  composition-owned runtime consumer methods explicitly, including
+  `ContentPackRunComposition.require_campaign_reward_definition()`, and lists
+  forbidden production runtime consumer composition method names explicitly,
+  including `require_runtime_resolver_result()`, so future consumers do not
+  treat the raw resolver result as their public entrypoint. The guard also
+  checks that
+  `ContentPackRunComposition.require_runtime_resolver_result()` still reads
+  the composition-owned builder result and validates it with
+  `runtime_resolver_errors(...)` before any helper receives it. Its report also
+  names the current promoted production runtime consumer helper usages:
+  narrative startup uses `require_narrative_quest_loader()`, combat encounter
+  assembly and combat blueprint reporting use
+  `require_combat_encounter_definition()`, and campaign reward menus plus
+  post-combat reward flow use `require_campaign_reward_definition()`. It is
+  not runtime activation, save pinning, dependency solving, hot reload, UI DLC
+  selection, or runtime loading authority.
+- `contexts/shared/infrastructure/content_pack_runtime_helper_content_kind_audit.py`
+  provides a report-only audit table over the promoted runtime helper surface.
+  It names each composition-owned helper, the public helper it delegates to,
+  the content kinds that helper consumes, the current runtime-output filename
+  pattern, and the production consumers that enter through the `require_*`
+  composition API. It is visibility only and does not change runtime loading,
+  runtime activation, save pinning, dependency solving, hot reload, UI DLC
+  selection, or JSON payload parsing.
+- `contexts/shared/infrastructure/content_pack_runtime_loading_authority.py`
+  provides report-only coverage over the existing resolver-backed promoted
+  runtime loading helpers. It compares the authoritative
+  `ContentPackRuntimeResolverResult` paths from `ContentPackRunComposition`
+  with the promoted narrative, combat encounter, and campaign reward helper
+  patterns from the helper content-kind audit, then reports which
+  resolver-owned runtime paths are covered and which are uncovered. It is a
+  migration checkpoint over the current loading authority surface, not runtime
+  activation, save pinning, dependency solving, hot reload, UI DLC selection,
+  or JSON payload parsing.
+- `contexts/shared/infrastructure/content_pack_runtime_loading_migration_review.py`
+  provides a report-only preflight review that aggregates the current runtime
+  resolver consumer guard, runtime context guard, runtime helper content-kind
+  audit, runtime loading authority coverage, QuestLoader load-all guard, combat
+  encounter loader shadow, campaign reward loader shadow, and combat support
+  JSON loader guard into one go/no-go surface for the next small runtime
+  loading slice. The same review also lists deferred runtime loading surfaces
+  that are known but non-blocking; enemy transform effects still call
+  `CombatContentLoader.load_default_runtime_paths()` directly and are reported
+  as `deferred_for_combat_effects_pipeline` until the combat effects pipeline
+  owns that injection path. It is a review checkpoint only and does not activate
+  packs, write saves, solve dependencies, support hot reload, change UI, change
+  combat balance, or touch `cardanalysis` / `combat_analysis`.
 - `contexts/shared/infrastructure/content_pack_inventory.py` provides a
   report-only inventory over discovered source packs, their source files, and
   declared runtime outputs. It is a resolver input/audit surface, not runtime
@@ -264,57 +407,94 @@ Why add this before content production?
 - `QuestLoader.load_from_runtime_paths()` is the explicit-path loader entry for
   promoted handoffs. It can load questline, encounter, and reward JSON from
   caller-provided paths and avoids directory prefix scanning.
-- `contexts/shared/infrastructure/content_pack_quest_loader_factory.py`
-  provides an inactive handoff factory that builds a loaded `QuestLoader` from
-  a clean handoff contract and promotion readiness report. It accepts explicit
-  active pack ids as resolver input for future activation/save-pinning callers,
-  while defaulting to all discovered active source packs. It is a factory
-  rehearsal for runtime promotion and is not called by combat startup paths.
+- `contexts/shared/infrastructure/content_pack_combat_content_loader_guard.py`
+  provides a report-only guard over production `CombatContentLoader` runtime
+  support JSON usage. Combat startup now enters the support loader through
+  `ContentPackRunComposition.require_combat_support_content_loader()`, where
+  the composition caches one `CombatContentLoader` loaded by
+  `CombatContentLoader.load_from_runtime_paths(...)` with the named default
+  support path set. Enemy transform effects still call
+  `CombatContentLoader.load_default_runtime_paths()` directly and remain a
+  later isolated migration slice. The current `data/combat/*.json` support
+  files are loaded through a named explicit file set instead of production
+  `CombatContentLoader.load_all()`. This does not make combat support JSON
+  resolver-owned runtime output, does not change combat balance, and does not
+  activate packs. The guard also reports the one composition-owned explicit
+  support path handoff and the remaining direct default support path handoff
+  deferred for the combat effects pipeline, plus the five current combat
+  support inputs, `data/combat/species.json`,
+  `data/combat/traits.json`, `data/combat/skills.json`,
+  `data/combat/arenas.json`, and `data/combat/arena_traits.json`, and keeps
+  them clean only while they are present and not claimed by the content-pack
+  runtime-output index.
 - `contexts/shared/infrastructure/content_pack_narrative_loader.py` provides
-  the first runtime promotion boundary over that handoff factory for narrative
+  the first runtime promotion boundary over the resolver-backed handoff for narrative
   startup. Narrative sessions now receive a content-pack handoff-backed
   `QuestLoader` containing the tutorial questline, tutorial encounters, and
   tutorial rewards only. The TA encounter file remains a pack-owned
   non-handoff sidecar and is still loaded by existing combat paths. The loader
-  accepts a shared `ContentPackRunSelection` object or legacy explicit active
-  pack ids as resolver input for future activation/save-pinning callers, while
-  defaulting to all discovered active source packs.
+  now requires a shared `ContentPackRuntimeResolverResult` from
+  `ContentPackRunComposition`, and derives the tutorial narrative handoff paths
+  from resolver-owned `narrative_source` references. Explicit active pack ids
+  and `ContentPackRunSelection` stay upstream as resolver-selection inputs;
+  CLI/report surfaces also build the resolver result through
+  `ContentPackRunComposition`, then pass that result into the loader. They are
+  not save pinning or runtime DLC activation.
+- The old inactive QuestLoader handoff factory and its inventory CLI report are
+  retired. The promoted narrative loader and helper boundaries consume the
+  shared resolver-owned runtime references directly instead of routing through
+  that rehearsal bridge.
 - `contexts/shared/infrastructure/content_pack_quest_loader_load_all_guard.py`
   provides a report-only static guard over production `QuestLoader.load_all()`
-  call sites. The default allowed set is empty. It prevents narrative, combat,
-  reward, or new runtime paths from silently returning to directory prefix
-  scanning.
+  call sites and direct calls to the old QuestLoader handoff factory. The
+  default allowed sets are empty. It prevents narrative, combat, reward, or new
+  runtime paths from silently returning to directory prefix scanning or the old
+  factory handoff path. The same guard also reports direct
+  `QuestLoader.load_from_runtime_paths()` usage so only the three promoted
+  resolver-backed helper boundaries and the report-only combat/reward shadow
+  lookups may call the explicit-path loader directly; new production consumers
+  should enter through `ContentPackRunComposition.require_*`.
 - `contexts/shared/infrastructure/campaign_reward_loader.py` owns the current
   campaign reward-definition lookup boundary. It now consumes the authoritative
   content-pack runtime resolver for `rewards_*.json` paths and loads those paths
   through `QuestLoader.load_from_runtime_paths()`. It accepts a shared
-  `ContentPackRunSelection` object or legacy explicit active pack ids as
-  resolver input for future activation/save-pinning callers, while defaulting
-  to all discovered active source packs. It is not runtime activation, save
-  pinning, dependency solving, or hot reload.
+  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition` and no
+  longer accepts legacy `ContentPackRunSelection` or explicit active pack ids
+  directly. It is not runtime activation, save pinning, dependency solving, or
+  hot reload.
 - `contexts/shared/infrastructure/combat_encounter_loader.py` owns the current
   combat encounter-definition lookup boundary. It now consumes the
   authoritative content-pack runtime resolver for `encounters_*.json` paths and
   loads those paths through `QuestLoader.load_from_runtime_paths()` so TA and
   tutorial encounters remain visible. It accepts a shared
-  `ContentPackRunSelection` object or legacy explicit active pack ids as
-  resolver input for future activation/save-pinning callers, while defaulting
-  to all discovered active source packs. It is not runtime activation, save
-  pinning, dependency solving, or hot reload.
+  `ContentPackRuntimeResolverResult` from `ContentPackRunComposition` and no
+  longer accepts legacy `ContentPackRunSelection` or explicit active pack ids
+  directly. It is not runtime activation, save pinning, dependency solving, or
+  hot reload.
 - `contexts/shared/infrastructure/content_pack_combat_encounter_loader_shadow.py`
   provides a report-only shadow over that combat encounter helper. It checks
   that current loader-visible encounter runtime files are pack-owned, declared
   outputs exist without collisions, and declared encounter ids remain visible
-  through `combat_encounter_loader.py`. It preserves `slack` as allowed-empty
-  and is still not runtime loading authority, resolver activation, save
-  pinning, dependency solving, hot reload, or combat balance work.
+  through `combat_encounter_loader.py`. Inventory/report and data-pipeline
+  contract paths may also pass the composition-owned
+  `ContentPackRuntimeResolverResult` into this shadow so it can compare
+  declared encounter output claims with resolver-owned `encounters_*.json`
+  references and report claim/reference drift before any future combat handoff.
+  It preserves `slack` as allowed-empty and is still not runtime loading
+  authority, resolver activation, save pinning, dependency solving, hot reload,
+  or combat balance work.
 - `contexts/shared/infrastructure/content_pack_campaign_reward_loader_shadow.py`
   provides a report-only shadow over the campaign reward helper. It checks that
   current loader-visible reward runtime files are pack-owned, declared outputs
   exist without collisions, and declared reward ids remain visible through
-  `campaign_reward_loader.py`. It preserves `slack` as allowed-empty and is
-  still not runtime loading authority, resolver activation, save pinning,
-  dependency solving, hot reload, or reward economy/balance work.
+  `campaign_reward_loader.py`. Inventory/report and data-pipeline contract
+  paths may also pass the composition-owned
+  `ContentPackRuntimeResolverResult` into this shadow so it can compare
+  declared reward output claims with resolver-owned `rewards_*.json`
+  references and report claim/reference drift before any future reward handoff.
+  It preserves `slack` as allowed-empty and is still not runtime loading
+  authority, resolver activation, save pinning, dependency solving, hot reload,
+  or reward economy/balance work.
 - `docs/development/content/CONTENT_PACK_RUNTIME_RESOLVER_CONTRACT_V1.md`
   freezes the future resolver promotion contract over readiness and selection
   preview inputs. It defines the expected resolved runtime-output reference
@@ -340,6 +520,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py`
 - Export the content-pack inventory as JSON:
   - `python scripts/content_pack_inventory.py --json`
+- Report the content-kind policy and allowed empty-runtime-output kinds:
+  - `python scripts/content_pack_inventory.py --content-kind-policy`
+- Export the content-kind policy as JSON:
+  - `python scripts/content_pack_inventory.py --content-kind-policy --json`
 - Report active pack identity preview:
   - `python scripts/content_pack_inventory.py --pack-identity-preview`
 - Export active pack identity preview as JSON:
@@ -358,6 +542,30 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --run-composition`
 - Export an explicit run/session runtime consumer composition as JSON:
   - `python scripts/content_pack_inventory.py --run-composition --active-pack-id tutorial --active-pack-id slack --json`
+- Report the transient process content-pack runtime context owner:
+  - `python scripts/content_pack_inventory.py --runtime-context`
+- Export an explicit transient process content-pack runtime context as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-context --active-pack-id tutorial --active-pack-id slack --json`
+- Report production runtime-context consumer guard:
+  - `python scripts/content_pack_inventory.py --runtime-context-guard`
+- Export production runtime-context consumer guard as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-context-guard --json`
+- Report production runtime resolver consumer guard:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard`
+- Export production runtime resolver consumer guard as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-resolver-consumer-guard --json`
+- Report runtime helper content-kind audit:
+  - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit`
+- Export runtime helper content-kind audit as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-helper-content-kind-audit --json`
+- Report resolver-backed runtime loading authority coverage:
+  - `python scripts/content_pack_inventory.py --runtime-loading-authority`
+- Export resolver-backed runtime loading authority coverage as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-loading-authority --json`
+- Report the aggregate runtime loading migration review:
+  - `python scripts/content_pack_inventory.py --runtime-loading-migration-review`
+- Export the aggregate runtime loading migration review as JSON:
+  - `python scripts/content_pack_inventory.py --runtime-loading-migration-review --json`
 - Report the runtime-output resolver input index:
   - `python scripts/content_pack_inventory.py --runtime-output-index`
 - Export the runtime-output resolver input index as JSON:
@@ -404,10 +612,6 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness`
 - Export QuestLoader promotion readiness as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-promotion-readiness --json`
-- Report inactive QuestLoader handoff factory:
-  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory`
-- Export inactive QuestLoader handoff factory as JSON:
-  - `python scripts/content_pack_inventory.py --quest-loader-handoff-factory --json`
 - Report content-pack-backed narrative loader:
   - `python scripts/content_pack_inventory.py --content-pack-narrative-loader`
 - Export content-pack-backed narrative loader as JSON:
@@ -418,6 +622,10 @@ Why add this before content production?
   - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard`
 - Export remaining production QuestLoader.load_all usage guard as JSON:
   - `python scripts/content_pack_inventory.py --quest-loader-load-all-guard --json`
+- Report combat support JSON loader guard:
+  - `python scripts/content_pack_inventory.py --combat-content-loader-guard`
+- Export combat support JSON loader guard as JSON:
+  - `python scripts/content_pack_inventory.py --combat-content-loader-guard --json`
 - Report combat encounter loader shadow:
   - `python scripts/content_pack_inventory.py --combat-encounter-loader-shadow`
 - Export combat encounter loader shadow as JSON:
