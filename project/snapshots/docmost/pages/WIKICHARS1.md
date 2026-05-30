@@ -6,7 +6,7 @@ status: "active"
 space: "General"
 parent_page_id: "019e6f70-b503-7d81-bca1-28e3ff1598b1"
 created_at: "2026-05-28 16:35:17.88626+00"
-updated_at: "2026-05-28 16:35:17.88626+00"
+updated_at: "2026-05-30 01:51:26.148+00"
 deleted_at: ""
 ---
 
@@ -184,4 +184,11 @@ Unique Mechanics
 
 ## Comments
 
-_No comments exported for this page._
+### open comment `019e7694-1b08-72c9-8339-6bdd83b48f7d`
+
+- Created at: `2026-05-30 01:51:18.279111+00`
+- Updated at: `2026-05-30 01:51:18.279111+00`
+- Selection: `想颜色`
+
+当前这个版本被废弃了，准备逐步替换为，学科 + 理想的内容。学科类似于一个角色的本体，然后 理想是卡组的升级方式。卡组会有5个颜色方向的升级。当前升级是互斥的。具体在设计中
+

@@ -1,0 +1,52 @@
+# 资产台账
+
+- 状态: Draft
+- 负责人: Team
+- 范围: project-asset-registry
+- 最后复核: 2026-05-29
+
+## 目标
+
+这里记录项目里值得被长期追踪的资产：文档入口、工具链、数据包、协作系统和关键治理材料。
+
+资产台账不是删除清单。它的作用是帮助人和 AI 知道：
+
+1. 哪些东西当前可依赖。
+2. 哪些东西只是原型或草案。
+3. 哪些入口是权威入口。
+4. 后续整理时应该先看哪里。
+
+机器可读源是 [registry.json](registry.json)。
+
+## 状态
+
+| 状态 | 含义 |
+| --- | --- |
+| idea | 只有想法，还没有稳定文件。 |
+| draft | 已有草稿，但缺少验证或权威收口。 |
+| prototype | 可以使用，但仍在快速变化。 |
+| validated | 有测试、报告或流程证据支撑。 |
+| stable | 已长期使用，且变更需要明确复核。 |
+| retired | 已停止使用，但保留历史记录。 |
+
+## 资产摘要
+
+| ID | 名称 | 类型 | 状态 | 权威入口 |
+| --- | --- | --- | --- | --- |
+| ASSET-WIKI-001 | 中文 Wiki 阅读入口 | documentation | prototype | `docs/wiki/README.md` |
+| ASSET-DOCMOST-001 | Docmost 本地协作层 | collaboration | prototype | `tools/docmost_mirror/README.md` |
+| ASSET-PROJECT-001 | Repo-first 项目管理目录 | project_management | validated | `docs/project/README.md` |
+| ASSET-SYNC-001 | GitHub 项目信号同步工具 | tooling | validated | `tools/project_sync/README.md` |
+| ASSET-DOCMOST-SNAPSHOT-001 | Docmost 到 Git 快照 | snapshot | prototype | `docs/project/snapshots/docmost/index.md` |
+| ASSET-CONTENT-001 | 核心内容设计文档集合 | content_design | draft | `docs/wiki/design.md` |
+| ASSET-TA-001 | TA 敌人与遭遇内容包 | content_pack | validated | `data/combat/ta/manifest.json` |
+| ASSET-CARDANALYSIS-001 | Combat Analysis 设计辅助工具链 | tooling | validated | `tools/combat_analysis/README.md` |
+| ASSET-ACK-001 | 致谢系统设计资料 | design_reference | draft | `docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md` |
+| ASSET-GOVERNANCE-001 | 文档治理与删除策略 | governance | validated | `docs/development/architecture/DESIGN_DOC_GOVERNANCE_V1.md` |
+
+## 维护规则
+
+1. 新增重要协作面、工具、数据包或设计集合时，补一条资产记录。
+2. 资产状态只能描述“当前可信程度”，不能替代删除确认。
+3. `retired` 表示不再主动使用，不等于可以删除。
+4. 删除、归档、移动资产前，仍然需要人工确认。

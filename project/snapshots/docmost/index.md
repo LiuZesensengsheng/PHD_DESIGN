@@ -1,9 +1,9 @@
 # Docmost Mirror Snapshot
 
 - Snapshot id: `docmost_mirror_snapshot_v1`
-- Generated at: `2026-05-29T01:17:47Z`
-- Pages: `22` total, `18` active, `4` deleted
-- Comments: `1` total, `1` open, `0` resolved, `0` deleted
+- Generated at: `2026-05-30T03:06:34Z`
+- Pages: `30` total, `26` active, `4` deleted
+- Comments: `3` total, `3` open, `0` resolved, `0` deleted
 
 This directory is a read-only mirror exported from Docmost. Docmost stays the editing source; Git sees this snapshot for review, diff, and AI recovery.
 
@@ -31,6 +31,14 @@ This directory is a read-only mirror exported from Docmost. Docmost stays the ed
   - [active] [测试](pages/BppfpVKm7O.md) `BppfpVKm7O`
 - [deleted] [富文本与结构图试验](pages/dr8JDgn1Zs.md) `dr8JDgn1Zs`
 - [deleted] [评论与讨论试验页](pages/YD56LSX14j.md) `YD56LSX14j`
+- [active] [项目计划](pages/TyFuQ9L1hr.md) `TyFuQ9L1hr`
+  - [active] [任务线](pages/QkZ2PiWzUp.md) `QkZ2PiWzUp`
+  - [active] [卡牌](pages/shu5g311PW.md) `shu5g311PW`
+  - [active] [总览](pages/DnFSqLPHSm.md) `DnFSqLPHSm`
+  - [active] [整体架构](pages/5vDFQb9IcR.md) `5vDFQb9IcR`
+  - [active] [特质](pages/VzLzY37Kih.md) `VzLzY37Kih`
+  - [active] [美术](pages/ag7s94u7YN.md) `ag7s94u7YN`
+    - [active] [战役场景](pages/76sLfjWiXB.md) `76sLfjWiXB`
 
 ## Files
 

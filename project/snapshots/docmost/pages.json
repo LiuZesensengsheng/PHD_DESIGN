@@ -358,7 +358,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "",
-    "position": "m0000",
+    "position": "a6Caa",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -3365,7 +3365,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0014",
+    "position": "aD068",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -5077,7 +5077,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0007",
+    "position": "a68YA",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -6650,7 +6650,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:36:28.116+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0003",
+    "position": "a2BCs",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -8354,7 +8354,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:36:31.447+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0008",
+    "position": "a756n",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -9519,7 +9519,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0013",
+    "position": "aCB1O",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -11242,7 +11242,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:36:30.411+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0005",
+    "position": "a47FW",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -12795,7 +12795,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:36:31.011+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0006",
+    "position": "a5BEl",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -14399,7 +14399,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0012",
+    "position": "aBAis",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -15973,7 +15973,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0004",
+    "position": "a36di",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -17404,14 +17404,14 @@
     "is_deleted": false,
     "deleted_at": "",
     "created_at": "2026-05-28 16:35:17.88626+00",
-    "updated_at": "2026-05-28 16:35:17.88626+00",
+    "updated_at": "2026-05-30 01:51:26.148+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0002",
+    "position": "a1B0N",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
     "is_locked": false,
-    "text_content": "\r\n\r\n来源：docs/wiki/characters.md\r\n\r\n\r\n\r\n\r\n\r\n状态: Draft\r\n\r\n\r\n\r\n负责人: Team\r\n\r\n\r\n\r\n范围: 角色、理想颜色和构筑身份导航\r\n\r\n\r\n\r\n权威性: No\r\n\r\n\r\n\r\n最后复核: 2026-05-27\r\n\r\n概览\r\n\r\n经典爬塔 Wiki 往往先按角色组织卡牌和机制。本项目当前更适合先用“理想颜色”来承担这个位置：它们是卡牌风格、构筑方向和体验语义的入口。\r\n\r\n理想颜色\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n理想\r\n\r\n\r\n\r\n当前状态\r\n\r\n\r\n\r\n关键词\r\n\r\n\r\n\r\n入口\r\n\r\n\r\n\r\n\r\n\r\n红色理想\r\n\r\n\r\n\r\n活跃设计 / 已有数据\r\n\r\n\r\n\r\n前沿、批注、首张牌、推进感\r\n\r\n\r\n\r\n红色设计\r\n\r\n\r\n\r\n\r\n\r\n白色理想\r\n\r\n\r\n\r\n活跃设计 / 已有数据\r\n\r\n\r\n\r\n指针、排序、端点、审查、校正\r\n\r\n\r\n\r\n白色设计\r\n\r\n\r\n\r\n\r\n\r\n绿色理想\r\n\r\n\r\n\r\n草案\r\n\r\n\r\n\r\n厚积、成长、长期性\r\n\r\n\r\n\r\n绿色设计\r\n\r\n与角色页的关系\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n经典 Wiki 栏目\r\n\r\n\r\n\r\n本项目第一版对应\r\n\r\n\r\n\r\n\r\n\r\nCharacters\r\n\r\n\r\n\r\n理想颜色 / 构筑身份\r\n\r\n\r\n\r\n\r\n\r\nStarter Deck\r\n\r\n\r\n\r\n待补：起始牌组和教程给牌\r\n\r\n\r\n\r\n\r\n\r\nUnique Cards\r\n\r\n\r\n\r\n红色、白色、绿色卡牌池\r\n\r\n\r\n\r\n\r\n\r\nUnique Mechanics\r\n\r\n\r\n\r\n每个理想的主机制和关键词\r\n\r\n当前边界\r\n\r\n红色和白色可以作为活跃内容阅读。绿色仍是草案，不应该在实现中被自动视为当前承诺。\r\n\r\n如果后续项目形成明确角色，例如导师型、TA 型、论文型或情绪型角色，再把这个页面拆成真正的角色索引。",
+    "text_content": "\n\n来源：docs/wiki/characters.md\n\n\n\n\n\n状态: Draft\n\n\n\n负责人: Team\n\n\n\n范围: 角色、理想颜色和构筑身份导航\n\n\n\n权威性: No\n\n\n\n最后复核: 2026-05-27\n\n概览\n\n经典爬塔 Wiki 往往先按角色组织卡牌和机制。本项目当前更适合先用“理想颜色”来承担这个位置：它们是卡牌风格、构筑方向和体验语义的入口。\n\n理想颜色\n\n\n\n\n\n\n\n理想\n\n\n\n当前状态\n\n\n\n关键词\n\n\n\n入口\n\n\n\n\n\n红色理想\n\n\n\n活跃设计 / 已有数据\n\n\n\n前沿、批注、首张牌、推进感\n\n\n\n红色设计\n\n\n\n\n\n白色理想\n\n\n\n活跃设计 / 已有数据\n\n\n\n指针、排序、端点、审查、校正\n\n\n\n白色设计\n\n\n\n\n\n绿色理想\n\n\n\n草案\n\n\n\n厚积、成长、长期性\n\n\n\n绿色设计\n\n与角色页的关系\n\n\n\n\n\n\n\n经典 Wiki 栏目\n\n\n\n本项目第一版对应\n\n\n\n\n\nCharacters\n\n\n\n理想颜色 / 构筑身份\n\n\n\n\n\nStarter Deck\n\n\n\n待补：起始牌组和教程给牌\n\n\n\n\n\nUnique Cards\n\n\n\n红色、白色、绿色卡牌池\n\n\n\n\n\nUnique Mechanics\n\n\n\n每个理想的主机制和关键词\n\n当前边界\n\n红色和白色可以作为活跃内容阅读。绿色仍是草案，不应该在实现中被自动视为当前承诺。\n\n如果后续项目形成明确角色，例如导师型、TA 型、论文型或情绪型角色，再把这个页面拆成真正的角色索引。",
     "content": {
       "type": "doc",
       "content": [
@@ -17422,8 +17422,7 @@
               "type": "paragraph",
               "attrs": {
                 "id": "waycbciuxsip",
-                "indent": 0,
-                "textAlign": null
+                "indent": 0
               },
               "content": [
                 {
@@ -17444,8 +17443,7 @@
                   "type": "paragraph",
                   "attrs": {
                     "id": "biwxkzqqrjpv",
-                    "indent": 0,
-                    "textAlign": null
+                    "indent": 0
                   },
                   "content": [
                     {
@@ -17463,8 +17461,7 @@
                   "type": "paragraph",
                   "attrs": {
                     "id": "xtchwvvaqdsc",
-                    "indent": 0,
-                    "textAlign": null
+                    "indent": 0
                   },
                   "content": [
                     {
@@ -17482,8 +17479,7 @@
                   "type": "paragraph",
                   "attrs": {
                     "id": "zjbvtlyyrzqr",
-                    "indent": 0,
-                    "textAlign": null
+                    "indent": 0
                   },
                   "content": [
                     {
@@ -17501,8 +17497,7 @@
                   "type": "paragraph",
                   "attrs": {
                     "id": "otybhucyciwf",
-                    "indent": 0,
-                    "textAlign": null
+                    "indent": 0
                   },
                   "content": [
                     {
@@ -17520,8 +17515,7 @@
                   "type": "paragraph",
                   "attrs": {
                     "id": "ioiuotnpvbvn",
-                    "indent": 0,
-                    "textAlign": null
+                    "indent": 0
                   },
                   "content": [
                     {
@@ -17539,8 +17533,7 @@
           "attrs": {
             "id": "yqmqidmmfloi",
             "level": 2,
-            "indent": 0,
-            "textAlign": null
+            "indent": 0
           },
           "content": [
             {
@@ -17553,8 +17546,7 @@
           "type": "paragraph",
           "attrs": {
             "id": "cehuovxnljyt",
-            "indent": 0,
-            "textAlign": null
+            "indent": 0
           },
           "content": [
             {
@@ -17568,13 +17560,25 @@
           "attrs": {
             "id": "utxgrakzsgsi",
             "level": 2,
-            "indent": 0,
-            "textAlign": null
+            "indent": 0
           },
           "content": [
             {
-              "text": "理想颜色",
+              "text": "理",
               "type": "text"
+            },
+            {
+              "text": "想颜色",
+              "type": "text",
+              "marks": [
+                {
+                  "type": "comment",
+                  "attrs": {
+                    "resolved": false,
+                    "commentId": "019e7694-1b08-72c9-8339-6bdd83b48f7d"
+                  }
+                }
+              ]
             }
           ]
         },
@@ -17588,18 +17592,14 @@
                   "type": "tableHeader",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "fbujnegegxgu",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17614,18 +17614,14 @@
                   "type": "tableHeader",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "dhpymhhawexy",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17640,18 +17636,14 @@
                   "type": "tableHeader",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "yttimpfkmnkj",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17666,18 +17658,14 @@
                   "type": "tableHeader",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "xsledlszyuim",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17697,18 +17685,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "nwtpqxwyvtyb",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17723,18 +17707,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "psngvlvegyam",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17749,18 +17729,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "fboonggpyanh",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17775,18 +17751,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "jgowqpnfrfdd",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17819,18 +17791,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "qezwfhybtngf",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17845,18 +17813,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "khipawuxennb",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17871,18 +17835,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "wuhaadojhbcm",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17897,18 +17857,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "lfusszorohua",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17941,18 +17897,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "drcotyvnddtu",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17967,18 +17919,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "gtwmghvlkfkj",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -17993,18 +17941,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "ilijaxznvyzr",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18019,18 +17963,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "rrhvqlorrawc",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18063,8 +18003,7 @@
           "attrs": {
             "id": "nnzivtnfizox",
             "level": 2,
-            "indent": 0,
-            "textAlign": null
+            "indent": 0
           },
           "content": [
             {
@@ -18083,18 +18022,14 @@
                   "type": "tableHeader",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "wlpfqaywderq",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18109,18 +18044,14 @@
                   "type": "tableHeader",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "hvwfnsgdfjxk",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18140,18 +18071,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "nvrqxsqemqmy",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18166,18 +18093,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "hucuubuzwnsd",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18197,18 +18120,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "jfbuvvdhaiiy",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18223,18 +18142,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "dafinvywieug",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18254,18 +18169,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "oldycterfzcw",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18280,18 +18191,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "hhhbfyvwhtcr",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18311,18 +18218,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "zesraaibjjng",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18337,18 +18240,14 @@
                   "type": "tableCell",
                   "attrs": {
                     "colspan": 1,
-                    "rowspan": 1,
-                    "colwidth": null,
-                    "backgroundColor": null,
-                    "backgroundColorName": null
+                    "rowspan": 1
                   },
                   "content": [
                     {
                       "type": "paragraph",
                       "attrs": {
                         "id": "zcciwvpuzkmo",
-                        "indent": 0,
-                        "textAlign": null
+                        "indent": 0
                       },
                       "content": [
                         {
@@ -18368,8 +18267,7 @@
           "attrs": {
             "id": "mjgvyebdozfe",
             "level": 2,
-            "indent": 0,
-            "textAlign": null
+            "indent": 0
           },
           "content": [
             {
@@ -18382,8 +18280,7 @@
           "type": "paragraph",
           "attrs": {
             "id": "rkiruawiyvrq",
-            "indent": 0,
-            "textAlign": null
+            "indent": 0
           },
           "content": [
             {
@@ -18396,8 +18293,7 @@
           "type": "paragraph",
           "attrs": {
             "id": "eemaoixuzrxd",
-            "indent": 0,
-            "textAlign": null
+            "indent": 0
           },
           "content": [
             {
@@ -18422,14 +18318,14 @@
     "is_deleted": false,
     "deleted_at": "",
     "created_at": "2026-05-28 16:35:17.88626+00",
-    "updated_at": "2026-05-28 16:36:26.202+00",
+    "updated_at": "2026-05-30 01:46:35.363+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0001",
+    "position": "a07El",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
     "is_locked": false,
-    "text_content": "\n\n来源：docs/wiki/design.md\n\n\n\n\n\n状态: Active\n\n\n\n负责人: Team\n\n\n\n范围: 设计资料导航\n\n\n\n权威性: No\n\n\n\n最后复核: 2026-05-27\n\n用途\n\n这个页面负责回答一个问题：当前那么多设计文档里，哪些最值得先看。\n\n它不是 docs/design/ 的替代品。真正的设计依据仍然来自活跃设计文档、运行时数据、代码和测试。\n\n当前权威入口\n\n\n\n\n\n\n\n区域\n\n\n\n入口\n\n\n\n当前姿态\n\n\n\n\n\n跨系统体验原则\n\n\n\nDESIGN_NORTH_STAR_V1.md\n\n\n\n活跃北极星。用于判断敌人、遭遇、事件和卡牌是否有共鸣、感动、乐趣和谈资。\n\n\n\n\n\n设计文档治理\n\n\n\nDESIGN_DOC_GOVERNANCE_V1.md\n\n\n\n活跃规则。用于区分 Active、Draft、Reference、Future、Archive。\n\n\n\n\n\n设计资料总入口\n\n\n\ndocs/design/README.md\n\n\n\n当前设计目录的权威地图。\n\n\n\n\n\n理想与卡牌\n\n\n\nideal/README.md\n\n\n\n试点治理中。红色和白色较活跃，绿色仍偏草案。\n\n\n\n\n\n战役与教程\n\n\n\ncampaign/README.md\n\n\n\n试点治理中。教程任务链是当前主要落地点。\n\n\n\n\n\n敌人与遭遇\n\n\n\nenemydesigon/README.md\n\n\n\n试点治理中。TA 线已有实现映射。\n\n\n\n\n\n归档设计\n\n\n\narchive/README.md\n\n\n\n默认不进入当前实现路径。\n\n\n\n\n\n清理候选\n\n\n\nCLEANUP_CANDIDATES.md\n\n\n\n只是复核队列，不等于删除许可。\n\n运行时锚点\n\n\n\n\n\n\n\n运行时区域\n\n\n\n位置\n\n\n\n\n\n红色卡牌\n\n\n\ndata/cards/red/\n\n\n\n\n\n白色卡牌\n\n\n\ndata/cards/white/\n\n\n\n\n\n教程叙事源\n\n\n\ndata/narrative_src/packs/tutorial/\n\n\n\n\n\n教程运行时任务链\n\n\n\ndata/questlines/questline_tutorial.json\n\n\n\n\n\nTA 战斗源包\n\n\n\ndata/combat/ta/\n\n\n\n\n\nTA 运行时遭遇\n\n\n\ndata/questlines/encounters_ta.json\n\n第一版 Wiki 的边界\n\n\n\n\n\n\n\n做\n\n\n\n不做\n\n\n\n\n\n把信息整理成可浏览索引\n\n\n\n不删除、不移动源文档\n\n\n\n\n\n标明活跃、草案、参考和归档关系\n\n\n\n不把草案写成已实现\n\n\n\n\n\n给每个栏目提供下一跳链接\n\n\n\n不重写 docs/design/ 的原始内容\n\n\n\n\n\n为讨论和评论预留入口\n\n\n\n不在当前版本内嵌实时评论\n\n清理原则\n\n旧设计文档需要小批次处理：\n\n\n\n\n\n先让活跃规格和运行时锚点可见。\n\n\n\n先提出低风险候选：临时文件、重复旧稿、乱码笔记、已解压保留的原始包。\n\n\n\n对价值不清楚的设计材料，优先标记为草案、参考、未来、归档或被替代。\n\n\n\n删除必须经过 owner 明确确认。\n\n",
+    "text_content": "\n\n来源：docs/wiki/design.md\n\n\n\n\n\n状态: Active\n\n\n\n负责人: Team\n\n\n\n范围: 设计资料导航\n\n\n\n权威性: No\n\n\n\n最后复核: 2026-05-27\n\n用途\n\n这个页面负责回答一个问题：当前那么多设计文档里，哪些最值得先看。 \n\n它不是 docs/design/ 的替代品。真正的设计依据仍然来自活跃设计文档、运行时数据、代码和测试。\n\n当前权威入口\n\n\n\n\n\n\n\n区域\n\n\n\n入口\n\n\n\n当前姿态\n\n\n\n\n\n跨系统体验原则\n\n\n\nDESIGN_NORTH_STAR_V1.md\n\n\n\n活跃北极星。用于判断敌人、遭遇、事件和卡牌是否有共鸣、感动、乐趣和谈资。\n\n\n\n\n\n设计文档治理\n\n\n\nDESIGN_DOC_GOVERNANCE_V1.md\n\n\n\n活跃规则。用于区分 Active、Draft、Reference、Future、Archive。\n\n\n\n\n\n设计资料总入口\n\n\n\ndocs/design/README.md\n\n\n\n当前设计目录的权威地图。\n\n\n\n\n\n理想与卡牌\n\n\n\nideal/README.md\n\n\n\n试点治理中。红色和白色较活跃，绿色仍偏草案。\n\n\n\n\n\n战役与教程\n\n\n\ncampaign/README.md\n\n\n\n试点治理中。教程任务链是当前主要落地点。\n\n\n\n\n\n敌人与遭遇\n\n\n\nenemydesigon/README.md\n\n\n\n试点治理中。TA 线已有实现映射。\n\n\n\n\n\n归档设计\n\n\n\narchive/README.md\n\n\n\n默认不进入当前实现路径。\n\n\n\n\n\n清理候选\n\n\n\nCLEANUP_CANDIDATES.md\n\n\n\n只是复核队列，不等于删除许可。\n\n运行时锚点\n\n\n\n\n\n\n\n运行时区域\n\n\n\n位置\n\n\n\n\n\n红色卡牌\n\n\n\ndata/cards/red/\n\n\n\n\n\n白色卡牌\n\n\n\ndata/cards/white/\n\n\n\n\n\n教程叙事源\n\n\n\ndata/narrative_src/packs/tutorial/\n\n\n\n\n\n教程运行时任务链\n\n\n\ndata/questlines/questline_tutorial.json\n\n\n\n\n\nTA 战斗源包\n\n\n\ndata/combat/ta/\n\n\n\n\n\nTA 运行时遭遇\n\n\n\ndata/questlines/encounters_ta.json\n\n第一版 Wiki 的边界\n\n\n\n\n\n\n\n做\n\n\n\n不做\n\n\n\n\n\n把信息整理成可浏览索引\n\n\n\n不删除、不移动源文档\n\n\n\n\n\n标明活跃、草案、参考和归档关系\n\n\n\n不把草案写成已实现\n\n\n\n\n\n给每个栏目提供下一跳链接\n\n\n\n不重写 docs/design/ 的原始内容\n\n\n\n\n\n为讨论和评论预留入口\n\n\n\n不在当前版本内嵌实时评论\n\n清理原则\n\n旧设计文档需要小批次处理：\n\n\n\n\n\n先让活跃规格和运行时锚点可见。\n\n\n\n先提出低风险候选：临时文件、重复旧稿、乱码笔记、已解压保留的原始包。\n\n\n\n对价值不清楚的设计材料，优先标记为草案、参考、未来、归档或被替代。\n\n\n\n删除必须经过 owner 明确确认。\n\n",
     "content": {
       "type": "doc",
       "content": [
@@ -18568,7 +18464,24 @@
           },
           "content": [
             {
-              "text": "这个页面负责回答一个问题：当前那么多设计文档里，哪些最值得先看。",
+              "text": "这个页面负责回答一个问题：当前",
+              "type": "text"
+            },
+            {
+              "text": "那么多设计文档里，哪些最值得先看。",
+              "type": "text",
+              "marks": [
+                {
+                  "type": "comment",
+                  "attrs": {
+                    "resolved": false,
+                    "commentId": "019e768f-a2b5-746a-8b2d-4520d86948d2"
+                  }
+                }
+              ]
+            },
+            {
+              "text": " ",
               "type": "text"
             }
           ]
@@ -20170,7 +20083,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0011",
+    "position": "aA2fK",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -22997,7 +22910,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0009",
+    "position": "a84Np",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -25388,7 +25301,7 @@
     "created_at": "2026-05-28 16:35:17.88626+00",
     "updated_at": "2026-05-28 16:35:17.88626+00",
     "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
-    "position": "m0010",
+    "position": "a9265",
     "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
     "space_name": "General",
     "space_slug": "general",
@@ -31335,5 +31248,4016 @@
       "评论与讨论试验页"
     ],
     "depth": 0
+  },
+  {
+    "id": "019e76c1-ccab-7c7b-98ae-8e3f9342887b",
+    "slug_id": "TyFuQ9L1hr",
+    "title": "项目计划",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 02:41:12.873464+00",
+    "updated_at": "2026-05-30 03:06:08.017+00",
+    "parent_page_id": "",
+    "position": "a7BG2",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "\n\n来源：docs/wiki/planning.md\n\n\n\n\n\n状态: Draft\n\n\n\n负责人: Team\n\n\n\n范围: goals-requirements-tasks-dashboard\n\n\n\n权威性: No\n\n\n\n最后复核: 2026-05-30\n\n说明\n\n源数据在 docs/project/planning/。本页是面向阅读的 Wiki 摘要。\n\n结构采用：\n\n目标 Goal\n  -> 需求 Requirement\n    -> 任务 Task\n\n\n里程碑是横向时间容器，不作为第四层。\n\n总览\n\n\n\n\n\n\n\n指标\n\n\n\n当前值\n\n\n\n\n\n目标\n\n\n\n2\n\n\n\n\n\n需求\n\n\n\n4\n\n\n\n\n\n任务\n\n\n\n7\n\n\n\n\n\n整体完成率\n\n\n\n62%\n\n\n\n\n\n已完成任务\n\n\n\n4\n\n\n\n\n\n阻塞任务\n\n\n\n0\n\n状态分布\n\n\n\n\n\n\n\n层级\n\n\n\n状态分布\n\n\n\n\n\n目标\n\n\n\nactive: 2\n\n\n\n\n\n需求\n\n\n\nactive: 3, planned: 1\n\n\n\n\n\n任务\n\n\n\ndone: 4, planned: 3\n\n目标进展\n\n\n\n\n\n\n\nID\n\n\n\n目标\n\n\n\n状态\n\n\n\n里程碑\n\n\n\n完成率\n\n\n\n下一步\n\n\n\n\n\nGOAL-001\n\n\n\nDocmost 本地协作试运行成功\n\n\n\nactive\n\n\n\nM6\n\n\n\n25%\n\n\n\n让团队先本地改几轮，再由 AI 导出并整理。\n\n\n\n\n\nGOAL-002\n\n\n\n项目驾驶舱成为 AI 可维护的单一入口\n\n\n\nactive\n\n\n\nM5\n\n\n\n100%\n\n\n\n把计划总览接入 Wiki 和项目控制检查。\n\n需求进展\n\n\n\n\n\n\n\nID\n\n\n\n所属目标\n\n\n\n需求\n\n\n\n状态\n\n\n\n完成率\n\n\n\n下一步\n\n\n\n\n\nREQ-001\n\n\n\nGOAL-001\n\n\n\n团队能在 Docmost 写作、评论和记录会议\n\n\n\nactive\n\n\n\n50%\n\n\n\n由团队继续在本地 Docmost 里改内容。\n\n\n\n\n\nREQ-002\n\n\n\nGOAL-001\n\n\n\nAI 能导出 Docmost 快照并整理进 Git\n\n\n\nplanned\n\n\n\n0%\n\n\n\n等待团队完成第一轮本地修改后导出快照。\n\n\n\n\n\nREQ-003\n\n\n\nGOAL-002\n\n\n\n项目计划能按目标、需求和任务统计进展\n\n\n\nactive\n\n\n\n100%\n\n\n\n生成 dashboard 并接入 Wiki。\n\n\n\n\n\nREQ-004\n\n\n\nGOAL-002\n\n\n\n项目控制检查覆盖计划结构\n\n\n\nactive\n\n\n\n100%\n\n\n\n扩展 scripts/check_project_control.py。\n\n任务列表\n\n\n\n\n\n\n\nID\n\n\n\n所属需求\n\n\n\n任务\n\n\n\n状态\n\n\n\n负责人\n\n\n\n目标日期\n\n\n\n下一步\n\n\n\n\n\nTASK-001\n\n\n\nREQ-001\n\n\n\n保持本地 Docmost 服务可用\n\n\n\ndone\n\n\n\nCodex\n\n\n\n2026-05-30\n\n\n\n团队继续在 Docmost 里编辑内容。\n\n\n\n\n\nTASK-002\n\n\n\nREQ-001\n\n\n\n记录第一轮真实评论和会议纪要\n\n\n\nplanned\n\n\n\nTeam\n\n\n\n2026-06-06\n\n\n\n在 Docmost 里继续写作、评论和开会。\n\n\n\n\n\nTASK-003\n\n\n\nREQ-002\n\n\n\n导出 Docmost 快照\n\n\n\nplanned\n\n\n\nCodex\n\n\n\n2026-06-10\n\n\n\n等团队完成一轮修改后执行导出。\n\n\n\n\n\nTASK-004\n\n\n\nREQ-002\n\n\n\n整理评论为正文、任务或决策\n\n\n\nplanned\n\n\n\nCodex\n\n\n\n2026-06-13\n\n\n\n基于下一次 Docmost 快照整理。\n\n\n\n\n\nTASK-005\n\n\n\nREQ-003\n\n\n\n建立目标、需求和任务 JSON 源\n\n\n\ndone\n\n\n\nCodex\n\n\n\n2026-05-30\n\n\n\n后续由 AI 根据 Docmost 讨论继续追加。\n\n\n\n\n\nTASK-006\n\n\n\nREQ-003\n\n\n\n生成项目计划总览和甘特图\n\n\n\ndone\n\n\n\nCodex\n\n\n\n2026-05-30\n\n\n\n让 Wiki 构建器渲染新页面。\n\n\n\n\n\nTASK-007\n\n\n\nREQ-004\n\n\n\n扩展项目控制检查\n\n\n\ndone\n\n\n\nCodex\n\n\n\n2026-05-30\n\n\n\n后续把计划检查作为项目管理维护默认动作。\n\n甘特图\n\ngantt\n  title 项目计划甘特图\n  dateFormat  YYYY-MM-DD\n  axisFormat  %m-%d\n  section GOAL-001 Docmost 本地协作试运行成功\n  Docmost 本地协作试运行成功 :active, GOAL_001, 2026-05-30, 2026-06-13\n  团队能在 Docmost 写作、评论和记录会议 :active, REQ_001, 2026-05-30, 2026-06-06\n  保持本地 Docmost 服务可用 :done, TASK_001, 2026-05-30, 2026-05-30\n  记录第一轮真实评论和会议纪要 :TASK_002, 2026-05-30, 2026-06-06\n  AI 能导出 Docmost 快照并整理进 Git :REQ_002, 2026-06-01, 2026-06-10\n  导出 Docmost 快照 :TASK_003, 2026-06-01, 2026-06-10\n  整理评论为正文、任务或决策 :TASK_004, 2026-06-01, 2026-06-13\n  section GOAL-002 项目驾驶舱成为 AI 可维护的单一入口\n  项目驾驶舱成为 AI 可维护的单一入口 :active, GOAL_002, 2026-05-29, 2026-06-07\n  项目计划能按目标、需求和任务统计进展 :active, REQ_003, 2026-05-30, 2026-05-30\n  建立目标、需求和任务 JSON 源 :done, TASK_005, 2026-05-30, 2026-05-30\n  生成项目计划总览和甘特图 :done, TASK_006, 2026-05-30, 2026-05-30\n  项目控制检查覆盖计划结构 :active, REQ_004, 2026-05-30, 2026-05-30\n  扩展项目控制检查 :done, TASK_007, 2026-05-30, 2026-05-30\n\n\n维护入口\n\n\n\n\n\n\n\n源\n\n\n\n入口\n\n\n\n\n\n项目计划目录\n\n\n\ndocs/project/planning/\n\n\n\n\n\n目标源\n\n\n\ngoals.json\n\n\n\n\n\n需求源\n\n\n\nrequirements.json\n\n\n\n\n\n任务源\n\n\n\ntasks.json\n\n",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "tstmltqrealf",
+                "indent": 0
+              },
+              "content": [
+                {
+                  "text": "来源：docs/wiki/planning.md",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "nanrsodvapeh",
+                    "indent": 0
+                  },
+                  "content": [
+                    {
+                      "text": "状态: Draft",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "pxxsxstjqlof",
+                    "indent": 0
+                  },
+                  "content": [
+                    {
+                      "text": "负责人: Team",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "sksauwlrglwo",
+                    "indent": 0
+                  },
+                  "content": [
+                    {
+                      "text": "范围: goals-requirements-tasks-dashboard",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "ljayblsozlpc",
+                    "indent": 0
+                  },
+                  "content": [
+                    {
+                      "text": "权威性: No",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "id": "rcbphlyjguxj",
+                    "indent": 0
+                  },
+                  "content": [
+                    {
+                      "text": "最后复核: 2026-05-30",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "miatjhkfnhnz",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "说明",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "mjkmkyiofowy",
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "源数据在 ",
+              "type": "text"
+            },
+            {
+              "text": "docs/project/planning/",
+              "type": "text",
+              "marks": [
+                {
+                  "type": "link",
+                  "attrs": {
+                    "rel": "noopener noreferrer nofollow",
+                    "href": "../project/planning/README.md",
+                    "class": null,
+                    "title": null,
+                    "target": "_blank",
+                    "internal": false
+                  }
+                }
+              ]
+            },
+            {
+              "text": "。本页是面向阅读的 Wiki 摘要。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "aeglpqqxucnc",
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "结构采用：",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "language": "text"
+          },
+          "content": [
+            {
+              "text": "目标 Goal\n  -> 需求 Requirement\n    -> 任务 Task\n",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "ovhvvjvkuacu",
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "里程碑是横向时间容器，不作为第四层。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "ajiogjcsefae",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "总览",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "drveqbjsqyfj",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "指标",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "egxsigbjwuvt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "当前值",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "zwskagefcqpn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "目标",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ejyxvzdoapnn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qafzibagtfuo",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "需求",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "mlovpszoatzw",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "4",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "iuxfjczhbutc",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "任务",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "koaeyaumldwh",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "7",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "dsnghghfdspj",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "整体完成率",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "xnndkfewcpve",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "62%",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "trejoxqhuizs",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "已完成任务",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "feglqavgcwne",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "4",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "gnprkoeudups",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "阻塞任务",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "lgpwsomlzkrg",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "0",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "zwrfyybnkzhc",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "状态分布",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "kuxalsqiacgg",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "层级",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "zvxjoheazjyu",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "状态分布",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "sdmccgbseizs",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "目标",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "jsqnlylylgop",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "active: 2",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "xnxjtfdymtvt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "需求",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "mnrpoktndjdy",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "active: 3, planned: 1",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ayvsqjvzrmem",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "任务",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "hqrtlkuegaau",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "done: 4, planned: 3",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "sicawrdmazcr",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "目标进展",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "zkakkfpkczdk",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "ID",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ngxopsvyqyor",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "目标",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "zkzotobezklr",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "状态",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "oaizsdtvkqyn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "里程碑",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "vmzzmavugfdw",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "完成率",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "mufnauatnpek",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "下一步",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bnlcjypnoluz",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "GOAL-001",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "nfcgvedelecn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Docmost 本地协作试运行成功",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "lkrdpevgcpyf",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "active",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "tsdnhjyabkgt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "M6",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "nqtoxfietvxk",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "25%",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "vkyxbudotqgo",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "让团队先本地改几轮，再由 AI 导出并整理。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ndenoqdijwmy",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "GOAL-002",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "dmmcgefohsqn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "项目驾驶舱成为 AI 可维护的单一入口",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bzbblksmntrl",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "active",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "wtroqhlwxnmw",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "M5",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qxtadqnoovgp",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "100%",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qexoibdtawyb",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "把计划总览接入 Wiki 和项目控制检查。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "diwnvddzvvau",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "需求进展",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "crykfdgtxbmr",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "ID",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "pskpkajrrmhd",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "所属目标",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qkzfzoxibipm",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "需求",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "plisxypiwhez",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "状态",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qopeegdfmhsb",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "完成率",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "vhtausufohtt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "下一步",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qybxzyltnrtu",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-001",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "pzhjkgevtpri",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "GOAL-001",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "jmslbrsgixab",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "团队能在 Docmost 写作、评论和记录会议",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "rlkawudusdkn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "active",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "pkhrfqhmtgrv",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "50%",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "irdpuduhyviz",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "由团队继续在本地 Docmost 里改内容。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ddkfzejvqqoq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-002",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "jtobmseicubn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "GOAL-001",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qgydvwefwatz",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "AI 能导出 Docmost 快照并整理进 Git",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "gcdhshiwtrrw",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "planned",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "sktmxcvjojfq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "0%",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ssychqmgvfcq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "等待团队完成第一轮本地修改后导出快照。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "rnffahggtauw",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-003",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "vqmnskiseihv",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "GOAL-002",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "baueyvyoxjjs",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "项目计划能按目标、需求和任务统计进展",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "uhhasfzahiav",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "active",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "txbfftltzmne",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "100%",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "guexzqnnmiqb",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "生成 dashboard 并接入 Wiki。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "aioldrttoace",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-004",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "tiqlfcxgxpql",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "GOAL-002",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bhjrrsyxgmhi",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "项目控制检查覆盖计划结构",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "zpabfsbhbtxq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "active",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "tplqvbnccqmr",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "100%",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "myxgomasvgof",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "扩展 ",
+                          "type": "text"
+                        },
+                        {
+                          "text": "scripts/check_project_control.py",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "code",
+                              "attrs": {}
+                            }
+                          ]
+                        },
+                        {
+                          "text": "。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "otzuwgrbefyj",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "任务列表",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "hihupyortrcf",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "ID",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "abkzmmzsudmp",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "所属需求",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "dsvpoopupaac",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "任务",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "gvhejvpnizgm",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "状态",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "opekvtbgvoop",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "负责人",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "esahtmcrpsap",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "目标日期",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ypyicqzcuzsi",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "下一步",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "tvfqyxkvtuxp",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "TASK-001",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "kxytuqzxralr",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-001",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "yoocbisgubqt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "保持本地 Docmost 服务可用",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "jtgbtsikejlb",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "done",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "vespwbambapg",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Codex",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "exqbuhnjdjef",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2026-05-30",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bxdvqslxkgic",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "团队继续在 Docmost 里编辑内容。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "hlgkbfxnnqvt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "TASK-002",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "phbwzyedgwxt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-001",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qhbtpwhxboxj",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "记录第一轮真实评论和会议纪要",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "osnxivdofcuw",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "planned",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ixmmlejwokqk",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Team",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "uvvklbyiqepw",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2026-06-06",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "rwotpmabofty",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "在 Docmost 里继续写作、评论和开会。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ddzxesljphtg",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "TASK-003",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "hvsrwjnbword",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-002",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "sjtmezzcdkjk",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "导出 Docmost 快照",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "plajetbtgoca",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "planned",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "afmzphkfrqdn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Codex",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "lbjbidyedsnc",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2026-06-10",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ghjyzxywhwgt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "等团队完成一轮修改后执行导出。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "dyllfkmbnbbi",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "TASK-004",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "rtsshlndupdq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-002",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "etewhcsjkvqk",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "整理评论为正文、任务或决策",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "oewlxrhqzqpo",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "planned",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qxjyvssxbgzc",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Codex",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "dvemppntwssn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2026-06-13",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "rtnbpkmndiva",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "基于下一次 Docmost 快照整理。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "hgeknizwrvql",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "TASK-005",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "kmtswawupewj",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-003",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "cjflrniexfcp",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "建立目标、需求和任务 JSON 源",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "gqouqyxdwlms",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "done",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "nccnahktqncx",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Codex",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "zybgesrjthcq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2026-05-30",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "zylzsycqbkvo",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "后续由 AI 根据 Docmost 讨论继续追加。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qztnypdgqduk",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "TASK-006",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "vfrcjysehwgd",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-003",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "vkohlqvzvjpz",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "生成项目计划总览和甘特图",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "pbdskreivcbc",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "done",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "frwudfyojrgq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Codex",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "aokaxjwthosq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2026-05-30",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "tlcbpyqqubsg",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "让 Wiki 构建器渲染新页面。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "pvtufcsevysq",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "TASK-007",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "bohqwqzivxko",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "REQ-004",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "nolpwrklisfn",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "扩展项目控制检查",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ksijwlbyzbig",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "done",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "mcnqafkdfsdm",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "Codex",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "wcalkzwjegxt",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "2026-05-30",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "hwplkfshbzsj",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "后续把计划检查作为项目管理维护默认动作。",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "tlvasyrzirbk",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "甘特图",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "attrs": {
+            "language": "mermaid"
+          },
+          "content": [
+            {
+              "text": "gantt\n  title 项目计划甘特图\n  dateFormat  YYYY-MM-DD\n  axisFormat  %m-%d\n  section GOAL-001 Docmost 本地协作试运行成功\n  Docmost 本地协作试运行成功 :active, GOAL_001, 2026-05-30, 2026-06-13\n  团队能在 Docmost 写作、评论和记录会议 :active, REQ_001, 2026-05-30, 2026-06-06\n  保持本地 Docmost 服务可用 :done, TASK_001, 2026-05-30, 2026-05-30\n  记录第一轮真实评论和会议纪要 :TASK_002, 2026-05-30, 2026-06-06\n  AI 能导出 Docmost 快照并整理进 Git :REQ_002, 2026-06-01, 2026-06-10\n  导出 Docmost 快照 :TASK_003, 2026-06-01, 2026-06-10\n  整理评论为正文、任务或决策 :TASK_004, 2026-06-01, 2026-06-13\n  section GOAL-002 项目驾驶舱成为 AI 可维护的单一入口\n  项目驾驶舱成为 AI 可维护的单一入口 :active, GOAL_002, 2026-05-29, 2026-06-07\n  项目计划能按目标、需求和任务统计进展 :active, REQ_003, 2026-05-30, 2026-05-30\n  建立目标、需求和任务 JSON 源 :done, TASK_005, 2026-05-30, 2026-05-30\n  生成项目计划总览和甘特图 :done, TASK_006, 2026-05-30, 2026-05-30\n  项目控制检查覆盖计划结构 :active, REQ_004, 2026-05-30, 2026-05-30\n  扩展项目控制检查 :done, TASK_007, 2026-05-30, 2026-05-30\n",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "id": "jmodkvnnkepx",
+            "level": 2,
+            "indent": 0
+          },
+          "content": [
+            {
+              "text": "维护入口",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "content": [
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "mqirqzgxkbdo",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "源",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableHeader",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "yghequgdnmjz",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "入口",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "yhqhdkzvzwib",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "项目计划目录",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "qkeaybwxbxts",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "docs/project/planning/",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "rel": "noopener noreferrer nofollow",
+                                "href": "../project/planning/README.md",
+                                "class": null,
+                                "title": null,
+                                "target": "_blank",
+                                "internal": false
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "ivvozektbovv",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "目标源",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "mpjuyhaqumpo",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "goals.json",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "rel": "noopener noreferrer nofollow",
+                                "href": "../project/planning/goals.json",
+                                "class": null,
+                                "title": null,
+                                "target": "_blank",
+                                "internal": false
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "pdckzpzrqnog",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "需求源",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "wympvgbpqnxd",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "requirements.json",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "rel": "noopener noreferrer nofollow",
+                                "href": "../project/planning/requirements.json",
+                                "class": null,
+                                "title": null,
+                                "target": "_blank",
+                                "internal": false
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableRow",
+              "content": [
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "natorcpwifkx",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "任务源",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tableCell",
+                  "attrs": {
+                    "colspan": 1,
+                    "rowspan": 1
+                  },
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "id": "xgpjsxemcmus",
+                        "indent": 0
+                      },
+                      "content": [
+                        {
+                          "text": "tasks.json",
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "rel": "noopener noreferrer nofollow",
+                                "href": "../project/planning/tasks.json",
+                                "class": null,
+                                "title": null,
+                                "target": "_blank",
+                                "internal": false
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "hbcfwbnjueus",
+            "indent": 0
+          }
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划"
+    ],
+    "depth": 0
+  },
+  {
+    "id": "019e76d8-9dac-711f-a689-d90f492c7719",
+    "slug_id": "QkZ2PiWzUp",
+    "title": "任务线",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 03:06:08.170924+00",
+    "updated_at": "2026-05-30 03:06:08.170924+00",
+    "parent_page_id": "019e76c1-ccab-7c7b-98ae-8e3f9342887b",
+    "position": "a40I8",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "待填写。\n\n\n\n你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "yerygpnmecyi",
+            "indent": 0,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "text": "待填写。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "vwlsxrmpdxsq",
+                "indent": 0,
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "text": "你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划",
+      "任务线"
+    ],
+    "depth": 1
+  },
+  {
+    "id": "019e76d8-9d95-7883-9573-4782202c1ad6",
+    "slug_id": "shu5g311PW",
+    "title": "卡牌",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 03:06:08.149232+00",
+    "updated_at": "2026-05-30 03:06:08.149232+00",
+    "parent_page_id": "019e76c1-ccab-7c7b-98ae-8e3f9342887b",
+    "position": "a32oP",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "待填写。\n\n\n\n你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "midaanpdmnna",
+            "indent": 0,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "text": "待填写。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "hrxfwiqorqss",
+                "indent": 0,
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "text": "你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划",
+      "卡牌"
+    ],
+    "depth": 1
+  },
+  {
+    "id": "019e76d8-9d43-79a6-9cec-c430364ddfc1",
+    "slug_id": "DnFSqLPHSm",
+    "title": "总览",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 03:06:08.066139+00",
+    "updated_at": "2026-05-30 03:06:08.066139+00",
+    "parent_page_id": "019e76c1-ccab-7c7b-98ae-8e3f9342887b",
+    "position": "a03HF",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "待填写。\n\n\n\n你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "qfooslfkexxy",
+            "indent": 0,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "text": "待填写。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "wnipqnilmgve",
+                "indent": 0,
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "text": "你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划",
+      "总览"
+    ],
+    "depth": 1
+  },
+  {
+    "id": "019e76d8-9d65-782d-9a84-5f3a0fe981ee",
+    "slug_id": "5vDFQb9IcR",
+    "title": "整体架构",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 03:06:08.100386+00",
+    "updated_at": "2026-05-30 03:06:08.100386+00",
+    "parent_page_id": "019e76c1-ccab-7c7b-98ae-8e3f9342887b",
+    "position": "a124m",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "待填写。\n\n\n\n你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "admabgrseozl",
+            "indent": 0,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "text": "待填写。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "nvegngzyrcqe",
+                "indent": 0,
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "text": "你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划",
+      "整体架构"
+    ],
+    "depth": 1
+  },
+  {
+    "id": "019e76d8-9dc6-7f50-b3fb-b862ec28f469",
+    "slug_id": "VzLzY37Kih",
+    "title": "特质",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 03:06:08.197599+00",
+    "updated_at": "2026-05-30 03:06:08.197599+00",
+    "parent_page_id": "019e76c1-ccab-7c7b-98ae-8e3f9342887b",
+    "position": "a55wK",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "待填写。\n\n\n\n你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "zmwreplunuoz",
+            "indent": 0,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "text": "待填写。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "ithbpnjsulwy",
+                "indent": 0,
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "text": "你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划",
+      "特质"
+    ],
+    "depth": 1
+  },
+  {
+    "id": "019e76d8-9d7d-766a-a675-620a4268d40a",
+    "slug_id": "ag7s94u7YN",
+    "title": "美术",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 03:06:08.125127+00",
+    "updated_at": "2026-05-30 03:06:08.125127+00",
+    "parent_page_id": "019e76c1-ccab-7c7b-98ae-8e3f9342887b",
+    "position": "a25jQ",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "待填写。\n\n\n\n你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "bxajnjanqedj",
+            "indent": 0,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "text": "待填写。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "wrnuphagmuea",
+                "indent": 0,
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "text": "你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划",
+      "美术"
+    ],
+    "depth": 1
+  },
+  {
+    "id": "019e76d8-9df0-7619-bc1d-d8814417bdaa",
+    "slug_id": "76sLfjWiXB",
+    "title": "战役场景",
+    "status": "active",
+    "is_deleted": false,
+    "deleted_at": "",
+    "created_at": "2026-05-30 03:06:08.238979+00",
+    "updated_at": "2026-05-30 03:06:08.238979+00",
+    "parent_page_id": "019e76d8-9d7d-766a-a675-620a4268d40a",
+    "position": "a09ad",
+    "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
+    "space_name": "General",
+    "space_slug": "general",
+    "is_locked": false,
+    "text_content": "待填写。\n\n\n\n你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "id": "aacwyynarepb",
+            "indent": 0,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "text": "待填写。",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "blockquote",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "id": "bxvpseoefkvc",
+                "indent": 0,
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "text": "你可以直接在 Docmost 里写正文；之后 Codex 会导出快照并整理回 Git。",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "path_titles": [
+      "项目计划",
+      "美术",
+      "战役场景"
+    ],
+    "depth": 2
   }
 ]

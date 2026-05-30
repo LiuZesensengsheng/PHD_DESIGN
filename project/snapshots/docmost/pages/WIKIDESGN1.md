@@ -6,7 +6,7 @@ status: "active"
 space: "General"
 parent_page_id: "019e6f70-b503-7d81-bca1-28e3ff1598b1"
 created_at: "2026-05-28 16:35:17.88626+00"
-updated_at: "2026-05-28 16:36:26.202+00"
+updated_at: "2026-05-30 01:46:35.363+00"
 deleted_at: ""
 ---
 
@@ -44,7 +44,7 @@ deleted_at: ""
 
 用途
 
-这个页面负责回答一个问题：当前那么多设计文档里，哪些最值得先看。
+这个页面负责回答一个问题：当前那么多设计文档里，哪些最值得先看。 
 
 它不是 docs/design/ 的替代品。真正的设计依据仍然来自活跃设计文档、运行时数据、代码和测试。
 
@@ -330,4 +330,11 @@ data/questlines/encounters_ta.json
 
 ## Comments
 
-_No comments exported for this page._
+### open comment `019e768f-a2b5-746a-8b2d-4520d86948d2`
+
+- Created at: `2026-05-30 01:46:25.332449+00`
+- Updated at: `2026-05-30 01:46:25.332449+00`
+- Selection: `那么多设计文档里，哪些最值得先看。`
+
+我计划逐步的把这个变成唯一的源
+

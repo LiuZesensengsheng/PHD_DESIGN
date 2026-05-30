@@ -26,16 +26,20 @@ GitHub 讨论 / TODO / 里程碑
 | --- | --- | --- |
 | 当前状态 | [status/current.md](status/current.md) | 当前项目管理快照、阻塞项和下一步。 |
 | GitHub 同步报告 | [status/github.md](status/github.md) | 从 GitHub Issues、Milestones、Discussions 拉取的只读摘要。 |
+| 进展总览 | [progress/overview.md](progress/overview.md) | 当前核心方向、方向评估、优先级和项目驾驶舱闭环。 |
+| 项目计划 | [planning/README.md](planning/README.md) | 目标、需求、任务和自动生成的计划总览。 |
 | 会议纪要 | [meetings/README.md](meetings/README.md) | 每次会议的索引和记录模板。 |
 | TODO | [todos/current.md](todos/current.md) | 当前手工维护的 TODO 清单。 |
 | 里程碑 | [milestones/README.md](milestones/README.md) | 阶段目标、完成标准和当前进度。 |
+| 资产台账 | [assets/README.md](assets/README.md) | 项目文档、工具、数据包和协作资产的状态索引。 |
+| 能力台账 | [capabilities/README.md](capabilities/README.md) | Wiki、Docmost、同步、治理和验证能力的状态索引。 |
 | 同步快照 | [snapshots/README.md](snapshots/README.md) | AI 可读 JSON 快照。 |
 
 ## 规则
 
 1. 每次形成项目管理结论时，补一条会议纪要。
 2. 会议纪要里的行动项要进入 `todos/current.md`，除非它只是口头备忘。
-3. TODO 尽量有稳定 ID，方便 AI 和人引用。
+3. 目标、需求、任务尽量有稳定 ID，方便 AI 和人引用。
 4. 里程碑只记录阶段目标，不塞日常碎任务。
 5. GitHub Issues/Discussions 同步上线前，本目录可以手工维护。
 6. 后续脚本同步时，保留人工摘要，不把原始 API 快照当成唯一可读入口。
@@ -57,8 +61,9 @@ GitHub 讨论 / TODO / 里程碑
 | V1 | 手工维护项目管理文件，Wiki 展示。 |
 | V2 | 从 GitHub Issues/Milestones 拉取 TODO 和进度快照。 |
 | V3 | 从 GitHub Discussions 拉取页面评论和会议讨论摘要。 |
-| V4 | AI 定期生成项目状态更新 PR。 |
-| V5 | 评估是否需要 OAuth 或 GitHub App 站内写入。 |
+| V4 | 资产、能力和进展台账进入项目驾驶舱。 |
+| V5 | AI 定期生成项目状态更新 PR。 |
+| V6 | 评估是否需要 OAuth 或 GitHub App 站内写入。 |
 
 ## 同步命令
 
@@ -67,3 +72,19 @@ python scripts/sync_project_management.py --fetch-github --repo LiuZesensengshen
 ```
 
 该命令只读 GitHub，输出 `docs/project/status/github.md` 和 `docs/project/snapshots/*.json`。
+
+## 项目控制检查
+
+```bash
+python scripts/check_project_control.py
+```
+
+该命令检查资产台账、能力台账、进展页和核心项目管理入口是否存在且基本一致。
+
+## 项目计划生成
+
+```bash
+python scripts/generate_project_planning_dashboard.py
+```
+
+该命令从 `docs/project/planning/*.json` 生成项目计划总览和 Wiki 项目计划页。

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "last_reviewed": "2026-05-30",
+  "status_values": [
+    "planned",
+    "active",
+    "blocked",
+    "review",
+    "done",
+    "later"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "goal_id": "GOAL-001",
+      "title": "团队能在 Docmost 写作、评论和记录会议",
+      "status": "active",
+      "owner": "Team",
+      "milestone_id": "M6",
+      "start_date": "2026-05-30",
+      "target_date": "2026-06-06",
+      "summary": "Docmost 需要先成为舒服的协作入口，而不是只做展示页面。",
+      "acceptance_criteria": [
+        "至少完成一轮真实页面编辑。",
+        "至少出现一轮评论或会议纪要。",
+        "评论能被整理成正文、任务或决策。"
+      ],
+      "next_step": "由团队继续在本地 Docmost 里改内容。"
+    },
+    {
+      "id": "REQ-002",
+      "goal_id": "GOAL-001",
+      "title": "AI 能导出 Docmost 快照并整理进 Git",
+      "status": "planned",
+      "owner": "Codex",
+      "milestone_id": "M6",
+      "start_date": "2026-06-01",
+      "target_date": "2026-06-10",
+      "summary": "Docmost 负责协作体验，Git 负责审计、回滚和 AI 感知。",
+      "acceptance_criteria": [
+        "Docmost 页面和评论能导出到 `docs/project/snapshots/docmost/`。",
+        "AI 能基于快照更新 Wiki、TODO、会议纪要和台账。",
+        "更新通过 PR 或可审查 diff 进入仓库。"
+      ],
+      "next_step": "等待团队完成第一轮本地修改后导出快照。"
+    },
+    {
+      "id": "REQ-003",
+      "goal_id": "GOAL-002",
+      "title": "项目计划能按目标、需求和任务统计进展",
+      "status": "active",
+      "owner": "Codex",
+      "milestone_id": "M5",
+      "start_date": "2026-05-30",
+      "target_date": "2026-05-30",
+      "summary": "把单层 TODO 升级为轻量的目标-需求-任务结构。",
+      "acceptance_criteria": [
+        "目标、需求和任务有机器可读 JSON 源。",
+        "总览页能统计完成率和状态分布。",
+        "Wiki 能展示项目计划和甘特图。"
+      ],
+      "next_step": "生成 dashboard 并接入 Wiki。"
+    },
+    {
+      "id": "REQ-004",
+      "goal_id": "GOAL-002",
+      "title": "项目控制检查覆盖计划结构",
+      "status": "active",
+      "owner": "Codex",
+      "milestone_id": "M5",
+      "start_date": "2026-05-30",
+      "target_date": "2026-05-30",
+      "summary": "让脚本检查目标、需求、任务之间的关系和状态值。",
+      "acceptance_criteria": [
+        "未知目标、未知需求和非法状态会被检查出来。",
+        "权威入口和生成页存在性会被检查。",
+        "检查脚本能输出计划数量。"
+      ],
+      "next_step": "扩展 `scripts/check_project_control.py`。"
+    }
+  ]
+}

@@ -28,6 +28,9 @@
 | 删除策略 | [DELETE_POLICY.md](../pm/DELETE_POLICY.md) |
 | Cloudflare 私有发布 | [Cloudflare 私有 Wiki 发布说明](CLOUDFLARE_PAGES_ACCESS_RUNBOOK.md) |
 | Wiki 项目仪表盘 | [项目管理](project.md) |
+| 项目进展总览 | [进展总览](progress.md) |
+| 项目计划总览 | [项目计划](planning.md) |
+| 资产与能力台账 | [资产与能力](assets.md) |
 
 ## 常用验证
 
@@ -38,6 +41,8 @@
 | 卡牌生成 | `python scripts/cards_csv_to_json.py --generate-all-colors` |
 | 卡牌生成测试 | `python -m pytest tests/scripts/test_cards_csv_to_json.py -q` |
 | 仓库完整测试 | `python -m pytest -q` |
+| 项目控制检查 | `python scripts/check_project_control.py` |
+| 项目计划生成 | `python scripts/generate_project_planning_dashboard.py` |
 
 ## 评论和 AI 感知
 

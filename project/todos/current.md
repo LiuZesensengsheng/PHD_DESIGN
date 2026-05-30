@@ -32,7 +32,13 @@ TODO 第一版先手工维护。后续接入 GitHub Issues 后，本页可以变
 | PM-006 | 评估 OAuth 或 GitHub App 站内写入 | Later | Team | M4 | 等只读同步和展示稳定后再判断。 |
 | PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Planned | Team | M3 | 为页面评论摘要和 AI 感知准备。 |
 | PM-008 | 决定 GitHub milestones 是否作为阶段进度源 | Planned | Team | M2/M3 | 当前 GitHub milestones 为空。 |
+| PM-009 | 建立资产台账和能力台账 V1 | Done | Codex | M5 | 已新增 `docs/project/assets/` 和 `docs/project/capabilities/`。 |
+| PM-010 | 建立项目进展总览 | Done | Codex | M5 | 已新增 `docs/project/progress/overview.md` 和 Wiki 进展页。 |
+| PM-011 | 建立 Project Control 检查工具 | In Progress | Codex | M5 | 检查台账 ID、状态和权威入口。 |
+| PM-012 | 本地试运行 Docmost 协作层 | Planned | Team | M6 | 一到两周后再决定是否上云。 |
+| PM-013 | 建立目标-需求-任务计划结构 | Done | Codex | M5 | 已新增 `docs/project/planning/*.json` 和自动生成总览。 |
+| PM-014 | 用 Docmost 讨论补充真实目标和需求 | Planned | Team | M6 | 后续由 AI 整理进 `docs/project/planning/`。 |
 
 ## 当前焦点
 
-当前焦点转向 M3：把 GitHub Discussions 的评论正文和页面摘要同步进仓库，让评论能被 AI 更及时地感知。
+当前焦点转向 M5/M6：先让资产、能力、进展和项目计划能被 AI 稳定维护，再用本地 Docmost 试运行验证协作体验。

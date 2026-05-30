@@ -18,10 +18,14 @@
 | --- | --- | --- |
 | 项目管理入口 | 已建立 | [docs/project/README.md](../project/README.md) |
 | 当前状态快照 | 已建立 | [current.md](../project/status/current.md) |
+| 进展总览 | 已建立 | [overview.md](../project/progress/overview.md) |
+| 项目计划 | 已建立 | [planning/README.md](../project/planning/README.md) |
 | GitHub 同步报告 | 已建立 | [github.md](../project/status/github.md) |
 | 会议纪要 | 已建立 | [meetings/README.md](../project/meetings/README.md) |
 | TODO 清单 | 已建立 | [todos/current.md](../project/todos/current.md) |
 | 里程碑 | 已建立 | [milestones/README.md](../project/milestones/README.md) |
+| 资产台账 | 已建立 | [assets/README.md](../project/assets/README.md) |
+| 能力台账 | 已建立 | [capabilities/README.md](../project/capabilities/README.md) |
 | JSON 快照 | 已建立 | [snapshots/README.md](../project/snapshots/README.md) |
 
 ## GitHub 同步快照
@@ -52,6 +56,12 @@
 | PM-006 | 评估 OAuth 或 GitHub App 站内写入 | Later | M4 |
 | PM-007 | 同步 Discussions 评论正文和最近评论摘要 | Planned | M3 |
 | PM-008 | 决定 GitHub milestones 是否作为阶段进度源 | Planned | M2/M3 |
+| PM-009 | 建立资产台账和能力台账 V1 | Done | M5 |
+| PM-010 | 建立项目进展总览 | Done | M5 |
+| PM-011 | 建立 Project Control 检查工具 | In Progress | M5 |
+| PM-012 | 本地试运行 Docmost 协作层 | Planned | M6 |
+| PM-013 | 建立目标-需求-任务计划结构 | Done | M5 |
+| PM-014 | 用 Docmost 讨论补充真实目标和需求 | Planned | M6 |
 
 ## 里程碑
 
@@ -62,6 +72,8 @@
 | M2 | GitHub TODO 同步 | Done | 从 Issues/Milestones 生成仓库快照。 |
 | M3 | GitHub 讨论同步 | In Progress | 从 Discussions 生成页面评论和会议摘要。 |
 | M4 | 站内写入评估 | Later | 决定是否需要 OAuth 或 GitHub App。 |
+| M5 | Project Control 台账与项目计划总览 | In Progress | 资产台账、能力台账、进展总览、目标-需求-任务计划和检查工具可用于核查项目治理结构。 |
+| M6 | Docmost 本地协作试运行 | Planned | 本地 Docmost 承载会议、评论、TODO 和 Wiki 草稿，并定期镜像到 Git。 |
 
 ## 工作流
 
@@ -70,6 +82,10 @@
   -> docs/project/meetings/YYYY-MM-DD-topic.md
   -> docs/project/todos/current.md
   -> docs/project/milestones/README.md
+  -> docs/project/assets/registry.json
+  -> docs/project/capabilities/registry.json
+  -> docs/project/progress/overview.md
+  -> docs/project/planning/*.json
   -> docs/wiki/project.md
   -> AI 读取并提出更新建议
 ```
@@ -79,5 +95,7 @@
 1. 自动从 GitHub Issues 拉取 TODO。
 2. 自动从 GitHub Milestones 拉取阶段进度。
 3. 自动从 GitHub Discussions 拉取页面评论。
-4. 在 Wiki 页面底部展示最近讨论摘要。
-5. 由 AI 定期生成项目状态更新 PR。
+4. 评估是否从 JSON 台账自动生成 Wiki 表格。
+5. 从目标、需求和任务 JSON 生成项目计划总览与甘特图。
+6. 在 Wiki 页面底部展示最近讨论摘要。
+7. 由 AI 定期生成项目状态更新 PR。

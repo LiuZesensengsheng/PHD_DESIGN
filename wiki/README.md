@@ -24,7 +24,10 @@ Wiki 是阅读层，不是第二套真相源。真正的设计依据仍然在 `d
 | 敌人与遭遇 | TA 线、单场遭遇、敌人数据入口 | [敌人与遭遇](enemies.md) |
 | 事件与叙事 | 教程叙事、事件草案、叙事 source pack | [事件与叙事](events.md) |
 | 奖励与长期系统 | 致谢、期刊、声望、会议等暂未完全收口的系统 | [奖励与长期系统](rewards.md) |
+| 进展总览 | 核心方向、方向评估、优先级和项目管理闭环 | [进展总览](progress.md) |
 | 项目管理 | 会议纪要、TODO、里程碑、当前进展 | [项目管理](project.md) |
+| 项目计划 | 目标、需求、任务、进度统计和甘特图 | [项目计划](planning.md) |
+| 资产与能力 | 项目资产、能力成熟度、证据和下一步 | [资产与能力](assets.md) |
 | 术语 | 常用设计词和状态标签 | [术语表](glossary.md) |
 | 开发协作 | 架构、入口命令、文档治理、发布方式 | [开发与治理](development.md) |
 
@@ -38,6 +41,9 @@ Wiki 是阅读层，不是第二套真相源。真正的设计依据仍然在 `d
 | 教程剧情现在在哪里 | [事件与叙事](events.md) | `data/narrative_src/packs/tutorial/` |
 | 当前项目方向是什么 | [开发与治理](development.md) | `docs/development/CURRENT_DIRECTION.md` |
 | 当前 TODO 和会议纪要在哪里 | [项目管理](project.md) | `docs/project/` |
+| 当前目标、需求和任务是什么 | [项目计划](planning.md) | `docs/project/planning/` |
+| 当前核心进展方向是什么 | [进展总览](progress.md) | `docs/project/progress/overview.md` |
+| 哪些资产和能力可依赖 | [资产与能力](assets.md) | `docs/project/assets/` 和 `docs/project/capabilities/` |
 
 ## 内容状态
 
