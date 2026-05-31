@@ -25,7 +25,7 @@
 | 方向 | 当前判断 | 成熟度 | 证据 | 下一步 |
 | --- | --- | --- | --- | --- |
 | Docmost Wiki 源 | 适合评论、富文本、会议纪要和正文协作；现在是唯一 Wiki 正文源。 | prototype | `tools/docmost_mirror/README.md` | 本地试运行一到两周，再决定是否上云。 |
-| 静态 Wiki 阅读层 | 旧 `docs/wiki` 内容源已退休，不再作为独立维护对象。 | retired | `tools/wiki_site/README.md` | 默认不再生成或维护，除非需要回滚。 |
+| 静态 Wiki 阅读层 | 旧 `docs/wiki` 内容源和 Git HTML 发布链路已删除；不再作为独立维护对象。 | retired | `docs/project/status/current.md` | 后续 Wiki 正文只走 Docmost，Git 只保留快照和项目治理记录。 |
 | Repo-first 项目管理 | 会议纪要、TODO、里程碑、状态快照已进入仓库。 | validated | `docs/project/README.md` | 增加资产/能力/进展台账并用脚本检查。 |
 | GitHub 信号同步 | Issues、Milestones、Discussions 已能生成只读快照。 | validated | `tools/project_sync/README.md` | 继续评估自动同步 PR。 |
 | 资产与能力台账 | V1 开始落地，帮助 AI 维护项目事实。 | prototype | `docs/project/assets/registry.json` | 先维护核心对象，不扩大到所有文件。 |

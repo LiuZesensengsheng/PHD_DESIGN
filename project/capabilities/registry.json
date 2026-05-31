@@ -8,19 +8,18 @@
       "domain": "wiki",
       "status": "Retired",
       "owner": "Codex",
-      "authoritative_page": "tools/wiki_site/README.md",
+      "authoritative_page": "docs/project/status/current.md",
       "related_files": [
-        "tools/wiki_site/build.py",
-        "tests/tools/test_wiki_site_build.py"
+        "docs/project/snapshots/docmost/index.md"
       ],
       "evidence": [
-        "tests/tools/test_wiki_site_build.py"
+        "docs/project/snapshots/docmost/index.md"
       ],
       "milestone": "M0-retired",
       "risks": [
         "??????? Wiki ??????????????????"
       ],
-      "next_step": "?????????????????????"
+      "next_step": "???????????????? Docmost ? Git ??????????"
     },
     {
       "id": "CAP-DOCMOST-001",

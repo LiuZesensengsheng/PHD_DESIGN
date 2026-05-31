@@ -47,7 +47,7 @@
 
 | ID | 名称 | 能力域 | 状态 | 权威入口 |
 | --- | --- | --- | --- | --- |
-| CAP-WIKI-001 | 旧静态 Wiki 构建与本地预览 | wiki | Retired | `tools/wiki_site/README.md` |
+| CAP-WIKI-001 | 旧静态 Wiki 构建与本地预览 | wiki | Retired | `docs/project/status/current.md` |
 | CAP-DOCMOST-001 | Docmost 页面导出到 Git 快照 | collaboration | Prototype | `tools/docmost_mirror/README.md` |
 | CAP-PROJECT-001 | 会议纪要、TODO、里程碑的 repo-first 管理 | project_management | Prototype | `docs/project/README.md` |
 | CAP-DISCUSS-001 | GitHub Discussions 评论同步到项目快照 | collaboration | Tested | `tools/project_sync/README.md` |

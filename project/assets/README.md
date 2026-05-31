@@ -49,7 +49,7 @@
 
 | ID | 名称 | 类型 | 状态 | 权威入口 |
 | --- | --- | --- | --- | --- |
-| ASSET-WIKI-001 | 旧静态 Wiki 阅读入口 | documentation | Retired | `tools/wiki_site/README.md` |
+| ASSET-WIKI-001 | 旧静态 Wiki 阅读入口 | documentation | Retired | `docs/project/status/current.md` |
 | ASSET-DOCMOST-001 | Docmost Wiki 正文源 | collaboration | Prototype | `tools/docmost_mirror/README.md` |
 | ASSET-PROJECT-001 | Repo-first 项目管理目录 | project_management | Tested | `docs/project/README.md` |
 | ASSET-SYNC-001 | GitHub 项目信号同步工具 | tooling | Tested | `tools/project_sync/README.md` |

@@ -3,7 +3,7 @@
 - 状态: Draft
 - 负责人: Team
 - 范围: project-status-snapshot
-- 最后复核: 2026-05-27
+- 最后复核: 2026-05-31
 
 ## 摘要
 
@@ -31,7 +31,7 @@ Wiki 正文源收敛到 Docmost。Git 不再维护独立 `docs/wiki` 内容源�
 | Docmost 快照仍需手动导出 | Docmost 新正文和评论不会自动进入 Git | 先手动运行导出脚本；稳定后评估定时导出或自动 PR。 |
 | GitHub milestones 为空 | 当前 issue 无法按阶段自动统计 | 先决定是否在 GitHub 建 milestones，或继续由 `docs/project/milestones/` 管阶段。 |
 | Docmost 与 Git 的事实源关系需要稳定 | 如果不定期导出，AI 只能看到旧快照 | 先采用“Docmost 正文源，Git 审计快照，AI 整理 PR”的本地试运行流程。 |
-| 旧静态 Wiki 链路已退休 | 旧 `docs/wiki` 内容源不再维护 | 保留历史快照和工具可回滚性，默认检查转向 Docmost 快照。 |
+| 旧静态 Wiki 链路已删除 | 旧 `docs/wiki` 内容源、静态 HTML 构建器和 Cloudflare Workers 配置已移除 | 仅保留 Docmost 导出的历史快照；默认检查转向 Docmost 快照。 |
 
 ## 下一步
 
