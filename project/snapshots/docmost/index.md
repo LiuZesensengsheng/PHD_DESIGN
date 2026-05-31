@@ -1,7 +1,7 @@
 # Docmost Mirror Snapshot
 
 - Snapshot id: `docmost_mirror_snapshot_v1`
-- Generated at: `2026-05-31T01:57:15Z`
+- Generated at: `2026-05-31T03:12:15Z`
 - Pages: `45` total, `39` active, `6` deleted
 - Comments: `6` total, `6` open, `0` resolved, `0` deleted
 
@@ -20,7 +20,7 @@ This directory is a read-only mirror exported from Docmost. Docmost stays the ed
   - [active] [奖励与长期系统](pages/WIKIREWRD1.md) `WIKIREWRD1`
   - [active] [学科与理想](pages/WIKICHARS1.md) `WIKICHARS1`
   - [active] [开发与治理](pages/WIKIDEVLP1.md) `WIKIDEVLP1`
-  - [active] [战役与路线](pages/WIKICAMPG1.md) `WIKICAMPG1`
+  - [active] [战役与任务线](pages/WIKICAMPG1.md) `WIKICAMPG1`
   - [active] [敌人与遭遇](pages/WIKIENEMY1.md) `WIKIENEMY1`
   - [active] [术语表](pages/WIKIGLOSS1.md) `WIKIGLOSS1`
   - [active] [机制](pages/WIKISYSTM1.md) `WIKISYSTM1`
