@@ -1,5 +1,14 @@
 # TA 第三批前置机制评估：迟到学生 / 代到学生的最小琐事宿主 v1
 
+- Status: Frozen
+- Owner: Team
+- Scope: ta-chore-host-precondition
+- Canonical: No
+- Supersedes: none
+- Superseded By: `TA_IMPLEMENTABILITY_MAPPING_V1.md`
+- Implemented In: `data/combat/ta/encounters_ta.csv`, `data/questlines/encounters_ta.json`
+- Last Reviewed: 2026-05-17
+
 ## 目标
 
 这份文档只回答一个问题：

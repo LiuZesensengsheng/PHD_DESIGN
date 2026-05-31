@@ -1,0 +1,231 @@
+{
+  "registry_id": "project_asset_registry_v1",
+  "last_reviewed": "2026-05-30",
+  "items": [
+    {
+      "id": "ASSET-WIKI-001",
+      "name": "??? Wiki ????",
+      "type": "documentation",
+      "status": "Retired",
+      "owner": "Team",
+      "authoritative_page": "docs/project/status/current.md",
+      "related_files": [
+        "docs/project/snapshots/docmost/index.md"
+      ],
+      "evidence": [
+        "docs/project/snapshots/docmost/index.md"
+      ],
+      "milestone": "M0-retired",
+      "risks": [
+        "???????????????? Docmost ??????"
+      ],
+      "next_step": "???????????????? Docmost ? Git ??????????"
+    },
+    {
+      "id": "ASSET-DOCMOST-001",
+      "name": "Docmost Wiki ???",
+      "type": "collaboration",
+      "status": "Prototype",
+      "owner": "Team",
+      "authoritative_page": "tools/docmost_mirror/README.md",
+      "related_files": [
+        "tools/docmost_mirror/README.md",
+        "tools/docmost_sandbox",
+        "scripts/export_docmost_snapshot.py",
+        "docs/project/snapshots/docmost/index.md"
+      ],
+      "evidence": [
+        "docs/project/snapshots/docmost/docmost_snapshot.json",
+        "docs/project/snapshots/docmost/pages.json",
+        "docs/project/snapshots/docmost/pages"
+      ],
+      "milestone": "M6",
+      "risks": [
+        "?? Docker ????????????",
+        "Git ????????????????? Docmost ??????"
+      ],
+      "next_step": "? Docmost ???? Wiki ??????????? Git?"
+    },
+    {
+      "id": "ASSET-PROJECT-001",
+      "name": "Repo-first 项目管理目录",
+      "type": "project_management",
+      "status": "Tested",
+      "owner": "Team",
+      "authoritative_page": "docs/project/README.md",
+      "related_files": [
+        "docs/project/README.md",
+        "docs/project/status/current.md",
+        "docs/project/todos/current.md",
+        "docs/project/milestones/README.md",
+        "docs/project/progress/overview.md",
+        "docs/project/planning/README.md",
+        "docs/project/planning/dashboard.md"
+      ],
+      "evidence": [
+        "docs/project/meetings/2026-05-27-wiki-project-management-v1.md",
+        "tests/tools/test_project_control.py"
+      ],
+      "milestone": "M1",
+      "risks": [
+        "????? TODO??????????????"
+      ],
+      "next_step": "? project_control ??????????????? Docmost ???????"
+    },
+    {
+      "id": "ASSET-SYNC-001",
+      "name": "GitHub 项目信号同步工具",
+      "type": "tooling",
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/project_sync/README.md",
+      "related_files": [
+        "tools/project_sync/sync.py",
+        "scripts/sync_project_management.py",
+        "docs/project/snapshots/project_sync_snapshot.json",
+        "docs/project/snapshots/discussion_review_cache.json"
+      ],
+      "evidence": [
+        "tests/tools/test_project_sync.py",
+        "docs/project/status/github.md",
+        "docs/project/meetings/2026-05-27-wiki-discussion-footer-v1.md"
+      ],
+      "milestone": "M2/M3",
+      "risks": [
+        "同步仍需手动触发",
+        "GitHub milestones 当前为空"
+      ],
+      "next_step": "评估是否用 GitHub Action 自动同步并开 PR。"
+    },
+    {
+      "id": "ASSET-DOCMOST-002",
+      "name": "Docmost 到 Git 快照",
+      "type": "snapshot",
+      "status": "Prototype",
+      "owner": "Codex",
+      "authoritative_page": "docs/project/snapshots/docmost/index.md",
+      "related_files": [
+        "docs/project/snapshots/docmost/docmost_snapshot.json",
+        "docs/project/snapshots/docmost/pages.json",
+        "docs/project/snapshots/docmost/comments.json"
+      ],
+      "evidence": [
+        "scripts/export_docmost_snapshot.py",
+        "docs/project/snapshots/docmost/pages"
+      ],
+      "milestone": "M6",
+      "risks": [
+        "??? Git ?????????????",
+        "????????????TODO??????????"
+      ],
+      "next_step": "????????????? AI ?????????"
+    },
+    {
+      "id": "ASSET-CONTENT-001",
+      "name": "核心内容设计文档集合",
+      "type": "content_design",
+      "status": "Draft",
+      "owner": "Team",
+      "authoritative_page": "docs/project/snapshots/docmost/index.md",
+      "related_files": [
+        "docs/design/README.md",
+        "docs/project/snapshots/docmost/pages"
+      ],
+      "evidence": [
+        "docs/project/assets/README.md",
+        "docs/project/snapshots/docmost/index.md"
+      ],
+      "milestone": "M0",
+      "risks": [
+        "旧设计文档和 Wiki 摘要之间仍可能存在重复或冲突",
+        "删除或归档必须继续经过人工确认"
+      ],
+      "next_step": "? Docmost ????????????Git ?????????????"
+    },
+    {
+      "id": "ASSET-TA-001",
+      "name": "TA 敌人与遭遇内容包",
+      "type": "content_pack",
+      "status": "Tested",
+      "owner": "Team",
+      "authoritative_page": "data/combat/ta/manifest.json",
+      "related_files": [
+        "data/combat/ta/species_ta.csv",
+        "data/combat/ta/skills_ta.csv",
+        "data/combat/ta/encounters_ta.csv"
+      ],
+      "evidence": [
+        "tests/combat/test_ta_runtime_encounters.py",
+        "tests/shared/test_combat_content_loader.py"
+      ],
+      "milestone": "Content Pack Minimal V1",
+      "risks": [
+        "TA 旧设计材料和运行时数据之间仍需持续对齐"
+      ],
+      "next_step": "把 TA 单敌人和遭遇索引逐步生成到 Wiki。"
+    },
+    {
+      "id": "ASSET-CARDANALYSIS-001",
+      "name": "Combat Analysis 设计辅助工具链",
+      "type": "tooling",
+      "status": "Tested",
+      "owner": "Codex",
+      "authoritative_page": "tools/combat_analysis/README.md",
+      "related_files": [
+        "tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md",
+        "docs/development/cardanalysis/CARDANALYSIS_NORTH_STAR_V1.md",
+        "docs/development/cardanalysis/ENGINEERING_IDEAL_ENCHANTMENT_CARDPOOL_CONSENSUS_V1.md"
+      ],
+      "evidence": [
+        "tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py",
+        "scripts/validate_capability_graph.py"
+      ],
+      "milestone": "Cardanalysis",
+      "risks": [
+        "工具链能力很强但文档体量大，需要通过台账和入口页降低检索噪音"
+      ],
+      "next_step": "把当前最可用的分析能力摘要同步到能力台账。"
+    },
+    {
+      "id": "ASSET-ACK-001",
+      "name": "致谢系统设计资料",
+      "type": "design_reference",
+      "status": "Draft",
+      "owner": "Team",
+      "authoritative_page": "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md",
+      "related_files": [
+        "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM.md"
+      ],
+      "evidence": [
+        "docs/project/assets/README.md"
+      ],
+      "milestone": "Long-term Systems",
+      "risks": [
+        "长期系统资料容易被误判为废弃",
+        "用户已明确要求 acknowledgements 相关资料继续保留"
+      ],
+      "next_step": "保留并标注可信度，不进入删除候选。"
+    },
+    {
+      "id": "ASSET-GOVERNANCE-001",
+      "name": "文档治理与删除策略",
+      "type": "governance",
+      "status": "Tested",
+      "owner": "Team",
+      "authoritative_page": "docs/development/architecture/DESIGN_DOC_GOVERNANCE_V1.md",
+      "related_files": [
+        "docs/pm/DELETE_POLICY.md",
+        "docs/pm/DECISION_LOG.md",
+        "docs/project/README.md"
+      ],
+      "evidence": [
+        "docs/project/assets/README.md"
+      ],
+      "milestone": "Documentation Governance",
+      "risks": [
+        "如果跳过确认直接归档或删除，会破坏用户对文档治理的信任"
+      ],
+      "next_step": "后续文档清理先给候选清单，再由 owner 确认归档或删除。"
+    }
+  ]
+}

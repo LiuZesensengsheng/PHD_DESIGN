@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "last_reviewed": "2026-05-30",
+  "status_values": [
+    "planned",
+    "active",
+    "at_risk",
+    "blocked",
+    "review",
+    "done",
+    "later"
+  ],
+  "goals": [
+    {
+      "id": "GOAL-001",
+      "title": "Docmost 本地协作试运行成功",
+      "status": "active",
+      "owner": "Team",
+      "milestone_ids": [
+        "M6"
+      ],
+      "start_date": "2026-05-30",
+      "target_date": "2026-06-13",
+      "summary": "验证 Docmost 是否能承载评论、会议纪要、TODO 和 Wiki 草稿，并由 AI 定期整理回 Git。",
+      "success_criteria": [
+        "团队能在 Docmost 里评论、开会和记录待办。",
+        "AI 能导出 Docmost 快照，并把结论整理回 Git。",
+        "评论处理后进入正文、任务、会议纪要或明确拒绝记录。"
+      ],
+      "next_step": "让团队先本地改几轮，再由 AI 导出并整理。"
+    },
+    {
+      "id": "GOAL-002",
+      "title": "项目驾驶舱成为 AI 可维护的单一入口",
+      "status": "active",
+      "owner": "Team",
+      "milestone_ids": [
+        "M5"
+      ],
+      "start_date": "2026-05-29",
+      "target_date": "2026-06-07",
+      "summary": "把项目进展、资产、能力、目标、需求和任务整理成轻量项目驾驶舱。",
+      "success_criteria": [
+        "资产与能力台账能解释项目当前可依赖内容。",
+        "目标、需求和任务能生成统计总览和甘特图。",
+        "检查脚本能发现台账漂移、链接缺失和关系错误。"
+      ],
+      "next_step": "把计划总览接入 Wiki 和项目控制检查。"
+    }
+  ]
+}

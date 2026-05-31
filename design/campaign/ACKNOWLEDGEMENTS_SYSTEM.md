@@ -1,5 +1,14 @@
 # "论文致谢"系统设计文档 (ACKNOWLEDGEMENTS_SYSTEM.md)
 
+- Status: Frozen
+- Owner: Team
+- Scope: acknowledgements-system-reference
+- Canonical: No
+- Supersedes: none
+- Superseded By: `ACKNOWLEDGEMENTS_SYSTEM_v2.md`
+- Implemented In: none
+- Last Reviewed: 2026-05-17
+
 ## 1. 设计哲学：游戏的情感终点
 
 "论文致谢"系统是我们游戏对传统"成就系统"的彻底颠覆。它不是一个用于炫耀或解锁内容的冰冷列表，而是这款游戏的**情感核心**与**最终沉淀**。
@@ -58,4 +67,4 @@
     - **致谢文本**: "**最后，我要由衷地感谢我的导师。感谢他不仅为本研究指明了方向，更是在最关键的时刻，亲自为本研究扫清了障碍。没有他，就没有这本论文。字面意义上。**"
 
 ## 4. 未来扩展
-本系统具有极强的扩展性，任何在游戏中设计的特殊挑战、隐藏事件、彩蛋，都可以转化为一篇独特的"致谢"。 
+本系统具有极强的扩展性，任何在游戏中设计的特殊挑战、隐藏事件、彩蛋，都可以转化为一篇独特的"致谢"。

@@ -1,5 +1,14 @@
 # 设计北极星（V1）
 
+- Status: Active
+- Owner: Team
+- Scope: cross-system-design
+- Canonical: Yes
+- Supersedes: none
+- Superseded By: none
+- Implemented In: `docs/design/README.md`
+- Last Reviewed: 2026-05-17
+
 > 目的：让所有设计（敌人/遭遇/事件/卡牌）都有一致的“为什么做”和“怎么验收”。
 
 ## 设计目的（4 个结果）

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "last_reviewed": "2026-05-30",
+  "status_values": [
+    "planned",
+    "in_progress",
+    "blocked",
+    "review",
+    "done",
+    "later"
+  ],
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "requirement_id": "REQ-001",
+      "title": "保持本地 Docmost 服务可用",
+      "status": "done",
+      "owner": "Codex",
+      "milestone_id": "M6",
+      "start_date": "2026-05-30",
+      "target_date": "2026-05-30",
+      "summary": "确认本地 Docmost、Postgres 和 Redis 容器正在运行。",
+      "evidence_paths": [
+        "tools/docmost_mirror/README.md"
+      ],
+      "next_step": "团队继续在 Docmost 里编辑内容。"
+    },
+    {
+      "id": "TASK-002",
+      "requirement_id": "REQ-001",
+      "title": "记录第一轮真实评论和会议纪要",
+      "status": "planned",
+      "owner": "Team",
+      "milestone_id": "M6",
+      "start_date": "2026-05-30",
+      "target_date": "2026-06-06",
+      "summary": "通过真实协作验证 Docmost 是否比静态 Wiki 更适合讨论。",
+      "evidence_paths": [],
+      "next_step": "在 Docmost 里继续写作、评论和开会。"
+    },
+    {
+      "id": "TASK-003",
+      "requirement_id": "REQ-002",
+      "title": "导出 Docmost 快照",
+      "status": "planned",
+      "owner": "Codex",
+      "milestone_id": "M6",
+      "start_date": "2026-06-01",
+      "target_date": "2026-06-10",
+      "summary": "把 Docmost 页面、评论和空间信息镜像到 Git。",
+      "evidence_paths": [
+        "scripts/export_docmost_snapshot.py",
+        "docs/project/snapshots/docmost/index.md"
+      ],
+      "next_step": "等团队完成一轮修改后执行导出。"
+    },
+    {
+      "id": "TASK-004",
+      "requirement_id": "REQ-002",
+      "title": "整理评论为正文、任务或决策",
+      "status": "planned",
+      "owner": "Codex",
+      "milestone_id": "M6",
+      "start_date": "2026-06-01",
+      "target_date": "2026-06-13",
+      "summary": "评论可以被解决，但处理前必须进入可维护结构。",
+      "evidence_paths": [
+        "docs/project/progress/overview.md"
+      ],
+      "next_step": "基于下一次 Docmost 快照整理。"
+    },
+    {
+      "id": "TASK-005",
+      "requirement_id": "REQ-003",
+      "title": "建立目标、需求和任务 JSON 源",
+      "status": "done",
+      "owner": "Codex",
+      "milestone_id": "M5",
+      "start_date": "2026-05-30",
+      "target_date": "2026-05-30",
+      "summary": "新增 `docs/project/planning/` 下的三层项目计划源。",
+      "evidence_paths": [
+        "docs/project/planning/goals.json",
+        "docs/project/planning/requirements.json",
+        "docs/project/planning/tasks.json"
+      ],
+      "next_step": "后续由 AI 根据 Docmost 讨论继续追加。"
+    },
+    {
+      "id": "TASK-006",
+      "requirement_id": "REQ-003",
+      "title": "生成项目计划总览和甘特图",
+      "status": "done",
+      "owner": "Codex",
+      "milestone_id": "M5",
+      "start_date": "2026-05-30",
+      "target_date": "2026-05-30",
+      "summary": "? JSON ???? docs/project/planning/dashboard.md?",
+      "evidence_paths": [
+        "scripts/generate_project_planning_dashboard.py",
+        "docs/project/planning/dashboard.md"
+      ],
+      "next_step": "???????????? AI ??? Docmost?"
+    },
+    {
+      "id": "TASK-007",
+      "requirement_id": "REQ-004",
+      "title": "扩展项目控制检查",
+      "status": "done",
+      "owner": "Codex",
+      "milestone_id": "M5",
+      "start_date": "2026-05-30",
+      "target_date": "2026-05-30",
+      "summary": "检查目标、需求、任务关系和入口文件。",
+      "evidence_paths": [
+        "scripts/check_project_control.py",
+        "tests/scripts/test_check_project_control.py"
+      ],
+      "next_step": "后续把计划检查作为项目管理维护默认动作。"
+    }
+  ]
+}

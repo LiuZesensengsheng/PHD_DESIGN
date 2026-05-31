@@ -1664,3 +1664,75 @@ restore serial `py -3.11 -m pytest -q` as the default commit gate and keep
    parallel-only failures appear.
 2. Keep quick and contract smoke profiles as early feedback, not commit-gate
    replacements.
+
+### [DL-20260531-01] Retire static Git HTML Wiki chain
+
+- Date: `2026-05-31`
+- Owner: `Team`
+- Status: `Accepted`
+- Related:
+  - `.github/workflows/publish-wiki.yml`
+  - `wrangler.jsonc`
+  - `tools/wiki_site/`
+  - `tests/tools/test_wiki_site_build.py`
+  - `docs/project/status/current.md`
+
+#### Background
+
+The project has converged on Docmost as the only Wiki正文 source. Git keeps
+Docmost snapshots, project-management records, and audit history, but the old
+static Git HTML Wiki and Cloudflare Workers publishing chain are no longer used.
+
+#### Decision
+
+Delete the retired static Wiki builder, its Cloudflare Workers configuration,
+its manual publish workflow, and its dedicated tests. Keep Docmost snapshot
+history under `docs/project/snapshots/docmost/`, and update active project
+registries so they no longer point to deleted static Wiki files.
+
+#### Human Workload Impact
+
+- Reduced human work:
+  fewer duplicate Wiki paths to remember and fewer obsolete Cloudflare/static
+  build references during document governance.
+- Increased human work:
+  rollback now means reverting this cleanup commit instead of running the old
+  static builder.
+- Critical path effect:
+  Wiki work should default to Docmost plus Git snapshots, not a parallel static
+  HTML site.
+
+#### AI Workload Assumption
+
+AI should read Docmost snapshots and project-management docs for Wiki context.
+AI should not suggest `tools/wiki_site`, `site/wiki`, `wrangler.jsonc`, or the
+old static Wiki workflow unless explicitly investigating historical commits.
+
+#### Alternatives
+
+1. Keep the retired static Wiki tools as rollback scaffolding.
+2. Move the tools to an archive directory instead of deleting them.
+
+#### Risks And Triggers
+
+- Risk:
+  someone tries to publish the retired static Wiki again.
+- Trigger:
+  a new PR reintroduces `tools/wiki_site`, `site/wiki`, or Cloudflare Workers
+  static Wiki configuration without a new accepted decision.
+
+#### Validation Plan
+
+- `python scripts/check_project_control.py` passes.
+- Static Wiki references remain only in historical meetings or Docmost snapshots.
+- Full repository pytest passes before commit.
+
+#### Rollback Plan
+
+Revert the cleanup commit if the project decides to restore the old static Git
+HTML Wiki chain.
+
+#### Follow-Up
+
+Keep Docmost as the Wiki source and improve the Docmost-to-Git snapshot workflow
+instead of maintaining a second HTML Wiki.

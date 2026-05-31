@@ -1,5 +1,14 @@
 ## 白色 · 指针排序主题 v3（核心：Pointer Sorting，保留少量整体排序）
 
+- Status: Active
+- Owner: Team
+- Scope: white-ideal-card-design
+- Canonical: Yes
+- Supersedes: `../archive/ideal/WHITE_IDEAL_CARD_DESIGN_V2.md`
+- Superseded By: none
+- Implemented In: `data/cards/white/`
+- Last Reviewed: 2026-05-17
+
 ### 目标与范围
 - 将“指针排序”确立为白色的核心表达：少移敌、多移指针/改扫描规则，降低操作与视觉负担。
 - 保留少量“整体排序/分区/洗牌”等重控元素，作为爆发或应急工具（多【消耗】/限次）。

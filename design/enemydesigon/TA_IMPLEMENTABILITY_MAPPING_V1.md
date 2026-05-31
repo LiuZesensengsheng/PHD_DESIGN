@@ -1,5 +1,14 @@
 # TA 敌人可实现性映射 v1
 
+- Status: Active
+- Owner: Team
+- Scope: ta-enemy-encounter-rollout
+- Canonical: Yes
+- Supersedes: none
+- Superseded By: none
+- Implemented In: `data/combat/ta/`, `data/questlines/encounters_ta.json`
+- Last Reviewed: 2026-05-17
+
 ## 目标
 
 把 [TA-2_extracted](/D:/PHD_SIMULATER/docs/design/enemydesigon/TA-2_extracted) 里的助教线设计，压成一份真正能指导实现顺序的落地文档。

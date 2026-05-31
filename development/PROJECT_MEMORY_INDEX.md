@@ -39,6 +39,9 @@ Use this index to decide where to read and where to write project knowledge.
   - source-of-truth entry for the combat-analysis model
   - `tools/delivery_tracker/README.md`
   - source-of-truth entry for the delivery-tracker model and generated current-report flow
+  - `tools/project_sync/README.md`
+  - source-of-truth entry for syncing GitHub project-management signals into
+    `docs/project/`
 
 ### Weekly Memory
 
@@ -56,6 +59,14 @@ Use this index to decide where to read and where to write project knowledge.
 - `docs/development/CODEX_TASK_POOL.md`
 - Use for work suitable for long, independent Codex execution
 
+### Project Management
+
+- `docs/project/README.md`
+- Use for repo-first project management: meeting notes, TODOs, milestones, current
+  status snapshots, and AI-readable project progress
+- Use `docs/project/status/current.md` as the current project-management snapshot
+- Use `docs/project/meetings/` for meeting minutes and action-item provenance
+
 ### Decision Memory
 
 - `docs/pm/DECISION_LOG.md`
@@ -71,11 +82,13 @@ Use this index to decide where to read and where to write project knowledge.
 1. `AGENTS.md`
 2. `docs/development/CURRENT_DIRECTION.md`
 3. Relevant architecture or workflow documents in `docs/development/` subdirectories
-4. `docs/pm/DECISION_LOG.md` if the task changes direction, scope, or architecture
-5. `docs/logs/daily/<today>.md`
-6. The most recent prior daily log with useful context
-7. The most recent weekly summary with useful context
-8. The latest monthly summary when recovering context across month boundaries
+4. `docs/project/README.md` and `docs/project/status/current.md` if the task
+   involves meetings, TODOs, milestones, wiki governance, or project management
+5. `docs/pm/DECISION_LOG.md` if the task changes direction, scope, or architecture
+6. `docs/logs/daily/<today>.md`
+7. The most recent prior daily log with useful context
+8. The most recent weekly summary with useful context
+9. The latest monthly summary when recovering context across month boundaries
 
 ## Development Directory Map
 
@@ -101,6 +114,8 @@ Use this index to decide where to read and where to write project knowledge.
   truth under `tools/<name>/` and register its `README.md` entrypoint here
 - Write decision outcomes into `docs/pm/DECISION_LOG.md`
 - Write independent AI-executable work into `docs/development/CODEX_TASK_POOL.md`
+- Write project-management snapshots, meeting notes, TODOs, and milestone progress
+  into `docs/project/`
 - Do not store current branch status or recent progress in skill bodies
 
 ## Command Recovery
