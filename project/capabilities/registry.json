@@ -4,30 +4,27 @@
   "items": [
     {
       "id": "CAP-WIKI-001",
-      "name": "静态 Wiki 构建与本地预览",
+      "name": "??? Wiki ???????",
       "domain": "wiki",
-      "status": "Tested",
+      "status": "Retired",
       "owner": "Codex",
       "authoritative_page": "tools/wiki_site/README.md",
       "related_files": [
         "tools/wiki_site/build.py",
-        "docs/wiki/README.md",
-        "docs/wiki/development.md"
+        "tests/tools/test_wiki_site_build.py"
       ],
       "evidence": [
-        "tests/tools/test_wiki_site_build.py",
-        "site/wiki"
+        "tests/tools/test_wiki_site_build.py"
       ],
-      "milestone": "M0",
+      "milestone": "M0-retired",
       "risks": [
-        "生产发布配置和本地构建配置可能脱节",
-        "静态页面的评论和富文本能力有限，需要 Docmost 或同步脚本补齐协作体验"
+        "??????? Wiki ??????????????????"
       ],
-      "next_step": "把资产、进展和项目管理页面纳入 Wiki 导航并稳定生产发布链路。"
+      "next_step": "?????????????????????"
     },
     {
       "id": "CAP-DOCMOST-001",
-      "name": "Docmost 页面导出到 Git 快照",
+      "name": "Docmost ????? Git ??",
       "domain": "collaboration",
       "status": "Prototype",
       "owner": "Codex",
@@ -39,14 +36,15 @@
       ],
       "evidence": [
         "docs/project/snapshots/docmost/docmost_snapshot.json",
-        "docs/project/snapshots/docmost/comments.json"
+        "docs/project/snapshots/docmost/comments.json",
+        "docs/project/snapshots/docmost/pages"
       ],
       "milestone": "M6",
       "risks": [
-        "本地 Docker/数据库状态需要持续可用",
-        "云端前需要先确认备份和迁移流程"
+        "?? Docker/???????????",
+        "Git ?????? AI ????????"
       ],
-      "next_step": "本地试运行一到两周，定期把评论和会议纪要整理回 Git。"
+      "next_step": "? Docmost ???? Wiki ??????????? AI ? Git ???"
     },
     {
       "id": "CAP-PROJECT-001",
@@ -60,11 +58,11 @@
         "docs/project/todos/current.md",
         "docs/project/milestones/README.md",
         "docs/project/planning/README.md",
-        "docs/project/progress/overview.md"
+        "docs/project/progress/overview.md",
+        "docs/project/planning/dashboard.md"
       ],
       "evidence": [
         "docs/project/status/current.md",
-        "docs/wiki/project.md",
         "tests/tools/test_project_control.py"
       ],
       "milestone": "M1/M5",
@@ -75,29 +73,26 @@
     },
     {
       "id": "CAP-DISCUSS-001",
-      "name": "GitHub Discussions 评论同步与 Wiki 页脚展示",
+      "name": "GitHub Discussions ?????????",
       "domain": "collaboration",
       "status": "Tested",
       "owner": "Codex",
       "authoritative_page": "tools/project_sync/README.md",
       "related_files": [
         "tools/project_sync/sync.py",
-        "docs/wiki/_discussion_cache/discussions.json",
-        "tools/wiki_site/build.py",
+        "docs/project/snapshots/discussion_review_cache.json",
         "docs/project/status/github.md"
       ],
       "evidence": [
         "tests/tools/test_project_sync.py",
-        "tests/tools/test_wiki_site_build.py",
         "docs/project/meetings/2026-05-27-wiki-discussion-footer-v1.md"
       ],
       "milestone": "M3",
       "risks": [
-        "评论同步仍需手动运行",
-        "评论正文展示为预览，不替代 GitHub Discussion 原帖",
-        "GitHub milestone 为空时阶段统计仍需要仓库内文档维护"
+        "??????????",
+        "Docmost ???????GitHub Discussions ?????????"
       ],
-      "next_step": "评估自动同步 PR 和独立 Wiki discussion 分类。"
+      "next_step": "?????? PR ????????"
     },
     {
       "id": "CAP-ASSET-001",
@@ -108,8 +103,7 @@
       "authoritative_page": "docs/project/assets/README.md",
       "related_files": [
         "docs/project/assets/registry.json",
-        "docs/project/capabilities/registry.json",
-        "docs/wiki/assets.md"
+        "docs/project/capabilities/registry.json"
       ],
       "evidence": [
         "scripts/check_project_control.py",
@@ -175,15 +169,13 @@
       "domain": "content_governance",
       "status": "Draft",
       "owner": "Team",
-      "authoritative_page": "docs/wiki/rewards.md",
+      "authoritative_page": "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md",
       "related_files": [
         "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md",
-        "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM.md",
-        "docs/wiki/rewards.md"
+        "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM.md"
       ],
       "evidence": [
-        "docs/project/assets/README.md",
-        "docs/wiki/assets.md"
+        "docs/project/assets/README.md"
       ],
       "milestone": "Long-term Systems",
       "risks": [
@@ -205,7 +197,6 @@
         "docs/project/README.md"
       ],
       "evidence": [
-        "docs/wiki/development.md",
         "docs/project/assets/README.md"
       ],
       "milestone": "Documentation Governance",
@@ -227,8 +218,7 @@
         "scripts/run_repo_smoke_baseline.py"
       ],
       "evidence": [
-        "tests/tools/test_project_control.py",
-        "tests/tools/test_wiki_site_build.py"
+        "tests/tools/test_project_control.py"
       ],
       "milestone": "Validation",
       "risks": [

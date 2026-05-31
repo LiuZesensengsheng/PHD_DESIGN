@@ -16,7 +16,7 @@
 GitHub 讨论 / TODO / 里程碑
   -> 同步或人工整理
   -> docs/project/
-  -> docs/wiki/project.md
+  -> docs/project/snapshots/docmost/
   -> AI 读取、总结、提出更新建议
 ```
 
@@ -50,7 +50,7 @@ GitHub 讨论 / TODO / 里程碑
 | 目录 | 边界 |
 | --- | --- |
 | `docs/project/` | 项目管理、会议、TODO、里程碑、AI 可读进展。 |
-| `docs/wiki/` | 面向浏览的网站页面。 |
+| `docs/project/snapshots/docmost/` | Docmost 的 Git 快照；用于 AI 感知、审计和回滚。 |
 | `docs/development/` | 稳定架构、开发规则、工作流规则。 |
 | `docs/pm/` | 重要决策、取舍、回滚说明。 |
 | `docs/logs/` | 短期 AI 交接和周期性记忆压缩。 |
@@ -59,7 +59,7 @@ GitHub 讨论 / TODO / 里程碑
 
 | 阶段 | 目标 |
 | --- | --- |
-| V1 | 手工维护项目管理文件，Wiki 展示。 |
+| V1 | 手工维护项目管理文件，Docmost 负责展示。 |
 | V2 | 从 GitHub Issues/Milestones 拉取 TODO 和进度快照。 |
 | V3 | 从 GitHub Discussions 拉取页面评论和会议讨论摘要。 |
 | V4 | 资产、能力和进展台账进入项目驾驶舱。 |
@@ -88,4 +88,4 @@ python scripts/check_project_control.py
 python scripts/generate_project_planning_dashboard.py
 ```
 
-该命令从 `docs/project/planning/*.json` 生成项目计划总览和 Wiki 项目计划页。
+该命令从 `docs/project/planning/*.json` 生成项目计划总览。

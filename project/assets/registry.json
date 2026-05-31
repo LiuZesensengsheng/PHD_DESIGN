@@ -4,32 +4,27 @@
   "items": [
     {
       "id": "ASSET-WIKI-001",
-      "name": "中文 Wiki 阅读入口",
+      "name": "??? Wiki ????",
       "type": "documentation",
-      "status": "Prototype",
+      "status": "Retired",
       "owner": "Team",
-      "authoritative_page": "docs/wiki/README.md",
+      "authoritative_page": "tools/wiki_site/README.md",
       "related_files": [
-        "docs/wiki/README.md",
-        "docs/wiki/progress.md",
-        "docs/wiki/planning.md",
-        "docs/wiki/assets.md",
-        "tools/wiki_site/build.py"
+        "tools/wiki_site/build.py",
+        "tests/tools/test_wiki_site_build.py"
       ],
       "evidence": [
-        "tests/tools/test_wiki_site_build.py",
-        "tools/wiki_site/README.md"
+        "docs/project/snapshots/docmost/index.md"
       ],
-      "milestone": "M0",
+      "milestone": "M0-retired",
       "risks": [
-        "线上 Cloudflare 生产部署链路仍需复核",
-        "Wiki 内容仍在从旧设计文档中逐步沉淀"
+        "???????????????? Docmost ??????"
       ],
-      "next_step": "继续补齐进展总览、资产与能力页面，并稳定发布链路。"
+      "next_step": "?????????????????????????"
     },
     {
       "id": "ASSET-DOCMOST-001",
-      "name": "Docmost 本地协作层",
+      "name": "Docmost Wiki ???",
       "type": "collaboration",
       "status": "Prototype",
       "owner": "Team",
@@ -37,18 +32,20 @@
       "related_files": [
         "tools/docmost_mirror/README.md",
         "tools/docmost_sandbox",
-        "scripts/export_docmost_snapshot.py"
+        "scripts/export_docmost_snapshot.py",
+        "docs/project/snapshots/docmost/index.md"
       ],
       "evidence": [
-        "docs/project/snapshots/docmost/index.md",
-        "docs/project/snapshots/docmost/docmost_snapshot.json"
+        "docs/project/snapshots/docmost/docmost_snapshot.json",
+        "docs/project/snapshots/docmost/pages.json",
+        "docs/project/snapshots/docmost/pages"
       ],
       "milestone": "M6",
       "risks": [
-        "本地 Docker 和数据库状态需要持续可用",
-        "Docmost 正文与 Git 源文件可能漂移，需要定期整理"
+        "?? Docker ????????????",
+        "Git ????????????????? Docmost ??????"
       ],
-      "next_step": "本地试运行一到两周，验证评论、会议纪要和 Wiki 编辑体验。"
+      "next_step": "? Docmost ???? Wiki ??????????? Git?"
     },
     {
       "id": "ASSET-PROJECT-001",
@@ -63,18 +60,18 @@
         "docs/project/todos/current.md",
         "docs/project/milestones/README.md",
         "docs/project/progress/overview.md",
-        "docs/project/planning/README.md"
+        "docs/project/planning/README.md",
+        "docs/project/planning/dashboard.md"
       ],
       "evidence": [
         "docs/project/meetings/2026-05-27-wiki-project-management-v1.md",
-        "docs/wiki/project.md",
         "tests/tools/test_project_control.py"
       ],
       "milestone": "M1",
       "risks": [
-        "手工维护时 TODO、会议纪要和 Wiki 页面可能漂移"
+        "????? TODO??????????????"
       ],
-      "next_step": "用 project_control 工具持续检查核心台账关系。"
+      "next_step": "? project_control ??????????????? Docmost ???????"
     },
     {
       "id": "ASSET-SYNC-001",
@@ -87,7 +84,7 @@
         "tools/project_sync/sync.py",
         "scripts/sync_project_management.py",
         "docs/project/snapshots/project_sync_snapshot.json",
-        "docs/wiki/_discussion_cache/discussions.json"
+        "docs/project/snapshots/discussion_review_cache.json"
       ],
       "evidence": [
         "tests/tools/test_project_sync.py",
@@ -119,10 +116,10 @@
       ],
       "milestone": "M6",
       "risks": [
-        "快照只是审计材料，不应直接替代 Git 中的 Markdown 源",
-        "评论处理后需要进入正文、TODO、会议纪要或拒绝记录"
+        "??? Git ?????????????",
+        "????????????TODO??????????"
       ],
-      "next_step": "固定评论处理规则，并定期把协作结论整理回 Git。"
+      "next_step": "????????????? AI ?????????"
     },
     {
       "id": "ASSET-CONTENT-001",
@@ -130,24 +127,21 @@
       "type": "content_design",
       "status": "Draft",
       "owner": "Team",
-      "authoritative_page": "docs/wiki/design.md",
+      "authoritative_page": "docs/project/snapshots/docmost/index.md",
       "related_files": [
         "docs/design/README.md",
-        "docs/wiki/design.md",
-        "docs/wiki/cards.md",
-        "docs/wiki/enemies.md",
-        "docs/wiki/rewards.md"
+        "docs/project/snapshots/docmost/pages"
       ],
       "evidence": [
-        "docs/wiki/project.md",
-        "docs/project/assets/README.md"
+        "docs/project/assets/README.md",
+        "docs/project/snapshots/docmost/index.md"
       ],
       "milestone": "M0",
       "risks": [
         "旧设计文档和 Wiki 摘要之间仍可能存在重复或冲突",
         "删除或归档必须继续经过人工确认"
       ],
-      "next_step": "逐页把稳定结论沉淀到 Wiki，旧文档只做候选归档清单。"
+      "next_step": "? Docmost ????????????Git ?????????????"
     },
     {
       "id": "ASSET-TA-001",
@@ -159,8 +153,7 @@
       "related_files": [
         "data/combat/ta/species_ta.csv",
         "data/combat/ta/skills_ta.csv",
-        "data/combat/ta/encounters_ta.csv",
-        "docs/wiki/enemies.md"
+        "data/combat/ta/encounters_ta.csv"
       ],
       "evidence": [
         "tests/combat/test_ta_runtime_encounters.py",
@@ -202,11 +195,9 @@
       "owner": "Team",
       "authoritative_page": "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md",
       "related_files": [
-        "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM.md",
-        "docs/wiki/rewards.md"
+        "docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM.md"
       ],
       "evidence": [
-        "docs/wiki/assets.md",
         "docs/project/assets/README.md"
       ],
       "milestone": "Long-term Systems",
@@ -229,8 +220,7 @@
         "docs/project/README.md"
       ],
       "evidence": [
-        "docs/project/assets/README.md",
-        "docs/wiki/development.md"
+        "docs/project/assets/README.md"
       ],
       "milestone": "Documentation Governance",
       "risks": [

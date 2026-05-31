@@ -6,7 +6,7 @@ status: "active"
 space: "General"
 parent_page_id: "019e6f70-b503-7d81-bca1-28e3ff1598b1"
 created_at: "2026-05-28 16:35:17.88626+00"
-updated_at: "2026-05-28 16:36:28.116+00"
+updated_at: "2026-05-30 13:08:54.18+00"
 deleted_at: ""
 ---
 
@@ -330,4 +330,26 @@ tests/scripts/test_cards_csv_to_json.py 和 tests/scripts/test_data_pipeline_con
 
 ## Comments
 
-_No comments exported for this page._
+### open comment `019e78ff-0b1d-7414-988e-203e23874f44`
+
+- Created at: `2026-05-30 13:07:20.987639+00`
+- Updated at: `2026-05-30 13:07:20.987639+00`
+- Selection: `(no selection)`
+
+这是一个评论的测试，叽里咕噜地在讲什么呢？
+
+### open comment `019e7900-58af-707f-8f97-51c4ff4e5bfd`
+
+- Created at: `2026-05-30 13:08:46.382776+00`
+- Updated at: `2026-05-30 13:08:46.382776+00`
+- Selection: `不应当被默认当成运行时承诺`
+
+这是针对一句话的评论，我觉得改成正在商议中就行。
+
+### open comment `019e7902-2fad-73e7-9c18-c66e2ae7b1b9`
+
+- Created at: `2026-05-30 13:10:46.956306+00`
+- Updated at: `2026-05-30 13:10:58.299+00`
+- Selection: `(no selection)`
+
+收到

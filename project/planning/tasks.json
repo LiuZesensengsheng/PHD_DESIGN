@@ -95,13 +95,12 @@
       "milestone_id": "M5",
       "start_date": "2026-05-30",
       "target_date": "2026-05-30",
-      "summary": "从 JSON 自动生成 dashboard 和 Wiki 阅读页。",
+      "summary": "? JSON ???? docs/project/planning/dashboard.md?",
       "evidence_paths": [
         "scripts/generate_project_planning_dashboard.py",
-        "docs/project/planning/dashboard.md",
-        "docs/wiki/planning.md"
+        "docs/project/planning/dashboard.md"
       ],
-      "next_step": "让 Wiki 构建器渲染新页面。"
+      "next_step": "???????????? AI ??? Docmost?"
     },
     {
       "id": "TASK-007",

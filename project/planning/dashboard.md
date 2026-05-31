@@ -64,7 +64,7 @@
 | TASK-003 | REQ-002 | 导出 Docmost 快照 | planned | Codex | 2026-06-10 | 等团队完成一轮修改后执行导出。 |
 | TASK-004 | REQ-002 | 整理评论为正文、任务或决策 | planned | Codex | 2026-06-13 | 基于下一次 Docmost 快照整理。 |
 | TASK-005 | REQ-003 | 建立目标、需求和任务 JSON 源 | done | Codex | 2026-05-30 | 后续由 AI 根据 Docmost 讨论继续追加。 |
-| TASK-006 | REQ-003 | 生成项目计划总览和甘特图 | done | Codex | 2026-05-30 | 让 Wiki 构建器渲染新页面。 |
+| TASK-006 | REQ-003 | 生成项目计划总览和甘特图 | done | Codex | 2026-05-30 | ???????????? AI ??? Docmost? |
 | TASK-007 | REQ-004 | 扩展项目控制检查 | done | Codex | 2026-05-30 | 后续把计划检查作为项目管理维护默认动作。 |
 
 ## 甘特图

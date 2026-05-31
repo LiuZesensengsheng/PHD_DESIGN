@@ -7,12 +7,12 @@
 
 ## 当前核心方向
 
-当前核心方向是把 Wiki、Docmost、项目管理文件和 Git 快照合成一个轻量项目驾驶舱：
+当前核心方向是把 Docmost、项目管理文件和 Git 快照合成一个轻量项目驾驶舱：
 
 ```text
 团队在 Docmost 写作、评论、开会
   -> AI 导出快照并整理评论
-  -> 更新 docs/project/、docs/wiki/ 和台账
+  -> 更新 docs/project/ 和台账
   -> 生成目标 / 需求 / 任务总览
   -> 生成 PR
   -> 人类复核后合并
@@ -24,13 +24,13 @@
 
 | 方向 | 当前判断 | 成熟度 | 证据 | 下一步 |
 | --- | --- | --- | --- | --- |
-| 中文 Wiki 阅读层 | 已可本地构建和发布，适合做稳定阅读入口。 | prototype | `tools/wiki_site/README.md` | 补齐进展、资产与能力页面。 |
-| Docmost 协作层 | 适合评论、富文本、会议纪要和临时协作。 | prototype | `tools/docmost_mirror/README.md` | 本地试运行一到两周，再决定是否上云。 |
+| Docmost Wiki 源 | 适合评论、富文本、会议纪要和正文协作；现在是唯一 Wiki 正文源。 | prototype | `tools/docmost_mirror/README.md` | 本地试运行一到两周，再决定是否上云。 |
+| 静态 Wiki 阅读层 | 旧 `docs/wiki` 内容源已退休，不再作为独立维护对象。 | retired | `tools/wiki_site/README.md` | 默认不再生成或维护，除非需要回滚。 |
 | Repo-first 项目管理 | 会议纪要、TODO、里程碑、状态快照已进入仓库。 | validated | `docs/project/README.md` | 增加资产/能力/进展台账并用脚本检查。 |
 | GitHub 信号同步 | Issues、Milestones、Discussions 已能生成只读快照。 | validated | `tools/project_sync/README.md` | 继续评估自动同步 PR。 |
 | 资产与能力台账 | V1 开始落地，帮助 AI 维护项目事实。 | prototype | `docs/project/assets/registry.json` | 先维护核心对象，不扩大到所有文件。 |
 | 目标-需求-任务计划 | V1 开始落地，可自动生成统计总览和甘特图。 | prototype | `docs/project/planning/dashboard.md` | 根据 Docmost 讨论继续补真实目标和需求。 |
-| 内容设计治理 | Wiki 正在承接设计阅读入口，旧文档仍需分批治理。 | draft | `docs/wiki/design.md` | 只提候选归档/删除清单，不主动删除。 |
+| 内容设计治理 | Docmost 正在承接设计阅读入口，旧文档仍需分批治理。 | draft | `docs/project/snapshots/docmost/index.md` | 只提候选归档/删除清单，不主动删除。 |
 | 战斗设计分析能力 | 工具链和文档很丰富，但入口复杂。 | validated | `tools/combat_analysis/README.md` | 用能力台账标出最可靠入口。 |
 
 ## 管理闭环
@@ -42,10 +42,8 @@ flowchart TD
   C --> D[docs/project 源文档]
   D --> E[资产与能力台账]
   D --> P[目标 / 需求 / 任务计划]
-  D --> F[docs/wiki 阅读页]
   E --> G[Project Control 检查]
   P --> G
-  F --> G
   G --> H[PR 与人工复核]
   H --> D
 ```
@@ -57,7 +55,7 @@ flowchart TD
 | P0 | 本地 Docmost 试运行 | 评论、会议纪要、TODO 能被导出并整理回 Git。 |
 | P0 | 资产与能力台账 V1 | `docs/project/assets/` 和 `docs/project/capabilities/` 可被检查脚本验证。 |
 | P0 | 目标-需求-任务计划 V1 | `docs/project/planning/dashboard.md` 能统计进展并生成甘特图。 |
-| P1 | 进展总览进入 Wiki | Wiki 首页、项目管理页能链接到进展和资产页面。 |
+| P1 | 进展总览进入 Docmost | Docmost 首页、项目管理页能链接到进展和资产页面。 |
 | P1 | Project Control 检查 | 能检查台账 ID、状态、入口文件和关键项目管理文件。 |
 | P2 | 设计文档分批治理 | 每批只提出候选，删除或归档经过 owner 确认。 |
 

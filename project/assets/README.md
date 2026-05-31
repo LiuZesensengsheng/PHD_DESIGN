@@ -16,7 +16,7 @@
 3. 哪些入口是权威入口。
 4. 后续整理时应该先看哪里。
 
-机器可读源是 [registry.json](registry.json)。本页解释填写规则，Wiki 负责展示摘要。
+机器可读源是 [registry.json](registry.json)。本页解释填写规则；Docmost 负责面向团队的阅读和讨论。
 
 ## 字段
 
@@ -27,7 +27,7 @@
 | `type` | 资产类型，例如 `documentation`、`content_design`、`tooling`。 |
 | `status` | 成熟度，见下方状态表。 |
 | `owner` | 当前维护负责人。 |
-| `authoritative_page` | 权威入口，优先指向 Wiki 或项目治理文档。 |
+| `authoritative_page` | 权威入口，优先指向 Docmost 快照、项目治理文档或工具说明。 |
 | `related_files` | 相关源码、文档或数据文件。 |
 | `evidence` | 测试、会议纪要、报告或其他可核查证据。 |
 | `milestone` | 相关阶段目标。 |
@@ -49,12 +49,12 @@
 
 | ID | 名称 | 类型 | 状态 | 权威入口 |
 | --- | --- | --- | --- | --- |
-| ASSET-WIKI-001 | 中文 Wiki 阅读入口 | documentation | Prototype | `docs/wiki/README.md` |
-| ASSET-DOCMOST-001 | Docmost 本地协作层 | collaboration | Prototype | `tools/docmost_mirror/README.md` |
+| ASSET-WIKI-001 | 旧静态 Wiki 阅读入口 | documentation | Retired | `tools/wiki_site/README.md` |
+| ASSET-DOCMOST-001 | Docmost Wiki 正文源 | collaboration | Prototype | `tools/docmost_mirror/README.md` |
 | ASSET-PROJECT-001 | Repo-first 项目管理目录 | project_management | Tested | `docs/project/README.md` |
 | ASSET-SYNC-001 | GitHub 项目信号同步工具 | tooling | Tested | `tools/project_sync/README.md` |
 | ASSET-DOCMOST-SNAPSHOT-001 | Docmost 到 Git 快照 | snapshot | Prototype | `docs/project/snapshots/docmost/index.md` |
-| ASSET-CONTENT-001 | 核心内容设计文档集合 | content_design | Draft | `docs/wiki/design.md` |
+| ASSET-CONTENT-001 | 核心内容设计文档集合 | content_design | Draft | `docs/project/snapshots/docmost/index.md` |
 | ASSET-TA-001 | TA 敌人与遭遇内容包 | content_pack | Tested | `data/combat/ta/manifest.json` |
 | ASSET-CARDANALYSIS-001 | Combat Analysis 设计辅助工具链 | tooling | Tested | `tools/combat_analysis/README.md` |
 | ASSET-ACK-001 | 致谢系统设计资料 | design_reference | Draft | `docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md` |
