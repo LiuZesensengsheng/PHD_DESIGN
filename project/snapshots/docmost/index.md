@@ -1,7 +1,7 @@
 # Docmost Mirror Snapshot
 
 - Snapshot id: `docmost_mirror_snapshot_v1`
-- Generated at: `2026-05-31T03:12:15Z`
+- Generated at: `2026-05-31T03:41:56Z`
 - Pages: `45` total, `39` active, `6` deleted
 - Comments: `6` total, `6` open, `0` resolved, `0` deleted
 

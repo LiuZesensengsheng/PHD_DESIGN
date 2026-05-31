@@ -1,6 +1,6 @@
 {
   "snapshot_id": "docmost_mirror_snapshot_v1",
-  "generated_at": "2026-05-31T03:12:15Z",
+  "generated_at": "2026-05-31T03:41:56Z",
   "source": {
     "kind": "docker_postgres_container",
     "postgres_container": "docmost_sandbox-postgres-1",
@@ -8277,24 +8277,23 @@
       "is_deleted": false,
       "deleted_at": "",
       "created_at": "2026-05-31 01:42:59.093619+00",
-      "updated_at": "2026-05-31 03:11:57.534204+00",
+      "updated_at": "2026-05-31 03:41:17.327+00",
       "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
       "position": "a1i57",
       "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
       "space_name": "General",
       "space_slug": "general",
       "is_locked": false,
-      "text_content": "页面定位\r\n\r\n本页描述战斗系统的第一层规则：一场战斗如何从回合、资源、牌堆、敌我行动，推进到压力爆表后的美德/折磨判定。\r\n\r\n第一版战斗应保持清楚、可预期、容易调试：\r\n\r\n\r\n\r\n\r\n\r\n玩家抽牌，获得能量，打出攻击牌、技能牌和能力牌。\r\n\r\n\r\n\r\n敌人展示意图，玩家根据手牌和资源做取舍。\r\n\r\n\r\n\r\n未被自信抵消的伤害会推高压力。\r\n\r\n\r\n\r\n压力到达上限时，触发美德与折磨判定。\r\n\r\n一句话循环\r\n\r\n玩家在自己的回合抽牌、获得能量、用卡牌处理敌人意图；敌人在自己的回合执行意图并施加压力。压力持续累积，直到角色到达阈值，进入美德或折磨的戏剧节点。\r\n\r\n时间节点\r\n\r\n玩家回合开始\r\n\r\n\r\n\r\n\r\n\r\n将本回合能量刷新为 3 点。\r\n\r\n\r\n\r\n抽取 5 张牌作为本回合手牌。\r\n\r\n\r\n\r\n清空上一回合遗留的自信。\r\n\r\n\r\n\r\n处理回合开始触发的能力、状态、装置和敌我效果。\r\n\r\n玩家回合中\r\n\r\n\r\n\r\n\r\n\r\n玩家消耗能量打出手牌。\r\n\r\n\r\n\r\n攻击牌主要造成伤害或施加进攻性效果。\r\n\r\n\r\n\r\n技能牌主要获得自信、抽牌、减压、处理牌堆或施加辅助效果。\r\n\r\n\r\n\r\n能力牌打出后提供持续规则，通常不会立刻进入弃牌堆循环。\r\n\r\n\r\n\r\n玩家可以根据敌人意图，选择进攻、格挡、减压、铺设能力或调整牌堆。\r\n\r\n玩家回合结束\r\n\r\n\r\n\r\n\r\n\r\n未使用的手牌进入弃牌堆，临时牌按其规则消失。\r\n\r\n\r\n\r\n处理回合结束触发。\r\n\r\n\r\n\r\n敌人准备进入行动。\r\n\r\n敌人回合开始\r\n\r\n\r\n\r\n\r\n\r\n处理敌方回合开始触发。\r\n\r\n\r\n\r\n敌人根据已展示的意图开始行动。\r\n\r\n敌人回合中\r\n\r\n\r\n\r\n\r\n\r\n敌人造成伤害、施加状态、生成问题牌，或改变下回合意图。\r\n\r\n\r\n\r\n玩家已有的自信优先抵消伤害。\r\n\r\n\r\n\r\n未被自信抵消的伤害转化为压力上升。\r\n\r\n敌人回合结束\r\n\r\n\r\n\r\n\r\n\r\n处理敌方回合结束触发。\r\n\r\n\r\n\r\n更新下一回合敌人意图。\r\n\r\n\r\n\r\n回到玩家回合开始。\r\n\r\n核心资源\r\n\r\n压力（血量）\r\n\r\n压力是角色在战斗中的主承压轨道。玩家所操控的角色拥有压力上限 m，不同角色（学科）的压力上限可以不同。\r\n\r\n角色收到伤害后，压力开始上涨。自信会先抵消伤害；每次受到未被自信抵消的伤害后，压力会上升。当压力到达压力上限 m 时，触发美德与折磨判定。\r\n\r\n压力不是单纯的扣血数字。它应该让玩家感到危机正在靠近：压力增长要可见，来源要能理解，玩家也应该拥有一定的预防、格挡、减压和危机处理手段。\r\n\r\n压力到达 m 后，角色并不会立刻死亡，而是进入美德/折磨判定。判定之后，角色仍有一段额外生命区间，从 m 延伸到 m+n。当压力到达 m+n 时，游戏结束，玩家必须重新开始游戏。\r\n\r\n第一版的首个学科暂定：\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n学科\r\n\r\n\r\n\r\n压力上限 m\r\n\r\n\r\n\r\n额外生命区间 n\r\n\r\n\r\n\r\n终局压力 m+n\r\n\r\n\r\n\r\n\r\n\r\n第一个学科\r\n\r\n\r\n\r\n100\r\n\r\n\r\n\r\n30\r\n\r\n\r\n\r\n130\r\n\r\n自信（护甲）\r\n\r\n自信是本作的护甲/格挡概念。它优先吸收敌人造成的伤害，从而避免压力上升。\r\n\r\n第一版倾向：\r\n\r\n\r\n\r\n\r\n\r\n自信主要是回合内防御资源。\r\n\r\n\r\n\r\n玩家新回合开始时，自信清空。\r\n\r\n\r\n\r\n若后续存在保留自信的效果，必须由卡牌、能力、理想附魔或美德效果明确写出。\r\n\r\n能量\r\n\r\n能量是每回合打牌的统一资源。\r\n\r\n第一版默认每回合开始时获得 3 点能量。能量应该接近《杀戮尖塔》的单一能量模型：每回合刷新，打牌消耗，少数效果可以增加、减少或保留能量。\r\n\r\n第一版明确不做彩色能量，也不做多条能量池。\r\n\r\n理想、学科、职业和卡牌类型可以改变牌的效果与气质，但不应自动制造新的能量颜色。\r\n\r\n手牌\r\n\r\n手牌是玩家本回合可用的行动集合。玩家每回合从抽牌堆抽牌，并根据能量、敌人意图、压力状态和构筑方向选择要打出的牌。\r\n\r\n第一版默认每回合开始抽 5 张牌。若卡牌、能力或状态改变抽牌数量，以对应效果为准。\r\n\r\n抽牌堆\r\n\r\n抽牌堆保存尚未抽到的牌。抽牌堆耗尽时，通常将弃牌堆洗入并形成新的抽牌堆。\r\n\r\n弃牌堆\r\n\r\n弃牌堆保存本场战斗中已经使用过或回合结束后丢弃的牌。它会在抽牌堆耗尽时重新洗入。\r\n\r\n消耗牌堆\r\n\r\n消耗牌堆保存本场战斗中被消耗的牌。被消耗的牌通常不会在本场战斗中再次进入抽牌循环，除非有特定效果将其取回。\r\n\r\n卡牌类型\r\n\r\n攻击牌\r\n\r\n攻击牌主要负责解决敌人：造成伤害、打断敌方节奏、施加进攻性状态，或与某些构筑轴产生连锁。\r\n\r\n技能牌\r\n\r\n技能牌主要负责处理局面：获得自信、减压、抽牌、弃牌、检索、生成临时牌、处理问题牌，或为下一步行动创造条件。\r\n\r\n能力牌\r\n\r\n能力牌提供持续规则。它们通常是构筑成型的关键，例如每回合触发一次效果、改变某类牌的收益，或让某个系统开始自动运转。\r\n\r\n临时牌与衍生牌\r\n\r\n某些职业或学科会生成临时牌或衍生牌。\r\n\r\n这类牌应在对应职业/学科子文档中展开。本页只记录它们可以进入基础战斗循环，不展开工科的 数据、自动化、经验方法 三轴。\r\n\r\n美德与折磨\r\n\r\n美德与折磨的设计灵感来自《暗黑地牢》的压力阈值结构，但本项目不直接复制它的数值、概率、命名或惩罚方式。\r\n\r\n当角色压力到达上限 m 时，进入一次判定：\r\n\r\n\r\n\r\n\r\n\r\n先判定本次爆表对应的理想颜色。\r\n\r\n\r\n\r\n再判定本次爆表进入美德还是折磨。\r\n\r\n理想颜色按当前卡组中的理想颜色权重随机。统计范围包括抽牌堆、手牌和弃牌堆；消耗牌堆不计入。\r\n\r\n例如当前抽牌堆、手牌和弃牌堆中共有 10 张带理想颜色的牌，其中 5 张红色、3 张白色、2 张绿色、0 张黑色、0 张蓝色，则本次爆表有 1/2 概率选择红色，3/10 概率选择白色，2/10 概率选择绿色，黑色和蓝色不会被选中。\r\n\r\n如果当前抽牌堆、手牌和弃牌堆中没有任何理想颜色牌，则跳过理想判定，游戏直接结束。\r\n\r\n选定理想颜色后，再进行美德/折磨判定：\r\n\r\n\r\n\r\n\r\n\r\n美德：基础概率 25%，当前只会被特质修正。触发后，压力回落 30%，角色获得 1 个固定 buff，同时对应颜色的卡牌获得强化，例如附魔效果增强，或获得新的临时强化附魔。\r\n\r\n\r\n\r\n折磨：基础概率 75%，当前只会被特质修正。触发后，压力不回落，角色获得 1 个固定 debuff，同时对应颜色的卡牌获得弱化，例如附魔效果弱化，或获得新的临时弱化附魔。\r\n\r\n当前版本里，美德/折磨概率只会被特质修正；特质系统本身尚未设计。事件、卡牌和当前战斗表现暂时不修正美德/折磨概率。\r\n\r\n美德触发后的压力回落按压力上限 m 计算：压力变成 70% * m，等价于恢复 30% * m 的压力空间。以第一个学科为例，m=100 时，美德触发后压力变为 70。\r\n\r\n美德和折磨都只持续到本场战斗结束。战斗结束后，美德/折磨状态消失；长期奖励、长期惩罚或身份记忆暂时不设计，但不排除未来扩展。\r\n\r\n这个系统的重点不是“随机奖励/随机惩罚”，而是制造可读的心理阈值：\r\n\r\n\r\n\r\n\r\n\r\n压力要能被看见。\r\n\r\n\r\n\r\n阈值要有提前量。\r\n\r\n\r\n\r\n正负分支要有明显差异。\r\n\r\n\r\n\r\n美德不能变成可刷奖励。\r\n\r\n\r\n\r\n折磨不能变成纯粹失控或无解惩罚。\r\n\r\n\r\n\r\n玩家在爆表前后都应该有预防、缓解、补救或承担风险的选择。\r\n\r\n与理想附魔的关系\r\n\r\n理想不是职业，不限制玩家选牌，也不把卡池扩张成每张牌五个版本。\r\n\r\n当前倾向是：\r\n\r\n\r\n\r\n\r\n\r\n单张牌上的理想附魔互斥，避免一张牌同时承载过多价值标签。\r\n\r\n\r\n\r\n一局游戏中可以出现多种理想倾向，它们通过牌组构成、附魔数量和关键牌自然形成主导色。\r\n\r\n\r\n\r\n美德触发后，可以强化主导理想色附魔，或者让某种理想短期升华。\r\n\r\n\r\n\r\n折磨触发后，可以污染主导理想色附魔，或者让某种理想带来副作用。\r\n\r\n\r\n\r\n每个理想颜色都可以拥有不同的美德和折磨效果。基础战斗循环只定义“按颜色权重选择理想，再按 25%/75% 进入美德或折磨”的通用流程。\r\n\r\n基础战斗循环只需要为这件事预留接口，不需要在本页展开五色理想的完整规则。\r\n\r\n当前不做\r\n\r\n\r\n\r\n\r\n\r\n不复制《暗黑地牢》的固定压力阈值、概率或状态名称。\r\n\r\n\r\n\r\n不做彩色能量。\r\n\r\n\r\n\r\n不把理想做成选牌限制或隐藏道德审判。\r\n\r\n\r\n\r\n不把美德做成稳定可刷的奖励引擎。\r\n\r\n\r\n\r\n不把折磨做成玩家无法回应的纯惩罚。\r\n\r\n\r\n\r\n不在基础循环页展开工科的 数据、自动化、经验方法 三轴；这些内容全部放到工科子文档。\r\n\r\n\r\n\r\n不在本页展开工科、卡牌池、敌人、事件和论文发表的细则。\r\n\r\n待确认问题\r\n\r\n\r\n\r\n\r\n\r\n其他学科的压力上限 m 和额外生命区间 n 分别如何取值？\r\n\r\n\r\n\r\n哪些特质会修正美德/折磨概率，以及修正幅度是多少？\r\n\r\n\r\n\r\n各理想颜色对应的美德、折磨、强化附魔和弱化附魔分别是什么？",
+      "text_content": "页面定位\n\n本页描述战斗系统的第一层规则：一场战斗如何从回合、资源、牌堆、敌我行动，推进到压力爆表后的美德/折磨判定。\n\n第一版战斗应保持清楚、可预期、容易调试：\n\n\n\n\n\n玩家抽牌，获得能量，打出攻击牌、技能牌和能力牌。\n\n\n\n敌人展示意图，玩家根据手牌和资源做取舍。\n\n\n\n未被自信抵消的伤害会推高压力。\n\n\n\n压力到达上限时，触发美德与折磨判定。\n\n一句话循环\n\n玩家在自己的回合抽牌、获得能量、用卡牌处理敌人意图；敌人在自己的回合执行意图并施加压力。压力持续累积，直到角色到达阈值，进入美德或折磨的戏剧节点。\n\n时间节点\n\n玩家回合开始\n\n\n\n\n\n将本回合能量刷新为 3 点。\n\n\n\n抽取 5 张牌作为本回合手牌。\n\n\n\n清空上一回合遗留的自信。\n\n\n\n处理回合开始触发的能力、状态、装置和敌我效果。\n\n玩家回合中\n\n\n\n\n\n玩家消耗能量打出手牌。\n\n\n\n攻击牌主要造成伤害或施加进攻性效果。\n\n\n\n技能牌主要获得自信、抽牌、减压、处理牌堆或施加辅助效果。\n\n\n\n能力牌打出后提供持续规则，通常不会立刻进入弃牌堆循环。\n\n\n\n玩家可以根据敌人意图，选择进攻、格挡、减压、铺设能力或调整牌堆。\n\n玩家回合结束\n\n\n\n\n\n未使用的手牌进入弃牌堆，临时牌按其规则消失。\n\n\n\n处理回合结束触发。\n\n\n\n敌人准备进入行动。\n\n敌人回合开始\n\n\n\n\n\n处理敌方回合开始触发。\n\n\n\n敌人根据已展示的意图开始行动。\n\n敌人回合中\n\n\n\n\n\n敌人造成伤害、施加状态、生成问题牌，或改变下回合意图。\n\n\n\n玩家已有的自信优先抵消伤害。\n\n\n\n未被自信抵消的伤害转化为压力上升。\n\n敌人回合结束\n\n\n\n\n\n处理敌方回合结束触发。\n\n\n\n更新下一回合敌人意图。\n\n\n\n回到玩家回合开始。\n\n核心资源\n\n压力（血量）\n\n压力是角色在战斗中的主承压轨道。玩家所操控的角色拥有压力上限 m，不同角色（学科）的压力上限可以不同。\n\n角色收到伤害后，压力开始上涨。自信会先抵消伤害；每次受到未被自信抵消的伤害后，压力会上升。当压力到达压力上限 m 时，触发美德与折磨判定。\n\n压力不是单纯的扣血数字。它应该让玩家感到危机正在靠近：压力增长要可见，来源要能理解，玩家也应该拥有一定的预防、格挡、减压和危机处理手段。\n\n压力到达 m 后，角色并不会立刻死亡，而是进入美德/折磨判定。判定之后，角色仍有一段额外生命区间，从 m 延伸到 m+n。当压力到达 m+n 时，游戏结束，玩家必须重新开始游戏。\n\n第一版的首个学科暂定：\n\n\n\n\n\n\n\n学科\n\n\n\n压力上限 m\n\n\n\n额外生命区间 n\n\n\n\n终局压力 m+n\n\n\n\n\n\n第一个学科\n\n\n\n100\n\n\n\n30\n\n\n\n130\n\n自信（护甲）\n\n自信是本作的护甲/格挡概念。它优先吸收敌人造成的伤害，从而避免压力上升。\n\n第一版倾向：\n\n\n\n\n\n自信主要是回合内防御资源。\n\n\n\n玩家新回合开始时，自信清空。\n\n\n\n若后续存在保留自信的效果，必须由卡牌、能力、理想附魔或美德效果明确写出。\n\n能量\n\n能量是每回合打牌的统一资源。\n\n第一版默认每回合开始时获得 3 点能量。能量应该接近《杀戮尖塔》的单一能量模型：每回合刷新，打牌消耗，少数效果可以增加、减少或保留能量。\n\n第一版明确不做彩色能量，也不做多条能量池。\n\n理想、学科、职业和卡牌类型可以改变牌的效果与气质，但不应自动制造新的能量颜色。\n\n手牌\n\n手牌是玩家本回合可用的行动集合。玩家每回合从抽牌堆抽牌，并根据能量、敌人意图、压力状态和构筑方向选择要打出的牌。\n\n第一版默认每回合开始抽 5 张牌。若卡牌、能力或状态改变抽牌数量，以对应效果为准。\n\n抽牌堆\n\n抽牌堆保存尚未抽到的牌。抽牌堆耗尽时，通常将弃牌堆洗入并形成新的抽牌堆。\n\n弃牌堆\n\n弃牌堆保存本场战斗中已经使用过或回合结束后丢弃的牌。它会在抽牌堆耗尽时重新洗入。\n\n消耗牌堆\n\n消耗牌堆保存本场战斗中被消耗的牌。被消耗的牌通常不会在本场战斗中再次进入抽牌循环，除非有特定效果将其取回。\n\n卡牌类型\n\n攻击牌\n\n攻击牌主要负责解决敌人：造成伤害、打断敌方节奏、施加进攻性状态，或与某些构筑轴产生连锁。\n\n技能牌\n\n技能牌主要负责处理局面：获得自信、减压、抽牌、弃牌、检索、生成临时牌、处理问题牌，或为下一步行动创造条件。\n\n能力牌\n\n能力牌提供持续规则。它们通常是构筑成型的关键，例如每回合触发一次效果、改变某类牌的收益，或让某个系统开始自动运转。\n\n临时牌与衍生牌\n\n某些职业或学科会生成临时牌或衍生牌。\n\n这类牌应在对应职业/学科子文档中展开。本页只记录它们可以进入基础战斗循环，不展开工科的 数据、自动化、经验方法 三轴。\n\n美德与折磨\n\n美德与折磨的设计灵感来自《暗黑地牢》的压力阈值结构，但本项目不直接复制它的数值、概率、命名或惩罚方式。\n\n当角色压力到达上限 m 时，进入一次判定：\n\n\n\n\n\n先判定本次爆表对应的理想颜色。\n\n\n\n再判定本次爆表进入美德还是折磨。\n\n理想颜色按当前卡组中的理想颜色权重随机。统计范围包括抽牌堆、手牌和弃牌堆；消耗牌堆不计入。\n\n例如当前抽牌堆、手牌和弃牌堆中共有 10 张带理想颜色的牌，其中 5 张红色、3 张白色、2 张绿色、0 张黑色、0 张蓝色，则本次爆表有 1/2 概率选择红色，3/10 概率选择白色，2/10 概率选择绿色，黑色和蓝色不会被选中。\n\n如果当前抽牌堆、手牌和弃牌堆中没有任何理想颜色牌，则跳过理想判定，游戏直接结束。\n\n选定理想颜色后，再进行美德/折磨判定：\n\n\n\n\n\n美德：基础概率 25%，当前只会被特质修正。触发后，压力回落 30%，角色获得 1 个固定 buff，同时对应颜色的卡牌获得强化，例如附魔效果增强，或获得新的临时强化附魔。\n\n\n\n折磨：基础概率 75%，当前只会被特质修正。触发后，压力不回落，角色获得 1 个固定 debuff，同时对应颜色的卡牌获得弱化，例如附魔效果弱化，或获得新的临时弱化附魔。\n\n当前版本里，美德/折磨概率只会被特质修正；特质系统本身尚未设计。事件、卡牌和当前战斗表现暂时不修正美德/折磨概率。\n\n美德触发后的压力回落按压力上限 m 计算：压力变成 70% * m，等价于恢复 30% * m 的压力空间。以第一个学科为例，m=100 时，美德触发后压力变为 70。\n\n美德和折磨都只持续到本场战斗结束。战斗结束后，美德/折磨状态消失；长期奖励、长期惩罚或身份记忆暂时不设计，但不排除未来扩展。\n\n这个系统的重点不是“随机奖励/随机惩罚”，而是制造可读的心理阈值：\n\n\n\n\n\n压力要能被看见。\n\n\n\n阈值要有提前量。\n\n\n\n正负分支要有明显差异。\n\n\n\n美德不能变成可刷奖励。\n\n\n\n折磨不能变成纯粹失控或无解惩罚。\n\n\n\n玩家在爆表前后都应该有预防、缓解、补救或承担风险的选择。\n\n与理想附魔的关系\n\n理想不是职业，不限制玩家选牌，也不把卡池扩张成每张牌五个版本。\n\n当前倾向是：\n\n\n\n\n\n单张牌上的理想附魔互斥，避免一张牌同时承载过多价值标签。\n\n\n\n一局游戏中可以出现多种理想倾向，它们通过牌组构成、附魔数量和关键牌自然形成主导色。\n\n\n\n美德触发后，可以强化主导理想色附魔，或者让某种理想短期升华。\n\n\n\n折磨触发后，可以污染主导理想色附魔，或者让某种理想带来副作用。\n\n\n\n每个理想颜色都可以拥有不同的美德和折磨效果。基础战斗循环只定义“按颜色权重选择理想，再按 25%/75% 进入美德或折磨”的通用流程。\n\n基础战斗循环只需要为这件事预留接口，不需要在本页展开五色理想的完整规则。\n\n当前不做\n\n\n\n\n\n不复制《暗黑地牢》的固定压力阈值、概率或状态名称。\n\n\n\n不做彩色能量。\n\n\n\n不把理想做成选牌限制或隐藏道德审判。\n\n\n\n不把美德做成稳定可刷的奖励引擎。\n\n\n\n不把折磨做成玩家无法回应的纯惩罚。\n\n\n\n不在基础循环页展开工科的 数据、自动化、经验方法 三轴；这些内容全部放到工科子文档。\n\n\n\n不在本页展开工科、卡牌池、敌人、事件和论文发表的细则。\n\n待确认问题\n\n\n\n\n\n其他学科的压力上限 m 和额外生命区间 n 分别如何取值？\n\n\n\n哪些特质会修正美德/折磨概率，以及修正幅度是多少？\n\n\n\n各理想颜色对应的美德、折磨、强化附魔和弱化附魔分别是什么？\n\n",
       "content": {
         "type": "doc",
         "content": [
           {
             "type": "heading",
             "attrs": {
-              "id": "cihrkwbuleld",
+              "id": "swbjhxiovqih",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8306,9 +8305,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "wsrmhyhouyxy",
-              "indent": 0,
-              "textAlign": null
+              "id": "ijckrpaxrtrz",
+              "indent": 0
             },
             "content": [
               {
@@ -8320,9 +8318,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "ouifhpnrxyoo",
-              "indent": 0,
-              "textAlign": null
+              "id": "qdkevmpojcox",
+              "indent": 0
             },
             "content": [
               {
@@ -8340,9 +8337,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "lrnnlumkcqwz",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "riyjkltrcing",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8359,9 +8355,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "hpaoymmvbsvr",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "vnyzfpjkxhhx",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8378,9 +8373,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "rqnvgsleaqtr",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "fnxklzcilynn",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8397,9 +8391,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "rnfkvpjagold",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "biplifqiykpg",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8415,10 +8408,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "iujprtvchcar",
+              "id": "izyrscngtkzf",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8430,9 +8422,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "zbznenubpaco",
-              "indent": 0,
-              "textAlign": null
+              "id": "zqkascpsivxy",
+              "indent": 0
             },
             "content": [
               {
@@ -8444,10 +8435,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "nrrvuehjucge",
+              "id": "vqqwilswiyky",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8459,10 +8449,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "zysdrcyloyws",
+              "id": "hhnvvzfwhugu",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8480,9 +8469,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "qcehebnlowlq",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "zrjfivbovpyd",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8499,9 +8487,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "glxypuotahcg",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "tqqduuzjhonu",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8518,9 +8505,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "xwjxpktellcr",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "jqikkvdwloca",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8537,9 +8523,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "pwkrgfyvfasi",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "iwmrrppdklfl",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8555,10 +8540,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "ilzwdesqzect",
+              "id": "bhtljpmdvscs",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8576,9 +8560,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "xlbaibxycctm",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "epvrlnqzjzfu",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8595,9 +8578,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "pyntcmuviciq",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "dfxnzrdcrsye",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8614,9 +8596,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "fzofvzzsipmk",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "mdhipasrkpgp",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8633,9 +8614,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "jbkrscohzowb",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "ifovgdpkfkno",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8652,9 +8632,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "hptrtctpzzzg",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "qfzbejjrudpb",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8670,10 +8649,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "iroopohlzmcx",
+              "id": "qbmxshoufkqp",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8691,9 +8669,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "ukviyyzmpgzj",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "biokuieonvqd",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8710,9 +8687,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "qszgllfmezhj",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "gxxdjyqjpayi",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8729,9 +8705,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "iimlqiihacpe",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "ijjyjnyiebfm",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8747,10 +8722,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "axzgqmwnnfxn",
+              "id": "wnlvokhukfgc",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8768,9 +8742,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "ulofiubfqjtu",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "qaxvaypbirrq",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8787,9 +8760,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "yojsflbzseek",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "bomuaoybqxra",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8805,10 +8777,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "fuaogfjfdhhu",
+              "id": "skaucdgmsaup",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8826,9 +8797,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "btkpiihxgyxc",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "rxwwsteesbho",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8845,9 +8815,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "eemmvxdsousl",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "dxipfesygizq",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8864,9 +8833,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "xchxurdflrwu",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "klfiqbytgjor",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8882,10 +8850,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "ciqxckoafgyd",
+              "id": "nzmedzixhtre",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8903,9 +8870,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "tqljurcqqskf",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "ogbljkyucmnx",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8922,9 +8888,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "blvsvfwyjpmx",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "ezgwzyifaxlm",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8941,9 +8906,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "atdzospmkfuk",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "hynwwgmujfof",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -8959,10 +8923,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "eubrbqmisrzk",
+              "id": "gdnfkheoankr",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8974,10 +8937,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "uzmofwsyddck",
+              "id": "yqcmqwketbsl",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -8989,9 +8951,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "klkktiviolpw",
-              "indent": 0,
-              "textAlign": null
+              "id": "laosdwauwmob",
+              "indent": 0
             },
             "content": [
               {
@@ -9003,7 +8964,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9016,9 +8978,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "clrtkjlsqadh",
-              "indent": 0,
-              "textAlign": null
+              "id": "nvqzkamevikv",
+              "indent": 0
             },
             "content": [
               {
@@ -9030,7 +8991,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9043,9 +9005,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "kykwrsmwcytf",
-              "indent": 0,
-              "textAlign": null
+              "id": "hhutraltlyel",
+              "indent": 0
             },
             "content": [
               {
@@ -9057,9 +9018,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "tthxkmllnkgi",
-              "indent": 0,
-              "textAlign": null
+              "id": "wqcqgtryeblg",
+              "indent": 0
             },
             "content": [
               {
@@ -9071,7 +9031,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9084,7 +9045,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9097,7 +9059,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9110,7 +9073,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9123,9 +9087,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "dojegabseqjx",
-              "indent": 0,
-              "textAlign": null
+              "id": "mkjeythsjtbh",
+              "indent": 0
             },
             "content": [
               {
@@ -9144,18 +9107,14 @@
                     "type": "tableHeader",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "rinxxgkywsej",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "idovgrgwfjvh",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9170,18 +9129,14 @@
                     "type": "tableHeader",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "glfwiyzzkpku",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "pwixfnxonwfe",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9193,7 +9148,8 @@
                             "type": "text",
                             "marks": [
                               {
-                                "type": "code"
+                                "type": "code",
+                                "attrs": {}
                               }
                             ]
                           }
@@ -9205,18 +9161,14 @@
                     "type": "tableHeader",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "srszhkbqoqpf",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "hjcwdczsoubu",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9228,7 +9180,8 @@
                             "type": "text",
                             "marks": [
                               {
-                                "type": "code"
+                                "type": "code",
+                                "attrs": {}
                               }
                             ]
                           }
@@ -9240,18 +9193,14 @@
                     "type": "tableHeader",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "nausngqdryje",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "ydiyurqcfegc",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9263,7 +9212,8 @@
                             "type": "text",
                             "marks": [
                               {
-                                "type": "code"
+                                "type": "code",
+                                "attrs": {}
                               }
                             ]
                           }
@@ -9280,18 +9230,14 @@
                     "type": "tableCell",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "fvczrmhkdtnd",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "ifayzxawomtw",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9306,18 +9252,14 @@
                     "type": "tableCell",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "pfrvqvkbydoe",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "cdlracgzrnwa",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9332,18 +9274,14 @@
                     "type": "tableCell",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "ldblmejvoaum",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "inmdtlzklkoi",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9358,18 +9296,14 @@
                     "type": "tableCell",
                     "attrs": {
                       "colspan": 1,
-                      "rowspan": 1,
-                      "colwidth": null,
-                      "backgroundColor": null,
-                      "backgroundColorName": null
+                      "rowspan": 1
                     },
                     "content": [
                       {
                         "type": "paragraph",
                         "attrs": {
-                          "id": "bbiatrgkdhdu",
-                          "indent": 0,
-                          "textAlign": null
+                          "id": "xixneumbcjoc",
+                          "indent": 0
                         },
                         "content": [
                           {
@@ -9387,10 +9321,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "pmofutzvwlaw",
+              "id": "gmuklyigxolg",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9402,9 +9335,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "mhesbziutacy",
-              "indent": 0,
-              "textAlign": null
+              "id": "ejuvgqlaubtk",
+              "indent": 0
             },
             "content": [
               {
@@ -9416,9 +9348,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "haxxzgzbofvf",
-              "indent": 0,
-              "textAlign": null
+              "id": "kjnzgdkdsuoz",
+              "indent": 0
             },
             "content": [
               {
@@ -9436,9 +9367,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "kdibdpoacfoo",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "njwfpbrmdmin",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -9455,9 +9385,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "jdddddtflctr",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "ikmyrqigbtxo",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -9474,9 +9403,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "zbsdezndzmbv",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "dycgdtvimcdp",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -9492,10 +9420,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "thghyckjyood",
+              "id": "uyttrfijilsk",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9507,9 +9434,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "nqpxqzirxuei",
-              "indent": 0,
-              "textAlign": null
+              "id": "kstxqywsxial",
+              "indent": 0
             },
             "content": [
               {
@@ -9521,9 +9447,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "xbvjtabxutud",
-              "indent": 0,
-              "textAlign": null
+              "id": "hyxydipsasfi",
+              "indent": 0
             },
             "content": [
               {
@@ -9535,9 +9460,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "jmtcdmooxqbi",
-              "indent": 0,
-              "textAlign": null
+              "id": "wjevhgfjuuqf",
+              "indent": 0
             },
             "content": [
               {
@@ -9549,9 +9473,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "ccrdysirvcpn",
-              "indent": 0,
-              "textAlign": null
+              "id": "iaadortelwlv",
+              "indent": 0
             },
             "content": [
               {
@@ -9563,10 +9486,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "wewuxdmcfbwn",
+              "id": "znznntqtpwxa",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9578,9 +9500,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "hixpqavegjpk",
-              "indent": 0,
-              "textAlign": null
+              "id": "twxktmlsqrwr",
+              "indent": 0
             },
             "content": [
               {
@@ -9592,9 +9513,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "fxdussljevcl",
-              "indent": 0,
-              "textAlign": null
+              "id": "lybjqaexscee",
+              "indent": 0
             },
             "content": [
               {
@@ -9606,10 +9526,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "kplhrrrjhbkv",
+              "id": "khcpthjcjwgy",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9621,9 +9540,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "wedonckysofn",
-              "indent": 0,
-              "textAlign": null
+              "id": "oggdsqdcmwwz",
+              "indent": 0
             },
             "content": [
               {
@@ -9635,10 +9553,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "nslcmcrryasc",
+              "id": "fccxfcembxsa",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9650,9 +9567,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "drdxiopiwfmg",
-              "indent": 0,
-              "textAlign": null
+              "id": "iytxaupedodw",
+              "indent": 0
             },
             "content": [
               {
@@ -9664,10 +9580,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "cowvegpqirbm",
+              "id": "cjausveiruvj",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9679,9 +9594,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "ieppnqebxqua",
-              "indent": 0,
-              "textAlign": null
+              "id": "bbnsjjglpnzk",
+              "indent": 0
             },
             "content": [
               {
@@ -9693,10 +9607,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "lqnukdszpvnr",
+              "id": "mmohjokivsyb",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9708,10 +9621,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "kdxsbgsjekys",
+              "id": "nqzmbmqzhkee",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9723,9 +9635,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "oftzfdfkwsjg",
-              "indent": 0,
-              "textAlign": null
+              "id": "wpvxyncjjhvs",
+              "indent": 0
             },
             "content": [
               {
@@ -9737,10 +9648,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "fgrdjllfjnbs",
+              "id": "ivjhitcnmkms",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9752,9 +9662,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "iyktenzwtilj",
-              "indent": 0,
-              "textAlign": null
+              "id": "ebldozqdkexm",
+              "indent": 0
             },
             "content": [
               {
@@ -9766,10 +9675,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "rqxodxvjiqom",
+              "id": "edcyxtsudlsn",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9781,9 +9689,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "brebmafwvbmu",
-              "indent": 0,
-              "textAlign": null
+              "id": "shxonzrmmvlt",
+              "indent": 0
             },
             "content": [
               {
@@ -9795,10 +9702,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "igpnceijoaqm",
+              "id": "fjwtfccscswf",
               "level": 3,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9810,9 +9716,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "kpxuutbuckje",
-              "indent": 0,
-              "textAlign": null
+              "id": "morcpnhvlypo",
+              "indent": 0
             },
             "content": [
               {
@@ -9824,9 +9729,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "fsizcjvxwkgk",
-              "indent": 0,
-              "textAlign": null
+              "id": "pvaofgtuiynj",
+              "indent": 0
             },
             "content": [
               {
@@ -9838,7 +9742,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9851,7 +9756,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9864,7 +9770,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9877,10 +9784,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "yfuygwysafpm",
+              "id": "gjiomsfuoaql",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -9892,9 +9798,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "fdnpeucqkkct",
-              "indent": 0,
-              "textAlign": null
+              "id": "eqyzrmutktpr",
+              "indent": 0
             },
             "content": [
               {
@@ -9906,9 +9811,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "aepgtfuwrnvc",
-              "indent": 0,
-              "textAlign": null
+              "id": "psirpddzameq",
+              "indent": 0
             },
             "content": [
               {
@@ -9920,7 +9824,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -9933,7 +9838,6 @@
           {
             "type": "orderedList",
             "attrs": {
-              "type": null,
               "start": 1
             },
             "content": [
@@ -9943,9 +9847,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "lmsvbfkdyznu",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "boiuglfraahe",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -9962,9 +9865,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "npheiycwaswx",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "bfmbsbwzpfpt",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -9980,9 +9882,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "tdzumlvwfmed",
-              "indent": 0,
-              "textAlign": null
+              "id": "aazmzjemnmlo",
+              "indent": 0
             },
             "content": [
               {
@@ -9994,9 +9895,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "nvlagqteqdht",
-              "indent": 0,
-              "textAlign": null
+              "id": "vvyppprhtpis",
+              "indent": 0
             },
             "content": [
               {
@@ -10008,9 +9908,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "svdlydueetju",
-              "indent": 0,
-              "textAlign": null
+              "id": "xkpdmsdlsrzn",
+              "indent": 0
             },
             "content": [
               {
@@ -10022,9 +9921,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "ypwcnozgeuqj",
-              "indent": 0,
-              "textAlign": null
+              "id": "picerxlsbkpb",
+              "indent": 0
             },
             "content": [
               {
@@ -10042,9 +9940,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "plcxnftyefjk",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "nsyldoeyespg",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10061,9 +9958,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "nspekandocco",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "lkpvfcauzazo",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10079,9 +9975,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "nsutpotggwvo",
-              "indent": 0,
-              "textAlign": null
+              "id": "qgbufdudrxlt",
+              "indent": 0
             },
             "content": [
               {
@@ -10093,9 +9988,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "mvlrmgzahpqi",
-              "indent": 0,
-              "textAlign": null
+              "id": "qpsobtkujvyq",
+              "indent": 0
             },
             "content": [
               {
@@ -10107,7 +10001,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -10120,7 +10015,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -10133,7 +10029,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -10146,7 +10043,8 @@
                 "type": "text",
                 "marks": [
                   {
-                    "type": "code"
+                    "type": "code",
+                    "attrs": {}
                   }
                 ]
               },
@@ -10159,9 +10057,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "seqdlrrvrspk",
-              "indent": 0,
-              "textAlign": null
+              "id": "odtoapkbfjkq",
+              "indent": 0
             },
             "content": [
               {
@@ -10173,9 +10070,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "gcjslnymhmcc",
-              "indent": 0,
-              "textAlign": null
+              "id": "ppfffzjmizpg",
+              "indent": 0
             },
             "content": [
               {
@@ -10193,9 +10089,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "ffsnjszsgsmw",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "ecfpfhnodqal",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10212,9 +10107,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "hnsgnbxamkhh",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "nxcuetapnhdl",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10231,9 +10125,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "ifvxdgopjsli",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "tydjaamjaxzl",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10250,9 +10143,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "rchwqnhqckft",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "fwjmfwlsexbn",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10269,9 +10161,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "xhvzvmrjilcz",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "utucubwclkwy",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10288,9 +10179,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "gofyfaovvbrd",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "zbqbzbytdmbd",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10306,10 +10196,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "jxwtozwljwsa",
+              "id": "icaknvtifjra",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -10321,9 +10210,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "cimqknbhnvdh",
-              "indent": 0,
-              "textAlign": null
+              "id": "obkwzekbmacm",
+              "indent": 0
             },
             "content": [
               {
@@ -10335,9 +10223,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "krrqleemlgau",
-              "indent": 0,
-              "textAlign": null
+              "id": "fnasblhtzgfz",
+              "indent": 0
             },
             "content": [
               {
@@ -10355,9 +10242,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "rghgeoigpapk",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "gtmejsilvpmv",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10374,9 +10260,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "tdrqiwkvkmyr",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "zdwjxzdunnsg",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10393,9 +10278,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "ujblrqenivua",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "vnxwmatuznbv",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10412,9 +10296,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "hsqvojnfjrel",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "qzrbvtcyioco",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10431,9 +10314,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "vfuufrlahjig",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "riwqujyvzkup",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10449,9 +10331,8 @@
           {
             "type": "paragraph",
             "attrs": {
-              "id": "nogbwzcrrwmd",
-              "indent": 0,
-              "textAlign": null
+              "id": "suhjyjbhmwrv",
+              "indent": 0
             },
             "content": [
               {
@@ -10463,10 +10344,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "jydotcpozvgv",
+              "id": "gsydymuydrpj",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -10484,9 +10364,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "gvfzuxkppfhb",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "uikgtapxrjap",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10503,9 +10382,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "txvbblckvjdq",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "phpzcggxykho",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10522,9 +10400,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "bpmofhjpnldl",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "nxmclmtotehl",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10541,9 +10418,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "xnrsoccdikli",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "thgudoackbwi",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10560,9 +10436,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "izbmhnvqmbrq",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "zrfjywesjqlv",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10579,9 +10454,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "dhazrbfdqpwi",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "twrmjxyhimwp",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10593,7 +10467,8 @@
                         "type": "text",
                         "marks": [
                           {
-                            "type": "code"
+                            "type": "code",
+                            "attrs": {}
                           }
                         ]
                       },
@@ -10606,7 +10481,8 @@
                         "type": "text",
                         "marks": [
                           {
-                            "type": "code"
+                            "type": "code",
+                            "attrs": {}
                           }
                         ]
                       },
@@ -10619,7 +10495,8 @@
                         "type": "text",
                         "marks": [
                           {
-                            "type": "code"
+                            "type": "code",
+                            "attrs": {}
                           }
                         ]
                       },
@@ -10637,9 +10514,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "yetsbuatatza",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "fkboksloiqrx",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10655,10 +10531,9 @@
           {
             "type": "heading",
             "attrs": {
-              "id": "wggogxshixnd",
+              "id": "iwwjfleqxivd",
               "level": 2,
-              "indent": 0,
-              "textAlign": null
+              "indent": 0
             },
             "content": [
               {
@@ -10670,7 +10545,6 @@
           {
             "type": "orderedList",
             "attrs": {
-              "type": null,
               "start": 1
             },
             "content": [
@@ -10680,9 +10554,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "dlwneurhxccz",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "bhdceetlasqp",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10694,7 +10567,8 @@
                         "type": "text",
                         "marks": [
                           {
-                            "type": "code"
+                            "type": "code",
+                            "attrs": {}
                           }
                         ]
                       },
@@ -10707,7 +10581,8 @@
                         "type": "text",
                         "marks": [
                           {
-                            "type": "code"
+                            "type": "code",
+                            "attrs": {}
                           }
                         ]
                       },
@@ -10725,9 +10600,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "htmftbnpcnpz",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "lzshkrjphizb",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10744,9 +10618,8 @@
                   {
                     "type": "paragraph",
                     "attrs": {
-                      "id": "kpcxifxolqhb",
-                      "indent": 0,
-                      "textAlign": null
+                      "id": "uiogjogyycuu",
+                      "indent": 0
                     },
                     "content": [
                       {
@@ -10758,6 +10631,13 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "id": "xabhbztqeuze",
+              "indent": 0
+            }
           }
         ]
       },
@@ -17489,7 +17369,7 @@
       "is_deleted": false,
       "deleted_at": "",
       "created_at": "2026-05-28 16:35:17.88626+00",
-      "updated_at": "2026-05-31 03:06:46.233+00",
+      "updated_at": "2026-05-31 03:22:53.705+00",
       "parent_page_id": "019e6f70-b503-7d81-bca1-28e3ff1598b1",
       "position": "a1wdzAWO",
       "space_id": "019e6ed0-fdc8-709c-9bef-63cc4166f4e4",
