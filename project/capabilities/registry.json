@@ -146,21 +146,25 @@
       "domain": "design_assist",
       "status": "Tested",
       "owner": "Codex",
-      "authoritative_page": "tools/combat_analysis/README.md",
+      "authoritative_page": "tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md",
       "related_files": [
         "tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md",
+        "scripts/run_programmatic_complete_card_draft_hosted_router.py",
         "docs/development/cardanalysis/CARDANALYSIS_NORTH_STAR_V1.md",
         "docs/development/cardanalysis/ENGINEERING_IDEAL_ENCHANTMENT_CARDPOOL_CONSENSUS_V1.md"
       ],
       "evidence": [
         "scripts/validate_capability_graph.py",
+        "tests/toolkit/combat_analysis/test_programmatic_complete_card_draft_hosted_router_v1.py",
+        "tests/scripts/test_run_programmatic_complete_card_draft_hosted_router.py",
         "tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py"
       ],
       "milestone": "Cardanalysis",
       "risks": [
-        "工具链能力很强但文档体量大，需要通过台账和入口页降低检索噪音"
+        "工具链能力很强但文档体量大，需要通过台账和入口页降低检索噪音",
+        "当前生成结果仍是 report-only/advisory-context-only，需要人类审核反馈后才能进入下一轮稳定约束"
       ],
-      "next_step": "把最常用分析入口提升到项目进展页和能力台账摘要。"
+      "next_step": "把 hosted router 指向的中文审核反馈转换成下一轮 report-only 修复约束。"
     },
     {
       "id": "CAP-LONGTERM-001",

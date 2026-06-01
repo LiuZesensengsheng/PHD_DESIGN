@@ -3,7 +3,7 @@
 - 状态: Draft
 - 负责人: Team
 - 范围: project-capability-registry
-- 最后复核: 2026-05-30
+- 最后复核: 2026-06-02
 
 ## 目标
 
@@ -53,7 +53,7 @@
 | CAP-DISCUSS-001 | GitHub Discussions 评论同步到项目快照 | collaboration | Tested | `tools/project_sync/README.md` |
 | CAP-ASSET-001 | 资产与能力台账维护 | governance | Prototype | `docs/project/assets/README.md` |
 | CAP-CONTENT-001 | 内容包身份和运行时输出可见性 | content_pipeline | Tested | `docs/development/content/CONTENT_PACK_MINIMAL_V1.md` |
-| CAP-CARDANALYSIS-001 | 卡牌与战斗设计分析 | design_assist | Tested | `tools/combat_analysis/README.md` |
+| CAP-CARDANALYSIS-001 | 卡牌与战斗设计分析 | design_assist | Tested | `tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md` |
 | CAP-LONGTERM-001 | 长期系统设计资料治理 | content_governance | Draft | `docs/design/campaign/ACKNOWLEDGEMENTS_SYSTEM_v2.md` |
 | CAP-GOVERNANCE-001 | 文档治理和删除确认流程 | governance | Tested | `docs/development/architecture/DESIGN_DOC_GOVERNANCE_V1.md` |
 | CAP-VALIDATION-001 | 仓库验证与测试入口 | validation | Tested | `docs/development/DEFAULT_ENTRYPOINTS.md` |
