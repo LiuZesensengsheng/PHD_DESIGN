@@ -129,6 +129,8 @@ Stop and ask before doing any of the following:
   - `design_engine/design_candidate_scout.py`
   - `reports/html/sts_profile_template.py` still owns a large single-page static
     template and can later split CSS/JS sections if report-lane conflicts continue.
+- Programmatic complete-card draft repair-stage route metadata should stay aligned
+  with `docs/development/cardanalysis/CARDANALYSIS_ARCHITECTURE_POLISH_V1.md`.
 
 ## First Milestone Exit Criteria
 
