@@ -30,14 +30,18 @@ Original V1 out of scope:
 The full suite remains required before commits; only the execution strategy
 changes from serial pytest to parallel pytest.
 
+Default commands use `python` after confirming it resolves to the project
+Python 3.11 interpreter. On Windows, `py -3.11` remains a launcher fallback when
+the active shell's `python` is not Python 3.11.
+
 Default full-suite entry point:
 
-- `py -3.11 -m pytest -q -n auto --dist=loadscope`
+- `python -m pytest -q -n auto --dist=loadscope`
 
 Use serial pytest only as a diagnosis fallback when a failure appears
 order-dependent or worker-specific:
 
-- `py -3.11 -m pytest -q`
+- `python -m pytest -q`
 
 ## Test Tiers
 
@@ -60,7 +64,7 @@ Use for fast AI feedback before broader validation.
 
 Default entry point:
 
-- `py -3.11 scripts/run_test_smoke.py --profile quick`
+- `python scripts/run_test_smoke.py --profile quick`
 
 Target runtime:
 
@@ -77,7 +81,7 @@ Use before finishing refactor slices that affect boundaries.
 
 Default entry point:
 
-- `py -3.11 scripts/run_test_smoke.py --profile contract`
+- `python scripts/run_test_smoke.py --profile contract`
 
 Current purpose:
 
@@ -91,7 +95,7 @@ Use at phase boundaries or when a change touches multiple subsystems.
 
 Default entry point:
 
-- `py -3.11 scripts/run_repo_smoke_baseline.py`
+- `python scripts/run_repo_smoke_baseline.py`
 
 Current purpose:
 
@@ -104,14 +108,14 @@ Use for commit readiness.
 
 Default entry point:
 
-- `py -3.11 -m pytest -q -n auto --dist=loadscope`
+- `python -m pytest -q -n auto --dist=loadscope`
 
 Current status:
 
 - required before every commit by `AGENTS.md`
 - remains a full-suite gate, not a smoke-only replacement
 - if parallel execution fails in a way that looks order-dependent, reproduce
-  with serial `py -3.11 -m pytest -q` before changing product code
+  with serial `python -m pytest -q` before changing product code
 
 ## Marker Policy
 

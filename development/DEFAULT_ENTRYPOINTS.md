@@ -13,23 +13,26 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
 
 ## Current Default Entrypoints
 
+Default commands use `python` and the project Python 3.11 contract; use
+`py -3.11` only when `python` is not 3.11.
+
 ### Environment Setup
 
 - Install runtime dependencies:
-  - `py -3.11 -m pip install -r requirements.txt`
+  - `python -m pip install -r requirements.txt`
 - Install development dependencies:
-  - `py -3.11 -m pip install -r requirements-dev.txt`
+  - `python -m pip install -r requirements-dev.txt`
 - Install build-only dependencies:
-  - `py -3.11 -m pip install -r requirements-build.txt`
+  - `python -m pip install -r requirements-build.txt`
 
 ### Repository Smoke Baseline
 
 - Run the quick local test smoke profile:
-  - `py -3.11 scripts/run_test_smoke.py --profile quick`
+  - `python scripts/run_test_smoke.py --profile quick`
 - Run the contract-oriented test smoke profile:
-  - `py -3.11 scripts/run_test_smoke.py --profile contract`
+  - `python scripts/run_test_smoke.py --profile contract`
 - List test smoke profiles:
-  - `py -3.11 scripts/run_test_smoke.py --list`
+  - `python scripts/run_test_smoke.py --list`
 - Run the default repo-wide smoke baseline:
   - `python scripts/run_repo_smoke_baseline.py`
 - List the included smoke groups:
@@ -120,8 +123,6 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/run_card_package_draft_handoff.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --output-dir tmp/combat_analysis/card_package_draft_handoff_current`
 - Record one generated or owner-supplied `complete_card_draft_v1` attempt against a draft handoff:
   - `python scripts/run_llm_complete_card_draft_attempt.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/llm_complete_card_draft_attempt_current`
-- Validate four-character generated-attempt negative controls:
-  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_llm_complete_card_draft_attempt_v1.py tests/toolkit/combat_analysis/test_exam_iteration_run_v1.py -q`
 - Record one report-only attempt-to-exam iteration run:
   - `python scripts/run_exam_iteration_run.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --axis-search <mechanism_axis_search_bundle_v1.json> --package-seed <card_package_proposal_v1.json> --output-dir tmp/combat_analysis/exam_iteration_run_current`
 - Summarize iteration runs into report-only prompt and handoff patch advice:
@@ -179,8 +180,6 @@ Prefer direct tests or single-purpose scripts over umbrella entrypoints.
   - `python scripts/validate_card_package_proposal.py --input tmp/combat_analysis/mechanism_axis_package_seed_current --json`
 - Run the control-discipline plus ideal report-only chain from pilot through draft-submission readiness:
   - `tools/combat_analysis/docs/COMBAT_ANALYSIS_ENTRYPOINTS_V1.md`
-- Run the mechanism axis report-only chain exam:
-  - `py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_report_only_chain_v1.py -q`
 - Write an evaluation-autonomous-design handoff input from the current package seed:
   - `python scripts/run_mechanism_axis_evaluation_handoff.py --input tmp/combat_analysis/mechanism_axis_package_seed_current/silent_sts1_reviewed_axes_328508221e_design_brief_package_seed_v1.json --output-dir tmp/combat_analysis/mechanism_axis_evaluation_handoff_current`
 - Run the evaluation autonomous design model from that handoff:
