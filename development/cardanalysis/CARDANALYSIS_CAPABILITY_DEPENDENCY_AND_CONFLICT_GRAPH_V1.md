@@ -265,7 +265,6 @@ Capabilities:
 - `cardanalysis_feature_projection_v1`
 - `stress_resolve_model_v1`
 - `campaign_experience_curve_v1`
-- `campaign_advisory_bundle_v1`
 - `cardanalysis_case_progress_report_v1`
 - `sts1_exam_target_v1`
 - `card_package_variant_set_v1`
@@ -311,7 +310,6 @@ Artifacts:
 - `existing_asset_case_adapter_entrypoint`
 - `stress_resolve_summary`
 - `campaign_experience_curve_summary`
-- `campaign_advisory_bundle`
 - `cardanalysis_case_progress_snapshot`
 - `mechanism_axis_summary`
 - `deck_compression_summary`
@@ -519,11 +517,10 @@ curves should normally be capability nodes, not task nodes, once they have a
 stable owner module and summary artifact. Use a task node only for the bounded
 integration or migration slice around such a model.
 
-`campaign_advisory_bundle_v1` is also a capability node because it has a stable
-owner module and CLI. It provides a standalone bundle artifact and consumes the
-campaign power, stress/resolve, and campaign experience summaries. It is not a
-canonical report-only registry surface unless the report-only registry is
-explicitly promoted later.
+The former standalone `campaign_advisory_bundle_v1` producer has been retired
+as a non-canonical report shell. Downstream tools may still read historical or
+owner-supplied campaign advisory fields as external advisory context, but the
+graph no longer treats the bundle as a live producer.
 
 ## Non-Goals For V1
 
