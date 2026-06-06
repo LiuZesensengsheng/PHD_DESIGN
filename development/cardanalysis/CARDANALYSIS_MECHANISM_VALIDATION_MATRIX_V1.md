@@ -89,7 +89,7 @@ Add consumer tests when applicable:
 - If the family changes project card recommendation labels or ranking:
   `py -3.11 -m pytest tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py tests/scripts/test_run_fast_card_design_loop.py -q`
 - If it changes synthesis candidate ranking or closure diagnostics:
-  `py -3.11 -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/toolkit/combat_analysis/test_design_engine_synthesis_closure.py tests/scripts/test_run_fast_card_synthesis_bridge.py tests/scripts/test_run_fast_card_synthesis_closure.py -q`
+  `py -3.11 -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/toolkit/combat_analysis/test_design_engine_synthesis_closure.py -q`
 - If it changes STS catalog recovery, similarity, or near-neighbor behavior, add a
   holdout case and run the holdout package listed below.
 
@@ -329,7 +329,7 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_rankin
 Synthesis and closure:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/toolkit/combat_analysis/test_design_engine_synthesis_closure.py tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_card_synthesis_bridge.py tests/scripts/test_run_fast_card_synthesis_closure.py tests/scripts/test_run_fast_draft_session.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_synthesis.py tests/toolkit/combat_analysis/test_design_engine_synthesis_closure.py tests/toolkit/combat_analysis/test_design_engine_fast_card_loop.py tests/toolkit/combat_analysis/test_design_engine_fast_draft_session.py tests/scripts/test_run_fast_draft_session.py -q
 ```
 
 Package, deck skeleton, and fun/health:
