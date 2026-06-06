@@ -57,20 +57,21 @@ fall back to old `tmp` snapshots.
 
 ## Recommendation
 
-Use Option 2.
+Superseded by the later slimming pass.
 
-Treat `scripts/run_programmatic_complete_card_draft_repair_stage.py --stage <id>`
-as the default repair-stage entrypoint, and keep
-`programmatic_complete_card_draft_repair_stage_descriptor_v1` in parity with every
-stage exposed by that CLI.
+The former unified repair-stage entrypoint and descriptor registry have been
+retired along with the historical round-named repair-stage modules. The hosted
+router should still read old report-only snapshots, but when an old route asks
+to continue that retired chain it must stop with
+`stop_for_retired_repair_stage_route` and point the next pass toward current
+generation, exam, advisory-input, or Chinese human-review routes.
 
-The hosted router should expose descriptor metadata in its command plan whenever it
-suggests a unified repair stage. Focused tests should enforce:
+Focused tests should enforce:
 
-- every unified repair stage has a descriptor,
-- descriptor source/output contracts match the stage route,
-- router command plans include descriptor metadata,
-- tmp-independent tests do not depend on repository historical outputs.
+- retired repair-stage routes do not produce command plans,
+- old snapshot contracts remain readable for handoff decisions,
+- tmp-independent tests do not depend on repository historical outputs,
+- report-only/advisory boundaries remain unchanged.
 
 ## Counter-Review
 

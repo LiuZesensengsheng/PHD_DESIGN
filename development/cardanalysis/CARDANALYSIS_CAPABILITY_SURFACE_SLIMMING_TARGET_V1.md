@@ -138,6 +138,13 @@ These parts should shrink:
   its engine modules, artifact reader, CLI, fixtures, tests, and doc page. Current
   report-only evidence reads should stay in mechanism-axis viability, deterministic
   STS holdout/ranking exports, fun-proxy calibration, and enemy-design probes.
+- Retired the historical `programmatic_complete_card_draft` repair-stage execution
+  chain: fourth-pass, targeted-provider, residual-provider, value/poison,
+  retain-semantics, retain style-tension, condition-quality, and value-position
+  stage modules, their unified old CLI, descriptor, dedicated tests, and active
+  capability graph nodes. The hosted router still reads old snapshots but now
+  stops and asks for human/current-route review instead of suggesting retired
+  stage commands.
 
 ## Options
 
