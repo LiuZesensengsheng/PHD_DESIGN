@@ -132,6 +132,9 @@ These parts should shrink:
   `modelization_shadow_report_v1`.
 - Kept the deterministic STS holdout benchmark and deterministic ranking exports as
   the active reference route for catalog-recovery learning and validation.
+- Retired the former `bounded_candidate_shadow_v1` sidecar, including its standalone
+  contract fixtures, CLI, tests, and doc page. Current candidate triage should stay in
+  Design Candidate Scout plus active mechanism-axis/STS holdout evidence routes.
 
 ## Options
 
