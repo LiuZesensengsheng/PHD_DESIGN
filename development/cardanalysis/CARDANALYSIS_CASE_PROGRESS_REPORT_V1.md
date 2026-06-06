@@ -130,9 +130,8 @@ The strongest inventories are:
 - `mechanism_case_library_v1`: `206` cases, `68` reviewed;
 - `enemy_archetype_model_v1`: `39` cases, `12` reviewed.
 
-The most visible reviewed-evidence gaps are:
+The most visible reviewed-evidence gap is:
 
-- `campaign_experience_curve_v1`: `7` allowed cases, `0` reviewed;
 - `card_package_health_v1`: `106` allowed cases, `0` reviewed.
 
 This means the system has broad advisory coverage, but some downstream consumers

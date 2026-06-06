@@ -37,12 +37,10 @@ Manifest entries are resolved relative to the manifest file first, then relative
 to the repository root. This keeps generated templates runnable from temporary
 output directories while preserving fixture-local manifests.
 
-The template manifest covers four legacy sources:
+The template manifest covers two legacy sources:
 
 - `mechanism_axis_viability_v1`
 - `campaign_power_curve_report_v1`
-- `stress_resolve_model_v1`
-- `campaign_experience_curve_v1`
 
 ## Output Artifacts
 

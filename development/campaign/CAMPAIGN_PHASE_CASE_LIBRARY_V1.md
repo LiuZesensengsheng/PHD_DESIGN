@@ -65,7 +65,6 @@ authority.authority_boundary = advisory_context_only
 
 Recommended allowed consumers:
 
-- `campaign_experience_curve_v1`
 - `campaign_power_curve_report_v1`
 - `campaign_advisory_bundle_v1`
 - `evaluation_autonomous_design_model_v1`

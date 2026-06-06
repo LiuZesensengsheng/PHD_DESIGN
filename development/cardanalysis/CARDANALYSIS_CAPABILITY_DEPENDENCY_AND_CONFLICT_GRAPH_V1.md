@@ -263,8 +263,6 @@ Capabilities:
 - `evaluation_autonomous_design_model_v1`
 - `cardanalysis_case_input_contract_v1`
 - `cardanalysis_feature_projection_v1`
-- `stress_resolve_model_v1`
-- `campaign_experience_curve_v1`
 - `cardanalysis_case_progress_report_v1`
 - `sts1_exam_target_v1`
 - `card_package_variant_set_v1`
@@ -308,8 +306,6 @@ Artifacts:
 - `feature_projection_payload`
 - `case_input_validator_entrypoint`
 - `existing_asset_case_adapter_entrypoint`
-- `stress_resolve_summary`
-- `campaign_experience_curve_summary`
 - `cardanalysis_case_progress_snapshot`
 - `mechanism_axis_summary`
 - `deck_compression_summary`
@@ -509,13 +505,8 @@ semantics can influence how current downstream case-backed heads read migrated
 mechanism evidence.
 
 Its dependency list should track only legacy surfaces it actually adapts. After
-the campaign expansion slice, that includes mechanism-axis viability, campaign
-power curve, stress/resolve, and campaign experience fixtures.
-
-New report-only model heads such as stress/resolve or campaign experience
-curves should normally be capability nodes, not task nodes, once they have a
-stable owner module and summary artifact. Use a task node only for the bounded
-integration or migration slice around such a model.
+the report-only slimming slice, that includes mechanism-axis viability and
+campaign power curve fixtures.
 
 The former standalone `campaign_advisory_bundle_v1` producer has been retired
 as a non-canonical report shell. Downstream tools may still read historical or
