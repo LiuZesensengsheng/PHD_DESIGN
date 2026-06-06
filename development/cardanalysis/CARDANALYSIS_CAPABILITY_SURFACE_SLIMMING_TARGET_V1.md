@@ -153,6 +153,11 @@ These parts should shrink:
   closed-test-pack scripts/modules/tests/docs are gone. Human-feedback validation
   remains active and now uses supplied closed-test-shaped snapshots or focused
   fixture inputs instead of generating the retired large wrapper output.
+- Retired the standalone CLI wrappers for the energy-gain safety and poison-value
+  calibration readouts. Their evaluator modules and focused toolkit tests remain
+  active because the composition-guided medium-package route embeds both readouts
+  as advisory context; the deleted wrapper scripts, script tests, and standalone
+  manifest writers no longer make them look like separate current routes.
 
 ## Options
 
