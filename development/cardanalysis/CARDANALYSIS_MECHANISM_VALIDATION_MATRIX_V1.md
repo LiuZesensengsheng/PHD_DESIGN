@@ -184,7 +184,7 @@ Minimum tests:
 
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py -q
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/toolkit/combat_analysis/test_deck_skeleton_evidence_bridge.py tests/scripts/test_run_combat_analysis_deck_skeleton_sidecar.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/toolkit/combat_analysis/test_deck_skeleton_evidence_bridge.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit/combat_analysis/test_scorecard_fragile_samples.py -q
 ```
 
@@ -335,7 +335,7 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_design_engine_constrained_
 Package, deck skeleton, and fun/health:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/toolkit/combat_analysis/test_deck_skeleton_evidence_bridge.py tests/scripts/test_run_combat_analysis_deck_skeleton_sidecar.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/toolkit/combat_analysis/test_deck_skeleton_evidence_bridge.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_fun_taxonomy_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_dataset_governance_v1.py tests/toolkit/combat_analysis/test_fun_proxy_calibration_v1.py tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_deck_fun_benchmark.py tests/scripts/test_run_fun_proxy_calibration.py tests/scripts/test_run_fun_enemy_design_probe.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit/combat_analysis/test_scorecard_fragile_samples.py tests/toolkit/combat_analysis/test_scorecard_samples.py tests/toolkit/combat_analysis/test_scorecard_ordering_pairs.py -q
 ```
