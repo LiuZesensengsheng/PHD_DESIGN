@@ -38,8 +38,9 @@ Out of scope:
 - Reviewed viability cases are the first validation layer for a new mechanism family.
   They are not a substitute for holdout evidence once the family affects catalog
   ranking or synthesis recovery claims.
-- Report-only/modelization paths may be validated by exports, reranker, and shadow
-  tests, but they must not become legality, schema, hard gate, or closure authority.
+- Deterministic ranking exports may validate catalog-recovery readouts, but retired
+  learned/reranker or shadow-comparison routes must not be restored as legality,
+  schema, hard gate, closure authority, or default synthesis behavior.
 - Report-only CLI manifests must include `evaluation_mode=report_only` and must not
   expose `overall_pass` or `hard_gates` unless the underlying evaluator already owns
   explicit hard gates.
@@ -260,10 +261,10 @@ Minimum holdout validation:
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_v1.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_silent_v1.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_defect_v1.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_watcher_v1.py tests/scripts/test_run_sts_catalog_holdout_benchmark.py -q
 ```
 
-If the holdout feeds ranking exports, rerankers, or shadow reports:
+If the holdout feeds deterministic ranking exports:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_ranking_export.py tests/scripts/test_run_sts_catalog_holdout_ranking_export.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_pairwise_reranker.py tests/scripts/test_run_sts_catalog_holdout_pairwise_reranker.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_shadow_compare.py tests/toolkit/combat_analysis/test_modelization_shadow_report.py tests/scripts/test_run_modelization_shadow_report.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_ranking_export.py tests/scripts/test_run_sts_catalog_holdout_ranking_export.py -q
 ```
 
 ### Reviewed Viability Only
@@ -301,7 +302,7 @@ the spec edits command surfaces, fixture contracts, or benchmark gate language.
 ## Full Merge Regression Package
 
 Run this when the main agent merges multiple cardanalysis sub-branches, resolves
-conflicts across contract/engine/benchmark/modelization/report lanes, or prepares a
+conflicts across contract/engine/benchmark/report lanes, or prepares a
 large cardanalysis integration handoff.
 
 Architecture and encoding:
@@ -318,11 +319,11 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_viability_v
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_project_card_design_cases_v1.py tests/toolkit/combat_analysis/test_project_design_assist_regression_matrix_v1.py tests/scripts/test_project_design_assist_sidecar_contracts_v1.py tests/scripts/test_run_fast_card_design_loop.py -q
 ```
 
-Holdout, ranking, reranker, and shadow:
+Holdout and deterministic ranking:
 
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_v1.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_silent_v1.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_defect_v1.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_benchmark_watcher_v1.py tests/scripts/test_run_sts_catalog_holdout_benchmark.py -q
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_ranking_export.py tests/scripts/test_run_sts_catalog_holdout_ranking_export.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_pairwise_reranker.py tests/scripts/test_run_sts_catalog_holdout_pairwise_reranker.py tests/toolkit/combat_analysis/test_sts_catalog_holdout_shadow_compare.py tests/toolkit/combat_analysis/test_modelization_shadow_report.py tests/scripts/test_run_modelization_shadow_report.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts_catalog_holdout_ranking_export.py tests/scripts/test_run_sts_catalog_holdout_ranking_export.py -q
 ```
 
 Synthesis and closure:

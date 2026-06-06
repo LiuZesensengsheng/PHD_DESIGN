@@ -86,7 +86,6 @@ repair iteration, exam/readout, and hosted expansion paths:
 | `axis_first_rehearsal_scorecard_comparison.py` | 2,277 |
 | `programmatic_complete_card_draft_generation.py` | 2,248 |
 | `programmatic_complete_card_draft_targeted_provider_repair_iteration.py` | 1,975 |
-| `reviewed_retrieval_shadow_compare.py` | 1,953 |
 | `programmatic_complete_card_draft_strong_build_pool.py` | 1,915 |
 | `programmatic_complete_card_draft_residual_provider_repair_iteration.py` | 1,859 |
 | `programmatic_complete_card_draft_value_poison_calibration_iteration.py` | 1,847 |
@@ -119,6 +118,20 @@ These parts should shrink:
 - historical repair modules named by iteration round instead of stage role;
 - docs and entrypoint lists that keep old routes looking equally canonical;
 - tests that depend on historical `tmp/combat_analysis` outputs.
+
+### Completed Deletion Slices
+
+- Retired the former stress/experience report-only side heads:
+  `stress_resolve_model_v1` and `campaign_experience_curve_v1`.
+- Retired the learned/reranker/shadow diagnostic family:
+  `pick_ranking_pairwise_reranker_v1`,
+  `reviewed_retrieval_pairwise_reranker_v1`,
+  `sts_catalog_holdout_pairwise_reranker_v1`,
+  `reviewed_retrieval_shadow_compare_v1`,
+  `sts_catalog_holdout_shadow_compare_v1`, and
+  `modelization_shadow_report_v1`.
+- Kept the deterministic STS holdout benchmark and deterministic ranking exports as
+  the active reference route for catalog-recovery learning and validation.
 
 ## Options
 
