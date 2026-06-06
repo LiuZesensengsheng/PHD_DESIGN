@@ -16,8 +16,8 @@ Use an incremental hardening path:
 1. Add architecture boundary guards before large moves.
 2. Move shared contracts out of high-level benchmark/studio modules.
 3. Split artifact readers and schema contracts out of orchestrators.
-4. Keep scout, bounded shadow, and learned ranking report-only/default-off unless a
-   later human decision explicitly promotes them.
+4. Keep any future candidate-triage or learned ranking route report-only/default-off
+   unless a later human decision explicitly promotes it.
 5. Preserve existing snapshots and reports while moving code.
 6. Keep report-only evaluation surfaces behind a canonical registry so parallel V1
    modules do not drift semantically.
@@ -60,7 +60,9 @@ modules. In particular:
 - `design_engine` must not grow new direct imports from `design_studio`.
 - Do not add duplicate report-only V1 modules for an already registered semantic
   surface.
-- Scout and bounded candidate shadow remain report-only, default-off, and
+- Retired Scout and bounded candidate shadow routes must not be reintroduced as
+  parallel active paths without a new decision.
+- Any future candidate-triage route remains report-only, default-off, and
   human-review-required.
 - Learned/modelized work starts with ranking/reranking only.
 - Legality, schema, hard benchmark gates, and closure diagnostics stay explicit.
@@ -72,8 +74,7 @@ adapters / profiles / source facts
         -> analysis / projections / recommendation
         -> design_engine
            - shared contracts
-           - bounded candidate envelopes
-           - scout/shadow orchestration
+           - bounded candidate envelopes when explicitly active
            - explicit constraints and diagnostics
         -> design_studio
            - reviewed benchmarks
@@ -91,7 +92,8 @@ adapters / profiles / source facts
 These lanes should be safe to develop in parallel once their contracts are stable:
 
 - `contract-lane`: dataclasses, payload parsers, versioned artifact contracts.
-- `engine-lane`: scout, bounded shadow, synthesis envelope, closure diagnostics.
+- `engine-lane`: synthesis envelope, explicit candidate boundaries when active, and
+  closure diagnostics.
 - `benchmark-lane`: holdout, mechanism-axis, retrieval/pick/export fixtures.
 - `modelization-lane`: feature export, offline reranker, shadow comparison.
 - `report-lane`: markdown, HTML, snapshot presentation.
@@ -126,7 +128,6 @@ Stop and ask before doing any of the following:
 ## Current Migration Debt
 
 - Large orchestrator modules still need responsibility splits:
-  - `design_engine/design_candidate_scout.py`
   - `reports/html/sts_profile_template.py` still owns a large single-page static
     template and can later split CSS/JS sections if report-lane conflicts continue.
 - Programmatic complete-card draft repair-stage route metadata should stay aligned
@@ -136,13 +137,8 @@ Stop and ask before doing any of the following:
 
 - No `design_engine -> design_studio` imports.
 - Shared mechanism-axis contracts live below `design_studio`.
-- Bounded shadow artifact parsing is outside the bounded shadow orchestrator.
-- Design-candidate scout mechanism evidence matching/summary logic is outside the
-  scout orchestration module.
-- Design-candidate scout report/snapshot rendering is outside the scout orchestration
-  module.
-- Bounded candidate shadow report/snapshot rendering is outside the bounded shadow
-  orchestration module.
+- Retired Scout and bounded candidate shadow routes are no longer active milestone
+  owners.
 - Constrained synthesis report/snapshot rendering is outside the synthesis orchestration
   module.
 - Constrained synthesis mutation delta/role/state helpers are outside the synthesis
@@ -178,7 +174,7 @@ Stop and ask before doing any of the following:
 
 - `synthesis_closure` continues to accept benchmark/calibration inputs through an
   explicit adapter boundary instead of default-importing `design_studio`.
-- Artifact readers/writers exist for the major scout/shadow/export snapshots.
+- Artifact readers/writers exist for active export snapshots.
 - Report rendering consumes stable payloads and does not recompute engine decisions.
 - Workers can operate on contract, engine, benchmark, modelization, report, and docs
   lanes without editing the same files.
