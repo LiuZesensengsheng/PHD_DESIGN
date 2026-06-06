@@ -158,6 +158,11 @@ These parts should shrink:
   active because the composition-guided medium-package route embeds both readouts
   as advisory context; the deleted wrapper scripts, script tests, and standalone
   manifest writers no longer make them look like separate current routes.
+- Retired the standalone medium-package expansion/repair routes and the old
+  Silent-only classic skeleton exam route. The 5-card-to-12-card medium expansion
+  logic remains only as an embedded helper for the strong-build pool, while the
+  multi-character classic skeleton exam is the canonical STS1 skeleton-alignment
+  route, including Silent.
 
 ## Options
 
