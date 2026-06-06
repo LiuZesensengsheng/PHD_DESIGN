@@ -77,18 +77,14 @@ scale of the surface:
 ### Main Hotspots
 
 The largest current `design_studio` modules are concentrated in generated draft,
-repair iteration, exam/readout, and hosted expansion paths:
+current pool/review-package generation, and exam/readout paths:
 
 | Module | Lines |
 | --- | ---: |
 | `programmatic_complete_card_draft_composition_guided_medium_package.py` | 3,158 |
-| `programmatic_complete_card_draft_hosted_expansion_run.py` | 3,046 |
 | `axis_first_rehearsal_scorecard_comparison.py` | 2,277 |
 | `programmatic_complete_card_draft_generation.py` | 2,248 |
-| `programmatic_complete_card_draft_targeted_provider_repair_iteration.py` | 1,975 |
 | `programmatic_complete_card_draft_strong_build_pool.py` | 1,915 |
-| `programmatic_complete_card_draft_residual_provider_repair_iteration.py` | 1,859 |
-| `programmatic_complete_card_draft_value_poison_calibration_iteration.py` | 1,847 |
 | `sts1_ironclad_multi_axis_medium_package_batch.py` | 1,701 |
 
 ### Essential Complexity
@@ -145,6 +141,18 @@ These parts should shrink:
   capability graph nodes. The hosted router still reads old snapshots but now
   stops and asks for human/current-route review instead of suggesting retired
   stage commands.
+- Retired the hosted expansion/candidate repair family and the old hosted
+  router: the former one-command hosted expansion, candidate-pool repair plan,
+  candidate-pool repair generation, value/diversity repair generation, their
+  CLI wrappers, dedicated tests, active graph nodes, and runbook entrypoints are
+  gone. Current 30-card and 12-card review work should use the explicit
+  strong-build pool, independent advisory exams/readouts, package composition
+  profile, and composition-guided medium package routes.
+- Retired the old one-command closed-loop/capability-pack/closed-test-pack
+  wrapper family: closed-loop smoke, iteration-plan, capability-pack, and
+  closed-test-pack scripts/modules/tests/docs are gone. Human-feedback validation
+  remains active and now uses supplied closed-test-shaped snapshots or focused
+  fixture inputs instead of generating the retired large wrapper output.
 
 ## Options
 
