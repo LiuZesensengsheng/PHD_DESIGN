@@ -41,19 +41,18 @@ They do not create:
 - default synthesis behavior;
 - learned or reranker behavior.
 
-## Entrypoint
+## Validation
 
-The taxonomy is currently applied by:
-
-```powershell
-python scripts/run_llm_complete_card_draft_attempt.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/llm_complete_card_draft_attempt_current
-```
-
-Focused validation:
+The retained taxonomy library is validated by:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_draft_failure_taxonomy_v1.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_draft_failure_taxonomy_v1.py tests/toolkit/combat_analysis/test_llm_complete_card_draft_attempt_v1.py -q
 ```
+
+The standalone `llm_complete_card_draft_attempt_v1` CLI wrapper has been
+retired. Current external draft intake should enter through
+`llm_draft_prompt_application_v1`, which still records nested attempt artifacts
+and applies this taxonomy before downstream report-only exams.
 
 ## Negative Controls
 

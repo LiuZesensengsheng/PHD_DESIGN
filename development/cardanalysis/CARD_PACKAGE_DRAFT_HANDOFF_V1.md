@@ -54,22 +54,20 @@ The handoff does not create:
 
 ## Current Smoke Fixture
 
-The first reusable smoke path is:
+The first reusable smoke fixture selects `poison_clock_retain_bridge` by
+default and requests a `complete_card_draft_v1` package with five required
+slots. The standalone CLI wrapper has been retired; the retained library and
+toolkit tests validate this fixture shape directly.
+
+## Validation
 
 ```powershell
-python scripts/run_card_package_draft_handoff.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --output-dir tmp/combat_analysis/card_package_draft_handoff_current
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_draft_handoff_v1.py -q
 ```
 
-It selects `poison_clock_retain_bridge` by default and requests a
-`complete_card_draft_v1` package with five required slots.
-
-## Entrypoints
-
-```powershell
-python scripts/run_card_package_draft_handoff.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --output-dir tmp/combat_analysis/card_package_draft_handoff_current
-python scripts/run_card_package_draft_handoff.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --variant-id delayed_catalyst_exactness --output-dir tmp/combat_analysis/card_package_draft_handoff_watch_variant
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_draft_handoff_v1.py tests/scripts/test_run_card_package_draft_handoff.py -q
-```
+Current external draft intake should enter through
+`llm_draft_prompt_application_v1`, which still records nested
+`card_package_draft_handoff_v1` artifacts alongside draft attempt metadata.
 
 ## Stop Lines
 

@@ -180,7 +180,7 @@ advisory_context_only
 `allowed_consumers` should name the capability heads or applications that may
 read the case. Examples:
 
-- `mechanism_axis_discovery_v1`
+- `mechanism_axis_search_v1`
 - `mechanism_fun_health_v1`
 - `card_package_health_v1`
 - `campaign_power_curve_report_v1`

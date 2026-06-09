@@ -124,7 +124,7 @@ scorecard health, or human-facing deck review health.
 Minimum tests by touched surface:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_fun_taxonomy_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_dataset_governance_v1.py tests/scripts/test_run_deck_fun_benchmark.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_fun_taxonomy_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_dataset_governance_v1.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_fun_proxy_calibration_v1.py tests/scripts/test_run_fun_proxy_calibration.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_fun_enemy_design_probe.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit/combat_analysis/test_scorecard_fragile_samples.py tests/toolkit/combat_analysis/test_scorecard_samples.py tests/toolkit/combat_analysis/test_scorecard_ordering_pairs.py -q
@@ -133,14 +133,14 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit
 For the report-only mechanism fun/health fixture surface, also run:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_fun_health_benchmark_v1.py tests/scripts/test_run_mechanism_fun_health_benchmark.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_fun_health_benchmark_v1.py -q
 ```
 
-Also run deck review/portfolio CLIs if the evaluator feeds designer-facing deck
-reports:
+Also run deck review/portfolio contracts if the evaluator feeds designer-facing
+deck reports:
 
 ```powershell
-py -3.11 -m pytest tests/scripts/test_run_deck_review_sidecar.py tests/scripts/test_run_deck_portfolio_brief.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_review_sidecar_v1.py tests/toolkit/combat_analysis/test_deck_portfolio_brief_v1.py -q
 ```
 
 Holdout is required only if the evaluator changes catalog ranking, synthesis recovery,
@@ -159,11 +159,9 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_analysis.py tests/toolkit/
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit/combat_analysis/test_scorecard_fragile_samples.py -q
 ```
 
-For the report-only deck compression/removal payload surface, also run:
-
-```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_compression_report.py tests/scripts/test_run_deck_compression_report.py -q
-```
+The former standalone report-only deck compression/removal payload owner is retired
+from active code. For new compression or route-readiness behavior, add focused
+tests to the facade-backed package/exam surface that consumes the behavior.
 
 Add profile tests for any affected character catalog:
 
@@ -209,32 +207,27 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_report_only_surface_regist
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/shared/test_text_encoding_guards.py -q
 ```
 
-Also run the owning evaluator and CLI test for every touched surface. Do not merge a
-new parallel V1 module when the same semantic surface is already registered; consolidate
-its useful fields, fixtures, or tests into the canonical owner.
+Also run the owning evaluator test for every touched surface, plus CLI tests only
+for surfaces whose standalone wrapper remains active. Do not merge a new parallel
+V1 module when the same semantic surface is already registered; consolidate its
+useful fields, fixtures, or tests into the canonical owner.
 
-For the mechanism-axis discovery surface:
-
-```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_mechanism_axis_discovery_v1.py tests/scripts/test_run_mechanism_axis_discovery.py -q
-```
+`mechanism_fun_health_v1`, `card_package_health_v1`, and
+`evaluation_autonomous_design_model_v1` are retained as library/fixture support
+surfaces. Their former standalone CLI wrappers are retired; validate them with
+their focused toolkit tests unless a future route-map update restores a facade
+action.
 
 For the evaluation autonomous design orchestration surface:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py tests/scripts/test_run_evaluation_autonomous_design_model.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py -q
 ```
 
 For the campaign power curve report surface:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py tests/scripts/test_run_campaign_power_curve_report.py -q
-```
-
-For the position redirect code preflight surface:
-
-```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_position_redirect_code_preflight_v1.py tests/scripts/test_run_position_redirect_code_preflight.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py -q
 ```
 
 ## Holdout Case Rules
@@ -336,7 +329,7 @@ Package, deck skeleton, and fun/health:
 
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_package_similarity_benchmark_v0.py tests/scripts/test_run_package_similarity_benchmark.py tests/toolkit/combat_analysis/test_deck_skeleton_sidecar.py tests/toolkit/combat_analysis/test_deck_skeleton_evidence_bridge.py -q
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_fun_taxonomy_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_dataset_governance_v1.py tests/toolkit/combat_analysis/test_fun_proxy_calibration_v1.py tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_deck_fun_benchmark.py tests/scripts/test_run_fun_proxy_calibration.py tests/scripts/test_run_fun_enemy_design_probe.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_deck_fun_taxonomy_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_v1.py tests/toolkit/combat_analysis/test_deck_fun_benchmark_dataset_governance_v1.py tests/toolkit/combat_analysis/test_fun_proxy_calibration_v1.py tests/toolkit/combat_analysis/test_fun_enemy_design_probe_v1.py tests/scripts/test_run_fun_proxy_calibration.py tests/scripts/test_run_fun_enemy_design_probe.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_scorecard.py tests/toolkit/combat_analysis/test_scorecard_fragile_samples.py tests/toolkit/combat_analysis/test_scorecard_samples.py tests/toolkit/combat_analysis/test_scorecard_ordering_pairs.py -q
 ```
 

@@ -21,7 +21,7 @@ card_package_draft_handoff_v1
   -> card_package_exam_v1
   -> exam_iteration_run_v1
   -> exam_iteration_prompt_patch_proposal_v1
-  -> exam_iteration_batch_comparison_v1
+  -> facade iterate/provider-comparison follow-up
 ```
 
 ## What It Contains
@@ -53,15 +53,16 @@ It does not:
 - change default synthesis behavior;
 - enable learned or reranker behavior.
 
-## Entrypoints
+## Validation
 
 ```powershell
-python scripts/run_exam_iteration_prompt_patch_proposal.py --input tmp/combat_analysis/exam_iteration_run_current/exam_iteration_run_v1_snapshot.json --output-dir tmp/combat_analysis/exam_iteration_prompt_patch_proposal_current
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_exam_iteration_prompt_patch_proposal_v1.py tests/scripts/test_run_exam_iteration_prompt_patch_proposal.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_exam_iteration_prompt_patch_proposal_v1.py -q
 ```
 
-The CLI accepts repeated `--input` paths or `--input-dir` directories containing
-`*_snapshot.json` files. It only consumes `exam_iteration_run_v1` snapshots.
+The standalone CLI wrapper has been retired. The retained library and toolkit
+tests still validate proposal construction from `exam_iteration_run_v1`
+snapshots, prompt/handoff patch lanes, boundary assertions, report payloads,
+snapshot payloads, and manifest payloads.
 
 ## Interpretation
 
@@ -70,5 +71,5 @@ lanes. It should be used to tighten the next `card_package_draft_handoff_v1` or
 LLM prompt before another generated attempt is recorded.
 
 It is not evidence that design quality improved. Improvement still requires new
-attempts, validation, package exam feedback, batch comparison, and human review
-before promotion.
+attempts, validation, package exam feedback, facade-backed comparison or
+iteration readout, and human review before promotion.

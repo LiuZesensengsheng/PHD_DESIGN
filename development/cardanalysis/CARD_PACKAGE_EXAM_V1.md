@@ -65,9 +65,11 @@ py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_package_exam_v1.py te
 Use `scripts/run_mechanism_axis_package_seed.py` to generate the package seed from the
 current mechanism-axis design brief fixture before running the exam.
 
-Use `scripts/run_autonomous_card_package_design_run.py` when the exam should also
-record the upstream axis search, design brief, selected variant, iteration feedback,
-and scorecard in one axis-first report-only run.
+Use `scripts/run_programmatic_complete_card_draft_generation.py` when the exam
+should also record nested upstream axis search, design brief, selected variant,
+iteration feedback, scorecard, and `autonomous_card_package_design_run_v1`
+artifacts in one axis-first report-only run. The former standalone autonomous-run
+CLI wrapper is retired; the library contract remains active.
 
 ## Interpretation
 

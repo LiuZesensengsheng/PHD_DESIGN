@@ -188,7 +188,7 @@ authority.authority_boundary = advisory_context_only
 Every case also keeps at least these consumer and non-consumer boundaries:
 
 - `allowed_consumers`
-  - `mechanism_axis_discovery_v1`
+  - `mechanism_axis_search_v1`
   - `cardanalysis_feature_projection_v1`
 - `forbidden_uses`
   - `hard_gate_promotion`

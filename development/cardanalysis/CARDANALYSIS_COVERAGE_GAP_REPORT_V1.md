@@ -23,7 +23,6 @@ In scope:
 
 - stable `cardanalysis_case_input_v1` normalized case inputs;
 - `cardanalysis_feature_projection_v1` projection payloads and snapshots;
-- `cardanalysis_case_projection_sample_pack_v1` manifests and snapshots;
 - capability graph context for current consumers and dependencies;
 - deterministic report-only gap inventory for next case-batch planning.
 
@@ -32,7 +31,7 @@ Out of scope:
 - modifying evaluators;
 - modifying `case_input_contract.py`;
 - modifying `feature_projection.py`;
-- modifying `mechanism_axis_discovery.py`;
+- modifying `mechanism_axis_search.py`;
 - modifying `capability_graph_registry.py`;
 - modifying `report_only_surface_registry.py`;
 - hard gates, default recommendation, synthesis, learned, or reranker behavior;
@@ -48,8 +47,6 @@ Recognized stable inputs:
 - a directory containing normalized case JSON files;
 - a `{"cases": [...]}` normalized case collection;
 - a feature-projection payload or snapshot;
-- a case-projection sample-pack input manifest;
-- a case-projection sample-pack normalized or projection snapshot;
 - a coverage-gap scanner input manifest produced by `--write-template`.
 
 Unrecognized JSON is a soft warning. Missing input paths and invalid JSON are
@@ -59,8 +56,6 @@ The first-round template includes existing scan inputs:
 
 - `tests/fixtures/combat_analysis/case_input_contract_v1`
 - `tests/fixtures/combat_analysis/feature_projection_v1`
-- `tests/fixtures/combat_analysis/existing_asset_case_adapter_v1`
-- `tests/fixtures/combat_analysis/case_projection_sample_pack_v1`
 - existing optional case-library directories such as
   `bbs_social_case_library_v1`
 
@@ -163,7 +158,7 @@ MasterAgent decision.
 ## Entrypoints
 
 ```bash
-python scripts/run_cardanalysis_coverage_gap_report.py --write-template <path>
-python scripts/run_cardanalysis_coverage_gap_report.py --input <path> --output-dir <dir>
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_coverage_gap_report_v1.py tests/scripts/test_run_cardanalysis_coverage_gap_report.py -q
+python scripts/run_cardanalysis_report.py --report coverage-gap --write-template <path>
+python scripts/run_cardanalysis_report.py --report coverage-gap --input <path> --output-dir <dir>
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_coverage_gap_report_v1.py tests/scripts/test_run_cardanalysis_report.py -q
 ```

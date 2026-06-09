@@ -50,16 +50,17 @@ Each card draft includes:
 
 ## Package Health Bridge
 
-The validator can export a temporary `card_package_health_v1` owner-input case.
-That bridge lets complete card drafts satisfy the previously missing
-`card_like_candidate_slots` lane without claiming reviewed evidence.
+`scripts/run_card_package_exam.py` embeds the temporary
+`card_package_health_v1` owner-input conversion. That bridge lets complete card
+drafts satisfy the previously missing `card_like_candidate_slots` lane without
+claiming reviewed evidence, while keeping the validator focused on
+schema/template validation instead of exposing a standalone export route.
 
 ## Entrypoints
 
 ```powershell
 python scripts/validate_complete_card_draft.py --write-template tmp/combat_analysis/complete_card_draft_template.json
 python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json
-python scripts/validate_complete_card_draft.py --input tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --export-card-package-health-input tmp/combat_analysis/complete_card_draft_package_health_input.json
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_complete_card_draft_v1.py tests/scripts/test_validate_complete_card_draft.py -q
 ```
 

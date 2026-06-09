@@ -6,6 +6,10 @@
 turning a mechanism candidate, parameter target, package skeleton, and existing
 cardanalysis evidence summaries into a human-review design brief.
 
+This surface is retained as `non_facade_design_support`. Its former standalone
+CLI wrapper is retired; current card-package design work should begin from
+`scripts/run_cardanalysis_tool_facade.py`.
+
 It answers:
 
 - whether the role-level package skeleton is ready for report-only review
@@ -45,11 +49,11 @@ This module consumes summary-shaped evidence from registered surfaces:
 
 | Evidence | Canonical owner |
 | --- | --- |
-| `mechanism_axis_discovery_summary` | `mechanism_axis_discovery_v1` |
+| `mechanism_axis_discovery_summary` | `mechanism_axis_search_v1` |
 | `mechanism_fun_health_summary` | `mechanism_fun_health_v1` |
 | `card_package_health_summary` | `card_package_health_v1` |
-| `deck_compression_summary` | `deck_compression_report_v1` |
-| `design_iteration_summary` | `design_iteration_brief_v1` |
+| `deck_compression_summary` | historical compatibility field; former owner surface retired |
+| `design_iteration_summary` | historical compatibility field; former owner surface retired |
 | evidence bundle root | `cardanalysis_evidence_bundle_v1` |
 
 The autonomous design model may explain how those summaries interact, but it must not
@@ -180,7 +184,7 @@ cost, trigger, resource, or release choice rather than generic hand cleanup.
 Focused validation:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py tests/scripts/test_run_evaluation_autonomous_design_model.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py -q
 ```
 
 Registry and boundary validation:

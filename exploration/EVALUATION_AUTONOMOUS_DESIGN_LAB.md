@@ -58,15 +58,17 @@ The stable parts of this exploration have been promoted into:
 
 - `docs/development/cardanalysis/EVALUATION_AUTONOMOUS_DESIGN_MODEL_V1.md`
 - `tools/combat_analysis/design_engine/evaluation_autonomous_design_model.py`
-- `scripts/run_evaluation_autonomous_design_model.py`
 - `tests/fixtures/combat_analysis/evaluation_autonomous_design_model_v1/`
 - `tests/toolkit/combat_analysis/test_evaluation_autonomous_design_model_v1.py`
-- `tests/scripts/test_run_evaluation_autonomous_design_model.py`
 
 The implemented surface remains report-only and advisory. It orchestrates existing
 summary payloads and package-skeleton wording; it does not replace canonical scoring
 owners, create gates, generate formal cards, change default recommendation paths, or
 enable learned/reranker promotion.
+
+The former standalone CLI wrapper was retired during facade-first slimming. Keep
+this surface as library/fixture support unless a future route-map update promotes
+a new facade action.
 
 ## Model Envelope
 

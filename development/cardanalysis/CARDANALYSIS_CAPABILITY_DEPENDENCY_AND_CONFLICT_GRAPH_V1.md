@@ -88,7 +88,6 @@ A produced or consumed contract, summary, or review payload.
 
 Examples:
 
-- `deck_compression_summary`
 - `mechanism_fun_health_summary`
 - `cardanalysis_evidence_bundle`
 
@@ -252,13 +251,9 @@ V1 should cover these canonical nodes first:
 Capabilities:
 
 - `mechanism_axis_viability_v1`
-- `deck_compression_report_v1`
 - `mechanism_fun_health_v1`
 - `card_package_health_v1`
-- `mechanism_axis_discovery_v1`
 - `campaign_power_curve_report_v1`
-- `position_redirect_code_preflight_v1`
-- `design_iteration_brief_v1`
 - `cardanalysis_evidence_bundle_v1`
 - `evaluation_autonomous_design_model_v1`
 - `cardanalysis_case_input_contract_v1`
@@ -271,33 +266,15 @@ Capabilities:
 - `card_draft_failure_taxonomy_v1`
 - `llm_complete_card_draft_attempt_v1`
 - `llm_draft_prompt_application_v1`
-- `external_draft_intake_packet_v1`
-- `external_draft_submission_readiness_v1`
-- `external_draft_intake_rehearsal_v1`
 - `exam_iteration_run_v1`
 - `exam_iteration_prompt_patch_proposal_v1`
-- `exam_iteration_batch_comparison_v1`
-- `exam_iteration_generated_attempt_batch_run_v1`
-- `exam_iteration_multi_character_batch_summary_v1`
-- `sts1_four_character_generated_attempt_intake_batch_v1`
-- `sts1_four_character_external_draft_intake_rehearsal_v1`
-- `sts1_owner_approved_external_draft_batch_manifest_v1`
 - `mechanism_axis_search_v1`
 - `mechanism_axis_design_brief_v1`
 - `mechanism_axis_package_seed_v1`
 - `autonomous_card_package_design_run_v1`
-- `axis_first_draft_writing_rehearsal_v1`
-- `axis_first_rehearsal_scorecard_comparison_v1`
-- `axis_first_integrated_exam_summary_v1`
-- `axis_first_repair_iteration_run_v1`
 - `card_package_exam_v1`
 - `sts1_four_character_exam_v1`
-- `sts1_exam_capability_calibration_v1`
-- `sts1_negative_case_projection_v1`
-- `control_card_production_packet_v1`
 - `card_design_scorecard_v1`
-- `card_design_scorecard_calibration_v1`
-- `card_design_scorecard_delta_report_v1`
 
 Artifacts:
 
@@ -305,7 +282,6 @@ Artifacts:
 - `normalized_design_case`
 - `feature_projection_payload`
 - `case_input_validator_entrypoint`
-- `existing_asset_case_adapter_entrypoint`
 - `cardanalysis_case_progress_snapshot`
 - `mechanism_axis_summary`
 - `deck_compression_summary`
@@ -313,8 +289,6 @@ Artifacts:
 - `card_package_health_summary`
 - `mechanism_axis_discovery_summary`
 - `campaign_power_curve_summary`
-- `position_redirect_code_preflight_summary`
-- `design_iteration_summary`
 - `cardanalysis_evidence_bundle`
 - `evaluation_autonomous_design_review`
 - `authority_boundary_contract`
@@ -325,33 +299,15 @@ Artifacts:
 - `card_draft_failure_taxonomy`
 - `llm_complete_card_draft_attempt_snapshot`
 - `llm_draft_prompt_application_snapshot`
-- `external_draft_intake_packet`
-- `external_draft_submission_readiness`
-- `external_draft_intake_rehearsal`
 - `exam_iteration_run_snapshot`
 - `exam_iteration_prompt_patch_proposal`
-- `exam_iteration_batch_comparison`
-- `exam_iteration_generated_attempt_batch_run`
-- `exam_iteration_multi_character_batch_summary`
-- `sts1_four_character_generated_attempt_intake_batch`
-- `sts1_four_character_external_draft_intake_rehearsal`
-- `sts1_owner_approved_external_draft_batch_manifest`
 - `mechanism_axis_search_bundle`
 - `mechanism_axis_design_brief`
 - `card_package_proposal_seed`
 - `autonomous_card_package_design_run_snapshot`
-- `axis_first_draft_writing_rehearsal_snapshot`
-- `axis_first_rehearsal_scorecard_comparison_snapshot`
-- `axis_first_integrated_exam_summary_snapshot`
-- `axis_first_repair_iteration_run_snapshot`
 - `card_package_exam_snapshot`
 - `sts1_four_character_exam_snapshot`
-- `sts1_exam_capability_calibration`
-- `sts1_negative_case_projection`
-- `control_card_production_packet`
 - `card_design_scorecard_summary`
-- `card_design_scorecard_calibration_summary`
-- `card_design_scorecard_delta_summary`
 
 Decision:
 
@@ -361,7 +317,6 @@ Decision:
 Tasks:
 
 - `cardanalysis_case_library_infra_v1`
-- `existing_asset_case_adapter_v1`
 
 ## Planning Semantics
 
@@ -497,16 +452,12 @@ tracks the minimal normalized case validator and CLI entrypoint. It is
 review-gated with mechanism discovery and autonomous design because changes to
 case validation can affect their future inputs.
 
-The second registered task node is `existing_asset_case_adapter_v1`, which
-tracks a narrow legacy-fixture export slice into normalized cases without
-claiming canonical ownership of the legacy surfaces themselves. It is
-review-gated with mechanism discovery and autonomous design because adapter
-semantics can influence how current downstream case-backed heads read migrated
-mechanism evidence.
-
-Its dependency list should track only legacy surfaces it actually adapts. After
-the report-only slimming slice, that includes mechanism-axis viability and
-campaign power curve fixtures.
+The former `existing_asset_case_adapter_v1` task/library surface is fully
+retired. Its standalone wrapper was retired first; the remaining owner module,
+fixture, toolkit test, capability graph node, and review-gate edges were later
+removed when the case-projection sample pack no longer needed adapter-shaped
+legacy conversion. Coverage and progress scans should read normalized cases,
+feature projections, or retained current case libraries directly.
 
 The former standalone `campaign_advisory_bundle_v1` producer has been retired
 as a non-canonical report shell. Downstream tools may still read historical or

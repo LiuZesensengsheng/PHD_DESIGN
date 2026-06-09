@@ -141,8 +141,8 @@ reviewed.
 ## Entrypoints
 
 ```bash
-python scripts/run_cardanalysis_case_progress_report.py --write-template <path>
-python scripts/run_cardanalysis_case_progress_report.py --input <path> --output-dir <dir>
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_case_progress_report_v1.py tests/scripts/test_run_cardanalysis_case_progress_report.py -q
+python scripts/run_cardanalysis_report.py --report case-progress --write-template <path>
+python scripts/run_cardanalysis_report.py --report case-progress --input <path> --output-dir <dir>
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_case_progress_report_v1.py tests/scripts/test_run_cardanalysis_report.py -q
 ```
 

@@ -25,7 +25,7 @@ card_package_draft_handoff_v1
   + external complete_card_draft_v1 file
   -> llm_draft_prompt_application_v1
   -> llm_complete_card_draft_attempt_v1
-  -> exam_iteration_generated_attempt_batch_run_v1 or exam_iteration_run_v1
+  -> exam_iteration_run_v1 or facade iterate/provider-comparison follow-up
 ```
 
 The surface is intentionally an audit packet, not a synthesis endpoint. It makes

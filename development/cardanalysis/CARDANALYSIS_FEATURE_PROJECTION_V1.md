@@ -90,13 +90,13 @@ Hints remain labels from the normalized case contract.
 Write a template:
 
 ```text
-python scripts/run_cardanalysis_feature_projection.py --write-template <path>
+python scripts/run_cardanalysis_report.py --report feature-projection --write-template <path>
 ```
 
 Run projection:
 
 ```text
-python scripts/run_cardanalysis_feature_projection.py --input <case-json> --output-dir <dir>
+python scripts/run_cardanalysis_report.py --report feature-projection --input <case-json> --output-dir <dir>
 ```
 
 `--input` may be a single case JSON file, a JSON array or `cases` manifest, or a
@@ -123,7 +123,7 @@ consumers by itself. MasterAgent should still review registration with:
 - depends on: `cardanalysis_case_input_contract_v1`
 - consumes: `authority_boundary_contract`
 - review-gated with: `evaluation_autonomous_design_model_v1`
-- review-gated with: `mechanism_axis_discovery_v1`
+- review-gated with: `mechanism_axis_search_v1`
 
 ## Fixture Notes
 
@@ -158,7 +158,7 @@ human_curated`, `review_status = review_needed`, and
 Focused validation:
 
 ```text
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_feature_projection_v1.py tests/scripts/test_run_cardanalysis_feature_projection.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_feature_projection_v1.py tests/scripts/test_run_cardanalysis_report.py -q
 ```
 
 Shared guardrails:

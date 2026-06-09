@@ -259,7 +259,7 @@ Do not copy these into the project as-is:
 
 ## Evaluation Dimensions For Future Model Work
 
-The future `virtue_affliction_design_model_v1` should evaluate at least these
+Any future generic stress-threshold branch model should evaluate at least these
 dimensions:
 
 | Dimension | Question |
@@ -308,8 +308,9 @@ This report sits next to `stress_resolve_model_v1` as research input. It does
 not replace that model, register a new capability graph node, or change any
 default entrypoint.
 
-The follow-up design surface is `virtue_affliction_design_model_v1`. That
-contract keeps this DD1 research in the same document family while adding:
+The former follow-up design surface, `virtue_affliction_design_model_v1`, is
+retired from active registry ownership. A future generic stress-threshold
+branch model may reuse this research while adding:
 
 - a report-only mathematical state model,
 - advisory metric definitions,
@@ -320,8 +321,8 @@ contract keeps this DD1 research in the same document family while adding:
 The model is still DD1-only. It does not use DD2 relationship/affinity systems
 as evidence or design input.
 
-If future work promotes `virtue_affliction_design_model_v1` beyond a draft, it
-should remain report-only first and declare whether it consumes:
+If future work promotes a generic stress-threshold branch model beyond a draft,
+it should remain report-only first and declare whether it consumes:
 
 - normalized case input,
 - stress/resolve summaries,

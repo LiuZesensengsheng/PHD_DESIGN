@@ -131,7 +131,7 @@ For each batch, run:
 ```powershell
 python scripts/validate_cardanalysis_case_input.py --input <touched-fixture-dir>
 py -3.11 -m pytest <focused-fixture-test> -q
-python scripts/run_cardanalysis_coverage_gap_report.py --input tmp/combat_analysis/coverage_gap_current_template.json --output-dir tmp/combat_analysis/coverage_gap_current
+python scripts/run_cardanalysis_report.py --report coverage-gap --input tmp/combat_analysis/coverage_gap_current_template.json --output-dir tmp/combat_analysis/coverage_gap_current
 python scripts/run_coverage_guided_case_queue.py --input tmp/combat_analysis/coverage_gap_current --output-dir tmp/combat_analysis/case_queue_current
 python scripts/validate_architecture.py
 python scripts/check_text_encoding.py

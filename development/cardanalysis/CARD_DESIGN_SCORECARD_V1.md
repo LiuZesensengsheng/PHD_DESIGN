@@ -20,8 +20,6 @@ card_package_exam_v1
   or exam_iteration_run_v1
   or sts1_four_character_exam_v1
   -> card_design_scorecard_v1
-  -> card_design_scorecard_calibration_v1
-  -> card_design_scorecard_delta_report_v1
 ```
 
 `scripts/run_sts1_four_character_exam.py` also writes scorecard artifacts in
@@ -58,13 +56,10 @@ should inspect before treating a stable score as equivalent content:
 - `package_synergy` -> package synergy
 - `failure_state_quality` -> failure-state quality
 
-Axis-first same-lane comparisons may now provide advisory
-`scorecard_dimension_visibility_notes` from
-`axis_first_rehearsal_scorecard_comparison_v1`. The scorecard CLI can show
-those notes in the Markdown report with `--visibility-notes`. The overlay can
-surface same-score content movement, such as a Silent payoff slot changing from
-`poison_payoff` texture to `generic_goodstuff`, but it does not change
-`card_design_scorecard_v1` scores, weights, hard-gate behavior, or authority.
+Optional `scorecard_dimension_visibility_notes` payloads can be shown in the
+Markdown report with `--visibility-notes`. The overlay can surface same-score
+content movement, but it does not change `card_design_scorecard_v1` scores,
+weights, hard-gate behavior, or authority.
 
 Reusable same-score visibility-note fixtures live under:
 
@@ -76,7 +71,7 @@ tests/fixtures/combat_analysis/card_design_scorecard_visibility_notes_v1/
 
 The V1 payload reserves explicit extension points for:
 
-- `virtue_affliction_design_model_v1`
+- `stress_threshold_branch_model_v1`
 - `campaign_curve_card_package_bridge_v1`
 
 Those future heads may add richer context, but this scorecard must not silently
@@ -101,9 +96,9 @@ any design promotion.
 
 ```powershell
 python scripts/run_card_design_scorecard.py --input tmp/combat_analysis/sts1_four_character_exam_current/sts1_four_character_exam_v1_snapshot.json --output-dir tmp/combat_analysis/card_design_scorecard_current
-python scripts/run_card_design_scorecard.py --input <supported_exam_or_iteration_snapshot.json> --visibility-notes <axis_first_rehearsal_scorecard_comparison_v1_snapshot.json> --output-dir tmp/combat_analysis/card_design_scorecard_with_visibility_notes_current
+python scripts/run_card_design_scorecard.py --input <supported_exam_or_iteration_snapshot.json> --visibility-notes <scorecard_dimension_visibility_notes.json> --output-dir tmp/combat_analysis/card_design_scorecard_with_visibility_notes_current
 python scripts/run_sts1_four_character_exam.py --output-dir tmp/combat_analysis/sts1_four_character_exam_current
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_design_scorecard_v1.py tests/scripts/test_run_card_design_scorecard.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_card_design_scorecard_v1.py tests/toolkit/combat_analysis/test_report_only_cli_artifact_runner_v1.py -q
 ```
 
 ## Interpretation
@@ -113,13 +108,10 @@ into comparable scores and dimension averages. It does not prove autonomous LLM
 card-design quality, card balance, reviewed evidence status, or promotion
 readiness.
 
-Use `card_design_scorecard_calibration_v1` when checking whether the scorecard
-is separating healthy controls from known failure-family controls.
-
-Use `card_design_scorecard_delta_report_v1` when comparing two or more
-scorecard snapshots to identify real progress, regressions, persistent weak
-dimensions, and next iteration focus. Delta reports are advisory comparison
-outputs only and do not recalibrate scoring weights.
+The former scorecard calibration and delta-report side readers are retired.
+Current progress comparison should use retained canonical exam/readout payloads
+and the facade-backed advisory exam or review-pack routes rather than rebuilding
+a separate scorecard side chain.
 
 Use `autonomous_card_package_design_run_v1` when the scorecard belongs to a
 supplied complete-card draft that should be audited as axis-first. That run

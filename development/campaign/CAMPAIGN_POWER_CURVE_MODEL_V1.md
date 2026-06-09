@@ -212,7 +212,7 @@ Not ready for:
 Minimum focused validation for this surface:
 
 ```powershell
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py tests/scripts/test_run_campaign_power_curve_report.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_campaign_power_curve_model_v1.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_report_only_surface_registry_v1.py tests/toolkit/combat_analysis/test_cardanalysis_evidence_bundle_v1.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_architecture_boundaries.py tests/shared/test_text_encoding_guards.py -q
 git diff --check

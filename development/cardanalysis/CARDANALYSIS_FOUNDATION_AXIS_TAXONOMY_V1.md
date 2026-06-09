@@ -118,7 +118,7 @@ When reviewing a card or package, ask:
 
 ## Relationship To Existing Surfaces
 
-`MECHANISM_AXIS_DISCOVERY_V1` already asks whether foundation axes support or swallow a
+`MECHANISM_AXIS_SEARCH_BUNDLE_V1` already asks whether foundation axes support or swallow a
 candidate mechanism. This taxonomy gives that question a broader design vocabulary,
 including status, search/tutor, temporary generation, and compression/removal
 boundaries that are not all first-class evaluator semantics.

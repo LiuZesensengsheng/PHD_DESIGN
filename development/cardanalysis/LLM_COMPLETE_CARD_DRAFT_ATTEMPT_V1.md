@@ -46,12 +46,18 @@ It does not create:
 - default synthesis behavior;
 - learned or reranker behavior.
 
-## Entrypoints
+## Validation
 
 ```powershell
-python scripts/run_llm_complete_card_draft_attempt.py --target tests/fixtures/combat_analysis/sts1_exam_target_v1/silent_poison_retain_shiv_exam_target_v1.json --variant-set tests/fixtures/combat_analysis/card_package_variant_set_v1/silent_poison_retain_shiv_variant_set_v1.json --draft tests/fixtures/combat_analysis/complete_card_draft_v1/silent_poison_retain_shiv_exam_draft_v1.json --output-dir tmp/combat_analysis/llm_complete_card_draft_attempt_current
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_llm_complete_card_draft_attempt_v1.py tests/scripts/test_run_llm_complete_card_draft_attempt.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_llm_complete_card_draft_attempt_v1.py -q
 ```
+
+The standalone CLI wrapper has been retired. The retained library and toolkit
+tests still validate handoff matching, `complete_card_draft_v1` validation,
+failure taxonomy output, negative controls, boundary attempts, report payloads,
+snapshot payloads, and manifest payloads. Current external draft intake should
+enter through `llm_draft_prompt_application_v1`, which still records nested
+`llm_complete_card_draft_attempt_v1` artifacts.
 
 ## Negative Controls
 

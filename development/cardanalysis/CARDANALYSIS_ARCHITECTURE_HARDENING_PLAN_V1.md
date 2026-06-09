@@ -44,12 +44,13 @@ The current canonical report-only surface map lives in
 New work should consolidate into those surfaces instead of creating overlapping V1
 modules. In particular:
 
-- `deck_compression_model_v1` should consolidate into `deck_compression_report_v1`.
+- Historical deck-compression wording should consolidate into facade-backed
+  package/exam routes instead of recreating `deck_compression_report_v1`.
 - `mechanism_fun_health_evaluator_v1` should consolidate into
   `mechanism_fun_health_v1`.
 - `cardanalysis_evidence_bundle_v1` may collect normalized summaries and review
   conflicts, but must not become pass/fail authority.
-- `mechanism_axis_discovery_v1` is the canonical report-only surface for early
+- `mechanism_axis_search_v1` is the canonical report-only surface for early
   mechanism-axis exploration, foundation-axis dependency review, and first parameter
   probe selection.
 

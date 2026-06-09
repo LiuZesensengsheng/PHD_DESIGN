@@ -39,7 +39,7 @@ Out of scope:
 ## Entrypoint
 
 ```bash
-python scripts/run_cardanalysis_evidence_quality_audit.py \
+python scripts/run_cardanalysis_report.py --report evidence-quality \
   --input tests/fixtures/combat_analysis/source_followup_case_library_v1 \
   --input tests/fixtures/combat_analysis/mechanism_case_library_v1 \
   --output-dir tmp/combat_analysis/evidence_quality_audit_current
@@ -276,7 +276,7 @@ This audit must not:
 Focused validation:
 
 ```bash
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_evidence_quality_audit_v1.py tests/scripts/test_run_cardanalysis_evidence_quality_audit.py -q
+py -3.11 -m pytest tests/toolkit/combat_analysis/test_evidence_quality_audit_v1.py tests/scripts/test_run_cardanalysis_report.py -q
 ```
 
 Full lane validation should also run both normalized case validators plus the

@@ -24,8 +24,7 @@ contracts.
 | Four-character generated-attempt negatives | `tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_negative_attempt_drafts_v1.json` | Provides one intentionally flawed generated-attempt draft per character. |
 | Four-character boundary generated attempts | `tests/fixtures/combat_analysis/llm_complete_card_draft_attempt_v1/sts1_four_character_boundary_attempt_drafts_v1.json` | Provides one schema-valid but suspicious generated-attempt draft per character for report-only attempt and iteration feedback. |
 | Enrichment proposal pack | `tests/fixtures/combat_analysis/sts1_card_exam_enrichment_v1/sts1_card_exam_enrichment_proposals_v1.json` | Lists proposed negative and boundary cases, blind spots, and scorecard dimensions. |
-| Deep negative case pack | `tests/fixtures/combat_analysis/sts1_negative_case_pack_v1/sts1_negative_case_pack_v1_cases.json` | Stores 16 normalized unreviewed `cardanalysis_case_input_v1` cases for STS1 negative/boundary coverage. |
-| Negative case projection | `tests/fixtures/combat_analysis/sts1_negative_case_projection_v1/sts1_negative_case_projection_v1_snapshot.json` | Projects the first-round negative cases into report-only feature-family, calibration-support, label-only blind spot, and review-queue readouts. |
+| Historical deep negative case sidecar | retired | The first-round normalized negative case pack and projection sidecar have been retired from active code; keep this document as historical enrichment context only. |
 
 ## Current Coverage
 
@@ -45,18 +44,11 @@ contracts: it uses valid `complete_card_draft_v1` payloads that can enter
 `llm_complete_card_draft_attempt_v1` and `exam_iteration_run_v1`, then checks that
 existing report-only feedback names the expected revision risks.
 
-The first deep case-pack batch adds normalized case material rather than more
-complete-card drafts. It covers four cases per STS1 character and rotates
-failure families across primary-axis drift, secondary-axis dominance,
-generic-goodstuff drift, early weak / late explosive curve risk, numeric
-fantasy, weak fail states, character-texture mismatch, and anti-combo role
-collision. These cases are generated hypotheses for exam preparation and remain
-unreviewed.
-
-The first projection pass keeps that same case round deep instead of broadening
-into a second pack. It reuses `cardanalysis_feature_projection_v1` and reports
-which cases support the two current calibration readouts, which adjacent labels
-remain label-only, and which cases are worth human review next.
+The historical deep case-pack and projection sidecars were useful as early
+exam-enrichment experiments, but they are no longer active routes or retained
+facade-facing capabilities. Current negative/boundary work should flow through
+the canonical complete-card draft, attempt, exam, scorecard, advisory exam, and
+review-pack routes.
 
 ## Blind Spots
 
@@ -125,7 +117,7 @@ without per-character reviewed bands.
   blocking expectations in a future mainline exam pass.
 - Add scorecard implementation only after the scorecard owner accepts the dimension
   definitions and evidence sources.
-- Keep `exam_iteration_run_v1` and `exam_iteration_generated_attempt_batch_run_v1`
+- Keep `exam_iteration_run_v1` and facade-backed iterate/provider-comparison
   core contracts unchanged for this enrichment pass.
 
 ## Validation
@@ -135,6 +127,4 @@ Focused validation:
 ```powershell
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_card_exam_enrichment_v1.py -q
 py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_card_exam_boundary_attempts_v1.py -q
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_negative_case_pack_v1.py tests/scripts/test_run_sts1_negative_case_pack.py -q
-py -3.11 -m pytest tests/toolkit/combat_analysis/test_sts1_negative_case_projection_v1.py tests/scripts/test_run_sts1_negative_case_projection.py -q
 ```
